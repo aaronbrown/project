@@ -1,0 +1,13 @@
+# clk_0
+# onchip_memory2_0
+# null
+# cpu_0
+set_global_assignment -name SDC_FILE [file join $::quartus(qip_path) cpu_0.sdc]
+set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu_0.ocp]
+# sdram_0
+# jtag_uart_0
+# procHasControl
+# timer_0
+# sysid
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 0025BCE5629C0000013CEAD7AEE0 
+ 
