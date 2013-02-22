@@ -1,6 +1,5 @@
 # clk_0
 # onchip_memory2_0
-# null
 # cpu_0
 set_global_assignment -name SDC_FILE [file join $::quartus(qip_path) cpu_0.sdc]
 set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu_0.ocp]
@@ -9,5 +8,10 @@ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu_0.oc
 # procHasControl
 # timer_0
 # sysid
-set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 0025BCE5629C0000013CEAD7AEE0 
+# null
+# sram_16bit_512k_0
+set_global_assignment -name TCL_FILE [file join $::quartus(qip_path) SRAM_16Bit_512K_hw.tcl]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) hdl/SRAM_16Bit_512K.v]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) sram_16bit_512k_0.v]
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 0025BCE5629C0000013CFF13E983 
  

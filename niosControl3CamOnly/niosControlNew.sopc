@@ -6,7 +6,15 @@
    {
       datum baseAddress
       {
-         value = "16814128";
+         value = "17862704";
+         type = "long";
+      }
+   }
+   element sram_16bit_512k_0.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "17301504";
          type = "long";
       }
    }
@@ -22,7 +30,7 @@
    {
       datum baseAddress
       {
-         value = "16814136";
+         value = "17862712";
          type = "long";
       }
    }
@@ -43,7 +51,7 @@
    {
       datum baseAddress
       {
-         value = "16812032";
+         value = "17860608";
          type = "long";
       }
    }
@@ -54,6 +62,9 @@
          value = "4";
          type = "int";
       }
+   }
+   element niosSystemCamControl
+   {
    }
    element onchip_memory2_0
    {
@@ -75,7 +86,7 @@
    {
       datum baseAddress
       {
-         value = "16793600";
+         value = "17842176";
          type = "long";
       }
    }
@@ -91,7 +102,7 @@
    {
       datum baseAddress
       {
-         value = "16814112";
+         value = "17862688";
          type = "long";
       }
    }
@@ -99,7 +110,7 @@
    {
       datum baseAddress
       {
-         value = "16814080";
+         value = "17862656";
          type = "long";
       }
    }
@@ -114,6 +125,14 @@
       {
          value = "{}";
          type = "String";
+      }
+   }
+   element sram_16bit_512k_0
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
       }
    }
    element sysid
@@ -142,10 +161,10 @@
  <parameter name="globalResetBus" value="true" />
  <parameter name="hdlLanguage" value="VERILOG" />
  <parameter name="maxAdditionalLatency" value="0" />
- <parameter name="projectName" value="niosControl3CamOnly" />
+ <parameter name="projectName">niosControl3CamOnly.qpf</parameter>
  <parameter name="sopcBorderPoints" value="true" />
- <parameter name="systemHash" value="-15475766585" />
- <parameter name="timeStamp" value="1361149626802" />
+ <parameter name="systemHash" value="-15449581908" />
+ <parameter name="timeStamp" value="1361488137491" />
  <module kind="clock_source" version="11.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -246,7 +265,7 @@
   <parameter name="mmu_TLBMissExcOffset" value="0" />
   <parameter name="manuallyAssignCpuID" value="false" />
   <parameter name="internalIrqMaskSystemInfo" value="3" />
-  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='onchip_memory2_0.s1' start='0x1004000' end='0x1008000' /><slave name='cpu_0.jtag_debug_module' start='0x1008800' end='0x1009000' /></address-map>]]></parameter>
+  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x80000' end='0x100000' /><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /></address-map>]]></parameter>
   <parameter name="instAddrWidth" value="25" />
   <parameter name="impl" value="Tiny" />
   <parameter name="icache_size" value="_4096" />
@@ -270,7 +289,7 @@
   <parameter name="dcache_numTCDM" value="_0" />
   <parameter name="dcache_lineSize" value="_32" />
   <parameter name="dcache_bursts" value="false" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='onchip_memory2_0.s1' start='0x1004000' end='0x1008000' /><slave name='cpu_0.jtag_debug_module' start='0x1008800' end='0x1009000' /><slave name='timer_0.s1' start='0x1009000' end='0x1009020' /><slave name='procHasControl.s1' start='0x1009020' end='0x1009030' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1009030' end='0x1009038' /><slave name='sysid.control_slave' start='0x1009038' end='0x1009040' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x80000' end='0x100000' /><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='timer_0.s1' start='0x1109000' end='0x1109020' /><slave name='procHasControl.s1' start='0x1109020' end='0x1109030' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1109030' end='0x1109038' /><slave name='sysid.control_slave' start='0x1109038' end='0x1109040' /></address-map>]]></parameter>
   <parameter name="dataAddrWidth" value="25" />
   <parameter name="customInstSlavesSystemInfo" value="&lt;info/&gt;" />
   <parameter name="cpuReset" value="false" />
@@ -357,6 +376,13 @@
  <module kind="altera_avalon_sysid" version="11.0" enabled="1" name="sysid">
   <parameter name="id" value="0" />
  </module>
+ <module
+   kind="sram_16bit_512k"
+   version="1.0.2"
+   enabled="1"
+   name="sram_16bit_512k_0">
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
+ </module>
  <connection
    kind="clock"
    version="11.0"
@@ -369,7 +395,7 @@
    start="cpu_0.instruction_master"
    end="cpu_0.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01008800" />
+  <parameter name="baseAddress" value="0x01108800" />
  </connection>
  <connection
    kind="avalon"
@@ -377,7 +403,7 @@
    start="cpu_0.data_master"
    end="cpu_0.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01008800" />
+  <parameter name="baseAddress" value="0x01108800" />
  </connection>
  <connection
    kind="avalon"
@@ -385,7 +411,7 @@
    start="cpu_0.instruction_master"
    end="onchip_memory2_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01004000" />
+  <parameter name="baseAddress" value="0x01104000" />
  </connection>
  <connection
    kind="avalon"
@@ -393,7 +419,7 @@
    start="cpu_0.data_master"
    end="onchip_memory2_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01004000" />
+  <parameter name="baseAddress" value="0x01104000" />
  </connection>
  <connection kind="clock" version="11.0" start="clk_0.clk" end="sdram_0.clk" />
  <connection
@@ -419,7 +445,7 @@
    start="cpu_0.data_master"
    end="jtag_uart_0.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01009030" />
+  <parameter name="baseAddress" value="0x01109030" />
  </connection>
  <connection
    kind="interrupt"
@@ -439,7 +465,7 @@
    start="cpu_0.data_master"
    end="procHasControl.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01009020" />
+  <parameter name="baseAddress" value="0x01109020" />
  </connection>
  <connection kind="clock" version="11.0" start="clk_0.clk" end="timer_0.clk" />
  <connection
@@ -448,7 +474,7 @@
    start="cpu_0.data_master"
    end="timer_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01009000" />
+  <parameter name="baseAddress" value="0x01109000" />
  </connection>
  <connection kind="interrupt" version="11.0" start="cpu_0.d_irq" end="timer_0.irq">
   <parameter name="irqNumber" value="1" />
@@ -460,6 +486,27 @@
    start="cpu_0.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01009038" />
+  <parameter name="baseAddress" value="0x01109038" />
+ </connection>
+ <connection
+   kind="clock"
+   version="11.0"
+   start="clk_0.clk"
+   end="sram_16bit_512k_0.clk" />
+ <connection
+   kind="avalon"
+   version="11.0"
+   start="cpu_0.instruction_master"
+   end="sram_16bit_512k_0.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01080000" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="11.0"
+   start="cpu_0.data_master"
+   end="sram_16bit_512k_0.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01080000" />
  </connection>
 </system>

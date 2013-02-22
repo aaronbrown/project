@@ -490,12 +490,12 @@ defparam cpu_0_ociram_lpm_dram_bdp_component.lpm_file = "cpu_0_ociram_default_co
 //synthesis read_comments_as_HDL on
 //defparam cpu_0_ociram_lpm_dram_bdp_component.lpm_file = "cpu_0_ociram_default_contents.mif";
 //synthesis read_comments_as_HDL off
-  assign cfgdout = (MonAReg[4 : 2] == 3'd0)? 32'h01004020 :
+  assign cfgdout = (MonAReg[4 : 2] == 3'd0)? 32'h01104020 :
     (MonAReg[4 : 2] == 3'd1)? 32'h00001919 :
     (MonAReg[4 : 2] == 3'd2)? 32'h00040000 :
     (MonAReg[4 : 2] == 3'd3)? 32'h00000000 :
     (MonAReg[4 : 2] == 3'd4)? 32'h20000000 :
-    (MonAReg[4 : 2] == 3'd5)? 32'h01004000 :
+    (MonAReg[4 : 2] == 3'd5)? 32'h01104000 :
     (MonAReg[4 : 2] == 3'd6)? 32'h00000000 :
     32'h00000000;
 
@@ -4100,8 +4100,8 @@ module cpu_0 (
     (W_br_taken | R_ctrl_uncond_cti_non_br)   ? 2'b10 :
     2'b11;
 
-  assign F_pc_no_crst_nxt = (F_pc_sel_nxt == 2'b00)? 4198408 :
-    (F_pc_sel_nxt == 2'b01)? 4203016 :
+  assign F_pc_no_crst_nxt = (F_pc_sel_nxt == 2'b00)? 4460552 :
+    (F_pc_sel_nxt == 2'b01)? 4465160 :
     (F_pc_sel_nxt == 2'b10)? E_arith_result[24 : 2] :
     F_pc_plus_one;
 
@@ -4112,7 +4112,7 @@ module cpu_0 (
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          F_pc <= 4198400;
+          F_pc <= 4460544;
       else if (F_pc_en)
           F_pc <= F_pc_nxt;
     end

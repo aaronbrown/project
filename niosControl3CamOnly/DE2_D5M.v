@@ -474,6 +474,13 @@ wire niosHasControl;
 
   niosSystemCamControl niosSystemCamControl_inst
     (
+		.SRAM_ADDR_from_the_sram_16bit_512k_0      (SRAM_ADDR),
+      .SRAM_CE_N_from_the_sram_16bit_512k_0      (SRAM_CE_N),
+      .SRAM_DQ_to_and_from_the_sram_16bit_512k_0 (SRAM_DQ),
+      .SRAM_LB_N_from_the_sram_16bit_512k_0      (SRAM_LB_N),
+      .SRAM_OE_N_from_the_sram_16bit_512k_0      (SRAM_OE_N),
+      .SRAM_UB_N_from_the_sram_16bit_512k_0      (SRAM_UB_N),
+      .SRAM_WE_N_from_the_sram_16bit_512k_0      (SRAM_WE_N),
       .clk_0                            (unshifted_nios_clk),
       .out_port_from_the_procHasControl (niosHasControl),
       .reset_n                          (KEY[0]),

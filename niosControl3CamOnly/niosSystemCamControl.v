@@ -174,7 +174,7 @@ module cpu_0_jtag_debug_module_arbitrator (
   //assign cpu_0_jtag_debug_module_readdata_from_sa = cpu_0_jtag_debug_module_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign cpu_0_jtag_debug_module_readdata_from_sa = cpu_0_jtag_debug_module_readdata;
 
-  assign cpu_0_data_master_requests_cpu_0_jtag_debug_module = ({cpu_0_data_master_address_to_slave[24 : 11] , 11'b0} == 25'h1008800) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_cpu_0_jtag_debug_module = ({cpu_0_data_master_address_to_slave[24 : 11] , 11'b0} == 25'h1108800) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //cpu_0_jtag_debug_module_arb_share_counter set values, which is an e_mux
   assign cpu_0_jtag_debug_module_arb_share_set_values = 1;
 
@@ -261,7 +261,7 @@ module cpu_0_jtag_debug_module_arbitrator (
   //cpu_0_jtag_debug_module_writedata mux, which is an e_mux
   assign cpu_0_jtag_debug_module_writedata = cpu_0_data_master_writedata;
 
-  assign cpu_0_instruction_master_requests_cpu_0_jtag_debug_module = (({cpu_0_instruction_master_address_to_slave[24 : 11] , 11'b0} == 25'h1008800) & (cpu_0_instruction_master_read)) & cpu_0_instruction_master_read;
+  assign cpu_0_instruction_master_requests_cpu_0_jtag_debug_module = (({cpu_0_instruction_master_address_to_slave[24 : 11] , 11'b0} == 25'h1108800) & (cpu_0_instruction_master_read)) & cpu_0_instruction_master_read;
   //cpu_0/data_master granted cpu_0/jtag_debug_module last time, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
@@ -462,11 +462,13 @@ module cpu_0_data_master_arbitrator (
                                        clk,
                                        cpu_0_data_master_address,
                                        cpu_0_data_master_byteenable_sdram_0_s1,
+                                       cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_granted_cpu_0_jtag_debug_module,
                                        cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave,
                                        cpu_0_data_master_granted_onchip_memory2_0_s1,
                                        cpu_0_data_master_granted_procHasControl_s1,
                                        cpu_0_data_master_granted_sdram_0_s1,
+                                       cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_granted_sysid_control_slave,
                                        cpu_0_data_master_granted_timer_0_s1,
                                        cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module,
@@ -474,6 +476,7 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_qualified_request_onchip_memory2_0_s1,
                                        cpu_0_data_master_qualified_request_procHasControl_s1,
                                        cpu_0_data_master_qualified_request_sdram_0_s1,
+                                       cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_qualified_request_sysid_control_slave,
                                        cpu_0_data_master_qualified_request_timer_0_s1,
                                        cpu_0_data_master_read,
@@ -483,6 +486,7 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_read_data_valid_procHasControl_s1,
                                        cpu_0_data_master_read_data_valid_sdram_0_s1,
                                        cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register,
+                                       cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_read_data_valid_sysid_control_slave,
                                        cpu_0_data_master_read_data_valid_timer_0_s1,
                                        cpu_0_data_master_requests_cpu_0_jtag_debug_module,
@@ -490,6 +494,7 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_requests_onchip_memory2_0_s1,
                                        cpu_0_data_master_requests_procHasControl_s1,
                                        cpu_0_data_master_requests_sdram_0_s1,
+                                       cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_requests_sysid_control_slave,
                                        cpu_0_data_master_requests_timer_0_s1,
                                        cpu_0_data_master_write,
@@ -500,6 +505,7 @@ module cpu_0_data_master_arbitrator (
                                        d1_onchip_memory2_0_s1_end_xfer,
                                        d1_procHasControl_s1_end_xfer,
                                        d1_sdram_0_s1_end_xfer,
+                                       d1_sram_16bit_512k_0_avalon_slave_0_end_xfer,
                                        d1_sysid_control_slave_end_xfer,
                                        d1_timer_0_s1_end_xfer,
                                        jtag_uart_0_avalon_jtag_slave_irq_from_sa,
@@ -511,6 +517,8 @@ module cpu_0_data_master_arbitrator (
                                        reset_n,
                                        sdram_0_s1_readdata_from_sa,
                                        sdram_0_s1_waitrequest_from_sa,
+                                       sram_16bit_512k_0_avalon_slave_0_readdata_from_sa,
+                                       sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0,
                                        sysid_control_slave_readdata_from_sa,
                                        timer_0_s1_irq_from_sa,
                                        timer_0_s1_readdata_from_sa,
@@ -536,11 +544,13 @@ module cpu_0_data_master_arbitrator (
   input            clk;
   input   [ 24: 0] cpu_0_data_master_address;
   input   [  1: 0] cpu_0_data_master_byteenable_sdram_0_s1;
+  input   [  1: 0] cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_granted_cpu_0_jtag_debug_module;
   input            cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave;
   input            cpu_0_data_master_granted_onchip_memory2_0_s1;
   input            cpu_0_data_master_granted_procHasControl_s1;
   input            cpu_0_data_master_granted_sdram_0_s1;
+  input            cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_granted_sysid_control_slave;
   input            cpu_0_data_master_granted_timer_0_s1;
   input            cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module;
@@ -548,6 +558,7 @@ module cpu_0_data_master_arbitrator (
   input            cpu_0_data_master_qualified_request_onchip_memory2_0_s1;
   input            cpu_0_data_master_qualified_request_procHasControl_s1;
   input            cpu_0_data_master_qualified_request_sdram_0_s1;
+  input            cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_qualified_request_sysid_control_slave;
   input            cpu_0_data_master_qualified_request_timer_0_s1;
   input            cpu_0_data_master_read;
@@ -557,6 +568,7 @@ module cpu_0_data_master_arbitrator (
   input            cpu_0_data_master_read_data_valid_procHasControl_s1;
   input            cpu_0_data_master_read_data_valid_sdram_0_s1;
   input            cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register;
+  input            cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_read_data_valid_sysid_control_slave;
   input            cpu_0_data_master_read_data_valid_timer_0_s1;
   input            cpu_0_data_master_requests_cpu_0_jtag_debug_module;
@@ -564,6 +576,7 @@ module cpu_0_data_master_arbitrator (
   input            cpu_0_data_master_requests_onchip_memory2_0_s1;
   input            cpu_0_data_master_requests_procHasControl_s1;
   input            cpu_0_data_master_requests_sdram_0_s1;
+  input            cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_requests_sysid_control_slave;
   input            cpu_0_data_master_requests_timer_0_s1;
   input            cpu_0_data_master_write;
@@ -574,6 +587,7 @@ module cpu_0_data_master_arbitrator (
   input            d1_onchip_memory2_0_s1_end_xfer;
   input            d1_procHasControl_s1_end_xfer;
   input            d1_sdram_0_s1_end_xfer;
+  input            d1_sram_16bit_512k_0_avalon_slave_0_end_xfer;
   input            d1_sysid_control_slave_end_xfer;
   input            d1_timer_0_s1_end_xfer;
   input            jtag_uart_0_avalon_jtag_slave_irq_from_sa;
@@ -585,6 +599,8 @@ module cpu_0_data_master_arbitrator (
   input            reset_n;
   input   [ 15: 0] sdram_0_s1_readdata_from_sa;
   input            sdram_0_s1_waitrequest_from_sa;
+  input   [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
+  input            sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0;
   input   [ 31: 0] sysid_control_slave_readdata_from_sa;
   input            timer_0_s1_irq_from_sa;
   input   [ 15: 0] timer_0_s1_readdata_from_sa;
@@ -616,7 +632,7 @@ module cpu_0_data_master_arbitrator (
   assign cpu_0_data_master_run = r_0 & r_1;
 
   //r_1 master_run cascaded wait assignment, which is an e_assign
-  assign r_1 = (cpu_0_data_master_granted_sdram_0_s1 | ~cpu_0_data_master_qualified_request_sdram_0_s1) & ((~cpu_0_data_master_qualified_request_sdram_0_s1 | ~cpu_0_data_master_read | (cpu_0_data_master_read_data_valid_sdram_0_s1 & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sdram_0_s1 | ~cpu_0_data_master_write | (1 & ~sdram_0_s1_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & ((~cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_read | (1 & 1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_requests_timer_0_s1) & ((~cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_read | (1 & 1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write)));
+  assign r_1 = (cpu_0_data_master_granted_sdram_0_s1 | ~cpu_0_data_master_qualified_request_sdram_0_s1) & ((~cpu_0_data_master_qualified_request_sdram_0_s1 | ~cpu_0_data_master_read | (cpu_0_data_master_read_data_valid_sdram_0_s1 & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sdram_0_s1 | ~cpu_0_data_master_write | (1 & ~sdram_0_s1_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | (cpu_0_data_master_write & !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_dbs_address[1]) | ~cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0) & (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0) & ((~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_read | (1 & 1 & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_write | (1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & ((~cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_read | (1 & 1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_requests_timer_0_s1) & ((~cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_read | (1 & 1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write)));
 
   //optimize select-logic by passing only those address bits which matter.
   assign cpu_0_data_master_address_to_slave = cpu_0_data_master_address[24 : 0];
@@ -627,6 +643,8 @@ module cpu_0_data_master_arbitrator (
     ({32 {~cpu_0_data_master_requests_onchip_memory2_0_s1}} | onchip_memory2_0_s1_readdata_from_sa) &
     ({32 {~cpu_0_data_master_requests_procHasControl_s1}} | procHasControl_s1_readdata_from_sa) &
     ({32 {~cpu_0_data_master_requests_sdram_0_s1}} | registered_cpu_0_data_master_readdata) &
+    ({32 {~cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0}} | {sram_16bit_512k_0_avalon_slave_0_readdata_from_sa[15 : 0],
+    dbs_16_reg_segment_0}) &
     ({32 {~cpu_0_data_master_requests_sysid_control_slave}} | sysid_control_slave_readdata_from_sa) &
     ({32 {~cpu_0_data_master_requests_timer_0_s1}} | timer_0_s1_readdata_from_sa);
 
@@ -700,15 +718,20 @@ module cpu_0_data_master_arbitrator (
 
 
   //compute the last dbs term, which is an e_mux
-  assign last_dbs_term_and_run = (cpu_0_data_master_dbs_address == 2'b10) & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sdram_0_s1;
+  assign last_dbs_term_and_run = (cpu_0_data_master_requests_sdram_0_s1)? (((cpu_0_data_master_dbs_address == 2'b10) & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sdram_0_s1)) :
+    (((cpu_0_data_master_dbs_address == 2'b10) & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0));
 
   //pre dbs count enable, which is an e_mux
   assign pre_dbs_count_enable = (((~cpu_0_data_master_no_byte_enables_and_last_term) & cpu_0_data_master_requests_sdram_0_s1 & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sdram_0_s1)) |
     cpu_0_data_master_read_data_valid_sdram_0_s1 |
-    (cpu_0_data_master_granted_sdram_0_s1 & cpu_0_data_master_write & 1 & 1 & ~sdram_0_s1_waitrequest_from_sa);
+    (cpu_0_data_master_granted_sdram_0_s1 & cpu_0_data_master_write & 1 & 1 & ~sdram_0_s1_waitrequest_from_sa) |
+    (((~cpu_0_data_master_no_byte_enables_and_last_term) & cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0)) |
+    (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_read & 1 & 1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer) |
+    ((cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_write & 1 & 1 & ({sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer})));
 
   //input to dbs-16 stored 0, which is an e_mux
-  assign p1_dbs_16_reg_segment_0 = sdram_0_s1_readdata_from_sa;
+  assign p1_dbs_16_reg_segment_0 = (cpu_0_data_master_requests_sdram_0_s1)? sdram_0_s1_readdata_from_sa :
+    sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
 
   //dbs register for dbs-16 segment 0, which is an e_register
   always @(posedge clk or negedge reset_n)
@@ -722,10 +745,13 @@ module cpu_0_data_master_arbitrator (
 
   //mux write dbs 1, which is an e_mux
   assign cpu_0_data_master_dbs_write_16 = (cpu_0_data_master_dbs_address[1])? cpu_0_data_master_writedata[31 : 16] :
+    (~(cpu_0_data_master_dbs_address[1]))? cpu_0_data_master_writedata[15 : 0] :
+    (cpu_0_data_master_dbs_address[1])? cpu_0_data_master_writedata[31 : 16] :
     cpu_0_data_master_writedata[15 : 0];
 
   //dbs count increment, which is an e_mux
   assign cpu_0_data_master_dbs_increment = (cpu_0_data_master_requests_sdram_0_s1)? 2 :
+    (cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0)? 2 :
     0;
 
   //dbs counter overflow, which is an e_assign
@@ -767,25 +793,32 @@ module cpu_0_instruction_master_arbitrator (
                                               cpu_0_instruction_master_granted_cpu_0_jtag_debug_module,
                                               cpu_0_instruction_master_granted_onchip_memory2_0_s1,
                                               cpu_0_instruction_master_granted_sdram_0_s1,
+                                              cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0,
                                               cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module,
                                               cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1,
                                               cpu_0_instruction_master_qualified_request_sdram_0_s1,
+                                              cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0,
                                               cpu_0_instruction_master_read,
                                               cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module,
                                               cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1,
                                               cpu_0_instruction_master_read_data_valid_sdram_0_s1,
                                               cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register,
+                                              cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0,
                                               cpu_0_instruction_master_requests_cpu_0_jtag_debug_module,
                                               cpu_0_instruction_master_requests_onchip_memory2_0_s1,
                                               cpu_0_instruction_master_requests_sdram_0_s1,
+                                              cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0,
                                               cpu_0_jtag_debug_module_readdata_from_sa,
                                               d1_cpu_0_jtag_debug_module_end_xfer,
                                               d1_onchip_memory2_0_s1_end_xfer,
                                               d1_sdram_0_s1_end_xfer,
+                                              d1_sram_16bit_512k_0_avalon_slave_0_end_xfer,
                                               onchip_memory2_0_s1_readdata_from_sa,
                                               reset_n,
                                               sdram_0_s1_readdata_from_sa,
                                               sdram_0_s1_waitrequest_from_sa,
+                                              sram_16bit_512k_0_avalon_slave_0_readdata_from_sa,
+                                              sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0,
 
                                              // outputs:
                                               cpu_0_instruction_master_address_to_slave,
@@ -804,25 +837,32 @@ module cpu_0_instruction_master_arbitrator (
   input            cpu_0_instruction_master_granted_cpu_0_jtag_debug_module;
   input            cpu_0_instruction_master_granted_onchip_memory2_0_s1;
   input            cpu_0_instruction_master_granted_sdram_0_s1;
+  input            cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module;
   input            cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1;
   input            cpu_0_instruction_master_qualified_request_sdram_0_s1;
+  input            cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_instruction_master_read;
   input            cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module;
   input            cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1;
   input            cpu_0_instruction_master_read_data_valid_sdram_0_s1;
   input            cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register;
+  input            cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_instruction_master_requests_cpu_0_jtag_debug_module;
   input            cpu_0_instruction_master_requests_onchip_memory2_0_s1;
   input            cpu_0_instruction_master_requests_sdram_0_s1;
+  input            cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
   input   [ 31: 0] cpu_0_jtag_debug_module_readdata_from_sa;
   input            d1_cpu_0_jtag_debug_module_end_xfer;
   input            d1_onchip_memory2_0_s1_end_xfer;
   input            d1_sdram_0_s1_end_xfer;
+  input            d1_sram_16bit_512k_0_avalon_slave_0_end_xfer;
   input   [ 31: 0] onchip_memory2_0_s1_readdata_from_sa;
   input            reset_n;
   input   [ 15: 0] sdram_0_s1_readdata_from_sa;
   input            sdram_0_s1_waitrequest_from_sa;
+  input   [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
+  input            sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0;
 
   reg              active_and_waiting_last_time;
   reg     [ 24: 0] cpu_0_instruction_master_address_last_time;
@@ -848,7 +888,7 @@ module cpu_0_instruction_master_arbitrator (
   assign cpu_0_instruction_master_run = r_0 & r_1;
 
   //r_1 master_run cascaded wait assignment, which is an e_assign
-  assign r_1 = 1 & (cpu_0_instruction_master_qualified_request_sdram_0_s1 | (cpu_0_instruction_master_read_data_valid_sdram_0_s1 & cpu_0_instruction_master_dbs_address[1]) | ~cpu_0_instruction_master_requests_sdram_0_s1) & (cpu_0_instruction_master_granted_sdram_0_s1 | ~cpu_0_instruction_master_qualified_request_sdram_0_s1) & ((~cpu_0_instruction_master_qualified_request_sdram_0_s1 | ~cpu_0_instruction_master_read | (cpu_0_instruction_master_read_data_valid_sdram_0_s1 & (cpu_0_instruction_master_dbs_address[1]) & cpu_0_instruction_master_read)));
+  assign r_1 = 1 & (cpu_0_instruction_master_qualified_request_sdram_0_s1 | (cpu_0_instruction_master_read_data_valid_sdram_0_s1 & cpu_0_instruction_master_dbs_address[1]) | ~cpu_0_instruction_master_requests_sdram_0_s1) & (cpu_0_instruction_master_granted_sdram_0_s1 | ~cpu_0_instruction_master_qualified_request_sdram_0_s1) & ((~cpu_0_instruction_master_qualified_request_sdram_0_s1 | ~cpu_0_instruction_master_read | (cpu_0_instruction_master_read_data_valid_sdram_0_s1 & (cpu_0_instruction_master_dbs_address[1]) & cpu_0_instruction_master_read))) & 1 & (cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0) & (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0) & ((~cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_read | (1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer & (cpu_0_instruction_master_dbs_address[1]) & cpu_0_instruction_master_read)));
 
   //optimize select-logic by passing only those address bits which matter.
   assign cpu_0_instruction_master_address_to_slave = cpu_0_instruction_master_address[24 : 0];
@@ -857,13 +897,16 @@ module cpu_0_instruction_master_arbitrator (
   assign cpu_0_instruction_master_readdata = ({32 {~cpu_0_instruction_master_requests_cpu_0_jtag_debug_module}} | cpu_0_jtag_debug_module_readdata_from_sa) &
     ({32 {~cpu_0_instruction_master_requests_onchip_memory2_0_s1}} | onchip_memory2_0_s1_readdata_from_sa) &
     ({32 {~cpu_0_instruction_master_requests_sdram_0_s1}} | {sdram_0_s1_readdata_from_sa[15 : 0],
+    dbs_16_reg_segment_0}) &
+    ({32 {~cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0}} | {sram_16bit_512k_0_avalon_slave_0_readdata_from_sa[15 : 0],
     dbs_16_reg_segment_0});
 
   //actual waitrequest port, which is an e_assign
   assign cpu_0_instruction_master_waitrequest = ~cpu_0_instruction_master_run;
 
   //input to dbs-16 stored 0, which is an e_mux
-  assign p1_dbs_16_reg_segment_0 = sdram_0_s1_readdata_from_sa;
+  assign p1_dbs_16_reg_segment_0 = (cpu_0_instruction_master_requests_sdram_0_s1)? sdram_0_s1_readdata_from_sa :
+    sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
 
   //dbs register for dbs-16 segment 0, which is an e_register
   always @(posedge clk or negedge reset_n)
@@ -877,6 +920,7 @@ module cpu_0_instruction_master_arbitrator (
 
   //dbs count increment, which is an e_mux
   assign cpu_0_instruction_master_dbs_increment = (cpu_0_instruction_master_requests_sdram_0_s1)? 2 :
+    (cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0)? 2 :
     0;
 
   //dbs counter overflow, which is an e_assign
@@ -899,7 +943,8 @@ module cpu_0_instruction_master_arbitrator (
 
 
   //pre dbs count enable, which is an e_mux
-  assign pre_dbs_count_enable = cpu_0_instruction_master_read_data_valid_sdram_0_s1;
+  assign pre_dbs_count_enable = cpu_0_instruction_master_read_data_valid_sdram_0_s1 |
+    (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_read & 1 & 1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer);
 
 
 //synthesis translate_off
@@ -1099,7 +1144,7 @@ module jtag_uart_0_avalon_jtag_slave_arbitrator (
   //assign jtag_uart_0_avalon_jtag_slave_readdata_from_sa = jtag_uart_0_avalon_jtag_slave_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign jtag_uart_0_avalon_jtag_slave_readdata_from_sa = jtag_uart_0_avalon_jtag_slave_readdata;
 
-  assign cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave = ({cpu_0_data_master_address_to_slave[24 : 3] , 3'b0} == 25'h1009030) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave = ({cpu_0_data_master_address_to_slave[24 : 3] , 3'b0} == 25'h1109030) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //assign jtag_uart_0_avalon_jtag_slave_dataavailable_from_sa = jtag_uart_0_avalon_jtag_slave_dataavailable so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign jtag_uart_0_avalon_jtag_slave_dataavailable_from_sa = jtag_uart_0_avalon_jtag_slave_dataavailable;
 
@@ -1431,7 +1476,7 @@ module onchip_memory2_0_s1_arbitrator (
   //assign onchip_memory2_0_s1_readdata_from_sa = onchip_memory2_0_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign onchip_memory2_0_s1_readdata_from_sa = onchip_memory2_0_s1_readdata;
 
-  assign cpu_0_data_master_requests_onchip_memory2_0_s1 = ({cpu_0_data_master_address_to_slave[24 : 14] , 14'b0} == 25'h1004000) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_onchip_memory2_0_s1 = ({cpu_0_data_master_address_to_slave[24 : 14] , 14'b0} == 25'h1104000) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //registered rdv signal_name registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1 assignment, which is an e_assign
   assign registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1 = cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register_in;
 
@@ -1543,7 +1588,7 @@ module onchip_memory2_0_s1_arbitrator (
   //mux onchip_memory2_0_s1_clken, which is an e_mux
   assign onchip_memory2_0_s1_clken = 1'b1;
 
-  assign cpu_0_instruction_master_requests_onchip_memory2_0_s1 = (({cpu_0_instruction_master_address_to_slave[24 : 14] , 14'b0} == 25'h1004000) & (cpu_0_instruction_master_read)) & cpu_0_instruction_master_read;
+  assign cpu_0_instruction_master_requests_onchip_memory2_0_s1 = (({cpu_0_instruction_master_address_to_slave[24 : 14] , 14'b0} == 25'h1104000) & (cpu_0_instruction_master_read)) & cpu_0_instruction_master_read;
   //cpu_0/data_master granted onchip_memory2_0/s1 last time, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
@@ -1854,7 +1899,7 @@ module procHasControl_s1_arbitrator (
   //assign procHasControl_s1_readdata_from_sa = procHasControl_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign procHasControl_s1_readdata_from_sa = procHasControl_s1_readdata;
 
-  assign cpu_0_data_master_requests_procHasControl_s1 = ({cpu_0_data_master_address_to_slave[24 : 4] , 4'b0} == 25'h1009020) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_procHasControl_s1 = ({cpu_0_data_master_address_to_slave[24 : 4] , 4'b0} == 25'h1109020) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //procHasControl_s1_arb_share_counter set values, which is an e_mux
   assign procHasControl_s1_arb_share_set_values = 1;
 
@@ -3236,6 +3281,468 @@ endmodule
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
+module sram_16bit_512k_0_avalon_slave_0_arbitrator (
+                                                     // inputs:
+                                                      clk,
+                                                      cpu_0_data_master_address_to_slave,
+                                                      cpu_0_data_master_byteenable,
+                                                      cpu_0_data_master_dbs_address,
+                                                      cpu_0_data_master_dbs_write_16,
+                                                      cpu_0_data_master_no_byte_enables_and_last_term,
+                                                      cpu_0_data_master_read,
+                                                      cpu_0_data_master_write,
+                                                      cpu_0_instruction_master_address_to_slave,
+                                                      cpu_0_instruction_master_dbs_address,
+                                                      cpu_0_instruction_master_read,
+                                                      reset_n,
+                                                      sram_16bit_512k_0_avalon_slave_0_readdata,
+
+                                                     // outputs:
+                                                      cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0,
+                                                      cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0,
+                                                      cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0,
+                                                      cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0,
+                                                      cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0,
+                                                      cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0,
+                                                      cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0,
+                                                      cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0,
+                                                      cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0,
+                                                      d1_sram_16bit_512k_0_avalon_slave_0_end_xfer,
+                                                      sram_16bit_512k_0_avalon_slave_0_address,
+                                                      sram_16bit_512k_0_avalon_slave_0_byteenable_n,
+                                                      sram_16bit_512k_0_avalon_slave_0_chipselect_n,
+                                                      sram_16bit_512k_0_avalon_slave_0_read_n,
+                                                      sram_16bit_512k_0_avalon_slave_0_readdata_from_sa,
+                                                      sram_16bit_512k_0_avalon_slave_0_reset_n,
+                                                      sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0,
+                                                      sram_16bit_512k_0_avalon_slave_0_write_n,
+                                                      sram_16bit_512k_0_avalon_slave_0_writedata
+                                                   )
+;
+
+  output  [  1: 0] cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0;
+  output           cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0;
+  output           cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
+  output           cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
+  output           cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
+  output           cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0;
+  output           cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
+  output           cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
+  output           cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
+  output           d1_sram_16bit_512k_0_avalon_slave_0_end_xfer;
+  output  [ 17: 0] sram_16bit_512k_0_avalon_slave_0_address;
+  output  [  1: 0] sram_16bit_512k_0_avalon_slave_0_byteenable_n;
+  output           sram_16bit_512k_0_avalon_slave_0_chipselect_n;
+  output           sram_16bit_512k_0_avalon_slave_0_read_n;
+  output  [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
+  output           sram_16bit_512k_0_avalon_slave_0_reset_n;
+  output           sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0;
+  output           sram_16bit_512k_0_avalon_slave_0_write_n;
+  output  [ 15: 0] sram_16bit_512k_0_avalon_slave_0_writedata;
+  input            clk;
+  input   [ 24: 0] cpu_0_data_master_address_to_slave;
+  input   [  3: 0] cpu_0_data_master_byteenable;
+  input   [  1: 0] cpu_0_data_master_dbs_address;
+  input   [ 15: 0] cpu_0_data_master_dbs_write_16;
+  input            cpu_0_data_master_no_byte_enables_and_last_term;
+  input            cpu_0_data_master_read;
+  input            cpu_0_data_master_write;
+  input   [ 24: 0] cpu_0_instruction_master_address_to_slave;
+  input   [  1: 0] cpu_0_instruction_master_dbs_address;
+  input            cpu_0_instruction_master_read;
+  input            reset_n;
+  input   [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata;
+
+  wire             cpu_0_data_master_arbiterlock;
+  wire             cpu_0_data_master_arbiterlock2;
+  wire    [  1: 0] cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0;
+  wire    [  1: 0] cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0_segment_0;
+  wire    [  1: 0] cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0_segment_1;
+  wire             cpu_0_data_master_continuerequest;
+  wire             cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_data_master_saved_grant_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_instruction_master_arbiterlock;
+  wire             cpu_0_instruction_master_arbiterlock2;
+  wire             cpu_0_instruction_master_continuerequest;
+  wire             cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_instruction_master_saved_grant_sram_16bit_512k_0_avalon_slave_0;
+  reg              d1_reasons_to_wait;
+  reg              d1_sram_16bit_512k_0_avalon_slave_0_end_xfer;
+  reg              enable_nonzero_assertions;
+  wire             end_xfer_arb_share_counter_term_sram_16bit_512k_0_avalon_slave_0;
+  wire             in_a_read_cycle;
+  wire             in_a_write_cycle;
+  reg              last_cycle_cpu_0_data_master_granted_slave_sram_16bit_512k_0_avalon_slave_0;
+  reg              last_cycle_cpu_0_instruction_master_granted_slave_sram_16bit_512k_0_avalon_slave_0;
+  wire    [ 24: 0] shifted_address_to_sram_16bit_512k_0_avalon_slave_0_from_cpu_0_data_master;
+  wire    [ 24: 0] shifted_address_to_sram_16bit_512k_0_avalon_slave_0_from_cpu_0_instruction_master;
+  wire    [ 17: 0] sram_16bit_512k_0_avalon_slave_0_address;
+  wire             sram_16bit_512k_0_avalon_slave_0_allgrants;
+  wire             sram_16bit_512k_0_avalon_slave_0_allow_new_arb_cycle;
+  wire             sram_16bit_512k_0_avalon_slave_0_any_bursting_master_saved_grant;
+  wire             sram_16bit_512k_0_avalon_slave_0_any_continuerequest;
+  reg     [  1: 0] sram_16bit_512k_0_avalon_slave_0_arb_addend;
+  wire             sram_16bit_512k_0_avalon_slave_0_arb_counter_enable;
+  reg     [  1: 0] sram_16bit_512k_0_avalon_slave_0_arb_share_counter;
+  wire    [  1: 0] sram_16bit_512k_0_avalon_slave_0_arb_share_counter_next_value;
+  wire    [  1: 0] sram_16bit_512k_0_avalon_slave_0_arb_share_set_values;
+  wire    [  1: 0] sram_16bit_512k_0_avalon_slave_0_arb_winner;
+  wire             sram_16bit_512k_0_avalon_slave_0_arbitration_holdoff_internal;
+  wire             sram_16bit_512k_0_avalon_slave_0_beginbursttransfer_internal;
+  wire             sram_16bit_512k_0_avalon_slave_0_begins_xfer;
+  wire    [  1: 0] sram_16bit_512k_0_avalon_slave_0_byteenable_n;
+  wire             sram_16bit_512k_0_avalon_slave_0_chipselect_n;
+  wire    [  3: 0] sram_16bit_512k_0_avalon_slave_0_chosen_master_double_vector;
+  wire    [  1: 0] sram_16bit_512k_0_avalon_slave_0_chosen_master_rot_left;
+  wire             sram_16bit_512k_0_avalon_slave_0_counter_load_value;
+  wire             sram_16bit_512k_0_avalon_slave_0_end_xfer;
+  wire             sram_16bit_512k_0_avalon_slave_0_firsttransfer;
+  wire    [  1: 0] sram_16bit_512k_0_avalon_slave_0_grant_vector;
+  wire             sram_16bit_512k_0_avalon_slave_0_in_a_read_cycle;
+  wire             sram_16bit_512k_0_avalon_slave_0_in_a_write_cycle;
+  wire    [  1: 0] sram_16bit_512k_0_avalon_slave_0_master_qreq_vector;
+  wire             sram_16bit_512k_0_avalon_slave_0_non_bursting_master_requests;
+  wire             sram_16bit_512k_0_avalon_slave_0_read_n;
+  wire    [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
+  reg              sram_16bit_512k_0_avalon_slave_0_reg_firsttransfer;
+  wire             sram_16bit_512k_0_avalon_slave_0_reset_n;
+  reg     [  1: 0] sram_16bit_512k_0_avalon_slave_0_saved_chosen_master_vector;
+  reg              sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable;
+  wire             sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable2;
+  wire             sram_16bit_512k_0_avalon_slave_0_unreg_firsttransfer;
+  reg              sram_16bit_512k_0_avalon_slave_0_wait_counter;
+  wire             sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0;
+  wire             sram_16bit_512k_0_avalon_slave_0_waits_for_read;
+  wire             sram_16bit_512k_0_avalon_slave_0_waits_for_write;
+  wire             sram_16bit_512k_0_avalon_slave_0_write_n;
+  wire    [ 15: 0] sram_16bit_512k_0_avalon_slave_0_writedata;
+  wire             wait_for_sram_16bit_512k_0_avalon_slave_0_counter;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_reasons_to_wait <= 0;
+      else 
+        d1_reasons_to_wait <= ~sram_16bit_512k_0_avalon_slave_0_end_xfer;
+    end
+
+
+  assign sram_16bit_512k_0_avalon_slave_0_begins_xfer = ~d1_reasons_to_wait & ((cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0));
+  //assign sram_16bit_512k_0_avalon_slave_0_readdata_from_sa = sram_16bit_512k_0_avalon_slave_0_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_readdata_from_sa = sram_16bit_512k_0_avalon_slave_0_readdata;
+
+  assign cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 = ({cpu_0_data_master_address_to_slave[24 : 19] , 19'b0} == 25'h1080000) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  //sram_16bit_512k_0_avalon_slave_0_arb_share_counter set values, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_arb_share_set_values = (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0)? 2 :
+    (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0)? 2 :
+    (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0)? 2 :
+    (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0)? 2 :
+    1;
+
+  //sram_16bit_512k_0_avalon_slave_0_non_bursting_master_requests mux, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_non_bursting_master_requests = cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 |
+    cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0 |
+    cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 |
+    cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
+
+  //sram_16bit_512k_0_avalon_slave_0_any_bursting_master_saved_grant mux, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_any_bursting_master_saved_grant = 0;
+
+  //sram_16bit_512k_0_avalon_slave_0_arb_share_counter_next_value assignment, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_arb_share_counter_next_value = sram_16bit_512k_0_avalon_slave_0_firsttransfer ? (sram_16bit_512k_0_avalon_slave_0_arb_share_set_values - 1) : |sram_16bit_512k_0_avalon_slave_0_arb_share_counter ? (sram_16bit_512k_0_avalon_slave_0_arb_share_counter - 1) : 0;
+
+  //sram_16bit_512k_0_avalon_slave_0_allgrants all slave grants, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_allgrants = (|sram_16bit_512k_0_avalon_slave_0_grant_vector) |
+    (|sram_16bit_512k_0_avalon_slave_0_grant_vector) |
+    (|sram_16bit_512k_0_avalon_slave_0_grant_vector) |
+    (|sram_16bit_512k_0_avalon_slave_0_grant_vector);
+
+  //sram_16bit_512k_0_avalon_slave_0_end_xfer assignment, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_end_xfer = ~(sram_16bit_512k_0_avalon_slave_0_waits_for_read | sram_16bit_512k_0_avalon_slave_0_waits_for_write);
+
+  //end_xfer_arb_share_counter_term_sram_16bit_512k_0_avalon_slave_0 arb share counter enable term, which is an e_assign
+  assign end_xfer_arb_share_counter_term_sram_16bit_512k_0_avalon_slave_0 = sram_16bit_512k_0_avalon_slave_0_end_xfer & (~sram_16bit_512k_0_avalon_slave_0_any_bursting_master_saved_grant | in_a_read_cycle | in_a_write_cycle);
+
+  //sram_16bit_512k_0_avalon_slave_0_arb_share_counter arbitration counter enable, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_arb_counter_enable = (end_xfer_arb_share_counter_term_sram_16bit_512k_0_avalon_slave_0 & sram_16bit_512k_0_avalon_slave_0_allgrants) | (end_xfer_arb_share_counter_term_sram_16bit_512k_0_avalon_slave_0 & ~sram_16bit_512k_0_avalon_slave_0_non_bursting_master_requests);
+
+  //sram_16bit_512k_0_avalon_slave_0_arb_share_counter counter, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          sram_16bit_512k_0_avalon_slave_0_arb_share_counter <= 0;
+      else if (sram_16bit_512k_0_avalon_slave_0_arb_counter_enable)
+          sram_16bit_512k_0_avalon_slave_0_arb_share_counter <= sram_16bit_512k_0_avalon_slave_0_arb_share_counter_next_value;
+    end
+
+
+  //sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable slave enables arbiterlock, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable <= 0;
+      else if ((|sram_16bit_512k_0_avalon_slave_0_master_qreq_vector & end_xfer_arb_share_counter_term_sram_16bit_512k_0_avalon_slave_0) | (end_xfer_arb_share_counter_term_sram_16bit_512k_0_avalon_slave_0 & ~sram_16bit_512k_0_avalon_slave_0_non_bursting_master_requests))
+          sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable <= |sram_16bit_512k_0_avalon_slave_0_arb_share_counter_next_value;
+    end
+
+
+  //cpu_0/data_master sram_16bit_512k_0/avalon_slave_0 arbiterlock, which is an e_assign
+  assign cpu_0_data_master_arbiterlock = sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable & cpu_0_data_master_continuerequest;
+
+  //sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable2 = |sram_16bit_512k_0_avalon_slave_0_arb_share_counter_next_value;
+
+  //cpu_0/data_master sram_16bit_512k_0/avalon_slave_0 arbiterlock2, which is an e_assign
+  assign cpu_0_data_master_arbiterlock2 = sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable2 & cpu_0_data_master_continuerequest;
+
+  //cpu_0/instruction_master sram_16bit_512k_0/avalon_slave_0 arbiterlock, which is an e_assign
+  assign cpu_0_instruction_master_arbiterlock = sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable & cpu_0_instruction_master_continuerequest;
+
+  //cpu_0/instruction_master sram_16bit_512k_0/avalon_slave_0 arbiterlock2, which is an e_assign
+  assign cpu_0_instruction_master_arbiterlock2 = sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable2 & cpu_0_instruction_master_continuerequest;
+
+  //cpu_0/instruction_master granted sram_16bit_512k_0/avalon_slave_0 last time, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          last_cycle_cpu_0_instruction_master_granted_slave_sram_16bit_512k_0_avalon_slave_0 <= 0;
+      else 
+        last_cycle_cpu_0_instruction_master_granted_slave_sram_16bit_512k_0_avalon_slave_0 <= cpu_0_instruction_master_saved_grant_sram_16bit_512k_0_avalon_slave_0 ? 1 : (sram_16bit_512k_0_avalon_slave_0_arbitration_holdoff_internal | ~cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0) ? 0 : last_cycle_cpu_0_instruction_master_granted_slave_sram_16bit_512k_0_avalon_slave_0;
+    end
+
+
+  //cpu_0_instruction_master_continuerequest continued request, which is an e_mux
+  assign cpu_0_instruction_master_continuerequest = last_cycle_cpu_0_instruction_master_granted_slave_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
+
+  //sram_16bit_512k_0_avalon_slave_0_any_continuerequest at least one master continues requesting, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_any_continuerequest = cpu_0_instruction_master_continuerequest |
+    cpu_0_data_master_continuerequest;
+
+  assign cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 = cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 & ~(((cpu_0_data_master_no_byte_enables_and_last_term | !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0) & cpu_0_data_master_write) | cpu_0_instruction_master_arbiterlock);
+  //sram_16bit_512k_0_avalon_slave_0_writedata mux, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_writedata = cpu_0_data_master_dbs_write_16;
+
+  assign cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0 = (({cpu_0_instruction_master_address_to_slave[24 : 19] , 19'b0} == 25'h1080000) & (cpu_0_instruction_master_read)) & cpu_0_instruction_master_read;
+  //cpu_0/data_master granted sram_16bit_512k_0/avalon_slave_0 last time, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          last_cycle_cpu_0_data_master_granted_slave_sram_16bit_512k_0_avalon_slave_0 <= 0;
+      else 
+        last_cycle_cpu_0_data_master_granted_slave_sram_16bit_512k_0_avalon_slave_0 <= cpu_0_data_master_saved_grant_sram_16bit_512k_0_avalon_slave_0 ? 1 : (sram_16bit_512k_0_avalon_slave_0_arbitration_holdoff_internal | ~cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0) ? 0 : last_cycle_cpu_0_data_master_granted_slave_sram_16bit_512k_0_avalon_slave_0;
+    end
+
+
+  //cpu_0_data_master_continuerequest continued request, which is an e_mux
+  assign cpu_0_data_master_continuerequest = last_cycle_cpu_0_data_master_granted_slave_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
+
+  assign cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 = cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0 & ~(cpu_0_data_master_arbiterlock);
+  //allow new arb cycle for sram_16bit_512k_0/avalon_slave_0, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_allow_new_arb_cycle = ~cpu_0_data_master_arbiterlock & ~cpu_0_instruction_master_arbiterlock;
+
+  //cpu_0/instruction_master assignment into master qualified-requests vector for sram_16bit_512k_0/avalon_slave_0, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_master_qreq_vector[0] = cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
+
+  //cpu_0/instruction_master grant sram_16bit_512k_0/avalon_slave_0, which is an e_assign
+  assign cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 = sram_16bit_512k_0_avalon_slave_0_grant_vector[0];
+
+  //cpu_0/instruction_master saved-grant sram_16bit_512k_0/avalon_slave_0, which is an e_assign
+  assign cpu_0_instruction_master_saved_grant_sram_16bit_512k_0_avalon_slave_0 = sram_16bit_512k_0_avalon_slave_0_arb_winner[0] && cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
+
+  //cpu_0/data_master assignment into master qualified-requests vector for sram_16bit_512k_0/avalon_slave_0, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_master_qreq_vector[1] = cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
+
+  //cpu_0/data_master grant sram_16bit_512k_0/avalon_slave_0, which is an e_assign
+  assign cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 = sram_16bit_512k_0_avalon_slave_0_grant_vector[1];
+
+  //cpu_0/data_master saved-grant sram_16bit_512k_0/avalon_slave_0, which is an e_assign
+  assign cpu_0_data_master_saved_grant_sram_16bit_512k_0_avalon_slave_0 = sram_16bit_512k_0_avalon_slave_0_arb_winner[1] && cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
+
+  //sram_16bit_512k_0/avalon_slave_0 chosen-master double-vector, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_chosen_master_double_vector = {sram_16bit_512k_0_avalon_slave_0_master_qreq_vector, sram_16bit_512k_0_avalon_slave_0_master_qreq_vector} & ({~sram_16bit_512k_0_avalon_slave_0_master_qreq_vector, ~sram_16bit_512k_0_avalon_slave_0_master_qreq_vector} + sram_16bit_512k_0_avalon_slave_0_arb_addend);
+
+  //stable onehot encoding of arb winner
+  assign sram_16bit_512k_0_avalon_slave_0_arb_winner = (sram_16bit_512k_0_avalon_slave_0_allow_new_arb_cycle & | sram_16bit_512k_0_avalon_slave_0_grant_vector) ? sram_16bit_512k_0_avalon_slave_0_grant_vector : sram_16bit_512k_0_avalon_slave_0_saved_chosen_master_vector;
+
+  //saved sram_16bit_512k_0_avalon_slave_0_grant_vector, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          sram_16bit_512k_0_avalon_slave_0_saved_chosen_master_vector <= 0;
+      else if (sram_16bit_512k_0_avalon_slave_0_allow_new_arb_cycle)
+          sram_16bit_512k_0_avalon_slave_0_saved_chosen_master_vector <= |sram_16bit_512k_0_avalon_slave_0_grant_vector ? sram_16bit_512k_0_avalon_slave_0_grant_vector : sram_16bit_512k_0_avalon_slave_0_saved_chosen_master_vector;
+    end
+
+
+  //onehot encoding of chosen master
+  assign sram_16bit_512k_0_avalon_slave_0_grant_vector = {(sram_16bit_512k_0_avalon_slave_0_chosen_master_double_vector[1] | sram_16bit_512k_0_avalon_slave_0_chosen_master_double_vector[3]),
+    (sram_16bit_512k_0_avalon_slave_0_chosen_master_double_vector[0] | sram_16bit_512k_0_avalon_slave_0_chosen_master_double_vector[2])};
+
+  //sram_16bit_512k_0/avalon_slave_0 chosen master rotated left, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_chosen_master_rot_left = (sram_16bit_512k_0_avalon_slave_0_arb_winner << 1) ? (sram_16bit_512k_0_avalon_slave_0_arb_winner << 1) : 1;
+
+  //sram_16bit_512k_0/avalon_slave_0's addend for next-master-grant
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          sram_16bit_512k_0_avalon_slave_0_arb_addend <= 1;
+      else if (|sram_16bit_512k_0_avalon_slave_0_grant_vector)
+          sram_16bit_512k_0_avalon_slave_0_arb_addend <= sram_16bit_512k_0_avalon_slave_0_end_xfer? sram_16bit_512k_0_avalon_slave_0_chosen_master_rot_left : sram_16bit_512k_0_avalon_slave_0_grant_vector;
+    end
+
+
+  //sram_16bit_512k_0_avalon_slave_0_reset_n assignment, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_reset_n = reset_n;
+
+  assign sram_16bit_512k_0_avalon_slave_0_chipselect_n = ~(cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 | cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0);
+  //sram_16bit_512k_0_avalon_slave_0_firsttransfer first transaction, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_firsttransfer = sram_16bit_512k_0_avalon_slave_0_begins_xfer ? sram_16bit_512k_0_avalon_slave_0_unreg_firsttransfer : sram_16bit_512k_0_avalon_slave_0_reg_firsttransfer;
+
+  //sram_16bit_512k_0_avalon_slave_0_unreg_firsttransfer first transaction, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_unreg_firsttransfer = ~(sram_16bit_512k_0_avalon_slave_0_slavearbiterlockenable & sram_16bit_512k_0_avalon_slave_0_any_continuerequest);
+
+  //sram_16bit_512k_0_avalon_slave_0_reg_firsttransfer first transaction, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          sram_16bit_512k_0_avalon_slave_0_reg_firsttransfer <= 1'b1;
+      else if (sram_16bit_512k_0_avalon_slave_0_begins_xfer)
+          sram_16bit_512k_0_avalon_slave_0_reg_firsttransfer <= sram_16bit_512k_0_avalon_slave_0_unreg_firsttransfer;
+    end
+
+
+  //sram_16bit_512k_0_avalon_slave_0_beginbursttransfer_internal begin burst transfer, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_beginbursttransfer_internal = sram_16bit_512k_0_avalon_slave_0_begins_xfer;
+
+  //sram_16bit_512k_0_avalon_slave_0_arbitration_holdoff_internal arbitration_holdoff, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_arbitration_holdoff_internal = sram_16bit_512k_0_avalon_slave_0_begins_xfer & sram_16bit_512k_0_avalon_slave_0_firsttransfer;
+
+  //~sram_16bit_512k_0_avalon_slave_0_read_n assignment, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_read_n = ~(((cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_read) | (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_read))& ~sram_16bit_512k_0_avalon_slave_0_begins_xfer);
+
+  //~sram_16bit_512k_0_avalon_slave_0_write_n assignment, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_write_n = ~(((cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_write)) & ~sram_16bit_512k_0_avalon_slave_0_begins_xfer & (sram_16bit_512k_0_avalon_slave_0_wait_counter >= 1));
+
+  assign shifted_address_to_sram_16bit_512k_0_avalon_slave_0_from_cpu_0_data_master = {cpu_0_data_master_address_to_slave >> 2,
+    cpu_0_data_master_dbs_address[1],
+    {1 {1'b0}}};
+
+  //sram_16bit_512k_0_avalon_slave_0_address mux, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_address = (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0)? (shifted_address_to_sram_16bit_512k_0_avalon_slave_0_from_cpu_0_data_master >> 1) :
+    (shifted_address_to_sram_16bit_512k_0_avalon_slave_0_from_cpu_0_instruction_master >> 1);
+
+  assign shifted_address_to_sram_16bit_512k_0_avalon_slave_0_from_cpu_0_instruction_master = {cpu_0_instruction_master_address_to_slave >> 2,
+    cpu_0_instruction_master_dbs_address[1],
+    {1 {1'b0}}};
+
+  //d1_sram_16bit_512k_0_avalon_slave_0_end_xfer register, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_sram_16bit_512k_0_avalon_slave_0_end_xfer <= 1;
+      else 
+        d1_sram_16bit_512k_0_avalon_slave_0_end_xfer <= sram_16bit_512k_0_avalon_slave_0_end_xfer;
+    end
+
+
+  //sram_16bit_512k_0_avalon_slave_0_waits_for_read in a cycle, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_waits_for_read = sram_16bit_512k_0_avalon_slave_0_in_a_read_cycle & sram_16bit_512k_0_avalon_slave_0_begins_xfer;
+
+  //sram_16bit_512k_0_avalon_slave_0_in_a_read_cycle assignment, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_in_a_read_cycle = (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_read) | (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_read);
+
+  //in_a_read_cycle assignment, which is an e_mux
+  assign in_a_read_cycle = sram_16bit_512k_0_avalon_slave_0_in_a_read_cycle;
+
+  //sram_16bit_512k_0_avalon_slave_0_waits_for_write in a cycle, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_waits_for_write = sram_16bit_512k_0_avalon_slave_0_in_a_write_cycle & wait_for_sram_16bit_512k_0_avalon_slave_0_counter;
+
+  //sram_16bit_512k_0_avalon_slave_0_in_a_write_cycle assignment, which is an e_assign
+  assign sram_16bit_512k_0_avalon_slave_0_in_a_write_cycle = cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_write;
+
+  //in_a_write_cycle assignment, which is an e_mux
+  assign in_a_write_cycle = sram_16bit_512k_0_avalon_slave_0_in_a_write_cycle;
+
+  assign sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0 = sram_16bit_512k_0_avalon_slave_0_wait_counter == 0;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          sram_16bit_512k_0_avalon_slave_0_wait_counter <= 0;
+      else 
+        sram_16bit_512k_0_avalon_slave_0_wait_counter <= sram_16bit_512k_0_avalon_slave_0_counter_load_value;
+    end
+
+
+  assign sram_16bit_512k_0_avalon_slave_0_counter_load_value = ((sram_16bit_512k_0_avalon_slave_0_in_a_write_cycle & sram_16bit_512k_0_avalon_slave_0_begins_xfer))? 1 :
+    (~sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0)? sram_16bit_512k_0_avalon_slave_0_wait_counter - 1 :
+    0;
+
+  assign wait_for_sram_16bit_512k_0_avalon_slave_0_counter = sram_16bit_512k_0_avalon_slave_0_begins_xfer | ~sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0;
+  //~sram_16bit_512k_0_avalon_slave_0_byteenable_n byte enable port mux, which is an e_mux
+  assign sram_16bit_512k_0_avalon_slave_0_byteenable_n = ~((cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0)? cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0 :
+    -1);
+
+  assign {cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0_segment_1,
+cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0_segment_0} = cpu_0_data_master_byteenable;
+  assign cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0 = ((cpu_0_data_master_dbs_address[1] == 0))? cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0_segment_0 :
+    cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0_segment_1;
+
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //sram_16bit_512k_0/avalon_slave_0 enable non-zero assertions, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          enable_nonzero_assertions <= 0;
+      else 
+        enable_nonzero_assertions <= 1'b1;
+    end
+
+
+  //grant signals are active simultaneously, which is an e_process
+  always @(posedge clk)
+    begin
+      if (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 + cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 > 1)
+        begin
+          $write("%0d ns: > 1 of grant signals are active simultaneously", $time);
+          $stop;
+        end
+    end
+
+
+  //saved_grant signals are active simultaneously, which is an e_process
+  always @(posedge clk)
+    begin
+      if (cpu_0_data_master_saved_grant_sram_16bit_512k_0_avalon_slave_0 + cpu_0_instruction_master_saved_grant_sram_16bit_512k_0_avalon_slave_0 > 1)
+        begin
+          $write("%0d ns: > 1 of saved_grant signals are active simultaneously", $time);
+          $stop;
+        end
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
 module sysid_control_slave_arbitrator (
                                         // inputs:
                                          clk,
@@ -3327,7 +3834,7 @@ module sysid_control_slave_arbitrator (
   //assign sysid_control_slave_readdata_from_sa = sysid_control_slave_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign sysid_control_slave_readdata_from_sa = sysid_control_slave_readdata;
 
-  assign cpu_0_data_master_requests_sysid_control_slave = (({cpu_0_data_master_address_to_slave[24 : 3] , 3'b0} == 25'h1009038) & (cpu_0_data_master_read | cpu_0_data_master_write)) & cpu_0_data_master_read;
+  assign cpu_0_data_master_requests_sysid_control_slave = (({cpu_0_data_master_address_to_slave[24 : 3] , 3'b0} == 25'h1109038) & (cpu_0_data_master_read | cpu_0_data_master_write)) & cpu_0_data_master_read;
   //sysid_control_slave_arb_share_counter set values, which is an e_mux
   assign sysid_control_slave_arb_share_set_values = 1;
 
@@ -3596,7 +4103,7 @@ module timer_0_s1_arbitrator (
   //assign timer_0_s1_readdata_from_sa = timer_0_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign timer_0_s1_readdata_from_sa = timer_0_s1_readdata;
 
-  assign cpu_0_data_master_requests_timer_0_s1 = ({cpu_0_data_master_address_to_slave[24 : 5] , 5'b0} == 25'h1009000) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_timer_0_s1 = ({cpu_0_data_master_address_to_slave[24 : 5] , 5'b0} == 25'h1109000) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //timer_0_s1_arb_share_counter set values, which is an e_mux
   assign timer_0_s1_arb_share_set_values = 1;
 
@@ -3831,10 +4338,26 @@ module niosSystemCamControl (
                                zs_dq_to_and_from_the_sdram_0,
                                zs_dqm_from_the_sdram_0,
                                zs_ras_n_from_the_sdram_0,
-                               zs_we_n_from_the_sdram_0
+                               zs_we_n_from_the_sdram_0,
+
+                              // the_sram_16bit_512k_0
+                               SRAM_ADDR_from_the_sram_16bit_512k_0,
+                               SRAM_CE_N_from_the_sram_16bit_512k_0,
+                               SRAM_DQ_to_and_from_the_sram_16bit_512k_0,
+                               SRAM_LB_N_from_the_sram_16bit_512k_0,
+                               SRAM_OE_N_from_the_sram_16bit_512k_0,
+                               SRAM_UB_N_from_the_sram_16bit_512k_0,
+                               SRAM_WE_N_from_the_sram_16bit_512k_0
                             )
 ;
 
+  output  [ 17: 0] SRAM_ADDR_from_the_sram_16bit_512k_0;
+  output           SRAM_CE_N_from_the_sram_16bit_512k_0;
+  inout   [ 15: 0] SRAM_DQ_to_and_from_the_sram_16bit_512k_0;
+  output           SRAM_LB_N_from_the_sram_16bit_512k_0;
+  output           SRAM_OE_N_from_the_sram_16bit_512k_0;
+  output           SRAM_UB_N_from_the_sram_16bit_512k_0;
+  output           SRAM_WE_N_from_the_sram_16bit_512k_0;
   output           out_port_from_the_procHasControl;
   output  [ 11: 0] zs_addr_from_the_sdram_0;
   output  [  1: 0] zs_ba_from_the_sdram_0;
@@ -3848,11 +4371,19 @@ module niosSystemCamControl (
   input            clk_0;
   input            reset_n;
 
+  wire    [ 17: 0] SRAM_ADDR_from_the_sram_16bit_512k_0;
+  wire             SRAM_CE_N_from_the_sram_16bit_512k_0;
+  wire    [ 15: 0] SRAM_DQ_to_and_from_the_sram_16bit_512k_0;
+  wire             SRAM_LB_N_from_the_sram_16bit_512k_0;
+  wire             SRAM_OE_N_from_the_sram_16bit_512k_0;
+  wire             SRAM_UB_N_from_the_sram_16bit_512k_0;
+  wire             SRAM_WE_N_from_the_sram_16bit_512k_0;
   wire             clk_0_reset_n;
   wire    [ 24: 0] cpu_0_data_master_address;
   wire    [ 24: 0] cpu_0_data_master_address_to_slave;
   wire    [  3: 0] cpu_0_data_master_byteenable;
   wire    [  1: 0] cpu_0_data_master_byteenable_sdram_0_s1;
+  wire    [  1: 0] cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0;
   wire    [  1: 0] cpu_0_data_master_dbs_address;
   wire    [ 15: 0] cpu_0_data_master_dbs_write_16;
   wire             cpu_0_data_master_debugaccess;
@@ -3861,6 +4392,7 @@ module niosSystemCamControl (
   wire             cpu_0_data_master_granted_onchip_memory2_0_s1;
   wire             cpu_0_data_master_granted_procHasControl_s1;
   wire             cpu_0_data_master_granted_sdram_0_s1;
+  wire             cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_data_master_granted_sysid_control_slave;
   wire             cpu_0_data_master_granted_timer_0_s1;
   wire    [ 31: 0] cpu_0_data_master_irq;
@@ -3870,6 +4402,7 @@ module niosSystemCamControl (
   wire             cpu_0_data_master_qualified_request_onchip_memory2_0_s1;
   wire             cpu_0_data_master_qualified_request_procHasControl_s1;
   wire             cpu_0_data_master_qualified_request_sdram_0_s1;
+  wire             cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_data_master_qualified_request_sysid_control_slave;
   wire             cpu_0_data_master_qualified_request_timer_0_s1;
   wire             cpu_0_data_master_read;
@@ -3879,6 +4412,7 @@ module niosSystemCamControl (
   wire             cpu_0_data_master_read_data_valid_procHasControl_s1;
   wire             cpu_0_data_master_read_data_valid_sdram_0_s1;
   wire             cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register;
+  wire             cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_data_master_read_data_valid_sysid_control_slave;
   wire             cpu_0_data_master_read_data_valid_timer_0_s1;
   wire    [ 31: 0] cpu_0_data_master_readdata;
@@ -3887,6 +4421,7 @@ module niosSystemCamControl (
   wire             cpu_0_data_master_requests_onchip_memory2_0_s1;
   wire             cpu_0_data_master_requests_procHasControl_s1;
   wire             cpu_0_data_master_requests_sdram_0_s1;
+  wire             cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_data_master_requests_sysid_control_slave;
   wire             cpu_0_data_master_requests_timer_0_s1;
   wire             cpu_0_data_master_waitrequest;
@@ -3898,18 +4433,22 @@ module niosSystemCamControl (
   wire             cpu_0_instruction_master_granted_cpu_0_jtag_debug_module;
   wire             cpu_0_instruction_master_granted_onchip_memory2_0_s1;
   wire             cpu_0_instruction_master_granted_sdram_0_s1;
+  wire             cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module;
   wire             cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1;
   wire             cpu_0_instruction_master_qualified_request_sdram_0_s1;
+  wire             cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_instruction_master_read;
   wire             cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module;
   wire             cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1;
   wire             cpu_0_instruction_master_read_data_valid_sdram_0_s1;
   wire             cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register;
+  wire             cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
   wire    [ 31: 0] cpu_0_instruction_master_readdata;
   wire             cpu_0_instruction_master_requests_cpu_0_jtag_debug_module;
   wire             cpu_0_instruction_master_requests_onchip_memory2_0_s1;
   wire             cpu_0_instruction_master_requests_sdram_0_s1;
+  wire             cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_instruction_master_waitrequest;
   wire    [  8: 0] cpu_0_jtag_debug_module_address;
   wire             cpu_0_jtag_debug_module_begintransfer;
@@ -3928,6 +4467,7 @@ module niosSystemCamControl (
   wire             d1_onchip_memory2_0_s1_end_xfer;
   wire             d1_procHasControl_s1_end_xfer;
   wire             d1_sdram_0_s1_end_xfer;
+  wire             d1_sram_16bit_512k_0_avalon_slave_0_end_xfer;
   wire             d1_sysid_control_slave_end_xfer;
   wire             d1_timer_0_s1_end_xfer;
   wire             jtag_uart_0_avalon_jtag_slave_address;
@@ -3977,6 +4517,16 @@ module niosSystemCamControl (
   wire             sdram_0_s1_waitrequest_from_sa;
   wire             sdram_0_s1_write_n;
   wire    [ 15: 0] sdram_0_s1_writedata;
+  wire    [ 17: 0] sram_16bit_512k_0_avalon_slave_0_address;
+  wire    [  1: 0] sram_16bit_512k_0_avalon_slave_0_byteenable_n;
+  wire             sram_16bit_512k_0_avalon_slave_0_chipselect_n;
+  wire             sram_16bit_512k_0_avalon_slave_0_read_n;
+  wire    [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata;
+  wire    [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
+  wire             sram_16bit_512k_0_avalon_slave_0_reset_n;
+  wire             sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0;
+  wire             sram_16bit_512k_0_avalon_slave_0_write_n;
+  wire    [ 15: 0] sram_16bit_512k_0_avalon_slave_0_writedata;
   wire             sysid_control_slave_address;
   wire             sysid_control_slave_clock;
   wire    [ 31: 0] sysid_control_slave_readdata;
@@ -4038,100 +4588,115 @@ module niosSystemCamControl (
 
   cpu_0_data_master_arbitrator the_cpu_0_data_master
     (
-      .clk                                                               (clk_0),
-      .cpu_0_data_master_address                                         (cpu_0_data_master_address),
-      .cpu_0_data_master_address_to_slave                                (cpu_0_data_master_address_to_slave),
-      .cpu_0_data_master_byteenable_sdram_0_s1                           (cpu_0_data_master_byteenable_sdram_0_s1),
-      .cpu_0_data_master_dbs_address                                     (cpu_0_data_master_dbs_address),
-      .cpu_0_data_master_dbs_write_16                                    (cpu_0_data_master_dbs_write_16),
-      .cpu_0_data_master_granted_cpu_0_jtag_debug_module                 (cpu_0_data_master_granted_cpu_0_jtag_debug_module),
-      .cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave           (cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave),
-      .cpu_0_data_master_granted_onchip_memory2_0_s1                     (cpu_0_data_master_granted_onchip_memory2_0_s1),
-      .cpu_0_data_master_granted_procHasControl_s1                       (cpu_0_data_master_granted_procHasControl_s1),
-      .cpu_0_data_master_granted_sdram_0_s1                              (cpu_0_data_master_granted_sdram_0_s1),
-      .cpu_0_data_master_granted_sysid_control_slave                     (cpu_0_data_master_granted_sysid_control_slave),
-      .cpu_0_data_master_granted_timer_0_s1                              (cpu_0_data_master_granted_timer_0_s1),
-      .cpu_0_data_master_irq                                             (cpu_0_data_master_irq),
-      .cpu_0_data_master_no_byte_enables_and_last_term                   (cpu_0_data_master_no_byte_enables_and_last_term),
-      .cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module       (cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module),
-      .cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave (cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave),
-      .cpu_0_data_master_qualified_request_onchip_memory2_0_s1           (cpu_0_data_master_qualified_request_onchip_memory2_0_s1),
-      .cpu_0_data_master_qualified_request_procHasControl_s1             (cpu_0_data_master_qualified_request_procHasControl_s1),
-      .cpu_0_data_master_qualified_request_sdram_0_s1                    (cpu_0_data_master_qualified_request_sdram_0_s1),
-      .cpu_0_data_master_qualified_request_sysid_control_slave           (cpu_0_data_master_qualified_request_sysid_control_slave),
-      .cpu_0_data_master_qualified_request_timer_0_s1                    (cpu_0_data_master_qualified_request_timer_0_s1),
-      .cpu_0_data_master_read                                            (cpu_0_data_master_read),
-      .cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module         (cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module),
-      .cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave   (cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave),
-      .cpu_0_data_master_read_data_valid_onchip_memory2_0_s1             (cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
-      .cpu_0_data_master_read_data_valid_procHasControl_s1               (cpu_0_data_master_read_data_valid_procHasControl_s1),
-      .cpu_0_data_master_read_data_valid_sdram_0_s1                      (cpu_0_data_master_read_data_valid_sdram_0_s1),
-      .cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register       (cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register),
-      .cpu_0_data_master_read_data_valid_sysid_control_slave             (cpu_0_data_master_read_data_valid_sysid_control_slave),
-      .cpu_0_data_master_read_data_valid_timer_0_s1                      (cpu_0_data_master_read_data_valid_timer_0_s1),
-      .cpu_0_data_master_readdata                                        (cpu_0_data_master_readdata),
-      .cpu_0_data_master_requests_cpu_0_jtag_debug_module                (cpu_0_data_master_requests_cpu_0_jtag_debug_module),
-      .cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave          (cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave),
-      .cpu_0_data_master_requests_onchip_memory2_0_s1                    (cpu_0_data_master_requests_onchip_memory2_0_s1),
-      .cpu_0_data_master_requests_procHasControl_s1                      (cpu_0_data_master_requests_procHasControl_s1),
-      .cpu_0_data_master_requests_sdram_0_s1                             (cpu_0_data_master_requests_sdram_0_s1),
-      .cpu_0_data_master_requests_sysid_control_slave                    (cpu_0_data_master_requests_sysid_control_slave),
-      .cpu_0_data_master_requests_timer_0_s1                             (cpu_0_data_master_requests_timer_0_s1),
-      .cpu_0_data_master_waitrequest                                     (cpu_0_data_master_waitrequest),
-      .cpu_0_data_master_write                                           (cpu_0_data_master_write),
-      .cpu_0_data_master_writedata                                       (cpu_0_data_master_writedata),
-      .cpu_0_jtag_debug_module_readdata_from_sa                          (cpu_0_jtag_debug_module_readdata_from_sa),
-      .d1_cpu_0_jtag_debug_module_end_xfer                               (d1_cpu_0_jtag_debug_module_end_xfer),
-      .d1_jtag_uart_0_avalon_jtag_slave_end_xfer                         (d1_jtag_uart_0_avalon_jtag_slave_end_xfer),
-      .d1_onchip_memory2_0_s1_end_xfer                                   (d1_onchip_memory2_0_s1_end_xfer),
-      .d1_procHasControl_s1_end_xfer                                     (d1_procHasControl_s1_end_xfer),
-      .d1_sdram_0_s1_end_xfer                                            (d1_sdram_0_s1_end_xfer),
-      .d1_sysid_control_slave_end_xfer                                   (d1_sysid_control_slave_end_xfer),
-      .d1_timer_0_s1_end_xfer                                            (d1_timer_0_s1_end_xfer),
-      .jtag_uart_0_avalon_jtag_slave_irq_from_sa                         (jtag_uart_0_avalon_jtag_slave_irq_from_sa),
-      .jtag_uart_0_avalon_jtag_slave_readdata_from_sa                    (jtag_uart_0_avalon_jtag_slave_readdata_from_sa),
-      .jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa                 (jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa),
-      .onchip_memory2_0_s1_readdata_from_sa                              (onchip_memory2_0_s1_readdata_from_sa),
-      .procHasControl_s1_readdata_from_sa                                (procHasControl_s1_readdata_from_sa),
-      .registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1  (registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
-      .reset_n                                                           (clk_0_reset_n),
-      .sdram_0_s1_readdata_from_sa                                       (sdram_0_s1_readdata_from_sa),
-      .sdram_0_s1_waitrequest_from_sa                                    (sdram_0_s1_waitrequest_from_sa),
-      .sysid_control_slave_readdata_from_sa                              (sysid_control_slave_readdata_from_sa),
-      .timer_0_s1_irq_from_sa                                            (timer_0_s1_irq_from_sa),
-      .timer_0_s1_readdata_from_sa                                       (timer_0_s1_readdata_from_sa)
+      .clk                                                                  (clk_0),
+      .cpu_0_data_master_address                                            (cpu_0_data_master_address),
+      .cpu_0_data_master_address_to_slave                                   (cpu_0_data_master_address_to_slave),
+      .cpu_0_data_master_byteenable_sdram_0_s1                              (cpu_0_data_master_byteenable_sdram_0_s1),
+      .cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0        (cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_dbs_address                                        (cpu_0_data_master_dbs_address),
+      .cpu_0_data_master_dbs_write_16                                       (cpu_0_data_master_dbs_write_16),
+      .cpu_0_data_master_granted_cpu_0_jtag_debug_module                    (cpu_0_data_master_granted_cpu_0_jtag_debug_module),
+      .cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave              (cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_granted_onchip_memory2_0_s1                        (cpu_0_data_master_granted_onchip_memory2_0_s1),
+      .cpu_0_data_master_granted_procHasControl_s1                          (cpu_0_data_master_granted_procHasControl_s1),
+      .cpu_0_data_master_granted_sdram_0_s1                                 (cpu_0_data_master_granted_sdram_0_s1),
+      .cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0           (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_granted_sysid_control_slave                        (cpu_0_data_master_granted_sysid_control_slave),
+      .cpu_0_data_master_granted_timer_0_s1                                 (cpu_0_data_master_granted_timer_0_s1),
+      .cpu_0_data_master_irq                                                (cpu_0_data_master_irq),
+      .cpu_0_data_master_no_byte_enables_and_last_term                      (cpu_0_data_master_no_byte_enables_and_last_term),
+      .cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module          (cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module),
+      .cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave    (cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_qualified_request_onchip_memory2_0_s1              (cpu_0_data_master_qualified_request_onchip_memory2_0_s1),
+      .cpu_0_data_master_qualified_request_procHasControl_s1                (cpu_0_data_master_qualified_request_procHasControl_s1),
+      .cpu_0_data_master_qualified_request_sdram_0_s1                       (cpu_0_data_master_qualified_request_sdram_0_s1),
+      .cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 (cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_qualified_request_sysid_control_slave              (cpu_0_data_master_qualified_request_sysid_control_slave),
+      .cpu_0_data_master_qualified_request_timer_0_s1                       (cpu_0_data_master_qualified_request_timer_0_s1),
+      .cpu_0_data_master_read                                               (cpu_0_data_master_read),
+      .cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module            (cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module),
+      .cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave      (cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_read_data_valid_onchip_memory2_0_s1                (cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
+      .cpu_0_data_master_read_data_valid_procHasControl_s1                  (cpu_0_data_master_read_data_valid_procHasControl_s1),
+      .cpu_0_data_master_read_data_valid_sdram_0_s1                         (cpu_0_data_master_read_data_valid_sdram_0_s1),
+      .cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register          (cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register),
+      .cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0   (cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_read_data_valid_sysid_control_slave                (cpu_0_data_master_read_data_valid_sysid_control_slave),
+      .cpu_0_data_master_read_data_valid_timer_0_s1                         (cpu_0_data_master_read_data_valid_timer_0_s1),
+      .cpu_0_data_master_readdata                                           (cpu_0_data_master_readdata),
+      .cpu_0_data_master_requests_cpu_0_jtag_debug_module                   (cpu_0_data_master_requests_cpu_0_jtag_debug_module),
+      .cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave             (cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_requests_onchip_memory2_0_s1                       (cpu_0_data_master_requests_onchip_memory2_0_s1),
+      .cpu_0_data_master_requests_procHasControl_s1                         (cpu_0_data_master_requests_procHasControl_s1),
+      .cpu_0_data_master_requests_sdram_0_s1                                (cpu_0_data_master_requests_sdram_0_s1),
+      .cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0          (cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_requests_sysid_control_slave                       (cpu_0_data_master_requests_sysid_control_slave),
+      .cpu_0_data_master_requests_timer_0_s1                                (cpu_0_data_master_requests_timer_0_s1),
+      .cpu_0_data_master_waitrequest                                        (cpu_0_data_master_waitrequest),
+      .cpu_0_data_master_write                                              (cpu_0_data_master_write),
+      .cpu_0_data_master_writedata                                          (cpu_0_data_master_writedata),
+      .cpu_0_jtag_debug_module_readdata_from_sa                             (cpu_0_jtag_debug_module_readdata_from_sa),
+      .d1_cpu_0_jtag_debug_module_end_xfer                                  (d1_cpu_0_jtag_debug_module_end_xfer),
+      .d1_jtag_uart_0_avalon_jtag_slave_end_xfer                            (d1_jtag_uart_0_avalon_jtag_slave_end_xfer),
+      .d1_onchip_memory2_0_s1_end_xfer                                      (d1_onchip_memory2_0_s1_end_xfer),
+      .d1_procHasControl_s1_end_xfer                                        (d1_procHasControl_s1_end_xfer),
+      .d1_sdram_0_s1_end_xfer                                               (d1_sdram_0_s1_end_xfer),
+      .d1_sram_16bit_512k_0_avalon_slave_0_end_xfer                         (d1_sram_16bit_512k_0_avalon_slave_0_end_xfer),
+      .d1_sysid_control_slave_end_xfer                                      (d1_sysid_control_slave_end_xfer),
+      .d1_timer_0_s1_end_xfer                                               (d1_timer_0_s1_end_xfer),
+      .jtag_uart_0_avalon_jtag_slave_irq_from_sa                            (jtag_uart_0_avalon_jtag_slave_irq_from_sa),
+      .jtag_uart_0_avalon_jtag_slave_readdata_from_sa                       (jtag_uart_0_avalon_jtag_slave_readdata_from_sa),
+      .jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa                    (jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa),
+      .onchip_memory2_0_s1_readdata_from_sa                                 (onchip_memory2_0_s1_readdata_from_sa),
+      .procHasControl_s1_readdata_from_sa                                   (procHasControl_s1_readdata_from_sa),
+      .registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1     (registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
+      .reset_n                                                              (clk_0_reset_n),
+      .sdram_0_s1_readdata_from_sa                                          (sdram_0_s1_readdata_from_sa),
+      .sdram_0_s1_waitrequest_from_sa                                       (sdram_0_s1_waitrequest_from_sa),
+      .sram_16bit_512k_0_avalon_slave_0_readdata_from_sa                    (sram_16bit_512k_0_avalon_slave_0_readdata_from_sa),
+      .sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0                   (sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0),
+      .sysid_control_slave_readdata_from_sa                                 (sysid_control_slave_readdata_from_sa),
+      .timer_0_s1_irq_from_sa                                               (timer_0_s1_irq_from_sa),
+      .timer_0_s1_readdata_from_sa                                          (timer_0_s1_readdata_from_sa)
     );
 
   cpu_0_instruction_master_arbitrator the_cpu_0_instruction_master
     (
-      .clk                                                                (clk_0),
-      .cpu_0_instruction_master_address                                   (cpu_0_instruction_master_address),
-      .cpu_0_instruction_master_address_to_slave                          (cpu_0_instruction_master_address_to_slave),
-      .cpu_0_instruction_master_dbs_address                               (cpu_0_instruction_master_dbs_address),
-      .cpu_0_instruction_master_granted_cpu_0_jtag_debug_module           (cpu_0_instruction_master_granted_cpu_0_jtag_debug_module),
-      .cpu_0_instruction_master_granted_onchip_memory2_0_s1               (cpu_0_instruction_master_granted_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_granted_sdram_0_s1                        (cpu_0_instruction_master_granted_sdram_0_s1),
-      .cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module (cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module),
-      .cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1     (cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_qualified_request_sdram_0_s1              (cpu_0_instruction_master_qualified_request_sdram_0_s1),
-      .cpu_0_instruction_master_read                                      (cpu_0_instruction_master_read),
-      .cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module   (cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module),
-      .cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1       (cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_read_data_valid_sdram_0_s1                (cpu_0_instruction_master_read_data_valid_sdram_0_s1),
-      .cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register (cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register),
-      .cpu_0_instruction_master_readdata                                  (cpu_0_instruction_master_readdata),
-      .cpu_0_instruction_master_requests_cpu_0_jtag_debug_module          (cpu_0_instruction_master_requests_cpu_0_jtag_debug_module),
-      .cpu_0_instruction_master_requests_onchip_memory2_0_s1              (cpu_0_instruction_master_requests_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_requests_sdram_0_s1                       (cpu_0_instruction_master_requests_sdram_0_s1),
-      .cpu_0_instruction_master_waitrequest                               (cpu_0_instruction_master_waitrequest),
-      .cpu_0_jtag_debug_module_readdata_from_sa                           (cpu_0_jtag_debug_module_readdata_from_sa),
-      .d1_cpu_0_jtag_debug_module_end_xfer                                (d1_cpu_0_jtag_debug_module_end_xfer),
-      .d1_onchip_memory2_0_s1_end_xfer                                    (d1_onchip_memory2_0_s1_end_xfer),
-      .d1_sdram_0_s1_end_xfer                                             (d1_sdram_0_s1_end_xfer),
-      .onchip_memory2_0_s1_readdata_from_sa                               (onchip_memory2_0_s1_readdata_from_sa),
-      .reset_n                                                            (clk_0_reset_n),
-      .sdram_0_s1_readdata_from_sa                                        (sdram_0_s1_readdata_from_sa),
-      .sdram_0_s1_waitrequest_from_sa                                     (sdram_0_s1_waitrequest_from_sa)
+      .clk                                                                         (clk_0),
+      .cpu_0_instruction_master_address                                            (cpu_0_instruction_master_address),
+      .cpu_0_instruction_master_address_to_slave                                   (cpu_0_instruction_master_address_to_slave),
+      .cpu_0_instruction_master_dbs_address                                        (cpu_0_instruction_master_dbs_address),
+      .cpu_0_instruction_master_granted_cpu_0_jtag_debug_module                    (cpu_0_instruction_master_granted_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_granted_onchip_memory2_0_s1                        (cpu_0_instruction_master_granted_onchip_memory2_0_s1),
+      .cpu_0_instruction_master_granted_sdram_0_s1                                 (cpu_0_instruction_master_granted_sdram_0_s1),
+      .cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0           (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module          (cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1              (cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1),
+      .cpu_0_instruction_master_qualified_request_sdram_0_s1                       (cpu_0_instruction_master_qualified_request_sdram_0_s1),
+      .cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 (cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_read                                               (cpu_0_instruction_master_read),
+      .cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module            (cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1                (cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1),
+      .cpu_0_instruction_master_read_data_valid_sdram_0_s1                         (cpu_0_instruction_master_read_data_valid_sdram_0_s1),
+      .cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register          (cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register),
+      .cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0   (cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_readdata                                           (cpu_0_instruction_master_readdata),
+      .cpu_0_instruction_master_requests_cpu_0_jtag_debug_module                   (cpu_0_instruction_master_requests_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_requests_onchip_memory2_0_s1                       (cpu_0_instruction_master_requests_onchip_memory2_0_s1),
+      .cpu_0_instruction_master_requests_sdram_0_s1                                (cpu_0_instruction_master_requests_sdram_0_s1),
+      .cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0          (cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_waitrequest                                        (cpu_0_instruction_master_waitrequest),
+      .cpu_0_jtag_debug_module_readdata_from_sa                                    (cpu_0_jtag_debug_module_readdata_from_sa),
+      .d1_cpu_0_jtag_debug_module_end_xfer                                         (d1_cpu_0_jtag_debug_module_end_xfer),
+      .d1_onchip_memory2_0_s1_end_xfer                                             (d1_onchip_memory2_0_s1_end_xfer),
+      .d1_sdram_0_s1_end_xfer                                                      (d1_sdram_0_s1_end_xfer),
+      .d1_sram_16bit_512k_0_avalon_slave_0_end_xfer                                (d1_sram_16bit_512k_0_avalon_slave_0_end_xfer),
+      .onchip_memory2_0_s1_readdata_from_sa                                        (onchip_memory2_0_s1_readdata_from_sa),
+      .reset_n                                                                     (clk_0_reset_n),
+      .sdram_0_s1_readdata_from_sa                                                 (sdram_0_s1_readdata_from_sa),
+      .sdram_0_s1_waitrequest_from_sa                                              (sdram_0_s1_waitrequest_from_sa),
+      .sram_16bit_512k_0_avalon_slave_0_readdata_from_sa                           (sram_16bit_512k_0_avalon_slave_0_readdata_from_sa),
+      .sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0                          (sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0)
     );
 
   cpu_0 the_cpu_0
@@ -4356,6 +4921,62 @@ module niosSystemCamControl (
       .zs_we_n        (zs_we_n_from_the_sdram_0)
     );
 
+  sram_16bit_512k_0_avalon_slave_0_arbitrator the_sram_16bit_512k_0_avalon_slave_0
+    (
+      .clk                                                                         (clk_0),
+      .cpu_0_data_master_address_to_slave                                          (cpu_0_data_master_address_to_slave),
+      .cpu_0_data_master_byteenable                                                (cpu_0_data_master_byteenable),
+      .cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0               (cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_dbs_address                                               (cpu_0_data_master_dbs_address),
+      .cpu_0_data_master_dbs_write_16                                              (cpu_0_data_master_dbs_write_16),
+      .cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0                  (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_no_byte_enables_and_last_term                             (cpu_0_data_master_no_byte_enables_and_last_term),
+      .cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0        (cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_read                                                      (cpu_0_data_master_read),
+      .cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0          (cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0                 (cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_data_master_write                                                     (cpu_0_data_master_write),
+      .cpu_0_instruction_master_address_to_slave                                   (cpu_0_instruction_master_address_to_slave),
+      .cpu_0_instruction_master_dbs_address                                        (cpu_0_instruction_master_dbs_address),
+      .cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0           (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 (cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_read                                               (cpu_0_instruction_master_read),
+      .cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0   (cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0          (cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0),
+      .d1_sram_16bit_512k_0_avalon_slave_0_end_xfer                                (d1_sram_16bit_512k_0_avalon_slave_0_end_xfer),
+      .reset_n                                                                     (clk_0_reset_n),
+      .sram_16bit_512k_0_avalon_slave_0_address                                    (sram_16bit_512k_0_avalon_slave_0_address),
+      .sram_16bit_512k_0_avalon_slave_0_byteenable_n                               (sram_16bit_512k_0_avalon_slave_0_byteenable_n),
+      .sram_16bit_512k_0_avalon_slave_0_chipselect_n                               (sram_16bit_512k_0_avalon_slave_0_chipselect_n),
+      .sram_16bit_512k_0_avalon_slave_0_read_n                                     (sram_16bit_512k_0_avalon_slave_0_read_n),
+      .sram_16bit_512k_0_avalon_slave_0_readdata                                   (sram_16bit_512k_0_avalon_slave_0_readdata),
+      .sram_16bit_512k_0_avalon_slave_0_readdata_from_sa                           (sram_16bit_512k_0_avalon_slave_0_readdata_from_sa),
+      .sram_16bit_512k_0_avalon_slave_0_reset_n                                    (sram_16bit_512k_0_avalon_slave_0_reset_n),
+      .sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0                          (sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0),
+      .sram_16bit_512k_0_avalon_slave_0_write_n                                    (sram_16bit_512k_0_avalon_slave_0_write_n),
+      .sram_16bit_512k_0_avalon_slave_0_writedata                                  (sram_16bit_512k_0_avalon_slave_0_writedata)
+    );
+
+  sram_16bit_512k_0 the_sram_16bit_512k_0
+    (
+      .SRAM_ADDR (SRAM_ADDR_from_the_sram_16bit_512k_0),
+      .SRAM_CE_N (SRAM_CE_N_from_the_sram_16bit_512k_0),
+      .SRAM_DQ   (SRAM_DQ_to_and_from_the_sram_16bit_512k_0),
+      .SRAM_LB_N (SRAM_LB_N_from_the_sram_16bit_512k_0),
+      .SRAM_OE_N (SRAM_OE_N_from_the_sram_16bit_512k_0),
+      .SRAM_UB_N (SRAM_UB_N_from_the_sram_16bit_512k_0),
+      .SRAM_WE_N (SRAM_WE_N_from_the_sram_16bit_512k_0),
+      .iADDR     (sram_16bit_512k_0_avalon_slave_0_address),
+      .iBE_N     (sram_16bit_512k_0_avalon_slave_0_byteenable_n),
+      .iCE_N     (sram_16bit_512k_0_avalon_slave_0_chipselect_n),
+      .iCLK      (clk_0),
+      .iDATA     (sram_16bit_512k_0_avalon_slave_0_writedata),
+      .iOE_N     (sram_16bit_512k_0_avalon_slave_0_read_n),
+      .iRST_N    (sram_16bit_512k_0_avalon_slave_0_reset_n),
+      .iWE_N     (sram_16bit_512k_0_avalon_slave_0_write_n),
+      .oDATA     (sram_16bit_512k_0_avalon_slave_0_readdata)
+    );
+
   sysid_control_slave_arbitrator the_sysid_control_slave
     (
       .clk                                                     (clk_0),
@@ -4461,16 +5082,18 @@ endmodule
 `include "c:/altera/11.0sp1/quartus/eda/sim_lib/altera_mf.v"
 `include "c:/altera/11.0sp1/quartus/eda/sim_lib/220model.v"
 `include "c:/altera/11.0sp1/quartus/eda/sim_lib/sgate.v"
+`include "hdl/SRAM_16Bit_512K.v"
+`include "sram_16bit_512k_0.v"
 `include "sdram_0.v"
 `include "timer_0.v"
 `include "sysid.v"
-`include "jtag_uart_0.v"
 `include "cpu_0_test_bench.v"
 `include "cpu_0_oci_test_bench.v"
 `include "cpu_0_jtag_debug_module_tck.v"
 `include "cpu_0_jtag_debug_module_sysclk.v"
 `include "cpu_0_jtag_debug_module_wrapper.v"
 `include "cpu_0.v"
+`include "jtag_uart_0.v"
 `include "onchip_memory2_0.v"
 `include "procHasControl.v"
 
@@ -4480,6 +5103,13 @@ module test_bench
 ;
 
 
+  wire    [ 17: 0] SRAM_ADDR_from_the_sram_16bit_512k_0;
+  wire             SRAM_CE_N_from_the_sram_16bit_512k_0;
+  wire    [ 15: 0] SRAM_DQ_to_and_from_the_sram_16bit_512k_0;
+  wire             SRAM_LB_N_from_the_sram_16bit_512k_0;
+  wire             SRAM_OE_N_from_the_sram_16bit_512k_0;
+  wire             SRAM_UB_N_from_the_sram_16bit_512k_0;
+  wire             SRAM_WE_N_from_the_sram_16bit_512k_0;
   wire             clk;
   reg              clk_0;
   wire             jtag_uart_0_avalon_jtag_slave_dataavailable_from_sa;
@@ -4505,18 +5135,25 @@ module test_bench
   //Set us up the Dut
   niosSystemCamControl DUT
     (
-      .clk_0                            (clk_0),
-      .out_port_from_the_procHasControl (out_port_from_the_procHasControl),
-      .reset_n                          (reset_n),
-      .zs_addr_from_the_sdram_0         (zs_addr_from_the_sdram_0),
-      .zs_ba_from_the_sdram_0           (zs_ba_from_the_sdram_0),
-      .zs_cas_n_from_the_sdram_0        (zs_cas_n_from_the_sdram_0),
-      .zs_cke_from_the_sdram_0          (zs_cke_from_the_sdram_0),
-      .zs_cs_n_from_the_sdram_0         (zs_cs_n_from_the_sdram_0),
-      .zs_dq_to_and_from_the_sdram_0    (zs_dq_to_and_from_the_sdram_0),
-      .zs_dqm_from_the_sdram_0          (zs_dqm_from_the_sdram_0),
-      .zs_ras_n_from_the_sdram_0        (zs_ras_n_from_the_sdram_0),
-      .zs_we_n_from_the_sdram_0         (zs_we_n_from_the_sdram_0)
+      .SRAM_ADDR_from_the_sram_16bit_512k_0      (SRAM_ADDR_from_the_sram_16bit_512k_0),
+      .SRAM_CE_N_from_the_sram_16bit_512k_0      (SRAM_CE_N_from_the_sram_16bit_512k_0),
+      .SRAM_DQ_to_and_from_the_sram_16bit_512k_0 (SRAM_DQ_to_and_from_the_sram_16bit_512k_0),
+      .SRAM_LB_N_from_the_sram_16bit_512k_0      (SRAM_LB_N_from_the_sram_16bit_512k_0),
+      .SRAM_OE_N_from_the_sram_16bit_512k_0      (SRAM_OE_N_from_the_sram_16bit_512k_0),
+      .SRAM_UB_N_from_the_sram_16bit_512k_0      (SRAM_UB_N_from_the_sram_16bit_512k_0),
+      .SRAM_WE_N_from_the_sram_16bit_512k_0      (SRAM_WE_N_from_the_sram_16bit_512k_0),
+      .clk_0                                     (clk_0),
+      .out_port_from_the_procHasControl          (out_port_from_the_procHasControl),
+      .reset_n                                   (reset_n),
+      .zs_addr_from_the_sdram_0                  (zs_addr_from_the_sdram_0),
+      .zs_ba_from_the_sdram_0                    (zs_ba_from_the_sdram_0),
+      .zs_cas_n_from_the_sdram_0                 (zs_cas_n_from_the_sdram_0),
+      .zs_cke_from_the_sdram_0                   (zs_cke_from_the_sdram_0),
+      .zs_cs_n_from_the_sdram_0                  (zs_cs_n_from_the_sdram_0),
+      .zs_dq_to_and_from_the_sdram_0             (zs_dq_to_and_from_the_sdram_0),
+      .zs_dqm_from_the_sdram_0                   (zs_dqm_from_the_sdram_0),
+      .zs_ras_n_from_the_sdram_0                 (zs_ras_n_from_the_sdram_0),
+      .zs_we_n_from_the_sdram_0                  (zs_we_n_from_the_sdram_0)
     );
 
   initial
