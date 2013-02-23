@@ -101,7 +101,7 @@ ACDS_VERSION := 12.1sp1
 # BUILD_NUMBER: 243
 
 SETTINGS_FILE := settings.bsp
-SOPC_FILE := C:/Users/Justin/test1/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
+SOPC_FILE := ../../niosSystemCamControl.sopcinfo
 
 #-------------------------------------------------------------------------------
 #                             TOOL & COMMAND DEFINITIONS
