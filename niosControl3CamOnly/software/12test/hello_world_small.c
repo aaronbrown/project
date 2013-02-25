@@ -98,6 +98,7 @@ void makePurple () {
   for(i = 0; i < lastAddress; i += 2)
     IOWR_16DIRECT(BASE_ADDRESS, i, 0x03ff);
 
+  IOWR_16DIRECT(procCntl, 0, 0x0000);
 }
 
 
@@ -110,8 +111,10 @@ int main()
   /* Event loop never exits. */
   while (1)
   {
-	  if (*(char*)procCntl != (char)0xFF)
-		  printf("ALERT!\n");
+	// procCntl may be write-only, and upon reading
+	// return only the default value??
+	// if (*(char*)procCntl != (char)0xFF)
+	//	  printf("ALERT!\n");
   }
 
   return 0;
