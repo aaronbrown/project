@@ -1,0 +1,8 @@
+
+**** Build of configuration Nios II for project 12test ****
+
+make all 
+Info: Building ../12test_bsp/
+make --no-print-directory -C ../12test_bsp/
+[BSP build complete]
+[12test build complete]
