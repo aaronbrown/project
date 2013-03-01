@@ -2,9 +2,9 @@
  * alt_sys_init.c - HAL initialization source
  *
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
- * SOPC Builder design path: C:/Users/Justin/test1/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
+ * SOPC Builder design path: ../../niosSystemCamControl.sopcinfo
  *
- * Generated: Thu Feb 21 16:40:52 PST 2013
+ * Generated: Wed Feb 27 15:46:48 PST 2013
  */
 
 /*

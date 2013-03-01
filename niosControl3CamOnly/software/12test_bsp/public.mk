@@ -78,20 +78,16 @@ ALT_CPPFLAGS += -DSYSTEM_BUS_WIDTH=32 \
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 12.1sp1
-ACDS_VERSION := 12.1sp1
+# ACDS_VERSION: 11.0sp1
+ACDS_VERSION := 11.0sp1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 243
+# BUILD_NUMBER: 208
 
 # Quartus Generated JDI File. Required for resolving node instance ID's with 
 # design component names. 
-JDI_FILE := C:/Users/Justin/test1/project/niosControl3CamOnly/DE2_D5M.jdi
-
-# Qsys--generated SOPCINFO file. Required for resolving node instance ID's with 
-# design component names. 
-SOPCINFO_FILE := C:/Users/Justin/test1/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
+JDI_FILE := $(ABS_BSP_ROOT_DIR)/../../DE2_D5M.jdi
 
 # Big-Endian operation. 
 # setting BIG_ENDIAN is false
@@ -168,19 +164,18 @@ ELF_PATCH_FLAG  += --timestamp 1361488137
 # multiple inheritance and exceptions are not supported. If false, adds 
 # -DALT_NO_C_PLUS_PLUS to ALT_CPPFLAGS in public.mk, and reduces code 
 # footprint. none 
-# setting hal.enable_c_plus_plus is 0
-ALT_CPPFLAGS += -DALT_NO_C_PLUS_PLUS
+# setting hal.enable_c_plus_plus is true
 
 # When your application exits, close file descriptors, call C++ destructors, 
 # etc. Code footprint can be reduced by disabling clean exit. If disabled, adds 
 # -DALT_NO_CLEAN_EXIT to ALT_CPPFLAGS and -Wl,--defsym, exit=_exit to 
 # ALT_LDFLAGS in public.mk. none 
-# setting hal.enable_clean_exit is true
+# setting hal.enable_clean_exit is 1
 
 # Add exit() support. This option increases code footprint if your "main()" 
 # routine does "return" or call "exit()". If false, adds -DALT_NO_EXIT to 
 # ALT_CPPFLAGS in public.mk, and reduces footprint none 
-# setting hal.enable_exit is true
+# setting hal.enable_exit is 1
 
 # Causes code to be compiled with gprof profiling enabled and the application 
 # ELF to be linked with the GPROF library. If true, adds -DALT_PROVIDE_GMON to 
@@ -215,7 +210,7 @@ ALT_CPPFLAGS += -DALT_NO_INSTRUCTION_EMULATION
 # access routines) to fail. You can define a symbol provided by each driver to 
 # prevent it from being removed. If true, adds -DALT_USE_SMALL_DRIVERS to 
 # ALT_CPPFLAGS in public.mk. none 
-# setting hal.enable_reduced_device_drivers is false
+# setting hal.enable_reduced_device_drivers is 0
 
 # Turns on HAL runtime stack checking feature. Enabling this setting causes 
 # additional code to be placed into each subroutine call to generate an 
@@ -236,7 +231,7 @@ ALT_CPPFLAGS += -DALT_NO_INSTRUCTION_EMULATION
 # are removed such as floating-point support in printf(), stdin input routines, 
 # and buffered I/O. The small C library is not compatible with Micrium 
 # MicroC/OS-II. If true, adds -msmallc to ALT_LDFLAGS in public.mk. none 
-# setting hal.enable_small_c_library is false
+# setting hal.enable_small_c_library is 0
 
 # Enable SOPC Builder System ID. If a System ID SOPC Builder component is 
 # connected to the CPU associated with this BSP, it will be enabled in the 

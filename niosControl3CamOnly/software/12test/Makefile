@@ -142,8 +142,9 @@ ACDS_VERSION := 12.1sp1
 ELF := 12test.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := hello_world_small.c
-CXX_SRCS :=
+C_SRCS :=
+CXX_SRCS += sift-driver.cpp
+CXX_SRCS += sift.cpp
 ASM_SRCS :=
 
 
