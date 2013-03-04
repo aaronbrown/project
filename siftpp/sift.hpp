@@ -135,11 +135,18 @@ __attribute__ ((__visibility__("default")))
  **
  ** @param x sequence of stream operations.
  **/
+/*
 #define VL_THROW(x)                             \
   {                                             \
     std::ostringstream oss ;                    \
     oss << x ;                                  \
     throw VL::Exception(oss.str()) ;            \
+  }
+*/    
+#define VL_THROW(x)                             \
+  {                                             \
+    std::cerr << x << std::endl;                \
+    exit(1);                                    \
   }
 
 /** @name PGM input/output */
@@ -287,7 +294,7 @@ private:
 }
 
 // Include inline functions definitions
-#include "sift.ipp"
+#include "sift-inline.cpp"
 
 // VL_SIFT_HPP
 #endif

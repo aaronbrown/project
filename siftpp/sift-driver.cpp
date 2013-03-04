@@ -200,7 +200,7 @@ main(int argc, char** argv)
   
   int ch ;
 
-  try {
+//try {
     
     while ( (ch = getopt_long(argc, argv, "vho:p:f:k:O:S:t:e:b", longopts, NULL)) != -1) {
       switch (ch) {
@@ -374,14 +374,14 @@ main(int argc, char** argv)
     }
 
     /* end option try-catch block */
-  }  
-  catch( VL::Exception const & e ) {
+//  }
+/*  catch( VL::Exception const & e ) {
     cerr << "siftpp: error: "
          << e.msg 
          << endl ;
     exit(1) ;
   } 
-
+*/
   // -----------------------------------------------------------------
   //                                            Loop over input images
   // -----------------------------------------------------------------      
@@ -389,7 +389,7 @@ main(int argc, char** argv)
 
     string name(argv[0]) ;
 
-    try {
+//    try {
       VL::PgmBuffer buffer ;
       
       // compute the output filenames:
@@ -437,16 +437,15 @@ main(int argc, char** argv)
         << "siftpp: lodaing PGM image '" << name << "' ..."
         << flush;
       
-       // cout << name << endl;
-      try {          
+//      try {
 	ifstream in(name.c_str(), ios::binary) ;
 	if(! in.good()) VL_THROW("Could not open '"<<name<<"'.") ;      
 	extractPgm(in, buffer) ;
-      }    
-      catch(VL::Exception const& e) {
+//      }
+/*      catch(VL::Exception const& e) {
 	throw VL::Exception("PGM read error: "+e.msg) ;
       }
-      
+*/
       verbose && cout 
         << " read "
         << buffer.width  <<" x "
@@ -746,11 +745,12 @@ main(int argc, char** argv)
       argc-- ;
       argv++ ;
       outputFilename = string("") ;
-    }
-    catch(VL::Exception &e) {
+//    }
+/*    catch(VL::Exception &e) {
       cerr<<endl<<"Error processing '"<<name<<"': "<<e.msg<<endl ;
       return 1 ;
     }    
+*/
   } // next image
   
   return 0 ;

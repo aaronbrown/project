@@ -46,7 +46,7 @@
  **/
 
 #include"sift.hpp"
-#include"sift-conv.tpp"
+#include"sift-conv.cpp"
 
 #include<algorithm>
 #include<iostream>
@@ -172,14 +172,14 @@ extractPgm(std::istream& in, PgmBuffer& buffer)
   in>>c ;
   if( c != 'P') VL_THROW("File is not in PGM format") ;
   
-  bool is_ascii ;
+//  bool is_ascii ;
   in>>c ;
-  switch( c ) {
+/*  switch( c ) {
   case '2' : is_ascii = true ; break ;
   case '5' : is_ascii = false ; break ;
   default  : VL_THROW("File is not in PGM format") ;
   }
-  
+*/
   in >> Detail::cmnt
      >> width
      >> Detail::cmnt 
@@ -200,8 +200,8 @@ extractPgm(std::istream& in, PgmBuffer& buffer)
   
   im_pt = new pixel_t [ width*height ];
   
-  try {
-    if( is_ascii ) {
+  //try {
+/*    if( is_ascii ) {
       pixel_t* start = im_pt ;
       pixel_t* end   = start + width*height ; 
       pixel_t  norm  = pixel_t( maxval ) ;
@@ -216,26 +216,28 @@ extractPgm(std::istream& in, PgmBuffer& buffer)
                              <<" at pixel="<<start-im_pt<<")") ;    
         *start++ = pixel_t( i ) / norm ;        
       }
-    } else {
-        //std::cout << "yes\n";
-      std::streampos beg = in.tellg() ;
-      char* buffer = new char [width*height] ;
-      in.read(buffer, width*height) ;
-      if(  in.fail() ) VL_THROW
+    } 
+ */
+  //else {
+    std::streampos beg = in.tellg() ;
+    char* buffer2 = new char [width*height] ;
+    in.read(buffer2, width*height) ;
+    if(  in.fail() ) VL_THROW
 			 ("PGM parsing error file (width="<<width
 			   <<" height="<<height
 			   <<" maxval="<<maxval
 			   <<" at pixel="<<in.tellg()-beg<<")") ;
       
-      pixel_t* start = im_pt ;
-      pixel_t* end   = start + width*height ; 
-      uint8_t* src = reinterpret_cast<uint8_t*>(buffer) ;      
-      while( start != end ) *start++ = *src++ / 255.0f ;
-    }       
-  } catch(...) {
+    pixel_t* start = im_pt ;
+    pixel_t* end   = start + width*height ;
+    uint8_t* src = reinterpret_cast<uint8_t*>(buffer2) ;
+    while( start != end ) *start++ = *src++ / 255.0f ;
+ //   }
+ /* } catch(...) {
     delete [] im_pt ; 
     throw ;
   }
+*/
   
   buffer.width  = width ;
   buffer.height = height ;
@@ -430,15 +432,22 @@ prepareBuffers()
   if( temp && tempReserved == size ) return ;
   
   freeBuffers() ;
+    
+    std::cout << "size: " << size <<std::endl;
   
   // allocate
   temp           = new pixel_t [ size ] ; 
   tempReserved   = size ;
   tempIsGrad     = false ;
   tempOctave     = 0 ;
+    
+    std::cout << "O: " << O << std::endl;
+    std::cout << "smax: " << smax << " smin: " << smin << std::endl;
+    std::cout << "w: " << w << "h: " << h << std::endl;
+    std::cout <<  " omin: " << omin << std::endl;
 
   octaves = new pixel_t* [ O ] ;
-  for(int o = 0 ; o < O ; ++o) {
+  for(int o = 0 ; o < O; ++o) {
     octaves[o] = new pixel_t [ (smax - smin + 1) * w * h ] ;
     w >>= 1 ;
     h >>= 1 ;
