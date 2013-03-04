@@ -164,11 +164,10 @@ int
 main()
 {
 	//alt_putstr("Hello from Nios II!\n");
-	printf("Hello printf 1!\n");
-	cout << "Hello cout!\n";
 	printf("Hello printf!\n");
+	cout << "Hello cout!\n";
   int    first          = -1 ;
-  int    octaves        = 5 ;
+  int    octaves        = 7 ;
   int    levels         = 3 ;
   float  threshold      = 0.04f / levels / 2.0f ;
   float  edgeThreshold  = 10.0f;
@@ -176,7 +175,7 @@ main()
   int    nodescr        = 0 ;
   int    noorient       = 0 ;
 //  int    stableorder    = 0 ;
-  int    verbose        = 0 ;
+  int    verbose        = 1 ;
   int    binary         = 0 ;
   int    haveKeypoints  = 0 ;
   int    unnormalized   = 0 ;
@@ -189,9 +188,13 @@ main()
   VL::PgmBuffer buffer ;
   buffer.width  = 640 ;
   buffer.height = 480 ;
-  //buffer.data   = BASE_ADDRESS ; // TODO: this isnt really right
-  // but just using it to compile for now
 
+
+  // TODO: this isn't really right
+  // but just using it to compile for now
+  // (incorrect because pixels are not in
+  //  order and are rgb instead of greyscale)
+  buffer.data   = (VL::pixel_t*) BASE_ADDRESS ;
 
       // ---------------------------------------------------------------
       //                                            Gaussian scale space
@@ -202,7 +205,7 @@ main()
       int const   omin   = first ;
       float const sigman = .5 ;
       float const sigma0 = 1.6 * powf(2.0f, 1.0f / S) ;
-      
+
       // optionally autoselect the number number of octaves
       // we downsample up to 8x8 patches
       if(O < 1) {
@@ -218,13 +221,13 @@ main()
         << "siftpp:   first octave          : " << omin << endl 
         << "siftpp:   levels per octave     : " << S 
         << endl ;
-      
+
       // initialize scalespace
       VL::Sift sift(buffer.data, buffer.width, buffer.height, 
 		    sigman, sigma0,
 		    O, S,
 		    omin, -1, S+1) ;
-      
+
       verbose && cout 
         << "siftpp: Gaussian scale space completed"
         << endl ;
@@ -239,7 +242,7 @@ main()
           << "siftpp:   threshold             : " << threshold << endl
           << "siftpp:   edge-threshold        : " << edgeThreshold
           << endl ;
-	
+
 	sift.detectKeypoints(threshold, edgeThreshold) ;
 	
 	verbose && cout 

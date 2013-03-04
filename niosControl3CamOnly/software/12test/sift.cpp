@@ -160,6 +160,7 @@ insertPgm(std::ostream& os, pixel_t const* im, int width, int height)
  ** @param buffer buffer descriptor to be filled.
  ** @return the stream @a in.
  **/
+/*
 std::istream& 
 extractPgm(std::istream& in, PgmBuffer& buffer)
 {
@@ -243,7 +244,7 @@ extractPgm(std::istream& in, PgmBuffer& buffer)
 
   return in ;
 }
-
+*/
 // ===================================================================
 //                                          Low level image operations
 // -------------------------------------------------------------------
@@ -429,9 +430,10 @@ prepareBuffers()
 
   if( temp && tempReserved == size ) return ;
   
-  freeBuffers() ;
-  
   // allocate
+  // TODO: this will not work.
+  // Must point to location in SDRAM
+  // Not enough space on heap
   temp           = new pixel_t [ size ] ; 
   tempReserved   = size ;
   tempIsGrad     = false ;
@@ -439,39 +441,13 @@ prepareBuffers()
 
   octaves = new pixel_t* [ O ] ;
   for(int o = 0 ; o < O ; ++o) {
+	// TODO: this will not work.
+	// Must point to location in SDRAM
+	// Not enough space on heap
     octaves[o] = new pixel_t [ (smax - smin + 1) * w * h ] ;
     w >>= 1 ;
     h >>= 1 ;
   }
-}
-  
-/** @brief Free buffers.
- **
- ** This function releases any buffer allocated by prepareBuffers().
- **
- ** @sa prepareBuffers().
- **/
-void
-Sift::
-freeBuffers()
-{
-  if( filter ) {
-    delete [] filter ;
-  }
-  filter = 0 ;
-
-  if( octaves ) {
-    for(int o = 0 ; o < O ; ++o) {
-      delete [] octaves[ o ] ;
-    }
-    delete [] octaves ;
-  }
-  octaves = 0 ;
-  
-  if( temp ) {
-    delete [] temp ;   
-  }
-  temp = 0  ; 
 }
 
 // ===================================================================
