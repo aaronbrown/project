@@ -40,19 +40,66 @@
 // BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO PROVIDE
 // MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
-template<typename T>
+
 void
-normalize(T* filter, int W)
+normalize(VL::pixel_t* filter, int W)
 {
-  T  acc  = 0 ; 
-  T* iter = filter ;
-  T* end  = filter + 2*W+1 ;
+  VL::pixel_t  acc  = 0 ; 
+  VL::pixel_t* iter = filter ;
+  VL::pixel_t* end  = filter + 2*W+1 ;
   while(iter != end) acc += *iter++ ;
   
   iter = filter ;
   while(iter != end) *iter++ /= acc ;
 }
 
+void
+econvolve(VL::pixel_t*       dst_pt,
+          const VL::pixel_t* src_pt,    int M, int N,
+          const VL::pixel_t* filter_pt, int W)
+{
+    typedef VL::pixel_t const TC ;
+    // convolve along columns, save transpose
+    // image is M by N
+    // buffer is N by M
+    // filter is (2*W+1) by 1
+    for(int j = 0 ; j < N ; ++j) {
+        for(int i = 0 ; i < M ; ++i) {
+            VL::pixel_t   acc = 0.0 ;
+            TC* g = filter_pt ;
+            TC* start = src_pt + (i-W) ;
+            TC* stop  ;
+            VL::pixel_t   x ;
+            
+            // beginning
+            stop = src_pt + std::max(0, i-W) ;
+            x    = *stop ;
+            while( start <= stop ) { acc += (*g++) * x ; start++ ; }
+            
+            // middle
+            stop =  src_pt + std::min(M-1, i+W) ;
+            while( start <  stop ) acc += (*g++) * (*start++) ;
+            
+            // end
+            x  = *start ;
+            stop = src_pt + (i+W) ;
+            while( start <= stop ) { acc += (*g++) * x ; start++ ; }
+            
+            // save
+            *dst_pt = acc ; 
+            dst_pt += N ;
+            
+            assert( g - filter_pt == 2*W+1 ) ;
+            
+        }
+        // next column
+        src_pt += M ;
+        dst_pt -= M*N - 1 ;
+    }
+}
+
+
+/*
 template<typename T>
 void
 convolve(T*       dst_pt, 
@@ -108,7 +155,9 @@ convolve(T*       dst_pt,
     dst_pt -= M*N - 1 ;
   }
 }
+*/
 
+/*
 // works with symmetric filters only
 template<typename T>
 void
@@ -168,52 +217,7 @@ nconvolve(T*       dst_pt,
    dst_pt -= M*N - 1 ;
  }
 }
-
-template<typename T>
-void
-econvolve(T*       dst_pt, 
-	  const T* src_pt,    int M, int N,
-	  const T* filter_pt, int W)
-{
-  typedef T const TC ;
-  // convolve along columns, save transpose
-  // image is M by N 
-  // buffer is N by M 
-  // filter is (2*W+1) by 1
-  for(int j = 0 ; j < N ; ++j) {
-    for(int i = 0 ; i < M ; ++i) {
-      T   acc = 0.0 ;
-      TC* g = filter_pt ;
-      TC* start = src_pt + (i-W) ;
-      TC* stop  ;
-      T   x ;
-
-      // beginning
-      stop = src_pt + std::max(0, i-W) ;
-      x    = *stop ;
-      while( start <= stop ) { acc += (*g++) * x ; start++ ; }
-
-      // middle
-      stop =  src_pt + std::min(M-1, i+W) ;
-      while( start <  stop ) acc += (*g++) * (*start++) ;
-
-      // end
-      x  = *start ;
-      stop = src_pt + (i+W) ;
-      while( start <= stop ) { acc += (*g++) * x ; start++ ; } 
-   
-      // save 
-      *dst_pt = acc ; 
-      dst_pt += N ;
-
-      assert( g - filter_pt == 2*W+1 ) ;
-
-    }
-    // next column
-    src_pt += M ;
-    dst_pt -= M*N - 1 ;
-  }
-}
+*/
 
 
 
