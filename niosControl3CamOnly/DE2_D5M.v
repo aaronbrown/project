@@ -507,7 +507,7 @@ assign {DRAM_UDQM,DRAM_LDQM} = niosHasControl ? {DRAM_UDQM_nios,DRAM_LDQM_nios} 
 Sdram_Control_4Port	u7	(	//	HOST Side						
 						    .REF_CLK(unshifted_nios_clk),
 						    .RESET_N(1'b1),
-							.CLK(DRAM_CLK),
+							.CLK(sdram_ctrl_clk),
 
 							//	FIFO Write Side 1
 							.WR1_DATA({1'b0,sCCD_G[11:7],sCCD_B[11:2]}),
