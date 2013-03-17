@@ -1,5 +1,5 @@
 Assembler report for DE2_D5M
-Sat Mar 16 19:46:11 2013
+Sat Mar 16 21:07:38 2013
 Quartus II 64-Bit Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Full Version
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat Mar 16 19:46:11 2013 ;
+; Assembler Status      ; Successful - Sat Mar 16 21:07:38 2013 ;
 ; Revision Name         ; DE2_D5M                               ;
 ; Top-level Entity Name ; DE2_D5M                               ;
 ; Family                ; Cyclone II                            ;
@@ -106,7 +106,7 @@ applicable agreement for further details.
 +----------------+--------------------------------------------------------------------------------------+
 ; Device         ; EP2C35F672C6                                                                         ;
 ; JTAG usercode  ; 0xFFFFFFFF                                                                           ;
-; Checksum       ; 0x00651EE5                                                                           ;
+; Checksum       ; 0x00600674                                                                           ;
 +----------------+--------------------------------------------------------------------------------------+
 
 
@@ -117,7 +117,7 @@ applicable agreement for further details.
 +--------------------+----------------------------------------------------------------------------------+
 ; Device             ; EPCS16                                                                           ;
 ; JTAG usercode      ; 0x00000000                                                                       ;
-; Checksum           ; 0x1C1A3195                                                                       ;
+; Checksum           ; 0x1C24EF1D                                                                       ;
 ; Compression Ratio  ; 2                                                                                ;
 +--------------------+----------------------------------------------------------------------------------+
 
@@ -128,14 +128,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Full Version
-    Info: Processing started: Sat Mar 16 19:45:53 2013
+    Info: Processing started: Sat Mar 16 21:07:21 2013
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off niosControl3CamOnly -c DE2_D5M
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 400 megabytes
-    Info: Processing ended: Sat Mar 16 19:46:11 2013
-    Info: Elapsed time: 00:00:18
+    Info: Peak virtual memory: 399 megabytes
+    Info: Processing ended: Sat Mar 16 21:07:38 2013
+    Info: Elapsed time: 00:00:17
     Info: Total CPU time (on all processors): 00:00:04
 
 

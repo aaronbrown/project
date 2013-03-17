@@ -5,6 +5,15 @@ mSetup_ST.0000 0 0 0
 mSetup_ST.0001 1 0 1 
 mSetup_ST.0010 1 1 0 
 
+State Machine - |DE2_D5M|Sdram_Arbiter:sdramArbiter0|Current_State
+Name Current_State.State_CamHasControl Current_State.State_NiosNOP Current_State.State_LoadCamMode Current_State.State_LoadNiosMode Current_State.State_CamNOP Current_State.State_NiosHasControl 
+Current_State.State_NiosHasControl 0 0 0 0 0 0 
+Current_State.State_CamNOP 0 0 0 0 1 1 
+Current_State.State_LoadNiosMode 0 0 0 1 0 1 
+Current_State.State_LoadCamMode 0 0 1 0 0 1 
+Current_State.State_NiosNOP 0 1 0 0 0 1 
+Current_State.State_CamHasControl 1 0 0 0 0 1 
+
 State Machine - |DE2_D5M|niosSystemCamControl:niosSystemCamControl_inst|sdram_0:the_sdram_0|m_next
 Name m_next.010000000 m_next.000010000 m_next.000001000 m_next.000000001 
 m_next.000000001 0 0 0 0 

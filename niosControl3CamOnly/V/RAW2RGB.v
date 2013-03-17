@@ -80,7 +80,8 @@ assign	oGreen	=	mCCD_G[11:0];
 assign	oBlue	=	mCCD_B[11:0];
 assign	oDVAL	=	mDVAL;
 
-assign GREY = ((tempR * 30) + (tempG * 59) + (tempB * 11)) / 100;
+//assign GREY = ((tempR * 30) + (tempG * 59) + (tempB * 11)) / 100;
+assign GREY = tempR[11:2] + tempR[11:5] + tempG[11:1] + tempG[11:3] + tempB[11:4] + tempB[11:5];
 assign mCCD_R 	= GREY;
 assign mCCD_G 	= GREY;
 assign mCCD_B	= GREY;

@@ -470,7 +470,7 @@ sdram_pll2			unew (
 
 assign CCD_MCLK = rClk[0];
 
-wire niosHasControl;
+wire niosWantsControl;
 
   niosSystemCamControl niosSystemCamControl_inst
     (
@@ -482,7 +482,7 @@ wire niosHasControl;
       .SRAM_UB_N_from_the_sram_16bit_512k_0      (SRAM_UB_N),
       .SRAM_WE_N_from_the_sram_16bit_512k_0      (SRAM_WE_N),
       .clk_0                            (unshifted_nios_clk),
-      .out_port_from_the_procHasControl (niosHasControl),
+      .out_port_from_the_procHasControl (niosWantsControl),
       .reset_n                          (KEY[0]),
       .zs_addr_from_the_sdram_0         (DRAM_ADDR_nios),
       .zs_ba_from_the_sdram_0           ({DRAM_BA_1_nios,DRAM_BA_0_nios}),
@@ -494,7 +494,8 @@ wire niosHasControl;
       .zs_ras_n_from_the_sdram_0        (DRAM_RAS_N_nios),
       .zs_we_n_from_the_sdram_0         (DRAM_WE_N_nios)
     );
-	 
+
+/*	 
 assign DRAM_ADDR = niosHasControl ? DRAM_ADDR_nios : DRAM_ADDR_cam;
 assign {DRAM_BA_1, DRAM_BA_0} = niosHasControl ? {DRAM_BA_1_nios, DRAM_BA_0_nios} : {DRAM_BA_1_cam, DRAM_BA_0_cam};
 assign DRAM_CS_N = niosHasControl ? DRAM_CS_N_nios : DRAM_CS_N_cam;
@@ -503,7 +504,45 @@ assign DRAM_RAS_N = niosHasControl ? DRAM_RAS_N_nios : DRAM_RAS_N_cam;
 assign DRAM_CAS_N = niosHasControl ? DRAM_CAS_N_nios : DRAM_CAS_N_cam;
 assign DRAM_WE_N = niosHasControl ? DRAM_WE_N_nios : DRAM_WE_N_cam;
 assign {DRAM_UDQM,DRAM_LDQM} = niosHasControl ? {DRAM_UDQM_nios,DRAM_LDQM_nios} : {DRAM_UDQM_cam,DRAM_LDQM_cam};
+*/
 
+wire niosHasControl;
+wire camHasControl;
+Sdram_Arbiter sdramArbiter0 (
+	.RequestNiosControl(niosWantsControl),
+	.NiosHasControl(niosHasControl),     
+   .CamHasControl(camHasControl),     
+   .Reset_N(KEY[0]),              
+	.clk(DRAM_CLK),
+	//	Nios Side
+   .SA_nios(DRAM_ADDR_nios),
+   .BA_nios({DRAM_BA_1_nios,DRAM_BA_0_nios}),
+   .CS_N_nios(DRAM_CS_N_nios),
+   .CKE_nios(DRAM_CKE_nios),
+   .RAS_N_nios(DRAM_RAS_N_nios),
+   .CAS_N_nios(DRAM_CAS_N_nios),
+   .WE_N_nios(DRAM_WE_N_nios),
+   .DQM_nios({DRAM_UDQM_nios,DRAM_LDQM_nios}),
+	//	Camera Side
+   .SA_cam(DRAM_ADDR_cam),
+   .BA_cam({DRAM_BA_1_cam, DRAM_BA_0_cam}),
+   .CS_N_cam(DRAM_CS_N_cam),
+   .CKE_cam(DRAM_CKE_cam),
+   .RAS_N_cam(DRAM_RAS_N_cam),
+   .CAS_N_cam(DRAM_CAS_N_cam),
+   .WE_N_cam(DRAM_WE_N_cam),
+   .DQM_cam({DRAM_UDQM_cam,DRAM_LDQM_cam}),
+	.SA(DRAM_ADDR),
+   .BA({DRAM_BA_1, DRAM_BA_0}),
+   .CS_N(DRAM_CS_N),
+   .CKE(DRAM_CKE),
+   .RAS_N(DRAM_RAS_N),
+   .CAS_N(DRAM_CAS_N),
+   .WE_N(DRAM_WE_N),
+   .DQM({DRAM_UDQM,DRAM_LDQM})
+   );
+		  
+		  
 Sdram_Control_4Port	u7	(	//	HOST Side						
 						    .REF_CLK(unshifted_nios_clk),
 						    .RESET_N(1'b1),
