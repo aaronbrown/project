@@ -188,13 +188,7 @@ main()
   VL::PgmBuffer buffer ;
   buffer.width  = 640 ;
   buffer.height = 480 ;
-
-
-  // TODO: this isn't really right
-  // but just using it to compile for now
-  // (incorrect because pixels are not in
-  //  order and are rgb instead of greyscale)
-  buffer.data   = (VL::pixel_t*) BASE_ADDRESS ;
+  extractPgm( buffer );
 
       // ---------------------------------------------------------------
       //                                            Gaussian scale space

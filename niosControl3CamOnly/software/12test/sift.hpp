@@ -157,6 +157,7 @@ struct PgmBuffer
 } ;
 std::ostream& insertPgm(std::ostream&, pixel_t const* im, int width, int height) ;
 std::istream& extractPgm(std::istream&, PgmBuffer& buffer) ;
+void extractPgm(PgmBuffer& buffer) ;
 /*@}*/
 
 /** @brief SIFT filter
