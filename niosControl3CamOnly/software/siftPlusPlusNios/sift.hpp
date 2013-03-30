@@ -62,6 +62,10 @@
 #define VL_XEAS(x) #x
 #define VL_EXPAND_AND_STRINGIFY(x) VL_XEAS(x)
 
+#define BASE_ADDRESS (unsigned short*)0x800000
+#define PROC_HAS_CONTROL *((unsigned short*)0x1109020)
+#define SIFT_DATA_START (VL::pixel_t*)0x92c000
+
 /** @brief VisionLab namespace */
 namespace VL {
 

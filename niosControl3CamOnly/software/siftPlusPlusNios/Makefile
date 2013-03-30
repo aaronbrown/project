@@ -143,9 +143,7 @@ ELF := siftPlusPlusNios.elf
 
 # Paths to C, C++, and assembly source files.
 C_SRCS :=
-CXX_SRCS += sift-conv.cpp
 CXX_SRCS += sift-driver.cpp
-CXX_SRCS += sift-inline.cpp
 CXX_SRCS += sift.cpp
 ASM_SRCS :=
 

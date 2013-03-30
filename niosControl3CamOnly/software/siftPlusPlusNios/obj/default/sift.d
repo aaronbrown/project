@@ -1,5 +1,3 @@
-obj/default/sift.o: sift.cpp sift.hpp sift-conv.cpp
+obj/default/sift.o: sift.cpp sift.hpp
 
 sift.hpp:
-
-sift-conv.cpp:

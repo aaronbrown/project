@@ -46,7 +46,6 @@
  **/
 
 #include"sift.hpp"
-#include"sift-conv.cpp"
 
 #include<algorithm>
 #include<iostream>
@@ -66,6 +65,7 @@ using namespace VL ;
 void
 normalize(VL::pixel_t* filter, int W)
 {
+	std::cout << "in normalize\n";
   VL::pixel_t  acc  = 0 ;
   VL::pixel_t* iter = filter ;
   VL::pixel_t* end  = filter + 2*W+1 ;
@@ -80,12 +80,15 @@ econvolve(VL::pixel_t*       dst_pt,
           const VL::pixel_t* src_pt,    int M, int N,
           const VL::pixel_t* filter_pt, int W)
 {
+	std::cout << "in econvolve\n";
     typedef VL::pixel_t const TC ;
     // convolve along columns, save transpose
     // image is M by N
     // buffer is N by M
     // filter is (2*W+1) by 1
+    std::cout << "W: " << W << std::endl;
     for(int j = 0 ; j < N ; ++j) {
+    	std::cout << "j = " << j << std::endl;
         for(int i = 0 ; i < M ; ++i) {
             VL::pixel_t   acc = 0.0 ;
             TC* g = filter_pt ;
@@ -318,6 +321,7 @@ namespace Detail {
 void
 copy(pixel_t* dst, pixel_t const* src, int width, int height)
 {
+	std::cout << "in copy\n";
   memcpy(dst, src, sizeof(pixel_t)*width*height)  ;
 }
 
@@ -398,6 +402,7 @@ Sift::smooth
  pixel_t const* src, int width, int height, 
  VL::float_t s)
 {
+	std::cout << "in smooth\n";
   // make sure a buffer larege enough has been allocated
   // to hold the filter
   int W = int( ceil( VL::float_t(4.0) * s ) ) ;
@@ -463,6 +468,7 @@ Sift::Sift(const pixel_t* _im_pt, int _width, int _height,
     octaves( NULL ),
     filter( NULL )    
 {
+	std::cout << "in constructor\n";
   process(_im_pt, _width, _height) ;
 }
 
@@ -480,11 +486,14 @@ void
 Sift::
 prepareBuffers()
 {
+	std::cout << "in prepareBuffers\n";
   // compute buffer size
   int w = (omin >= 0) ? (width  >> omin) : (width  << -omin) ;
   int h = (omin >= 0) ? (height >> omin) : (height << -omin) ;
+ // int size = w*h* std::max
+ //   ((smax - smin), 2*((smax+1) - (smin-2) +1)) ;
   int size = w*h* std::max
-    ((smax - smin), 2*((smax+1) - (smin-2) +1)) ;
+    ((smax - smin), 2*((smax - smin) -2)) ;
 
   if( temp && tempReserved == size ) return ;
   
@@ -497,19 +506,36 @@ prepareBuffers()
     std::cout <<  " omin: " << omin << std::endl;
   
   // allocate
-  temp           = new pixel_t [ size ] ; 
+  //temp           = new pixel_t [ size ] ;
+  temp = SIFT_DATA_START + w*h;
   tempReserved   = size ;
   tempIsGrad     = false ;
   tempOctave     = 0 ;
+
+  // NOTE: the following numbers are for a 480x360 image
+  //   with levels = 1, 1 octave at a time
+  // displayed image: 640*480 (4 bytes ea) 1228800 bytes
+  //		0x800000 - 0x92bfff
+  // fp image data: 	480*360 (4 bytes ea) 691200 bytes
+  //		0x93c000 - 0x9d4bff
+  // temp: size (4 bytes ea) 2073600 bytes : maximum
+  //		0x9d4c00 - 0xf0bbff
+  // octaves: (smax - smin + 1) * w * h 2764800 bytes : maximum
+  // 		0xf0bc00 - 0x11aebff
     
 
+  //octaves = new pixel_t* [ O ] ;
+  //octaves = temp + size;
 
-  octaves = new pixel_t* [ O ] ;
+  octaves = new pixel_t*;
+  octaves[0] = temp + size;
+  /*
   for(int o = 0 ; o < O; ++o) {
     octaves[o] = new pixel_t [ (smax - smin + 1) * w * h ] ;
     w >>= 1 ;
     h >>= 1 ;
   }
+  */
 }
   
 /** @brief Free buffers.
@@ -522,22 +548,28 @@ void
 Sift::
 freeBuffers()
 {
+	std::cout << "in freeBuffers\n";
   if( filter ) {
     delete [] filter ;
   }
   filter = 0 ;
 
+
   if( octaves ) {
-    for(int o = 0 ; o < O ; ++o) {
-      delete [] octaves[ o ] ;
-    }
-    delete [] octaves ;
+   // for(int o = 0 ; o < O ; ++o) {
+   //   delete [] octaves[ o ] ;
+   // }
+    //delete [] octaves ;
+  	delete octaves;
   }
+
   octaves = 0 ;
   
+  /*
   if( temp ) {
     delete [] temp ;   
   }
+  */
   temp = 0  ; 
 }
 
@@ -563,6 +595,7 @@ Sift::Keypoint
 Sift::getKeypoint(VL::float_t x, VL::float_t y, VL::float_t sigma) const
 {
 
+	std::cout << "in getKeypoint\n";
   /*
     The formula linking the keypoint scale sigma to the octave and
     scale index is
@@ -675,6 +708,7 @@ Sift::
 process(const pixel_t* _im_pt, int _width, int _height)
 {
   using namespace Detail ;
+  std::cout << "in process\n";
 
   width  = _width ;
   height = _height ;
@@ -686,7 +720,7 @@ process(const pixel_t* _im_pt, int _width, int _height)
   // -----------------------------------------------------------------
   //                                                 Make pyramid base
   // -----------------------------------------------------------------
-  if( omin < 0 ) {
+  /*if( omin < 0 ) {
     copyAndUpsampleRows(temp,       _im_pt, width,  height  ) ;
     copyAndUpsampleRows(octaves[0], temp,   height, 2*width ) ;      
 
@@ -694,7 +728,8 @@ process(const pixel_t* _im_pt, int _width, int _height)
       copyAndUpsampleRows(temp,       octaves[0], width  << -o,    height << -o) ;
       copyAndUpsampleRows(octaves[0], temp,       height << -o, 2*(width  << -o)) ;             }
 
-  } else if( omin > 0 ) {
+  } else */
+  if( omin > 0 ) {
     copyAndDownsample(octaves[0], _im_pt, width, height, 1 << omin) ;
   } else {
     copy(octaves[0], _im_pt, width, height) ;
@@ -762,6 +797,7 @@ process(const pixel_t* _im_pt, int _width, int _height)
 void
 Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
 {
+	std::cout << "in detectKeypoints\n";
   keypoints.clear() ;
 
   unsigned long nValidatedKeypoints = 0 ;
@@ -1062,6 +1098,7 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
 void
 Sift::prepareGrad(int o)
 { 
+	std::cout << "in prepareGrad\n";
   int const ow = getOctaveWidth(o) ;
   int const oh = getOctaveHeight(o) ;
   int const xo = 1 ;
@@ -1119,6 +1156,7 @@ Sift::prepareGrad(int o)
 int
 Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
 {
+	std::cout << "in computeKeypointOrientations\n";
   int const   nbins = 36 ;
   VL::float_t const winFactor = 1.5 ;
   VL::float_t hist [nbins] ;
@@ -1294,7 +1332,7 @@ Sift::computeKeypointDescriptor
  Keypoint keypoint, 
  VL::float_t angle0)
 {
-
+	std::cout << "in computeKeypointDescriptor\n";
   /* The SIFT descriptor is a  three dimensional histogram of the position
    * and orientation of the gradient.  There are NBP bins for each spatial
    * dimesions and NBO  bins for the orientation dimesion,  for a total of

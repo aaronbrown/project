@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
  * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Sun Mar 03 17:28:57 PST 2013
+ * Generated: Thu Mar 28 19:36:17 PDT 2013
  */
 
 /*
@@ -318,7 +318,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1361488137u
+#define SYSID_TIMESTAMP 1363048067u
 #define SYSID_TYPE "altera_avalon_sysid"
 
 
