@@ -2,9 +2,9 @@
  * linker.x - Linker script
  *
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
- * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
+ * SOPC Builder design path: C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Sat Mar 30 15:19:22 PDT 2013
+ * Generated: Sun Mar 31 03:04:19 PDT 2013
  */
 
 /*

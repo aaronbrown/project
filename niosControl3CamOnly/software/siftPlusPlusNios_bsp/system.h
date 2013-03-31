@@ -2,9 +2,9 @@
  * system.h - SOPC Builder system and BSP software package information
  *
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
- * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
+ * SOPC Builder design path: C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Thu Mar 28 19:36:17 PDT 2013
+ * Generated: Sun Mar 31 03:04:19 PDT 2013
  */
 
 /*
@@ -119,6 +119,16 @@
 
 
 /*
+ * Custom instruction macros
+ *
+ */
+
+#define ALT_CI_ALTERA_NIOS_CUSTOM_INSTR_FLOATING_POINT_INST(n,A,B) __builtin_custom_inii(ALT_CI_ALTERA_NIOS_CUSTOM_INSTR_FLOATING_POINT_INST_N+(n&ALT_CI_ALTERA_NIOS_CUSTOM_INSTR_FLOATING_POINT_INST_N_MASK),(A),(B))
+#define ALT_CI_ALTERA_NIOS_CUSTOM_INSTR_FLOATING_POINT_INST_N 0xfc
+#define ALT_CI_ALTERA_NIOS_CUSTOM_INSTR_FLOATING_POINT_INST_N_MASK ((1<<2)-1)
+
+
+/*
  * Define for each module class mastered by the CPU
  *
  */
@@ -130,6 +140,7 @@
 #define __ALTERA_AVALON_SYSID
 #define __ALTERA_AVALON_TIMER
 #define __ALTERA_NIOS2
+#define __ALTERA_NIOS_CUSTOM_INSTR_FLOATING_POINT
 #define __SRAM_16BIT_512K
 
 
@@ -318,7 +329,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1363048067u
+#define SYSID_TIMESTAMP 1364720178u
 #define SYSID_TYPE "altera_avalon_sysid"
 
 

@@ -8,10 +8,16 @@ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu_0.oc
 # procHasControl
 # timer_0
 # sysid
-# null
 # sram_16bit_512k_0
 set_global_assignment -name TCL_FILE [file join $::quartus(qip_path) SRAM_16Bit_512K_hw.tcl]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) hdl/SRAM_16Bit_512K.v]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) sram_16bit_512k_0.v]
-set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 0025BCE5629C0000013CFF13E983 
+# null
+# cpu_0_altera_nios_custom_instr_floating_point_inst
+set_global_assignment -name TCL_FILE [file join $::quartus(ip_rootpath) altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_qsys_hw.tcl]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(ip_rootpath) altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_wrapper.v]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(ip_rootpath) altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_qsys.v]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(ip_rootpath) altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_hw_qsys.v]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) cpu_0_altera_nios_custom_instr_floating_point_inst.v]
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID F04DA25B30410000013DBFA9DD90 
  

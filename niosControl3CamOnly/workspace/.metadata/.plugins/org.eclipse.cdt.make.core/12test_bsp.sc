@@ -4,12 +4,12 @@
 <scannerInfo id="org.eclipse.cdt.make.core.discoveredScannerInfo">
 <instance id="preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1813573275;preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1813573275.;cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.base.63117123;cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin.1583451913">
 <collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++"/>
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++\i686-pc-cygwin"/>
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++\backward"/>
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include"/>
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\usr\include"/>
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\usr\include\w32api"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++\i686-pc-cygwin"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++\backward"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\usr\include"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\usr\include\w32api"/>
 <definedSymbol symbol="__cplusplus=1"/>
 <definedSymbol symbol="__STDC_HOSTED__=1"/>
 <definedSymbol symbol="__GNUC__=3"/>
@@ -99,9 +99,9 @@
 </instance>
 <instance id="preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1813573275;preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1813573275.;cdt.managedbuild.tool.gnu.c.compiler.cygwin.base.1562389373;cdt.managedbuild.tool.gnu.c.compiler.input.cygwin.25603912">
 <collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include"/>
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\usr\include"/>
-<includePath path="c:\altera\11.0sp1\quartus\bin\cygwin\usr\include\w32api"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\usr\include"/>
+<includePath path="C:\altera\11.0sp1\quartus\bin\cygwin\usr\include\w32api"/>
 <definedSymbol symbol="__STDC_HOSTED__=1"/>
 <definedSymbol symbol="__GNUC__=3"/>
 <definedSymbol symbol="__GNUC_MINOR__=4"/>

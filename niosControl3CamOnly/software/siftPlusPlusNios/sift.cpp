@@ -88,7 +88,7 @@ econvolve(VL::pixel_t*       dst_pt,
     // filter is (2*W+1) by 1
     std::cout << "W: " << W << std::endl;
     for(int j = 0 ; j < N ; ++j) {
-    	std::cout << "j = " << j << std::endl;
+    	//std::cout << "j = " << j << std::endl;
         for(int i = 0 ; i < M ; ++i) {
             VL::pixel_t   acc = 0.0 ;
             TC* g = filter_pt ;
@@ -405,7 +405,7 @@ Sift::smooth
 	std::cout << "in smooth\n";
   // make sure a buffer larege enough has been allocated
   // to hold the filter
-  int W = int( ceil( VL::float_t(4.0) * s ) ) ;
+  int W = int( ceil( VL::float_t(1.0) * s ) ) ;
   if( ! filter ) {
     filterReserved = 0 ;
   }
@@ -426,6 +426,10 @@ Sift::smooth
   // normalize to one
   normalize(filter, W) ;
   
+  // print filter
+  for(int j = 0 ; j < 2*W+1 ; ++j)
+	  std::cout << filter[j] << std::endl;
+
   // convolve
   econvolve(temp, src, width, height, filter, W) ;
   econvolve(dst, temp, height, width, filter, W) ;
@@ -507,9 +511,9 @@ prepareBuffers()
   
   // allocate
   temp           = new pixel_t [ size ] ;
-  //temp = SIFT_DATA_START + 480*360;
+  //temp = (VL::pixel_t*)SIFT_DATA_START + 480*360;
   std::cout << "temp: " << temp <<std::endl;
-  //temp = SIFT_DATA_START + 480*360;
+  //temp = (VL::pixel_t*)SIFT_DATA_START + 480*360;
   tempReserved   = size ;
   tempIsGrad     = false ;
   tempOctave     = 0 ;

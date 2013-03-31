@@ -3,15 +3,15 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow Model Setup 'unew|altpll_component|pll|clk[2]'
-Slack : 5.265
+Slack : 5.134
 TNS   : 0.000
 
 Type  : Slow Model Setup 'unew|altpll_component|pll|clk[0]'
-Slack : 5.437
+Slack : 5.920
 TNS   : 0.000
 
 Type  : Slow Model Setup 'unew|altpll_component|pll|clk[1]'
-Slack : 11.330
+Slack : 11.469
 TNS   : 0.000
 
 Type  : Slow Model Hold 'unew|altpll_component|pll|clk[0]'
@@ -27,19 +27,19 @@ Slack : 0.391
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'unew|altpll_component|pll|clk[2]'
-Slack : 1.980
+Slack : 2.204
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'unew|altpll_component|pll|clk[1]'
-Slack : 14.871
+Slack : 14.534
 TNS   : 0.000
 
 Type  : Slow Model Removal 'unew|altpll_component|pll|clk[1]'
-Slack : 1.921
+Slack : 1.732
 TNS   : 0.000
 
 Type  : Slow Model Removal 'unew|altpll_component|pll|clk[2]'
-Slack : 2.789
+Slack : 2.566
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'unew|altpll_component|pll|clk[2]'
@@ -63,7 +63,7 @@ Slack : 97.778
 TNS   : 0.000
 
 Type  : Fast Model Setup 'unew|altpll_component|pll|clk[0]'
-Slack : 6.266
+Slack : 6.489
 TNS   : 0.000
 
 Type  : Fast Model Setup 'unew|altpll_component|pll|clk[2]'
@@ -71,7 +71,7 @@ Slack : 7.543
 TNS   : 0.000
 
 Type  : Fast Model Setup 'unew|altpll_component|pll|clk[1]'
-Slack : 15.469
+Slack : 15.718
 TNS   : 0.000
 
 Type  : Fast Model Hold 'unew|altpll_component|pll|clk[0]'
@@ -87,19 +87,19 @@ Slack : 0.215
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'unew|altpll_component|pll|clk[2]'
-Slack : 3.196
+Slack : 3.329
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'unew|altpll_component|pll|clk[1]'
-Slack : 17.148
+Slack : 17.451
 TNS   : 0.000
 
 Type  : Fast Model Removal 'unew|altpll_component|pll|clk[1]'
-Slack : 0.973
+Slack : 0.922
 TNS   : 0.000
 
 Type  : Fast Model Removal 'unew|altpll_component|pll|clk[2]'
-Slack : 1.683
+Slack : 1.551
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'unew|altpll_component|pll|clk[2]'

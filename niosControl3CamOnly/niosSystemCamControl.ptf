@@ -432,7 +432,7 @@ SYSTEM niosSystemCamControl
             Data_Width = "32";
             Address_Width = "8";
             Is_Custom_Instruction = "1";
-            Is_Enabled = "0";
+            Is_Enabled = "1";
             Max_Address_Width = "8";
             Base_Address = "N/A";
             Is_Visible = "0";
@@ -444,84 +444,238 @@ SYSTEM niosSystemCamControl
                type = "dataa";
                width = "32";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT datab
             {
                type = "datab";
                width = "32";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT result
             {
                type = "result";
                width = "32";
                direction = "input";
+               Is_Enabled = "0";
             }
             PORT clk_en
             {
                type = "clk_en";
                width = "1";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT reset
             {
                type = "reset";
                width = "1";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT start
             {
                type = "start";
                width = "1";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT done
             {
                type = "done";
                width = "1";
                direction = "input";
+               Is_Enabled = "0";
             }
             PORT n
             {
                type = "n";
                width = "8";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT a
             {
                type = "a";
                width = "5";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT b
             {
                type = "b";
                width = "5";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT c
             {
                type = "c";
                width = "5";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT readra
             {
                type = "readra";
                width = "1";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT readrb
             {
                type = "readrb";
                width = "1";
                direction = "output";
+               Is_Enabled = "0";
             }
             PORT writerc
             {
                type = "writerc";
                width = "1";
                direction = "output";
+               Is_Enabled = "0";
+            }
+            PORT D_ci_a
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "a";
+               width = "5";
+            }
+            PORT D_ci_b
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "b";
+               width = "5";
+            }
+            PORT D_ci_c
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "c";
+               width = "5";
+            }
+            PORT D_ci_n
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "n";
+               width = "8";
+            }
+            PORT D_ci_readra
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "readra";
+               width = "1";
+            }
+            PORT D_ci_readrb
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "readrb";
+               width = "1";
+            }
+            PORT D_ci_writerc
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "writerc";
+               width = "1";
+            }
+            PORT E_ci_dataa
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "dataa";
+               width = "32";
+            }
+            PORT E_ci_datab
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "datab";
+               width = "32";
+            }
+            PORT E_ci_multi_clk_en
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "clk_en";
+               width = "1";
+            }
+            PORT E_ci_multi_clock
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "multi_clk";
+               width = "1";
+            }
+            PORT E_ci_multi_done
+            {
+               Is_Enabled = "1";
+               direction = "input";
+               type = "done";
+               width = "1";
+            }
+            PORT E_ci_multi_reset
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "multi_reset";
+               width = "1";
+            }
+            PORT E_ci_multi_start
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "start";
+               width = "1";
+            }
+            PORT E_ci_result
+            {
+               Is_Enabled = "1";
+               direction = "input";
+               type = "result";
+               width = "32";
+            }
+            PORT W_ci_estatus
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "estatus";
+               width = "1";
+            }
+            PORT W_ci_ipending
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "ipending";
+               width = "32";
+            }
+            PORT W_ci_status
+            {
+               Is_Enabled = "1";
+               direction = "output";
+               type = "status";
+               width = "1";
+            }
+            PORT clk
+            {
+               Is_Enabled = "1";
+               direction = "input";
+               type = "clk";
+               width = "1";
+            }
+            PORT reset_n
+            {
+               Is_Enabled = "1";
+               direction = "input";
+               type = "reset_n";
+               width = "1";
             }
          }
       }
@@ -640,25 +794,11 @@ SYSTEM niosSystemCamControl
                direction = "input";
                Is_Enabled = "1";
             }
-            PORT clk
-            {
-               Is_Enabled = "1";
-               direction = "input";
-               type = "clk";
-               width = "1";
-            }
             PORT jtag_debug_module_resetrequest
             {
                Is_Enabled = "1";
                direction = "output";
                type = "resetrequest";
-               width = "1";
-            }
-            PORT reset_n
-            {
-               Is_Enabled = "1";
-               direction = "input";
-               type = "reset_n";
                width = "1";
             }
          }
@@ -1370,152 +1510,362 @@ SYSTEM niosSystemCamControl
             }
             SIGNAL aam
             {
-               format = "Divider";
-               name = "common";
-               radix = "";
+               format = "Logic";
+               name = "E_ci_dataa";
+               radix = "hexadecimal";
             }
             SIGNAL aan
             {
                format = "Logic";
-               name = "clk";
+               name = "E_ci_datab";
                radix = "hexadecimal";
             }
             SIGNAL aao
             {
                format = "Logic";
-               name = "reset_n";
+               name = "W_ci_ipending";
                radix = "hexadecimal";
             }
             SIGNAL aap
             {
                format = "Logic";
-               name = "F_pcb_nxt";
+               name = "W_ci_status";
                radix = "hexadecimal";
             }
             SIGNAL aaq
             {
                format = "Logic";
-               name = "F_pcb";
+               name = "W_ci_estatus";
                radix = "hexadecimal";
             }
             SIGNAL aar
             {
                format = "Logic";
-               name = "F_vinst";
-               radix = "ascii";
+               name = "D_ci_n";
+               radix = "hexadecimal";
             }
             SIGNAL aas
             {
                format = "Logic";
-               name = "D_vinst";
-               radix = "ascii";
+               name = "D_ci_a";
+               radix = "hexadecimal";
             }
             SIGNAL aat
             {
                format = "Logic";
-               name = "R_vinst";
-               radix = "ascii";
+               name = "D_ci_b";
+               radix = "hexadecimal";
             }
             SIGNAL aau
             {
                format = "Logic";
-               name = "E_vinst";
-               radix = "ascii";
+               name = "D_ci_c";
+               radix = "hexadecimal";
             }
             SIGNAL aav
             {
                format = "Logic";
-               name = "W_vinst";
-               radix = "ascii";
+               name = "D_ci_readra";
+               radix = "hexadecimal";
             }
             SIGNAL aaw
             {
                format = "Logic";
-               name = "F_valid";
+               name = "D_ci_readrb";
                radix = "hexadecimal";
             }
             SIGNAL aax
             {
                format = "Logic";
-               name = "D_valid";
+               name = "D_ci_writerc";
                radix = "hexadecimal";
             }
             SIGNAL aay
             {
                format = "Logic";
-               name = "R_valid";
+               name = "E_ci_result";
                radix = "hexadecimal";
             }
             SIGNAL aaz
             {
                format = "Logic";
-               name = "E_valid";
+               name = "E_ci_multi_clk_en";
                radix = "hexadecimal";
             }
             SIGNAL aba
             {
                format = "Logic";
-               name = "W_valid";
+               name = "E_ci_multi_clock";
                radix = "hexadecimal";
             }
             SIGNAL abb
             {
                format = "Logic";
-               name = "D_wr_dst_reg";
+               name = "E_ci_multi_reset";
                radix = "hexadecimal";
             }
             SIGNAL abc
             {
                format = "Logic";
-               name = "D_dst_regnum";
+               name = "E_ci_multi_start";
                radix = "hexadecimal";
             }
             SIGNAL abd
             {
                format = "Logic";
-               name = "W_wr_data";
+               name = "E_ci_multi_done";
                radix = "hexadecimal";
             }
             SIGNAL abe
             {
-               format = "Logic";
-               name = "F_iw";
-               radix = "hexadecimal";
+               format = "Divider";
+               name = "common";
+               radix = "";
             }
             SIGNAL abf
             {
                format = "Logic";
-               name = "D_iw";
+               name = "clk";
                radix = "hexadecimal";
             }
             SIGNAL abg
             {
-               format = "Divider";
-               name = "breaks";
-               radix = "";
+               format = "Logic";
+               name = "reset_n";
+               radix = "hexadecimal";
             }
             SIGNAL abh
             {
                format = "Logic";
-               name = "hbreak_req";
+               name = "F_pcb_nxt";
                radix = "hexadecimal";
             }
             SIGNAL abi
             {
                format = "Logic";
-               name = "oci_hbreak_req";
+               name = "F_pcb";
                radix = "hexadecimal";
             }
             SIGNAL abj
             {
                format = "Logic";
-               name = "hbreak_enabled";
-               radix = "hexadecimal";
+               name = "F_vinst";
+               radix = "ascii";
             }
             SIGNAL abk
             {
                format = "Logic";
+               name = "D_vinst";
+               radix = "ascii";
+            }
+            SIGNAL abl
+            {
+               format = "Logic";
+               name = "R_vinst";
+               radix = "ascii";
+            }
+            SIGNAL abm
+            {
+               format = "Logic";
+               name = "E_vinst";
+               radix = "ascii";
+            }
+            SIGNAL abn
+            {
+               format = "Logic";
+               name = "W_vinst";
+               radix = "ascii";
+            }
+            SIGNAL abo
+            {
+               format = "Logic";
+               name = "F_valid";
+               radix = "hexadecimal";
+            }
+            SIGNAL abp
+            {
+               format = "Logic";
+               name = "D_valid";
+               radix = "hexadecimal";
+            }
+            SIGNAL abq
+            {
+               format = "Logic";
+               name = "R_valid";
+               radix = "hexadecimal";
+            }
+            SIGNAL abr
+            {
+               format = "Logic";
+               name = "E_valid";
+               radix = "hexadecimal";
+            }
+            SIGNAL abs
+            {
+               format = "Logic";
+               name = "W_valid";
+               radix = "hexadecimal";
+            }
+            SIGNAL abt
+            {
+               format = "Logic";
+               name = "D_wr_dst_reg";
+               radix = "hexadecimal";
+            }
+            SIGNAL abu
+            {
+               format = "Logic";
+               name = "D_dst_regnum";
+               radix = "hexadecimal";
+            }
+            SIGNAL abv
+            {
+               format = "Logic";
+               name = "W_wr_data";
+               radix = "hexadecimal";
+            }
+            SIGNAL abw
+            {
+               format = "Logic";
+               name = "F_iw";
+               radix = "hexadecimal";
+            }
+            SIGNAL abx
+            {
+               format = "Logic";
+               name = "D_iw";
+               radix = "hexadecimal";
+            }
+            SIGNAL aby
+            {
+               format = "Divider";
+               name = "breaks";
+               radix = "";
+            }
+            SIGNAL abz
+            {
+               format = "Logic";
+               name = "hbreak_req";
+               radix = "hexadecimal";
+            }
+            SIGNAL aca
+            {
+               format = "Logic";
+               name = "oci_hbreak_req";
+               radix = "hexadecimal";
+            }
+            SIGNAL acb
+            {
+               format = "Logic";
+               name = "hbreak_enabled";
+               radix = "hexadecimal";
+            }
+            SIGNAL acc
+            {
+               format = "Logic";
                name = "wait_for_one_post_bret_inst";
+               radix = "hexadecimal";
+            }
+            SIGNAL acd
+            {
+               format = "Divider";
+               name = "custom_instruction";
+               radix = "";
+            }
+            SIGNAL ace
+            {
+               format = "Logic";
+               name = "R_ctrl_custom";
+               radix = "hexadecimal";
+            }
+            SIGNAL acf
+            {
+               format = "Logic";
+               name = "R_ctrl_custom_multi";
+               radix = "hexadecimal";
+            }
+            SIGNAL acg
+            {
+               format = "Logic";
+               name = "E_ci_dataa";
+               radix = "hexadecimal";
+            }
+            SIGNAL ach
+            {
+               format = "Logic";
+               name = "E_ci_datab";
+               radix = "hexadecimal";
+            }
+            SIGNAL aci
+            {
+               format = "Logic";
+               name = "W_ipending_reg";
+               radix = "hexadecimal";
+            }
+            SIGNAL acj
+            {
+               format = "Logic";
+               name = "W_status_reg";
+               radix = "hexadecimal";
+            }
+            SIGNAL ack
+            {
+               format = "Logic";
+               name = "W_estatus_reg";
+               radix = "hexadecimal";
+            }
+            SIGNAL acl
+            {
+               format = "Logic";
+               name = "D_ci_n";
+               radix = "hexadecimal";
+            }
+            SIGNAL acm
+            {
+               format = "Logic";
+               name = "D_ci_readra";
+               radix = "hexadecimal";
+            }
+            SIGNAL acn
+            {
+               format = "Logic";
+               name = "D_ci_readrb";
+               radix = "hexadecimal";
+            }
+            SIGNAL aco
+            {
+               format = "Logic";
+               name = "D_ci_writerc";
+               radix = "hexadecimal";
+            }
+            SIGNAL acp
+            {
+               format = "Logic";
+               name = "E_ci_result";
+               radix = "hexadecimal";
+            }
+            SIGNAL acq
+            {
+               format = "Logic";
+               name = "E_ci_multi_clk_en";
+               radix = "hexadecimal";
+            }
+            SIGNAL acr
+            {
+               format = "Logic";
+               name = "E_ci_multi_start";
+               radix = "hexadecimal";
+            }
+            SIGNAL acs
+            {
+               format = "Logic";
+               name = "E_ci_multi_done";
+               radix = "hexadecimal";
+            }
+            SIGNAL act
+            {
+               format = "Logic";
+               name = "E_ci_multi_stall";
                radix = "hexadecimal";
             }
          }
@@ -2673,7 +3023,7 @@ SYSTEM niosSystemCamControl
          Has_Clock = "1";
          View 
          {
-            Settings_Summary = "System ID (at last Generate):<br> <b>00000000</b>    (unique ID tag) <br> <b>5126A909</b> (timestamp: Thu Feb 21, 2013 @3:08 PM)";
+            Settings_Summary = "System ID (at last Generate):<br> <b>00000000</b>    (unique ID tag) <br> <b>5157FA32</b> (timestamp: Sun Mar 31, 2013 @1:56 AM)";
             MESSAGES 
             {
             }
@@ -2682,7 +3032,7 @@ SYSTEM niosSystemCamControl
       WIZARD_SCRIPT_ARGUMENTS 
       {
          id = "0u";
-         timestamp = "1361488137u";
+         timestamp = "1364720178u";
          regenerate_values = "0";
          MAKE 
          {
@@ -2691,7 +3041,7 @@ SYSTEM niosSystemCamControl
                verifysysid 
                {
                   All_Depends_On = "0";
-                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x01109038 --id=0 --timestamp=1361488137";
+                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x01109038 --id=0 --timestamp=1364720178";
                   Is_Phony = "1";
                   Target_File = "dummy_verifysysid_file";
                }
@@ -2901,6 +3251,117 @@ SYSTEM niosSystemCamControl
       HDL_INFO 
       {
          Simulation_HDL_Files = "__PROJECT_DIRECTORY__/hdl/SRAM_16Bit_512K.v,__PROJECT_DIRECTORY__/sram_16bit_512k_0.v";
+      }
+      WIZARD_SCRIPT_ARGUMENTS 
+      {
+      }
+   }
+   MODULE cpu_0_altera_nios_custom_instr_floating_point_inst
+   {
+      SLAVE s1
+      {
+         SYSTEM_BUILDER_INFO 
+         {
+            Bus_Type = "nios_custom_instruction";
+            Data_Width = "32";
+            Address_Width = "2";
+            Is_Custom_Instruction = "1";
+            Is_Enabled = "1";
+            ci_operands = "2";
+            ci_cycles = "1";
+            ci_inst_type = "variable multicycle";
+            Has_Base_Address = "1";
+            Base_Address = "0x000000fc";
+            ci_macro_name = "altera_nios_custom_instr_floating_point_inst";
+            MASTERED_BY cpu_0/custom_instruction_master
+            {
+               priority = "1";
+            }
+            IRQ_MASTER cpu_0/custom_instruction_master
+            {
+               IRQ_Number = "NC";
+            }
+            Address_Group = "0";
+         }
+         PORT_WIRING 
+         {
+            PORT clk
+            {
+               type = "clk";
+               width = "1";
+               direction = "input";
+            }
+            PORT clk_en
+            {
+               type = "clk_en";
+               width = "1";
+               direction = "input";
+            }
+            PORT dataa
+            {
+               type = "dataa";
+               width = "32";
+               direction = "input";
+            }
+            PORT datab
+            {
+               type = "datab";
+               width = "32";
+               direction = "input";
+            }
+            PORT n
+            {
+               type = "n";
+               width = "2";
+               direction = "input";
+            }
+            PORT reset
+            {
+               type = "reset";
+               width = "1";
+               direction = "input";
+            }
+            PORT start
+            {
+               type = "start";
+               width = "1";
+               direction = "input";
+            }
+            PORT done
+            {
+               type = "done";
+               width = "1";
+               direction = "output";
+            }
+            PORT result
+            {
+               type = "result";
+               width = "32";
+               direction = "output";
+            }
+         }
+      }
+      class = "no_legacy_module";
+      class_version = "7.08110";
+      gtf_class_name = "altera_nios_custom_instr_floating_point";
+      gtf_class_version = "11.0";
+      SYSTEM_BUILDER_INFO 
+      {
+         Do_Not_Generate = "1";
+         Instantiate_In_System_Module = "1";
+         Is_Bridge = "0";
+         Is_Enabled = "1";
+         Clock_Source = "clk_0";
+         View 
+         {
+            MESSAGES 
+            {
+            }
+         }
+      }
+      HDL_INFO 
+      {
+         Simulation_HDL_Files = "C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_wrapper.v,C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_qsys.v,C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_hw_qsys.v,__PROJECT_DIRECTORY__/cpu_0_altera_nios_custom_instr_floating_point_inst.v";
       }
       WIZARD_SCRIPT_ARGUMENTS 
       {

@@ -1,0 +1,362 @@
+// file:        sift-driver.cpp
+// author:      Andrea Vedaldi
+// description: SIFT command line utility implementation
+
+// AUTORIGTHS
+
+#include"sift.hpp"
+
+#include<string>
+#include<iostream>
+#include<iomanip>
+#include<fstream>
+#include<sstream>
+#include<algorithm>
+
+
+extern "C" {
+#include<getopt.h>
+#include<assert.h>
+#include<io.h>
+}
+#include<memory>
+
+using namespace std ;
+
+
+
+/* keypoint list */
+typedef vector<pair<VL::Sift::Keypoint,VL::float_t> > Keypoints ;
+
+/* predicate used to order keypoints by increasing scale */
+bool cmpKeypoints (Keypoints::value_type const&a,
+		   Keypoints::value_type const&b) {
+  return a.first.sigma < b.first.sigma ;
+}
+
+void extractImageData(VL::PgmBuffer& buffer)
+{
+  VL::pixel_t* im_pt = new VL::pixel_t[480*360];
+	unsigned int x, y, byteNum, blockNum, offset;
+	unsigned short *imgPtr = 0;
+	unsigned short intensityVal;
+	unsigned char intensityValSmall;
+
+	for (y = 60; y < 420; y++)
+	{
+		for (x = 80; x < 560; x++)
+		{
+				byteNum = (y*640 + x);
+        blockNum = byteNum / 256;
+        offset = byteNum % 256;
+
+        // this offset is in terms of shorts (= byte offset / 2)
+        // read from the second of the two locations used to store
+        //	pixel (x,y)'s data, and write to the first
+        imgPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + offset + 256;
+
+        intensityVal = *(imgPtr) & 0x3ff;
+        intensityValSmall = intensityVal >> 2;
+
+        *im_pt++ = intensityValSmall / 255.0f;
+		}
+	}
+
+	cout << "im_pt: " << im_pt << endl;
+	//cout << im_pt - SIFT_DATA_START <<endl;
+  buffer.width  = 480 ;
+  buffer.height = 360 ;
+  buffer.data   = im_pt ;
+}
+
+void replaceImageData()
+{
+  VL::pixel_t* im_pt = reinterpret_cast<VL::pixel_t*>((unsigned short*)BASE_ADDRESS);
+  int      width ;
+  int      height ;
+  int      maxval ;
+	unsigned int x, y, byteNum, blockNum, offset;
+	unsigned short *imgPtr = 0;
+	unsigned short intensityVal;
+	unsigned char intensityValSmall;
+
+	for (y = 0; y < 480; y++)
+	{
+		for (x = 0; x < 640; x++)
+		{
+				byteNum = (y*640 + x);
+        blockNum = byteNum / 256;
+        offset = byteNum % 256;
+
+        // this offset is in terms of shorts (= byte offset / 2)
+        // read from the second of the two locations used to store
+        //	pixel (x,y)'s data, and write to the first
+        imgPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + byteNum;
+        *imgPtr = *(imgPtr + 256) = (unsigned short)((*im_pt++ * 255.0f) * 4);
+		}
+	}
+
+	cout << "im_pt2: " << im_pt << endl;
+
+}
+void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin, int imgWidth, int imgHeight, int VGAoffsetX, int VGAoffsetY)
+{
+	unsigned short backgroundBlue = 0x03FF;
+	unsigned short backgroundRed  = 0x0000;
+
+	VL::pixel_t pixelIntensity;
+	unsigned short ushortIntensity;
+
+	unsigned int x, y, byteNum, blockNum, offset;
+	unsigned short *vgaPtr = 0;
+
+	// process vga pixels in reverse order,
+	// in case VGA was overwritten with the image.
+	// We will write to the red parts of all pixels first
+	// Then after we will copy those to the blue parts
+	for (y = 479; y >= 0; y++)
+	{
+		for (x = 639; x >= 0; x--)
+		{
+			// calculate VGA/SDRAM red pixel address
+			byteNum = (y*640 + x);
+			blockNum = byteNum / 256;
+			offset = byteNum % 256;
+			vgaPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + byteNum + 256;
+
+			// check if out of bounds of image
+			if ( (y < VGAoffsetY) || (y >= VGAoffsetY + imgHeight) ||
+					(x < VGAoffsetX) || (x >= VGAoffsetX + imgWidth) )
+			{
+				// out of bounds, write default background color
+				*vgaPtr = backgroundRed;
+				continue;
+			}
+
+			// if we reach this point, we are in bounds of image
+			pixelIntensity = *imgPtr;
+
+			// make sure pixel is not over or under saturated
+			if (pixelIntensity > intensityMax)
+				pixelIntensity = intensityMax ;
+			if (pixelIntensity < intensityMin)
+				pixelIntensity = intensityMin ;
+
+			// normalize to 1024
+			pixelIntensity = 1023.0 * (pixelIntensity - intensityMin) / (intensityMax - intensityMin);
+
+			// round and convert to unsigned short
+			ushortIntensity = (unsigned short)(pixelIntensity + 0.5);
+
+			// save red to SDRAM
+			*vgaPtr = ((0x001f & ushortIntensity) << 10) | ushortIntensity;
+		}
+	}
+
+	// Now copy the blue parts
+	for (y = 479; y >= 0; y++)
+	{
+		for (x = 639; x >= 0; x--)
+		{
+			// calculate VGA/SDRAM blue pixel address
+			byteNum = (y*640 + x);
+			blockNum = byteNum / 256;
+			offset = byteNum % 256;
+			vgaPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + byteNum;
+
+			// check if out of bounds of image
+			if ( (y < VGAoffsetY) || (y >= VGAoffsetY + imgHeight) ||
+					(x < VGAoffsetX) || (x >= VGAoffsetX + imgWidth) )
+			{
+				// out of bounds, write default background color
+				*vgaPtr = backgroundBlue;
+				continue;
+			}
+
+			// if we reach this point, we are in bounds of image
+			// copy red to blue in SDRAM
+			*vgaPtr = *(vgaPtr + 256);
+		}
+	}
+
+}
+// -------------------------------------------------------------------
+//                                                                main
+// -------------------------------------------------------------------
+int
+main(int argc, char** argv)
+{
+  int    first          = 1 ;
+  int    octaves        = 3 ;
+  int    levels         = 1 ;
+  VL::float_t  threshold      (0.08f / levels / 2.0f) ;
+  VL::float_t  edgeThreshold  (10.0f);
+  VL::float_t  magnif         (3.0) ;
+  int    verbose        = 1 ;
+
+  VL::PgmBuffer buffer ;
+
+  int i = 10;
+  VL::pixel_t* floatImage = (VL::pixel_t*) VL::pixel_t*new VL::pixel_t[i*i];
+  for (int y = 0; y < i; y++)
+	  for (int x = 0; x < i; x++)
+		  *(floatImage + (i*y + x)) = x + y;
+
+  PROC_CONTROL_ON;
+  cout << "started writing\n";
+  moveImageToVGA(floatImage, (float)(2*(x-1)), 0.0, 10, 10, 10, 10);
+  PROC_CONTROL_OFF;
+  cout << "finished writing\n";
+  std::usleep(10*1000*1000);
+  PROC_CONTROL_ON;
+
+  cout << "Hello!\n";
+  extractImageData(buffer);
+  //replaceImageData();
+  // -----------------------------------------------------------------
+  //                                            Retrieve input image
+  // -----------------------------------------------------------------
+  // ON NIOS, SUBSTITUTE SDRAM IMAGE READ HERE
+
+  /*
+  unsigned int x, y, byteNum, blockNum, offset;
+	unsigned short *imgPtr = 0;
+	unsigned short intensityVal;
+	unsigned char intensityValSmall;
+
+  for (y = 0; y < 480; y++)
+  {
+    for (x = 0; x < 640; x++)
+    {
+    	if (y >= 60 && y <= 420 && x >= 80 && x <= 560) {
+      byteNum = (y*640 + x);
+      blockNum = byteNum / 256;
+      offset = byteNum % 256;
+
+      // imgPtr and BASE_ADDRESS are type unsigned char, so
+      // 	 this adds a byte offset, which is what we want
+      //imgPtr = BASE_ADDRESS + 2*byteNum + 512*blockNum;
+
+      // this offset is in terms of shorts (= byte offset / 2)
+      imgPtr = BASE_ADDRESS + 256*blockNum + byteNum;
+
+      intensityVal = *(imgPtr) & 0x3ff;
+      intensityValSmall = intensityVal >> 2;
+
+
+      // write blue to the screen
+      if (x % 3 == 0 || y%2 == 0)
+      {
+      	*(imgPtr) = 0x03ff;
+      	*(imgPtr + 256) = 0x0000; // (256 = 512 bytes / 2)
+
+      	//IOWR_16DIRECT(BASE_ADDRESS, 2*byteNum + 512*blockNum, 0x03ff);
+      	//IOWR_16DIRECT(BASE_ADDRESS, 2*byteNum + 512*blockNum + 512, 0x0000);
+      }
+      else
+      {
+      	*(imgPtr) = 0x0000;
+      	*(imgPtr + 256) = 0x03ff; // (256 = 512 bytes / 2)
+
+      	//IOWR_16DIRECT(BASE_ADDRESS, 2*byteNum + 512*blockNum, 0x0000);
+        //IOWR_16DIRECT(BASE_ADDRESS, 2*byteNum + 512*blockNum + 512, 0x03ff);
+      }
+
+    	}
+    } // for each x
+  } // for each y
+
+*/
+
+
+  //verbose && cout
+  //      << " read "
+  //      << buffer.width  <<" x "
+  //      << buffer.height <<" pixels"
+  //      << endl ;
+      
+  // ---------------------------------------------------------------
+  //                                            Gaussian scale space
+  // ---------------------------------------------------------------
+  verbose && cout
+        << "siftpp: computing Gaussian scale space" 
+        << endl ;
+      
+  int         O      = octaves ;
+  int const   S      = levels ;
+  VL::float_t const sigman(.5) ;
+  VL::float_t const sigma0(1.6 * powf(2.0f, 1.0f / S)) ;
+      
+  verbose && cout
+        << "siftpp:   number of octaves     : " << O << endl
+        << "siftpp:   levels per octave     : " << S
+        << endl ;
+
+  for (int omin = first; omin < O; omin++)
+  {
+    verbose && cout << "siftpp:   current octave        : " << omin << endl;
+
+    // initialize scalespace
+    VL::Sift sift(buffer.data, buffer.width, buffer.height,
+        sigman, sigma0,
+        1, S,
+		    omin, -1, S+1) ;
+      
+    verbose && cout
+        << "siftpp: Gaussian scale space completed"
+        << endl ;
+      
+
+    // -------------------------------------------------------------
+    //                                             Run SIFT detector
+    // -------------------------------------------------------------
+    verbose && cout
+          << "siftpp: running detector  "<< endl;
+	
+    sift.detectKeypoints(threshold, edgeThreshold) ;
+	
+    verbose && cout
+          << "siftpp: detector completed with " 
+          << sift.keypointsEnd() - sift.keypointsBegin() 
+          << " keypoints" 
+          << endl ;
+      
+    // -------------------------------------------------------------
+    //                  Run SIFT orientation detector and descriptor
+    // -------------------------------------------------------------
+
+    // set descriptor options
+    sift.setNormalizeDescriptor( 1 ) ;
+    sift.setMagnification( magnif ) ;
+
+    verbose && cout << "siftpp: computing orientations and descriptors\n" ;
+      
+    // -------------------------------------------------------------
+    //            Run detector, compute orientations and descriptors
+    // -------------------------------------------------------------
+    for( VL::Sift::KeypointsConstIter iter = sift.keypointsBegin() ;
+	       iter != sift.keypointsEnd() ; ++iter ) {
+	    
+      // detect orientations
+      VL::float_t angles [4] ;
+      int nangles ;
+
+      nangles = sift.computeKeypointOrientations(angles, *iter) ;
+	    
+      // compute descriptors
+      for(int a = 0 ; a < nangles ; ++a) {
+        // compute descriptor
+        VL::float_t descr_pt [128] ;
+        sift.computeKeypointDescriptor(descr_pt, *iter, angles[a]) ;
+      } // next angle
+    } // next keypoint
+	} // next octave
+
+	verbose && cout
+          << "siftpp: job completed"<<endl ;
+
+	PROC_CONTROL_OFF;
+  while(1);
+
+  return 0 ;
+} // main()

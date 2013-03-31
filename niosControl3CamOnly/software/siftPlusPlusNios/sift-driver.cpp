@@ -12,7 +12,7 @@
 #include<fstream>
 #include<sstream>
 #include<algorithm>
-
+#include <unistd.h>
 
 extern "C" {
 #include<getopt.h>
@@ -38,7 +38,7 @@ void extractImageData(VL::PgmBuffer& buffer)
 {
   VL::pixel_t* im_pt = new VL::pixel_t[480*360];
 	unsigned int x, y, byteNum, blockNum, offset;
-	unsigned short *imgPtr = 0;
+	unsigned short imgPtr = 0;
 	unsigned short intensityVal;
 	unsigned char intensityValSmall;
 
@@ -53,12 +53,12 @@ void extractImageData(VL::PgmBuffer& buffer)
         // this offset is in terms of shorts (= byte offset / 2)
         // read from the second of the two locations used to store
         //	pixel (x,y)'s data, and write to the first
-        imgPtr = BASE_ADDRESS + 256*blockNum + offset + 256;
+        imgPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + offset + 256;
 
         intensityVal = *(imgPtr) & 0x3ff;
         intensityValSmall = intensityVal >> 2;
 
-        *im_pt++ = intensityValSmall / 255.0f;
+        *im_pt++ = ((float)intensityValSmall) / 255.0f;
 		}
 	}
 
@@ -71,14 +71,9 @@ void extractImageData(VL::PgmBuffer& buffer)
 
 void replaceImageData()
 {
-  VL::pixel_t* im_pt = reinterpret_cast<VL::pixel_t*>(BASE_ADDRESS);
-  int      width ;
-  int      height ;
-  int      maxval ;
+  VL::pixel_t* im_pt = (VL::pixel_t*)BASE_ADDRESS;
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short *imgPtr = 0;
-	unsigned short intensityVal;
-	unsigned char intensityValSmall;
 
 	for (y = 0; y < 480; y++)
 	{
@@ -91,12 +86,112 @@ void replaceImageData()
         // this offset is in terms of shorts (= byte offset / 2)
         // read from the second of the two locations used to store
         //	pixel (x,y)'s data, and write to the first
-        imgPtr = BASE_ADDRESS + 256*blockNum + byteNum;
+        imgPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + byteNum;
         *imgPtr = *(imgPtr + 256) = (unsigned short)((*im_pt++ * 255.0f) * 4);
 		}
 	}
 
 	cout << "im_pt2: " << im_pt << endl;
+
+}
+// moveImageToVGA
+// This function copies a pixel_t image to the correct location
+// to be displayed via VGA.
+// The pixel_t image does not have to be the full size of the VGA (640 x 480)
+// but can instead be a subregion, defined by imgWidth and imgHeight,
+// located on the screen at coordinates (VGAoffsetX, VGAoffsetY).
+// The parts of the VGA image that are not part of the pixel_t image
+// are set to a default color, set by backgroundBlue and backgroundRed,
+// so that although the pixel_t part of the VGA image will be greyscale,
+// the border can be any solid color.
+// intensityMax and intensityMin set what float values are to be converted to white
+// and black, respectively. pixel_t values out of this range are acceptable and will saturate
+// to either full white or full black, depending on which side of the boundary they cross.
+void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin, unsigned int imgWidth, unsigned int imgHeight, unsigned int VGAoffsetX, unsigned int VGAoffsetY)
+{
+	// yellow background
+	unsigned short backgroundBlue = 0xf000;
+	unsigned short backgroundRed  = 0xffff;
+
+	VL::pixel_t pixelIntensity;
+	unsigned short ushortIntensity;
+
+	int x, y, byteNum, blockNum, offset;
+	unsigned short *vgaPtr = 0;
+	imgPtr += imgWidth * imgHeight;
+
+	// process vga pixels in reverse order,
+	// in case VGA was overwritten with the image.
+	// We will write to the red parts of all pixels first
+	// Then after we will copy those to the blue parts
+	for (y = 479; y >= 0; y--)
+	{
+		for (x = 639; x >= 0; x--)
+		{
+			// calculate VGA/SDRAM red pixel address
+			byteNum = (y*640 + x);
+			blockNum = byteNum / 256;
+			offset = byteNum % 256;
+			vgaPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + byteNum + 256;
+
+			// check if out of bounds of image
+			if ( (y < VGAoffsetY) || (y >= VGAoffsetY + imgHeight) ||
+					(x < VGAoffsetX) || (x >= VGAoffsetX + imgWidth) )
+			{
+				// out of bounds, write default background color
+				*vgaPtr = backgroundRed;
+				continue;
+			}
+
+			// if we reach this point, we are in bounds of image
+			// read in intensity value
+			pixelIntensity = *(--imgPtr);
+
+			// make sure pixel is not over or under saturated
+			if (pixelIntensity > intensityMax)
+				pixelIntensity = intensityMax ;
+			if (pixelIntensity < intensityMin)
+				pixelIntensity = intensityMin ;
+
+			// normalize to 1024
+			pixelIntensity = 1023.0 * (pixelIntensity - intensityMin) / (intensityMax - intensityMin);
+
+			// round and convert to unsigned short
+			ushortIntensity = (unsigned short)(pixelIntensity + 0.5);
+
+			// save red to SDRAM
+			*vgaPtr = ((0x001f & ushortIntensity) << 10) | ushortIntensity;
+		}
+	}
+
+	// Now copy the blue parts
+	for (y = 479; y >= 0; y--)
+	{
+		for (x = 639; x >= 0; x--)
+		{
+			// calculate VGA/SDRAM blue pixel address
+			byteNum = (y*640 + x);
+			blockNum = byteNum / 256;
+			offset = byteNum % 256;
+			vgaPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + byteNum;
+
+			// check if out of bounds of image
+			if ( (y < VGAoffsetY) || (y >= VGAoffsetY + imgHeight) ||
+					(x < VGAoffsetX) || (x >= VGAoffsetX + imgWidth) )
+			{
+				// out of bounds, write default background color
+				*vgaPtr = backgroundBlue;
+				continue;
+			}
+
+			// if we reach this point, we are in bounds of image
+			// read in intensity value
+			ushortIntensity = 0x03ff & * (vgaPtr + 256);
+
+			// copy red to blue in SDRAM
+			*vgaPtr = ((0x03e0 & ushortIntensity) << 5) | ushortIntensity;
+		}
+	}
 
 }
 // -------------------------------------------------------------------
@@ -105,6 +200,36 @@ void replaceImageData()
 int
 main(int argc, char** argv)
 {
+	// Switch control to processor
+	// Otherwise heap allocations and sdram access
+	// will not work properly
+	PROC_CONTROL_ON;
+
+	// move heap past camera image in SDRAM. We don't want the image being
+	// overwritten or the heap being corrupted
+	VL::pixel_t* OriginalImage = (VL::pixel_t*) new VL::pixel_t[640*480];
+
+	/*
+	// Code I used to write a test square to VGA part of SDRAM using
+	// the moveImageToVGA function and prove that it works
+	int i = 100; // square size
+	// allocate space for float representation of the image
+	VL::pixel_t* floatImage = (VL::pixel_t*) new VL::pixel_t[i*i];
+	// set image data, a diagonal gradient
+	for (int y = 0; y < i; y++)
+		for (int x = 0; x < i; x++)
+			*(floatImage + (i*y + x)) = x + y;
+	cout << "started writing test image to screen\n";
+	moveImageToVGA(floatImage, (float)(2*(i-1)), 0.0, i, i, 50, 50);
+	delete [] floatImage;
+	PROC_CONTROL_OFF;
+	cout << "finished writing test image to screen\n";
+	cout << "displaying for 60 seconds before continuing\n";
+	usleep(60*1000*1000);
+	PROC_CONTROL_ON;
+	*/
+
+
   int    first          = 1 ;
   int    octaves        = 3 ;
   int    levels         = 1 ;
@@ -115,10 +240,18 @@ main(int argc, char** argv)
 
   VL::PgmBuffer buffer ;
 
-  PROC_HAS_CONTROL = 1;
-
   cout << "Hello!\n";
   extractImageData(buffer);
+
+	cout << "writing extracted image data to VGA...";
+	moveImageToVGA(buffer.data, 1.0, 0.0, buffer.width, buffer.height, 80, 60);
+	PROC_CONTROL_OFF;
+	cout << "done\n";
+	cout << "displaying for 60 seconds before continuing...";
+	usleep(60*1000*1000);
+	PROC_CONTROL_ON;
+	cout << "done\n";
+
   //replaceImageData();
   // -----------------------------------------------------------------
   //                                            Retrieve input image
@@ -262,7 +395,7 @@ main(int argc, char** argv)
 	verbose && cout
           << "siftpp: job completed"<<endl ;
 
-  PROC_HAS_CONTROL = 0;
+	PROC_CONTROL_OFF;
   while(1);
 
   return 0 ;

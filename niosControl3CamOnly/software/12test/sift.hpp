@@ -247,7 +247,7 @@ public:
     
 private:
   void prepareBuffers() ;
-  void freeBuffers() ;
+  //void freeBuffers() ;
   void smooth(VL::pixel_t       * dst, 
 	      VL::pixel_t       * temp, 
               VL::pixel_t const * src, int width, int height, 

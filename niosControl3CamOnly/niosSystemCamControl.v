@@ -54,7 +54,6 @@ module cpu_0_jtag_debug_module_arbitrator (
                                              cpu_0_jtag_debug_module_chipselect,
                                              cpu_0_jtag_debug_module_debugaccess,
                                              cpu_0_jtag_debug_module_readdata_from_sa,
-                                             cpu_0_jtag_debug_module_reset_n,
                                              cpu_0_jtag_debug_module_resetrequest_from_sa,
                                              cpu_0_jtag_debug_module_write,
                                              cpu_0_jtag_debug_module_writedata,
@@ -76,7 +75,6 @@ module cpu_0_jtag_debug_module_arbitrator (
   output           cpu_0_jtag_debug_module_chipselect;
   output           cpu_0_jtag_debug_module_debugaccess;
   output  [ 31: 0] cpu_0_jtag_debug_module_readdata_from_sa;
-  output           cpu_0_jtag_debug_module_reset_n;
   output           cpu_0_jtag_debug_module_resetrequest_from_sa;
   output           cpu_0_jtag_debug_module_write;
   output  [ 31: 0] cpu_0_jtag_debug_module_writedata;
@@ -140,7 +138,6 @@ module cpu_0_jtag_debug_module_arbitrator (
   wire             cpu_0_jtag_debug_module_non_bursting_master_requests;
   wire    [ 31: 0] cpu_0_jtag_debug_module_readdata_from_sa;
   reg              cpu_0_jtag_debug_module_reg_firsttransfer;
-  wire             cpu_0_jtag_debug_module_reset_n;
   wire             cpu_0_jtag_debug_module_resetrequest_from_sa;
   reg     [  1: 0] cpu_0_jtag_debug_module_saved_chosen_master_vector;
   reg              cpu_0_jtag_debug_module_slavearbiterlockenable;
@@ -331,9 +328,6 @@ module cpu_0_jtag_debug_module_arbitrator (
 
 
   assign cpu_0_jtag_debug_module_begintransfer = cpu_0_jtag_debug_module_begins_xfer;
-  //cpu_0_jtag_debug_module_reset_n assignment, which is an e_assign
-  assign cpu_0_jtag_debug_module_reset_n = reset_n;
-
   //assign cpu_0_jtag_debug_module_resetrequest_from_sa = cpu_0_jtag_debug_module_resetrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign cpu_0_jtag_debug_module_resetrequest_from_sa = cpu_0_jtag_debug_module_resetrequest;
 
@@ -445,6 +439,62 @@ module cpu_0_jtag_debug_module_arbitrator (
 //////////////// END SIMULATION-ONLY CONTENTS
 
 //synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module cpu_0_custom_instruction_master_arbitrator (
+                                                    // inputs:
+                                                     clk,
+                                                     cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa,
+                                                     cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa,
+                                                     cpu_0_custom_instruction_master_start,
+                                                     reset_n,
+
+                                                    // outputs:
+                                                     cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select,
+                                                     cpu_0_custom_instruction_master_done,
+                                                     cpu_0_custom_instruction_master_reset_n,
+                                                     cpu_0_custom_instruction_master_result,
+                                                     cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1
+                                                  )
+;
+
+  output           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select;
+  output           cpu_0_custom_instruction_master_done;
+  output           cpu_0_custom_instruction_master_reset_n;
+  output  [ 31: 0] cpu_0_custom_instruction_master_result;
+  output           cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  input            clk;
+  input            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa;
+  input   [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
+  input            cpu_0_custom_instruction_master_start;
+  input            reset_n;
+
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select;
+  wire             cpu_0_custom_instruction_master_done;
+  wire             cpu_0_custom_instruction_master_reset_n;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_result;
+  wire             cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select = 1'b1;
+  assign cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select & cpu_0_custom_instruction_master_start;
+  //cpu_0_custom_instruction_master_result mux, which is an e_mux
+  assign cpu_0_custom_instruction_master_result = {32 {cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select}} & cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
+
+  //multi_done mux, which is an e_mux
+  assign cpu_0_custom_instruction_master_done = {1 {cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select}} & cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa;
+
+  //cpu_0_custom_instruction_master_reset_n local reset_n, which is an e_assign
+  assign cpu_0_custom_instruction_master_reset_n = reset_n;
+
 
 endmodule
 
@@ -1005,6 +1055,84 @@ module cpu_0_instruction_master_arbitrator (
 //////////////// END SIMULATION-ONLY CONTENTS
 
 //synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator (
+                                                                          // inputs:
+                                                                           clk,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select,
+                                                                           cpu_0_custom_instruction_master_clk_en,
+                                                                           cpu_0_custom_instruction_master_dataa,
+                                                                           cpu_0_custom_instruction_master_datab,
+                                                                           cpu_0_custom_instruction_master_n,
+                                                                           cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1,
+                                                                           reset_n,
+
+                                                                          // outputs:
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa,
+                                                                           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start
+                                                                        )
+;
+
+  output           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en;
+  output  [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa;
+  output  [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab;
+  output           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa;
+  output  [  1: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n;
+  output           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset;
+  output  [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
+  output           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start;
+  input            clk;
+  input            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done;
+  input   [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result;
+  input            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select;
+  input            cpu_0_custom_instruction_master_clk_en;
+  input   [ 31: 0] cpu_0_custom_instruction_master_dataa;
+  input   [ 31: 0] cpu_0_custom_instruction_master_datab;
+  input   [  7: 0] cpu_0_custom_instruction_master_n;
+  input            cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  input            reset_n;
+
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en;
+  wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa;
+  wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa;
+  wire    [  1: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset;
+  wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en = cpu_0_custom_instruction_master_clk_en;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa = cpu_0_custom_instruction_master_dataa;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab = cpu_0_custom_instruction_master_datab;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n = cpu_0_custom_instruction_master_n;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start = cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  //assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result;
+
+  //assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done;
+
+  //cpu_0_altera_nios_custom_instr_floating_point_inst/s1 local reset_n, which is an e_assign
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset = ~reset_n;
+
 
 endmodule
 
@@ -4379,6 +4507,37 @@ module niosSystemCamControl (
   wire             SRAM_UB_N_from_the_sram_16bit_512k_0;
   wire             SRAM_WE_N_from_the_sram_16bit_512k_0;
   wire             clk_0_reset_n;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en;
+  wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa;
+  wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa;
+  wire    [  1: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset;
+  wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result;
+  wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select;
+  wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start;
+  wire    [  4: 0] cpu_0_custom_instruction_master_a;
+  wire    [  4: 0] cpu_0_custom_instruction_master_b;
+  wire    [  4: 0] cpu_0_custom_instruction_master_c;
+  wire             cpu_0_custom_instruction_master_clk_en;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_dataa;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_datab;
+  wire             cpu_0_custom_instruction_master_done;
+  wire             cpu_0_custom_instruction_master_estatus;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_ipending;
+  wire             cpu_0_custom_instruction_master_multi_clk;
+  wire             cpu_0_custom_instruction_master_multi_reset;
+  wire    [  7: 0] cpu_0_custom_instruction_master_n;
+  wire             cpu_0_custom_instruction_master_readra;
+  wire             cpu_0_custom_instruction_master_readrb;
+  wire             cpu_0_custom_instruction_master_reset_n;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_result;
+  wire             cpu_0_custom_instruction_master_start;
+  wire             cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  wire             cpu_0_custom_instruction_master_status;
+  wire             cpu_0_custom_instruction_master_writerc;
   wire    [ 24: 0] cpu_0_data_master_address;
   wire    [ 24: 0] cpu_0_data_master_address_to_slave;
   wire    [  3: 0] cpu_0_data_master_byteenable;
@@ -4457,7 +4616,6 @@ module niosSystemCamControl (
   wire             cpu_0_jtag_debug_module_debugaccess;
   wire    [ 31: 0] cpu_0_jtag_debug_module_readdata;
   wire    [ 31: 0] cpu_0_jtag_debug_module_readdata_from_sa;
-  wire             cpu_0_jtag_debug_module_reset_n;
   wire             cpu_0_jtag_debug_module_resetrequest;
   wire             cpu_0_jtag_debug_module_resetrequest_from_sa;
   wire             cpu_0_jtag_debug_module_write;
@@ -4577,13 +4735,26 @@ module niosSystemCamControl (
       .cpu_0_jtag_debug_module_debugaccess                                (cpu_0_jtag_debug_module_debugaccess),
       .cpu_0_jtag_debug_module_readdata                                   (cpu_0_jtag_debug_module_readdata),
       .cpu_0_jtag_debug_module_readdata_from_sa                           (cpu_0_jtag_debug_module_readdata_from_sa),
-      .cpu_0_jtag_debug_module_reset_n                                    (cpu_0_jtag_debug_module_reset_n),
       .cpu_0_jtag_debug_module_resetrequest                               (cpu_0_jtag_debug_module_resetrequest),
       .cpu_0_jtag_debug_module_resetrequest_from_sa                       (cpu_0_jtag_debug_module_resetrequest_from_sa),
       .cpu_0_jtag_debug_module_write                                      (cpu_0_jtag_debug_module_write),
       .cpu_0_jtag_debug_module_writedata                                  (cpu_0_jtag_debug_module_writedata),
       .d1_cpu_0_jtag_debug_module_end_xfer                                (d1_cpu_0_jtag_debug_module_end_xfer),
       .reset_n                                                            (clk_0_reset_n)
+    );
+
+  cpu_0_custom_instruction_master_arbitrator the_cpu_0_custom_instruction_master
+    (
+      .clk                                                                                         (clk_0),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa                          (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa                        (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select                                (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select),
+      .cpu_0_custom_instruction_master_done                                                        (cpu_0_custom_instruction_master_done),
+      .cpu_0_custom_instruction_master_reset_n                                                     (cpu_0_custom_instruction_master_reset_n),
+      .cpu_0_custom_instruction_master_result                                                      (cpu_0_custom_instruction_master_result),
+      .cpu_0_custom_instruction_master_start                                                       (cpu_0_custom_instruction_master_start),
+      .cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 (cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1),
+      .reset_n                                                                                     (clk_0_reset_n)
     );
 
   cpu_0_data_master_arbitrator the_cpu_0_data_master
@@ -4701,6 +4872,24 @@ module niosSystemCamControl (
 
   cpu_0 the_cpu_0
     (
+      .D_ci_a                                (cpu_0_custom_instruction_master_a),
+      .D_ci_b                                (cpu_0_custom_instruction_master_b),
+      .D_ci_c                                (cpu_0_custom_instruction_master_c),
+      .D_ci_n                                (cpu_0_custom_instruction_master_n),
+      .D_ci_readra                           (cpu_0_custom_instruction_master_readra),
+      .D_ci_readrb                           (cpu_0_custom_instruction_master_readrb),
+      .D_ci_writerc                          (cpu_0_custom_instruction_master_writerc),
+      .E_ci_dataa                            (cpu_0_custom_instruction_master_dataa),
+      .E_ci_datab                            (cpu_0_custom_instruction_master_datab),
+      .E_ci_multi_clk_en                     (cpu_0_custom_instruction_master_clk_en),
+      .E_ci_multi_clock                      (cpu_0_custom_instruction_master_multi_clk),
+      .E_ci_multi_done                       (cpu_0_custom_instruction_master_done),
+      .E_ci_multi_reset                      (cpu_0_custom_instruction_master_multi_reset),
+      .E_ci_multi_start                      (cpu_0_custom_instruction_master_start),
+      .E_ci_result                           (cpu_0_custom_instruction_master_result),
+      .W_ci_estatus                          (cpu_0_custom_instruction_master_estatus),
+      .W_ci_ipending                         (cpu_0_custom_instruction_master_ipending),
+      .W_ci_status                           (cpu_0_custom_instruction_master_status),
       .clk                                   (clk_0),
       .d_address                             (cpu_0_data_master_address),
       .d_byteenable                          (cpu_0_data_master_byteenable),
@@ -4724,7 +4913,42 @@ module niosSystemCamControl (
       .jtag_debug_module_select              (cpu_0_jtag_debug_module_chipselect),
       .jtag_debug_module_write               (cpu_0_jtag_debug_module_write),
       .jtag_debug_module_writedata           (cpu_0_jtag_debug_module_writedata),
-      .reset_n                               (cpu_0_jtag_debug_module_reset_n)
+      .reset_n                               (cpu_0_custom_instruction_master_reset_n)
+    );
+
+  cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator the_cpu_0_altera_nios_custom_instr_floating_point_inst_s1
+    (
+      .clk                                                                                         (clk_0),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en                                (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa                                 (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab                                 (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done                                  (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa                          (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n                                     (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset                                 (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result                                (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa                        (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select                                (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select),
+      .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start                                 (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start),
+      .cpu_0_custom_instruction_master_clk_en                                                      (cpu_0_custom_instruction_master_clk_en),
+      .cpu_0_custom_instruction_master_dataa                                                       (cpu_0_custom_instruction_master_dataa),
+      .cpu_0_custom_instruction_master_datab                                                       (cpu_0_custom_instruction_master_datab),
+      .cpu_0_custom_instruction_master_n                                                           (cpu_0_custom_instruction_master_n),
+      .cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 (cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1),
+      .reset_n                                                                                     (clk_0_reset_n)
+    );
+
+  cpu_0_altera_nios_custom_instr_floating_point_inst the_cpu_0_altera_nios_custom_instr_floating_point_inst
+    (
+      .clk    (clk_0),
+      .clk_en (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en),
+      .dataa  (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa),
+      .datab  (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab),
+      .done   (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done),
+      .n      (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n),
+      .reset  (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset),
+      .result (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result),
+      .start  (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start)
     );
 
   jtag_uart_0_avalon_jtag_slave_arbitrator the_jtag_uart_0_avalon_jtag_slave
@@ -5082,6 +5306,10 @@ endmodule
 `include "c:/altera/11.0sp1/quartus/eda/sim_lib/altera_mf.v"
 `include "c:/altera/11.0sp1/quartus/eda/sim_lib/220model.v"
 `include "c:/altera/11.0sp1/quartus/eda/sim_lib/sgate.v"
+`include "C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_wrapper.v"
+`include "C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_qsys.v"
+`include "C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_hw_qsys.v"
+`include "cpu_0_altera_nios_custom_instr_floating_point_inst.v"
 `include "hdl/SRAM_16Bit_512K.v"
 `include "sram_16bit_512k_0.v"
 `include "sdram_0.v"
@@ -5112,6 +5340,17 @@ module test_bench
   wire             SRAM_WE_N_from_the_sram_16bit_512k_0;
   wire             clk;
   reg              clk_0;
+  wire    [  4: 0] cpu_0_custom_instruction_master_a;
+  wire    [  4: 0] cpu_0_custom_instruction_master_b;
+  wire    [  4: 0] cpu_0_custom_instruction_master_c;
+  wire             cpu_0_custom_instruction_master_estatus;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_ipending;
+  wire             cpu_0_custom_instruction_master_multi_clk;
+  wire             cpu_0_custom_instruction_master_multi_reset;
+  wire             cpu_0_custom_instruction_master_readra;
+  wire             cpu_0_custom_instruction_master_readrb;
+  wire             cpu_0_custom_instruction_master_status;
+  wire             cpu_0_custom_instruction_master_writerc;
   wire             jtag_uart_0_avalon_jtag_slave_dataavailable_from_sa;
   wire             jtag_uart_0_avalon_jtag_slave_readyfordata_from_sa;
   wire             out_port_from_the_procHasControl;

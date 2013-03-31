@@ -245,63 +245,6 @@ extractPgm(std::istream& in, PgmBuffer& buffer)
   return in ;
 }
 
-/** @brief Extract PGM from SDRAM.
- **
- ** The function converts a  grayscale image from the D5M camera
- ** format to a pixel_t array format. The D5M camera leaves the
- ** image at the beginning of SDRAM, and this data will be
- ** overwritten starting at the same address. Therefore,
- ** sizeof( pixel_t ) must be <= 4 Bytes.
- **
- ** The buffer argument should already have width and height
- ** properties set, and this function will point the pixel_t*
- ** data property to the image address in SDRAM after conversion.
- **
- ** When the function encouters an error it just writes to cout
- ** and returns, because exceptions aren't working on nios.
- **
- ** @param buffer buffer descriptor.
- ** @return none.
- **/
-
-void
-extractPgm( PgmBuffer& buffer )
-{
-	if ( buffer.height > 640 )
-	{
-		cout << "Height too large (extractPgm)\n";
-		return;
-	}
-	else if ( buffer.width > 480 )
-	{
-		cout << "Width too large (extractPgm)\n";
-		return;
-	}
-	else if ( sizeof( pixel_t ) > 480 )
-	{
-		cout << "pixel_t too large (extractPgm)\n";
-		return;
-	}
-
-	pixel_t* im_pt = BASE_ADDRESS;
-	int pixel_t_size = sizeof( pixel_t );
-	for ( int y = 0; y < buffer.height; y++ )
-		for ( int x = 0; x < buffer.width; x++ )
-		{
-			pixelnumber = y * 640 + x;
-			blocknumber = something with pixelnumber;
-
-			... find address of red color of pixel at (x,y)
-
-			// cast to pixel_t. Should we worry that magnitude is 10 bit instead of 8 bits?
-			*(im_pt) = <pixel_t>(int) (0x3ff & IORD_16DIRECT(BASE_ADDRESS, address offset of red at (x,y)));
-
-			im_pt += pixel_t_size;
-		}
-	buffer.data = BASE_ADDRESS;
-	return void;
-}
-
 // ===================================================================
 //                                          Low level image operations
 // -------------------------------------------------------------------
@@ -469,7 +412,7 @@ Sift::Sift(const pixel_t* _im_pt, int _width, int _height,
  **/
 Sift::~Sift()
 {
-  freeBuffers() ;
+  //freeBuffers() ;
 }
 
 /** Allocate buffers. Buffer sizes depend on the image size and the
