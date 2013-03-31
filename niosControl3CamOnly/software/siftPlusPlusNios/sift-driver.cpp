@@ -36,7 +36,7 @@ bool cmpKeypoints (Keypoints::value_type const&a,
 
 void extractImageData(VL::PgmBuffer& buffer)
 {
-  VL::pixel_t* im_pt = SIFT_DATA_START;
+  VL::pixel_t* im_pt = new VL::pixel_t[480*360];
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short *imgPtr = 0;
 	unsigned short intensityVal;
@@ -53,7 +53,7 @@ void extractImageData(VL::PgmBuffer& buffer)
         // this offset is in terms of shorts (= byte offset / 2)
         // read from the second of the two locations used to store
         //	pixel (x,y)'s data, and write to the first
-        imgPtr = BASE_ADDRESS + 256*blockNum + byteNum + 256;
+        imgPtr = BASE_ADDRESS + 256*blockNum + offset + 256;
 
         intensityVal = *(imgPtr) & 0x3ff;
         intensityValSmall = intensityVal >> 2;
@@ -65,7 +65,7 @@ void extractImageData(VL::PgmBuffer& buffer)
 	cout << "im_pt: " << im_pt << endl;
 	//cout << im_pt - SIFT_DATA_START <<endl;
   buffer.width  = 480 ;
-  buffer.height = 320 ;
+  buffer.height = 360 ;
   buffer.data   = im_pt ;
 }
 
@@ -105,7 +105,7 @@ void replaceImageData()
 int
 main(int argc, char** argv)
 {
-  int    first          = 0 ;
+  int    first          = 1 ;
   int    octaves        = 3 ;
   int    levels         = 1 ;
   VL::float_t  threshold      (0.08f / levels / 2.0f) ;
@@ -176,11 +176,11 @@ main(int argc, char** argv)
 */
 
 
-  verbose && cout
-        << " read "
-        << buffer.width  <<" x "
-        << buffer.height <<" pixels" 
-        << endl ;
+  //verbose && cout
+  //      << " read "
+  //      << buffer.width  <<" x "
+  //      << buffer.height <<" pixels"
+  //      << endl ;
       
   // ---------------------------------------------------------------
   //                                            Gaussian scale space
@@ -195,8 +195,8 @@ main(int argc, char** argv)
   VL::float_t const sigma0(1.6 * powf(2.0f, 1.0f / S)) ;
       
   verbose && cout
-        << "siftpp:   number of octaves     : " << O << endl 
-        << "siftpp:   levels per octave     : " << S 
+        << "siftpp:   number of octaves     : " << O << endl
+        << "siftpp:   levels per octave     : " << S
         << endl ;
 
   for (int omin = first; omin < O; omin++)

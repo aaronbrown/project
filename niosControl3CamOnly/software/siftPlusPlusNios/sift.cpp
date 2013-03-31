@@ -506,36 +506,45 @@ prepareBuffers()
     std::cout <<  " omin: " << omin << std::endl;
   
   // allocate
-  //temp           = new pixel_t [ size ] ;
-  temp = SIFT_DATA_START + w*h;
+  temp           = new pixel_t [ size ] ;
+  //temp = SIFT_DATA_START + 480*360;
+  std::cout << "temp: " << temp <<std::endl;
+  //temp = SIFT_DATA_START + 480*360;
   tempReserved   = size ;
   tempIsGrad     = false ;
   tempOctave     = 0 ;
+
 
   // NOTE: the following numbers are for a 480x360 image
   //   with levels = 1, 1 octave at a time
   // displayed image: 640*480 (4 bytes ea) 1228800 bytes
   //		0x800000 - 0x92bfff
   // fp image data: 	480*360 (4 bytes ea) 691200 bytes
-  //		0x93c000 - 0x9d4bff
+  //		0x92c000 - 0x9d4bff
   // temp: size (4 bytes ea) 2073600 bytes : maximum
   //		0x9d4c00 - 0xf0bbff
   // octaves: (smax - smin + 1) * w * h 2764800 bytes : maximum
   // 		0xf0bc00 - 0x11aebff
     
 
-  //octaves = new pixel_t* [ O ] ;
+  octaves = new pixel_t* [ O ] ;
   //octaves = temp + size;
 
-  octaves = new pixel_t*;
+  /*(octaves = new pixel_t*[1];
   octaves[0] = temp + size;
-  /*
+  std::cout << "octaves: " << octaves << std::endl;
+  std::cout << "oct[0]: " << octaves[0] << std::endl;
+  std::cout << "octaves again: " << octaves << std::endl;
+  std::cout << getLevel(2, 0) << std::endl;
+  */
+
   for(int o = 0 ; o < O; ++o) {
     octaves[o] = new pixel_t [ (smax - smin + 1) * w * h ] ;
+    std::cout << "octaves[o]: " << octaves[o] << std::endl;
     w >>= 1 ;
     h >>= 1 ;
   }
-  */
+
 }
   
 /** @brief Free buffers.
@@ -556,20 +565,20 @@ freeBuffers()
 
 
   if( octaves ) {
-   // for(int o = 0 ; o < O ; ++o) {
-   //   delete [] octaves[ o ] ;
-   // }
-    //delete [] octaves ;
-  	delete octaves;
+    for(int o = 0 ; o < O ; ++o) {
+      delete [] octaves[ o ] ;
+    }
+    delete [] octaves ;
+  	//delete octaves;
   }
 
   octaves = 0 ;
   
-  /*
+
   if( temp ) {
     delete [] temp ;   
   }
-  */
+
   temp = 0  ; 
 }
 
@@ -881,6 +890,7 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
               k.iy = y ;
               k.is = s ;
               keypoints.push_back(k) ;
+              std::cout << "point found\n";
             }
             pt += 1 ;
           }

@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Mar 28, 2013 7:36:16 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1364524576640</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Mar 30, 2013 3:19:22 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1364681962133</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\software\siftPlusPlusNios_bsp</BspGeneratedLocation>
         <BspSettingsFile>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\software\siftPlusPlusNios_bsp\settings.bsp</BspSettingsFile>
         <SopcDesignFile>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\niosSystemCamControl.sopcinfo</SopcDesignFile>
@@ -910,7 +910,7 @@
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.heap</sectionName>
-                <regionName>sram_16bit_512k_0</regionName>
+                <regionName>sdram_0</regionName>
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.stack</sectionName>
