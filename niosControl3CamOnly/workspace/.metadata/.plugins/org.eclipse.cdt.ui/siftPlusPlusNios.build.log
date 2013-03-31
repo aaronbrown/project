@@ -5,20 +5,4 @@ make all
 Info: Building ../siftPlusPlusNios_bsp/
 make --no-print-directory -C ../siftPlusPlusNios_bsp/
 [BSP build complete]
-Info: Compiling sift-driver.cpp to obj/default/sift-driver.o
-nios2-elf-gcc -xc++ -MP -MMD -c -I../siftPlusPlusNios_bsp//HAL/inc -I../siftPlusPlusNios_bsp/ -I../siftPlusPlusNios_bsp//drivers/inc  -DSYSTEM_BUS_WIDTH=32 -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -EL -mno-hw-div -mcustom-fpu-cfg=60-1 -mno-hw-mul -mno-hw-mulx  -o obj/default/sift-driver.o sift-driver.cpp
-sift-driver.cpp: In function 'void extractImageData(VL::PgmBuffer&)':
-sift-driver.cpp:56: error: invalid conversion from 'short unsigned int*' to 'short unsigned int'
-sift-driver.cpp:58: error: invalid type argument of 'unary *'
-sift-driver.cpp: In function 'void moveImageToVGA(VL::pixel_t*, float, float, unsigned int, unsigned int, unsigned int, unsigned int)':
-sift-driver.cpp:138: warning: comparison between signed and unsigned integer expressions
-sift-driver.cpp:138: warning: comparison between signed and unsigned integer expressions
-sift-driver.cpp:139: warning: comparison between signed and unsigned integer expressions
-sift-driver.cpp:139: warning: comparison between signed and unsigned integer expressions
-sift-driver.cpp:179: warning: comparison between signed and unsigned integer expressions
-sift-driver.cpp:179: warning: comparison between signed and unsigned integer expressions
-sift-driver.cpp:180: warning: comparison between signed and unsigned integer expressions
-sift-driver.cpp:180: warning: comparison between signed and unsigned integer expressions
-sift-driver.cpp: In function 'int main(int, char**)':
-sift-driver.cpp:210: warning: unused variable 'OriginalImage'
-make: *** [obj/default/sift-driver.o] Error 1
+[siftPlusPlusNios build complete]

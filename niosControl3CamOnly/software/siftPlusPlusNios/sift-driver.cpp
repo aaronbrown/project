@@ -38,7 +38,7 @@ void extractImageData(VL::PgmBuffer& buffer)
 {
   VL::pixel_t* im_pt = new VL::pixel_t[480*360];
 	unsigned int x, y, byteNum, blockNum, offset;
-	unsigned short imgPtr = 0;
+	unsigned short* imgPtr = 0;
 	unsigned short intensityVal;
 	unsigned char intensityValSmall;
 
@@ -53,7 +53,7 @@ void extractImageData(VL::PgmBuffer& buffer)
         // this offset is in terms of shorts (= byte offset / 2)
         // read from the second of the two locations used to store
         //	pixel (x,y)'s data, and write to the first
-        imgPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + offset + 256;
+        imgPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset + 256;
 
         intensityVal = *(imgPtr) & 0x3ff;
         intensityValSmall = intensityVal >> 2;
@@ -132,7 +132,7 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 			byteNum = (y*640 + x);
 			blockNum = byteNum / 256;
 			offset = byteNum % 256;
-			vgaPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + byteNum + 256;
+			vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset + 256;
 
 			// check if out of bounds of image
 			if ( (y < VGAoffsetY) || (y >= VGAoffsetY + imgHeight) ||
@@ -173,7 +173,7 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 			byteNum = (y*640 + x);
 			blockNum = byteNum / 256;
 			offset = byteNum % 256;
-			vgaPtr = (unsigned short*)BASE_ADDRESS + 256*blockNum + byteNum;
+			vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset;
 
 			// check if out of bounds of image
 			if ( (y < VGAoffsetY) || (y >= VGAoffsetY + imgHeight) ||
@@ -209,7 +209,7 @@ main(int argc, char** argv)
 	// overwritten or the heap being corrupted
 	VL::pixel_t* OriginalImage = (VL::pixel_t*) new VL::pixel_t[640*480];
 
-	/*
+	//
 	// Code I used to write a test square to VGA part of SDRAM using
 	// the moveImageToVGA function and prove that it works
 	int i = 100; // square size
@@ -227,7 +227,7 @@ main(int argc, char** argv)
 	cout << "displaying for 60 seconds before continuing\n";
 	usleep(60*1000*1000);
 	PROC_CONTROL_ON;
-	*/
+	//
 
 
   int    first          = 1 ;

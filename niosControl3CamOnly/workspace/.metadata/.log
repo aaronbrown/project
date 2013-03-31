@@ -385,3 +385,35 @@ SEVERE: nios2-bsp-generate-files failed.
 
 !ENTRY com.altera.sbtgui.launch 1 0 2013-03-31 03:53:20.469
 !MESSAGE Executing: [C:\Windows\system32\cmd.exe, /C, C:/altera/11.0sp1/quartus\bin\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x1109038 --id=0x0 /cygdrive/c/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/software/siftPlusPlusNios/siftPlusPlusNios.elf]
+!SESSION 2013-03-31 14:11:48.941 -----------------------------------------------
+eclipse.buildId=M20100909-0800
+java.version=1.6.0_23
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -perspective com.altera.sbtgui.ui.cPerspective
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.cpp.product -perspective com.altera.sbtgui.ui.cPerspective
+
+!ENTRY com.altera.sbtgui.launch 4 0 2013-03-31 14:53:57.963
+!MESSAGE The system console model is invalid. Cannot launch.
+!SESSION 2013-03-31 14:56:35.609 -----------------------------------------------
+eclipse.buildId=M20100909-0800
+java.version=1.6.0_23
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -perspective com.altera.sbtgui.ui.cPerspective
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.cpp.product -perspective com.altera.sbtgui.ui.cPerspective
+
+!ENTRY com.altera.sbtgui.launch 1 0 2013-03-31 14:56:54.096
+!MESSAGE Executing: [C:\Windows\system32\cmd.exe, /C, C:/altera/11.0sp1/quartus\bin\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x1109038 --id=0x0]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2013-03-31 14:56:58.736
+!MESSAGE Executing: [C:\Windows\system32\cmd.exe, /C, C:/altera/11.0sp1/quartus\bin\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x1109038 --id=0x0 /cygdrive/c/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/software/siftPlusPlusNios/siftPlusPlusNios.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2013-03-31 14:58:30.930
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2013-03-31 14:58:34.494
+!MESSAGE Executing: [C:\Windows\system32\cmd.exe, /C, C:/altera/11.0sp1/quartus\bin\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x1109038 --id=0x0]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2013-03-31 14:58:38.632
+!MESSAGE Executing: [C:\Windows\system32\cmd.exe, /C, C:/altera/11.0sp1/quartus\bin\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x1109038 --id=0x0 /cygdrive/c/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/software/siftPlusPlusNios/siftPlusPlusNios.elf]
