@@ -86,7 +86,7 @@ econvolve(VL::pixel_t*       dst_pt,
     // image is M by N
     // buffer is N by M
     // filter is (2*W+1) by 1
-    std::cout << "W: " << W << std::endl;
+    //std::cout << "W: " << W << std::endl;
     for(int j = 0 ; j < N ; ++j) {
     	//std::cout << "j = " << j << std::endl;
         for(int i = 0 ; i < M ; ++i) {
@@ -373,7 +373,7 @@ copyAndDownsample(pixel_t* dst, pixel_t const* src,
 {
   for(int y = 0 ; y < height ; y+=d) {
     pixel_t const * srcrowp = src + y * width ;    
-    for(int x = 0 ; x < width - (d-1) ; x+=d) {     
+    for(int x = 0 ; x < width - (d-1) ; x+=d) {
       *dst++ = *srcrowp ;
       srcrowp += d ;
     }
@@ -405,7 +405,7 @@ Sift::smooth
 	std::cout << "in smooth\n";
   // make sure a buffer larege enough has been allocated
   // to hold the filter
-  int W = int( ceil( VL::float_t(1.0) * s ) ) ;
+  int W = int( ceil( VL::float_t(4.0) * s ) ) ;
   if( ! filter ) {
     filterReserved = 0 ;
   }
@@ -426,9 +426,11 @@ Sift::smooth
   // normalize to one
   normalize(filter, W) ;
   
+  /*
   // print filter
   for(int j = 0 ; j < 2*W+1 ; ++j)
 	  std::cout << filter[j] << std::endl;
+	  */
 
   // convolve
   econvolve(temp, src, width, height, filter, W) ;
@@ -512,7 +514,7 @@ prepareBuffers()
   // allocate
   temp           = new pixel_t [ size ] ;
   //temp = (VL::pixel_t*)SIFT_DATA_START + 480*360;
-  std::cout << "temp: " << temp <<std::endl;
+  //std::cout << "temp: " << temp <<std::endl;
   //temp = (VL::pixel_t*)SIFT_DATA_START + 480*360;
   tempReserved   = size ;
   tempIsGrad     = false ;
@@ -544,7 +546,7 @@ prepareBuffers()
 
   for(int o = 0 ; o < O; ++o) {
     octaves[o] = new pixel_t [ (smax - smin + 1) * w * h ] ;
-    std::cout << "octaves[o]: " << octaves[o] << std::endl;
+   // std::cout << "octaves[o]: " << octaves[o] << std::endl;
     w >>= 1 ;
     h >>= 1 ;
   }
@@ -749,7 +751,7 @@ process(const pixel_t* _im_pt, int _width, int _height)
   }
 
   {
-    VL::float_t sa = sigma0 * powf(sigmak, smin) ; 
+    VL::float_t sa = sigma0 * powf(sigmak, smin) ;
     VL::float_t sb = sigman / powf(2.0f,   omin) ; // review this
     if( sa > sb ) {
       VL::float_t sd = sqrt ( sa*sa - sb*sb ) ;
@@ -841,6 +843,7 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
           *pt++ = *srcb++ - *srca++ ;
         }
       }
+      //std::cout << "dog pt: " << pt << std::endl;
     }
     
     // -----------------------------------------------------------------
@@ -894,7 +897,6 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
               k.iy = y ;
               k.is = s ;
               keypoints.push_back(k) ;
-              std::cout << "point found\n";
             }
             pt += 1 ;
           }
@@ -1045,7 +1047,7 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
         
         // Accept-reject keypoint
         {
-          VL::float_t val = at(0,0,0) + 0.5 * (Dx * b[0] + Dy * b[1] + Ds * b[2]) ; 
+          VL::float_t val = at(0,0,0) + 0.5 * (Dx * b[0] + Dy * b[1] + Ds * b[2]) ;
           VL::float_t score = (Dxx+Dyy)*(Dxx+Dyy) / (Dxx*Dyy - Dxy*Dxy) ; 
           VL::float_t xn = x + b[0] ;
           VL::float_t yn = y + b[1] ;
@@ -1075,6 +1077,8 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
             diter->s = sn ;
 
             diter->sigma = getScaleFromIndex(o,sn) ;
+
+            //std::cout << "keypoint found at (" << x << ", "<<y <<")\n";
 
             ++diter ;
           }
@@ -1121,10 +1125,11 @@ Sift::prepareGrad(int o)
 
   if( ! tempIsGrad || tempOctave != o ) {
 
+  	pixel_t *gradMax = 0;
     // compute dx/dy
     for(int s = smin+1 ; s <= smax-2 ; ++s) {
       for(int y = 1 ; y < oh-1 ; ++y ) {
-        pixel_t* src  = getLevel(o, s) + xo + yo*y ;        
+        pixel_t* src  = getLevel(o, s) + xo + yo*y ;
         pixel_t* end  = src + ow - 1 ;
         pixel_t* grad = 2 * (xo + yo*y + (s - smin -1)*so) + temp ;
         while(src != end) {
@@ -1134,10 +1139,14 @@ Sift::prepareGrad(int o)
           VL::float_t t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
           *grad++ = pixel_t( m ) ;
           *grad++ = pixel_t( t ) ;
+          if (grad > gradMax)
+          	gradMax = grad;
           ++src ;
         }
       }
     }
+
+    //std::cout << "gradMax: " << gradMax << std::endl;
   }
   
   tempIsGrad = true ;
@@ -1226,7 +1235,7 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
 
   for(int ys = std::max(-W, 1-yi) ; ys <= std::min(+W, oh -2 -yi) ; ++ys) {
     for(int xs = std::max(-W, 1-xi) ; xs <= std::min(+W, ow -2 -xi) ; ++xs) {
-      
+
       VL::float_t dx = xi + xs - x;
       VL::float_t dy = yi + ys - y;
       VL::float_t r2 = dx*dx + dy*dy ;
@@ -1288,8 +1297,8 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
       
       // quadratic interpolation
       //      VL::float_t di = -0.5 * (hp - hm) / (hp+hm-2*h0) ; 
-      VL::float_t di = -0.5 * (hp - hm) / (hp+hm-2*h0) ; 
-      VL::float_t th = 2*M_PI * (i+di+0.5) / nbins ;      
+      VL::float_t di = -0.5 * (hp - hm) / (hp+hm-2*h0) ;
+      VL::float_t th = 2*M_PI * (i+di+0.5) / nbins ;
       angles [ nangles++ ] = th ;
       if( nangles == 4 )
         goto enough_angles ;

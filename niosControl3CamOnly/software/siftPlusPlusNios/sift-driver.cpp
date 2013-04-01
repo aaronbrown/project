@@ -37,10 +37,17 @@ bool cmpKeypoints (Keypoints::value_type const&a,
 void extractImageData(VL::PgmBuffer& buffer)
 {
   VL::pixel_t* im_pt = new VL::pixel_t[480*360];
+  VL::pixel_t* start = im_pt;
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short* imgPtr = 0;
 	unsigned short intensityVal;
-	unsigned char intensityValSmall;
+	float maxVal = 0.0;
+	float minVal = 1.0;
+	float floatIntensity;
+
+  buffer.width  = 480 ;
+  buffer.height = 360 ;
+  buffer.data   = im_pt ;
 
 	for (y = 60; y < 420; y++)
 	{
@@ -56,17 +63,29 @@ void extractImageData(VL::PgmBuffer& buffer)
         imgPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset + 256;
 
         intensityVal = *(imgPtr) & 0x3ff;
-        intensityValSmall = intensityVal >> 2;
+        //intensityValSmall = intensityVal >> 2;
 
-        *im_pt++ = ((float)intensityValSmall) / 255.0f;
+        floatIntensity = intensityVal / 1023.0f;
+
+        if (floatIntensity > maxVal)
+        	maxVal = floatIntensity;
+        if (floatIntensity < minVal)
+        	minVal = floatIntensity;
+
+        *start++ = floatIntensity;
 		}
 	}
 
+	VL::pixel_t *end = start;
+
+	for (start = im_pt; start != end; start++)
+		*start = (*start - minVal) / (maxVal - minVal);
+
 	cout << "im_pt: " << im_pt << endl;
+	cout << "maxVal: " << maxVal << endl;
+	cout << "minVal: " << minVal << endl;
 	//cout << im_pt - SIFT_DATA_START <<endl;
-  buffer.width  = 480 ;
-  buffer.height = 360 ;
-  buffer.data   = im_pt ;
+
 }
 
 void replaceImageData()
@@ -194,6 +213,16 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 	}
 
 }
+void writeRedPixelAt(int x, int y)
+{
+	int byteNum = (y*640 + x);
+	int blockNum = byteNum / 256;
+	int offset = byteNum % 256;
+	unsigned short *vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset;
+
+	*(vgaPtr + 256) = 0x3ff;
+	*vgaPtr = 0;
+}
 // -------------------------------------------------------------------
 //                                                                main
 // -------------------------------------------------------------------
@@ -208,7 +237,7 @@ main(int argc, char** argv)
 	// move heap past camera image in SDRAM. We don't want the image being
 	// overwritten or the heap being corrupted
 	VL::pixel_t* OriginalImage = (VL::pixel_t*) new VL::pixel_t[640*480];
-
+/*
 	//
 	// Code I used to write a test square to VGA part of SDRAM using
 	// the moveImageToVGA function and prove that it works
@@ -228,13 +257,13 @@ main(int argc, char** argv)
 	usleep(60*1000*1000);
 	PROC_CONTROL_ON;
 	//
+*/
 
-
-  int    first          = 1 ;
+  int    first          = 0 ;
   int    octaves        = 3 ;
   int    levels         = 1 ;
-  VL::float_t  threshold      (0.08f / levels / 2.0f) ;
-  VL::float_t  edgeThreshold  (10.0f);
+  VL::float_t  threshold      (0.001f / levels / 2.0f) ;
+  VL::float_t  edgeThreshold  (20.0f);
   VL::float_t  magnif         (3.0) ;
   int    verbose        = 1 ;
 
@@ -247,8 +276,8 @@ main(int argc, char** argv)
 	moveImageToVGA(buffer.data, 1.0, 0.0, buffer.width, buffer.height, 80, 60);
 	PROC_CONTROL_OFF;
 	cout << "done\n";
-	cout << "displaying for 60 seconds before continuing...";
-	usleep(60*1000*1000);
+	cout << "displaying for 10 seconds before continuing...";
+	usleep(10*1000*1000);
 	PROC_CONTROL_ON;
 	cout << "done\n";
 
@@ -360,11 +389,17 @@ main(int argc, char** argv)
           << sift.keypointsEnd() - sift.keypointsBegin() 
           << " keypoints" 
           << endl ;
+
+    for (VL::Sift::KeypointsConstIter iter = sift.keypointsBegin();
+    			iter != sift.keypointsEnd(); ++iter)
+    {
+    	writeRedPixelAt(iter->ix + 80, iter->iy + 60);
+    }
       
     // -------------------------------------------------------------
     //                  Run SIFT orientation detector and descriptor
     // -------------------------------------------------------------
-
+/*
     // set descriptor options
     sift.setNormalizeDescriptor( 1 ) ;
     sift.setMagnification( magnif ) ;
@@ -390,6 +425,7 @@ main(int argc, char** argv)
         sift.computeKeypointDescriptor(descr_pt, *iter, angles[a]) ;
       } // next angle
     } // next keypoint
+    */
 	} // next octave
 
 	verbose && cout
