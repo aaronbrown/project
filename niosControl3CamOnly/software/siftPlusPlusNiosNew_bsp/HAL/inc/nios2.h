@@ -200,13 +200,13 @@ extern "C"
 #define NIOS2_MPUBASE_D_OFST         (0)
 #define NIOS2_MPUBASE_INDEX_MASK     (0x0000003e)
 #define NIOS2_MPUBASE_INDEX_OFST     (1)
-#define NIOS2_MPUBASE_BASE_ADDR_MASK (0xffffffc0)
+#define NIOS2_MPUBASE_BASE_ADDR_MASK (0x7fffffc0)
 #define NIOS2_MPUBASE_BASE_ADDR_OFST (6)
 
 /* MPU Access Register */
 #define NIOS2_MPUACC_LIMIT_MASK (0xffffffc0)
 #define NIOS2_MPUACC_LIMIT_OFST (6)
-#define NIOS2_MPUACC_MASK_MASK  (0xffffffc0)
+#define NIOS2_MPUACC_MASK_MASK  (0x7fffffc0)
 #define NIOS2_MPUACC_MASK_OFST  (6)
 #define NIOS2_MPUACC_C_MASK     (0x00000020)
 #define NIOS2_MPUACC_C_OFST     (5)

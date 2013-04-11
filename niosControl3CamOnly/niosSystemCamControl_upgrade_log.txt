@@ -1,0 +1,11 @@
+Info: Upgrading System to Qsys
+Debug: Transform: PipelineBridgeSwap
+Info: pipeline_bridge_swap_transform: After transform: 11 modules, 23 connections
+Debug: Transform: ClockCrossingBridgeSwap
+Debug: Transform: QsysBetaIPSwap
+Debug: Transform: TristateConduitUpgradeTransform
+Debug: Transform: ResetUpgradeTransform
+Info: reset_upgrade_transform: After transform: 11 modules, 49 connections
+Debug: Transform: BorderUpgradeTransform
+Info: border_upgrade_transform: After transform: 12 modules, 49 connections
+Info: SOPC to Qsys Upgrade Done

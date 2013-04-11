@@ -64,8 +64,10 @@
 
 #define BASE_ADDRESS 0x800000
 #define PROC_HAS_CONTROL 0x1109020
-#define PROC_CONTROL_ON *((unsigned short*)PROC_HAS_CONTROL) = 1
-#define PROC_CONTROL_OFF *((unsigned short*)PROC_HAS_CONTROL) = 0
+//#define PROC_CONTROL_ON *((volatile unsigned short*)PROC_HAS_CONTROL) = 1
+//#define PROC_CONTROL_OFF *((volatile unsigned short*)PROC_HAS_CONTROL) = 0
+#define PROC_CONTROL_ON IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 1);
+#define PROC_CONTROL_OFF IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 0);
 #define SIFT_DATA_START 0x92c000
 
 /** @brief VisionLab namespace */

@@ -1,0 +1,6 @@
+# Reading C:/altera/12.1/modelsim_ase/tcl/vsim/pref.tcl 
+# vsim -gui niosSystemCamControl_sim.mpf 
+# ** Error: (vsim-19) Failed to access library 'niosSystemCamControl_sim' at "niosSystemCamControl_sim".
+# 
+# No such file or directory. (errno = ENOENT)
+# Error loading design

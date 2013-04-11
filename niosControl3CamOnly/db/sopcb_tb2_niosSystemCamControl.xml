@@ -574,7 +574,7 @@
    <SOPCModuleParameter>
     <C>115</C>
     <Name>impl</Name>
-    <Value>Tiny</Value>
+    <Value>Fast</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>116</C>
@@ -763,7 +763,7 @@
    <SOPCModuleParameter>
     <C>153</C>
     <Name>clockRate</Name>
-    <Value>50000000</Value>
+    <Value>100000000</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>154</C>
@@ -1029,7 +1029,7 @@
    <SOPCModuleParameter>
     <C>207</C>
     <Name>timestamp</Name>
-    <Value>1364720178</Value>
+    <Value>1365705896</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
@@ -1362,7 +1362,121 @@
     <Value>Cyclone II</Value>
    </SOPCModuleParameter>
   </SOPCModule>
-  <SystemID>1068172951</SystemID>
+  <SOPCModule>
+   <C>272</C>
+   <ModuleType>non_altera_module</ModuleType>
+   <SOPCInterface>
+    <C>273</C>
+    <InterfaceType>clock_end</InterfaceType>
+    <SOPCInterfaceParameter>
+     <C>274</C>
+     <Name>clockRate</Name>
+     <Value>100000000</Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>275</C>
+     <Name>externallyDriven</Name>
+     <Value>false</Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>276</C>
+     <Name>ptfSchematicName</Name>
+     <Value></Value>
+    </SOPCInterfaceParameter>
+    <SOPCPort>
+     <C>277</C>
+     <Direction>Input</Direction>
+     <Role>clk</Role>
+     <Width>1</Width>
+    </SOPCPort>
+   </SOPCInterface>
+   <SOPCInterface>
+    <C>278</C>
+    <InterfaceType>reset_end</InterfaceType>
+    <SOPCInterfaceParameter>
+     <C>279</C>
+     <Name>associatedClock</Name>
+     <Value></Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>280</C>
+     <Name>synchronousEdges</Name>
+     <Value>NONE</Value>
+    </SOPCInterfaceParameter>
+    <SOPCPort>
+     <C>281</C>
+     <Direction>Input</Direction>
+     <Role>reset_n</Role>
+     <Width>1</Width>
+    </SOPCPort>
+   </SOPCInterface>
+   <SOPCInterface>
+    <C>282</C>
+    <InterfaceType>clock_start</InterfaceType>
+    <SOPCInterfaceParameter>
+     <C>283</C>
+     <Name>associatedDirectClock</Name>
+     <Value>clk_in</Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>284</C>
+     <Name>clockRate</Name>
+     <Value>100000000</Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>285</C>
+     <Name>clockRateKnown</Name>
+     <Value>true</Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>286</C>
+     <Name>externallyDriven</Name>
+     <Value>true</Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>287</C>
+     <Name>ptfSchematicName</Name>
+     <Value></Value>
+    </SOPCInterfaceParameter>
+    <SOPCPort>
+     <C>288</C>
+     <Direction>Output</Direction>
+     <Role>clk</Role>
+     <Width>1</Width>
+    </SOPCPort>
+   </SOPCInterface>
+   <SOPCInterface>
+    <C>289</C>
+    <InterfaceType>reset_start</InterfaceType>
+    <SOPCInterfaceParameter>
+     <C>290</C>
+     <Name>associatedClock</Name>
+     <Value></Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>291</C>
+     <Name>associatedDirectReset</Name>
+     <Value>clk_in_reset</Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>292</C>
+     <Name>associatedResetSinks</Name>
+     <Value>clk_in_reset</Value>
+    </SOPCInterfaceParameter>
+    <SOPCInterfaceParameter>
+     <C>293</C>
+     <Name>synchronousEdges</Name>
+     <Value>NONE</Value>
+    </SOPCInterfaceParameter>
+    <SOPCPort>
+     <C>294</C>
+     <Direction>Output</Direction>
+     <Role>reset_n</Role>
+     <Width>1</Width>
+    </SOPCPort>
+   </SOPCInterface>
+  </SOPCModule>
+  <SystemID>2053861184</SystemID>
  </SOPCSystem>
  <SchemaVersion>schema_2011-03-02</SchemaVersion>
 </ProgramExecution>

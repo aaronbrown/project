@@ -26,6 +26,14 @@
          type = "int";
       }
    }
+   element clk_1
+   {
+      datum _sortIndex
+      {
+         value = "10";
+         type = "int";
+      }
+   }
    element sysid.control_slave
    {
       datum baseAddress
@@ -90,11 +98,11 @@
          type = "int";
       }
    }
-   element onchip_memory2_0.s1
+   element sdram_0.s1
    {
       datum baseAddress
       {
-         value = "17842176";
+         value = "8388608";
          type = "long";
       }
    }
@@ -114,11 +122,11 @@
          type = "long";
       }
    }
-   element sdram_0.s1
+   element onchip_memory2_0.s1
    {
       datum baseAddress
       {
-         value = "8388608";
+         value = "17842176";
          type = "long";
       }
    }
@@ -131,7 +139,7 @@
       }
       datum megawizard_uipreferences
       {
-         value = "{}";
+         value = "{output_language=VERILOG, output_directory=C:\\Data\\Projects\\School\\EEC_181AB\\project\\niosControl3CamOnly}";
          type = "String";
       }
    }
@@ -171,8 +179,8 @@
  <parameter name="maxAdditionalLatency" value="0" />
  <parameter name="projectName">niosControl3CamOnly.qpf</parameter>
  <parameter name="sopcBorderPoints" value="true" />
- <parameter name="systemHash" value="-30931052470" />
- <parameter name="timeStamp" value="1364720177654" />
+ <parameter name="systemHash" value="-33764146329" />
+ <parameter name="timeStamp" value="1365705896020" />
  <module kind="clock_source" version="11.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -275,7 +283,7 @@
   <parameter name="internalIrqMaskSystemInfo" value="3" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /></address-map>]]></parameter>
   <parameter name="instAddrWidth" value="25" />
-  <parameter name="impl" value="Tiny" />
+  <parameter name="impl" value="Fast" />
   <parameter name="icache_size" value="_4096" />
   <parameter name="icache_ramBlockType" value="Automatic" />
   <parameter name="icache_numTCIM" value="_0" />
@@ -318,7 +326,7 @@
   <parameter name="TRP" value="20.0" />
   <parameter name="TWR" value="14.0" />
   <parameter name="casLatency" value="3" />
-  <parameter name="clockRate" value="50000000" />
+  <parameter name="clockRate" value="100000000" />
   <parameter name="columnWidth" value="8" />
   <parameter name="dataWidth" value="16" />
   <parameter name="generateSimulationModel" value="false" />
@@ -399,6 +407,12 @@
   <parameter name="useDivider" value="1" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone II" />
  </module>
+ <module kind="clock_source" version="11.0" enabled="1" name="clk_1">
+  <parameter name="clockFrequency" value="100000000" />
+  <parameter name="clockFrequencyKnown" value="true" />
+  <parameter name="inputClockFrequency" value="0" />
+  <parameter name="resetSynchronousEdges" value="NONE" />
+ </module>
  <connection
    kind="clock"
    version="11.0"
@@ -437,7 +451,6 @@
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x01104000" />
  </connection>
- <connection kind="clock" version="11.0" start="clk_0.clk" end="sdram_0.clk" />
  <connection
    kind="avalon"
    version="11.0"
@@ -534,4 +547,5 @@
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="252" />
  </connection>
+ <connection kind="clock" version="11.0" start="clk_1.clk" end="sdram_0.clk" />
 </system>

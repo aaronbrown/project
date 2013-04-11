@@ -78,20 +78,16 @@ ALT_CPPFLAGS += -DSYSTEM_BUS_WIDTH=32 \
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 12.1sp1
-ACDS_VERSION := 12.1sp1
+# ACDS_VERSION: 11.0sp1
+ACDS_VERSION := 11.0sp1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 243
+# BUILD_NUMBER: 208
 
 # Quartus Generated JDI File. Required for resolving node instance ID's with 
 # design component names. 
 JDI_FILE := C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/DE2_D5M.jdi
-
-# Qsys--generated SOPCINFO file. Required for resolving node instance ID's with 
-# design component names. 
-SOPCINFO_FILE := C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
 
 # Big-Endian operation. 
 # setting BIG_ENDIAN is false
@@ -125,8 +121,8 @@ ALT_CFLAGS += -mcustom-fpu-cfg=60-1
 ALT_LDFLAGS += -mcustom-fpu-cfg=60-1
 
 # Hardware Multiplier present. 
-# setting HARDWARE_MULTIPLY is false
-ALT_CFLAGS += -mno-hw-mul
+# setting HARDWARE_MULTIPLY is true
+ALT_CFLAGS += -mhw-mul
 
 # Hardware Mulx present. 
 # setting HARDWARE_MULX is false
@@ -155,9 +151,9 @@ SOPC_SYSID_FLAG += --sidp=0x1109038
 ELF_PATCH_FLAG  += --sidp 0x1109038
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1364720178
-SOPC_SYSID_FLAG += --timestamp=1364720178
-ELF_PATCH_FLAG  += --timestamp 1364720178
+# setting SOPC_TIMESTAMP is 1365705896
+SOPC_SYSID_FLAG += --timestamp=1365705896
+ELF_PATCH_FLAG  += --timestamp 1365705896
 
 # Small-footprint (polled mode) driver none 
 # setting altera_avalon_jtag_uart_driver.enable_small_driver is false

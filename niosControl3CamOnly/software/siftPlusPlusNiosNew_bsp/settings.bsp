@@ -2,9 +2,9 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Apr 4, 2013 4:20:02 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1365117602313</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\software\siftPlusPlusNiosNew_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Apr 11, 2013 12:36:07 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1365708967369</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>C:\Data\Projects\School\EEC_181AB\project\niosControl3CamOnly\software\siftPlusPlusNiosNew_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\niosSystemCamControl.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>

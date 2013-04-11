@@ -380,8 +380,18 @@ assign	CCD_LVAL	=	GPIO_1[21];
 assign	CCD_PIXCLK	=	GPIO_1[0];
 assign	GPIO_1[19]	=	1'b1;  // tRIGGER
 assign	GPIO_1[17]	=	DLY_RST_1;
+reg [17:0] mode = 0;
 
-assign	LEDR		=	SW;
+always @ (posedge unshifted_nios_clk) 
+	if ((DRAM_CS_N == 0) &&
+	(DRAM_RAS_N == 0) &&
+	(DRAM_CAS_N == 0) &&
+	(DRAM_WE_N == 0))
+		mode <= DRAM_ADDR;
+	else 
+		mode <= mode;
+		
+assign	LEDR		=	mode;
 assign	LEDG		=	Y_Cont;
 
 assign	VGA_CTRL_CLK=	rClk[0];
@@ -482,6 +492,7 @@ wire niosWantsControl;
       .SRAM_UB_N_from_the_sram_16bit_512k_0      (SRAM_UB_N),
       .SRAM_WE_N_from_the_sram_16bit_512k_0      (SRAM_WE_N),
       .clk_0                            (unshifted_nios_clk),
+      .clk_1                            (sdram_ctrl_clk),
       .out_port_from_the_procHasControl (niosWantsControl),
       .reset_n                          (KEY[0]),
       .zs_addr_from_the_sdram_0         (DRAM_ADDR_nios),

@@ -18,6 +18,203 @@
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
+module cpu_0_ic_data_module (
+                              // inputs:
+                               clock,
+                               data,
+                               rdaddress,
+                               rden,
+                               wraddress,
+                               wren,
+
+                              // outputs:
+                               q
+                            )
+;
+
+  parameter lpm_file = "UNUSED";
+
+
+  output  [ 31: 0] q;
+  input            clock;
+  input   [ 31: 0] data;
+  input   [  9: 0] rdaddress;
+  input            rden;
+  input   [  9: 0] wraddress;
+  input            wren;
+
+  wire    [ 31: 0] q;
+  wire    [ 31: 0] ram_q;
+  assign q = ram_q;
+  altsyncram the_altsyncram
+    (
+      .address_a (wraddress),
+      .address_b (rdaddress),
+      .clock0 (clock),
+      .data_a (data),
+      .q_b (ram_q),
+      .rden_b (rden),
+      .wren_a (wren)
+    );
+
+  defparam the_altsyncram.address_reg_b = "CLOCK0",
+           the_altsyncram.maximum_depth = 0,
+           the_altsyncram.numwords_a = 1024,
+           the_altsyncram.numwords_b = 1024,
+           the_altsyncram.operation_mode = "DUAL_PORT",
+           the_altsyncram.outdata_reg_b = "UNREGISTERED",
+           the_altsyncram.ram_block_type = "AUTO",
+           the_altsyncram.rdcontrol_reg_b = "CLOCK0",
+           the_altsyncram.read_during_write_mode_mixed_ports = "DONT_CARE",
+           the_altsyncram.width_a = 32,
+           the_altsyncram.width_b = 32,
+           the_altsyncram.widthad_a = 10,
+           the_altsyncram.widthad_b = 10;
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module cpu_0_ic_tag_module (
+                             // inputs:
+                              clock,
+                              data,
+                              rdaddress,
+                              rden,
+                              wraddress,
+                              wren,
+
+                             // outputs:
+                              q
+                           )
+;
+
+  parameter lpm_file = "UNUSED";
+
+
+  output  [ 20: 0] q;
+  input            clock;
+  input   [ 20: 0] data;
+  input   [  6: 0] rdaddress;
+  input            rden;
+  input   [  6: 0] wraddress;
+  input            wren;
+
+  wire    [ 20: 0] q;
+  wire    [ 20: 0] ram_q;
+  assign q = ram_q;
+  altsyncram the_altsyncram
+    (
+      .address_a (wraddress),
+      .address_b (rdaddress),
+      .clock0 (clock),
+      .data_a (data),
+      .q_b (ram_q),
+      .rden_b (rden),
+      .wren_a (wren)
+    );
+
+  defparam the_altsyncram.address_reg_b = "CLOCK0",
+           the_altsyncram.init_file = lpm_file,
+           the_altsyncram.maximum_depth = 0,
+           the_altsyncram.numwords_a = 128,
+           the_altsyncram.numwords_b = 128,
+           the_altsyncram.operation_mode = "DUAL_PORT",
+           the_altsyncram.outdata_reg_b = "UNREGISTERED",
+           the_altsyncram.ram_block_type = "AUTO",
+           the_altsyncram.rdcontrol_reg_b = "CLOCK0",
+           the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
+           the_altsyncram.width_a = 21,
+           the_altsyncram.width_b = 21,
+           the_altsyncram.widthad_a = 7,
+           the_altsyncram.widthad_b = 7;
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module cpu_0_bht_module (
+                          // inputs:
+                           clock,
+                           data,
+                           rdaddress,
+                           rden,
+                           wraddress,
+                           wren,
+
+                          // outputs:
+                           q
+                        )
+;
+
+  parameter lpm_file = "UNUSED";
+
+
+  output  [  1: 0] q;
+  input            clock;
+  input   [  1: 0] data;
+  input   [  7: 0] rdaddress;
+  input            rden;
+  input   [  7: 0] wraddress;
+  input            wren;
+
+  wire    [  1: 0] q;
+  wire    [  1: 0] ram_q;
+  assign q = ram_q;
+  altsyncram the_altsyncram
+    (
+      .address_a (wraddress),
+      .address_b (rdaddress),
+      .clock0 (clock),
+      .data_a (data),
+      .q_b (ram_q),
+      .rden_b (rden),
+      .wren_a (wren)
+    );
+
+  defparam the_altsyncram.address_reg_b = "CLOCK0",
+           the_altsyncram.init_file = lpm_file,
+           the_altsyncram.maximum_depth = 0,
+           the_altsyncram.numwords_a = 256,
+           the_altsyncram.numwords_b = 256,
+           the_altsyncram.operation_mode = "DUAL_PORT",
+           the_altsyncram.outdata_reg_b = "UNREGISTERED",
+           the_altsyncram.ram_block_type = "AUTO",
+           the_altsyncram.rdcontrol_reg_b = "CLOCK0",
+           the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
+           the_altsyncram.width_a = 2,
+           the_altsyncram.width_b = 2,
+           the_altsyncram.widthad_a = 8,
+           the_altsyncram.widthad_b = 8;
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
 module cpu_0_register_bank_a_module (
                                       // inputs:
                                        clock,
@@ -63,7 +260,7 @@ module cpu_0_register_bank_a_module (
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
            the_altsyncram.rdcontrol_reg_b = "CLOCK0",
-           the_altsyncram.read_during_write_mode_mixed_ports = "DONT_CARE",
+           the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
            the_altsyncram.widthad_a = 5,
@@ -126,11 +323,205 @@ module cpu_0_register_bank_b_module (
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
            the_altsyncram.rdcontrol_reg_b = "CLOCK0",
-           the_altsyncram.read_during_write_mode_mixed_ports = "DONT_CARE",
+           the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
            the_altsyncram.widthad_a = 5,
            the_altsyncram.widthad_b = 5;
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module cpu_0_dc_tag_module (
+                             // inputs:
+                              clock,
+                              data,
+                              rdaddress,
+                              wraddress,
+                              wren,
+
+                             // outputs:
+                              q
+                           )
+;
+
+  parameter lpm_file = "UNUSED";
+
+
+  output  [ 15: 0] q;
+  input            clock;
+  input   [ 15: 0] data;
+  input   [  5: 0] rdaddress;
+  input   [  5: 0] wraddress;
+  input            wren;
+
+  wire    [ 15: 0] q;
+  wire    [ 15: 0] ram_q;
+  assign q = ram_q;
+  altsyncram the_altsyncram
+    (
+      .address_a (wraddress),
+      .address_b (rdaddress),
+      .clock0 (clock),
+      .data_a (data),
+      .q_b (ram_q),
+      .wren_a (wren)
+    );
+
+  defparam the_altsyncram.address_reg_b = "CLOCK0",
+           the_altsyncram.init_file = lpm_file,
+           the_altsyncram.maximum_depth = 0,
+           the_altsyncram.numwords_a = 64,
+           the_altsyncram.numwords_b = 64,
+           the_altsyncram.operation_mode = "DUAL_PORT",
+           the_altsyncram.outdata_reg_b = "UNREGISTERED",
+           the_altsyncram.ram_block_type = "AUTO",
+           the_altsyncram.rdcontrol_reg_b = "CLOCK0",
+           the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
+           the_altsyncram.width_a = 16,
+           the_altsyncram.width_b = 16,
+           the_altsyncram.widthad_a = 6,
+           the_altsyncram.widthad_b = 6;
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module cpu_0_dc_data_module (
+                              // inputs:
+                               byteenable,
+                               clock,
+                               data,
+                               rdaddress,
+                               wraddress,
+                               wren,
+
+                              // outputs:
+                               q
+                            )
+;
+
+  parameter lpm_file = "UNUSED";
+
+
+  output  [ 31: 0] q;
+  input   [  3: 0] byteenable;
+  input            clock;
+  input   [ 31: 0] data;
+  input   [  8: 0] rdaddress;
+  input   [  8: 0] wraddress;
+  input            wren;
+
+  wire    [ 31: 0] q;
+  wire    [ 31: 0] ram_q;
+  assign q = ram_q;
+  altsyncram the_altsyncram
+    (
+      .address_a (wraddress),
+      .address_b (rdaddress),
+      .byteena_a (byteenable),
+      .clock0 (clock),
+      .data_a (data),
+      .q_b (ram_q),
+      .wren_a (wren)
+    );
+
+  defparam the_altsyncram.address_reg_b = "CLOCK0",
+           the_altsyncram.maximum_depth = 0,
+           the_altsyncram.numwords_a = 512,
+           the_altsyncram.numwords_b = 512,
+           the_altsyncram.operation_mode = "DUAL_PORT",
+           the_altsyncram.outdata_reg_b = "UNREGISTERED",
+           the_altsyncram.ram_block_type = "AUTO",
+           the_altsyncram.rdcontrol_reg_b = "CLOCK0",
+           the_altsyncram.read_during_write_mode_mixed_ports = "DONT_CARE",
+           the_altsyncram.width_a = 32,
+           the_altsyncram.width_b = 32,
+           the_altsyncram.width_byteena_a = 4,
+           the_altsyncram.widthad_a = 9,
+           the_altsyncram.widthad_b = 9;
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module cpu_0_dc_victim_module (
+                                // inputs:
+                                 clock,
+                                 data,
+                                 rdaddress,
+                                 rden,
+                                 wraddress,
+                                 wren,
+
+                                // outputs:
+                                 q
+                              )
+;
+
+  parameter lpm_file = "UNUSED";
+
+
+  output  [ 31: 0] q;
+  input            clock;
+  input   [ 31: 0] data;
+  input   [  2: 0] rdaddress;
+  input            rden;
+  input   [  2: 0] wraddress;
+  input            wren;
+
+  wire    [ 31: 0] q;
+  wire    [ 31: 0] ram_q;
+  assign q = ram_q;
+  altsyncram the_altsyncram
+    (
+      .address_a (wraddress),
+      .address_b (rdaddress),
+      .clock0 (clock),
+      .data_a (data),
+      .q_b (ram_q),
+      .rden_b (rden),
+      .wren_a (wren)
+    );
+
+  defparam the_altsyncram.address_reg_b = "CLOCK0",
+           the_altsyncram.maximum_depth = 0,
+           the_altsyncram.numwords_a = 8,
+           the_altsyncram.numwords_b = 8,
+           the_altsyncram.operation_mode = "DUAL_PORT",
+           the_altsyncram.outdata_reg_b = "UNREGISTERED",
+           the_altsyncram.ram_block_type = "AUTO",
+           the_altsyncram.rdcontrol_reg_b = "CLOCK0",
+           the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
+           the_altsyncram.width_a = 32,
+           the_altsyncram.width_b = 32,
+           the_altsyncram.widthad_a = 3,
+           the_altsyncram.widthad_b = 3;
 
 
 endmodule
@@ -494,7 +885,7 @@ defparam cpu_0_ociram_lpm_dram_bdp_component.lpm_file = "cpu_0_ociram_default_co
     (MonAReg[4 : 2] == 3'd1)? 32'h00001919 :
     (MonAReg[4 : 2] == 3'd2)? 32'h00040000 :
     (MonAReg[4 : 2] == 3'd3)? 32'h00000000 :
-    (MonAReg[4 : 2] == 3'd4)? 32'h20000000 :
+    (MonAReg[4 : 2] == 3'd4)? 32'h20000b0c :
     (MonAReg[4 : 2] == 3'd5)? 32'h01104000 :
     (MonAReg[4 : 2] == 3'd6)? 32'h00000000 :
     32'h00000000;
@@ -901,9 +1292,11 @@ endmodule
 
 module cpu_0_nios2_oci_xbrk (
                               // inputs:
-                               D_valid,
+                               D_en,
+                               E_en,
                                E_valid,
                                F_pc,
+                               M_en,
                                clk,
                                reset_n,
                                trigger_state_0,
@@ -929,9 +1322,11 @@ module cpu_0_nios2_oci_xbrk (
   output           xbrk_traceoff;
   output           xbrk_traceon;
   output           xbrk_trigout;
-  input            D_valid;
+  input            D_en;
+  input            E_en;
   input            E_valid;
   input   [ 22: 0] F_pc;
+  input            M_en;
   input            clk;
   input            reset_n;
   input            trigger_state_0;
@@ -948,6 +1343,11 @@ module cpu_0_nios2_oci_xbrk (
   reg              E_xbrk_traceoff;
   reg              E_xbrk_traceon;
   reg              E_xbrk_trigout;
+  reg              M_xbrk_goto0;
+  reg              M_xbrk_goto1;
+  reg              M_xbrk_traceoff;
+  reg              M_xbrk_traceon;
+  reg              M_xbrk_trigout;
   wire    [ 24: 0] cpu_i_address;
   wire             xbrk0_armed;
   wire             xbrk0_break_hit;
@@ -990,8 +1390,8 @@ module cpu_0_nios2_oci_xbrk (
   wire             xbrk_traceon;
   wire             xbrk_trigout;
   assign cpu_i_address = {F_pc, 2'b00};
-  assign D_cpu_addr_en = D_valid;
-  assign E_cpu_addr_en = E_valid;
+  assign D_cpu_addr_en = D_en;
+  assign E_cpu_addr_en = E_en;
   assign xbrk0_break_hit = 0;
   assign xbrk0_ton_hit = 0;
   assign xbrk0_toff_hit = 0;
@@ -1076,11 +1476,56 @@ module cpu_0_nios2_oci_xbrk (
     end
 
 
-  assign xbrk_traceon = 1'b0;
-  assign xbrk_traceoff = 1'b0;
-  assign xbrk_trigout = 1'b0;
-  assign xbrk_goto0 = 1'b0;
-  assign xbrk_goto1 = 1'b0;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_xbrk_traceon <= 0;
+      else if (M_en)
+          M_xbrk_traceon <= E_xbrk_traceon & E_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_xbrk_traceoff <= 0;
+      else if (M_en)
+          M_xbrk_traceoff <= E_xbrk_traceoff & E_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_xbrk_trigout <= 0;
+      else if (M_en)
+          M_xbrk_trigout <= E_xbrk_trigout & E_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_xbrk_goto0 <= 0;
+      else if (M_en)
+          M_xbrk_goto0 <= E_xbrk_goto0 & E_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_xbrk_goto1 <= 0;
+      else if (M_en)
+          M_xbrk_goto1 <= E_xbrk_goto1 & E_valid;
+    end
+
+
+  assign xbrk_traceon = M_xbrk_traceon;
+  assign xbrk_traceoff = M_xbrk_traceoff;
+  assign xbrk_trigout = M_xbrk_trigout;
+  assign xbrk_goto0 = M_xbrk_goto0;
+  assign xbrk_goto1 = M_xbrk_goto1;
   assign xbrk0_armed = (xbrk_ctrl0[4] & trigger_state_0) ||
     (xbrk_ctrl0[5] & trigger_state_1);
 
@@ -1107,13 +1552,14 @@ endmodule
 
 module cpu_0_nios2_oci_dbrk (
                               // inputs:
-                               E_st_data,
-                               av_ld_data_aligned_filtered,
+                               A_ctrl_ld,
+                               A_ctrl_st,
+                               A_en,
+                               A_mem_baddr,
+                               A_st_data,
+                               A_valid,
+                               A_wr_data_filtered,
                                clk,
-                               d_address,
-                               d_read,
-                               d_waitrequest,
-                               d_write,
                                debugack,
                                reset_n,
 
@@ -1147,13 +1593,14 @@ module cpu_0_nios2_oci_dbrk (
   output           dbrk_traceoff;
   output           dbrk_traceon;
   output           dbrk_trigout;
-  input   [ 31: 0] E_st_data;
-  input   [ 31: 0] av_ld_data_aligned_filtered;
+  input            A_ctrl_ld;
+  input            A_ctrl_st;
+  input            A_en;
+  input   [ 24: 0] A_mem_baddr;
+  input   [ 31: 0] A_st_data;
+  input            A_valid;
+  input   [ 31: 0] A_wr_data_filtered;
   input            clk;
-  input   [ 24: 0] d_address;
-  input            d_read;
-  input            d_waitrequest;
-  input            d_write;
   input            debugack;
   input            reset_n;
 
@@ -1204,12 +1651,12 @@ module cpu_0_nios2_oci_dbrk (
   reg              dbrk_traceoff;
   reg              dbrk_traceon;
   reg              dbrk_trigout;
-  assign cpu_d_address = d_address;
-  assign cpu_d_readdata = av_ld_data_aligned_filtered;
-  assign cpu_d_read = d_read;
-  assign cpu_d_writedata = E_st_data;
-  assign cpu_d_write = d_write;
-  assign cpu_d_wait = d_waitrequest;
+  assign cpu_d_address = A_mem_baddr;
+  assign cpu_d_readdata = A_wr_data_filtered;
+  assign cpu_d_read = A_ctrl_ld & A_valid;
+  assign cpu_d_writedata = A_st_data;
+  assign cpu_d_write = A_ctrl_st & A_valid;
+  assign cpu_d_wait = ~A_en;
   assign dbrk_data = cpu_d_write ? cpu_d_writedata : cpu_d_readdata;
   always @(posedge clk or negedge reset_n)
     begin
@@ -1293,11 +1740,33 @@ endmodule
 
 module cpu_0_nios2_oci_itrace (
                                 // inputs:
+                                 A_cmp_result,
+                                 A_ctrl_exception,
+                                 A_en,
+                                 A_op_beq,
+                                 A_op_bge,
+                                 A_op_bgeu,
+                                 A_op_blt,
+                                 A_op_bltu,
+                                 A_op_bne,
+                                 A_op_br,
+                                 A_op_bret,
+                                 A_op_call,
+                                 A_op_callr,
+                                 A_op_eret,
+                                 A_op_jmp,
+                                 A_op_jmpi,
+                                 A_op_ret,
+                                 A_pcb,
+                                 A_valid,
+                                 A_wr_data_filtered,
                                  clk,
                                  dbrk_traceoff,
                                  dbrk_traceon,
+                                 debugack,
                                  jdo,
                                  jrst_n,
+                                 reset_n,
                                  take_action_tracectrl,
                                  trc_enb,
                                  xbrk_traceoff,
@@ -1318,11 +1787,33 @@ module cpu_0_nios2_oci_itrace (
   output  [ 35: 0] itm;
   output  [ 15: 0] trc_ctrl;
   output           trc_on;
+  input            A_cmp_result;
+  input            A_ctrl_exception;
+  input            A_en;
+  input            A_op_beq;
+  input            A_op_bge;
+  input            A_op_bgeu;
+  input            A_op_blt;
+  input            A_op_bltu;
+  input            A_op_bne;
+  input            A_op_br;
+  input            A_op_bret;
+  input            A_op_call;
+  input            A_op_callr;
+  input            A_op_eret;
+  input            A_op_jmp;
+  input            A_op_jmpi;
+  input            A_op_ret;
+  input   [ 24: 0] A_pcb;
+  input            A_valid;
+  input   [ 31: 0] A_wr_data_filtered;
   input            clk;
   input            dbrk_traceoff;
   input            dbrk_traceon;
+  input            debugack;
   input   [ 15: 0] jdo;
   input            jrst_n;
+  input            reset_n;
   input            take_action_tracectrl;
   input            trc_enb;
   input            xbrk_traceoff;
@@ -1330,6 +1821,8 @@ module cpu_0_nios2_oci_itrace (
   input            xbrk_wrap_traceoff;
 
   wire             advanced_exception;
+  wire             cond_dct_taken;
+  reg              d1_debugack /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=D103"  */;
   reg     [ 29: 0] dct_buffer /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=R101"  */;
   wire    [  1: 0] dct_code;
   reg     [  3: 0] dct_count /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=R101"  */;
@@ -1341,6 +1834,7 @@ module cpu_0_nios2_oci_itrace (
   wire             is_exception;
   wire             is_fast_tlb_miss_exception;
   wire             is_idct;
+  wire             is_uncond_dct;
   reg     [ 35: 0] itm /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=R101"  */;
   wire             not_in_debug_mode;
   reg     [ 31: 0] pending_excaddr /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=R101"  */;
@@ -1359,17 +1853,30 @@ module cpu_0_nios2_oci_itrace (
   wire    [ 15: 0] trc_ctrl;
   reg     [ 10: 0] trc_ctrl_reg /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=\"D101,D103,R101\""  */;
   wire             trc_on;
-  assign is_cond_dct = 1'b0;
-  assign is_dct = 1'b0;
-  assign dct_is_taken = 1'b0;
-  assign is_idct = 1'b0;
-  assign retired_pcb = 32'b0;
-  assign not_in_debug_mode = 1'b0;
-  assign instr_retired = 1'b0;
+  assign is_cond_dct = A_op_bge  | A_op_blt | A_op_bne | A_op_bgeu | 
+    A_op_bltu | A_op_beq;
+
+  assign is_uncond_dct = A_op_br | A_op_call | A_op_jmpi;
+  assign is_dct = is_cond_dct | is_uncond_dct;
+  assign cond_dct_taken = A_cmp_result;
+  assign dct_is_taken = is_uncond_dct | (is_cond_dct & cond_dct_taken);
+  assign is_idct = A_op_jmp | A_op_callr | A_op_ret | A_op_eret | A_op_bret;
+  assign retired_pcb = A_pcb;
+  assign not_in_debug_mode = ~d1_debugack;
+  assign instr_retired = A_valid & A_en;
   assign advanced_exception = 1'b0;
-  assign is_exception = 1'b0;
+  assign is_exception = A_ctrl_exception;
   assign is_fast_tlb_miss_exception = 1'b0;
-  assign excaddr = 32'b0;
+  assign excaddr = A_wr_data_filtered;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_debugack <= 0;
+      else if (instr_retired)
+          d1_debugack <= debugack;
+    end
+
+
   assign sync_code = trc_ctrl[3 : 2];
   assign sync_interval = { sync_code[1] & sync_code[0], 1'b0, sync_code[1] & ~sync_code[0], 1'b0, ~sync_code[1] & sync_code[0], 2'b00 };
   assign sync_pending = sync_timer == 0;
@@ -2667,20 +3174,40 @@ endmodule
 
 module cpu_0_nios2_oci (
                          // inputs:
-                          D_valid,
-                          E_st_data,
+                          A_cmp_result,
+                          A_ctrl_exception,
+                          A_ctrl_ld,
+                          A_ctrl_st,
+                          A_en,
+                          A_mem_baddr,
+                          A_op_beq,
+                          A_op_bge,
+                          A_op_bgeu,
+                          A_op_blt,
+                          A_op_bltu,
+                          A_op_bne,
+                          A_op_br,
+                          A_op_bret,
+                          A_op_call,
+                          A_op_callr,
+                          A_op_eret,
+                          A_op_jmp,
+                          A_op_jmpi,
+                          A_op_ret,
+                          A_pcb,
+                          A_st_data,
+                          A_valid,
+                          A_wr_data_filtered,
+                          D_en,
+                          E_en,
                           E_valid,
                           F_pc,
+                          M_en,
                           address,
-                          av_ld_data_aligned_filtered,
                           begintransfer,
                           byteenable,
                           chipselect,
                           clk,
-                          d_address,
-                          d_read,
-                          d_waitrequest,
-                          d_write,
                           debugaccess,
                           hbreak_enabled,
                           reset,
@@ -2706,20 +3233,40 @@ module cpu_0_nios2_oci (
   output           oci_single_step_mode;
   output  [ 31: 0] readdata;
   output           resetrequest;
-  input            D_valid;
-  input   [ 31: 0] E_st_data;
+  input            A_cmp_result;
+  input            A_ctrl_exception;
+  input            A_ctrl_ld;
+  input            A_ctrl_st;
+  input            A_en;
+  input   [ 24: 0] A_mem_baddr;
+  input            A_op_beq;
+  input            A_op_bge;
+  input            A_op_bgeu;
+  input            A_op_blt;
+  input            A_op_bltu;
+  input            A_op_bne;
+  input            A_op_br;
+  input            A_op_bret;
+  input            A_op_call;
+  input            A_op_callr;
+  input            A_op_eret;
+  input            A_op_jmp;
+  input            A_op_jmpi;
+  input            A_op_ret;
+  input   [ 24: 0] A_pcb;
+  input   [ 31: 0] A_st_data;
+  input            A_valid;
+  input   [ 31: 0] A_wr_data_filtered;
+  input            D_en;
+  input            E_en;
   input            E_valid;
   input   [ 22: 0] F_pc;
+  input            M_en;
   input   [  8: 0] address;
-  input   [ 31: 0] av_ld_data_aligned_filtered;
   input            begintransfer;
   input   [  3: 0] byteenable;
   input            chipselect;
   input            clk;
-  input   [ 24: 0] d_address;
-  input            d_read;
-  input            d_waitrequest;
-  input            d_write;
   input            debugaccess;
   input            hbreak_enabled;
   input            reset;
@@ -2911,9 +3458,11 @@ module cpu_0_nios2_oci (
 
   cpu_0_nios2_oci_xbrk the_cpu_0_nios2_oci_xbrk
     (
-      .D_valid         (D_valid),
+      .D_en            (D_en),
+      .E_en            (E_en),
       .E_valid         (E_valid),
       .F_pc            (F_pc),
+      .M_en            (M_en),
       .clk             (clk),
       .reset_n         (reset_n),
       .trigger_state_0 (trigger_state_0),
@@ -2932,40 +3481,63 @@ module cpu_0_nios2_oci (
 
   cpu_0_nios2_oci_dbrk the_cpu_0_nios2_oci_dbrk
     (
-      .E_st_data                   (E_st_data),
-      .av_ld_data_aligned_filtered (av_ld_data_aligned_filtered),
-      .clk                         (clk),
-      .cpu_d_address               (cpu_d_address),
-      .cpu_d_read                  (cpu_d_read),
-      .cpu_d_readdata              (cpu_d_readdata),
-      .cpu_d_wait                  (cpu_d_wait),
-      .cpu_d_write                 (cpu_d_write),
-      .cpu_d_writedata             (cpu_d_writedata),
-      .d_address                   (d_address),
-      .d_read                      (d_read),
-      .d_waitrequest               (d_waitrequest),
-      .d_write                     (d_write),
-      .dbrk_break                  (dbrk_break),
-      .dbrk_goto0                  (dbrk_goto0),
-      .dbrk_goto1                  (dbrk_goto1),
-      .dbrk_traceme                (dbrk_traceme),
-      .dbrk_traceoff               (dbrk_traceoff),
-      .dbrk_traceon                (dbrk_traceon),
-      .dbrk_trigout                (dbrk_trigout),
-      .debugack                    (debugack),
-      .reset_n                     (reset_n)
+      .A_ctrl_ld          (A_ctrl_ld),
+      .A_ctrl_st          (A_ctrl_st),
+      .A_en               (A_en),
+      .A_mem_baddr        (A_mem_baddr),
+      .A_st_data          (A_st_data),
+      .A_valid            (A_valid),
+      .A_wr_data_filtered (A_wr_data_filtered),
+      .clk                (clk),
+      .cpu_d_address      (cpu_d_address),
+      .cpu_d_read         (cpu_d_read),
+      .cpu_d_readdata     (cpu_d_readdata),
+      .cpu_d_wait         (cpu_d_wait),
+      .cpu_d_write        (cpu_d_write),
+      .cpu_d_writedata    (cpu_d_writedata),
+      .dbrk_break         (dbrk_break),
+      .dbrk_goto0         (dbrk_goto0),
+      .dbrk_goto1         (dbrk_goto1),
+      .dbrk_traceme       (dbrk_traceme),
+      .dbrk_traceoff      (dbrk_traceoff),
+      .dbrk_traceon       (dbrk_traceon),
+      .dbrk_trigout       (dbrk_trigout),
+      .debugack           (debugack),
+      .reset_n            (reset_n)
     );
 
   cpu_0_nios2_oci_itrace the_cpu_0_nios2_oci_itrace
     (
+      .A_cmp_result          (A_cmp_result),
+      .A_ctrl_exception      (A_ctrl_exception),
+      .A_en                  (A_en),
+      .A_op_beq              (A_op_beq),
+      .A_op_bge              (A_op_bge),
+      .A_op_bgeu             (A_op_bgeu),
+      .A_op_blt              (A_op_blt),
+      .A_op_bltu             (A_op_bltu),
+      .A_op_bne              (A_op_bne),
+      .A_op_br               (A_op_br),
+      .A_op_bret             (A_op_bret),
+      .A_op_call             (A_op_call),
+      .A_op_callr            (A_op_callr),
+      .A_op_eret             (A_op_eret),
+      .A_op_jmp              (A_op_jmp),
+      .A_op_jmpi             (A_op_jmpi),
+      .A_op_ret              (A_op_ret),
+      .A_pcb                 (A_pcb),
+      .A_valid               (A_valid),
+      .A_wr_data_filtered    (A_wr_data_filtered),
       .clk                   (clk),
       .dbrk_traceoff         (dbrk_traceoff),
       .dbrk_traceon          (dbrk_traceon),
       .dct_buffer            (dct_buffer),
       .dct_count             (dct_count),
+      .debugack              (debugack),
       .itm                   (itm),
       .jdo                   (jdo),
       .jrst_n                (jrst_n),
+      .reset_n               (reset_n),
       .take_action_tracectrl (take_action_tracectrl),
       .trc_ctrl              (trc_ctrl),
       .trc_enb               (trc_enb),
@@ -3105,13 +3677,15 @@ endmodule
 
 module cpu_0 (
                // inputs:
-                E_ci_multi_done,
-                E_ci_result,
+                A_ci_multi_done,
+                A_ci_multi_result,
                 clk,
                 d_irq,
                 d_readdata,
+                d_readdatavalid,
                 d_waitrequest,
                 i_readdata,
+                i_readdatavalid,
                 i_waitrequest,
                 jtag_debug_module_address,
                 jtag_debug_module_begintransfer,
@@ -3123,22 +3697,22 @@ module cpu_0 (
                 reset_n,
 
                // outputs:
-                D_ci_a,
-                D_ci_b,
-                D_ci_c,
-                D_ci_n,
-                D_ci_readra,
-                D_ci_readrb,
-                D_ci_writerc,
-                E_ci_dataa,
-                E_ci_datab,
-                E_ci_multi_clk_en,
-                E_ci_multi_clock,
-                E_ci_multi_reset,
-                E_ci_multi_start,
-                W_ci_estatus,
-                W_ci_ipending,
-                W_ci_status,
+                A_ci_multi_a,
+                A_ci_multi_b,
+                A_ci_multi_c,
+                A_ci_multi_clk_en,
+                A_ci_multi_clock,
+                A_ci_multi_dataa,
+                A_ci_multi_datab,
+                A_ci_multi_estatus,
+                A_ci_multi_ipending,
+                A_ci_multi_n,
+                A_ci_multi_readra,
+                A_ci_multi_readrb,
+                A_ci_multi_reset,
+                A_ci_multi_start,
+                A_ci_multi_status,
+                A_ci_multi_writerc,
                 d_address,
                 d_byteenable,
                 d_read,
@@ -3152,22 +3726,22 @@ module cpu_0 (
              )
 ;
 
-  output  [  4: 0] D_ci_a;
-  output  [  4: 0] D_ci_b;
-  output  [  4: 0] D_ci_c;
-  output  [  7: 0] D_ci_n;
-  output           D_ci_readra;
-  output           D_ci_readrb;
-  output           D_ci_writerc;
-  output  [ 31: 0] E_ci_dataa;
-  output  [ 31: 0] E_ci_datab;
-  output           E_ci_multi_clk_en;
-  output           E_ci_multi_clock;
-  output           E_ci_multi_reset;
-  output           E_ci_multi_start;
-  output           W_ci_estatus;
-  output  [ 31: 0] W_ci_ipending;
-  output           W_ci_status;
+  output  [  4: 0] A_ci_multi_a;
+  output  [  4: 0] A_ci_multi_b;
+  output  [  4: 0] A_ci_multi_c;
+  output           A_ci_multi_clk_en;
+  output           A_ci_multi_clock;
+  output  [ 31: 0] A_ci_multi_dataa;
+  output  [ 31: 0] A_ci_multi_datab;
+  output           A_ci_multi_estatus;
+  output  [ 31: 0] A_ci_multi_ipending;
+  output  [  7: 0] A_ci_multi_n;
+  output           A_ci_multi_readra;
+  output           A_ci_multi_readrb;
+  output           A_ci_multi_reset;
+  output           A_ci_multi_start;
+  output           A_ci_multi_status;
+  output           A_ci_multi_writerc;
   output  [ 24: 0] d_address;
   output  [  3: 0] d_byteenable;
   output           d_read;
@@ -3178,13 +3752,15 @@ module cpu_0 (
   output           jtag_debug_module_debugaccess_to_roms;
   output  [ 31: 0] jtag_debug_module_readdata;
   output           jtag_debug_module_resetrequest;
-  input            E_ci_multi_done;
-  input   [ 31: 0] E_ci_result;
+  input            A_ci_multi_done;
+  input   [ 31: 0] A_ci_multi_result;
   input            clk;
   input   [ 31: 0] d_irq;
   input   [ 31: 0] d_readdata;
+  input            d_readdatavalid;
   input            d_waitrequest;
   input   [ 31: 0] i_readdata;
+  input            i_readdatavalid;
   input            i_waitrequest;
   input   [  8: 0] jtag_debug_module_address;
   input            jtag_debug_module_begintransfer;
@@ -3195,53 +3771,646 @@ module cpu_0 (
   input   [ 31: 0] jtag_debug_module_writedata;
   input            reset_n;
 
-  wire    [  4: 0] D_ci_a;
-  wire    [  4: 0] D_ci_b;
-  wire    [  4: 0] D_ci_c;
-  wire    [  7: 0] D_ci_n;
-  wire             D_ci_readra;
-  wire             D_ci_readrb;
-  wire             D_ci_writerc;
+  reg     [ 24: 0] A_br_taken_baddr;
+  wire    [ 31: 0] A_bstatus_reg;
+  reg              A_bstatus_reg_pie;
+  wire             A_bstatus_reg_pie_inst_nxt;
+  wire             A_bstatus_reg_pie_nxt;
+  wire             A_bstatus_reg_pie_wr_en;
+  wire    [  4: 0] A_ci_multi_a;
+  wire    [  4: 0] A_ci_multi_b;
+  wire    [  4: 0] A_ci_multi_c;
+  wire             A_ci_multi_clk_en;
+  wire             A_ci_multi_clock;
+  wire    [ 31: 0] A_ci_multi_dataa;
+  wire    [ 31: 0] A_ci_multi_datab;
+  wire             A_ci_multi_estatus;
+  wire    [ 31: 0] A_ci_multi_ipending;
+  wire    [  7: 0] A_ci_multi_n;
+  wire             A_ci_multi_readra;
+  wire             A_ci_multi_readrb;
+  wire             A_ci_multi_reset;
+  reg     [ 31: 0] A_ci_multi_src1;
+  reg     [ 31: 0] A_ci_multi_src2;
+  reg              A_ci_multi_stall;
+  reg              A_ci_multi_start;
+  wire             A_ci_multi_status;
+  wire             A_ci_multi_writerc;
+  reg              A_cmp_result;
+  wire    [ 31: 0] A_cpuid_reg;
+  reg              A_ctrl_a_not_src;
+  wire             A_ctrl_a_not_src_nxt;
+  reg              A_ctrl_alu_force_xor;
+  wire             A_ctrl_alu_force_xor_nxt;
+  reg              A_ctrl_alu_signed_comparison;
+  wire             A_ctrl_alu_signed_comparison_nxt;
+  reg              A_ctrl_alu_subtract;
+  wire             A_ctrl_alu_subtract_nxt;
+  reg              A_ctrl_b_is_dst;
+  wire             A_ctrl_b_is_dst_nxt;
+  reg              A_ctrl_b_not_src;
+  wire             A_ctrl_b_not_src_nxt;
+  reg              A_ctrl_br;
+  reg              A_ctrl_br_always_pred_taken;
+  wire             A_ctrl_br_always_pred_taken_nxt;
+  reg              A_ctrl_br_cond;
+  wire             A_ctrl_br_cond_nxt;
+  wire             A_ctrl_br_nxt;
+  reg              A_ctrl_br_uncond;
+  wire             A_ctrl_br_uncond_nxt;
+  reg              A_ctrl_break;
+  wire             A_ctrl_break_nxt;
+  reg              A_ctrl_cmp;
+  wire             A_ctrl_cmp_nxt;
+  reg              A_ctrl_crst;
+  wire             A_ctrl_crst_nxt;
+  reg              A_ctrl_custom_combo;
+  wire             A_ctrl_custom_combo_nxt;
+  reg              A_ctrl_custom_multi;
+  wire             A_ctrl_custom_multi_nxt;
+  reg              A_ctrl_dc_addr_inv;
+  wire             A_ctrl_dc_addr_inv_nxt;
+  reg              A_ctrl_dc_addr_nowb_inv;
+  wire             A_ctrl_dc_addr_nowb_inv_nxt;
+  reg              A_ctrl_dc_addr_wb_inv;
+  wire             A_ctrl_dc_addr_wb_inv_nxt;
+  reg              A_ctrl_dc_index_inv;
+  wire             A_ctrl_dc_index_inv_nxt;
+  reg              A_ctrl_dc_index_nowb_inv;
+  wire             A_ctrl_dc_index_nowb_inv_nxt;
+  reg              A_ctrl_dc_index_wb_inv;
+  wire             A_ctrl_dc_index_wb_inv_nxt;
+  reg              A_ctrl_dc_nowb_inv;
+  wire             A_ctrl_dc_nowb_inv_nxt;
+  reg              A_ctrl_dcache_management;
+  wire             A_ctrl_dcache_management_nxt;
+  reg              A_ctrl_exception;
+  wire             A_ctrl_exception_nxt;
+  reg              A_ctrl_flush_pipe_always;
+  wire             A_ctrl_flush_pipe_always_nxt;
+  reg              A_ctrl_hi_imm16;
+  wire             A_ctrl_hi_imm16_nxt;
+  reg              A_ctrl_ignore_dst;
+  wire             A_ctrl_ignore_dst_nxt;
+  reg              A_ctrl_illegal;
+  wire             A_ctrl_illegal_nxt;
+  reg              A_ctrl_implicit_dst_eretaddr;
+  wire             A_ctrl_implicit_dst_eretaddr_nxt;
+  reg              A_ctrl_implicit_dst_retaddr;
+  wire             A_ctrl_implicit_dst_retaddr_nxt;
+  reg              A_ctrl_invalidate_i;
+  wire             A_ctrl_invalidate_i_nxt;
+  reg              A_ctrl_jmp_direct;
+  wire             A_ctrl_jmp_direct_nxt;
+  reg              A_ctrl_jmp_indirect;
+  wire             A_ctrl_jmp_indirect_nxt;
+  reg              A_ctrl_late_result;
+  wire             A_ctrl_late_result_nxt;
+  reg              A_ctrl_ld;
+  reg              A_ctrl_ld16;
+  wire             A_ctrl_ld16_nxt;
+  reg              A_ctrl_ld32;
+  wire             A_ctrl_ld32_nxt;
+  reg              A_ctrl_ld8;
+  reg              A_ctrl_ld8_ld16;
+  wire             A_ctrl_ld8_ld16_nxt;
+  wire             A_ctrl_ld8_nxt;
+  reg              A_ctrl_ld_bypass;
+  wire             A_ctrl_ld_bypass_nxt;
+  reg              A_ctrl_ld_dcache_management;
+  wire             A_ctrl_ld_dcache_management_nxt;
+  reg              A_ctrl_ld_io;
+  wire             A_ctrl_ld_io_nxt;
+  reg              A_ctrl_ld_non_bypass;
+  wire             A_ctrl_ld_non_bypass_nxt;
+  reg              A_ctrl_ld_non_io;
+  wire             A_ctrl_ld_non_io_nxt;
+  wire             A_ctrl_ld_nxt;
+  reg              A_ctrl_ld_signed;
+  wire             A_ctrl_ld_signed_nxt;
+  reg              A_ctrl_ld_st;
+  reg              A_ctrl_ld_st_bypass;
+  wire             A_ctrl_ld_st_bypass_nxt;
+  reg              A_ctrl_ld_st_bypass_or_dcache_management;
+  wire             A_ctrl_ld_st_bypass_or_dcache_management_nxt;
+  reg              A_ctrl_ld_st_io;
+  wire             A_ctrl_ld_st_io_nxt;
+  reg              A_ctrl_ld_st_non_bypass;
+  reg              A_ctrl_ld_st_non_bypass_non_st32;
+  wire             A_ctrl_ld_st_non_bypass_non_st32_nxt;
+  wire             A_ctrl_ld_st_non_bypass_nxt;
+  reg              A_ctrl_ld_st_non_io;
+  reg              A_ctrl_ld_st_non_io_non_st32;
+  wire             A_ctrl_ld_st_non_io_non_st32_nxt;
+  wire             A_ctrl_ld_st_non_io_nxt;
+  reg              A_ctrl_ld_st_non_st32;
+  wire             A_ctrl_ld_st_non_st32_nxt;
+  wire             A_ctrl_ld_st_nxt;
+  reg              A_ctrl_logic;
+  wire             A_ctrl_logic_nxt;
+  reg              A_ctrl_mem;
+  reg              A_ctrl_mem16;
+  wire             A_ctrl_mem16_nxt;
+  reg              A_ctrl_mem32;
+  wire             A_ctrl_mem32_nxt;
+  reg              A_ctrl_mem8;
+  wire             A_ctrl_mem8_nxt;
+  reg              A_ctrl_mem_data_access;
+  wire             A_ctrl_mem_data_access_nxt;
+  wire             A_ctrl_mem_nxt;
+  reg              A_ctrl_mul_lsw;
+  wire             A_ctrl_mul_lsw_nxt;
+  reg              A_ctrl_rdctl_inst;
+  wire             A_ctrl_rdctl_inst_nxt;
+  reg              A_ctrl_retaddr;
+  wire             A_ctrl_retaddr_nxt;
+  reg              A_ctrl_rot;
+  wire             A_ctrl_rot_nxt;
+  reg              A_ctrl_shift_right_arith;
+  wire             A_ctrl_shift_right_arith_nxt;
+  reg              A_ctrl_shift_rot;
+  reg              A_ctrl_shift_rot_left;
+  wire             A_ctrl_shift_rot_left_nxt;
+  wire             A_ctrl_shift_rot_nxt;
+  reg              A_ctrl_shift_rot_right;
+  wire             A_ctrl_shift_rot_right_nxt;
+  reg              A_ctrl_src2_choose_imm;
+  wire             A_ctrl_src2_choose_imm_nxt;
+  reg              A_ctrl_st;
+  reg              A_ctrl_st16;
+  wire             A_ctrl_st16_nxt;
+  reg              A_ctrl_st8;
+  wire             A_ctrl_st8_nxt;
+  reg              A_ctrl_st_bypass;
+  wire             A_ctrl_st_bypass_nxt;
+  reg              A_ctrl_st_io;
+  wire             A_ctrl_st_io_nxt;
+  reg              A_ctrl_st_non_bypass;
+  wire             A_ctrl_st_non_bypass_nxt;
+  reg              A_ctrl_st_non_io;
+  wire             A_ctrl_st_non_io_nxt;
+  wire             A_ctrl_st_nxt;
+  reg              A_ctrl_supervisor_only;
+  wire             A_ctrl_supervisor_only_nxt;
+  reg              A_ctrl_uncond_cti_non_br;
+  wire             A_ctrl_uncond_cti_non_br_nxt;
+  reg              A_ctrl_unimp_nop;
+  wire             A_ctrl_unimp_nop_nxt;
+  reg              A_ctrl_unimp_trap;
+  wire             A_ctrl_unimp_trap_nxt;
+  reg              A_ctrl_unsigned_lo_imm16;
+  wire             A_ctrl_unsigned_lo_imm16_nxt;
+  reg              A_ctrl_wrctl_inst;
+  wire             A_ctrl_wrctl_inst_nxt;
+  wire    [ 15: 0] A_data_ram_ld16_data;
+  wire             A_data_ram_ld_align_fill_bit;
+  reg              A_data_ram_ld_align_sign_bit;
+  wire    [  7: 0] A_data_ram_ld_byte0_data;
+  wire    [  7: 0] A_data_ram_ld_byte1_data;
+  wire    [  7: 0] A_data_ram_ld_byte2_data;
+  wire    [  7: 0] A_data_ram_ld_byte3_data;
+  reg     [ 13: 0] A_dc_actual_tag;
+  wire             A_dc_dc_addr_wb_inv_done_nxt;
+  wire             A_dc_dc_addr_wb_inv_want_xfer;
+  reg              A_dc_dcache_management_done;
+  wire             A_dc_dcache_management_done_nxt;
+  wire             A_dc_dcache_management_wr_en;
+  wire    [ 13: 0] A_dc_desired_tag;
+  reg              A_dc_dirty;
+  reg              A_dc_fill_active;
+  wire             A_dc_fill_active_nxt;
+  wire    [  3: 0] A_dc_fill_byte_en;
+  wire             A_dc_fill_done;
+  reg     [  2: 0] A_dc_fill_dp_offset;
+  wire             A_dc_fill_dp_offset_en;
+  wire    [  2: 0] A_dc_fill_dp_offset_nxt;
+  reg              A_dc_fill_has_started;
+  wire             A_dc_fill_has_started_nxt;
+  wire             A_dc_fill_miss_offset_is_next;
+  reg              A_dc_fill_need_extra_stall;
+  wire             A_dc_fill_need_extra_stall_nxt;
+  wire             A_dc_fill_starting;
+  reg              A_dc_fill_starting_d1;
+  wire             A_dc_fill_want_dmaster;
+  wire             A_dc_fill_want_xfer;
+  wire    [ 31: 0] A_dc_fill_wr_data;
+  reg              A_dc_hit;
+  wire             A_dc_index_wb_inv_done_nxt;
+  wire             A_dc_index_wb_inv_want_xfer;
+  reg              A_dc_potential_hazard_after_st;
+  reg     [  3: 0] A_dc_rd_addr_cnt;
+  wire    [  3: 0] A_dc_rd_addr_cnt_nxt;
+  reg     [ 31: 0] A_dc_rd_data;
+  reg     [  3: 0] A_dc_rd_data_cnt;
+  wire    [  3: 0] A_dc_rd_data_cnt_nxt;
+  wire             A_dc_rd_last_driven;
+  wire             A_dc_rd_last_transfer;
+  reg              A_dc_rd_last_transfer_d1;
+  reg              A_dc_valid_st_bypass_hit;
+  wire             A_dc_valid_st_bypass_hit_wr_en;
+  reg              A_dc_valid_st_cache_hit;
+  reg              A_dc_want_fill;
+  wire             A_dc_want_xfer;
+  reg              A_dc_wb_active;
+  wire             A_dc_wb_active_nxt;
+  wire             A_dc_wb_en;
+  reg     [  5: 0] A_dc_wb_line;
+  reg     [  2: 0] A_dc_wb_rd_addr_offset;
+  wire    [  2: 0] A_dc_wb_rd_addr_offset_nxt;
+  reg              A_dc_wb_rd_addr_starting;
+  wire    [ 31: 0] A_dc_wb_rd_data;
+  reg              A_dc_wb_rd_data_first;
+  wire             A_dc_wb_rd_data_first_nxt;
+  reg              A_dc_wb_rd_data_starting;
+  reg     [ 13: 0] A_dc_wb_tag;
+  wire             A_dc_wb_update_av_writedata;
+  reg              A_dc_wb_wr_active;
+  wire             A_dc_wb_wr_active_nxt;
+  wire             A_dc_wb_wr_starting;
+  wire             A_dc_wb_wr_want_dmaster;
+  reg     [  3: 0] A_dc_wr_data_cnt;
+  wire    [  3: 0] A_dc_wr_data_cnt_nxt;
+  wire             A_dc_wr_last_driven;
+  wire             A_dc_wr_last_transfer;
+  reg              A_dc_xfer_rd_addr_active;
+  wire             A_dc_xfer_rd_addr_active_nxt;
+  reg              A_dc_xfer_rd_addr_done;
+  wire             A_dc_xfer_rd_addr_done_nxt;
+  reg              A_dc_xfer_rd_addr_has_started;
+  wire             A_dc_xfer_rd_addr_has_started_nxt;
+  reg     [  2: 0] A_dc_xfer_rd_addr_offset;
+  wire             A_dc_xfer_rd_addr_offset_match;
+  wire    [  2: 0] A_dc_xfer_rd_addr_offset_nxt;
+  wire             A_dc_xfer_rd_addr_starting;
+  reg              A_dc_xfer_rd_data_active;
+  reg     [  2: 0] A_dc_xfer_rd_data_offset;
+  reg              A_dc_xfer_rd_data_offset_match;
+  reg              A_dc_xfer_rd_data_starting;
+  reg              A_dc_xfer_wr_active;
+  reg     [ 31: 0] A_dc_xfer_wr_data;
+  wire    [ 31: 0] A_dc_xfer_wr_data_nxt;
+  reg     [  2: 0] A_dc_xfer_wr_offset;
+  reg              A_dc_xfer_wr_starting;
+  wire    [  4: 0] A_dst_regnum;
+  reg     [  4: 0] A_dst_regnum_from_M;
+  wire             A_en;
+  reg              A_en_d1;
+  wire    [ 31: 0] A_estatus_reg;
+  reg              A_estatus_reg_pie;
+  wire             A_estatus_reg_pie_inst_nxt;
+  wire             A_estatus_reg_pie_nxt;
+  wire             A_estatus_reg_pie_wr_en;
+  wire    [ 31: 0] A_fwd_reg_data;
+  wire    [ 31: 0] A_ienable_reg;
+  reg              A_ienable_reg_irq0;
+  wire             A_ienable_reg_irq0_nxt;
+  wire             A_ienable_reg_irq0_wr_en;
+  reg              A_ienable_reg_irq1;
+  wire             A_ienable_reg_irq1_nxt;
+  wire             A_ienable_reg_irq1_wr_en;
+  wire    [423: 0] A_inst;
+  reg     [ 31: 0] A_inst_result;
+  wire    [ 31: 0] A_inst_result_aligned;
+  wire    [ 31: 0] A_ipending_reg;
+  reg              A_ipending_reg_irq0;
+  wire             A_ipending_reg_irq0_nxt;
+  wire             A_ipending_reg_irq0_wr_en;
+  reg              A_ipending_reg_irq1;
+  wire             A_ipending_reg_irq1_nxt;
+  wire             A_ipending_reg_irq1_wr_en;
+  reg     [ 31: 0] A_iw /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
+  wire    [  4: 0] A_iw_a;
+  wire    [  4: 0] A_iw_b;
+  wire    [  4: 0] A_iw_c;
+  wire    [  2: 0] A_iw_control_regnum;
+  wire    [  7: 0] A_iw_custom_n;
+  wire             A_iw_custom_readra;
+  wire             A_iw_custom_readrb;
+  wire             A_iw_custom_writerc;
+  wire    [ 15: 0] A_iw_imm16;
+  wire    [ 25: 0] A_iw_imm26;
+  wire    [  4: 0] A_iw_imm5;
+  wire    [  1: 0] A_iw_memsz;
+  wire    [  5: 0] A_iw_op;
+  wire    [  5: 0] A_iw_opx;
+  wire    [  4: 0] A_iw_shift_imm5;
+  wire    [  4: 0] A_iw_trap_break_imm5;
+  reg              A_ld_align_byte1_fill;
+  reg              A_ld_align_byte2_byte3_fill;
+  reg              A_ld_align_sh16;
+  reg              A_ld_align_sh8;
+  reg              A_ld_bypass_delayed;
+  reg              A_ld_bypass_delayed_started;
+  wire             A_ld_bypass_done;
+  wire             A_mem16;
+  wire             A_mem32;
+  wire             A_mem8;
+  reg     [ 24: 0] A_mem_baddr;
+  wire    [  1: 0] A_mem_baddr_byte_field;
+  wire    [  5: 0] A_mem_baddr_line_field;
+  wire    [  8: 0] A_mem_baddr_line_offset_field;
+  wire    [  2: 0] A_mem_baddr_offset_field;
+  wire             A_mem_bypass_pending;
+  reg     [  3: 0] A_mem_byte_en;
+  reg              A_mem_stall;
+  wire             A_mem_stall_nxt;
+  wire             A_mem_stall_start_nxt;
+  wire             A_mem_stall_stop_nxt;
+  wire    [ 31: 0] A_mul_cell_result;
+  reg     [  2: 0] A_mul_cnt;
+  wire    [  2: 0] A_mul_cnt_nxt;
+  wire             A_mul_done_nxt;
+  reg     [ 31: 0] A_mul_partial_prod;
+  wire    [ 31: 0] A_mul_partial_prod_nxt;
+  reg     [ 31: 0] A_mul_result;
+  wire    [ 31: 0] A_mul_result_nxt;
+  reg     [ 31: 0] A_mul_src1;
+  wire    [ 31: 0] A_mul_src1_nxt;
+  reg     [ 31: 0] A_mul_src2;
+  wire    [ 31: 0] A_mul_src2_nxt;
+  reg              A_mul_stall;
+  reg              A_mul_stall_d1;
+  reg              A_mul_stall_d2;
+  reg              A_mul_stall_d3;
+  wire             A_mul_stall_nxt;
+  wire             A_op_add;
+  wire             A_op_addi;
+  wire             A_op_and;
+  wire             A_op_andhi;
+  wire             A_op_andi;
+  wire             A_op_beq;
+  wire             A_op_bge;
+  wire             A_op_bgeu;
+  wire             A_op_blt;
+  wire             A_op_bltu;
+  wire             A_op_bne;
+  wire             A_op_br;
+  wire             A_op_break;
+  wire             A_op_bret;
+  wire             A_op_call;
+  wire             A_op_callr;
+  wire             A_op_cmpeq;
+  wire             A_op_cmpeqi;
+  wire             A_op_cmpge;
+  wire             A_op_cmpgei;
+  wire             A_op_cmpgeu;
+  wire             A_op_cmpgeui;
+  wire             A_op_cmplt;
+  wire             A_op_cmplti;
+  wire             A_op_cmpltu;
+  wire             A_op_cmpltui;
+  wire             A_op_cmpne;
+  wire             A_op_cmpnei;
+  wire             A_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  wire             A_op_crst;
+  wire             A_op_custom;
+  wire             A_op_div;
+  wire             A_op_divu;
+  wire             A_op_eret;
+  wire             A_op_flushd;
+  wire             A_op_flushda;
+  wire             A_op_flushi;
+  wire             A_op_flushp;
+  wire             A_op_hbreak;
+  wire             A_op_initd;
+  wire             A_op_initda;
+  wire             A_op_initi;
+  wire             A_op_intr;
+  wire             A_op_jmp;
+  wire             A_op_jmpi;
+  wire             A_op_ldb;
+  wire             A_op_ldbio;
+  wire             A_op_ldbu;
+  wire             A_op_ldbuio;
+  wire             A_op_ldh;
+  wire             A_op_ldhio;
+  wire             A_op_ldhu;
+  wire             A_op_ldhuio;
+  wire             A_op_ldl;
+  wire             A_op_ldw;
+  wire             A_op_ldwio;
+  wire             A_op_mul;
+  wire             A_op_muli;
+  wire             A_op_mulxss;
+  wire             A_op_mulxsu;
+  wire             A_op_mulxuu;
+  wire             A_op_nextpc;
+  wire             A_op_nor;
+  wire             A_op_opx;
+  wire             A_op_or;
+  wire             A_op_orhi;
+  wire             A_op_ori;
+  wire             A_op_rdctl;
+  wire             A_op_rdprs;
+  wire             A_op_ret;
+  wire             A_op_rol;
+  wire             A_op_roli;
+  wire             A_op_ror;
+  wire             A_op_rsv02;
+  wire             A_op_rsv09;
+  wire             A_op_rsv10;
+  wire             A_op_rsv17;
+  wire             A_op_rsv18;
+  wire             A_op_rsv25;
+  wire             A_op_rsv26;
+  wire             A_op_rsv33;
+  wire             A_op_rsv34;
+  wire             A_op_rsv41;
+  wire             A_op_rsv42;
+  wire             A_op_rsv49;
+  wire             A_op_rsv57;
+  wire             A_op_rsv61;
+  wire             A_op_rsv62;
+  wire             A_op_rsv63;
+  wire             A_op_rsvx00;
+  wire             A_op_rsvx10;
+  wire             A_op_rsvx15;
+  wire             A_op_rsvx17;
+  wire             A_op_rsvx21;
+  wire             A_op_rsvx25;
+  wire             A_op_rsvx33;
+  wire             A_op_rsvx34;
+  wire             A_op_rsvx35;
+  wire             A_op_rsvx42;
+  wire             A_op_rsvx43;
+  wire             A_op_rsvx44;
+  wire             A_op_rsvx47;
+  wire             A_op_rsvx50;
+  wire             A_op_rsvx51;
+  wire             A_op_rsvx55;
+  wire             A_op_rsvx56;
+  wire             A_op_rsvx60;
+  wire             A_op_rsvx63;
+  wire             A_op_sll;
+  wire             A_op_slli;
+  wire             A_op_sra;
+  wire             A_op_srai;
+  wire             A_op_srl;
+  wire             A_op_srli;
+  wire             A_op_stb;
+  wire             A_op_stbio;
+  wire             A_op_stc;
+  wire             A_op_sth;
+  wire             A_op_sthio;
+  wire             A_op_stw;
+  wire             A_op_stwio;
+  wire             A_op_sub;
+  wire             A_op_sync;
+  wire             A_op_trap;
+  wire             A_op_wrctl;
+  wire             A_op_wrprs;
+  wire             A_op_xor;
+  wire             A_op_xorhi;
+  wire             A_op_xori;
+  reg     [ 24: 0] A_pcb /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
+  wire             A_pipe_flush;
+  wire    [ 22: 0] A_pipe_flush_waddr;
+  reg              A_regnum_a_cmp_D;
+  wire             A_regnum_a_cmp_F;
+  reg              A_regnum_b_cmp_D;
+  wire             A_regnum_b_cmp_F;
+  reg     [ 31: 0] A_rot;
+  reg              A_rot_fill_bit;
+  wire    [  7: 0] A_rot_lut0;
+  wire    [  7: 0] A_rot_lut1;
+  wire    [  7: 0] A_rot_lut2;
+  wire    [  7: 0] A_rot_lut3;
+  reg     [  7: 0] A_rot_mask;
+  reg              A_rot_pass0;
+  reg              A_rot_pass1;
+  reg              A_rot_pass2;
+  reg              A_rot_pass3;
+  reg              A_rot_sel_fill0;
+  reg              A_rot_sel_fill1;
+  reg              A_rot_sel_fill2;
+  reg              A_rot_sel_fill3;
+  reg              A_shift_rot_cnt;
+  wire             A_shift_rot_cnt_nxt;
+  wire             A_shift_rot_done_nxt;
+  reg     [ 31: 0] A_shift_rot_result;
+  reg              A_shift_rot_stall;
+  wire             A_shift_rot_stall_nxt;
+  reg     [ 31: 0] A_slow_inst_result;
+  wire             A_slow_inst_result_en;
+  wire    [ 31: 0] A_slow_inst_result_nxt;
+  reg              A_slow_inst_sel;
+  wire             A_slow_inst_sel_nxt;
+  wire    [ 15: 0] A_slow_ld16_data;
+  wire    [  7: 0] A_slow_ld_byte0_data_aligned_nxt;
+  wire    [  7: 0] A_slow_ld_byte1_data_aligned_nxt;
+  wire    [  7: 0] A_slow_ld_byte2_data_aligned_nxt;
+  wire    [  7: 0] A_slow_ld_byte3_data_aligned_nxt;
+  wire    [ 31: 0] A_slow_ld_data_aligned_nxt;
+  wire             A_slow_ld_data_fill_bit;
+  wire             A_slow_ld_data_sign_bit;
+  wire    [  1: 0] A_slow_ld_data_sign_bit_16;
+  wire    [ 31: 0] A_slow_ld_data_unaligned;
+  reg     [ 31: 0] A_src2;
+  reg              A_st_bypass_delayed;
+  reg              A_st_bypass_delayed_started;
+  wire             A_st_bypass_done;
+  wire             A_st_bypass_transfer_done;
+  reg              A_st_bypass_transfer_done_d1;
+  reg     [ 31: 0] A_st_data;
+  wire             A_stall;
+  wire    [ 31: 0] A_status_reg;
+  reg              A_status_reg_pie;
+  wire             A_status_reg_pie_inst_nxt;
+  wire             A_status_reg_pie_nxt;
+  wire             A_status_reg_pie_wr_en;
+  reg              A_valid /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
+  wire             A_valid_crst;
+  reg              A_valid_wrctl_ienable;
+  wire    [423: 0] A_vinst;
+  wire    [ 31: 0] A_wr_data_filtered;
+  wire    [ 31: 0] A_wr_data_unfiltered;
+  wire             A_wr_dst_reg;
+  reg              A_wr_dst_reg_from_M;
+  reg     [  1: 0] D_bht_data;
+  reg     [  7: 0] D_bht_ptr;
+  wire             D_br_cond_pred_taken;
+  wire    [ 12: 0] D_br_offset_remaining;
+  wire    [ 19: 0] D_br_offset_sex;
+  wire             D_br_pred_not_taken;
+  wire             D_br_pred_taken;
+  wire    [ 24: 0] D_br_taken_baddr;
+  wire    [ 22: 0] D_br_taken_waddr;
+  reg     [ 10: 0] D_br_taken_waddr_partial;
   wire    [  1: 0] D_compare_op;
+  wire    [ 31: 0] D_control_reg_rddata_muxed;
+  wire             D_ctrl_a_is_src;
+  reg              D_ctrl_a_not_src;
+  wire             D_ctrl_a_not_src_nxt;
   wire             D_ctrl_alu_force_xor;
   wire             D_ctrl_alu_signed_comparison;
   wire             D_ctrl_alu_subtract;
-  wire             D_ctrl_b_is_dst;
-  wire             D_ctrl_br;
-  wire             D_ctrl_br_cmp;
-  wire             D_ctrl_br_uncond;
+  reg              D_ctrl_b_is_dst;
+  wire             D_ctrl_b_is_dst_nxt;
+  wire             D_ctrl_b_is_src;
+  reg              D_ctrl_b_not_src;
+  wire             D_ctrl_b_not_src_nxt;
+  reg              D_ctrl_br;
+  wire             D_ctrl_br_always_pred_taken;
+  wire             D_ctrl_br_cond;
+  wire             D_ctrl_br_nxt;
+  reg              D_ctrl_br_uncond;
+  wire             D_ctrl_br_uncond_nxt;
   wire             D_ctrl_break;
+  wire             D_ctrl_cmp;
   wire             D_ctrl_crst;
-  wire             D_ctrl_custom;
+  wire             D_ctrl_custom_combo;
   wire             D_ctrl_custom_multi;
   wire             D_ctrl_exception;
-  wire             D_ctrl_force_src2_zero;
-  wire             D_ctrl_hi_imm16;
-  wire             D_ctrl_ignore_dst;
-  wire             D_ctrl_implicit_dst_eretaddr;
-  wire             D_ctrl_implicit_dst_retaddr;
-  wire             D_ctrl_jmp_direct;
+  wire             D_ctrl_flush_pipe_always;
+  reg              D_ctrl_hi_imm16;
+  wire             D_ctrl_hi_imm16_nxt;
+  reg              D_ctrl_ignore_dst;
+  wire             D_ctrl_ignore_dst_nxt;
+  wire             D_ctrl_illegal;
+  reg              D_ctrl_implicit_dst_eretaddr;
+  wire             D_ctrl_implicit_dst_eretaddr_nxt;
+  reg              D_ctrl_implicit_dst_retaddr;
+  wire             D_ctrl_implicit_dst_retaddr_nxt;
+  reg              D_ctrl_jmp_direct;
+  wire             D_ctrl_jmp_direct_nxt;
   wire             D_ctrl_jmp_indirect;
+  wire             D_ctrl_late_result;
   wire             D_ctrl_ld;
-  wire             D_ctrl_ld_io;
-  wire             D_ctrl_ld_non_io;
-  wire             D_ctrl_ld_signed;
   wire             D_ctrl_logic;
-  wire             D_ctrl_rdctl_inst;
+  wire             D_ctrl_mul_lsw;
   wire             D_ctrl_retaddr;
-  wire             D_ctrl_rot_right;
-  wire             D_ctrl_shift_logical;
+  wire             D_ctrl_rot;
   wire             D_ctrl_shift_right_arith;
   wire             D_ctrl_shift_rot;
+  wire             D_ctrl_shift_rot_left;
   wire             D_ctrl_shift_rot_right;
-  wire             D_ctrl_src2_choose_imm;
-  wire             D_ctrl_st;
+  reg              D_ctrl_src2_choose_imm;
+  wire             D_ctrl_src2_choose_imm_nxt;
+  wire             D_ctrl_supervisor_only;
   wire             D_ctrl_uncond_cti_non_br;
-  wire             D_ctrl_unsigned_lo_imm16;
-  wire             D_ctrl_wrctl_inst;
+  wire             D_ctrl_unimp_nop;
+  wire             D_ctrl_unimp_trap;
+  reg              D_ctrl_unsigned_lo_imm16;
+  wire             D_ctrl_unsigned_lo_imm16_nxt;
+  wire             D_data_depend;
+  wire             D_dep_stall;
   wire    [  4: 0] D_dst_regnum;
+  wire    [  4: 0] D_dstfield_regnum;
+  wire             D_en;
+  wire    [ 22: 0] D_extra_pc;
+  wire    [ 24: 0] D_extra_pcb;
+  wire             D_ic_bypass_start_avalon_read;
+  wire             D_ic_fill_ignore;
+  reg              D_ic_fill_same_tag_line;
+  wire             D_ic_fill_starting;
+  reg              D_ic_fill_starting_d1;
+  wire             D_ic_want_fill;
+  wire             D_ic_want_fill_unfiltered;
+  wire             D_ic_want_fill_unfiltered_is_x;
   wire    [423: 0] D_inst;
-  reg     [ 31: 0] D_iw /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
+  reg              D_issue;
+  wire             D_issue_rdprs;
+  reg     [ 31: 0] D_iw;
   wire    [  4: 0] D_iw_a;
   wire    [  4: 0] D_iw_b;
   wire    [  4: 0] D_iw_c;
@@ -3258,7 +4427,10 @@ module cpu_0 (
   wire    [  5: 0] D_iw_opx;
   wire    [  4: 0] D_iw_shift_imm5;
   wire    [  4: 0] D_iw_trap_break_imm5;
+  reg              D_iw_valid;
+  wire    [ 24: 0] D_jmp_direct_target_baddr;
   wire    [ 22: 0] D_jmp_direct_target_waddr;
+  reg              D_kill;
   wire    [  1: 0] D_logic_op;
   wire    [  1: 0] D_logic_op_raw;
   wire             D_mem16;
@@ -3393,74 +4565,430 @@ module cpu_0 (
   wire             D_op_xor;
   wire             D_op_xorhi;
   wire             D_op_xori;
-  reg              D_valid;
+  reg     [ 22: 0] D_pc;
+  wire    [  6: 0] D_pc_line_field;
+  wire    [  2: 0] D_pc_offset_field;
+  reg     [ 22: 0] D_pc_plus_one;
+  wire    [ 12: 0] D_pc_tag_field;
+  wire    [ 24: 0] D_pcb;
+  wire             D_rdprs_stall;
+  reg              D_rdprs_stall_done;
+  wire             D_rdprs_stall_done_nxt;
+  wire             D_rdprs_stall_unfiltered;
+  wire             D_refetch;
+  wire             D_regnum_a_cmp_F;
+  wire             D_regnum_b_cmp_F;
+  wire    [ 31: 0] D_rf_a;
+  wire    [ 31: 0] D_rf_b;
+  wire    [ 31: 0] D_src1;
+  wire             D_src1_choose_A;
+  wire             D_src1_choose_E;
+  wire             D_src1_choose_M;
+  wire             D_src1_choose_W;
+  wire             D_src1_hazard_A;
+  wire             D_src1_hazard_E;
+  wire             D_src1_hazard_M;
+  wire             D_src1_hazard_W;
+  wire             D_src1_other_rs;
+  wire    [ 31: 0] D_src1_reg;
+  wire    [ 31: 0] D_src2;
+  wire             D_src2_choose_A;
+  wire             D_src2_choose_E;
+  wire             D_src2_choose_M;
+  wire             D_src2_choose_W;
+  wire             D_src2_hazard_A;
+  wire             D_src2_hazard_E;
+  wire             D_src2_hazard_M;
+  wire             D_src2_hazard_W;
+  wire    [ 31: 0] D_src2_imm;
+  wire    [  1: 0] D_src2_imm_sel;
+  wire    [ 31: 0] D_src2_reg;
+  wire             D_stall;
+  wire             D_valid;
   wire    [423: 0] D_vinst;
   wire             D_wr_dst_reg;
+  wire             E_M_dc_line_offset_match;
+  wire             E_add_br_to_taken_history_filtered;
+  wire             E_add_br_to_taken_history_unfiltered;
   wire    [ 31: 0] E_alu_result;
-  reg              E_alu_sub;
   wire    [ 32: 0] E_arith_result;
   wire    [ 31: 0] E_arith_src1;
   wire    [ 31: 0] E_arith_src2;
-  wire    [ 31: 0] E_ci_dataa;
-  wire    [ 31: 0] E_ci_datab;
-  reg              E_ci_multi_clk_en;
-  wire             E_ci_multi_clock;
-  wire             E_ci_multi_reset;
-  wire             E_ci_multi_stall;
-  reg              E_ci_multi_start;
+  reg     [  1: 0] E_bht_data;
+  reg     [  7: 0] E_bht_ptr;
+  wire             E_br_actually_taken;
+  wire             E_br_cond_pred_taken;
+  wire    [  7: 0] E_br_cond_taken_history;
+  wire             E_br_mispredict;
+  wire             E_br_result;
+  reg     [ 24: 0] E_br_taken_baddr;
+  wire             E_cancel;
   wire             E_cmp_result;
-  wire    [ 31: 0] E_control_rd_data;
+  reg     [  1: 0] E_compare_op;
+  reg     [ 31: 0] E_control_reg_rddata;
+  reg              E_ctrl_a_not_src;
+  wire             E_ctrl_a_not_src_nxt;
+  reg              E_ctrl_alu_force_xor;
+  wire             E_ctrl_alu_force_xor_nxt;
+  reg              E_ctrl_alu_signed_comparison;
+  wire             E_ctrl_alu_signed_comparison_nxt;
+  reg              E_ctrl_alu_subtract;
+  wire             E_ctrl_alu_subtract_nxt;
+  reg              E_ctrl_b_is_dst;
+  wire             E_ctrl_b_is_dst_nxt;
+  reg              E_ctrl_b_not_src;
+  wire             E_ctrl_b_not_src_nxt;
+  reg              E_ctrl_br;
+  reg              E_ctrl_br_always_pred_taken;
+  wire             E_ctrl_br_always_pred_taken_nxt;
+  reg              E_ctrl_br_cond;
+  wire             E_ctrl_br_cond_nxt;
+  wire             E_ctrl_br_nxt;
+  reg              E_ctrl_br_uncond;
+  wire             E_ctrl_br_uncond_nxt;
+  reg              E_ctrl_break;
+  wire             E_ctrl_break_nxt;
+  reg              E_ctrl_cmp;
+  wire             E_ctrl_cmp_nxt;
+  reg              E_ctrl_crst;
+  wire             E_ctrl_crst_nxt;
+  reg              E_ctrl_custom_combo;
+  wire             E_ctrl_custom_combo_nxt;
+  reg              E_ctrl_custom_multi;
+  wire             E_ctrl_custom_multi_nxt;
+  wire             E_ctrl_dc_addr_inv;
+  wire             E_ctrl_dc_addr_nowb_inv;
+  wire             E_ctrl_dc_addr_wb_inv;
+  wire             E_ctrl_dc_index_inv;
+  wire             E_ctrl_dc_index_nowb_inv;
+  wire             E_ctrl_dc_index_wb_inv;
+  wire             E_ctrl_dc_nowb_inv;
+  wire             E_ctrl_dcache_management;
+  reg              E_ctrl_exception;
+  wire             E_ctrl_exception_nxt;
+  reg              E_ctrl_flush_pipe_always;
+  wire             E_ctrl_flush_pipe_always_nxt;
+  reg              E_ctrl_hi_imm16;
+  wire             E_ctrl_hi_imm16_nxt;
+  reg              E_ctrl_ignore_dst;
+  wire             E_ctrl_ignore_dst_nxt;
+  reg              E_ctrl_illegal;
+  wire             E_ctrl_illegal_nxt;
+  reg              E_ctrl_implicit_dst_eretaddr;
+  wire             E_ctrl_implicit_dst_eretaddr_nxt;
+  reg              E_ctrl_implicit_dst_retaddr;
+  wire             E_ctrl_implicit_dst_retaddr_nxt;
+  wire             E_ctrl_invalidate_i;
+  reg              E_ctrl_jmp_direct;
+  wire             E_ctrl_jmp_direct_nxt;
+  reg              E_ctrl_jmp_indirect;
+  wire             E_ctrl_jmp_indirect_nxt;
+  reg              E_ctrl_late_result;
+  wire             E_ctrl_late_result_nxt;
+  reg              E_ctrl_ld;
+  wire             E_ctrl_ld16;
+  wire             E_ctrl_ld32;
+  wire             E_ctrl_ld8;
+  wire             E_ctrl_ld8_ld16;
+  wire             E_ctrl_ld_bypass;
+  wire             E_ctrl_ld_dcache_management;
+  wire             E_ctrl_ld_io;
+  wire             E_ctrl_ld_non_bypass;
+  wire             E_ctrl_ld_non_io;
+  wire             E_ctrl_ld_nxt;
+  wire             E_ctrl_ld_signed;
+  wire             E_ctrl_ld_st;
+  wire             E_ctrl_ld_st_bypass;
+  wire             E_ctrl_ld_st_bypass_or_dcache_management;
+  wire             E_ctrl_ld_st_io;
+  wire             E_ctrl_ld_st_non_bypass;
+  wire             E_ctrl_ld_st_non_bypass_non_st32;
+  wire             E_ctrl_ld_st_non_io;
+  wire             E_ctrl_ld_st_non_io_non_st32;
+  wire             E_ctrl_ld_st_non_st32;
+  reg              E_ctrl_logic;
+  wire             E_ctrl_logic_nxt;
+  wire             E_ctrl_mem;
+  wire             E_ctrl_mem16;
+  wire             E_ctrl_mem32;
+  wire             E_ctrl_mem8;
+  wire             E_ctrl_mem_data_access;
+  reg              E_ctrl_mul_lsw;
+  wire             E_ctrl_mul_lsw_nxt;
+  wire             E_ctrl_rdctl_inst;
+  reg              E_ctrl_retaddr;
+  wire             E_ctrl_retaddr_nxt;
+  reg              E_ctrl_rot;
+  wire             E_ctrl_rot_nxt;
+  reg              E_ctrl_shift_right_arith;
+  wire             E_ctrl_shift_right_arith_nxt;
+  reg              E_ctrl_shift_rot;
+  reg              E_ctrl_shift_rot_left;
+  wire             E_ctrl_shift_rot_left_nxt;
+  wire             E_ctrl_shift_rot_nxt;
+  reg              E_ctrl_shift_rot_right;
+  wire             E_ctrl_shift_rot_right_nxt;
+  reg              E_ctrl_src2_choose_imm;
+  wire             E_ctrl_src2_choose_imm_nxt;
+  wire             E_ctrl_st;
+  wire             E_ctrl_st16;
+  wire             E_ctrl_st8;
+  wire             E_ctrl_st_bypass;
+  wire             E_ctrl_st_io;
+  wire             E_ctrl_st_non_bypass;
+  wire             E_ctrl_st_non_io;
+  reg              E_ctrl_supervisor_only;
+  wire             E_ctrl_supervisor_only_nxt;
+  reg              E_ctrl_uncond_cti_non_br;
+  wire             E_ctrl_uncond_cti_non_br_nxt;
+  reg              E_ctrl_unimp_nop;
+  wire             E_ctrl_unimp_nop_nxt;
+  reg              E_ctrl_unimp_trap;
+  wire             E_ctrl_unimp_trap_nxt;
+  reg              E_ctrl_unsigned_lo_imm16;
+  wire             E_ctrl_unsigned_lo_imm16_nxt;
+  wire             E_ctrl_wrctl_inst;
+  reg     [  4: 0] E_dst_regnum;
+  wire             E_en;
   wire             E_eq;
-  reg              E_invert_arith_src_msb;
-  wire             E_ld_stall;
+  reg     [ 22: 0] E_extra_pc;
+  wire    [ 24: 0] E_extra_pcb;
+  wire    [ 31: 0] E_fwd_reg_data;
+  wire             E_hbreak_req;
+  wire    [423: 0] E_inst;
+  reg     [ 31: 0] E_iw;
+  wire    [  4: 0] E_iw_a;
+  wire    [  4: 0] E_iw_b;
+  wire    [  4: 0] E_iw_c;
+  wire    [  2: 0] E_iw_control_regnum;
+  wire    [  7: 0] E_iw_custom_n;
+  wire             E_iw_custom_readra;
+  wire             E_iw_custom_readrb;
+  wire             E_iw_custom_writerc;
+  wire    [ 15: 0] E_iw_imm16;
+  wire    [ 25: 0] E_iw_imm26;
+  wire    [  4: 0] E_iw_imm5;
+  wire    [  1: 0] E_iw_memsz;
+  wire    [  5: 0] E_iw_op;
+  wire    [  5: 0] E_iw_opx;
+  wire    [  4: 0] E_iw_shift_imm5;
+  wire    [  4: 0] E_iw_trap_break_imm5;
+  reg     [  1: 0] E_logic_op;
   wire    [ 31: 0] E_logic_result;
-  wire             E_logic_result_is_0;
   wire             E_lt;
+  wire             E_mem16;
+  wire             E_mem32;
+  wire             E_mem8;
   wire    [ 24: 0] E_mem_baddr;
+  wire    [  1: 0] E_mem_baddr_byte_field;
+  wire    [  5: 0] E_mem_baddr_line_field;
+  wire    [  8: 0] E_mem_baddr_line_offset_field;
+  wire    [  2: 0] E_mem_baddr_offset_field;
+  wire             E_mem_bypass_non_io;
   wire    [  3: 0] E_mem_byte_en;
-  reg              E_new_inst;
-  reg     [  4: 0] E_shift_rot_cnt;
-  wire    [  4: 0] E_shift_rot_cnt_nxt;
-  wire             E_shift_rot_done;
-  wire             E_shift_rot_fill_bit;
-  reg     [ 31: 0] E_shift_rot_result;
-  wire    [ 31: 0] E_shift_rot_result_nxt;
-  wire             E_shift_rot_stall;
+  wire             E_op_add;
+  wire             E_op_addi;
+  wire             E_op_and;
+  wire             E_op_andhi;
+  wire             E_op_andi;
+  wire             E_op_beq;
+  wire             E_op_bge;
+  wire             E_op_bgeu;
+  wire             E_op_blt;
+  wire             E_op_bltu;
+  wire             E_op_bne;
+  wire             E_op_br;
+  wire             E_op_break;
+  wire             E_op_bret;
+  wire             E_op_call;
+  wire             E_op_callr;
+  wire             E_op_cmpeq;
+  wire             E_op_cmpeqi;
+  wire             E_op_cmpge;
+  wire             E_op_cmpgei;
+  wire             E_op_cmpgeu;
+  wire             E_op_cmpgeui;
+  wire             E_op_cmplt;
+  wire             E_op_cmplti;
+  wire             E_op_cmpltu;
+  wire             E_op_cmpltui;
+  wire             E_op_cmpne;
+  wire             E_op_cmpnei;
+  wire             E_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  wire             E_op_crst;
+  wire             E_op_custom;
+  wire             E_op_div;
+  wire             E_op_divu;
+  wire             E_op_eret;
+  wire             E_op_flushd;
+  wire             E_op_flushda;
+  wire             E_op_flushi;
+  wire             E_op_flushp;
+  wire             E_op_hbreak;
+  wire             E_op_initd;
+  wire             E_op_initda;
+  wire             E_op_initi;
+  wire             E_op_intr;
+  wire             E_op_jmp;
+  wire             E_op_jmpi;
+  wire             E_op_ldb;
+  wire             E_op_ldbio;
+  wire             E_op_ldbu;
+  wire             E_op_ldbuio;
+  wire             E_op_ldh;
+  wire             E_op_ldhio;
+  wire             E_op_ldhu;
+  wire             E_op_ldhuio;
+  wire             E_op_ldl;
+  wire             E_op_ldw;
+  wire             E_op_ldwio;
+  wire             E_op_mul;
+  wire             E_op_muli;
+  wire             E_op_mulxss;
+  wire             E_op_mulxsu;
+  wire             E_op_mulxuu;
+  wire             E_op_nextpc;
+  wire             E_op_nor;
+  wire             E_op_opx;
+  wire             E_op_or;
+  wire             E_op_orhi;
+  wire             E_op_ori;
+  wire             E_op_rdctl;
+  wire             E_op_rdprs;
+  wire             E_op_ret;
+  wire             E_op_rol;
+  wire             E_op_roli;
+  wire             E_op_ror;
+  wire             E_op_rsv02;
+  wire             E_op_rsv09;
+  wire             E_op_rsv10;
+  wire             E_op_rsv17;
+  wire             E_op_rsv18;
+  wire             E_op_rsv25;
+  wire             E_op_rsv26;
+  wire             E_op_rsv33;
+  wire             E_op_rsv34;
+  wire             E_op_rsv41;
+  wire             E_op_rsv42;
+  wire             E_op_rsv49;
+  wire             E_op_rsv57;
+  wire             E_op_rsv61;
+  wire             E_op_rsv62;
+  wire             E_op_rsv63;
+  wire             E_op_rsvx00;
+  wire             E_op_rsvx10;
+  wire             E_op_rsvx15;
+  wire             E_op_rsvx17;
+  wire             E_op_rsvx21;
+  wire             E_op_rsvx25;
+  wire             E_op_rsvx33;
+  wire             E_op_rsvx34;
+  wire             E_op_rsvx35;
+  wire             E_op_rsvx42;
+  wire             E_op_rsvx43;
+  wire             E_op_rsvx44;
+  wire             E_op_rsvx47;
+  wire             E_op_rsvx50;
+  wire             E_op_rsvx51;
+  wire             E_op_rsvx55;
+  wire             E_op_rsvx56;
+  wire             E_op_rsvx60;
+  wire             E_op_rsvx63;
+  wire             E_op_sll;
+  wire             E_op_slli;
+  wire             E_op_sra;
+  wire             E_op_srai;
+  wire             E_op_srl;
+  wire             E_op_srli;
+  wire             E_op_stb;
+  wire             E_op_stbio;
+  wire             E_op_stc;
+  wire             E_op_sth;
+  wire             E_op_sthio;
+  wire             E_op_stw;
+  wire             E_op_stwio;
+  wire             E_op_sub;
+  wire             E_op_sync;
+  wire             E_op_trap;
+  wire             E_op_wrctl;
+  wire             E_op_wrprs;
+  wire             E_op_xor;
+  wire             E_op_xorhi;
+  wire             E_op_xori;
+  reg     [ 22: 0] E_pc;
+  reg     [ 24: 0] E_pcb;
+  reg              E_regnum_a_cmp_D;
+  wire             E_regnum_a_cmp_F;
+  reg              E_regnum_b_cmp_D;
+  wire             E_regnum_b_cmp_F;
+  wire             E_rot_fill_bit;
+  wire    [  7: 0] E_rot_left_mask;
+  wire    [  7: 0] E_rot_mask;
+  wire    [  4: 0] E_rot_n;
+  wire             E_rot_pass0;
+  wire             E_rot_pass1;
+  wire             E_rot_pass2;
+  wire             E_rot_pass3;
+  wire    [ 31: 0] E_rot_prestep1;
+  wire    [  7: 0] E_rot_right_mask;
+  wire    [  4: 0] E_rot_rn;
+  wire             E_rot_sel_fill0;
+  wire             E_rot_sel_fill1;
+  wire             E_rot_sel_fill2;
+  wire             E_rot_sel_fill3;
+  wire             E_sel_data_master;
   reg     [ 31: 0] E_src1;
+  wire             E_src1_eq_src2;
   reg     [ 31: 0] E_src2;
+  reg     [ 31: 0] E_src2_reg;
   wire    [ 31: 0] E_st_data;
-  wire             E_st_stall;
   wire             E_stall;
-  reg              E_valid;
+  wire    [  7: 0] E_stb_data;
+  wire    [ 15: 0] E_sth_data;
+  wire    [ 31: 0] E_stw_data;
+  wire             E_valid;
+  reg              E_valid_from_D;
+  reg              E_valid_jmp_indirect;
+  wire             E_valid_prior_to_hbreak;
   wire    [423: 0] E_vinst;
-  wire             E_wrctl_bstatus;
-  wire             E_wrctl_estatus;
-  wire             E_wrctl_ienable;
-  wire             E_wrctl_status;
-  wire    [ 31: 0] F_av_iw;
-  wire    [  4: 0] F_av_iw_a;
-  wire    [  4: 0] F_av_iw_b;
-  wire    [  4: 0] F_av_iw_c;
-  wire    [  2: 0] F_av_iw_control_regnum;
-  wire    [  7: 0] F_av_iw_custom_n;
-  wire             F_av_iw_custom_readra;
-  wire             F_av_iw_custom_readrb;
-  wire             F_av_iw_custom_writerc;
-  wire    [ 15: 0] F_av_iw_imm16;
-  wire    [ 25: 0] F_av_iw_imm26;
-  wire    [  4: 0] F_av_iw_imm5;
-  wire    [  1: 0] F_av_iw_memsz;
-  wire    [  5: 0] F_av_iw_op;
-  wire    [  5: 0] F_av_iw_opx;
-  wire    [  4: 0] F_av_iw_shift_imm5;
-  wire    [  4: 0] F_av_iw_trap_break_imm5;
-  wire             F_av_mem16;
-  wire             F_av_mem32;
-  wire             F_av_mem8;
+  wire             E_wr_dst_reg;
+  reg              E_wr_dst_reg_from_D;
+  wire    [  1: 0] F_bht_data;
+  reg     [  7: 0] F_bht_ptr;
+  wire    [  7: 0] F_bht_ptr_nxt;
+  wire    [ 10: 0] F_br_taken_waddr_partial;
+  wire             F_ctrl_a_not_src;
+  wire             F_ctrl_b_is_dst;
+  wire             F_ctrl_b_not_src;
+  wire             F_ctrl_br;
+  wire             F_ctrl_br_uncond;
+  wire             F_ctrl_hi_imm16;
+  wire             F_ctrl_ignore_dst;
+  wire             F_ctrl_implicit_dst_eretaddr;
+  wire             F_ctrl_implicit_dst_retaddr;
+  wire             F_ctrl_jmp_direct;
+  wire             F_ctrl_src2_choose_imm;
+  wire             F_ctrl_unsigned_lo_imm16;
+  wire             F_en;
+  wire             F_ic_bypass_req;
+  wire    [  9: 0] F_ic_data_rd_addr_nxt;
+  wire    [ 12: 0] F_ic_desired_tag;
+  wire             F_ic_fill_same_tag_line;
+  wire             F_ic_hit;
+  wire    [ 31: 0] F_ic_iw;
+  wire    [ 12: 0] F_ic_tag_field;
+  wire    [ 20: 0] F_ic_tag_rd;
+  wire    [  6: 0] F_ic_tag_rd_addr_nxt;
+  wire             F_ic_valid;
+  wire    [  7: 0] F_ic_valid_bits;
   wire    [423: 0] F_inst;
+  wire             F_inst_ram_hit;
+  wire             F_issue;
   wire    [ 31: 0] F_iw;
   wire    [  4: 0] F_iw_a;
+  wire    [  4: 0] F_iw_a_rf;
   wire    [  4: 0] F_iw_b;
+  wire    [  4: 0] F_iw_b_rf;
   wire    [  4: 0] F_iw_c;
   wire    [  2: 0] F_iw_control_regnum;
   wire    [  7: 0] F_iw_custom_n;
@@ -3475,6 +5003,8 @@ module cpu_0 (
   wire    [  5: 0] F_iw_opx;
   wire    [  4: 0] F_iw_shift_imm5;
   wire    [  4: 0] F_iw_trap_break_imm5;
+  wire             F_iw_valid;
+  wire             F_kill;
   wire             F_mem16;
   wire             F_mem32;
   wire             F_mem8;
@@ -3607,178 +5137,849 @@ module cpu_0 (
   wire             F_op_xor;
   wire             F_op_xorhi;
   wire             F_op_xori;
-  reg     [ 22: 0] F_pc /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
-  wire             F_pc_en;
-  wire    [ 22: 0] F_pc_no_crst_nxt;
+  reg     [ 22: 0] F_pc;
+  wire    [  6: 0] F_pc_line_field;
   wire    [ 22: 0] F_pc_nxt;
   wire    [ 22: 0] F_pc_plus_one;
-  wire    [  1: 0] F_pc_sel_nxt;
+  wire    [ 12: 0] F_pc_tag_field;
   wire    [ 24: 0] F_pcb;
   wire    [ 24: 0] F_pcb_nxt;
-  wire    [ 24: 0] F_pcb_plus_four;
-  wire             F_valid;
+  wire    [ 31: 0] F_ram_iw;
+  wire    [  4: 0] F_ram_iw_a;
+  wire    [  4: 0] F_ram_iw_b;
+  wire    [  4: 0] F_ram_iw_c;
+  wire    [  2: 0] F_ram_iw_control_regnum;
+  wire    [  7: 0] F_ram_iw_custom_n;
+  wire             F_ram_iw_custom_readra;
+  wire             F_ram_iw_custom_readrb;
+  wire             F_ram_iw_custom_writerc;
+  wire    [ 15: 0] F_ram_iw_imm16;
+  wire    [ 25: 0] F_ram_iw_imm26;
+  wire    [  4: 0] F_ram_iw_imm5;
+  wire    [  1: 0] F_ram_iw_memsz;
+  wire    [  5: 0] F_ram_iw_op;
+  wire    [  5: 0] F_ram_iw_opx;
+  wire    [  4: 0] F_ram_iw_shift_imm5;
+  wire    [  4: 0] F_ram_iw_trap_break_imm5;
+  wire             F_ram_mem16;
+  wire             F_ram_mem32;
+  wire             F_ram_mem8;
+  wire             F_sel_instruction_master;
+  wire             F_stall;
   wire    [423: 0] F_vinst;
-  reg     [  1: 0] R_compare_op;
-  reg              R_ctrl_alu_force_xor;
-  wire             R_ctrl_alu_force_xor_nxt;
-  reg              R_ctrl_alu_signed_comparison;
-  wire             R_ctrl_alu_signed_comparison_nxt;
-  reg              R_ctrl_alu_subtract;
-  wire             R_ctrl_alu_subtract_nxt;
-  reg              R_ctrl_b_is_dst;
-  wire             R_ctrl_b_is_dst_nxt;
-  reg              R_ctrl_br;
-  reg              R_ctrl_br_cmp;
-  wire             R_ctrl_br_cmp_nxt;
-  wire             R_ctrl_br_nxt;
-  reg              R_ctrl_br_uncond;
-  wire             R_ctrl_br_uncond_nxt;
-  reg              R_ctrl_break;
-  wire             R_ctrl_break_nxt;
-  reg              R_ctrl_crst;
-  wire             R_ctrl_crst_nxt;
-  reg              R_ctrl_custom;
-  reg              R_ctrl_custom_multi;
-  wire             R_ctrl_custom_multi_nxt;
-  wire             R_ctrl_custom_nxt;
-  reg              R_ctrl_exception;
-  wire             R_ctrl_exception_nxt;
-  reg              R_ctrl_force_src2_zero;
-  wire             R_ctrl_force_src2_zero_nxt;
-  reg              R_ctrl_hi_imm16;
-  wire             R_ctrl_hi_imm16_nxt;
-  reg              R_ctrl_ignore_dst;
-  wire             R_ctrl_ignore_dst_nxt;
-  reg              R_ctrl_implicit_dst_eretaddr;
-  wire             R_ctrl_implicit_dst_eretaddr_nxt;
-  reg              R_ctrl_implicit_dst_retaddr;
-  wire             R_ctrl_implicit_dst_retaddr_nxt;
-  reg              R_ctrl_jmp_direct;
-  wire             R_ctrl_jmp_direct_nxt;
-  reg              R_ctrl_jmp_indirect;
-  wire             R_ctrl_jmp_indirect_nxt;
-  reg              R_ctrl_ld;
-  reg              R_ctrl_ld_io;
-  wire             R_ctrl_ld_io_nxt;
-  reg              R_ctrl_ld_non_io;
-  wire             R_ctrl_ld_non_io_nxt;
-  wire             R_ctrl_ld_nxt;
-  reg              R_ctrl_ld_signed;
-  wire             R_ctrl_ld_signed_nxt;
-  reg              R_ctrl_logic;
-  wire             R_ctrl_logic_nxt;
-  reg              R_ctrl_rdctl_inst;
-  wire             R_ctrl_rdctl_inst_nxt;
-  reg              R_ctrl_retaddr;
-  wire             R_ctrl_retaddr_nxt;
-  reg              R_ctrl_rot_right;
-  wire             R_ctrl_rot_right_nxt;
-  reg              R_ctrl_shift_logical;
-  wire             R_ctrl_shift_logical_nxt;
-  reg              R_ctrl_shift_right_arith;
-  wire             R_ctrl_shift_right_arith_nxt;
-  reg              R_ctrl_shift_rot;
-  wire             R_ctrl_shift_rot_nxt;
-  reg              R_ctrl_shift_rot_right;
-  wire             R_ctrl_shift_rot_right_nxt;
-  reg              R_ctrl_src2_choose_imm;
-  wire             R_ctrl_src2_choose_imm_nxt;
-  reg              R_ctrl_st;
-  wire             R_ctrl_st_nxt;
-  reg              R_ctrl_uncond_cti_non_br;
-  wire             R_ctrl_uncond_cti_non_br_nxt;
-  reg              R_ctrl_unsigned_lo_imm16;
-  wire             R_ctrl_unsigned_lo_imm16_nxt;
-  reg              R_ctrl_wrctl_inst;
-  wire             R_ctrl_wrctl_inst_nxt;
-  reg     [  4: 0] R_dst_regnum /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
-  wire             R_en;
-  reg     [  1: 0] R_logic_op;
-  wire    [ 31: 0] R_rf_a;
-  wire    [ 31: 0] R_rf_b;
-  wire    [ 31: 0] R_src1;
-  wire    [ 31: 0] R_src2;
-  wire    [ 15: 0] R_src2_hi;
-  wire    [ 15: 0] R_src2_lo;
-  reg              R_src2_use_imm;
-  wire    [  7: 0] R_stb_data;
-  wire    [ 15: 0] R_sth_data;
-  reg              R_valid;
-  wire    [423: 0] R_vinst;
-  reg              R_wr_dst_reg;
-  reg     [ 31: 0] W_alu_result;
-  wire             W_br_taken;
-  reg              W_bstatus_reg;
-  wire             W_bstatus_reg_inst_nxt;
-  wire             W_bstatus_reg_nxt;
-  wire             W_ci_estatus;
-  wire    [ 31: 0] W_ci_ipending;
-  wire             W_ci_status;
-  reg              W_cmp_result;
-  reg     [ 31: 0] W_control_rd_data;
-  reg              W_estatus_reg;
-  wire             W_estatus_reg_inst_nxt;
-  wire             W_estatus_reg_nxt;
-  reg     [ 31: 0] W_ienable_reg;
-  wire    [ 31: 0] W_ienable_reg_nxt;
-  reg     [ 31: 0] W_ipending_reg;
-  wire    [ 31: 0] W_ipending_reg_nxt;
-  wire    [ 24: 0] W_mem_baddr;
-  wire    [ 31: 0] W_rf_wr_data;
-  wire             W_rf_wren;
-  wire             W_status_reg;
-  reg              W_status_reg_pie;
-  wire             W_status_reg_pie_inst_nxt;
-  wire             W_status_reg_pie_nxt;
-  reg              W_valid /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
+  wire             M_A_dc_line_match;
+  reg              M_A_dc_line_match_d1;
+  reg     [ 31: 0] M_alu_result;
+  reg     [  1: 0] M_bht_data;
+  wire    [  7: 0] M_bht_ptr_filtered;
+  reg     [  7: 0] M_bht_ptr_unfiltered;
+  wire    [  1: 0] M_bht_wr_data_filtered;
+  wire    [  1: 0] M_bht_wr_data_unfiltered;
+  wire             M_bht_wr_en_filtered;
+  wire             M_bht_wr_en_unfiltered;
+  reg              M_br_actually_taken;
+  reg     [  7: 0] M_br_cond_taken_history;
+  reg              M_br_mispredict;
+  reg     [ 24: 0] M_br_taken_baddr;
+  wire             M_cancel;
+  reg              M_cmp_result;
+  reg     [ 31: 0] M_control_reg_rddata;
+  reg              M_ctrl_a_not_src;
+  wire             M_ctrl_a_not_src_nxt;
+  reg              M_ctrl_alu_force_xor;
+  wire             M_ctrl_alu_force_xor_nxt;
+  reg              M_ctrl_alu_signed_comparison;
+  wire             M_ctrl_alu_signed_comparison_nxt;
+  reg              M_ctrl_alu_subtract;
+  wire             M_ctrl_alu_subtract_nxt;
+  reg              M_ctrl_b_is_dst;
+  wire             M_ctrl_b_is_dst_nxt;
+  reg              M_ctrl_b_not_src;
+  wire             M_ctrl_b_not_src_nxt;
+  reg              M_ctrl_br;
+  reg              M_ctrl_br_always_pred_taken;
+  wire             M_ctrl_br_always_pred_taken_nxt;
+  reg              M_ctrl_br_cond;
+  wire             M_ctrl_br_cond_nxt;
+  wire             M_ctrl_br_nxt;
+  reg              M_ctrl_br_uncond;
+  wire             M_ctrl_br_uncond_nxt;
+  reg              M_ctrl_break;
+  wire             M_ctrl_break_nxt;
+  reg              M_ctrl_cmp;
+  wire             M_ctrl_cmp_nxt;
+  reg              M_ctrl_crst;
+  wire             M_ctrl_crst_nxt;
+  reg              M_ctrl_custom_combo;
+  wire             M_ctrl_custom_combo_nxt;
+  reg              M_ctrl_custom_multi;
+  wire             M_ctrl_custom_multi_nxt;
+  reg              M_ctrl_dc_addr_inv;
+  wire             M_ctrl_dc_addr_inv_nxt;
+  reg              M_ctrl_dc_addr_nowb_inv;
+  wire             M_ctrl_dc_addr_nowb_inv_nxt;
+  reg              M_ctrl_dc_addr_wb_inv;
+  wire             M_ctrl_dc_addr_wb_inv_nxt;
+  reg              M_ctrl_dc_index_inv;
+  wire             M_ctrl_dc_index_inv_nxt;
+  reg              M_ctrl_dc_index_nowb_inv;
+  wire             M_ctrl_dc_index_nowb_inv_nxt;
+  reg              M_ctrl_dc_index_wb_inv;
+  wire             M_ctrl_dc_index_wb_inv_nxt;
+  reg              M_ctrl_dc_nowb_inv;
+  wire             M_ctrl_dc_nowb_inv_nxt;
+  reg              M_ctrl_dcache_management;
+  wire             M_ctrl_dcache_management_nxt;
+  reg              M_ctrl_exception;
+  wire             M_ctrl_exception_nxt;
+  reg              M_ctrl_flush_pipe_always;
+  wire             M_ctrl_flush_pipe_always_nxt;
+  reg              M_ctrl_hi_imm16;
+  wire             M_ctrl_hi_imm16_nxt;
+  reg              M_ctrl_ignore_dst;
+  wire             M_ctrl_ignore_dst_nxt;
+  reg              M_ctrl_illegal;
+  wire             M_ctrl_illegal_nxt;
+  reg              M_ctrl_implicit_dst_eretaddr;
+  wire             M_ctrl_implicit_dst_eretaddr_nxt;
+  reg              M_ctrl_implicit_dst_retaddr;
+  wire             M_ctrl_implicit_dst_retaddr_nxt;
+  reg              M_ctrl_invalidate_i;
+  wire             M_ctrl_invalidate_i_nxt;
+  reg              M_ctrl_jmp_direct;
+  wire             M_ctrl_jmp_direct_nxt;
+  reg              M_ctrl_jmp_indirect;
+  wire             M_ctrl_jmp_indirect_nxt;
+  reg              M_ctrl_late_result;
+  wire             M_ctrl_late_result_nxt;
+  reg              M_ctrl_ld;
+  reg              M_ctrl_ld16;
+  wire             M_ctrl_ld16_nxt;
+  reg              M_ctrl_ld32;
+  wire             M_ctrl_ld32_nxt;
+  reg              M_ctrl_ld8;
+  reg              M_ctrl_ld8_ld16;
+  wire             M_ctrl_ld8_ld16_nxt;
+  wire             M_ctrl_ld8_nxt;
+  reg              M_ctrl_ld_bypass;
+  wire             M_ctrl_ld_bypass_nxt;
+  reg              M_ctrl_ld_dcache_management;
+  wire             M_ctrl_ld_dcache_management_nxt;
+  reg              M_ctrl_ld_io;
+  wire             M_ctrl_ld_io_nxt;
+  reg              M_ctrl_ld_non_bypass;
+  wire             M_ctrl_ld_non_bypass_nxt;
+  reg              M_ctrl_ld_non_io;
+  wire             M_ctrl_ld_non_io_nxt;
+  wire             M_ctrl_ld_nxt;
+  reg              M_ctrl_ld_signed;
+  wire             M_ctrl_ld_signed_nxt;
+  reg              M_ctrl_ld_st;
+  reg              M_ctrl_ld_st_bypass;
+  wire             M_ctrl_ld_st_bypass_nxt;
+  reg              M_ctrl_ld_st_bypass_or_dcache_management;
+  wire             M_ctrl_ld_st_bypass_or_dcache_management_nxt;
+  wire             M_ctrl_ld_st_cache;
+  reg              M_ctrl_ld_st_io;
+  wire             M_ctrl_ld_st_io_nxt;
+  reg              M_ctrl_ld_st_non_bypass;
+  reg              M_ctrl_ld_st_non_bypass_non_st32;
+  wire             M_ctrl_ld_st_non_bypass_non_st32_nxt;
+  wire             M_ctrl_ld_st_non_bypass_nxt;
+  reg              M_ctrl_ld_st_non_io;
+  reg              M_ctrl_ld_st_non_io_non_st32;
+  wire             M_ctrl_ld_st_non_io_non_st32_nxt;
+  wire             M_ctrl_ld_st_non_io_nxt;
+  reg              M_ctrl_ld_st_non_st32;
+  wire             M_ctrl_ld_st_non_st32_nxt;
+  wire             M_ctrl_ld_st_nxt;
+  reg              M_ctrl_logic;
+  wire             M_ctrl_logic_nxt;
+  reg              M_ctrl_mem;
+  reg              M_ctrl_mem16;
+  wire             M_ctrl_mem16_nxt;
+  reg              M_ctrl_mem32;
+  wire             M_ctrl_mem32_nxt;
+  reg              M_ctrl_mem8;
+  wire             M_ctrl_mem8_nxt;
+  reg              M_ctrl_mem_data_access;
+  wire             M_ctrl_mem_data_access_nxt;
+  wire             M_ctrl_mem_nxt;
+  reg              M_ctrl_mul_lsw;
+  wire             M_ctrl_mul_lsw_nxt;
+  reg              M_ctrl_rdctl_inst;
+  wire             M_ctrl_rdctl_inst_nxt;
+  reg              M_ctrl_retaddr;
+  wire             M_ctrl_retaddr_nxt;
+  reg              M_ctrl_rot;
+  wire             M_ctrl_rot_nxt;
+  reg              M_ctrl_shift_right_arith;
+  wire             M_ctrl_shift_right_arith_nxt;
+  reg              M_ctrl_shift_rot;
+  reg              M_ctrl_shift_rot_left;
+  wire             M_ctrl_shift_rot_left_nxt;
+  wire             M_ctrl_shift_rot_nxt;
+  reg              M_ctrl_shift_rot_right;
+  wire             M_ctrl_shift_rot_right_nxt;
+  reg              M_ctrl_src2_choose_imm;
+  wire             M_ctrl_src2_choose_imm_nxt;
+  reg              M_ctrl_st;
+  reg              M_ctrl_st16;
+  wire             M_ctrl_st16_nxt;
+  reg              M_ctrl_st8;
+  wire             M_ctrl_st8_nxt;
+  reg              M_ctrl_st_bypass;
+  wire             M_ctrl_st_bypass_nxt;
+  wire             M_ctrl_st_cache;
+  reg              M_ctrl_st_io;
+  wire             M_ctrl_st_io_nxt;
+  reg              M_ctrl_st_non_bypass;
+  wire             M_ctrl_st_non_bypass_nxt;
+  reg              M_ctrl_st_non_io;
+  wire             M_ctrl_st_non_io_nxt;
+  wire             M_ctrl_st_nxt;
+  reg              M_ctrl_supervisor_only;
+  wire             M_ctrl_supervisor_only_nxt;
+  reg              M_ctrl_uncond_cti_non_br;
+  wire             M_ctrl_uncond_cti_non_br_nxt;
+  reg              M_ctrl_unimp_nop;
+  wire             M_ctrl_unimp_nop_nxt;
+  reg              M_ctrl_unimp_trap;
+  wire             M_ctrl_unimp_trap_nxt;
+  reg              M_ctrl_unsigned_lo_imm16;
+  wire             M_ctrl_unsigned_lo_imm16_nxt;
+  reg              M_ctrl_wrctl_inst;
+  wire             M_ctrl_wrctl_inst_nxt;
+  wire             M_data_ram_ld_align_sign_bit;
+  wire    [  1: 0] M_data_ram_ld_align_sign_bit_16;
+  reg              M_data_ram_ld_align_sign_bit_16_hi;
+  wire    [ 13: 0] M_dc_actual_tag;
+  wire    [ 13: 0] M_dc_desired_tag;
+  wire             M_dc_dirty;
+  wire             M_dc_dirty_raw;
+  wire             M_dc_hit;
+  wire             M_dc_potential_hazard_after_st;
+  wire             M_dc_potential_hazard_after_st_unfiltered;
+  wire             M_dc_potential_hazard_after_st_unfiltered_is_x;
+  wire    [ 31: 0] M_dc_rd_data;
+  wire             M_dc_st_wr_en;
+  wire    [ 15: 0] M_dc_tag_entry;
+  wire             M_dc_tag_match;
+  wire             M_dc_valid;
+  wire             M_dc_valid_st_bypass_hit;
+  wire             M_dc_valid_st_cache_hit;
+  wire             M_dc_want_fill;
+  wire             M_dc_want_mem_bypass_or_dcache_management;
+  reg     [  4: 0] M_dst_regnum;
+  wire             M_en;
+  wire             M_exc_any;
+  wire    [ 31: 0] M_fwd_reg_data;
+  wire    [423: 0] M_inst;
+  wire    [ 31: 0] M_inst_result;
+  reg     [ 31: 0] M_iw;
+  wire    [  4: 0] M_iw_a;
+  wire    [  4: 0] M_iw_b;
+  wire    [  4: 0] M_iw_c;
+  wire    [  2: 0] M_iw_control_regnum;
+  wire    [  7: 0] M_iw_custom_n;
+  wire             M_iw_custom_readra;
+  wire             M_iw_custom_readrb;
+  wire             M_iw_custom_writerc;
+  wire    [ 15: 0] M_iw_imm16;
+  wire    [ 25: 0] M_iw_imm26;
+  wire    [  4: 0] M_iw_imm5;
+  wire    [  1: 0] M_iw_memsz;
+  wire    [  5: 0] M_iw_op;
+  wire    [  5: 0] M_iw_opx;
+  wire    [  4: 0] M_iw_shift_imm5;
+  wire    [  4: 0] M_iw_trap_break_imm5;
+  wire             M_ld_align_byte1_fill;
+  wire             M_ld_align_byte2_byte3_fill;
+  wire             M_ld_align_sh16;
+  wire             M_ld_align_sh8;
+  wire             M_mem16;
+  wire             M_mem32;
+  wire             M_mem8;
+  wire    [ 24: 0] M_mem_baddr;
+  wire    [  1: 0] M_mem_baddr_byte_field;
+  wire    [  5: 0] M_mem_baddr_line_field;
+  wire    [  8: 0] M_mem_baddr_line_offset_field;
+  wire    [  2: 0] M_mem_baddr_offset_field;
+  reg     [  3: 0] M_mem_byte_en;
+  wire             M_op_add;
+  wire             M_op_addi;
+  wire             M_op_and;
+  wire             M_op_andhi;
+  wire             M_op_andi;
+  wire             M_op_beq;
+  wire             M_op_bge;
+  wire             M_op_bgeu;
+  wire             M_op_blt;
+  wire             M_op_bltu;
+  wire             M_op_bne;
+  wire             M_op_br;
+  wire             M_op_break;
+  wire             M_op_bret;
+  wire             M_op_call;
+  wire             M_op_callr;
+  wire             M_op_cmpeq;
+  wire             M_op_cmpeqi;
+  wire             M_op_cmpge;
+  wire             M_op_cmpgei;
+  wire             M_op_cmpgeu;
+  wire             M_op_cmpgeui;
+  wire             M_op_cmplt;
+  wire             M_op_cmplti;
+  wire             M_op_cmpltu;
+  wire             M_op_cmpltui;
+  wire             M_op_cmpne;
+  wire             M_op_cmpnei;
+  wire             M_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  wire             M_op_crst;
+  wire             M_op_custom;
+  wire             M_op_div;
+  wire             M_op_divu;
+  wire             M_op_eret;
+  wire             M_op_flushd;
+  wire             M_op_flushda;
+  wire             M_op_flushi;
+  wire             M_op_flushp;
+  wire             M_op_hbreak;
+  wire             M_op_initd;
+  wire             M_op_initda;
+  wire             M_op_initi;
+  wire             M_op_intr;
+  wire             M_op_jmp;
+  wire             M_op_jmpi;
+  wire             M_op_ldb;
+  wire             M_op_ldbio;
+  wire             M_op_ldbu;
+  wire             M_op_ldbuio;
+  wire             M_op_ldh;
+  wire             M_op_ldhio;
+  wire             M_op_ldhu;
+  wire             M_op_ldhuio;
+  wire             M_op_ldl;
+  wire             M_op_ldw;
+  wire             M_op_ldwio;
+  wire             M_op_mul;
+  wire             M_op_muli;
+  wire             M_op_mulxss;
+  wire             M_op_mulxsu;
+  wire             M_op_mulxuu;
+  wire             M_op_nextpc;
+  wire             M_op_nor;
+  wire             M_op_opx;
+  wire             M_op_or;
+  wire             M_op_orhi;
+  wire             M_op_ori;
+  wire             M_op_rdctl;
+  wire             M_op_rdprs;
+  wire             M_op_ret;
+  wire             M_op_rol;
+  wire             M_op_roli;
+  wire             M_op_ror;
+  wire             M_op_rsv02;
+  wire             M_op_rsv09;
+  wire             M_op_rsv10;
+  wire             M_op_rsv17;
+  wire             M_op_rsv18;
+  wire             M_op_rsv25;
+  wire             M_op_rsv26;
+  wire             M_op_rsv33;
+  wire             M_op_rsv34;
+  wire             M_op_rsv41;
+  wire             M_op_rsv42;
+  wire             M_op_rsv49;
+  wire             M_op_rsv57;
+  wire             M_op_rsv61;
+  wire             M_op_rsv62;
+  wire             M_op_rsv63;
+  wire             M_op_rsvx00;
+  wire             M_op_rsvx10;
+  wire             M_op_rsvx15;
+  wire             M_op_rsvx17;
+  wire             M_op_rsvx21;
+  wire             M_op_rsvx25;
+  wire             M_op_rsvx33;
+  wire             M_op_rsvx34;
+  wire             M_op_rsvx35;
+  wire             M_op_rsvx42;
+  wire             M_op_rsvx43;
+  wire             M_op_rsvx44;
+  wire             M_op_rsvx47;
+  wire             M_op_rsvx50;
+  wire             M_op_rsvx51;
+  wire             M_op_rsvx55;
+  wire             M_op_rsvx56;
+  wire             M_op_rsvx60;
+  wire             M_op_rsvx63;
+  wire             M_op_sll;
+  wire             M_op_slli;
+  wire             M_op_sra;
+  wire             M_op_srai;
+  wire             M_op_srl;
+  wire             M_op_srli;
+  wire             M_op_stb;
+  wire             M_op_stbio;
+  wire             M_op_stc;
+  wire             M_op_sth;
+  wire             M_op_sthio;
+  wire             M_op_stw;
+  wire             M_op_stwio;
+  wire             M_op_sub;
+  wire             M_op_sync;
+  wire             M_op_trap;
+  wire             M_op_wrctl;
+  wire             M_op_wrprs;
+  wire             M_op_xor;
+  wire             M_op_xorhi;
+  wire             M_op_xori;
+  reg     [ 24: 0] M_pcb;
+  reg              M_pipe_flush;
+  wire    [ 24: 0] M_pipe_flush_baddr;
+  wire    [ 24: 0] M_pipe_flush_baddr_nxt;
+  wire             M_pipe_flush_nxt;
+  reg     [ 22: 0] M_pipe_flush_waddr;
+  wire    [ 22: 0] M_pipe_flush_waddr_nxt;
+  wire    [ 31: 0] M_ram_rd_data;
+  wire    [ 31: 0] M_rdctl_data;
+  reg              M_regnum_a_cmp_D;
+  wire             M_regnum_a_cmp_F;
+  reg              M_regnum_b_cmp_D;
+  wire             M_regnum_b_cmp_F;
+  reg              M_rot_fill_bit;
+  reg     [  7: 0] M_rot_mask;
+  reg              M_rot_pass0;
+  reg              M_rot_pass1;
+  reg              M_rot_pass2;
+  reg              M_rot_pass3;
+  wire    [ 31: 0] M_rot_prestep2;
+  reg     [  4: 0] M_rot_rn;
+  reg              M_rot_sel_fill0;
+  reg              M_rot_sel_fill1;
+  reg              M_rot_sel_fill2;
+  reg              M_rot_sel_fill3;
+  reg     [ 31: 0] M_rot_step1;
+  reg              M_sel_data_master;
+  reg     [ 31: 0] M_src1;
+  reg     [ 31: 0] M_src2;
+  reg     [ 31: 0] M_st_data;
+  wire             M_st_dc_wr_en;
+  wire             M_stall;
+  reg     [ 24: 0] M_target_pcb;
+  wire             M_valid;
+  reg              M_valid_from_E;
+  reg              M_valid_mem_d1;
+  wire    [423: 0] M_vinst;
+  wire             M_wr_dst_reg;
+  reg              M_wr_dst_reg_from_E;
+  wire             M_wr_dst_reg_with_wrprs;
+  wire             M_wrctl_bstatus;
+  wire             M_wrctl_data_bstatus_reg_pie;
+  wire             M_wrctl_data_estatus_reg_pie;
+  wire             M_wrctl_data_ienable_reg_irq0;
+  wire             M_wrctl_data_ienable_reg_irq1;
+  wire             M_wrctl_data_status_reg_pie;
+  wire             M_wrctl_estatus;
+  wire             M_wrctl_ienable;
+  wire             M_wrctl_status;
+  reg     [ 31: 0] Mn_rot_step2;
+  reg     [ 24: 0] W_br_taken_baddr;
+  reg              W_ctrl_a_not_src;
+  wire             W_ctrl_a_not_src_nxt;
+  reg              W_ctrl_alu_force_xor;
+  wire             W_ctrl_alu_force_xor_nxt;
+  reg              W_ctrl_alu_signed_comparison;
+  wire             W_ctrl_alu_signed_comparison_nxt;
+  reg              W_ctrl_alu_subtract;
+  wire             W_ctrl_alu_subtract_nxt;
+  reg              W_ctrl_b_is_dst;
+  wire             W_ctrl_b_is_dst_nxt;
+  reg              W_ctrl_b_not_src;
+  wire             W_ctrl_b_not_src_nxt;
+  reg              W_ctrl_br;
+  reg              W_ctrl_br_always_pred_taken;
+  wire             W_ctrl_br_always_pred_taken_nxt;
+  reg              W_ctrl_br_cond;
+  wire             W_ctrl_br_cond_nxt;
+  wire             W_ctrl_br_nxt;
+  reg              W_ctrl_br_uncond;
+  wire             W_ctrl_br_uncond_nxt;
+  reg              W_ctrl_break;
+  wire             W_ctrl_break_nxt;
+  reg              W_ctrl_cmp;
+  wire             W_ctrl_cmp_nxt;
+  reg              W_ctrl_crst;
+  wire             W_ctrl_crst_nxt;
+  reg              W_ctrl_custom_combo;
+  wire             W_ctrl_custom_combo_nxt;
+  reg              W_ctrl_custom_multi;
+  wire             W_ctrl_custom_multi_nxt;
+  reg              W_ctrl_dc_addr_inv;
+  wire             W_ctrl_dc_addr_inv_nxt;
+  reg              W_ctrl_dc_addr_nowb_inv;
+  wire             W_ctrl_dc_addr_nowb_inv_nxt;
+  reg              W_ctrl_dc_addr_wb_inv;
+  wire             W_ctrl_dc_addr_wb_inv_nxt;
+  reg              W_ctrl_dc_index_inv;
+  wire             W_ctrl_dc_index_inv_nxt;
+  reg              W_ctrl_dc_index_nowb_inv;
+  wire             W_ctrl_dc_index_nowb_inv_nxt;
+  reg              W_ctrl_dc_index_wb_inv;
+  wire             W_ctrl_dc_index_wb_inv_nxt;
+  reg              W_ctrl_dc_nowb_inv;
+  wire             W_ctrl_dc_nowb_inv_nxt;
+  reg              W_ctrl_dcache_management;
+  wire             W_ctrl_dcache_management_nxt;
+  reg              W_ctrl_exception;
+  wire             W_ctrl_exception_nxt;
+  reg              W_ctrl_flush_pipe_always;
+  wire             W_ctrl_flush_pipe_always_nxt;
+  reg              W_ctrl_hi_imm16;
+  wire             W_ctrl_hi_imm16_nxt;
+  reg              W_ctrl_ignore_dst;
+  wire             W_ctrl_ignore_dst_nxt;
+  reg              W_ctrl_illegal;
+  wire             W_ctrl_illegal_nxt;
+  reg              W_ctrl_implicit_dst_eretaddr;
+  wire             W_ctrl_implicit_dst_eretaddr_nxt;
+  reg              W_ctrl_implicit_dst_retaddr;
+  wire             W_ctrl_implicit_dst_retaddr_nxt;
+  reg              W_ctrl_invalidate_i;
+  wire             W_ctrl_invalidate_i_nxt;
+  reg              W_ctrl_jmp_direct;
+  wire             W_ctrl_jmp_direct_nxt;
+  reg              W_ctrl_jmp_indirect;
+  wire             W_ctrl_jmp_indirect_nxt;
+  reg              W_ctrl_late_result;
+  wire             W_ctrl_late_result_nxt;
+  reg              W_ctrl_ld;
+  reg              W_ctrl_ld16;
+  wire             W_ctrl_ld16_nxt;
+  reg              W_ctrl_ld32;
+  wire             W_ctrl_ld32_nxt;
+  reg              W_ctrl_ld8;
+  reg              W_ctrl_ld8_ld16;
+  wire             W_ctrl_ld8_ld16_nxt;
+  wire             W_ctrl_ld8_nxt;
+  reg              W_ctrl_ld_dcache_management;
+  wire             W_ctrl_ld_dcache_management_nxt;
+  reg              W_ctrl_ld_io;
+  wire             W_ctrl_ld_io_nxt;
+  reg              W_ctrl_ld_non_io;
+  wire             W_ctrl_ld_non_io_nxt;
+  wire             W_ctrl_ld_nxt;
+  reg              W_ctrl_ld_signed;
+  wire             W_ctrl_ld_signed_nxt;
+  reg              W_ctrl_ld_st;
+  reg              W_ctrl_ld_st_io;
+  wire             W_ctrl_ld_st_io_nxt;
+  reg              W_ctrl_ld_st_non_io;
+  reg              W_ctrl_ld_st_non_io_non_st32;
+  wire             W_ctrl_ld_st_non_io_non_st32_nxt;
+  wire             W_ctrl_ld_st_non_io_nxt;
+  reg              W_ctrl_ld_st_non_st32;
+  wire             W_ctrl_ld_st_non_st32_nxt;
+  wire             W_ctrl_ld_st_nxt;
+  reg              W_ctrl_logic;
+  wire             W_ctrl_logic_nxt;
+  reg              W_ctrl_mem;
+  reg              W_ctrl_mem16;
+  wire             W_ctrl_mem16_nxt;
+  reg              W_ctrl_mem32;
+  wire             W_ctrl_mem32_nxt;
+  reg              W_ctrl_mem8;
+  wire             W_ctrl_mem8_nxt;
+  reg              W_ctrl_mem_data_access;
+  wire             W_ctrl_mem_data_access_nxt;
+  wire             W_ctrl_mem_nxt;
+  reg              W_ctrl_mul_lsw;
+  wire             W_ctrl_mul_lsw_nxt;
+  reg              W_ctrl_rdctl_inst;
+  wire             W_ctrl_rdctl_inst_nxt;
+  reg              W_ctrl_retaddr;
+  wire             W_ctrl_retaddr_nxt;
+  reg              W_ctrl_rot;
+  wire             W_ctrl_rot_nxt;
+  reg              W_ctrl_shift_right_arith;
+  wire             W_ctrl_shift_right_arith_nxt;
+  reg              W_ctrl_shift_rot;
+  reg              W_ctrl_shift_rot_left;
+  wire             W_ctrl_shift_rot_left_nxt;
+  wire             W_ctrl_shift_rot_nxt;
+  reg              W_ctrl_shift_rot_right;
+  wire             W_ctrl_shift_rot_right_nxt;
+  reg              W_ctrl_src2_choose_imm;
+  wire             W_ctrl_src2_choose_imm_nxt;
+  reg              W_ctrl_st;
+  reg              W_ctrl_st16;
+  wire             W_ctrl_st16_nxt;
+  reg              W_ctrl_st8;
+  wire             W_ctrl_st8_nxt;
+  reg              W_ctrl_st_io;
+  wire             W_ctrl_st_io_nxt;
+  reg              W_ctrl_st_non_io;
+  wire             W_ctrl_st_non_io_nxt;
+  wire             W_ctrl_st_nxt;
+  reg              W_ctrl_supervisor_only;
+  wire             W_ctrl_supervisor_only_nxt;
+  reg              W_ctrl_uncond_cti_non_br;
+  wire             W_ctrl_uncond_cti_non_br_nxt;
+  reg              W_ctrl_unimp_nop;
+  wire             W_ctrl_unimp_nop_nxt;
+  reg              W_ctrl_unimp_trap;
+  wire             W_ctrl_unimp_trap_nxt;
+  reg              W_ctrl_unsigned_lo_imm16;
+  wire             W_ctrl_unsigned_lo_imm16_nxt;
+  reg              W_ctrl_wrctl_inst;
+  wire             W_ctrl_wrctl_inst_nxt;
+  reg     [  4: 0] W_dst_regnum;
+  wire             W_en;
+  wire    [423: 0] W_inst;
+  reg     [ 31: 0] W_iw;
+  wire    [  4: 0] W_iw_a;
+  wire    [  4: 0] W_iw_b;
+  wire    [  4: 0] W_iw_c;
+  wire    [  2: 0] W_iw_control_regnum;
+  wire    [  7: 0] W_iw_custom_n;
+  wire             W_iw_custom_readra;
+  wire             W_iw_custom_readrb;
+  wire             W_iw_custom_writerc;
+  wire    [ 15: 0] W_iw_imm16;
+  wire    [ 25: 0] W_iw_imm26;
+  wire    [  4: 0] W_iw_imm5;
+  wire    [  1: 0] W_iw_memsz;
+  wire    [  5: 0] W_iw_op;
+  wire    [  5: 0] W_iw_opx;
+  wire    [  4: 0] W_iw_shift_imm5;
+  wire    [  4: 0] W_iw_trap_break_imm5;
+  wire             W_mem16;
+  wire             W_mem32;
+  wire             W_mem8;
+  wire             W_op_add;
+  wire             W_op_addi;
+  wire             W_op_and;
+  wire             W_op_andhi;
+  wire             W_op_andi;
+  wire             W_op_beq;
+  wire             W_op_bge;
+  wire             W_op_bgeu;
+  wire             W_op_blt;
+  wire             W_op_bltu;
+  wire             W_op_bne;
+  wire             W_op_br;
+  wire             W_op_break;
+  wire             W_op_bret;
+  wire             W_op_call;
+  wire             W_op_callr;
+  wire             W_op_cmpeq;
+  wire             W_op_cmpeqi;
+  wire             W_op_cmpge;
+  wire             W_op_cmpgei;
+  wire             W_op_cmpgeu;
+  wire             W_op_cmpgeui;
+  wire             W_op_cmplt;
+  wire             W_op_cmplti;
+  wire             W_op_cmpltu;
+  wire             W_op_cmpltui;
+  wire             W_op_cmpne;
+  wire             W_op_cmpnei;
+  wire             W_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
+  wire             W_op_crst;
+  wire             W_op_custom;
+  wire             W_op_div;
+  wire             W_op_divu;
+  wire             W_op_eret;
+  wire             W_op_flushd;
+  wire             W_op_flushda;
+  wire             W_op_flushi;
+  wire             W_op_flushp;
+  wire             W_op_hbreak;
+  wire             W_op_initd;
+  wire             W_op_initda;
+  wire             W_op_initi;
+  wire             W_op_intr;
+  wire             W_op_jmp;
+  wire             W_op_jmpi;
+  wire             W_op_ldb;
+  wire             W_op_ldbio;
+  wire             W_op_ldbu;
+  wire             W_op_ldbuio;
+  wire             W_op_ldh;
+  wire             W_op_ldhio;
+  wire             W_op_ldhu;
+  wire             W_op_ldhuio;
+  wire             W_op_ldl;
+  wire             W_op_ldw;
+  wire             W_op_ldwio;
+  wire             W_op_mul;
+  wire             W_op_muli;
+  wire             W_op_mulxss;
+  wire             W_op_mulxsu;
+  wire             W_op_mulxuu;
+  wire             W_op_nextpc;
+  wire             W_op_nor;
+  wire             W_op_opx;
+  wire             W_op_or;
+  wire             W_op_orhi;
+  wire             W_op_ori;
+  wire             W_op_rdctl;
+  wire             W_op_rdprs;
+  wire             W_op_ret;
+  wire             W_op_rol;
+  wire             W_op_roli;
+  wire             W_op_ror;
+  wire             W_op_rsv02;
+  wire             W_op_rsv09;
+  wire             W_op_rsv10;
+  wire             W_op_rsv17;
+  wire             W_op_rsv18;
+  wire             W_op_rsv25;
+  wire             W_op_rsv26;
+  wire             W_op_rsv33;
+  wire             W_op_rsv34;
+  wire             W_op_rsv41;
+  wire             W_op_rsv42;
+  wire             W_op_rsv49;
+  wire             W_op_rsv57;
+  wire             W_op_rsv61;
+  wire             W_op_rsv62;
+  wire             W_op_rsv63;
+  wire             W_op_rsvx00;
+  wire             W_op_rsvx10;
+  wire             W_op_rsvx15;
+  wire             W_op_rsvx17;
+  wire             W_op_rsvx21;
+  wire             W_op_rsvx25;
+  wire             W_op_rsvx33;
+  wire             W_op_rsvx34;
+  wire             W_op_rsvx35;
+  wire             W_op_rsvx42;
+  wire             W_op_rsvx43;
+  wire             W_op_rsvx44;
+  wire             W_op_rsvx47;
+  wire             W_op_rsvx50;
+  wire             W_op_rsvx51;
+  wire             W_op_rsvx55;
+  wire             W_op_rsvx56;
+  wire             W_op_rsvx60;
+  wire             W_op_rsvx63;
+  wire             W_op_sll;
+  wire             W_op_slli;
+  wire             W_op_sra;
+  wire             W_op_srai;
+  wire             W_op_srl;
+  wire             W_op_srli;
+  wire             W_op_stb;
+  wire             W_op_stbio;
+  wire             W_op_stc;
+  wire             W_op_sth;
+  wire             W_op_sthio;
+  wire             W_op_stw;
+  wire             W_op_stwio;
+  wire             W_op_sub;
+  wire             W_op_sync;
+  wire             W_op_trap;
+  wire             W_op_wrctl;
+  wire             W_op_wrprs;
+  wire             W_op_xor;
+  wire             W_op_xorhi;
+  wire             W_op_xori;
+  reg     [ 24: 0] W_pcb;
+  reg              W_regnum_a_cmp_D;
+  reg              W_regnum_b_cmp_D;
+  reg              W_valid;
   wire    [423: 0] W_vinst;
-  wire    [ 31: 0] W_wr_data;
-  wire    [ 31: 0] W_wr_data_non_zero;
-  wire             av_fill_bit;
-  reg     [  1: 0] av_ld_align_cycle;
-  wire    [  1: 0] av_ld_align_cycle_nxt;
-  wire             av_ld_align_one_more_cycle;
-  reg              av_ld_aligning_data;
-  wire             av_ld_aligning_data_nxt;
-  reg     [  7: 0] av_ld_byte0_data;
-  wire    [  7: 0] av_ld_byte0_data_nxt;
-  reg     [  7: 0] av_ld_byte1_data;
-  wire             av_ld_byte1_data_en;
-  wire    [  7: 0] av_ld_byte1_data_nxt;
-  reg     [  7: 0] av_ld_byte2_data;
-  wire    [  7: 0] av_ld_byte2_data_nxt;
-  reg     [  7: 0] av_ld_byte3_data;
-  wire    [  7: 0] av_ld_byte3_data_nxt;
-  wire    [ 31: 0] av_ld_data_aligned_filtered;
-  wire    [ 31: 0] av_ld_data_aligned_unfiltered;
-  wire             av_ld_done;
-  wire             av_ld_extend;
-  wire             av_ld_getting_data;
-  wire             av_ld_rshift8;
-  reg              av_ld_waiting_for_data;
-  wire             av_ld_waiting_for_data_nxt;
-  wire             av_sign_bit;
+  reg     [ 31: 0] W_wr_data;
+  reg              W_wr_dst_reg;
+  wire             av_addr_accepted;
+  wire             av_rd_addr_accepted;
+  wire             av_wr_data_transfer;
+  reg              clr_break_line;
   wire    [ 24: 0] d_address;
+  reg     [  1: 0] d_address_byte_field;
+  wire    [  1: 0] d_address_byte_field_nxt;
+  reg     [  5: 0] d_address_line_field;
+  wire    [  5: 0] d_address_line_field_nxt;
+  reg     [  2: 0] d_address_offset_field;
+  wire    [  2: 0] d_address_offset_field_nxt;
+  reg     [ 13: 0] d_address_tag_field;
+  wire    [ 13: 0] d_address_tag_field_nxt;
   reg     [  3: 0] d_byteenable;
+  wire    [  3: 0] d_byteenable_nxt;
   reg              d_read;
   wire             d_read_nxt;
-  wire             d_write;
+  reg     [ 31: 0] d_readdata_d1;
+  reg              d_readdatavalid_d1;
+  reg              d_write;
   wire             d_write_nxt;
   reg     [ 31: 0] d_writedata;
+  wire    [ 31: 0] d_writedata_nxt;
+  wire    [  8: 0] dc_data_rd_port_addr;
+  wire    [ 31: 0] dc_data_rd_port_data;
+  wire    [  5: 0] dc_data_rd_port_line_field;
+  wire    [  2: 0] dc_data_rd_port_offset_field;
+  wire    [  8: 0] dc_data_wr_port_addr;
+  wire    [  3: 0] dc_data_wr_port_byte_en;
+  wire    [ 31: 0] dc_data_wr_port_data;
+  wire             dc_data_wr_port_en;
+  wire             dc_line_dirty_off;
+  wire             dc_line_dirty_on;
+  wire             dc_line_valid_off;
+  wire             dc_line_valid_on;
+  wire    [  5: 0] dc_tag_rd_port_addr;
+  wire    [ 15: 0] dc_tag_rd_port_data;
+  wire    [  5: 0] dc_tag_wr_port_addr;
+  wire    [ 15: 0] dc_tag_wr_port_data;
+  wire             dc_tag_wr_port_en;
   reg              hbreak_enabled;
-  reg              hbreak_pending;
-  wire             hbreak_pending_nxt;
   wire             hbreak_req;
   wire    [ 24: 0] i_address;
   reg              i_read;
   wire             i_read_nxt;
-  wire    [ 31: 0] iactive;
-  wire             intr_req;
+  reg     [ 31: 0] i_readdata_d1;
+  reg              i_readdatavalid_d1;
+  wire             ic_bypass_active;
+  wire             ic_data_rden;
+  wire             ic_data_wren;
+  reg              ic_fill_active;
+  wire             ic_fill_active_nxt;
+  reg     [  3: 0] ic_fill_ap_cnt;
+  wire    [  3: 0] ic_fill_ap_cnt_nxt;
+  wire             ic_fill_ap_last_word;
+  reg     [  2: 0] ic_fill_ap_offset;
+  wire    [  2: 0] ic_fill_ap_offset_nxt;
+  wire             ic_fill_done;
+  wire             ic_fill_dp_last_word;
+  reg     [  2: 0] ic_fill_dp_offset;
+  wire             ic_fill_dp_offset_en;
+  wire    [  2: 0] ic_fill_dp_offset_nxt;
+  reg     [  2: 0] ic_fill_initial_offset;
+  reg     [  6: 0] ic_fill_line;
+  reg              ic_fill_prevent_refill;
+  wire             ic_fill_prevent_refill_nxt;
+  wire             ic_fill_req_accepted;
+  reg     [ 12: 0] ic_fill_tag;
+  wire    [  7: 0] ic_fill_valid_bit_new;
+  reg     [  7: 0] ic_fill_valid_bits;
+  wire             ic_fill_valid_bits_en;
+  wire    [  7: 0] ic_fill_valid_bits_nxt;
+  reg              ic_tag_clr_valid_bits;
+  wire             ic_tag_clr_valid_bits_nxt;
+  wire             ic_tag_rden;
+  reg     [  6: 0] ic_tag_wraddress;
+  wire    [  6: 0] ic_tag_wraddress_nxt;
+  wire    [ 20: 0] ic_tag_wrdata;
+  wire             ic_tag_wren;
   wire             jtag_debug_module_clk;
   wire             jtag_debug_module_debugaccess_to_roms;
   wire    [ 31: 0] jtag_debug_module_readdata;
   wire             jtag_debug_module_reset;
   wire             jtag_debug_module_resetrequest;
+  reg              latched_oci_tb_hbreak_req;
+  wire             latched_oci_tb_hbreak_req_next;
+  wire             norm_intr_req;
   wire             oci_hbreak_req;
   wire    [ 31: 0] oci_ienable;
   wire             oci_single_step_mode;
@@ -3789,67 +5990,60 @@ module cpu_0 (
   //the_cpu_0_test_bench, which is an e_instance
   cpu_0_test_bench the_cpu_0_test_bench
     (
-      .D_iw                          (D_iw),
-      .D_iw_op                       (D_iw_op),
-      .D_iw_opx                      (D_iw_opx),
-      .D_valid                       (D_valid),
-      .E_alu_result                  (E_alu_result),
-      .E_mem_byte_en                 (E_mem_byte_en),
-      .E_st_data                     (E_st_data),
-      .E_valid                       (E_valid),
-      .F_pcb                         (F_pcb),
-      .F_valid                       (F_valid),
-      .R_ctrl_exception              (R_ctrl_exception),
-      .R_ctrl_ld                     (R_ctrl_ld),
-      .R_ctrl_ld_non_io              (R_ctrl_ld_non_io),
-      .R_dst_regnum                  (R_dst_regnum),
-      .R_wr_dst_reg                  (R_wr_dst_reg),
-      .W_bstatus_reg                 (W_bstatus_reg),
-      .W_cmp_result                  (W_cmp_result),
-      .W_estatus_reg                 (W_estatus_reg),
-      .W_ienable_reg                 (W_ienable_reg),
-      .W_ipending_reg                (W_ipending_reg),
-      .W_mem_baddr                   (W_mem_baddr),
-      .W_rf_wr_data                  (W_rf_wr_data),
-      .W_status_reg                  (W_status_reg),
-      .W_valid                       (W_valid),
-      .W_vinst                       (W_vinst),
-      .W_wr_data                     (W_wr_data),
-      .av_ld_data_aligned_filtered   (av_ld_data_aligned_filtered),
-      .av_ld_data_aligned_unfiltered (av_ld_data_aligned_unfiltered),
-      .clk                           (clk),
-      .d_address                     (d_address),
-      .d_byteenable                  (d_byteenable),
-      .d_read                        (d_read),
-      .d_write                       (d_write),
-      .d_write_nxt                   (d_write_nxt),
-      .i_address                     (i_address),
-      .i_read                        (i_read),
-      .i_readdata                    (i_readdata),
-      .i_waitrequest                 (i_waitrequest),
-      .reset_n                       (reset_n),
-      .test_has_ended                (test_has_ended)
+      .A_bstatus_reg                        (A_bstatus_reg),
+      .A_cmp_result                         (A_cmp_result),
+      .A_ctrl_exception                     (A_ctrl_exception),
+      .A_ctrl_ld_non_bypass                 (A_ctrl_ld_non_bypass),
+      .A_dst_regnum                         (A_dst_regnum),
+      .A_en                                 (A_en),
+      .A_estatus_reg                        (A_estatus_reg),
+      .A_ienable_reg                        (A_ienable_reg),
+      .A_ipending_reg                       (A_ipending_reg),
+      .A_iw                                 (A_iw),
+      .A_mem_byte_en                        (A_mem_byte_en),
+      .A_op_hbreak                          (A_op_hbreak),
+      .A_op_intr                            (A_op_intr),
+      .A_pcb                                (A_pcb),
+      .A_st_data                            (A_st_data),
+      .A_status_reg                         (A_status_reg),
+      .A_valid                              (A_valid),
+      .A_wr_data_filtered                   (A_wr_data_filtered),
+      .A_wr_data_unfiltered                 (A_wr_data_unfiltered),
+      .A_wr_dst_reg                         (A_wr_dst_reg),
+      .E_add_br_to_taken_history_filtered   (E_add_br_to_taken_history_filtered),
+      .E_add_br_to_taken_history_unfiltered (E_add_br_to_taken_history_unfiltered),
+      .E_logic_result                       (E_logic_result),
+      .E_src1_eq_src2                       (E_src1_eq_src2),
+      .E_valid                              (E_valid),
+      .M_bht_ptr_filtered                   (M_bht_ptr_filtered),
+      .M_bht_ptr_unfiltered                 (M_bht_ptr_unfiltered),
+      .M_bht_wr_data_filtered               (M_bht_wr_data_filtered),
+      .M_bht_wr_data_unfiltered             (M_bht_wr_data_unfiltered),
+      .M_bht_wr_en_filtered                 (M_bht_wr_en_filtered),
+      .M_bht_wr_en_unfiltered               (M_bht_wr_en_unfiltered),
+      .M_mem_baddr                          (M_mem_baddr),
+      .M_target_pcb                         (M_target_pcb),
+      .M_valid                              (M_valid),
+      .W_dst_regnum                         (W_dst_regnum),
+      .W_iw                                 (W_iw),
+      .W_iw_op                              (W_iw_op),
+      .W_iw_opx                             (W_iw_opx),
+      .W_pcb                                (W_pcb),
+      .W_valid                              (W_valid),
+      .W_vinst                              (W_vinst),
+      .W_wr_dst_reg                         (W_wr_dst_reg),
+      .clk                                  (clk),
+      .d_address                            (d_address),
+      .d_byteenable                         (d_byteenable),
+      .d_read                               (d_read),
+      .d_write                              (d_write),
+      .i_address                            (i_address),
+      .i_read                               (i_read),
+      .i_readdatavalid                      (i_readdatavalid),
+      .reset_n                              (reset_n),
+      .test_has_ended                       (test_has_ended)
     );
 
-  assign F_av_iw_a = F_av_iw[31 : 27];
-  assign F_av_iw_b = F_av_iw[26 : 22];
-  assign F_av_iw_c = F_av_iw[21 : 17];
-  assign F_av_iw_custom_n = F_av_iw[13 : 6];
-  assign F_av_iw_custom_readra = F_av_iw[16];
-  assign F_av_iw_custom_readrb = F_av_iw[15];
-  assign F_av_iw_custom_writerc = F_av_iw[14];
-  assign F_av_iw_opx = F_av_iw[16 : 11];
-  assign F_av_iw_op = F_av_iw[5 : 0];
-  assign F_av_iw_shift_imm5 = F_av_iw[10 : 6];
-  assign F_av_iw_trap_break_imm5 = F_av_iw[10 : 6];
-  assign F_av_iw_imm5 = F_av_iw[10 : 6];
-  assign F_av_iw_imm16 = F_av_iw[21 : 6];
-  assign F_av_iw_imm26 = F_av_iw[31 : 6];
-  assign F_av_iw_memsz = F_av_iw[4 : 3];
-  assign F_av_iw_control_regnum = F_av_iw[8 : 6];
-  assign F_av_mem8 = F_av_iw_memsz == 2'b00;
-  assign F_av_mem16 = F_av_iw_memsz == 2'b01;
-  assign F_av_mem32 = F_av_iw_memsz[1] == 1'b1;
   assign F_iw_a = F_iw[31 : 27];
   assign F_iw_b = F_iw[26 : 22];
   assign F_iw_c = F_iw[21 : 17];
@@ -3869,6 +6063,25 @@ module cpu_0 (
   assign F_mem8 = F_iw_memsz == 2'b00;
   assign F_mem16 = F_iw_memsz == 2'b01;
   assign F_mem32 = F_iw_memsz[1] == 1'b1;
+  assign F_ram_iw_a = F_ram_iw[31 : 27];
+  assign F_ram_iw_b = F_ram_iw[26 : 22];
+  assign F_ram_iw_c = F_ram_iw[21 : 17];
+  assign F_ram_iw_custom_n = F_ram_iw[13 : 6];
+  assign F_ram_iw_custom_readra = F_ram_iw[16];
+  assign F_ram_iw_custom_readrb = F_ram_iw[15];
+  assign F_ram_iw_custom_writerc = F_ram_iw[14];
+  assign F_ram_iw_opx = F_ram_iw[16 : 11];
+  assign F_ram_iw_op = F_ram_iw[5 : 0];
+  assign F_ram_iw_shift_imm5 = F_ram_iw[10 : 6];
+  assign F_ram_iw_trap_break_imm5 = F_ram_iw[10 : 6];
+  assign F_ram_iw_imm5 = F_ram_iw[10 : 6];
+  assign F_ram_iw_imm16 = F_ram_iw[21 : 6];
+  assign F_ram_iw_imm26 = F_ram_iw[31 : 6];
+  assign F_ram_iw_memsz = F_ram_iw[4 : 3];
+  assign F_ram_iw_control_regnum = F_ram_iw[8 : 6];
+  assign F_ram_mem8 = F_ram_iw_memsz == 2'b00;
+  assign F_ram_mem16 = F_ram_iw_memsz == 2'b01;
+  assign F_ram_mem32 = F_ram_iw_memsz[1] == 1'b1;
   assign D_iw_a = D_iw[31 : 27];
   assign D_iw_b = D_iw[26 : 22];
   assign D_iw_c = D_iw[21 : 17];
@@ -3888,6 +6101,82 @@ module cpu_0 (
   assign D_mem8 = D_iw_memsz == 2'b00;
   assign D_mem16 = D_iw_memsz == 2'b01;
   assign D_mem32 = D_iw_memsz[1] == 1'b1;
+  assign E_iw_a = E_iw[31 : 27];
+  assign E_iw_b = E_iw[26 : 22];
+  assign E_iw_c = E_iw[21 : 17];
+  assign E_iw_custom_n = E_iw[13 : 6];
+  assign E_iw_custom_readra = E_iw[16];
+  assign E_iw_custom_readrb = E_iw[15];
+  assign E_iw_custom_writerc = E_iw[14];
+  assign E_iw_opx = E_iw[16 : 11];
+  assign E_iw_op = E_iw[5 : 0];
+  assign E_iw_shift_imm5 = E_iw[10 : 6];
+  assign E_iw_trap_break_imm5 = E_iw[10 : 6];
+  assign E_iw_imm5 = E_iw[10 : 6];
+  assign E_iw_imm16 = E_iw[21 : 6];
+  assign E_iw_imm26 = E_iw[31 : 6];
+  assign E_iw_memsz = E_iw[4 : 3];
+  assign E_iw_control_regnum = E_iw[8 : 6];
+  assign E_mem8 = E_iw_memsz == 2'b00;
+  assign E_mem16 = E_iw_memsz == 2'b01;
+  assign E_mem32 = E_iw_memsz[1] == 1'b1;
+  assign M_iw_a = M_iw[31 : 27];
+  assign M_iw_b = M_iw[26 : 22];
+  assign M_iw_c = M_iw[21 : 17];
+  assign M_iw_custom_n = M_iw[13 : 6];
+  assign M_iw_custom_readra = M_iw[16];
+  assign M_iw_custom_readrb = M_iw[15];
+  assign M_iw_custom_writerc = M_iw[14];
+  assign M_iw_opx = M_iw[16 : 11];
+  assign M_iw_op = M_iw[5 : 0];
+  assign M_iw_shift_imm5 = M_iw[10 : 6];
+  assign M_iw_trap_break_imm5 = M_iw[10 : 6];
+  assign M_iw_imm5 = M_iw[10 : 6];
+  assign M_iw_imm16 = M_iw[21 : 6];
+  assign M_iw_imm26 = M_iw[31 : 6];
+  assign M_iw_memsz = M_iw[4 : 3];
+  assign M_iw_control_regnum = M_iw[8 : 6];
+  assign M_mem8 = M_iw_memsz == 2'b00;
+  assign M_mem16 = M_iw_memsz == 2'b01;
+  assign M_mem32 = M_iw_memsz[1] == 1'b1;
+  assign A_iw_a = A_iw[31 : 27];
+  assign A_iw_b = A_iw[26 : 22];
+  assign A_iw_c = A_iw[21 : 17];
+  assign A_iw_custom_n = A_iw[13 : 6];
+  assign A_iw_custom_readra = A_iw[16];
+  assign A_iw_custom_readrb = A_iw[15];
+  assign A_iw_custom_writerc = A_iw[14];
+  assign A_iw_opx = A_iw[16 : 11];
+  assign A_iw_op = A_iw[5 : 0];
+  assign A_iw_shift_imm5 = A_iw[10 : 6];
+  assign A_iw_trap_break_imm5 = A_iw[10 : 6];
+  assign A_iw_imm5 = A_iw[10 : 6];
+  assign A_iw_imm16 = A_iw[21 : 6];
+  assign A_iw_imm26 = A_iw[31 : 6];
+  assign A_iw_memsz = A_iw[4 : 3];
+  assign A_iw_control_regnum = A_iw[8 : 6];
+  assign A_mem8 = A_iw_memsz == 2'b00;
+  assign A_mem16 = A_iw_memsz == 2'b01;
+  assign A_mem32 = A_iw_memsz[1] == 1'b1;
+  assign W_iw_a = W_iw[31 : 27];
+  assign W_iw_b = W_iw[26 : 22];
+  assign W_iw_c = W_iw[21 : 17];
+  assign W_iw_custom_n = W_iw[13 : 6];
+  assign W_iw_custom_readra = W_iw[16];
+  assign W_iw_custom_readrb = W_iw[15];
+  assign W_iw_custom_writerc = W_iw[14];
+  assign W_iw_opx = W_iw[16 : 11];
+  assign W_iw_op = W_iw[5 : 0];
+  assign W_iw_shift_imm5 = W_iw[10 : 6];
+  assign W_iw_trap_break_imm5 = W_iw[10 : 6];
+  assign W_iw_imm5 = W_iw[10 : 6];
+  assign W_iw_imm16 = W_iw[21 : 6];
+  assign W_iw_imm26 = W_iw[31 : 6];
+  assign W_iw_memsz = W_iw[4 : 3];
+  assign W_iw_control_regnum = W_iw[8 : 6];
+  assign W_mem8 = W_iw_memsz == 2'b00;
+  assign W_mem16 = W_iw_memsz == 2'b01;
+  assign W_mem32 = W_iw_memsz[1] == 1'b1;
   assign F_op_call = F_iw_op == 0;
   assign F_op_jmpi = F_iw_op == 1;
   assign F_op_ldbu = F_iw_op == 3;
@@ -4146,187 +6435,1060 @@ module cpu_0 (
   assign D_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 = D_op_custom & 1'b1;
   assign D_op_opx = D_iw_op == 58;
   assign D_op_custom = D_iw_op == 50;
-  assign R_en = 1'b1;
-  assign E_ci_dataa = E_src1;
-  assign E_ci_datab = E_src2;
-  assign W_ci_ipending = W_ipending_reg;
-  assign W_ci_status = W_status_reg;
-  assign W_ci_estatus = W_estatus_reg;
-  assign D_ci_n = D_iw_custom_n;
-  assign D_ci_a = D_iw_a;
-  assign D_ci_b = D_iw_b;
-  assign D_ci_c = D_iw_c;
-  assign D_ci_readra = D_iw_custom_readra;
-  assign D_ci_readrb = D_iw_custom_readrb;
-  assign D_ci_writerc = D_iw_custom_writerc;
-  assign E_ci_multi_clock = clk;
-  assign E_ci_multi_reset = ~reset_n;
-  //custom_instruction_master, which is an e_custom_instruction_master
-  assign iactive = d_irq[31 : 0] & 32'b00000000000000000000000000000011;
-  assign F_pc_sel_nxt = R_ctrl_exception                          ? 2'b00 :
-    R_ctrl_break                              ? 2'b01 :
-    (W_br_taken | R_ctrl_uncond_cti_non_br)   ? 2'b10 :
-    2'b11;
+  assign E_op_call = E_iw_op == 0;
+  assign E_op_jmpi = E_iw_op == 1;
+  assign E_op_ldbu = E_iw_op == 3;
+  assign E_op_addi = E_iw_op == 4;
+  assign E_op_stb = E_iw_op == 5;
+  assign E_op_br = E_iw_op == 6;
+  assign E_op_ldb = E_iw_op == 7;
+  assign E_op_cmpgei = E_iw_op == 8;
+  assign E_op_ldhu = E_iw_op == 11;
+  assign E_op_andi = E_iw_op == 12;
+  assign E_op_sth = E_iw_op == 13;
+  assign E_op_bge = E_iw_op == 14;
+  assign E_op_ldh = E_iw_op == 15;
+  assign E_op_cmplti = E_iw_op == 16;
+  assign E_op_initda = E_iw_op == 19;
+  assign E_op_ori = E_iw_op == 20;
+  assign E_op_stw = E_iw_op == 21;
+  assign E_op_blt = E_iw_op == 22;
+  assign E_op_ldw = E_iw_op == 23;
+  assign E_op_cmpnei = E_iw_op == 24;
+  assign E_op_flushda = E_iw_op == 27;
+  assign E_op_xori = E_iw_op == 28;
+  assign E_op_stc = E_iw_op == 29;
+  assign E_op_bne = E_iw_op == 30;
+  assign E_op_ldl = E_iw_op == 31;
+  assign E_op_cmpeqi = E_iw_op == 32;
+  assign E_op_ldbuio = E_iw_op == 35;
+  assign E_op_muli = E_iw_op == 36;
+  assign E_op_stbio = E_iw_op == 37;
+  assign E_op_beq = E_iw_op == 38;
+  assign E_op_ldbio = E_iw_op == 39;
+  assign E_op_cmpgeui = E_iw_op == 40;
+  assign E_op_ldhuio = E_iw_op == 43;
+  assign E_op_andhi = E_iw_op == 44;
+  assign E_op_sthio = E_iw_op == 45;
+  assign E_op_bgeu = E_iw_op == 46;
+  assign E_op_ldhio = E_iw_op == 47;
+  assign E_op_cmpltui = E_iw_op == 48;
+  assign E_op_initd = E_iw_op == 51;
+  assign E_op_orhi = E_iw_op == 52;
+  assign E_op_stwio = E_iw_op == 53;
+  assign E_op_bltu = E_iw_op == 54;
+  assign E_op_ldwio = E_iw_op == 55;
+  assign E_op_rdprs = E_iw_op == 56;
+  assign E_op_flushd = E_iw_op == 59;
+  assign E_op_xorhi = E_iw_op == 60;
+  assign E_op_rsv02 = E_iw_op == 2;
+  assign E_op_rsv09 = E_iw_op == 9;
+  assign E_op_rsv10 = E_iw_op == 10;
+  assign E_op_rsv17 = E_iw_op == 17;
+  assign E_op_rsv18 = E_iw_op == 18;
+  assign E_op_rsv25 = E_iw_op == 25;
+  assign E_op_rsv26 = E_iw_op == 26;
+  assign E_op_rsv33 = E_iw_op == 33;
+  assign E_op_rsv34 = E_iw_op == 34;
+  assign E_op_rsv41 = E_iw_op == 41;
+  assign E_op_rsv42 = E_iw_op == 42;
+  assign E_op_rsv49 = E_iw_op == 49;
+  assign E_op_rsv57 = E_iw_op == 57;
+  assign E_op_rsv61 = E_iw_op == 61;
+  assign E_op_rsv62 = E_iw_op == 62;
+  assign E_op_rsv63 = E_iw_op == 63;
+  assign E_op_eret = E_op_opx & (E_iw_opx == 1);
+  assign E_op_roli = E_op_opx & (E_iw_opx == 2);
+  assign E_op_rol = E_op_opx & (E_iw_opx == 3);
+  assign E_op_flushp = E_op_opx & (E_iw_opx == 4);
+  assign E_op_ret = E_op_opx & (E_iw_opx == 5);
+  assign E_op_nor = E_op_opx & (E_iw_opx == 6);
+  assign E_op_mulxuu = E_op_opx & (E_iw_opx == 7);
+  assign E_op_cmpge = E_op_opx & (E_iw_opx == 8);
+  assign E_op_bret = E_op_opx & (E_iw_opx == 9);
+  assign E_op_ror = E_op_opx & (E_iw_opx == 11);
+  assign E_op_flushi = E_op_opx & (E_iw_opx == 12);
+  assign E_op_jmp = E_op_opx & (E_iw_opx == 13);
+  assign E_op_and = E_op_opx & (E_iw_opx == 14);
+  assign E_op_cmplt = E_op_opx & (E_iw_opx == 16);
+  assign E_op_slli = E_op_opx & (E_iw_opx == 18);
+  assign E_op_sll = E_op_opx & (E_iw_opx == 19);
+  assign E_op_wrprs = E_op_opx & (E_iw_opx == 20);
+  assign E_op_or = E_op_opx & (E_iw_opx == 22);
+  assign E_op_mulxsu = E_op_opx & (E_iw_opx == 23);
+  assign E_op_cmpne = E_op_opx & (E_iw_opx == 24);
+  assign E_op_srli = E_op_opx & (E_iw_opx == 26);
+  assign E_op_srl = E_op_opx & (E_iw_opx == 27);
+  assign E_op_nextpc = E_op_opx & (E_iw_opx == 28);
+  assign E_op_callr = E_op_opx & (E_iw_opx == 29);
+  assign E_op_xor = E_op_opx & (E_iw_opx == 30);
+  assign E_op_mulxss = E_op_opx & (E_iw_opx == 31);
+  assign E_op_cmpeq = E_op_opx & (E_iw_opx == 32);
+  assign E_op_divu = E_op_opx & (E_iw_opx == 36);
+  assign E_op_div = E_op_opx & (E_iw_opx == 37);
+  assign E_op_rdctl = E_op_opx & (E_iw_opx == 38);
+  assign E_op_mul = E_op_opx & (E_iw_opx == 39);
+  assign E_op_cmpgeu = E_op_opx & (E_iw_opx == 40);
+  assign E_op_initi = E_op_opx & (E_iw_opx == 41);
+  assign E_op_trap = E_op_opx & (E_iw_opx == 45);
+  assign E_op_wrctl = E_op_opx & (E_iw_opx == 46);
+  assign E_op_cmpltu = E_op_opx & (E_iw_opx == 48);
+  assign E_op_add = E_op_opx & (E_iw_opx == 49);
+  assign E_op_break = E_op_opx & (E_iw_opx == 52);
+  assign E_op_hbreak = E_op_opx & (E_iw_opx == 53);
+  assign E_op_sync = E_op_opx & (E_iw_opx == 54);
+  assign E_op_sub = E_op_opx & (E_iw_opx == 57);
+  assign E_op_srai = E_op_opx & (E_iw_opx == 58);
+  assign E_op_sra = E_op_opx & (E_iw_opx == 59);
+  assign E_op_intr = E_op_opx & (E_iw_opx == 61);
+  assign E_op_crst = E_op_opx & (E_iw_opx == 62);
+  assign E_op_rsvx00 = E_op_opx & (E_iw_opx == 0);
+  assign E_op_rsvx10 = E_op_opx & (E_iw_opx == 10);
+  assign E_op_rsvx15 = E_op_opx & (E_iw_opx == 15);
+  assign E_op_rsvx17 = E_op_opx & (E_iw_opx == 17);
+  assign E_op_rsvx21 = E_op_opx & (E_iw_opx == 21);
+  assign E_op_rsvx25 = E_op_opx & (E_iw_opx == 25);
+  assign E_op_rsvx33 = E_op_opx & (E_iw_opx == 33);
+  assign E_op_rsvx34 = E_op_opx & (E_iw_opx == 34);
+  assign E_op_rsvx35 = E_op_opx & (E_iw_opx == 35);
+  assign E_op_rsvx42 = E_op_opx & (E_iw_opx == 42);
+  assign E_op_rsvx43 = E_op_opx & (E_iw_opx == 43);
+  assign E_op_rsvx44 = E_op_opx & (E_iw_opx == 44);
+  assign E_op_rsvx47 = E_op_opx & (E_iw_opx == 47);
+  assign E_op_rsvx50 = E_op_opx & (E_iw_opx == 50);
+  assign E_op_rsvx51 = E_op_opx & (E_iw_opx == 51);
+  assign E_op_rsvx55 = E_op_opx & (E_iw_opx == 55);
+  assign E_op_rsvx56 = E_op_opx & (E_iw_opx == 56);
+  assign E_op_rsvx60 = E_op_opx & (E_iw_opx == 60);
+  assign E_op_rsvx63 = E_op_opx & (E_iw_opx == 63);
+  assign E_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 = E_op_custom & 1'b1;
+  assign E_op_opx = E_iw_op == 58;
+  assign E_op_custom = E_iw_op == 50;
+  assign M_op_call = M_iw_op == 0;
+  assign M_op_jmpi = M_iw_op == 1;
+  assign M_op_ldbu = M_iw_op == 3;
+  assign M_op_addi = M_iw_op == 4;
+  assign M_op_stb = M_iw_op == 5;
+  assign M_op_br = M_iw_op == 6;
+  assign M_op_ldb = M_iw_op == 7;
+  assign M_op_cmpgei = M_iw_op == 8;
+  assign M_op_ldhu = M_iw_op == 11;
+  assign M_op_andi = M_iw_op == 12;
+  assign M_op_sth = M_iw_op == 13;
+  assign M_op_bge = M_iw_op == 14;
+  assign M_op_ldh = M_iw_op == 15;
+  assign M_op_cmplti = M_iw_op == 16;
+  assign M_op_initda = M_iw_op == 19;
+  assign M_op_ori = M_iw_op == 20;
+  assign M_op_stw = M_iw_op == 21;
+  assign M_op_blt = M_iw_op == 22;
+  assign M_op_ldw = M_iw_op == 23;
+  assign M_op_cmpnei = M_iw_op == 24;
+  assign M_op_flushda = M_iw_op == 27;
+  assign M_op_xori = M_iw_op == 28;
+  assign M_op_stc = M_iw_op == 29;
+  assign M_op_bne = M_iw_op == 30;
+  assign M_op_ldl = M_iw_op == 31;
+  assign M_op_cmpeqi = M_iw_op == 32;
+  assign M_op_ldbuio = M_iw_op == 35;
+  assign M_op_muli = M_iw_op == 36;
+  assign M_op_stbio = M_iw_op == 37;
+  assign M_op_beq = M_iw_op == 38;
+  assign M_op_ldbio = M_iw_op == 39;
+  assign M_op_cmpgeui = M_iw_op == 40;
+  assign M_op_ldhuio = M_iw_op == 43;
+  assign M_op_andhi = M_iw_op == 44;
+  assign M_op_sthio = M_iw_op == 45;
+  assign M_op_bgeu = M_iw_op == 46;
+  assign M_op_ldhio = M_iw_op == 47;
+  assign M_op_cmpltui = M_iw_op == 48;
+  assign M_op_initd = M_iw_op == 51;
+  assign M_op_orhi = M_iw_op == 52;
+  assign M_op_stwio = M_iw_op == 53;
+  assign M_op_bltu = M_iw_op == 54;
+  assign M_op_ldwio = M_iw_op == 55;
+  assign M_op_rdprs = M_iw_op == 56;
+  assign M_op_flushd = M_iw_op == 59;
+  assign M_op_xorhi = M_iw_op == 60;
+  assign M_op_rsv02 = M_iw_op == 2;
+  assign M_op_rsv09 = M_iw_op == 9;
+  assign M_op_rsv10 = M_iw_op == 10;
+  assign M_op_rsv17 = M_iw_op == 17;
+  assign M_op_rsv18 = M_iw_op == 18;
+  assign M_op_rsv25 = M_iw_op == 25;
+  assign M_op_rsv26 = M_iw_op == 26;
+  assign M_op_rsv33 = M_iw_op == 33;
+  assign M_op_rsv34 = M_iw_op == 34;
+  assign M_op_rsv41 = M_iw_op == 41;
+  assign M_op_rsv42 = M_iw_op == 42;
+  assign M_op_rsv49 = M_iw_op == 49;
+  assign M_op_rsv57 = M_iw_op == 57;
+  assign M_op_rsv61 = M_iw_op == 61;
+  assign M_op_rsv62 = M_iw_op == 62;
+  assign M_op_rsv63 = M_iw_op == 63;
+  assign M_op_eret = M_op_opx & (M_iw_opx == 1);
+  assign M_op_roli = M_op_opx & (M_iw_opx == 2);
+  assign M_op_rol = M_op_opx & (M_iw_opx == 3);
+  assign M_op_flushp = M_op_opx & (M_iw_opx == 4);
+  assign M_op_ret = M_op_opx & (M_iw_opx == 5);
+  assign M_op_nor = M_op_opx & (M_iw_opx == 6);
+  assign M_op_mulxuu = M_op_opx & (M_iw_opx == 7);
+  assign M_op_cmpge = M_op_opx & (M_iw_opx == 8);
+  assign M_op_bret = M_op_opx & (M_iw_opx == 9);
+  assign M_op_ror = M_op_opx & (M_iw_opx == 11);
+  assign M_op_flushi = M_op_opx & (M_iw_opx == 12);
+  assign M_op_jmp = M_op_opx & (M_iw_opx == 13);
+  assign M_op_and = M_op_opx & (M_iw_opx == 14);
+  assign M_op_cmplt = M_op_opx & (M_iw_opx == 16);
+  assign M_op_slli = M_op_opx & (M_iw_opx == 18);
+  assign M_op_sll = M_op_opx & (M_iw_opx == 19);
+  assign M_op_wrprs = M_op_opx & (M_iw_opx == 20);
+  assign M_op_or = M_op_opx & (M_iw_opx == 22);
+  assign M_op_mulxsu = M_op_opx & (M_iw_opx == 23);
+  assign M_op_cmpne = M_op_opx & (M_iw_opx == 24);
+  assign M_op_srli = M_op_opx & (M_iw_opx == 26);
+  assign M_op_srl = M_op_opx & (M_iw_opx == 27);
+  assign M_op_nextpc = M_op_opx & (M_iw_opx == 28);
+  assign M_op_callr = M_op_opx & (M_iw_opx == 29);
+  assign M_op_xor = M_op_opx & (M_iw_opx == 30);
+  assign M_op_mulxss = M_op_opx & (M_iw_opx == 31);
+  assign M_op_cmpeq = M_op_opx & (M_iw_opx == 32);
+  assign M_op_divu = M_op_opx & (M_iw_opx == 36);
+  assign M_op_div = M_op_opx & (M_iw_opx == 37);
+  assign M_op_rdctl = M_op_opx & (M_iw_opx == 38);
+  assign M_op_mul = M_op_opx & (M_iw_opx == 39);
+  assign M_op_cmpgeu = M_op_opx & (M_iw_opx == 40);
+  assign M_op_initi = M_op_opx & (M_iw_opx == 41);
+  assign M_op_trap = M_op_opx & (M_iw_opx == 45);
+  assign M_op_wrctl = M_op_opx & (M_iw_opx == 46);
+  assign M_op_cmpltu = M_op_opx & (M_iw_opx == 48);
+  assign M_op_add = M_op_opx & (M_iw_opx == 49);
+  assign M_op_break = M_op_opx & (M_iw_opx == 52);
+  assign M_op_hbreak = M_op_opx & (M_iw_opx == 53);
+  assign M_op_sync = M_op_opx & (M_iw_opx == 54);
+  assign M_op_sub = M_op_opx & (M_iw_opx == 57);
+  assign M_op_srai = M_op_opx & (M_iw_opx == 58);
+  assign M_op_sra = M_op_opx & (M_iw_opx == 59);
+  assign M_op_intr = M_op_opx & (M_iw_opx == 61);
+  assign M_op_crst = M_op_opx & (M_iw_opx == 62);
+  assign M_op_rsvx00 = M_op_opx & (M_iw_opx == 0);
+  assign M_op_rsvx10 = M_op_opx & (M_iw_opx == 10);
+  assign M_op_rsvx15 = M_op_opx & (M_iw_opx == 15);
+  assign M_op_rsvx17 = M_op_opx & (M_iw_opx == 17);
+  assign M_op_rsvx21 = M_op_opx & (M_iw_opx == 21);
+  assign M_op_rsvx25 = M_op_opx & (M_iw_opx == 25);
+  assign M_op_rsvx33 = M_op_opx & (M_iw_opx == 33);
+  assign M_op_rsvx34 = M_op_opx & (M_iw_opx == 34);
+  assign M_op_rsvx35 = M_op_opx & (M_iw_opx == 35);
+  assign M_op_rsvx42 = M_op_opx & (M_iw_opx == 42);
+  assign M_op_rsvx43 = M_op_opx & (M_iw_opx == 43);
+  assign M_op_rsvx44 = M_op_opx & (M_iw_opx == 44);
+  assign M_op_rsvx47 = M_op_opx & (M_iw_opx == 47);
+  assign M_op_rsvx50 = M_op_opx & (M_iw_opx == 50);
+  assign M_op_rsvx51 = M_op_opx & (M_iw_opx == 51);
+  assign M_op_rsvx55 = M_op_opx & (M_iw_opx == 55);
+  assign M_op_rsvx56 = M_op_opx & (M_iw_opx == 56);
+  assign M_op_rsvx60 = M_op_opx & (M_iw_opx == 60);
+  assign M_op_rsvx63 = M_op_opx & (M_iw_opx == 63);
+  assign M_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 = M_op_custom & 1'b1;
+  assign M_op_opx = M_iw_op == 58;
+  assign M_op_custom = M_iw_op == 50;
+  assign A_op_call = A_iw_op == 0;
+  assign A_op_jmpi = A_iw_op == 1;
+  assign A_op_ldbu = A_iw_op == 3;
+  assign A_op_addi = A_iw_op == 4;
+  assign A_op_stb = A_iw_op == 5;
+  assign A_op_br = A_iw_op == 6;
+  assign A_op_ldb = A_iw_op == 7;
+  assign A_op_cmpgei = A_iw_op == 8;
+  assign A_op_ldhu = A_iw_op == 11;
+  assign A_op_andi = A_iw_op == 12;
+  assign A_op_sth = A_iw_op == 13;
+  assign A_op_bge = A_iw_op == 14;
+  assign A_op_ldh = A_iw_op == 15;
+  assign A_op_cmplti = A_iw_op == 16;
+  assign A_op_initda = A_iw_op == 19;
+  assign A_op_ori = A_iw_op == 20;
+  assign A_op_stw = A_iw_op == 21;
+  assign A_op_blt = A_iw_op == 22;
+  assign A_op_ldw = A_iw_op == 23;
+  assign A_op_cmpnei = A_iw_op == 24;
+  assign A_op_flushda = A_iw_op == 27;
+  assign A_op_xori = A_iw_op == 28;
+  assign A_op_stc = A_iw_op == 29;
+  assign A_op_bne = A_iw_op == 30;
+  assign A_op_ldl = A_iw_op == 31;
+  assign A_op_cmpeqi = A_iw_op == 32;
+  assign A_op_ldbuio = A_iw_op == 35;
+  assign A_op_muli = A_iw_op == 36;
+  assign A_op_stbio = A_iw_op == 37;
+  assign A_op_beq = A_iw_op == 38;
+  assign A_op_ldbio = A_iw_op == 39;
+  assign A_op_cmpgeui = A_iw_op == 40;
+  assign A_op_ldhuio = A_iw_op == 43;
+  assign A_op_andhi = A_iw_op == 44;
+  assign A_op_sthio = A_iw_op == 45;
+  assign A_op_bgeu = A_iw_op == 46;
+  assign A_op_ldhio = A_iw_op == 47;
+  assign A_op_cmpltui = A_iw_op == 48;
+  assign A_op_initd = A_iw_op == 51;
+  assign A_op_orhi = A_iw_op == 52;
+  assign A_op_stwio = A_iw_op == 53;
+  assign A_op_bltu = A_iw_op == 54;
+  assign A_op_ldwio = A_iw_op == 55;
+  assign A_op_rdprs = A_iw_op == 56;
+  assign A_op_flushd = A_iw_op == 59;
+  assign A_op_xorhi = A_iw_op == 60;
+  assign A_op_rsv02 = A_iw_op == 2;
+  assign A_op_rsv09 = A_iw_op == 9;
+  assign A_op_rsv10 = A_iw_op == 10;
+  assign A_op_rsv17 = A_iw_op == 17;
+  assign A_op_rsv18 = A_iw_op == 18;
+  assign A_op_rsv25 = A_iw_op == 25;
+  assign A_op_rsv26 = A_iw_op == 26;
+  assign A_op_rsv33 = A_iw_op == 33;
+  assign A_op_rsv34 = A_iw_op == 34;
+  assign A_op_rsv41 = A_iw_op == 41;
+  assign A_op_rsv42 = A_iw_op == 42;
+  assign A_op_rsv49 = A_iw_op == 49;
+  assign A_op_rsv57 = A_iw_op == 57;
+  assign A_op_rsv61 = A_iw_op == 61;
+  assign A_op_rsv62 = A_iw_op == 62;
+  assign A_op_rsv63 = A_iw_op == 63;
+  assign A_op_eret = A_op_opx & (A_iw_opx == 1);
+  assign A_op_roli = A_op_opx & (A_iw_opx == 2);
+  assign A_op_rol = A_op_opx & (A_iw_opx == 3);
+  assign A_op_flushp = A_op_opx & (A_iw_opx == 4);
+  assign A_op_ret = A_op_opx & (A_iw_opx == 5);
+  assign A_op_nor = A_op_opx & (A_iw_opx == 6);
+  assign A_op_mulxuu = A_op_opx & (A_iw_opx == 7);
+  assign A_op_cmpge = A_op_opx & (A_iw_opx == 8);
+  assign A_op_bret = A_op_opx & (A_iw_opx == 9);
+  assign A_op_ror = A_op_opx & (A_iw_opx == 11);
+  assign A_op_flushi = A_op_opx & (A_iw_opx == 12);
+  assign A_op_jmp = A_op_opx & (A_iw_opx == 13);
+  assign A_op_and = A_op_opx & (A_iw_opx == 14);
+  assign A_op_cmplt = A_op_opx & (A_iw_opx == 16);
+  assign A_op_slli = A_op_opx & (A_iw_opx == 18);
+  assign A_op_sll = A_op_opx & (A_iw_opx == 19);
+  assign A_op_wrprs = A_op_opx & (A_iw_opx == 20);
+  assign A_op_or = A_op_opx & (A_iw_opx == 22);
+  assign A_op_mulxsu = A_op_opx & (A_iw_opx == 23);
+  assign A_op_cmpne = A_op_opx & (A_iw_opx == 24);
+  assign A_op_srli = A_op_opx & (A_iw_opx == 26);
+  assign A_op_srl = A_op_opx & (A_iw_opx == 27);
+  assign A_op_nextpc = A_op_opx & (A_iw_opx == 28);
+  assign A_op_callr = A_op_opx & (A_iw_opx == 29);
+  assign A_op_xor = A_op_opx & (A_iw_opx == 30);
+  assign A_op_mulxss = A_op_opx & (A_iw_opx == 31);
+  assign A_op_cmpeq = A_op_opx & (A_iw_opx == 32);
+  assign A_op_divu = A_op_opx & (A_iw_opx == 36);
+  assign A_op_div = A_op_opx & (A_iw_opx == 37);
+  assign A_op_rdctl = A_op_opx & (A_iw_opx == 38);
+  assign A_op_mul = A_op_opx & (A_iw_opx == 39);
+  assign A_op_cmpgeu = A_op_opx & (A_iw_opx == 40);
+  assign A_op_initi = A_op_opx & (A_iw_opx == 41);
+  assign A_op_trap = A_op_opx & (A_iw_opx == 45);
+  assign A_op_wrctl = A_op_opx & (A_iw_opx == 46);
+  assign A_op_cmpltu = A_op_opx & (A_iw_opx == 48);
+  assign A_op_add = A_op_opx & (A_iw_opx == 49);
+  assign A_op_break = A_op_opx & (A_iw_opx == 52);
+  assign A_op_hbreak = A_op_opx & (A_iw_opx == 53);
+  assign A_op_sync = A_op_opx & (A_iw_opx == 54);
+  assign A_op_sub = A_op_opx & (A_iw_opx == 57);
+  assign A_op_srai = A_op_opx & (A_iw_opx == 58);
+  assign A_op_sra = A_op_opx & (A_iw_opx == 59);
+  assign A_op_intr = A_op_opx & (A_iw_opx == 61);
+  assign A_op_crst = A_op_opx & (A_iw_opx == 62);
+  assign A_op_rsvx00 = A_op_opx & (A_iw_opx == 0);
+  assign A_op_rsvx10 = A_op_opx & (A_iw_opx == 10);
+  assign A_op_rsvx15 = A_op_opx & (A_iw_opx == 15);
+  assign A_op_rsvx17 = A_op_opx & (A_iw_opx == 17);
+  assign A_op_rsvx21 = A_op_opx & (A_iw_opx == 21);
+  assign A_op_rsvx25 = A_op_opx & (A_iw_opx == 25);
+  assign A_op_rsvx33 = A_op_opx & (A_iw_opx == 33);
+  assign A_op_rsvx34 = A_op_opx & (A_iw_opx == 34);
+  assign A_op_rsvx35 = A_op_opx & (A_iw_opx == 35);
+  assign A_op_rsvx42 = A_op_opx & (A_iw_opx == 42);
+  assign A_op_rsvx43 = A_op_opx & (A_iw_opx == 43);
+  assign A_op_rsvx44 = A_op_opx & (A_iw_opx == 44);
+  assign A_op_rsvx47 = A_op_opx & (A_iw_opx == 47);
+  assign A_op_rsvx50 = A_op_opx & (A_iw_opx == 50);
+  assign A_op_rsvx51 = A_op_opx & (A_iw_opx == 51);
+  assign A_op_rsvx55 = A_op_opx & (A_iw_opx == 55);
+  assign A_op_rsvx56 = A_op_opx & (A_iw_opx == 56);
+  assign A_op_rsvx60 = A_op_opx & (A_iw_opx == 60);
+  assign A_op_rsvx63 = A_op_opx & (A_iw_opx == 63);
+  assign A_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 = A_op_custom & 1'b1;
+  assign A_op_opx = A_iw_op == 58;
+  assign A_op_custom = A_iw_op == 50;
+  assign W_op_call = W_iw_op == 0;
+  assign W_op_jmpi = W_iw_op == 1;
+  assign W_op_ldbu = W_iw_op == 3;
+  assign W_op_addi = W_iw_op == 4;
+  assign W_op_stb = W_iw_op == 5;
+  assign W_op_br = W_iw_op == 6;
+  assign W_op_ldb = W_iw_op == 7;
+  assign W_op_cmpgei = W_iw_op == 8;
+  assign W_op_ldhu = W_iw_op == 11;
+  assign W_op_andi = W_iw_op == 12;
+  assign W_op_sth = W_iw_op == 13;
+  assign W_op_bge = W_iw_op == 14;
+  assign W_op_ldh = W_iw_op == 15;
+  assign W_op_cmplti = W_iw_op == 16;
+  assign W_op_initda = W_iw_op == 19;
+  assign W_op_ori = W_iw_op == 20;
+  assign W_op_stw = W_iw_op == 21;
+  assign W_op_blt = W_iw_op == 22;
+  assign W_op_ldw = W_iw_op == 23;
+  assign W_op_cmpnei = W_iw_op == 24;
+  assign W_op_flushda = W_iw_op == 27;
+  assign W_op_xori = W_iw_op == 28;
+  assign W_op_stc = W_iw_op == 29;
+  assign W_op_bne = W_iw_op == 30;
+  assign W_op_ldl = W_iw_op == 31;
+  assign W_op_cmpeqi = W_iw_op == 32;
+  assign W_op_ldbuio = W_iw_op == 35;
+  assign W_op_muli = W_iw_op == 36;
+  assign W_op_stbio = W_iw_op == 37;
+  assign W_op_beq = W_iw_op == 38;
+  assign W_op_ldbio = W_iw_op == 39;
+  assign W_op_cmpgeui = W_iw_op == 40;
+  assign W_op_ldhuio = W_iw_op == 43;
+  assign W_op_andhi = W_iw_op == 44;
+  assign W_op_sthio = W_iw_op == 45;
+  assign W_op_bgeu = W_iw_op == 46;
+  assign W_op_ldhio = W_iw_op == 47;
+  assign W_op_cmpltui = W_iw_op == 48;
+  assign W_op_initd = W_iw_op == 51;
+  assign W_op_orhi = W_iw_op == 52;
+  assign W_op_stwio = W_iw_op == 53;
+  assign W_op_bltu = W_iw_op == 54;
+  assign W_op_ldwio = W_iw_op == 55;
+  assign W_op_rdprs = W_iw_op == 56;
+  assign W_op_flushd = W_iw_op == 59;
+  assign W_op_xorhi = W_iw_op == 60;
+  assign W_op_rsv02 = W_iw_op == 2;
+  assign W_op_rsv09 = W_iw_op == 9;
+  assign W_op_rsv10 = W_iw_op == 10;
+  assign W_op_rsv17 = W_iw_op == 17;
+  assign W_op_rsv18 = W_iw_op == 18;
+  assign W_op_rsv25 = W_iw_op == 25;
+  assign W_op_rsv26 = W_iw_op == 26;
+  assign W_op_rsv33 = W_iw_op == 33;
+  assign W_op_rsv34 = W_iw_op == 34;
+  assign W_op_rsv41 = W_iw_op == 41;
+  assign W_op_rsv42 = W_iw_op == 42;
+  assign W_op_rsv49 = W_iw_op == 49;
+  assign W_op_rsv57 = W_iw_op == 57;
+  assign W_op_rsv61 = W_iw_op == 61;
+  assign W_op_rsv62 = W_iw_op == 62;
+  assign W_op_rsv63 = W_iw_op == 63;
+  assign W_op_eret = W_op_opx & (W_iw_opx == 1);
+  assign W_op_roli = W_op_opx & (W_iw_opx == 2);
+  assign W_op_rol = W_op_opx & (W_iw_opx == 3);
+  assign W_op_flushp = W_op_opx & (W_iw_opx == 4);
+  assign W_op_ret = W_op_opx & (W_iw_opx == 5);
+  assign W_op_nor = W_op_opx & (W_iw_opx == 6);
+  assign W_op_mulxuu = W_op_opx & (W_iw_opx == 7);
+  assign W_op_cmpge = W_op_opx & (W_iw_opx == 8);
+  assign W_op_bret = W_op_opx & (W_iw_opx == 9);
+  assign W_op_ror = W_op_opx & (W_iw_opx == 11);
+  assign W_op_flushi = W_op_opx & (W_iw_opx == 12);
+  assign W_op_jmp = W_op_opx & (W_iw_opx == 13);
+  assign W_op_and = W_op_opx & (W_iw_opx == 14);
+  assign W_op_cmplt = W_op_opx & (W_iw_opx == 16);
+  assign W_op_slli = W_op_opx & (W_iw_opx == 18);
+  assign W_op_sll = W_op_opx & (W_iw_opx == 19);
+  assign W_op_wrprs = W_op_opx & (W_iw_opx == 20);
+  assign W_op_or = W_op_opx & (W_iw_opx == 22);
+  assign W_op_mulxsu = W_op_opx & (W_iw_opx == 23);
+  assign W_op_cmpne = W_op_opx & (W_iw_opx == 24);
+  assign W_op_srli = W_op_opx & (W_iw_opx == 26);
+  assign W_op_srl = W_op_opx & (W_iw_opx == 27);
+  assign W_op_nextpc = W_op_opx & (W_iw_opx == 28);
+  assign W_op_callr = W_op_opx & (W_iw_opx == 29);
+  assign W_op_xor = W_op_opx & (W_iw_opx == 30);
+  assign W_op_mulxss = W_op_opx & (W_iw_opx == 31);
+  assign W_op_cmpeq = W_op_opx & (W_iw_opx == 32);
+  assign W_op_divu = W_op_opx & (W_iw_opx == 36);
+  assign W_op_div = W_op_opx & (W_iw_opx == 37);
+  assign W_op_rdctl = W_op_opx & (W_iw_opx == 38);
+  assign W_op_mul = W_op_opx & (W_iw_opx == 39);
+  assign W_op_cmpgeu = W_op_opx & (W_iw_opx == 40);
+  assign W_op_initi = W_op_opx & (W_iw_opx == 41);
+  assign W_op_trap = W_op_opx & (W_iw_opx == 45);
+  assign W_op_wrctl = W_op_opx & (W_iw_opx == 46);
+  assign W_op_cmpltu = W_op_opx & (W_iw_opx == 48);
+  assign W_op_add = W_op_opx & (W_iw_opx == 49);
+  assign W_op_break = W_op_opx & (W_iw_opx == 52);
+  assign W_op_hbreak = W_op_opx & (W_iw_opx == 53);
+  assign W_op_sync = W_op_opx & (W_iw_opx == 54);
+  assign W_op_sub = W_op_opx & (W_iw_opx == 57);
+  assign W_op_srai = W_op_opx & (W_iw_opx == 58);
+  assign W_op_sra = W_op_opx & (W_iw_opx == 59);
+  assign W_op_intr = W_op_opx & (W_iw_opx == 61);
+  assign W_op_crst = W_op_opx & (W_iw_opx == 62);
+  assign W_op_rsvx00 = W_op_opx & (W_iw_opx == 0);
+  assign W_op_rsvx10 = W_op_opx & (W_iw_opx == 10);
+  assign W_op_rsvx15 = W_op_opx & (W_iw_opx == 15);
+  assign W_op_rsvx17 = W_op_opx & (W_iw_opx == 17);
+  assign W_op_rsvx21 = W_op_opx & (W_iw_opx == 21);
+  assign W_op_rsvx25 = W_op_opx & (W_iw_opx == 25);
+  assign W_op_rsvx33 = W_op_opx & (W_iw_opx == 33);
+  assign W_op_rsvx34 = W_op_opx & (W_iw_opx == 34);
+  assign W_op_rsvx35 = W_op_opx & (W_iw_opx == 35);
+  assign W_op_rsvx42 = W_op_opx & (W_iw_opx == 42);
+  assign W_op_rsvx43 = W_op_opx & (W_iw_opx == 43);
+  assign W_op_rsvx44 = W_op_opx & (W_iw_opx == 44);
+  assign W_op_rsvx47 = W_op_opx & (W_iw_opx == 47);
+  assign W_op_rsvx50 = W_op_opx & (W_iw_opx == 50);
+  assign W_op_rsvx51 = W_op_opx & (W_iw_opx == 51);
+  assign W_op_rsvx55 = W_op_opx & (W_iw_opx == 55);
+  assign W_op_rsvx56 = W_op_opx & (W_iw_opx == 56);
+  assign W_op_rsvx60 = W_op_opx & (W_iw_opx == 60);
+  assign W_op_rsvx63 = W_op_opx & (W_iw_opx == 63);
+  assign W_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 = W_op_custom & 1'b1;
+  assign W_op_opx = W_iw_op == 58;
+  assign W_op_custom = W_iw_op == 50;
+  assign F_stall = D_stall;
+  assign F_en = ~F_stall;
+  assign F_iw = (latched_oci_tb_hbreak_req & hbreak_enabled) ? 4040762 :
+    1'b0                                 ? 127034 :
+    (norm_intr_req)                                 ? 3926074 : 
+    F_ram_iw;
 
-  assign F_pc_no_crst_nxt = (F_pc_sel_nxt == 2'b00)? 4460552 :
-    (F_pc_sel_nxt == 2'b01)? 4465160 :
-    (F_pc_sel_nxt == 2'b10)? E_arith_result[24 : 2] :
-    F_pc_plus_one;
+  assign F_kill = D_refetch | M_pipe_flush | E_valid_jmp_indirect |
+    ((D_br_pred_taken | D_ctrl_uncond_cti_non_br) & D_issue);
 
-  assign F_pc_nxt = F_pc_no_crst_nxt;
-  assign F_pcb_nxt = {F_pc_nxt, 2'b00};
-  assign F_pc_en = W_valid;
-  assign F_pc_plus_one = F_pc + 1;
+  assign F_br_taken_waddr_partial = F_pc_plus_one[9 : 0] + 
+    F_ram_iw_imm16[11 : 2];
+
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          F_pc <= 4460544;
-      else if (F_pc_en)
+          D_iw_valid <= 0;
+      else if (D_en)
+          D_iw_valid <= F_iw_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_issue <= 0;
+      else if (D_en)
+          D_issue <= F_issue;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_kill <= 0;
+      else if (D_en)
+          D_kill <= F_kill;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_br_taken_waddr_partial <= 0;
+      else if (D_en)
+          D_br_taken_waddr_partial <= F_br_taken_waddr_partial;
+    end
+
+
+  assign D_refetch = ~D_iw_valid & ~D_kill;
+  assign D_br_offset_sex = {{16 {D_iw_imm16[15]}}, D_iw_imm16[15 : 12]};
+  assign D_br_offset_remaining = D_br_offset_sex[12 : 0];
+  assign D_br_taken_waddr = { D_pc_plus_one[22 : 10] +
+    D_br_offset_remaining + 
+    D_br_taken_waddr_partial[10],
+    D_br_taken_waddr_partial[9 : 0]};
+
+  assign D_br_taken_baddr = {D_br_taken_waddr, 2'b00};
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_br_taken_baddr <= 0;
+      else if (E_en)
+          E_br_taken_baddr <= D_br_taken_baddr;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_br_taken_baddr <= 0;
+      else if (M_en)
+          M_br_taken_baddr <= E_br_taken_baddr;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_br_taken_baddr <= 0;
+      else if (A_en)
+          A_br_taken_baddr <= M_br_taken_baddr;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_br_taken_baddr <= 0;
+      else 
+        W_br_taken_baddr <= A_br_taken_baddr;
+    end
+
+
+  assign F_pcb_nxt = {F_pc_nxt, 2'b00};
+  assign F_pcb = {F_pc, 2'b00};
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          F_pc <= 0;
+      else if (F_en)
           F_pc <= F_pc_nxt;
     end
 
 
-  assign F_pcb = {F_pc, 2'b00};
-  assign F_pcb_plus_four = {F_pc_plus_one, 2'b00};
-  assign F_valid = i_read & ~i_waitrequest;
-  assign i_read_nxt = W_valid | (i_read & i_waitrequest);
-  assign i_address = {F_pc, 2'b00};
+  assign F_pc_plus_one = F_pc + 1;
+  assign D_ic_bypass_start_avalon_read = 0;
+  assign F_ic_bypass_req = 0;
+  assign ic_bypass_active = 0;
+  assign F_ic_data_rd_addr_nxt = F_pc_nxt[9 : 0];
+  assign ic_data_wren = i_readdatavalid_d1 & ~ic_bypass_active;
+  assign ic_data_rden = F_en;
+//cpu_0_ic_data, which is an nios_sdp_ram
+cpu_0_ic_data_module cpu_0_ic_data
+  (
+    .clock     (clk),
+    .data      (i_readdata_d1),
+    .q         (F_ic_iw),
+    .rdaddress (F_ic_data_rd_addr_nxt),
+    .rden      (ic_data_rden),
+    .wraddress ({ic_fill_line, ic_fill_dp_offset}),
+    .wren      (ic_data_wren)
+  );
+
+  assign F_ic_tag_rd_addr_nxt = F_pc_nxt[9 : 3];
+  assign ic_tag_clr_valid_bits_nxt = (M_ctrl_invalidate_i & M_valid) | D_ic_fill_starting | clr_break_line;
+  assign ic_fill_valid_bits_nxt = ic_tag_clr_valid_bits_nxt ? 0 :
+    D_ic_fill_starting_d1     ? ic_fill_valid_bit_new : 
+    (ic_fill_valid_bits | ic_fill_valid_bit_new);
+
+  assign ic_fill_valid_bits_en = ic_tag_clr_valid_bits_nxt | D_ic_fill_starting_d1 | 
+    i_readdatavalid_d1;
+
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          i_read <= 1'b1;
+          clr_break_line <= 1;
+      else 
+        clr_break_line <= 0;
+    end
+
+
+  assign ic_tag_wraddress_nxt = (clr_break_line)? 65 :
+    ((M_ctrl_crst & M_valid))? 0 :
+    ((M_ctrl_invalidate_i & M_valid))? (M_alu_result[11 : 5]) :
+    (D_ic_fill_starting)? D_pc_line_field :
+    ic_fill_line;
+
+  assign ic_tag_wren = ic_tag_clr_valid_bits | i_readdatavalid_d1;
+  assign ic_tag_wrdata = {ic_fill_tag, ic_fill_valid_bits};
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_tag_clr_valid_bits <= 1;
+      else 
+        ic_tag_clr_valid_bits <= ic_tag_clr_valid_bits_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_valid_bits <= 0;
+      else if (ic_fill_valid_bits_en)
+          ic_fill_valid_bits <= ic_fill_valid_bits_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_tag_wraddress <= 0;
+      else 
+        ic_tag_wraddress <= ic_tag_wraddress_nxt;
+    end
+
+
+  assign ic_tag_rden = F_en;
+//cpu_0_ic_tag, which is an nios_sdp_ram
+cpu_0_ic_tag_module cpu_0_ic_tag
+  (
+    .clock     (clk),
+    .data      (ic_tag_wrdata),
+    .q         (F_ic_tag_rd),
+    .rdaddress (F_ic_tag_rd_addr_nxt),
+    .rden      (ic_tag_rden),
+    .wraddress (ic_tag_wraddress),
+    .wren      (ic_tag_wren)
+  );
+
+//synthesis translate_off
+`ifdef NO_PLI
+defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.dat";
+`else
+defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.hex";
+`endif
+//synthesis translate_on
+//synthesis read_comments_as_HDL on
+//defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.mif";
+//synthesis read_comments_as_HDL off
+  assign F_ic_tag_field = F_ic_tag_rd[20 : 8];
+  assign F_ic_valid_bits = F_ic_tag_rd[7 : 0];
+  assign F_ic_desired_tag = F_pc[22 : 10];
+  assign F_ic_valid = (F_pc[2 : 0] == 3'd0)? F_ic_valid_bits[0] :
+    (F_pc[2 : 0] == 3'd1)? F_ic_valid_bits[1] :
+    (F_pc[2 : 0] == 3'd2)? F_ic_valid_bits[2] :
+    (F_pc[2 : 0] == 3'd3)? F_ic_valid_bits[3] :
+    (F_pc[2 : 0] == 3'd4)? F_ic_valid_bits[4] :
+    (F_pc[2 : 0] == 3'd5)? F_ic_valid_bits[5] :
+    (F_pc[2 : 0] == 3'd6)? F_ic_valid_bits[6] :
+    F_ic_valid_bits[7];
+
+  assign F_ic_hit = F_ic_valid & (F_ic_desired_tag == F_ic_tag_field) &
+    ~F_ic_bypass_req & ~ic_bypass_active;
+
+  assign F_pc_tag_field = F_pc[22 : 10];
+  assign F_pc_line_field = F_pc[9 : 3];
+  assign D_pc_tag_field = D_pc[22 : 10];
+  assign D_pc_line_field = D_pc[9 : 3];
+  assign D_pc_offset_field = D_pc[2 : 0];
+  assign D_ic_want_fill_unfiltered = ~D_iw_valid & ~D_kill & ~M_pipe_flush;
+  assign ic_fill_prevent_refill_nxt = D_ic_fill_starting | (ic_fill_prevent_refill & ~((M_ctrl_invalidate_i & M_valid) | ic_bypass_active));
+  assign F_ic_fill_same_tag_line = (F_pc_tag_field == ic_fill_tag) & (F_pc_line_field == ic_fill_line);
+  assign D_ic_fill_ignore = ic_fill_prevent_refill & D_ic_fill_same_tag_line;
+  assign D_ic_fill_starting = ~ic_fill_active & D_ic_want_fill & ~D_ic_fill_ignore & ~ic_bypass_active;
+  assign ic_fill_done = ic_fill_dp_last_word & i_readdatavalid_d1;
+  assign ic_fill_active_nxt = D_ic_fill_starting | (ic_fill_active & ~ic_fill_done);
+  assign ic_fill_dp_last_word = ic_fill_dp_offset_nxt == ic_fill_initial_offset;
+  assign ic_fill_dp_offset_en = D_ic_fill_starting_d1 | i_readdatavalid_d1;
+  assign ic_fill_dp_offset_nxt = D_ic_fill_starting_d1 ? 
+    ic_fill_initial_offset : 
+    (ic_fill_dp_offset + 1);
+
+  assign ic_fill_ap_offset_nxt = ic_fill_req_accepted ? (ic_fill_ap_offset + 1) :
+    (D_ic_fill_starting | D_ic_bypass_start_avalon_read) ? 
+    D_pc_offset_field :
+    ic_fill_ap_offset;
+
+  assign ic_fill_ap_cnt_nxt = ic_fill_req_accepted ? (ic_fill_ap_cnt + 1) :
+    D_ic_fill_starting   ? 1 :
+    ic_fill_ap_cnt;
+
+  assign ic_fill_ap_last_word = ic_fill_ap_cnt[3];
+  assign ic_fill_req_accepted = i_read & ~i_waitrequest;
+  assign i_read_nxt = D_ic_fill_starting | D_ic_bypass_start_avalon_read |
+    (i_read & (i_waitrequest | 
+    (~ic_fill_ap_last_word & ic_fill_active)));
+
+  assign i_address = {ic_fill_tag, 
+    ic_fill_line[6 : 0],
+    ic_fill_ap_offset, 
+    2'b00};
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_ap_offset <= 0;
+      else 
+        ic_fill_ap_offset <= ic_fill_ap_offset_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_ap_cnt <= 0;
+      else 
+        ic_fill_ap_cnt <= ic_fill_ap_cnt_nxt;
+    end
+
+
+  assign ic_fill_valid_bit_new = (ic_fill_dp_offset_nxt == 3'd0)? 8'b00000001 :
+    (ic_fill_dp_offset_nxt == 3'd1)? 8'b00000010 :
+    (ic_fill_dp_offset_nxt == 3'd2)? 8'b00000100 :
+    (ic_fill_dp_offset_nxt == 3'd3)? 8'b00001000 :
+    (ic_fill_dp_offset_nxt == 3'd4)? 8'b00010000 :
+    (ic_fill_dp_offset_nxt == 3'd5)? 8'b00100000 :
+    (ic_fill_dp_offset_nxt == 3'd6)? 8'b01000000 :
+    8'b10000000;
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ic_fill_starting_d1 <= 0;
+      else 
+        D_ic_fill_starting_d1 <= D_ic_fill_starting;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ic_fill_same_tag_line <= 0;
+      else if (D_en)
+          D_ic_fill_same_tag_line <= F_ic_fill_same_tag_line;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_active <= 0;
+      else 
+        ic_fill_active <= ic_fill_active_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_prevent_refill <= 0;
+      else 
+        ic_fill_prevent_refill <= ic_fill_prevent_refill_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_tag <= 0;
+      else if (D_ic_fill_starting | D_ic_bypass_start_avalon_read)
+          ic_fill_tag <= D_pc_tag_field;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_line <= 0;
+      else if (D_ic_fill_starting | D_ic_bypass_start_avalon_read)
+          ic_fill_line <= D_pc_line_field;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_initial_offset <= 0;
+      else if (D_ic_fill_starting | D_ic_bypass_start_avalon_read)
+          ic_fill_initial_offset <= D_pc_offset_field;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          ic_fill_dp_offset <= 0;
+      else if (ic_fill_dp_offset_en)
+          ic_fill_dp_offset <= ic_fill_dp_offset_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          i_readdatavalid_d1 <= 0;
+      else 
+        i_readdatavalid_d1 <= i_readdatavalid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          i_read <= 0;
       else 
         i_read <= i_read_nxt;
     end
 
 
-  assign oci_tb_hbreak_req = oci_hbreak_req;
-  assign hbreak_req = (oci_tb_hbreak_req | hbreak_pending) & hbreak_enabled &  ~(wait_for_one_post_bret_inst & ~W_valid);
-  assign hbreak_pending_nxt = hbreak_pending ? hbreak_enabled 
-    : hbreak_req;
-
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          wait_for_one_post_bret_inst <= 1'b0;
+          i_readdata_d1 <= 0;
       else 
-        wait_for_one_post_bret_inst <= (~hbreak_enabled & oci_single_step_mode) ? 1'b1  : (F_valid | ~oci_single_step_mode) ? 1'b0  : wait_for_one_post_bret_inst;
+        i_readdata_d1 <= i_readdata;
+    end
+
+
+  assign F_bht_ptr_nxt = F_pc_nxt[7 : 0] ^ 
+    M_br_cond_taken_history[7 : 0];
+
+//cpu_0_bht, which is an nios_sdp_ram
+cpu_0_bht_module cpu_0_bht
+  (
+    .clock     (clk),
+    .data      (M_bht_wr_data_filtered),
+    .q         (F_bht_data),
+    .rdaddress (F_bht_ptr_nxt),
+    .rden      (F_en),
+    .wraddress (M_bht_ptr_filtered),
+    .wren      (M_bht_wr_en_filtered)
+  );
+
+//synthesis translate_off
+`ifdef NO_PLI
+defparam cpu_0_bht.lpm_file = "cpu_0_bht_ram.dat";
+`else
+defparam cpu_0_bht.lpm_file = "cpu_0_bht_ram.hex";
+`endif
+//synthesis translate_on
+//synthesis read_comments_as_HDL on
+//defparam cpu_0_bht.lpm_file = "cpu_0_bht_ram.mif";
+//synthesis read_comments_as_HDL off
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_bht_data <= 0;
+      else if (D_en)
+          D_bht_data <= F_bht_data;
+    end
+
+
+  assign D_br_cond_pred_taken = (D_bht_data[1] == 0) |
+    D_ctrl_br_always_pred_taken;
+
+  assign D_br_pred_taken = D_ctrl_br & (D_ctrl_br_uncond | D_br_cond_pred_taken);
+  assign D_br_pred_not_taken = D_ctrl_br_cond & !D_br_cond_pred_taken;
+  assign F_sel_instruction_master = 1'b1;
+  assign F_ram_iw = F_ic_iw;
+  assign F_inst_ram_hit = (F_ic_hit & ~(A_valid_crst)) | 
+    ~F_sel_instruction_master;
+
+  assign F_iw_valid = F_inst_ram_hit;
+  assign F_issue = F_iw_valid & ~F_kill;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          F_bht_ptr <= 0;
+      else if (F_en)
+          F_bht_ptr <= F_bht_ptr_nxt;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          hbreak_pending <= 1'b0;
-      else 
-        hbreak_pending <= hbreak_pending_nxt;
-    end
-
-
-  assign intr_req = W_status_reg_pie & (W_ipending_reg != 0);
-  assign F_av_iw = i_readdata;
-  assign F_iw = hbreak_req     ? 4040762 :
-    1'b0   ? 127034 :
-    intr_req       ? 3926074 : 
-    F_av_iw;
-
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          D_iw <= 0;
-      else if (F_valid)
-          D_iw <= F_iw;
+          D_bht_ptr <= 0;
+      else if (D_en)
+          D_bht_ptr <= F_bht_ptr;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          D_valid <= 0;
-      else 
-        D_valid <= F_valid;
-    end
-
-
-  assign D_dst_regnum = D_ctrl_implicit_dst_retaddr    ? 5'd31 : 
-    D_ctrl_implicit_dst_eretaddr   ? 5'd29 : 
-    D_ctrl_b_is_dst                ? D_iw_b :
-    D_iw_c;
-
-  assign D_wr_dst_reg = (D_dst_regnum != 0) & ~D_ctrl_ignore_dst;
-  assign D_logic_op_raw = D_op_opx ? D_iw_opx[4 : 3] : 
-    D_iw_op[4 : 3];
-
-  assign D_logic_op = D_ctrl_alu_force_xor ? 2'b11 : D_logic_op_raw;
-  assign D_compare_op = D_op_opx ? D_iw_opx[4 : 3] : 
-    D_iw_op[4 : 3];
-
-  assign D_jmp_direct_target_waddr = D_iw[31 : 6];
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          R_valid <= 0;
-      else 
-        R_valid <= D_valid;
+          E_bht_data <= 0;
+      else if (E_en)
+          E_bht_data <= D_bht_data;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_wr_dst_reg <= 0;
-      else 
-        R_wr_dst_reg <= D_wr_dst_reg;
+          E_bht_ptr <= 0;
+      else if (E_en)
+          E_bht_ptr <= D_bht_ptr;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_dst_regnum <= 0;
-      else 
-        R_dst_regnum <= D_dst_regnum;
+          M_bht_data <= 0;
+      else if (M_en)
+          M_bht_data <= E_bht_data;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_logic_op <= 0;
-      else 
-        R_logic_op <= D_logic_op;
+          M_bht_ptr_unfiltered <= 0;
+      else if (M_en)
+          M_bht_ptr_unfiltered <= E_bht_ptr;
+    end
+
+
+  assign E_br_cond_pred_taken = (E_bht_data[1] == 0) | 
+    E_ctrl_br_always_pred_taken;
+
+  assign E_br_actually_taken = E_br_result;
+  assign E_br_mispredict = E_ctrl_br_cond & E_valid & (E_br_cond_pred_taken != E_br_actually_taken);
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_br_actually_taken <= 0;
+      else if (M_en)
+          M_br_actually_taken <= E_br_actually_taken;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_compare_op <= 0;
-      else 
-        R_compare_op <= D_compare_op;
+          M_br_mispredict <= 0;
+      else if (M_en)
+          M_br_mispredict <= E_br_mispredict;
     end
 
+
+  assign E_br_cond_taken_history = E_add_br_to_taken_history_filtered ? 
+    { M_br_cond_taken_history[6 : 0], 
+    E_br_actually_taken } :
+    M_br_cond_taken_history;
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_src2_use_imm <= 0;
-      else 
-        R_src2_use_imm <= D_ctrl_src2_choose_imm | (D_ctrl_br & R_valid);
+          M_br_cond_taken_history <= 0;
+      else if (M_en)
+          M_br_cond_taken_history <= E_br_cond_taken_history;
     end
 
 
-  assign W_rf_wren = (R_wr_dst_reg & W_valid) | ~reset_n;
-  assign W_rf_wr_data = R_ctrl_ld ? av_ld_data_aligned_filtered : W_wr_data;
+  assign M_bht_wr_data_unfiltered = ({M_bht_data, M_br_mispredict} == {2'd0, 1'b0})? 2'd1 :
+    ({M_bht_data, M_br_mispredict} == {2'd0, 1'b1})? 2'd2 :
+    ({M_bht_data, M_br_mispredict} == {2'd1, 1'b0})? 2'd1 :
+    ({M_bht_data, M_br_mispredict} == {2'd1, 1'b1})? 2'd0 :
+    ({M_bht_data, M_br_mispredict} == {2'd2, 1'b0})? 2'd3 :
+    ({M_bht_data, M_br_mispredict} == {2'd2, 1'b1})? 2'd0 :
+    ({M_bht_data, M_br_mispredict} == {2'd3, 1'b0})? 2'd3 :
+    2'd2;
+
+  assign M_bht_wr_en_unfiltered = M_ctrl_br_cond & ~M_ctrl_br_always_pred_taken & M_valid_from_E;
+  assign E_add_br_to_taken_history_unfiltered = E_ctrl_br_cond & E_valid;
+  assign F_iw_a_rf = D_en ? F_ram_iw_a : D_iw_a;
+  assign F_iw_b_rf = D_en ? F_ram_iw_b : D_iw_b;
 //cpu_0_register_bank_a, which is an nios_sdp_ram
 cpu_0_register_bank_a_module cpu_0_register_bank_a
   (
     .clock     (clk),
-    .data      (W_rf_wr_data),
-    .q         (R_rf_a),
-    .rdaddress (D_iw_a),
-    .wraddress (R_dst_regnum),
-    .wren      (W_rf_wren)
+    .data      (A_wr_data_filtered),
+    .q         (D_rf_a),
+    .rdaddress (F_iw_a_rf),
+    .wraddress (A_dst_regnum),
+    .wren      (A_wr_dst_reg)
   );
 
 //synthesis translate_off
@@ -4343,11 +7505,11 @@ defparam cpu_0_register_bank_a.lpm_file = "cpu_0_rf_ram_a.hex";
 cpu_0_register_bank_b_module cpu_0_register_bank_b
   (
     .clock     (clk),
-    .data      (W_rf_wr_data),
-    .q         (R_rf_b),
-    .rdaddress (D_iw_b),
-    .wraddress (R_dst_regnum),
-    .wren      (W_rf_wren)
+    .data      (A_wr_data_filtered),
+    .q         (D_rf_b),
+    .rdaddress (F_iw_b_rf),
+    .wraddress (A_dst_regnum),
+    .wren      (A_wr_dst_reg)
   );
 
 //synthesis translate_off
@@ -4360,186 +7522,1094 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
 //synthesis read_comments_as_HDL on
 //defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.mif";
 //synthesis read_comments_as_HDL off
-  assign R_src1 = (((R_ctrl_br & E_valid) | (R_ctrl_retaddr & R_valid)))? {F_pc_plus_one, 2'b00} :
-    ((R_ctrl_jmp_direct & E_valid))? {D_jmp_direct_target_waddr, 2'b00} :
-    R_rf_a;
+  assign A_shift_rot_cnt_nxt = A_shift_rot_stall ? 
+    A_shift_rot_cnt-1 :
+    1;
 
-  assign R_src2_lo = ((R_ctrl_force_src2_zero|R_ctrl_hi_imm16))? 16'b0 :
-    (R_src2_use_imm)? D_iw_imm16 :
-    R_rf_b[15 : 0];
+  assign A_shift_rot_done_nxt = A_shift_rot_cnt_nxt == 0;
+  assign A_shift_rot_stall_nxt = ~A_shift_rot_done_nxt & 
+    (A_shift_rot_stall |
+    (M_ctrl_shift_rot & M_valid & A_en));
 
-  assign R_src2_hi = ((R_ctrl_force_src2_zero|R_ctrl_unsigned_lo_imm16))? 16'b0 :
-    (R_ctrl_hi_imm16)? D_iw_imm16 :
-    (R_src2_use_imm)? {16 {D_iw_imm16[15]}} :
-    R_rf_b[31 : 16];
-
-  assign R_src2 = {R_src2_hi, R_src2_lo};
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          E_valid <= 0;
+          A_shift_rot_cnt <= 0;
       else 
-        E_valid <= R_valid | E_stall;
+        A_shift_rot_cnt <= A_shift_rot_cnt_nxt;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          E_new_inst <= 0;
+          A_shift_rot_stall <= 0;
       else 
-        E_new_inst <= R_valid;
+        A_shift_rot_stall <= A_shift_rot_stall_nxt;
+    end
+
+
+  assign E_rot_n = E_src2[4 : 0];
+  assign E_rot_rn = E_ctrl_shift_rot_right ? -E_rot_n : E_rot_n;
+  assign E_rot_fill_bit = E_ctrl_shift_right_arith ? E_src1[31] : 0;
+  assign E_rot_left_mask = (E_rot_n[2 : 0] == 3'b000)? 8'b00000000 :
+    (E_rot_n[2 : 0] == 3'b001)? 8'b00000001 :
+    (E_rot_n[2 : 0] == 3'b010)? 8'b00000011 :
+    (E_rot_n[2 : 0] == 3'b011)? 8'b00000111 :
+    (E_rot_n[2 : 0] == 3'b100)? 8'b00001111 :
+    (E_rot_n[2 : 0] == 3'b101)? 8'b00011111 :
+    (E_rot_n[2 : 0] == 3'b110)? 8'b00111111 :
+    8'b01111111;
+
+  assign E_rot_right_mask = (E_rot_n[2 : 0] == 3'b000)? 8'b00000000 :
+    (E_rot_n[2 : 0] == 3'b001)? 8'b10000000 :
+    (E_rot_n[2 : 0] == 3'b010)? 8'b11000000 :
+    (E_rot_n[2 : 0] == 3'b011)? 8'b11100000 :
+    (E_rot_n[2 : 0] == 3'b100)? 8'b11110000 :
+    (E_rot_n[2 : 0] == 3'b101)? 8'b11111000 :
+    (E_rot_n[2 : 0] == 3'b110)? 8'b11111100 :
+    8'b11111110;
+
+  assign E_rot_mask = E_ctrl_shift_rot_right ? E_rot_right_mask : E_rot_left_mask;
+  assign E_rot_pass0 = E_ctrl_rot ||                                              (E_ctrl_shift_rot_right && (E_rot_n < 24));
+  assign E_rot_pass1 = E_ctrl_rot || (E_ctrl_shift_rot_left && (E_rot_n <  8)) || (E_ctrl_shift_rot_right && (E_rot_n < 16));
+  assign E_rot_pass2 = E_ctrl_rot || (E_ctrl_shift_rot_left && (E_rot_n < 16)) || (E_ctrl_shift_rot_right && (E_rot_n <  8));
+  assign E_rot_pass3 = E_ctrl_rot || (E_ctrl_shift_rot_left && (E_rot_n < 24));
+  assign E_rot_sel_fill0 = E_ctrl_shift_rot_left && (E_rot_n >=  8);
+  assign E_rot_sel_fill1 = (E_ctrl_shift_rot_left && (E_rot_n >= 16)) || (E_ctrl_shift_rot_right && (E_rot_n >= 24));
+  assign E_rot_sel_fill2 = (E_ctrl_shift_rot_left && (E_rot_n >= 24)) || (E_ctrl_shift_rot_right && (E_rot_n >= 16));
+  assign E_rot_sel_fill3 = E_ctrl_shift_rot_right && (E_rot_n >=  8);
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_rot_fill_bit <= 0;
+      else if (M_en)
+          M_rot_fill_bit <= E_rot_fill_bit;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          E_src1 <= 0;
-      else 
-        E_src1 <= R_src1;
+          M_rot_mask <= 0;
+      else if (M_en)
+          M_rot_mask <= E_rot_mask;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          E_src2 <= 0;
-      else 
-        E_src2 <= R_src2;
+          M_rot_pass0 <= 0;
+      else if (M_en)
+          M_rot_pass0 <= E_rot_pass0;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          E_invert_arith_src_msb <= 0;
-      else 
-        E_invert_arith_src_msb <= D_ctrl_alu_signed_comparison & R_valid;
+          M_rot_pass1 <= 0;
+      else if (M_en)
+          M_rot_pass1 <= E_rot_pass1;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          E_alu_sub <= 0;
-      else 
-        E_alu_sub <= D_ctrl_alu_subtract & R_valid;
-    end
-
-
-  assign E_stall = E_shift_rot_stall | E_ld_stall | E_st_stall | E_ci_multi_stall;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          E_ci_multi_start <= 0;
-      else 
-        E_ci_multi_start <= E_ci_multi_start ? 1'b0 : 
-                (R_ctrl_custom_multi & R_valid);
-
+          M_rot_pass2 <= 0;
+      else if (M_en)
+          M_rot_pass2 <= E_rot_pass2;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          E_ci_multi_clk_en <= 0;
-      else 
-        E_ci_multi_clk_en <= E_ci_multi_clk_en ? ~E_ci_multi_done : 
-                (R_ctrl_custom_multi & R_valid);
-
-    end
-
-
-  assign E_ci_multi_stall = R_ctrl_custom_multi & E_valid & ~E_ci_multi_done;
-  assign E_arith_src1 = { E_src1[31] ^ E_invert_arith_src_msb, 
-    E_src1[30 : 0]};
-
-  assign E_arith_src2 = { E_src2[31] ^ E_invert_arith_src_msb, 
-    E_src2[30 : 0]};
-
-  assign E_arith_result = E_alu_sub ?
-    E_arith_src1 - E_arith_src2 :
-    E_arith_src1 + E_arith_src2;
-
-  assign E_mem_baddr = E_arith_result[24 : 0];
-  assign E_logic_result = (R_logic_op == 2'b00)? (~(E_src1 | E_src2)) :
-    (R_logic_op == 2'b01)? (E_src1 & E_src2) :
-    (R_logic_op == 2'b10)? (E_src1 | E_src2) :
-    (E_src1 ^ E_src2);
-
-  assign E_logic_result_is_0 = E_logic_result == 0;
-  assign E_eq = E_logic_result_is_0;
-  assign E_lt = E_arith_result[32];
-  assign E_cmp_result = (R_compare_op == 2'b00)? E_eq :
-    (R_compare_op == 2'b01)? ~E_lt :
-    (R_compare_op == 2'b10)? E_lt :
-    ~E_eq;
-
-  assign E_shift_rot_cnt_nxt = E_new_inst ? E_src2[4 : 0] : E_shift_rot_cnt-1;
-  assign E_shift_rot_done = (E_shift_rot_cnt == 0) & ~E_new_inst;
-  assign E_shift_rot_stall = R_ctrl_shift_rot & E_valid & ~E_shift_rot_done;
-  assign E_shift_rot_fill_bit = R_ctrl_shift_logical ? 1'b0 :
-    (R_ctrl_rot_right ? E_shift_rot_result[0] : 
-    E_shift_rot_result[31]);
-
-  assign E_shift_rot_result_nxt = (E_new_inst)? E_src1 :
-    (R_ctrl_shift_rot_right)? {E_shift_rot_fill_bit, E_shift_rot_result[31 : 1]} :
-    {E_shift_rot_result[30 : 0], E_shift_rot_fill_bit};
-
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          E_shift_rot_result <= 0;
-      else 
-        E_shift_rot_result <= E_shift_rot_result_nxt;
+          M_rot_pass3 <= 0;
+      else if (M_en)
+          M_rot_pass3 <= E_rot_pass3;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          E_shift_rot_cnt <= 0;
-      else 
-        E_shift_rot_cnt <= E_shift_rot_cnt_nxt;
+          M_rot_sel_fill0 <= 0;
+      else if (M_en)
+          M_rot_sel_fill0 <= E_rot_sel_fill0;
     end
 
 
-  assign E_control_rd_data = (D_iw_control_regnum == 3'd0)? W_status_reg :
-    (D_iw_control_regnum == 3'd1)? W_estatus_reg :
-    (D_iw_control_regnum == 3'd2)? W_bstatus_reg :
-    (D_iw_control_regnum == 3'd3)? W_ienable_reg :
-    (D_iw_control_regnum == 3'd4)? W_ipending_reg :
-    0;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_rot_sel_fill1 <= 0;
+      else if (M_en)
+          M_rot_sel_fill1 <= E_rot_sel_fill1;
+    end
 
-  assign E_alu_result = ((R_ctrl_br_cmp | R_ctrl_rdctl_inst))? 0 :
-    (R_ctrl_shift_rot)? E_shift_rot_result :
-    (R_ctrl_logic)? E_logic_result :
-    (R_ctrl_custom)? E_ci_result :
-    E_arith_result;
 
-  assign R_stb_data = R_rf_b[7 : 0];
-  assign R_sth_data = R_rf_b[15 : 0];
-  assign E_st_data = (D_mem8)? {R_stb_data, R_stb_data, R_stb_data, R_stb_data} :
-    (D_mem16)? {R_sth_data, R_sth_data} :
-    R_rf_b;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_rot_sel_fill2 <= 0;
+      else if (M_en)
+          M_rot_sel_fill2 <= E_rot_sel_fill2;
+    end
 
-  assign E_mem_byte_en = ({D_iw_memsz, E_mem_baddr[1 : 0]} == {2'b00, 2'b00})? 4'b0001 :
-    ({D_iw_memsz, E_mem_baddr[1 : 0]} == {2'b00, 2'b01})? 4'b0010 :
-    ({D_iw_memsz, E_mem_baddr[1 : 0]} == {2'b00, 2'b10})? 4'b0100 :
-    ({D_iw_memsz, E_mem_baddr[1 : 0]} == {2'b00, 2'b11})? 4'b1000 :
-    ({D_iw_memsz, E_mem_baddr[1 : 0]} == {2'b01, 2'b00})? 4'b0011 :
-    ({D_iw_memsz, E_mem_baddr[1 : 0]} == {2'b01, 2'b01})? 4'b0011 :
-    ({D_iw_memsz, E_mem_baddr[1 : 0]} == {2'b01, 2'b10})? 4'b1100 :
-    ({D_iw_memsz, E_mem_baddr[1 : 0]} == {2'b01, 2'b11})? 4'b1100 :
-    4'b1111;
 
-  assign d_read_nxt = (R_ctrl_ld & E_new_inst) | (d_read & d_waitrequest);
-  assign E_ld_stall = R_ctrl_ld & ((E_valid & ~av_ld_done) | E_new_inst);
-  assign d_write_nxt = (R_ctrl_st & E_new_inst) | (d_write & d_waitrequest);
-  assign E_st_stall = d_write_nxt;
-  assign d_address = W_mem_baddr;
-  assign av_ld_getting_data = d_read & ~d_waitrequest;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_rot_sel_fill3 <= 0;
+      else if (M_en)
+          M_rot_sel_fill3 <= E_rot_sel_fill3;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_fill_bit <= 0;
+      else if (A_en)
+          A_rot_fill_bit <= M_rot_fill_bit;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_mask <= 0;
+      else if (A_en)
+          A_rot_mask <= M_rot_mask;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_pass0 <= 0;
+      else if (A_en)
+          A_rot_pass0 <= M_rot_pass0;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_pass1 <= 0;
+      else if (A_en)
+          A_rot_pass1 <= M_rot_pass1;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_pass2 <= 0;
+      else if (A_en)
+          A_rot_pass2 <= M_rot_pass2;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_pass3 <= 0;
+      else if (A_en)
+          A_rot_pass3 <= M_rot_pass3;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_sel_fill0 <= 0;
+      else if (A_en)
+          A_rot_sel_fill0 <= M_rot_sel_fill0;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_sel_fill1 <= 0;
+      else if (A_en)
+          A_rot_sel_fill1 <= M_rot_sel_fill1;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_sel_fill2 <= 0;
+      else if (A_en)
+          A_rot_sel_fill2 <= M_rot_sel_fill2;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot_sel_fill3 <= 0;
+      else if (A_en)
+          A_rot_sel_fill3 <= M_rot_sel_fill3;
+    end
+
+
+  assign E_rot_prestep1 = E_rot_rn[0] ? {E_src1[30 : 0], E_src1[31]} : E_src1;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_rot_step1 <= 0;
+      else if (M_en)
+          M_rot_step1 <= E_rot_rn[1] ? {E_rot_prestep1[29 : 0], E_rot_prestep1[31 : 30]} : E_rot_prestep1;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_rot_rn <= 0;
+      else if (M_en)
+          M_rot_rn <= E_rot_rn;
+    end
+
+
+  assign M_rot_prestep2 = M_rot_rn[2] ? {M_rot_step1[27 : 0], M_rot_step1[31 : 28]} : M_rot_step1;
+  always @(negedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          Mn_rot_step2 <= 0;
+      else 
+        Mn_rot_step2 <= M_rot_rn[3] ? {M_rot_prestep2[23 : 0], M_rot_prestep2[31 : 24]} : M_rot_prestep2;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_rot <= 0;
+      else if (A_en)
+          A_rot <= M_rot_rn[4] ? 
+                    {Mn_rot_step2[15 : 0], Mn_rot_step2[31 : 16]} : 
+                    Mn_rot_step2;
+
+    end
+
+
+  assign A_rot_lut0 = {8{A_rot_sel_fill0 & A_rot_fill_bit}} | (A_rot_fill_bit ? ({8{~A_rot_sel_fill0}} & (A_rot[7 : 0] | A_rot_mask)) : ({8{~A_rot_sel_fill0}} & A_rot[7 : 0] & ~A_rot_mask));
+  assign A_rot_lut1 = {8{A_rot_sel_fill1 & A_rot_fill_bit}} | (A_rot_fill_bit ? ({8{~A_rot_sel_fill1}} & (A_rot[15 : 8] | A_rot_mask)) : ({8{~A_rot_sel_fill1}} & A_rot[15 : 8] & ~A_rot_mask));
+  assign A_rot_lut2 = {8{A_rot_sel_fill2 & A_rot_fill_bit}} | (A_rot_fill_bit ? ({8{~A_rot_sel_fill2}} & (A_rot[23 : 16] | A_rot_mask)) : ({8{~A_rot_sel_fill2}} & A_rot[23 : 16] & ~A_rot_mask));
+  assign A_rot_lut3 = {8{A_rot_sel_fill3 & A_rot_fill_bit}} | (A_rot_fill_bit ? ({8{~A_rot_sel_fill3}} & (A_rot[31 : 24] | A_rot_mask)) : ({8{~A_rot_sel_fill3}} & A_rot[31 : 24] & ~A_rot_mask));
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_shift_rot_result[7 : 0] <= 0;
+      else 
+        A_shift_rot_result[7 : 0] <= A_rot_pass0 ? A_rot[7 : 0] : A_rot_lut0;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_shift_rot_result[15 : 8] <= 0;
+      else 
+        A_shift_rot_result[15 : 8] <= A_rot_pass1 ? A_rot[15 : 8] : A_rot_lut1;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_shift_rot_result[23 : 16] <= 0;
+      else 
+        A_shift_rot_result[23 : 16] <= A_rot_pass2 ? A_rot[23 : 16] : A_rot_lut2;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_shift_rot_result[31 : 24] <= 0;
+      else 
+        A_shift_rot_result[31 : 24] <= A_rot_pass3 ? A_rot[31 : 24] : A_rot_lut3;
+    end
+
+
+  assign E_mem_bypass_non_io = E_arith_result[31];
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_rd_data <= 0;
+      else if (A_en)
+          A_dc_rd_data <= M_dc_rd_data;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_actual_tag <= 0;
+      else if (A_en)
+          A_dc_actual_tag <= M_dc_actual_tag;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_hit <= 0;
+      else if (A_en)
+          A_dc_hit <= M_dc_hit;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_valid_st_cache_hit <= 0;
+      else if (A_en)
+          A_dc_valid_st_cache_hit <= M_dc_valid_st_cache_hit;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_valid_st_bypass_hit <= 0;
+      else if (A_en)
+          A_dc_valid_st_bypass_hit <= M_dc_valid_st_bypass_hit;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_potential_hazard_after_st <= 0;
+      else if (A_en)
+          A_dc_potential_hazard_after_st <= M_dc_potential_hazard_after_st;
+    end
+
+
+  assign M_ctrl_st_cache = M_ctrl_st_non_bypass & M_sel_data_master;
+  assign M_ctrl_ld_st_cache = M_ctrl_ld_st_non_bypass & M_sel_data_master;
+  assign E_mem_baddr_line_field = E_mem_baddr[10 : 5];
+  assign E_mem_baddr_offset_field = E_mem_baddr[4 : 2];
+  assign E_mem_baddr_line_offset_field = E_mem_baddr[10 : 2];
+  assign E_mem_baddr_byte_field = E_mem_baddr[1 : 0];
+  assign M_mem_baddr_line_field = M_mem_baddr[10 : 5];
+  assign M_mem_baddr_offset_field = M_mem_baddr[4 : 2];
+  assign M_mem_baddr_line_offset_field = M_mem_baddr[10 : 2];
+  assign M_mem_baddr_byte_field = M_mem_baddr[1 : 0];
+  assign A_mem_baddr_line_field = A_mem_baddr[10 : 5];
+  assign A_mem_baddr_offset_field = A_mem_baddr[4 : 2];
+  assign A_mem_baddr_line_offset_field = A_mem_baddr[10 : 2];
+  assign A_mem_baddr_byte_field = A_mem_baddr[1 : 0];
+  assign M_dc_st_wr_en = M_ctrl_st_cache & M_valid & A_en;
+  assign A_dc_dcache_management_wr_en = (A_ctrl_dc_index_inv | (A_ctrl_dc_addr_inv & A_dc_hit)) &
+    A_valid & A_en_d1;
+
+  assign dc_tag_wr_port_data = (A_dc_fill_starting_d1)? {A_ctrl_st, dc_line_valid_on, A_dc_desired_tag} :
+    (A_dc_dcache_management_wr_en)? {dc_line_dirty_off, dc_line_valid_off, M_dc_desired_tag} :
+    {dc_line_dirty_on,  dc_line_valid_on,  M_dc_desired_tag};
+
+  assign dc_tag_wr_port_addr = ((A_dc_fill_starting_d1 | A_dc_dcache_management_wr_en))? A_mem_baddr_line_field :
+    M_mem_baddr_line_field;
+
+  assign dc_tag_wr_port_en = A_dc_fill_starting_d1 | 
+    A_dc_dcache_management_wr_en | M_dc_st_wr_en;
+
+  assign dc_line_dirty_on = 1'b1;
+  assign dc_line_dirty_off = 1'b0;
+  assign dc_line_valid_on = 1'b1;
+  assign dc_line_valid_off = 1'b0;
+  assign M_dc_tag_entry = dc_tag_rd_port_data;
+  assign M_dc_dirty_raw = M_dc_tag_entry[15];
+  assign M_dc_valid = M_dc_tag_entry[14];
+  assign M_dc_actual_tag = M_dc_tag_entry[13 : 0];
+  assign dc_tag_rd_port_addr = M_en                   ? E_mem_baddr_line_field : 
+    M_mem_baddr_line_field;
+
+//cpu_0_dc_tag, which is an nios_sdp_ram
+cpu_0_dc_tag_module cpu_0_dc_tag
+  (
+    .clock     (clk),
+    .data      (dc_tag_wr_port_data),
+    .q         (dc_tag_rd_port_data),
+    .rdaddress (dc_tag_rd_port_addr),
+    .wraddress (dc_tag_wr_port_addr),
+    .wren      (dc_tag_wr_port_en)
+  );
+
+//synthesis translate_off
+`ifdef NO_PLI
+defparam cpu_0_dc_tag.lpm_file = "cpu_0_dc_tag_ram.dat";
+`else
+defparam cpu_0_dc_tag.lpm_file = "cpu_0_dc_tag_ram.hex";
+`endif
+//synthesis translate_on
+//synthesis read_comments_as_HDL on
+//defparam cpu_0_dc_tag.lpm_file = "cpu_0_dc_tag_ram.mif";
+//synthesis read_comments_as_HDL off
+  assign M_dc_desired_tag = M_mem_baddr[24 : 11];
+  assign A_dc_desired_tag = A_mem_baddr[24 : 11];
+  assign M_dc_tag_match = M_dc_desired_tag == M_dc_actual_tag;
+  assign M_dc_hit = M_dc_tag_match & M_dc_valid;
+  assign M_dc_dirty = M_dc_dirty_raw | (M_A_dc_line_match & A_dc_valid_st_cache_hit);
+  assign dc_data_rd_port_line_field = M_en                     ? E_mem_baddr_line_field : 
+    A_dc_xfer_rd_addr_active ? A_mem_baddr_line_field :
+    M_mem_baddr_line_field;
+
+  assign dc_data_rd_port_offset_field = M_en                      ? E_mem_baddr_offset_field : 
+    A_dc_xfer_rd_addr_active  ? A_dc_xfer_rd_addr_offset :
+    M_mem_baddr_offset_field;
+
+  assign dc_data_rd_port_addr = {dc_data_rd_port_line_field, dc_data_rd_port_offset_field};
+  assign M_dc_rd_data = dc_data_rd_port_data;
+  assign M_st_dc_wr_en = M_ctrl_st_cache & M_valid & A_en;
+  assign dc_data_wr_port_data = A_dc_fill_active               ? A_dc_fill_wr_data : 
+    A_dc_valid_st_bypass_hit_wr_en ? A_st_data :
+    M_st_data;
+
+  assign dc_data_wr_port_byte_en = A_dc_fill_active               ? A_dc_fill_byte_en : 
+    A_dc_valid_st_bypass_hit_wr_en ? A_mem_byte_en :
+    M_mem_byte_en;
+
+  assign dc_data_wr_port_addr = A_dc_fill_active               ? 
+    { A_mem_baddr_line_field, A_dc_fill_dp_offset } : 
+    A_dc_valid_st_bypass_hit_wr_en ? A_mem_baddr_line_offset_field :
+    M_mem_baddr_line_offset_field;
+
+  assign dc_data_wr_port_en = (A_dc_fill_active ? d_readdatavalid_d1 : M_st_dc_wr_en) |
+    A_dc_valid_st_bypass_hit_wr_en;
+
+//cpu_0_dc_data, which is an nios_sdp_ram
+cpu_0_dc_data_module cpu_0_dc_data
+  (
+    .byteenable (dc_data_wr_port_byte_en),
+    .clock      (clk),
+    .data       (dc_data_wr_port_data),
+    .q          (dc_data_rd_port_data),
+    .rdaddress  (dc_data_rd_port_addr),
+    .wraddress  (dc_data_wr_port_addr),
+    .wren       (dc_data_wr_port_en)
+  );
+
+  assign E_M_dc_line_offset_match = E_mem_baddr_line_offset_field == M_mem_baddr_line_offset_field;
+  assign M_A_dc_line_match = M_mem_baddr_line_field == A_mem_baddr_line_field;
+  assign M_dc_valid_st_cache_hit = M_valid & M_ctrl_st_cache & M_dc_hit;
+  assign M_dc_valid_st_bypass_hit = M_valid & M_ctrl_st_bypass & M_dc_hit;
+//cpu_0_dc_victim, which is an nios_sdp_ram
+cpu_0_dc_victim_module cpu_0_dc_victim
+  (
+    .clock     (clk),
+    .data      (A_dc_xfer_wr_data),
+    .q         (A_dc_wb_rd_data),
+    .rdaddress (A_dc_wb_rd_addr_offset),
+    .rden      (A_dc_wb_en),
+    .wraddress (A_dc_xfer_wr_offset),
+    .wren      (A_dc_xfer_wr_active)
+  );
+
+  assign M_dc_want_fill = M_valid & M_ctrl_ld_st_cache & ~M_dc_hit;
+  assign A_dc_fill_starting = A_dc_want_fill & ~A_dc_fill_has_started & ~A_dc_wb_active;
+  assign A_dc_fill_has_started_nxt = A_en ? 1'b0 : (A_dc_fill_starting | A_dc_fill_has_started);
+  assign A_dc_fill_need_extra_stall_nxt = M_valid_mem_d1 & M_A_dc_line_match_d1 & 
+    M_mem_baddr_offset_field == 7;
+
+  assign A_dc_fill_done = A_dc_fill_need_extra_stall ? 
+    A_dc_rd_last_transfer_d1 : 
+    A_dc_rd_last_transfer;
+
+  assign A_dc_fill_active_nxt = A_dc_fill_active ? ~A_dc_fill_done : A_dc_fill_starting;
+  assign A_dc_fill_want_dmaster = A_dc_fill_starting | A_dc_fill_active;
+  assign A_dc_fill_dp_offset_nxt = A_dc_fill_starting ? 0 : (A_dc_fill_dp_offset + 1);
+  assign A_dc_fill_dp_offset_en = A_dc_fill_starting | d_readdatavalid_d1;
+  assign A_dc_fill_miss_offset_is_next = A_dc_fill_active & (A_dc_fill_dp_offset == A_mem_baddr_offset_field);
+  assign A_dc_fill_byte_en = (A_ctrl_st & A_dc_fill_miss_offset_is_next) ? 
+    ~A_mem_byte_en : 
+    {4{1'b1}};
+
+  assign A_dc_fill_wr_data = d_readdata_d1;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_want_fill <= 0;
+      else if (A_en)
+          A_dc_want_fill <= M_dc_want_fill;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_fill_has_started <= 0;
+      else 
+        A_dc_fill_has_started <= A_dc_fill_has_started_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_fill_active <= 0;
+      else 
+        A_dc_fill_active <= A_dc_fill_active_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_fill_dp_offset <= 0;
+      else if (A_dc_fill_dp_offset_en)
+          A_dc_fill_dp_offset <= A_dc_fill_dp_offset_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_fill_starting_d1 <= 0;
+      else 
+        A_dc_fill_starting_d1 <= A_dc_fill_starting;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_valid_mem_d1 <= 0;
+      else 
+        M_valid_mem_d1 <= M_ctrl_ld_st & M_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_A_dc_line_match_d1 <= 0;
+      else 
+        M_A_dc_line_match_d1 <= M_A_dc_line_match;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_fill_need_extra_stall <= 0;
+      else 
+        A_dc_fill_need_extra_stall <= A_dc_fill_need_extra_stall_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_rd_last_transfer_d1 <= 0;
+      else 
+        A_dc_rd_last_transfer_d1 <= A_dc_rd_last_transfer;
+    end
+
+
+  assign A_dc_wb_active_nxt = A_dc_wb_active ? ~A_dc_wr_last_transfer : A_dc_xfer_rd_addr_starting;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wb_active <= 0;
+      else 
+        A_dc_wb_active <= A_dc_wb_active_nxt;
+    end
+
+
+  assign A_dc_fill_want_xfer = A_dc_want_fill & A_dc_dirty;
+  assign A_dc_index_wb_inv_want_xfer = A_ctrl_dc_index_wb_inv & A_valid & A_dc_dirty;
+  assign A_dc_dc_addr_wb_inv_want_xfer = A_ctrl_dc_addr_wb_inv  & A_valid & A_dc_dirty & A_dc_hit;
+  assign A_dc_want_xfer = A_dc_fill_want_xfer | A_dc_index_wb_inv_want_xfer | 
+    A_dc_dc_addr_wb_inv_want_xfer;
+
+  assign A_dc_xfer_rd_addr_starting = A_dc_want_xfer & ~A_dc_xfer_rd_addr_has_started & ~A_dc_wb_active;
+  assign A_dc_xfer_rd_addr_has_started_nxt = A_en ? 1'b0 : 
+    (A_dc_xfer_rd_addr_starting | A_dc_xfer_rd_addr_has_started);
+
+  assign A_dc_xfer_rd_addr_done_nxt = A_dc_xfer_rd_addr_active & 
+    (A_dc_xfer_rd_addr_offset == (7 - 1));
+
+  assign A_dc_xfer_rd_addr_active_nxt = A_dc_xfer_rd_addr_active ? 
+    ~A_dc_xfer_rd_addr_done : 
+    A_dc_xfer_rd_addr_starting;
+
+  assign A_dc_xfer_rd_addr_offset_nxt = A_dc_xfer_rd_addr_starting ? 0 : (A_dc_xfer_rd_addr_offset + 1);
+  assign A_dc_xfer_rd_addr_offset_match = A_ctrl_st & (A_dc_xfer_rd_addr_offset == A_mem_baddr_offset_field);
+  assign A_dc_xfer_wr_data_nxt = A_dc_xfer_rd_data_offset_match ? 
+    A_dc_rd_data :  
+    dc_data_rd_port_data;
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_dirty <= 0;
+      else if (A_en)
+          A_dc_dirty <= M_dc_dirty;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_rd_addr_has_started <= 0;
+      else 
+        A_dc_xfer_rd_addr_has_started <= A_dc_xfer_rd_addr_has_started_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_rd_addr_active <= 0;
+      else 
+        A_dc_xfer_rd_addr_active <= A_dc_xfer_rd_addr_active_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_rd_addr_done <= 0;
+      else 
+        A_dc_xfer_rd_addr_done <= A_dc_xfer_rd_addr_done_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_rd_addr_offset <= 0;
+      else 
+        A_dc_xfer_rd_addr_offset <= A_dc_xfer_rd_addr_offset_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_rd_data_starting <= 0;
+      else 
+        A_dc_xfer_rd_data_starting <= A_dc_xfer_rd_addr_starting;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_rd_data_active <= 0;
+      else 
+        A_dc_xfer_rd_data_active <= A_dc_xfer_rd_addr_active;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_rd_data_offset_match <= 0;
+      else 
+        A_dc_xfer_rd_data_offset_match <= A_dc_xfer_rd_addr_offset_match;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_rd_data_offset <= 0;
+      else 
+        A_dc_xfer_rd_data_offset <= A_dc_xfer_rd_addr_offset;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_wr_starting <= 0;
+      else 
+        A_dc_xfer_wr_starting <= A_dc_xfer_rd_data_starting;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_wr_active <= 0;
+      else 
+        A_dc_xfer_wr_active <= A_dc_xfer_rd_data_active;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_wr_data <= 0;
+      else 
+        A_dc_xfer_wr_data <= A_dc_xfer_wr_data_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_xfer_wr_offset <= 0;
+      else 
+        A_dc_xfer_wr_offset <= A_dc_xfer_rd_data_offset;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wb_tag <= 0;
+      else if (A_dc_xfer_rd_data_starting)
+          A_dc_wb_tag <= A_dc_actual_tag;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wb_line <= 0;
+      else if (A_dc_xfer_rd_data_starting)
+          A_dc_wb_line <= A_mem_baddr_line_field;
+    end
+
+
+  assign A_dc_wb_en = av_wr_data_transfer | A_dc_wb_rd_addr_starting | 
+    A_dc_wb_rd_data_starting | A_dc_wb_wr_starting;
+
+  assign A_dc_wb_rd_addr_offset_nxt = A_dc_wb_rd_addr_starting ? 0 : (A_dc_wb_rd_addr_offset + 1);
+  assign A_dc_wb_wr_starting = A_dc_wb_rd_data_first & ~d_read;
+  assign A_dc_wb_wr_active_nxt = A_dc_wb_wr_active ? ~A_dc_wr_last_transfer : A_dc_wb_wr_starting;
+  assign A_dc_wb_wr_want_dmaster = A_dc_wb_wr_starting | A_dc_wb_wr_active;
+  assign A_dc_wb_rd_data_first_nxt = A_dc_wb_rd_data_first ? 
+    ~A_dc_wb_wr_starting : 
+    A_dc_wb_rd_data_starting;
+
+  assign A_dc_wb_update_av_writedata = A_dc_wb_wr_starting | 
+    (A_dc_wb_wr_active & ~A_dc_wr_last_driven & ~d_waitrequest);
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wb_rd_addr_starting <= 0;
+      else 
+        A_dc_wb_rd_addr_starting <= A_dc_xfer_wr_starting;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wb_rd_addr_offset <= 0;
+      else if (A_dc_wb_en)
+          A_dc_wb_rd_addr_offset <= A_dc_wb_rd_addr_offset_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wb_rd_data_starting <= 0;
+      else 
+        A_dc_wb_rd_data_starting <= A_dc_wb_rd_addr_starting;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wb_wr_active <= 0;
+      else 
+        A_dc_wb_wr_active <= A_dc_wb_wr_active_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wb_rd_data_first <= 0;
+      else 
+        A_dc_wb_rd_data_first <= A_dc_wb_rd_data_first_nxt;
+    end
+
+
+  assign A_dc_index_wb_inv_done_nxt = ~A_dc_dirty | A_dc_xfer_rd_addr_done;
+  assign A_dc_dc_addr_wb_inv_done_nxt = ~A_dc_dirty | A_dc_xfer_rd_addr_done | ~A_dc_hit;
+  assign A_dc_dcache_management_done_nxt = A_valid & ~A_en &
+    (A_ctrl_dc_nowb_inv |
+    (A_ctrl_dc_index_wb_inv & A_dc_index_wb_inv_done_nxt) |
+    ((A_ctrl_dc_addr_wb_inv ) & A_dc_dc_addr_wb_inv_done_nxt));
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_dcache_management_done <= 0;
+      else 
+        A_dc_dcache_management_done <= A_dc_dcache_management_done_nxt;
+    end
+
+
+  assign M_dc_want_mem_bypass_or_dcache_management = M_valid & M_ctrl_ld_st_bypass_or_dcache_management;
+  assign A_ld_bypass_done = A_dc_rd_last_transfer;
+  assign A_st_bypass_transfer_done = A_dc_wr_last_transfer & ~A_dc_wb_active;
+  assign A_st_bypass_done = A_dc_valid_st_bypass_hit ? 
+    A_st_bypass_transfer_done_d1 :
+    A_st_bypass_transfer_done;
+
+  assign A_mem_bypass_pending = A_ctrl_ld_st_bypass & A_valid & ~A_en;
+  assign A_dc_valid_st_bypass_hit_wr_en = A_dc_valid_st_bypass_hit & A_en_d1;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ld_bypass_delayed <= 0;
+      else if (A_en)
+          A_ld_bypass_delayed <= M_ctrl_ld_bypass & M_valid & A_dc_wb_active;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_st_bypass_delayed <= 0;
+      else if (A_en)
+          A_st_bypass_delayed <= M_ctrl_st_bypass & M_valid & A_dc_wb_active;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ld_bypass_delayed_started <= 0;
+      else 
+        A_ld_bypass_delayed_started <= A_en ? 0 : 
+                ((A_ld_bypass_delayed & ~A_dc_wb_active) | 
+                A_ld_bypass_delayed_started);
+
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_st_bypass_delayed_started <= 0;
+      else 
+        A_st_bypass_delayed_started <= A_en ? 0 : 
+                ((A_st_bypass_delayed & ~A_dc_wb_active) | 
+                A_st_bypass_delayed_started);
+
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_st_bypass_transfer_done_d1 <= 0;
+      else 
+        A_st_bypass_transfer_done_d1 <= A_st_bypass_transfer_done;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_en_d1 <= 0;
+      else 
+        A_en_d1 <= A_en;
+    end
+
+
+  assign d_address_tag_field_nxt = A_dc_wb_wr_want_dmaster                         ? A_dc_wb_tag : 
+    (A_dc_fill_want_dmaster | A_mem_bypass_pending) ? A_dc_desired_tag :
+    M_dc_desired_tag;
+
+  assign d_address_line_field_nxt = A_dc_wb_wr_want_dmaster                         ? 
+    A_dc_wb_line : 
+    (A_dc_fill_want_dmaster | A_mem_bypass_pending) ? 
+    A_mem_baddr_line_field :
+    M_mem_baddr_line_field;
+
+  assign d_address_byte_field_nxt = (A_dc_wb_wr_want_dmaster | A_dc_fill_want_dmaster) ? 0 : 
+    A_mem_bypass_pending                      ? A_mem_baddr_byte_field :
+    M_mem_baddr_byte_field;
+
+  assign d_byteenable_nxt = (A_dc_wb_wr_want_dmaster | A_dc_fill_want_dmaster) ? {4{1'b1}} : 
+    A_mem_bypass_pending                               ? A_mem_byte_en :
+    M_mem_byte_en;
+
+  assign d_writedata_nxt = A_dc_wb_update_av_writedata                 ? A_dc_wb_rd_data : 
+    A_dc_wb_wr_active                           ? d_writedata :
+    A_mem_bypass_pending                        ? A_st_data :
+    M_st_data;
+
+  assign d_write_nxt = A_dc_wb_wr_starting |
+    (M_ctrl_st_bypass & M_valid & A_en & ~A_dc_wb_active) | 
+    (A_st_bypass_delayed & ~A_st_bypass_delayed_started & 
+    ~A_dc_wb_active) |
+    (d_write & (d_waitrequest | ~A_dc_wr_last_driven));
+
+  assign d_address = {d_address_tag_field, 
+    d_address_line_field[5 : 0],
+    d_address_offset_field,
+    d_address_byte_field};
+
+  assign M_dc_potential_hazard_after_st_unfiltered = E_M_dc_line_offset_match & M_ctrl_st_cache & M_valid & 
+    E_ctrl_mem & E_valid;
+
+  assign A_mem_stall_start_nxt = A_en & (M_dc_want_fill|M_dc_want_mem_bypass_or_dcache_management|M_dc_potential_hazard_after_st);
+  assign A_mem_stall_stop_nxt = (A_dc_fill_active & A_dc_fill_done)|(A_dc_dcache_management_done)|(A_ctrl_ld_bypass & A_ld_bypass_done)|(A_ctrl_st_bypass & A_st_bypass_done)|(A_dc_potential_hazard_after_st & A_dc_valid_st_cache_hit);
+  assign A_mem_stall_nxt = A_mem_stall ? ~A_mem_stall_stop_nxt : A_mem_stall_start_nxt;
+  assign A_dc_rd_data_cnt_nxt = d_readdatavalid_d1 ? (A_dc_rd_data_cnt + 1) :
+    A_dc_fill_starting ? 1 :
+    A_dc_fill_active   ? A_dc_rd_data_cnt :
+    8;
+
+  assign A_dc_rd_last_transfer = A_dc_rd_data_cnt[3] & d_readdatavalid_d1;
+  assign av_wr_data_transfer = d_write & ~d_waitrequest;
+  assign A_dc_wr_data_cnt_nxt = av_wr_data_transfer ? (A_dc_wr_data_cnt + 1) :
+    A_dc_wb_wr_starting ? 1 :
+    A_dc_wb_wr_active   ? A_dc_wr_data_cnt :
+    8;
+
+  assign A_dc_wr_last_driven = A_dc_wr_data_cnt[3];
+  assign A_dc_wr_last_transfer = A_dc_wr_last_driven & d_write & ~d_waitrequest;
+  assign av_addr_accepted = (d_read | d_write) & ~d_waitrequest;
+  assign d_address_offset_field_nxt = av_addr_accepted ? (d_address_offset_field + 1) :
+    (A_dc_wb_wr_starting | A_dc_fill_starting) ? 0 :
+    (A_dc_wb_wr_active | A_dc_fill_active) ? d_address_offset_field :
+    A_mem_bypass_pending                ? A_mem_baddr_offset_field :
+    M_mem_baddr_offset_field;
+
+  assign d_read_nxt = A_dc_fill_starting |
+    (M_ctrl_ld_bypass & M_valid & A_en & ~A_dc_wb_active) | 
+    (A_ld_bypass_delayed & ~A_ld_bypass_delayed_started & 
+    ~A_dc_wb_active) |
+    (d_read & (d_waitrequest | ~A_dc_rd_last_driven));
+
+  assign av_rd_addr_accepted = d_read & ~d_waitrequest;
+  assign A_dc_rd_addr_cnt_nxt = av_rd_addr_accepted ? (A_dc_rd_addr_cnt + 1) :
+    A_dc_fill_starting  ? 1 :
+    A_dc_fill_active    ? A_dc_rd_addr_cnt :
+    8;
+
+  assign A_dc_rd_last_driven = A_dc_rd_addr_cnt[3];
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_rd_addr_cnt <= 0;
+      else 
+        A_dc_rd_addr_cnt <= A_dc_rd_addr_cnt_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d_address_tag_field <= 0;
+      else 
+        d_address_tag_field <= d_address_tag_field_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d_address_line_field <= 0;
+      else 
+        d_address_line_field <= d_address_line_field_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d_address_offset_field <= 0;
+      else 
+        d_address_offset_field <= d_address_offset_field_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d_address_byte_field <= 0;
+      else 
+        d_address_byte_field <= d_address_byte_field_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d_byteenable <= 0;
+      else 
+        d_byteenable <= d_byteenable_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d_writedata <= 0;
+      else 
+        d_writedata <= d_writedata_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_mem_stall <= 0;
+      else 
+        A_mem_stall <= A_mem_stall_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_rd_data_cnt <= 0;
+      else 
+        A_dc_rd_data_cnt <= A_dc_rd_data_cnt_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dc_wr_data_cnt <= 0;
+      else 
+        A_dc_wr_data_cnt <= A_dc_wr_data_cnt_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d_readdata_d1 <= 0;
+      else 
+        d_readdata_d1 <= d_readdata;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d_write <= 0;
+      else 
+        d_write <= d_write_nxt;
+    end
+
+
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -4552,118 +8622,804 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          d_writedata <= 0;
+          d_readdatavalid_d1 <= 0;
       else 
-        d_writedata <= E_st_data;
+        d_readdatavalid_d1 <= d_readdatavalid;
+    end
+
+
+  assign A_slow_ld_data_unaligned = d_readdata_d1;
+  assign A_slow_ld_data_sign_bit_16 = A_mem_baddr[1]  ? 
+    {A_slow_ld_data_unaligned[31], A_slow_ld_data_unaligned[23]} : 
+    {A_slow_ld_data_unaligned[15], A_slow_ld_data_unaligned[7]};
+
+  assign A_slow_ld_data_fill_bit = A_slow_ld_data_sign_bit & A_ctrl_ld_signed;
+  assign A_slow_ld_data_sign_bit = ((A_mem_baddr[0]) | A_ctrl_ld16) ? 
+    A_slow_ld_data_sign_bit_16[1] : A_slow_ld_data_sign_bit_16[0];
+
+  assign A_slow_ld16_data = A_ld_align_sh16 ? 
+    A_slow_ld_data_unaligned[31 : 16] :
+    A_slow_ld_data_unaligned[15 : 0];
+
+  assign A_slow_ld_byte0_data_aligned_nxt = A_ld_align_sh8 ? 
+    A_slow_ld16_data[15 : 8] :
+    A_slow_ld16_data[7 : 0];
+
+  assign A_slow_ld_byte1_data_aligned_nxt = A_ld_align_byte1_fill ? 
+    {8 {A_slow_ld_data_fill_bit}} : 
+    A_slow_ld16_data[15 : 8];
+
+  assign A_slow_ld_byte2_data_aligned_nxt = A_ld_align_byte2_byte3_fill ? 
+    {8 {A_slow_ld_data_fill_bit}} : 
+    A_slow_ld_data_unaligned[23 : 16];
+
+  assign A_slow_ld_byte3_data_aligned_nxt = A_ld_align_byte2_byte3_fill ? 
+    {8 {A_slow_ld_data_fill_bit}} : 
+    A_slow_ld_data_unaligned[31 : 24];
+
+  assign A_slow_ld_data_aligned_nxt = {A_slow_ld_byte3_data_aligned_nxt, A_slow_ld_byte2_data_aligned_nxt, 
+    A_slow_ld_byte1_data_aligned_nxt, A_slow_ld_byte0_data_aligned_nxt};
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_data_ram_ld_align_sign_bit_16_hi <= 0;
+      else if (M_en)
+          M_data_ram_ld_align_sign_bit_16_hi <= (E_mem_baddr[0]) | E_ctrl_ld16;
+    end
+
+
+  assign M_data_ram_ld_align_sign_bit_16 = M_mem_baddr[1] ? 
+    {M_ram_rd_data[31], M_ram_rd_data[23]} : 
+    {M_ram_rd_data[15], M_ram_rd_data[7]};
+
+  assign M_data_ram_ld_align_sign_bit = M_data_ram_ld_align_sign_bit_16_hi ?
+    M_data_ram_ld_align_sign_bit_16[1] : 
+    M_data_ram_ld_align_sign_bit_16[0];
+
+  assign A_data_ram_ld_align_fill_bit = A_data_ram_ld_align_sign_bit & A_ctrl_ld_signed;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_data_ram_ld_align_sign_bit <= 0;
+      else if (A_en)
+          A_data_ram_ld_align_sign_bit <= M_data_ram_ld_align_sign_bit;
+    end
+
+
+  assign A_data_ram_ld16_data = A_ld_align_sh16 ? 
+    A_inst_result[31 : 16] :
+    A_inst_result[15 : 0];
+
+  assign A_data_ram_ld_byte0_data = A_ld_align_sh8 ? 
+    A_data_ram_ld16_data[15 : 8] :
+    A_data_ram_ld16_data[7 : 0];
+
+  assign A_data_ram_ld_byte1_data = A_ld_align_byte1_fill ? 
+    {8 {A_data_ram_ld_align_fill_bit}} : 
+    A_data_ram_ld16_data[15 : 8];
+
+  assign A_data_ram_ld_byte2_data = A_ld_align_byte2_byte3_fill ? 
+    {8 {A_data_ram_ld_align_fill_bit}} : 
+    A_inst_result[23 : 16];
+
+  assign A_data_ram_ld_byte3_data = A_ld_align_byte2_byte3_fill ? 
+    {8 {A_data_ram_ld_align_fill_bit}} : 
+    A_inst_result[31 : 24];
+
+  assign A_inst_result_aligned = {A_data_ram_ld_byte3_data, A_data_ram_ld_byte2_data, 
+    A_data_ram_ld_byte1_data, A_data_ram_ld_byte0_data};
+
+  assign E_arith_src1 = { E_src1[31] ^ E_ctrl_alu_signed_comparison, 
+    E_src1[30 : 0]};
+
+  assign E_arith_src2 = { E_src2[31] ^ E_ctrl_alu_signed_comparison, 
+    E_src2[30 : 0]};
+
+  assign E_arith_result = E_ctrl_alu_subtract ?
+    E_arith_src1 - E_arith_src2 :
+    E_arith_src1 + E_arith_src2;
+
+  assign E_mem_baddr = E_arith_result[24 : 0];
+  assign E_logic_result = (E_logic_op == 2'b00)? (~(E_src1 | E_src2)) :
+    (E_logic_op == 2'b01)? (E_src1 & E_src2) :
+    (E_logic_op == 2'b10)? (E_src1 | E_src2) :
+    (E_src1 ^ E_src2);
+
+  assign E_eq = E_src1_eq_src2;
+  assign E_lt = E_arith_result[32];
+  assign E_cmp_result = (E_compare_op == 2'b00)? E_eq :
+    (E_compare_op == 2'b01)? ~E_lt :
+    (E_compare_op == 2'b10)? E_lt :
+    ~E_eq;
+
+  assign E_br_result = E_cmp_result;
+  assign E_alu_result = ({32 {E_ctrl_cmp}} & E_cmp_result) |
+    ({32 {E_ctrl_logic}} & E_logic_result) |
+    ({32 {E_ctrl_retaddr}} & {E_extra_pc, 2'b00}) |
+    ({32 {(~(E_ctrl_cmp)) && (~(E_ctrl_logic)) && (~(E_ctrl_retaddr))}} & E_arith_result[31 : 0]);
+
+  assign E_sth_data = E_src2_reg[15 : 0];
+  assign E_stw_data = E_src2_reg[31 : 0];
+  assign E_stb_data = E_src2_reg[7 : 0];
+  assign E_st_data = (E_mem8)? {E_stb_data, E_stb_data, E_stb_data, E_stb_data} :
+    (E_mem16)? {E_sth_data, E_sth_data} :
+    E_stw_data;
+
+  assign E_mem_byte_en = ({E_iw_memsz, E_mem_baddr[1 : 0]} == {2'b00, 2'b00})? 4'b0001 :
+    ({E_iw_memsz, E_mem_baddr[1 : 0]} == {2'b00, 2'b01})? 4'b0010 :
+    ({E_iw_memsz, E_mem_baddr[1 : 0]} == {2'b00, 2'b10})? 4'b0100 :
+    ({E_iw_memsz, E_mem_baddr[1 : 0]} == {2'b00, 2'b11})? 4'b1000 :
+    ({E_iw_memsz, E_mem_baddr[1 : 0]} == {2'b01, 2'b00})? 4'b0011 :
+    ({E_iw_memsz, E_mem_baddr[1 : 0]} == {2'b01, 2'b01})? 4'b0011 :
+    ({E_iw_memsz, E_mem_baddr[1 : 0]} == {2'b01, 2'b10})? 4'b1100 :
+    ({E_iw_memsz, E_mem_baddr[1 : 0]} == {2'b01, 2'b11})? 4'b1100 :
+    4'b1111;
+
+  assign A_status_reg_pie_inst_nxt = (M_ctrl_exception | M_ctrl_break |
+    M_ctrl_crst)      ? 1'b0 :
+    M_op_eret         ? A_estatus_reg[0] :
+    M_op_bret         ? A_bstatus_reg[0] :
+    M_wrctl_status    ? M_wrctl_data_status_reg_pie :
+    A_status_reg_pie;
+
+  assign A_estatus_reg_pie_inst_nxt = M_ctrl_crst       ? 0 :
+    M_ctrl_exception  ? A_status_reg_pie :
+    M_wrctl_estatus   ? M_wrctl_data_estatus_reg_pie :
+    A_estatus_reg_pie;
+
+  assign A_bstatus_reg_pie_inst_nxt = M_ctrl_break      ? A_status_reg_pie :
+    M_wrctl_bstatus   ? M_wrctl_data_bstatus_reg_pie :
+    A_bstatus_reg_pie;
+
+  assign M_wrctl_status = M_ctrl_wrctl_inst & (M_iw_control_regnum == 0);
+  assign M_wrctl_estatus = M_ctrl_wrctl_inst & (M_iw_control_regnum == 1);
+  assign M_wrctl_bstatus = M_ctrl_wrctl_inst & (M_iw_control_regnum == 2);
+  assign M_wrctl_ienable = M_ctrl_wrctl_inst & (M_iw_control_regnum == 3);
+  assign M_wrctl_data_status_reg_pie = M_alu_result[0];
+  assign M_wrctl_data_estatus_reg_pie = M_alu_result[0];
+  assign M_wrctl_data_bstatus_reg_pie = M_alu_result[0];
+  assign M_wrctl_data_ienable_reg_irq0 = M_alu_result[0];
+  assign M_wrctl_data_ienable_reg_irq1 = M_alu_result[1];
+  assign A_status_reg_pie_nxt = M_valid           ? A_status_reg_pie_inst_nxt : 
+    A_status_reg_pie;
+
+  assign A_status_reg_pie_wr_en = A_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_status_reg_pie <= 0;
+      else if (A_status_reg_pie_wr_en)
+          A_status_reg_pie <= A_status_reg_pie_nxt;
+    end
+
+
+  assign A_estatus_reg_pie_nxt = M_valid ? A_estatus_reg_pie_inst_nxt : 
+    A_estatus_reg_pie;
+
+  assign A_estatus_reg_pie_wr_en = A_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_estatus_reg_pie <= 0;
+      else if (A_estatus_reg_pie_wr_en)
+          A_estatus_reg_pie <= A_estatus_reg_pie_nxt;
+    end
+
+
+  assign A_bstatus_reg_pie_nxt = M_valid ? A_bstatus_reg_pie_inst_nxt : 
+    A_bstatus_reg_pie;
+
+  assign A_bstatus_reg_pie_wr_en = A_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_bstatus_reg_pie <= 0;
+      else if (A_bstatus_reg_pie_wr_en)
+          A_bstatus_reg_pie <= A_bstatus_reg_pie_nxt;
+    end
+
+
+  assign A_ienable_reg_irq0_nxt = (M_wrctl_ienable & M_valid) ? 
+    M_wrctl_data_ienable_reg_irq0 :
+    A_ienable_reg_irq0;
+
+  assign A_ienable_reg_irq0_wr_en = A_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ienable_reg_irq0 <= 0;
+      else if (A_ienable_reg_irq0_wr_en)
+          A_ienable_reg_irq0 <= A_ienable_reg_irq0_nxt;
+    end
+
+
+  assign A_ienable_reg_irq1_nxt = (M_wrctl_ienable & M_valid) ? 
+    M_wrctl_data_ienable_reg_irq1 :
+    A_ienable_reg_irq1;
+
+  assign A_ienable_reg_irq1_wr_en = A_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ienable_reg_irq1 <= 0;
+      else if (A_ienable_reg_irq1_wr_en)
+          A_ienable_reg_irq1 <= A_ienable_reg_irq1_nxt;
+    end
+
+
+  assign A_ipending_reg_irq0_nxt = d_irq[0] & A_ienable_reg_irq0 & oci_ienable[0];
+  assign A_ipending_reg_irq0_wr_en = 1;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ipending_reg_irq0 <= 0;
+      else if (A_ipending_reg_irq0_wr_en)
+          A_ipending_reg_irq0 <= A_ipending_reg_irq0_nxt;
+    end
+
+
+  assign A_ipending_reg_irq1_nxt = d_irq[1] & A_ienable_reg_irq1 & oci_ienable[1];
+  assign A_ipending_reg_irq1_wr_en = 1;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ipending_reg_irq1 <= 0;
+      else if (A_ipending_reg_irq1_wr_en)
+          A_ipending_reg_irq1 <= A_ipending_reg_irq1_nxt;
+    end
+
+
+  assign A_status_reg = { 31'd0, A_status_reg_pie };
+  assign A_estatus_reg = { 31'd0, A_estatus_reg_pie };
+  assign A_bstatus_reg = { 31'd0, A_bstatus_reg_pie };
+  assign A_ienable_reg = { 30'd0, A_ienable_reg_irq1, A_ienable_reg_irq0 };
+  assign A_ipending_reg = { 30'd0, A_ipending_reg_irq1, A_ipending_reg_irq0 };
+  assign A_cpuid_reg = { 31'd0, 1'd0 };
+  assign D_control_reg_rddata_muxed = (D_iw_control_regnum == 3'd0)? A_status_reg :
+    (D_iw_control_regnum == 3'd1)? A_estatus_reg :
+    (D_iw_control_regnum == 3'd2)? A_bstatus_reg :
+    (D_iw_control_regnum == 3'd3)? A_ienable_reg :
+    (D_iw_control_regnum == 3'd4)? A_ipending_reg :
+    A_cpuid_reg;
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_control_reg_rddata <= 0;
+      else if (E_en)
+          E_control_reg_rddata <= D_control_reg_rddata_muxed;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          d_byteenable <= 0;
-      else 
-        d_byteenable <= E_mem_byte_en;
+          M_control_reg_rddata <= 0;
+      else if (M_en)
+          M_control_reg_rddata <= E_control_reg_rddata;
     end
 
 
-  assign av_ld_align_cycle_nxt = av_ld_getting_data ? 0 : (av_ld_align_cycle+1);
-  assign av_ld_align_one_more_cycle = av_ld_align_cycle == (D_mem16 ? 2 : 3);
-  assign av_ld_aligning_data_nxt = av_ld_aligning_data ? 
-    ~av_ld_align_one_more_cycle : 
-    (~D_mem32 & av_ld_getting_data);
-
-  assign av_ld_waiting_for_data_nxt = av_ld_waiting_for_data ? 
-    ~av_ld_getting_data : 
-    (R_ctrl_ld & E_new_inst);
-
-  assign av_ld_done = ~av_ld_waiting_for_data_nxt & (D_mem32 | ~av_ld_aligning_data_nxt);
-  assign av_ld_rshift8 = av_ld_aligning_data & 
-    (av_ld_align_cycle < (W_mem_baddr[1 : 0]));
-
-  assign av_ld_extend = av_ld_aligning_data;
-  assign av_ld_byte0_data_nxt = av_ld_rshift8      ? av_ld_byte1_data :
-    av_ld_extend       ? av_ld_byte0_data :
-    d_readdata[7 : 0];
-
-  assign av_ld_byte1_data_nxt = av_ld_rshift8      ? av_ld_byte2_data :
-    av_ld_extend       ? {8 {av_fill_bit}} :
-    d_readdata[15 : 8];
-
-  assign av_ld_byte2_data_nxt = av_ld_rshift8      ? av_ld_byte3_data :
-    av_ld_extend       ? {8 {av_fill_bit}} :
-    d_readdata[23 : 16];
-
-  assign av_ld_byte3_data_nxt = av_ld_rshift8      ? av_ld_byte3_data :
-    av_ld_extend       ? {8 {av_fill_bit}} :
-    d_readdata[31 : 24];
-
-  assign av_ld_byte1_data_en = ~(av_ld_extend & D_mem16 & ~av_ld_rshift8);
-  assign av_ld_data_aligned_unfiltered = {av_ld_byte3_data, av_ld_byte2_data, 
-    av_ld_byte1_data, av_ld_byte0_data};
-
-  assign av_sign_bit = D_mem16 ? av_ld_byte1_data[7] : av_ld_byte0_data[7];
-  assign av_fill_bit = av_sign_bit & R_ctrl_ld_signed;
+  assign M_rdctl_data = M_control_reg_rddata;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          av_ld_align_cycle <= 0;
+          hbreak_enabled <= 1'b1;
+      else if (M_valid & M_en)
+          hbreak_enabled <= M_ctrl_break ? 1'b0 : M_op_bret ? 1'b1 : hbreak_enabled;
+    end
+
+
+  assign oci_tb_hbreak_req = oci_hbreak_req;
+  assign hbreak_req = (oci_tb_hbreak_req | latched_oci_tb_hbreak_req) 
+    & hbreak_enabled   
+    & ~(wait_for_one_post_bret_inst);
+
+  assign E_hbreak_req = hbreak_req & 
+    ~(E_op_hbreak & E_valid_prior_to_hbreak);
+
+  assign latched_oci_tb_hbreak_req_next = latched_oci_tb_hbreak_req ? 
+    hbreak_enabled : 
+    (hbreak_req & E_valid_prior_to_hbreak);
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          latched_oci_tb_hbreak_req <= 1'b0;
       else 
-        av_ld_align_cycle <= av_ld_align_cycle_nxt;
+        latched_oci_tb_hbreak_req <= latched_oci_tb_hbreak_req_next;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          av_ld_waiting_for_data <= 0;
+          wait_for_one_post_bret_inst <= 1'b0;
       else 
-        av_ld_waiting_for_data <= av_ld_waiting_for_data_nxt;
+        wait_for_one_post_bret_inst <= (~hbreak_enabled & oci_single_step_mode) ? 1'b1 
+                : ((E_en & E_valid_prior_to_hbreak) | 
+                (~oci_single_step_mode))             ? 1'b0 
+                : wait_for_one_post_bret_inst;
+
+    end
+
+
+  assign D_pcb = {D_pc, 2'b00};
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_pcb <= 0;
+      else if (E_en)
+          E_pcb <= D_pcb;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          av_ld_aligning_data <= 0;
-      else 
-        av_ld_aligning_data <= av_ld_aligning_data_nxt;
+          M_pcb <= 0;
+      else if (M_en)
+          M_pcb <= E_pcb;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          av_ld_byte0_data <= 0;
-      else 
-        av_ld_byte0_data <= av_ld_byte0_data_nxt;
+          A_pcb <= 0;
+      else if (A_en)
+          A_pcb <= M_pcb;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          av_ld_byte1_data <= 0;
-      else if (av_ld_byte1_data_en)
-          av_ld_byte1_data <= av_ld_byte1_data_nxt;
+          W_pcb <= 0;
+      else 
+        W_pcb <= A_pcb;
+    end
+
+
+  assign D_stall = D_dep_stall | D_rdprs_stall | E_stall;
+  assign D_en = ~D_stall;
+  assign D_dep_stall = D_data_depend & D_issue & ~M_pipe_flush;
+  assign D_issue_rdprs = 0;
+  assign D_rdprs_stall_unfiltered = D_issue_rdprs & ~D_rdprs_stall_done & ~M_pipe_flush;
+  assign D_rdprs_stall_done_nxt = M_pipe_flush        ? 0 :
+    D_rdprs_stall_done  ? E_stall :
+    D_issue_rdprs;
+
+  assign D_rdprs_stall = D_rdprs_stall_unfiltered;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_iw <= 0;
+      else if (D_en)
+          D_iw <= F_iw;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          av_ld_byte2_data <= 0;
-      else 
-        av_ld_byte2_data <= av_ld_byte2_data_nxt;
+          D_pc <= 0;
+      else if (D_en)
+          D_pc <= F_pc;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          av_ld_byte3_data <= 0;
+          D_pc_plus_one <= 0;
+      else if (D_en)
+          D_pc_plus_one <= F_pc_plus_one;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_rdprs_stall_done <= 0;
       else 
-        av_ld_byte3_data <= av_ld_byte3_data_nxt;
+        D_rdprs_stall_done <= D_rdprs_stall_done_nxt;
+    end
+
+
+  assign D_valid = D_issue & ~D_data_depend & ~D_rdprs_stall & ~M_pipe_flush;
+  assign D_jmp_direct_target_waddr = D_iw[31 : 6];
+  assign D_jmp_direct_target_baddr = {D_jmp_direct_target_waddr, 2'b00};
+  assign D_extra_pc = D_br_pred_not_taken ? D_br_taken_waddr : 
+    D_pc_plus_one;
+
+  assign D_extra_pcb = {D_extra_pc, 2'b00};
+  assign E_stall = M_stall;
+  assign E_en = ~E_stall;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_valid_from_D <= 0;
+      else if (E_en)
+          E_valid_from_D <= D_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_iw <= 0;
+      else if (E_en)
+          E_iw <= D_iw;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_dst_regnum <= 0;
+      else if (E_en)
+          E_dst_regnum <= D_dst_regnum;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_wr_dst_reg_from_D <= 0;
+      else if (E_en)
+          E_wr_dst_reg_from_D <= D_wr_dst_reg;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_extra_pc <= 0;
+      else if (E_en)
+          E_extra_pc <= D_extra_pc;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_pc <= 0;
+      else if (E_en)
+          E_pc <= D_pc;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_valid_jmp_indirect <= 0;
+      else if (E_en)
+          E_valid_jmp_indirect <= D_ctrl_jmp_indirect & D_valid;
+    end
+
+
+  assign E_extra_pcb = {E_extra_pc, 2'b00};
+  assign E_valid = E_valid_from_D & ~E_cancel;
+  assign E_wr_dst_reg = E_wr_dst_reg_from_D & ~E_cancel;
+  assign E_valid_prior_to_hbreak = E_valid_from_D & ~M_pipe_flush;
+  assign E_cancel = M_pipe_flush | E_hbreak_req;
+  assign M_pipe_flush_nxt = E_br_mispredict | 
+    (E_valid & E_ctrl_flush_pipe_always) |
+    (E_valid_prior_to_hbreak & E_hbreak_req);
+
+  assign M_pipe_flush_waddr_nxt = E_hbreak_req        ? E_pc                       :
+    E_ctrl_jmp_indirect ? E_src1[24 : 2]        :
+    E_ctrl_crst         ? 4460544:
+    E_ctrl_exception    ? 4460552:
+    E_ctrl_break        ? 4465160:
+    E_extra_pc;
+
+  assign M_pipe_flush_baddr_nxt = {M_pipe_flush_waddr_nxt, 2'b00};
+  assign E_sel_data_master = 1'b1;
+  assign M_stall = A_stall;
+  assign M_en = ~M_stall;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_valid_from_E <= 0;
+      else if (M_en)
+          M_valid_from_E <= E_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_iw <= 0;
+      else if (M_en)
+          M_iw <= E_iw;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_mem_byte_en <= 0;
+      else if (M_en)
+          M_mem_byte_en <= E_mem_byte_en;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_alu_result <= 0;
+      else if (M_en)
+          M_alu_result <= E_alu_result;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_st_data <= 0;
+      else if (M_en)
+          M_st_data <= E_st_data;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_dst_regnum <= 0;
+      else if (M_en)
+          M_dst_regnum <= E_dst_regnum;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_cmp_result <= 0;
+      else if (M_en)
+          M_cmp_result <= E_cmp_result;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_wr_dst_reg_from_E <= 0;
+      else if (M_en)
+          M_wr_dst_reg_from_E <= E_wr_dst_reg;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_target_pcb <= 0;
+      else if (M_en)
+          M_target_pcb <= E_src1[24 : 0];
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_pipe_flush <= 1'b1;
+      else if (M_en)
+          M_pipe_flush <= M_pipe_flush_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_pipe_flush_waddr <= 4460544;
+      else if (M_en)
+          M_pipe_flush_waddr <= M_pipe_flush_waddr_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_sel_data_master <= 0;
+      else if (M_en)
+          M_sel_data_master <= E_sel_data_master;
+    end
+
+
+  assign M_pipe_flush_baddr = {M_pipe_flush_waddr, 2'b00};
+  assign M_mem_baddr = M_alu_result[24 : 0];
+  assign M_exc_any = 1'b0;
+  assign M_ram_rd_data = M_dc_rd_data;
+  assign M_fwd_reg_data = M_alu_result;
+  assign M_inst_result = (M_ctrl_rdctl_inst)? M_rdctl_data :
+    (M_ctrl_mem)? M_ram_rd_data :
+    M_alu_result;
+
+  assign M_ld_align_sh16 = (M_ctrl_ld8 | M_ctrl_ld16) & M_mem_baddr[1] &
+    ~M_exc_any;
+
+  assign M_ld_align_sh8 = M_ctrl_ld8 & M_mem_baddr[0] &
+    ~M_exc_any;
+
+  assign M_ld_align_byte1_fill = M_ctrl_ld8 & ~M_exc_any;
+  assign M_ld_align_byte2_byte3_fill = M_ctrl_ld8_ld16 & ~M_exc_any;
+  assign M_cancel = 1'b0;
+  assign M_valid = M_valid_from_E & ~M_cancel;
+  assign M_wr_dst_reg_with_wrprs = M_wr_dst_reg_from_E;
+  assign M_wr_dst_reg = M_wr_dst_reg_with_wrprs & ~M_cancel;
+  assign A_stall = A_mem_stall|A_mul_stall|A_shift_rot_stall|A_ci_multi_stall;
+  assign A_en = ~A_stall;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_valid <= 0;
+      else if (A_en)
+          A_valid <= M_valid;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_iw <= 0;
+      else if (A_en)
+          A_iw <= M_iw;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_inst_result <= 0;
+      else if (A_en)
+          A_inst_result <= M_inst_result;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_mem_byte_en <= 0;
+      else if (A_en)
+          A_mem_byte_en <= M_mem_byte_en;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_st_data <= 0;
+      else if (A_en)
+          A_st_data <= M_st_data;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_dst_regnum_from_M <= 0;
+      else if (A_en)
+          A_dst_regnum_from_M <= M_dst_regnum;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ld_align_sh16 <= 0;
+      else if (A_en)
+          A_ld_align_sh16 <= M_ld_align_sh16;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ld_align_sh8 <= 0;
+      else if (A_en)
+          A_ld_align_sh8 <= M_ld_align_sh8;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ld_align_byte1_fill <= 0;
+      else if (A_en)
+          A_ld_align_byte1_fill <= M_ld_align_byte1_fill;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ld_align_byte2_byte3_fill <= 0;
+      else if (A_en)
+          A_ld_align_byte2_byte3_fill <= M_ld_align_byte2_byte3_fill;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_cmp_result <= 0;
+      else if (A_en)
+          A_cmp_result <= M_cmp_result;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_mem_baddr <= 0;
+      else if (A_en)
+          A_mem_baddr <= M_mem_baddr;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_wr_dst_reg_from_M <= 1'b1;
+      else if (A_en)
+          A_wr_dst_reg_from_M <= M_wr_dst_reg;
+    end
+
+
+  assign A_pipe_flush = 1'b0;
+  assign A_pipe_flush_waddr = 0;
+  assign A_valid_crst = 0;
+  assign A_slow_inst_result_en = A_ctrl_custom_multi|((A_dc_fill_miss_offset_is_next | A_ctrl_ld_bypass) &
+    d_readdatavalid_d1);
+
+  assign A_slow_inst_sel_nxt = A_en ? 0 : A_ctrl_custom_multi|A_ctrl_ld_bypass|A_dc_want_fill;
+  assign A_slow_inst_result_nxt = (A_ctrl_custom_multi)? A_ci_multi_result :
+    A_slow_ld_data_aligned_nxt;
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_slow_inst_sel <= 0;
+      else 
+        A_slow_inst_sel <= A_slow_inst_sel_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_slow_inst_result <= 0;
+      else if (A_slow_inst_result_en)
+          A_slow_inst_result <= A_slow_inst_result_nxt;
+    end
+
+
+  assign A_wr_data_unfiltered = (A_ctrl_mul_lsw)? A_mul_result :
+    (A_ctrl_shift_rot)? A_shift_rot_result :
+    (~A_slow_inst_sel)? A_inst_result_aligned :
+    A_slow_inst_result;
+
+  assign A_fwd_reg_data = A_wr_data_filtered;
+  assign A_wr_dst_reg = A_wr_dst_reg_from_M;
+  assign A_dst_regnum = A_dst_regnum_from_M;
+  assign W_en = 1'b1;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_wr_data <= 0;
+      else 
+        W_wr_data <= A_wr_data_filtered;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_iw <= 0;
+      else 
+        W_iw <= A_iw;
     end
 
 
@@ -4672,149 +9428,646 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
       if (reset_n == 0)
           W_valid <= 0;
       else 
-        W_valid <= E_valid & ~E_stall;
+        W_valid <= A_valid & A_en;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_control_rd_data <= 0;
+          W_wr_dst_reg <= 0;
       else 
-        W_control_rd_data <= E_control_rd_data;
+        W_wr_dst_reg <= A_wr_dst_reg & A_en;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_cmp_result <= 0;
+          W_dst_regnum <= 0;
       else 
-        W_cmp_result <= E_cmp_result;
+        W_dst_regnum <= A_dst_regnum;
+    end
+
+
+  assign F_pc_nxt = (A_pipe_flush)? A_pipe_flush_waddr :
+    (M_pipe_flush)? M_pipe_flush_waddr :
+    (E_valid_jmp_indirect)? E_src1[24 : 2] :
+    (D_refetch)? D_pc :
+    ((D_br_pred_taken & D_issue))? D_br_taken_waddr :
+    ((D_ctrl_jmp_direct & D_issue))? D_jmp_direct_target_waddr :
+    F_pc_plus_one;
+
+  assign D_regnum_a_cmp_F = (F_ram_iw_a == D_dst_regnum) & D_wr_dst_reg;
+  assign E_regnum_a_cmp_F = (F_ram_iw_a == E_dst_regnum) & E_wr_dst_reg;
+  assign M_regnum_a_cmp_F = (F_ram_iw_a == M_dst_regnum) & M_wr_dst_reg;
+  assign A_regnum_a_cmp_F = (F_ram_iw_a == A_dst_regnum) & A_wr_dst_reg;
+  assign D_regnum_b_cmp_F = (F_ram_iw_b == D_dst_regnum) & D_wr_dst_reg;
+  assign E_regnum_b_cmp_F = (F_ram_iw_b == E_dst_regnum) & E_wr_dst_reg;
+  assign M_regnum_b_cmp_F = (F_ram_iw_b == M_dst_regnum) & M_wr_dst_reg;
+  assign A_regnum_b_cmp_F = (F_ram_iw_b == A_dst_regnum) & A_wr_dst_reg;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_regnum_a_cmp_D <= 0;
+      else if (E_en)
+          E_regnum_a_cmp_D <= D_en ? D_regnum_a_cmp_F : 1'b0;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_alu_result <= 0;
+          M_regnum_a_cmp_D <= 0;
+      else if (M_en)
+          M_regnum_a_cmp_D <= D_en ? E_regnum_a_cmp_F : E_regnum_a_cmp_D;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_regnum_a_cmp_D <= 0;
+      else if (A_en)
+          A_regnum_a_cmp_D <= D_en ? M_regnum_a_cmp_F : M_regnum_a_cmp_D;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_regnum_a_cmp_D <= 0;
       else 
-        W_alu_result <= E_alu_result;
+        W_regnum_a_cmp_D <= D_en ? A_regnum_a_cmp_F : A_regnum_a_cmp_D;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_status_reg_pie <= 0;
+          E_regnum_b_cmp_D <= 0;
+      else if (E_en)
+          E_regnum_b_cmp_D <= D_en ? D_regnum_b_cmp_F : 1'b0;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_regnum_b_cmp_D <= 0;
+      else if (M_en)
+          M_regnum_b_cmp_D <= D_en ? E_regnum_b_cmp_F : E_regnum_b_cmp_D;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_regnum_b_cmp_D <= 0;
+      else if (A_en)
+          A_regnum_b_cmp_D <= D_en ? M_regnum_b_cmp_F : M_regnum_b_cmp_D;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_regnum_b_cmp_D <= 0;
       else 
-        W_status_reg_pie <= W_status_reg_pie_nxt;
+        W_regnum_b_cmp_D <= D_en ? A_regnum_b_cmp_F : A_regnum_b_cmp_D;
+    end
+
+
+  assign D_ctrl_a_is_src = ~D_ctrl_a_not_src;
+  assign D_ctrl_b_is_src = ~D_ctrl_b_not_src;
+  assign D_src1_hazard_E = E_regnum_a_cmp_D & D_ctrl_a_is_src;
+  assign D_src1_hazard_M = M_regnum_a_cmp_D & D_ctrl_a_is_src;
+  assign D_src1_hazard_A = A_regnum_a_cmp_D & D_ctrl_a_is_src;
+  assign D_src1_hazard_W = W_regnum_a_cmp_D & D_ctrl_a_is_src;
+  assign D_src2_hazard_E = E_regnum_b_cmp_D & D_ctrl_b_is_src;
+  assign D_src2_hazard_M = M_regnum_b_cmp_D & D_ctrl_b_is_src;
+  assign D_src2_hazard_A = A_regnum_b_cmp_D & D_ctrl_b_is_src;
+  assign D_src2_hazard_W = W_regnum_b_cmp_D & D_ctrl_b_is_src;
+  assign D_src1_other_rs = 0;
+  assign D_src1_choose_E = D_src1_hazard_E & ~D_src1_other_rs;
+  assign D_src1_choose_M = D_src1_hazard_M & ~D_src1_other_rs;
+  assign D_src1_choose_A = D_src1_hazard_A & ~D_src1_other_rs;
+  assign D_src1_choose_W = D_src1_hazard_W & ~D_src1_other_rs;
+  assign D_src2_choose_E = D_src2_hazard_E;
+  assign D_src2_choose_M = D_src2_hazard_M;
+  assign D_src2_choose_A = D_src2_hazard_A;
+  assign D_src2_choose_W = D_src2_hazard_W;
+  assign D_data_depend = ((D_src1_hazard_E | D_src2_hazard_E) & E_ctrl_late_result) |
+    ((D_src1_hazard_M | D_src2_hazard_M) & M_ctrl_late_result);
+
+  assign D_dstfield_regnum = D_ctrl_b_is_dst ? D_iw_b : D_iw_c;
+  assign D_dst_regnum = D_ctrl_implicit_dst_retaddr ? 5'd31 : 
+    D_ctrl_implicit_dst_eretaddr ? 5'd29 : 
+    D_dstfield_regnum;
+
+  assign D_wr_dst_reg = (D_dst_regnum != 0) & ~D_ctrl_ignore_dst & D_valid;
+  assign E_fwd_reg_data = E_alu_result;
+  assign D_src1_reg = (D_src1_choose_E)? E_fwd_reg_data :
+    (D_src1_choose_M)? M_fwd_reg_data :
+    (D_src1_choose_A)? A_fwd_reg_data :
+    (D_src1_choose_W)? W_wr_data :
+    D_rf_a;
+
+  assign D_src1 = D_src1_reg;
+  assign D_src2_reg = (D_src2_choose_E)? E_fwd_reg_data :
+    (D_src2_choose_M)? M_fwd_reg_data :
+    (D_src2_choose_A)? A_fwd_reg_data :
+    (D_src2_choose_W)? W_wr_data :
+    D_rf_b;
+
+  assign D_src2_imm_sel = {D_ctrl_hi_imm16,D_ctrl_unsigned_lo_imm16};
+  assign D_src2_imm = (D_src2_imm_sel == 2'b00)? {{16 {D_iw_imm16[15]}}, D_iw_imm16} :
+    (D_src2_imm_sel == 2'b01)? {{16 {1'b0}}          , D_iw_imm16} :
+    (D_src2_imm_sel == 2'b10)? {D_iw_imm16                               , 16'b0     } :
+    {{16 {1'b0}}          , 16'b0     };
+
+  assign D_src2 = D_ctrl_src2_choose_imm ? D_src2_imm : D_src2_reg;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_src1 <= 0;
+      else if (E_en)
+          E_src1 <= D_src1;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_estatus_reg <= 0;
+          E_src2 <= 0;
+      else if (E_en)
+          E_src2 <= D_src2;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_src2_reg <= 0;
+      else if (E_en)
+          E_src2_reg <= D_src2_reg;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_src1 <= 0;
+      else if (M_en)
+          M_src1 <= E_src1;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_src2 <= 0;
+      else if (M_en)
+          M_src2 <= E_src2;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_src2 <= 0;
+      else if (A_en)
+          A_src2 <= M_src2;
+    end
+
+
+  assign D_logic_op_raw = D_op_opx ? D_iw_opx[4 : 3] : 
+    D_iw_op[4 : 3];
+
+  assign D_logic_op = D_ctrl_alu_force_xor ? 2'b11 : D_logic_op_raw;
+  assign D_compare_op = D_op_opx ? D_iw_opx[4 : 3] : 
+    D_iw_op[4 : 3];
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_logic_op <= 0;
+      else if (E_en)
+          E_logic_op <= D_logic_op;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_compare_op <= 0;
+      else if (E_en)
+          E_compare_op <= D_compare_op;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_valid_wrctl_ienable <= 0;
+      else if (A_en)
+          A_valid_wrctl_ienable <= M_wrctl_ienable & M_valid;
+    end
+
+
+  assign norm_intr_req = A_status_reg_pie & (A_ipending_reg != 0) &
+    ~A_valid_wrctl_ienable;
+
+  assign A_mul_cnt_nxt = A_mul_stall ? 
+    A_mul_cnt-1 :
+    4;
+
+  assign A_mul_done_nxt = A_mul_cnt_nxt == 0;
+  assign A_mul_stall_nxt = ~A_mul_done_nxt & 
+    (A_mul_stall |
+    (M_ctrl_mul_lsw & M_valid & A_en));
+
+  assign A_mul_src1_nxt = (~A_mul_stall)? M_src1 :
+    {A_mul_src1[15 : 0],
+    16'b0};
+
+  assign A_mul_src2_nxt = (~A_mul_stall)? M_src2 :
+    {16'b0,
+    A_mul_src2[31 : 16]};
+
+  assign A_mul_partial_prod_nxt = A_mul_cell_result[31 : 0];
+  assign A_mul_result_nxt = A_mul_stall_d3 ?
+    A_mul_partial_prod + A_mul_result :
+    A_mul_partial_prod;
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_mul_src1 <= 0;
       else 
-        W_estatus_reg <= W_estatus_reg_nxt;
+        A_mul_src1 <= A_mul_src1_nxt;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_bstatus_reg <= 0;
+          A_mul_src2 <= 0;
       else 
-        W_bstatus_reg <= W_bstatus_reg_nxt;
+        A_mul_src2 <= A_mul_src2_nxt;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_ienable_reg <= 0;
+          A_mul_partial_prod <= 0;
       else 
-        W_ienable_reg <= W_ienable_reg_nxt;
+        A_mul_partial_prod <= A_mul_partial_prod_nxt;
     end
 
 
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_ipending_reg <= 0;
+          A_mul_result <= 0;
       else 
-        W_ipending_reg <= W_ipending_reg_nxt;
+        A_mul_result <= A_mul_result_nxt;
     end
 
 
-  assign W_wr_data_non_zero = R_ctrl_br_cmp ? W_cmp_result :
-    R_ctrl_rdctl_inst       ? W_control_rd_data :
-    W_alu_result[31 : 0];
-
-  assign W_wr_data = W_wr_data_non_zero;
-  assign W_br_taken = R_ctrl_br & W_cmp_result;
-  assign W_mem_baddr = W_alu_result[24 : 0];
-  assign W_status_reg = W_status_reg_pie;
-  assign E_wrctl_status = R_ctrl_wrctl_inst & 
-    (D_iw_control_regnum == 3'd0);
-
-  assign E_wrctl_estatus = R_ctrl_wrctl_inst & 
-    (D_iw_control_regnum == 3'd1);
-
-  assign E_wrctl_bstatus = R_ctrl_wrctl_inst & 
-    (D_iw_control_regnum == 3'd2);
-
-  assign E_wrctl_ienable = R_ctrl_wrctl_inst & 
-    (D_iw_control_regnum == 3'd3);
-
-  assign W_status_reg_pie_inst_nxt = (R_ctrl_exception | R_ctrl_break | R_ctrl_crst) ? 1'b0 :
-    (D_op_eret)                     ? W_estatus_reg :
-    (D_op_bret)                     ? W_bstatus_reg :
-    (E_wrctl_status)                ? E_src1[0] :
-    W_status_reg_pie;
-
-  assign W_status_reg_pie_nxt = E_valid ? W_status_reg_pie_inst_nxt : W_status_reg_pie;
-  assign W_estatus_reg_inst_nxt = (R_ctrl_crst)        ? 0 :
-    (R_ctrl_exception)   ? W_status_reg :
-    (E_wrctl_estatus)    ? E_src1[0] :
-    W_estatus_reg;
-
-  assign W_estatus_reg_nxt = E_valid ? W_estatus_reg_inst_nxt : W_estatus_reg;
-  assign W_bstatus_reg_inst_nxt = (R_ctrl_break)       ? W_status_reg :
-    (E_wrctl_bstatus)    ? E_src1[0] :
-    W_bstatus_reg;
-
-  assign W_bstatus_reg_nxt = E_valid ? W_bstatus_reg_inst_nxt : W_bstatus_reg;
-  assign W_ienable_reg_nxt = ((E_wrctl_ienable & E_valid) ? 
-    E_src1[31 : 0] : W_ienable_reg) & 32'b00000000000000000000000000000011;
-
-  assign W_ipending_reg_nxt = iactive & W_ienable_reg & oci_ienable & 32'b00000000000000000000000000000011;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          hbreak_enabled <= 1'b1;
-      else if (E_valid)
-          hbreak_enabled <= R_ctrl_break ? 1'b0 : D_op_bret ? 1'b1 : hbreak_enabled;
+          A_mul_cnt <= 0;
+      else 
+        A_mul_cnt <= A_mul_cnt_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_mul_stall <= 0;
+      else 
+        A_mul_stall <= A_mul_stall_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_mul_stall_d1 <= 0;
+      else 
+        A_mul_stall_d1 <= A_mul_stall;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_mul_stall_d2 <= 0;
+      else 
+        A_mul_stall_d2 <= A_mul_stall_d1;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_mul_stall_d3 <= 0;
+      else 
+        A_mul_stall_d3 <= A_mul_stall_d2;
+    end
+
+
+  cpu_0_mult_cell the_cpu_0_mult_cell
+    (
+      .A_mul_cell_result (A_mul_cell_result),
+      .A_mul_src1        (A_mul_src1),
+      .A_mul_src2        (A_mul_src2),
+      .clk               (clk),
+      .reset_n           (reset_n)
+    );
+
+  assign A_ci_multi_dataa = A_ci_multi_src1;
+  assign A_ci_multi_datab = A_ci_multi_src2;
+  assign A_ci_multi_ipending = A_ci_multi_ipending;
+  assign A_ci_multi_status = A_ci_multi_status;
+  assign A_ci_multi_estatus = A_ci_multi_estatus;
+  assign A_ci_multi_n = A_iw_custom_n;
+  assign A_ci_multi_a = A_iw_a;
+  assign A_ci_multi_b = A_iw_b;
+  assign A_ci_multi_c = A_iw_c;
+  assign A_ci_multi_readra = A_iw_custom_readra;
+  assign A_ci_multi_readrb = A_iw_custom_readrb;
+  assign A_ci_multi_writerc = A_iw_custom_writerc;
+  //custom_instruction_master, which is an e_custom_instruction_master
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ci_multi_src1 <= 0;
+      else if (A_en)
+          A_ci_multi_src1 <= M_src1;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ci_multi_src2 <= 0;
+      else if (A_en)
+          A_ci_multi_src2 <= M_src2;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ci_multi_stall <= 0;
+      else 
+        A_ci_multi_stall <= A_ci_multi_stall ? ~A_ci_multi_done : 
+                (M_ctrl_custom_multi & M_valid & A_en);
+
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ci_multi_start <= 0;
+      else 
+        A_ci_multi_start <= A_ci_multi_start ? 1'b0 : 
+                (M_ctrl_custom_multi & M_valid & A_en);
+
+    end
+
+
+  assign A_ci_multi_clk_en = A_ci_multi_stall;
+  assign A_ci_multi_clock = clk;
+  assign A_ci_multi_reset = ~reset_n;
+  assign E_ctrl_ld_bypass = (E_ctrl_ld_io | (E_ctrl_ld_non_io & E_mem_bypass_non_io)) &
+    E_sel_data_master;
+
+  assign M_ctrl_ld_bypass_nxt = E_ctrl_ld_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_bypass <= 0;
+      else if (M_en)
+          M_ctrl_ld_bypass <= M_ctrl_ld_bypass_nxt;
+    end
+
+
+  assign A_ctrl_ld_bypass_nxt = M_ctrl_ld_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_bypass <= 0;
+      else if (A_en)
+          A_ctrl_ld_bypass <= A_ctrl_ld_bypass_nxt;
+    end
+
+
+  assign E_ctrl_st_bypass = (E_ctrl_st_io | (E_ctrl_st_non_io & E_mem_bypass_non_io)) &
+    E_sel_data_master;
+
+  assign M_ctrl_st_bypass_nxt = E_ctrl_st_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_st_bypass <= 0;
+      else if (M_en)
+          M_ctrl_st_bypass <= M_ctrl_st_bypass_nxt;
+    end
+
+
+  assign A_ctrl_st_bypass_nxt = M_ctrl_st_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_st_bypass <= 0;
+      else if (A_en)
+          A_ctrl_st_bypass <= A_ctrl_st_bypass_nxt;
+    end
+
+
+  assign E_ctrl_ld_st_bypass = (E_ctrl_ld_st_io | 
+    (E_ctrl_ld_st_non_io & E_mem_bypass_non_io)) &
+    E_sel_data_master;
+
+  assign M_ctrl_ld_st_bypass_nxt = E_ctrl_ld_st_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st_bypass <= 0;
+      else if (M_en)
+          M_ctrl_ld_st_bypass <= M_ctrl_ld_st_bypass_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_bypass_nxt = M_ctrl_ld_st_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st_bypass <= 0;
+      else if (A_en)
+          A_ctrl_ld_st_bypass <= A_ctrl_ld_st_bypass_nxt;
+    end
+
+
+  assign E_ctrl_ld_st_bypass_or_dcache_management = ((E_ctrl_ld_st_io | 
+    (E_ctrl_ld_st_non_io & E_mem_bypass_non_io)) &
+    E_sel_data_master) | E_ctrl_dcache_management;
+
+  assign M_ctrl_ld_st_bypass_or_dcache_management_nxt = E_ctrl_ld_st_bypass_or_dcache_management;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st_bypass_or_dcache_management <= 0;
+      else if (M_en)
+          M_ctrl_ld_st_bypass_or_dcache_management <= M_ctrl_ld_st_bypass_or_dcache_management_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_bypass_or_dcache_management_nxt = M_ctrl_ld_st_bypass_or_dcache_management;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st_bypass_or_dcache_management <= 0;
+      else if (A_en)
+          A_ctrl_ld_st_bypass_or_dcache_management <= A_ctrl_ld_st_bypass_or_dcache_management_nxt;
+    end
+
+
+  assign E_ctrl_ld_non_bypass = (E_ctrl_ld_non_io & ~E_mem_bypass_non_io) | 
+    (E_ctrl_ld & ~E_sel_data_master);
+
+  assign M_ctrl_ld_non_bypass_nxt = E_ctrl_ld_non_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_non_bypass <= 0;
+      else if (M_en)
+          M_ctrl_ld_non_bypass <= M_ctrl_ld_non_bypass_nxt;
+    end
+
+
+  assign A_ctrl_ld_non_bypass_nxt = M_ctrl_ld_non_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_non_bypass <= 0;
+      else if (A_en)
+          A_ctrl_ld_non_bypass <= A_ctrl_ld_non_bypass_nxt;
+    end
+
+
+  assign E_ctrl_st_non_bypass = (E_ctrl_st_non_io & ~E_mem_bypass_non_io) | 
+    (E_ctrl_st & ~E_sel_data_master);
+
+  assign M_ctrl_st_non_bypass_nxt = E_ctrl_st_non_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_st_non_bypass <= 0;
+      else if (M_en)
+          M_ctrl_st_non_bypass <= M_ctrl_st_non_bypass_nxt;
+    end
+
+
+  assign A_ctrl_st_non_bypass_nxt = M_ctrl_st_non_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_st_non_bypass <= 0;
+      else if (A_en)
+          A_ctrl_st_non_bypass <= A_ctrl_st_non_bypass_nxt;
+    end
+
+
+  assign E_ctrl_ld_st_non_bypass = (E_ctrl_ld_st_non_io & ~E_mem_bypass_non_io) | 
+    (E_ctrl_ld_st & ~E_sel_data_master);
+
+  assign M_ctrl_ld_st_non_bypass_nxt = E_ctrl_ld_st_non_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st_non_bypass <= 0;
+      else if (M_en)
+          M_ctrl_ld_st_non_bypass <= M_ctrl_ld_st_non_bypass_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_non_bypass_nxt = M_ctrl_ld_st_non_bypass;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st_non_bypass <= 0;
+      else if (A_en)
+          A_ctrl_ld_st_non_bypass <= A_ctrl_ld_st_non_bypass_nxt;
+    end
+
+
+  assign E_ctrl_ld_st_non_bypass_non_st32 = (E_ctrl_ld_st_non_io_non_st32 & ~E_mem_bypass_non_io) |
+    (E_ctrl_ld_st_non_st32 & ~E_sel_data_master);
+
+  assign M_ctrl_ld_st_non_bypass_non_st32_nxt = E_ctrl_ld_st_non_bypass_non_st32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st_non_bypass_non_st32 <= 0;
+      else if (M_en)
+          M_ctrl_ld_st_non_bypass_non_st32 <= M_ctrl_ld_st_non_bypass_non_st32_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_non_bypass_non_st32_nxt = M_ctrl_ld_st_non_bypass_non_st32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st_non_bypass_non_st32 <= 0;
+      else if (A_en)
+          A_ctrl_ld_st_non_bypass_non_st32 <= A_ctrl_ld_st_non_bypass_non_st32_nxt;
     end
 
 
   cpu_0_nios2_oci the_cpu_0_nios2_oci
     (
-      .D_valid                               (D_valid),
-      .E_st_data                             (E_st_data),
+      .A_cmp_result                          (A_cmp_result),
+      .A_ctrl_exception                      (A_ctrl_exception),
+      .A_ctrl_ld                             (A_ctrl_ld),
+      .A_ctrl_st                             (A_ctrl_st),
+      .A_en                                  (A_en),
+      .A_mem_baddr                           (A_mem_baddr),
+      .A_op_beq                              (A_op_beq),
+      .A_op_bge                              (A_op_bge),
+      .A_op_bgeu                             (A_op_bgeu),
+      .A_op_blt                              (A_op_blt),
+      .A_op_bltu                             (A_op_bltu),
+      .A_op_bne                              (A_op_bne),
+      .A_op_br                               (A_op_br),
+      .A_op_bret                             (A_op_bret),
+      .A_op_call                             (A_op_call),
+      .A_op_callr                            (A_op_callr),
+      .A_op_eret                             (A_op_eret),
+      .A_op_jmp                              (A_op_jmp),
+      .A_op_jmpi                             (A_op_jmpi),
+      .A_op_ret                              (A_op_ret),
+      .A_pcb                                 (A_pcb),
+      .A_st_data                             (A_st_data),
+      .A_valid                               (A_valid),
+      .A_wr_data_filtered                    (A_wr_data_filtered),
+      .D_en                                  (D_en),
+      .E_en                                  (E_en),
       .E_valid                               (E_valid),
       .F_pc                                  (F_pc),
+      .M_en                                  (M_en),
       .address                               (jtag_debug_module_address),
-      .av_ld_data_aligned_filtered           (av_ld_data_aligned_filtered),
       .begintransfer                         (jtag_debug_module_begintransfer),
       .byteenable                            (jtag_debug_module_byteenable),
       .chipselect                            (jtag_debug_module_select),
       .clk                                   (jtag_debug_module_clk),
-      .d_address                             (d_address),
-      .d_read                                (d_read),
-      .d_waitrequest                         (d_waitrequest),
-      .d_write                               (d_write),
       .debugaccess                           (jtag_debug_module_debugaccess),
       .hbreak_enabled                        (hbreak_enabled),
       .jtag_debug_module_debugaccess_to_roms (jtag_debug_module_debugaccess_to_roms),
@@ -4834,25 +10087,280 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
   //jtag_debug_module, which is an e_avalon_slave
   assign jtag_debug_module_clk = clk;
   assign jtag_debug_module_reset = ~reset_n;
-  assign D_ctrl_custom = D_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
-  assign R_ctrl_custom_nxt = D_ctrl_custom;
+  assign D_ctrl_unimp_trap = D_op_div|D_op_divu|D_op_mulxss|D_op_mulxsu|D_op_mulxuu;
+  assign E_ctrl_unimp_trap_nxt = D_ctrl_unimp_trap;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_custom <= 0;
-      else if (R_en)
-          R_ctrl_custom <= R_ctrl_custom_nxt;
+          E_ctrl_unimp_trap <= 0;
+      else if (E_en)
+          E_ctrl_unimp_trap <= E_ctrl_unimp_trap_nxt;
+    end
+
+
+  assign M_ctrl_unimp_trap_nxt = E_ctrl_unimp_trap;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_unimp_trap <= 0;
+      else if (M_en)
+          M_ctrl_unimp_trap <= M_ctrl_unimp_trap_nxt;
+    end
+
+
+  assign A_ctrl_unimp_trap_nxt = M_ctrl_unimp_trap;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_unimp_trap <= 0;
+      else if (A_en)
+          A_ctrl_unimp_trap <= A_ctrl_unimp_trap_nxt;
+    end
+
+
+  assign W_ctrl_unimp_trap_nxt = A_ctrl_unimp_trap;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_unimp_trap <= 0;
+      else if (W_en)
+          W_ctrl_unimp_trap <= W_ctrl_unimp_trap_nxt;
+    end
+
+
+  assign D_ctrl_unimp_nop = 1'b0;
+  assign E_ctrl_unimp_nop_nxt = D_ctrl_unimp_nop;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_unimp_nop <= 0;
+      else if (E_en)
+          E_ctrl_unimp_nop <= E_ctrl_unimp_nop_nxt;
+    end
+
+
+  assign M_ctrl_unimp_nop_nxt = E_ctrl_unimp_nop;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_unimp_nop <= 0;
+      else if (M_en)
+          M_ctrl_unimp_nop <= M_ctrl_unimp_nop_nxt;
+    end
+
+
+  assign A_ctrl_unimp_nop_nxt = M_ctrl_unimp_nop;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_unimp_nop <= 0;
+      else if (A_en)
+          A_ctrl_unimp_nop <= A_ctrl_unimp_nop_nxt;
+    end
+
+
+  assign W_ctrl_unimp_nop_nxt = A_ctrl_unimp_nop;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_unimp_nop <= 0;
+      else if (W_en)
+          W_ctrl_unimp_nop <= W_ctrl_unimp_nop_nxt;
+    end
+
+
+  assign D_ctrl_illegal = 1'b0;
+  assign E_ctrl_illegal_nxt = D_ctrl_illegal;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_illegal <= 0;
+      else if (E_en)
+          E_ctrl_illegal <= E_ctrl_illegal_nxt;
+    end
+
+
+  assign M_ctrl_illegal_nxt = E_ctrl_illegal;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_illegal <= 0;
+      else if (M_en)
+          M_ctrl_illegal <= M_ctrl_illegal_nxt;
+    end
+
+
+  assign A_ctrl_illegal_nxt = M_ctrl_illegal;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_illegal <= 0;
+      else if (A_en)
+          A_ctrl_illegal <= A_ctrl_illegal_nxt;
+    end
+
+
+  assign W_ctrl_illegal_nxt = A_ctrl_illegal;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_illegal <= 0;
+      else if (W_en)
+          W_ctrl_illegal <= W_ctrl_illegal_nxt;
+    end
+
+
+  assign D_ctrl_custom_combo = 1'b0;
+  assign E_ctrl_custom_combo_nxt = D_ctrl_custom_combo;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_custom_combo <= 0;
+      else if (E_en)
+          E_ctrl_custom_combo <= E_ctrl_custom_combo_nxt;
+    end
+
+
+  assign M_ctrl_custom_combo_nxt = E_ctrl_custom_combo;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_custom_combo <= 0;
+      else if (M_en)
+          M_ctrl_custom_combo <= M_ctrl_custom_combo_nxt;
+    end
+
+
+  assign A_ctrl_custom_combo_nxt = M_ctrl_custom_combo;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_custom_combo <= 0;
+      else if (A_en)
+          A_ctrl_custom_combo <= A_ctrl_custom_combo_nxt;
+    end
+
+
+  assign W_ctrl_custom_combo_nxt = A_ctrl_custom_combo;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_custom_combo <= 0;
+      else if (W_en)
+          W_ctrl_custom_combo <= W_ctrl_custom_combo_nxt;
     end
 
 
   assign D_ctrl_custom_multi = D_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
-  assign R_ctrl_custom_multi_nxt = D_ctrl_custom_multi;
+  assign E_ctrl_custom_multi_nxt = D_ctrl_custom_multi;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_custom_multi <= 0;
-      else if (R_en)
-          R_ctrl_custom_multi <= R_ctrl_custom_multi_nxt;
+          E_ctrl_custom_multi <= 0;
+      else if (E_en)
+          E_ctrl_custom_multi <= E_ctrl_custom_multi_nxt;
+    end
+
+
+  assign M_ctrl_custom_multi_nxt = E_ctrl_custom_multi;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_custom_multi <= 0;
+      else if (M_en)
+          M_ctrl_custom_multi <= M_ctrl_custom_multi_nxt;
+    end
+
+
+  assign A_ctrl_custom_multi_nxt = M_ctrl_custom_multi;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_custom_multi <= 0;
+      else if (A_en)
+          A_ctrl_custom_multi <= A_ctrl_custom_multi_nxt;
+    end
+
+
+  assign W_ctrl_custom_multi_nxt = A_ctrl_custom_multi;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_custom_multi <= 0;
+      else if (W_en)
+          W_ctrl_custom_multi <= W_ctrl_custom_multi_nxt;
+    end
+
+
+  assign D_ctrl_supervisor_only = D_op_initi|D_op_initd|D_op_eret|D_op_bret|D_op_wrctl|D_op_rdctl;
+  assign E_ctrl_supervisor_only_nxt = D_ctrl_supervisor_only;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_supervisor_only <= 0;
+      else if (E_en)
+          E_ctrl_supervisor_only <= E_ctrl_supervisor_only_nxt;
+    end
+
+
+  assign M_ctrl_supervisor_only_nxt = E_ctrl_supervisor_only;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_supervisor_only <= 0;
+      else if (M_en)
+          M_ctrl_supervisor_only <= M_ctrl_supervisor_only_nxt;
+    end
+
+
+  assign A_ctrl_supervisor_only_nxt = M_ctrl_supervisor_only;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_supervisor_only <= 0;
+      else if (A_en)
+          A_ctrl_supervisor_only <= A_ctrl_supervisor_only_nxt;
+    end
+
+
+  assign W_ctrl_supervisor_only_nxt = A_ctrl_supervisor_only;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_supervisor_only <= 0;
+      else if (W_en)
+          W_ctrl_supervisor_only <= W_ctrl_supervisor_only_nxt;
+    end
+
+
+  assign E_ctrl_invalidate_i = E_op_initi|E_op_flushi|E_op_crst|E_op_rsvx63;
+  assign M_ctrl_invalidate_i_nxt = E_ctrl_invalidate_i;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_invalidate_i <= 0;
+      else if (M_en)
+          M_ctrl_invalidate_i <= M_ctrl_invalidate_i_nxt;
+    end
+
+
+  assign A_ctrl_invalidate_i_nxt = M_ctrl_invalidate_i;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_invalidate_i <= 0;
+      else if (A_en)
+          A_ctrl_invalidate_i <= A_ctrl_invalidate_i_nxt;
+    end
+
+
+  assign W_ctrl_invalidate_i_nxt = A_ctrl_invalidate_i;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_invalidate_i <= 0;
+      else if (W_en)
+          W_ctrl_invalidate_i <= W_ctrl_invalidate_i_nxt;
     end
 
 
@@ -4865,46 +10373,237 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_rsvx21|
     D_op_callr;
 
-  assign R_ctrl_jmp_indirect_nxt = D_ctrl_jmp_indirect;
+  assign E_ctrl_jmp_indirect_nxt = D_ctrl_jmp_indirect;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_jmp_indirect <= 0;
-      else if (R_en)
-          R_ctrl_jmp_indirect <= R_ctrl_jmp_indirect_nxt;
+          E_ctrl_jmp_indirect <= 0;
+      else if (E_en)
+          E_ctrl_jmp_indirect <= E_ctrl_jmp_indirect_nxt;
     end
 
 
-  assign D_ctrl_jmp_direct = D_op_call|D_op_jmpi;
-  assign R_ctrl_jmp_direct_nxt = D_ctrl_jmp_direct;
+  assign M_ctrl_jmp_indirect_nxt = E_ctrl_jmp_indirect;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_jmp_direct <= 0;
-      else if (R_en)
-          R_ctrl_jmp_direct <= R_ctrl_jmp_direct_nxt;
+          M_ctrl_jmp_indirect <= 0;
+      else if (M_en)
+          M_ctrl_jmp_indirect <= M_ctrl_jmp_indirect_nxt;
     end
 
 
-  assign D_ctrl_implicit_dst_retaddr = D_op_call|D_op_rsv02;
-  assign R_ctrl_implicit_dst_retaddr_nxt = D_ctrl_implicit_dst_retaddr;
+  assign A_ctrl_jmp_indirect_nxt = M_ctrl_jmp_indirect;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_implicit_dst_retaddr <= 0;
-      else if (R_en)
-          R_ctrl_implicit_dst_retaddr <= R_ctrl_implicit_dst_retaddr_nxt;
+          A_ctrl_jmp_indirect <= 0;
+      else if (A_en)
+          A_ctrl_jmp_indirect <= A_ctrl_jmp_indirect_nxt;
     end
 
 
-  assign D_ctrl_implicit_dst_eretaddr = D_op_div|D_op_divu|D_op_mul|D_op_muli|D_op_mulxss|D_op_mulxsu|D_op_mulxuu;
-  assign R_ctrl_implicit_dst_eretaddr_nxt = D_ctrl_implicit_dst_eretaddr;
+  assign W_ctrl_jmp_indirect_nxt = A_ctrl_jmp_indirect;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_implicit_dst_eretaddr <= 0;
-      else if (R_en)
-          R_ctrl_implicit_dst_eretaddr <= R_ctrl_implicit_dst_eretaddr_nxt;
+          W_ctrl_jmp_indirect <= 0;
+      else if (W_en)
+          W_ctrl_jmp_indirect <= W_ctrl_jmp_indirect_nxt;
+    end
+
+
+  assign F_ctrl_jmp_direct = F_op_call|F_op_jmpi;
+  assign D_ctrl_jmp_direct_nxt = F_ctrl_jmp_direct;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_jmp_direct <= 0;
+      else if (D_en)
+          D_ctrl_jmp_direct <= D_ctrl_jmp_direct_nxt;
+    end
+
+
+  assign E_ctrl_jmp_direct_nxt = D_ctrl_jmp_direct;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_jmp_direct <= 0;
+      else if (E_en)
+          E_ctrl_jmp_direct <= E_ctrl_jmp_direct_nxt;
+    end
+
+
+  assign M_ctrl_jmp_direct_nxt = E_ctrl_jmp_direct;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_jmp_direct <= 0;
+      else if (M_en)
+          M_ctrl_jmp_direct <= M_ctrl_jmp_direct_nxt;
+    end
+
+
+  assign A_ctrl_jmp_direct_nxt = M_ctrl_jmp_direct;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_jmp_direct <= 0;
+      else if (A_en)
+          A_ctrl_jmp_direct <= A_ctrl_jmp_direct_nxt;
+    end
+
+
+  assign W_ctrl_jmp_direct_nxt = A_ctrl_jmp_direct;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_jmp_direct <= 0;
+      else if (W_en)
+          W_ctrl_jmp_direct <= W_ctrl_jmp_direct_nxt;
+    end
+
+
+  assign D_ctrl_mul_lsw = D_op_muli|D_op_mul|D_op_rsvx47|D_op_rsvx55|D_op_rsvx63;
+  assign E_ctrl_mul_lsw_nxt = D_ctrl_mul_lsw;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_mul_lsw <= 0;
+      else if (E_en)
+          E_ctrl_mul_lsw <= E_ctrl_mul_lsw_nxt;
+    end
+
+
+  assign M_ctrl_mul_lsw_nxt = E_ctrl_mul_lsw;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_mul_lsw <= 0;
+      else if (M_en)
+          M_ctrl_mul_lsw <= M_ctrl_mul_lsw_nxt;
+    end
+
+
+  assign A_ctrl_mul_lsw_nxt = M_ctrl_mul_lsw;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_mul_lsw <= 0;
+      else if (A_en)
+          A_ctrl_mul_lsw <= A_ctrl_mul_lsw_nxt;
+    end
+
+
+  assign W_ctrl_mul_lsw_nxt = A_ctrl_mul_lsw;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_mul_lsw <= 0;
+      else if (W_en)
+          W_ctrl_mul_lsw <= W_ctrl_mul_lsw_nxt;
+    end
+
+
+  assign F_ctrl_implicit_dst_retaddr = F_op_call|F_op_rsv02;
+  assign D_ctrl_implicit_dst_retaddr_nxt = F_ctrl_implicit_dst_retaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_implicit_dst_retaddr <= 0;
+      else if (D_en)
+          D_ctrl_implicit_dst_retaddr <= D_ctrl_implicit_dst_retaddr_nxt;
+    end
+
+
+  assign E_ctrl_implicit_dst_retaddr_nxt = D_ctrl_implicit_dst_retaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_implicit_dst_retaddr <= 0;
+      else if (E_en)
+          E_ctrl_implicit_dst_retaddr <= E_ctrl_implicit_dst_retaddr_nxt;
+    end
+
+
+  assign M_ctrl_implicit_dst_retaddr_nxt = E_ctrl_implicit_dst_retaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_implicit_dst_retaddr <= 0;
+      else if (M_en)
+          M_ctrl_implicit_dst_retaddr <= M_ctrl_implicit_dst_retaddr_nxt;
+    end
+
+
+  assign A_ctrl_implicit_dst_retaddr_nxt = M_ctrl_implicit_dst_retaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_implicit_dst_retaddr <= 0;
+      else if (A_en)
+          A_ctrl_implicit_dst_retaddr <= A_ctrl_implicit_dst_retaddr_nxt;
+    end
+
+
+  assign W_ctrl_implicit_dst_retaddr_nxt = A_ctrl_implicit_dst_retaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_implicit_dst_retaddr <= 0;
+      else if (W_en)
+          W_ctrl_implicit_dst_retaddr <= W_ctrl_implicit_dst_retaddr_nxt;
+    end
+
+
+  assign F_ctrl_implicit_dst_eretaddr = F_op_div|F_op_divu|F_op_mulxss|F_op_mulxsu|F_op_mulxuu;
+  assign D_ctrl_implicit_dst_eretaddr_nxt = F_ctrl_implicit_dst_eretaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_implicit_dst_eretaddr <= 0;
+      else if (D_en)
+          D_ctrl_implicit_dst_eretaddr <= D_ctrl_implicit_dst_eretaddr_nxt;
+    end
+
+
+  assign E_ctrl_implicit_dst_eretaddr_nxt = D_ctrl_implicit_dst_eretaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_implicit_dst_eretaddr <= 0;
+      else if (E_en)
+          E_ctrl_implicit_dst_eretaddr <= E_ctrl_implicit_dst_eretaddr_nxt;
+    end
+
+
+  assign M_ctrl_implicit_dst_eretaddr_nxt = E_ctrl_implicit_dst_eretaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_implicit_dst_eretaddr <= 0;
+      else if (M_en)
+          M_ctrl_implicit_dst_eretaddr <= M_ctrl_implicit_dst_eretaddr_nxt;
+    end
+
+
+  assign A_ctrl_implicit_dst_eretaddr_nxt = M_ctrl_implicit_dst_eretaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_implicit_dst_eretaddr <= 0;
+      else if (A_en)
+          A_ctrl_implicit_dst_eretaddr <= A_ctrl_implicit_dst_eretaddr_nxt;
+    end
+
+
+  assign W_ctrl_implicit_dst_eretaddr_nxt = A_ctrl_implicit_dst_eretaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_implicit_dst_eretaddr <= 0;
+      else if (W_en)
+          W_ctrl_implicit_dst_eretaddr <= W_ctrl_implicit_dst_eretaddr_nxt;
     end
 
 
@@ -4912,43 +10611,131 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_rsvx44|
     D_op_div|
     D_op_divu|
-    D_op_mul|
-    D_op_muli|
     D_op_mulxss|
     D_op_mulxsu|
     D_op_mulxuu|
     D_op_intr|
     D_op_rsvx60;
 
-  assign R_ctrl_exception_nxt = D_ctrl_exception;
+  assign E_ctrl_exception_nxt = D_ctrl_exception;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_exception <= 0;
-      else if (R_en)
-          R_ctrl_exception <= R_ctrl_exception_nxt;
+          E_ctrl_exception <= 0;
+      else if (E_en)
+          E_ctrl_exception <= E_ctrl_exception_nxt;
+    end
+
+
+  assign M_ctrl_exception_nxt = E_ctrl_exception;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_exception <= 0;
+      else if (M_en)
+          M_ctrl_exception <= M_ctrl_exception_nxt;
+    end
+
+
+  assign A_ctrl_exception_nxt = M_ctrl_exception;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_exception <= 0;
+      else if (A_en)
+          A_ctrl_exception <= A_ctrl_exception_nxt;
+    end
+
+
+  assign W_ctrl_exception_nxt = A_ctrl_exception;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_exception <= 0;
+      else if (W_en)
+          W_ctrl_exception <= W_ctrl_exception_nxt;
     end
 
 
   assign D_ctrl_break = D_op_break|D_op_hbreak;
-  assign R_ctrl_break_nxt = D_ctrl_break;
+  assign E_ctrl_break_nxt = D_ctrl_break;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_break <= 0;
-      else if (R_en)
-          R_ctrl_break <= R_ctrl_break_nxt;
+          E_ctrl_break <= 0;
+      else if (E_en)
+          E_ctrl_break <= E_ctrl_break_nxt;
+    end
+
+
+  assign M_ctrl_break_nxt = E_ctrl_break;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_break <= 0;
+      else if (M_en)
+          M_ctrl_break <= M_ctrl_break_nxt;
+    end
+
+
+  assign A_ctrl_break_nxt = M_ctrl_break;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_break <= 0;
+      else if (A_en)
+          A_ctrl_break <= A_ctrl_break_nxt;
+    end
+
+
+  assign W_ctrl_break_nxt = A_ctrl_break;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_break <= 0;
+      else if (W_en)
+          W_ctrl_break <= W_ctrl_break_nxt;
     end
 
 
   assign D_ctrl_crst = D_op_crst|D_op_rsvx63;
-  assign R_ctrl_crst_nxt = D_ctrl_crst;
+  assign E_ctrl_crst_nxt = D_ctrl_crst;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_crst <= 0;
-      else if (R_en)
-          R_ctrl_crst <= R_ctrl_crst_nxt;
+          E_ctrl_crst <= 0;
+      else if (E_en)
+          E_ctrl_crst <= E_ctrl_crst_nxt;
+    end
+
+
+  assign M_ctrl_crst_nxt = E_ctrl_crst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_crst <= 0;
+      else if (M_en)
+          M_ctrl_crst <= M_ctrl_crst_nxt;
+    end
+
+
+  assign A_ctrl_crst_nxt = M_ctrl_crst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_crst <= 0;
+      else if (A_en)
+          A_ctrl_crst <= A_ctrl_crst_nxt;
+    end
+
+
+  assign W_ctrl_crst_nxt = A_ctrl_crst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_crst <= 0;
+      else if (W_en)
+          W_ctrl_crst <= W_ctrl_crst_nxt;
     end
 
 
@@ -4963,13 +10750,43 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_rsvx21|
     D_op_callr;
 
-  assign R_ctrl_uncond_cti_non_br_nxt = D_ctrl_uncond_cti_non_br;
+  assign E_ctrl_uncond_cti_non_br_nxt = D_ctrl_uncond_cti_non_br;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_uncond_cti_non_br <= 0;
-      else if (R_en)
-          R_ctrl_uncond_cti_non_br <= R_ctrl_uncond_cti_non_br_nxt;
+          E_ctrl_uncond_cti_non_br <= 0;
+      else if (E_en)
+          E_ctrl_uncond_cti_non_br <= E_ctrl_uncond_cti_non_br_nxt;
+    end
+
+
+  assign M_ctrl_uncond_cti_non_br_nxt = E_ctrl_uncond_cti_non_br;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_uncond_cti_non_br <= 0;
+      else if (M_en)
+          M_ctrl_uncond_cti_non_br <= M_ctrl_uncond_cti_non_br_nxt;
+    end
+
+
+  assign A_ctrl_uncond_cti_non_br_nxt = M_ctrl_uncond_cti_non_br;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_uncond_cti_non_br <= 0;
+      else if (A_en)
+          A_ctrl_uncond_cti_non_br <= A_ctrl_uncond_cti_non_br_nxt;
+    end
+
+
+  assign W_ctrl_uncond_cti_non_br_nxt = A_ctrl_uncond_cti_non_br;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_uncond_cti_non_br <= 0;
+      else if (W_en)
+          W_ctrl_uncond_cti_non_br <= W_ctrl_uncond_cti_non_br_nxt;
     end
 
 
@@ -4981,8 +10798,6 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_rsvx44|
     D_op_div|
     D_op_divu|
-    D_op_mul|
-    D_op_muli|
     D_op_mulxss|
     D_op_mulxsu|
     D_op_mulxuu|
@@ -4991,46 +10806,133 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_break|
     D_op_hbreak;
 
-  assign R_ctrl_retaddr_nxt = D_ctrl_retaddr;
+  assign E_ctrl_retaddr_nxt = D_ctrl_retaddr;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_retaddr <= 0;
-      else if (R_en)
-          R_ctrl_retaddr <= R_ctrl_retaddr_nxt;
+          E_ctrl_retaddr <= 0;
+      else if (E_en)
+          E_ctrl_retaddr <= E_ctrl_retaddr_nxt;
     end
 
 
-  assign D_ctrl_shift_logical = D_op_slli|D_op_sll|D_op_srli|D_op_srl;
-  assign R_ctrl_shift_logical_nxt = D_ctrl_shift_logical;
+  assign M_ctrl_retaddr_nxt = E_ctrl_retaddr;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_shift_logical <= 0;
-      else if (R_en)
-          R_ctrl_shift_logical <= R_ctrl_shift_logical_nxt;
+          M_ctrl_retaddr <= 0;
+      else if (M_en)
+          M_ctrl_retaddr <= M_ctrl_retaddr_nxt;
+    end
+
+
+  assign A_ctrl_retaddr_nxt = M_ctrl_retaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_retaddr <= 0;
+      else if (A_en)
+          A_ctrl_retaddr <= A_ctrl_retaddr_nxt;
+    end
+
+
+  assign W_ctrl_retaddr_nxt = A_ctrl_retaddr;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_retaddr <= 0;
+      else if (W_en)
+          W_ctrl_retaddr <= W_ctrl_retaddr_nxt;
+    end
+
+
+  assign D_ctrl_shift_rot_left = D_op_slli|
+    D_op_rsvx50|
+    D_op_sll|
+    D_op_rsvx51|
+    D_op_roli|
+    D_op_rsvx34|
+    D_op_rol|
+    D_op_rsvx35;
+
+  assign E_ctrl_shift_rot_left_nxt = D_ctrl_shift_rot_left;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_shift_rot_left <= 0;
+      else if (E_en)
+          E_ctrl_shift_rot_left <= E_ctrl_shift_rot_left_nxt;
+    end
+
+
+  assign M_ctrl_shift_rot_left_nxt = E_ctrl_shift_rot_left;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_shift_rot_left <= 0;
+      else if (M_en)
+          M_ctrl_shift_rot_left <= M_ctrl_shift_rot_left_nxt;
+    end
+
+
+  assign A_ctrl_shift_rot_left_nxt = M_ctrl_shift_rot_left;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_shift_rot_left <= 0;
+      else if (A_en)
+          A_ctrl_shift_rot_left <= A_ctrl_shift_rot_left_nxt;
+    end
+
+
+  assign W_ctrl_shift_rot_left_nxt = A_ctrl_shift_rot_left;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_shift_rot_left <= 0;
+      else if (W_en)
+          W_ctrl_shift_rot_left <= W_ctrl_shift_rot_left_nxt;
     end
 
 
   assign D_ctrl_shift_right_arith = D_op_srai|D_op_sra;
-  assign R_ctrl_shift_right_arith_nxt = D_ctrl_shift_right_arith;
+  assign E_ctrl_shift_right_arith_nxt = D_ctrl_shift_right_arith;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_shift_right_arith <= 0;
-      else if (R_en)
-          R_ctrl_shift_right_arith <= R_ctrl_shift_right_arith_nxt;
+          E_ctrl_shift_right_arith <= 0;
+      else if (E_en)
+          E_ctrl_shift_right_arith <= E_ctrl_shift_right_arith_nxt;
     end
 
 
-  assign D_ctrl_rot_right = D_op_rsvx10|D_op_ror|D_op_rsvx42|D_op_rsvx43;
-  assign R_ctrl_rot_right_nxt = D_ctrl_rot_right;
+  assign M_ctrl_shift_right_arith_nxt = E_ctrl_shift_right_arith;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_rot_right <= 0;
-      else if (R_en)
-          R_ctrl_rot_right <= R_ctrl_rot_right_nxt;
+          M_ctrl_shift_right_arith <= 0;
+      else if (M_en)
+          M_ctrl_shift_right_arith <= M_ctrl_shift_right_arith_nxt;
+    end
+
+
+  assign A_ctrl_shift_right_arith_nxt = M_ctrl_shift_right_arith;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_shift_right_arith <= 0;
+      else if (A_en)
+          A_ctrl_shift_right_arith <= A_ctrl_shift_right_arith_nxt;
+    end
+
+
+  assign W_ctrl_shift_right_arith_nxt = A_ctrl_shift_right_arith;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_shift_right_arith <= 0;
+      else if (W_en)
+          W_ctrl_shift_right_arith <= W_ctrl_shift_right_arith_nxt;
     end
 
 
@@ -5043,13 +10945,43 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_rsvx42|
     D_op_rsvx43;
 
-  assign R_ctrl_shift_rot_right_nxt = D_ctrl_shift_rot_right;
+  assign E_ctrl_shift_rot_right_nxt = D_ctrl_shift_rot_right;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_shift_rot_right <= 0;
-      else if (R_en)
-          R_ctrl_shift_rot_right <= R_ctrl_shift_rot_right_nxt;
+          E_ctrl_shift_rot_right <= 0;
+      else if (E_en)
+          E_ctrl_shift_rot_right <= E_ctrl_shift_rot_right_nxt;
+    end
+
+
+  assign M_ctrl_shift_rot_right_nxt = E_ctrl_shift_rot_right;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_shift_rot_right <= 0;
+      else if (M_en)
+          M_ctrl_shift_rot_right <= M_ctrl_shift_rot_right_nxt;
+    end
+
+
+  assign A_ctrl_shift_rot_right_nxt = M_ctrl_shift_rot_right;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_shift_rot_right <= 0;
+      else if (A_en)
+          A_ctrl_shift_rot_right <= A_ctrl_shift_rot_right_nxt;
+    end
+
+
+  assign W_ctrl_shift_rot_right_nxt = A_ctrl_shift_rot_right;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_shift_rot_right <= 0;
+      else if (W_en)
+          W_ctrl_shift_rot_right <= W_ctrl_shift_rot_right_nxt;
     end
 
 
@@ -5070,13 +11002,92 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_rsvx42|
     D_op_rsvx43;
 
-  assign R_ctrl_shift_rot_nxt = D_ctrl_shift_rot;
+  assign E_ctrl_shift_rot_nxt = D_ctrl_shift_rot;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_shift_rot <= 0;
-      else if (R_en)
-          R_ctrl_shift_rot <= R_ctrl_shift_rot_nxt;
+          E_ctrl_shift_rot <= 0;
+      else if (E_en)
+          E_ctrl_shift_rot <= E_ctrl_shift_rot_nxt;
+    end
+
+
+  assign M_ctrl_shift_rot_nxt = E_ctrl_shift_rot;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_shift_rot <= 0;
+      else if (M_en)
+          M_ctrl_shift_rot <= M_ctrl_shift_rot_nxt;
+    end
+
+
+  assign A_ctrl_shift_rot_nxt = M_ctrl_shift_rot;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_shift_rot <= 0;
+      else if (A_en)
+          A_ctrl_shift_rot <= A_ctrl_shift_rot_nxt;
+    end
+
+
+  assign W_ctrl_shift_rot_nxt = A_ctrl_shift_rot;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_shift_rot <= 0;
+      else if (W_en)
+          W_ctrl_shift_rot <= W_ctrl_shift_rot_nxt;
+    end
+
+
+  assign D_ctrl_rot = D_op_roli|
+    D_op_rsvx34|
+    D_op_rol|
+    D_op_rsvx35|
+    D_op_rsvx10|
+    D_op_ror|
+    D_op_rsvx42|
+    D_op_rsvx43;
+
+  assign E_ctrl_rot_nxt = D_ctrl_rot;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_rot <= 0;
+      else if (E_en)
+          E_ctrl_rot <= E_ctrl_rot_nxt;
+    end
+
+
+  assign M_ctrl_rot_nxt = E_ctrl_rot;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_rot <= 0;
+      else if (M_en)
+          M_ctrl_rot <= M_ctrl_rot_nxt;
+    end
+
+
+  assign A_ctrl_rot_nxt = M_ctrl_rot;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_rot <= 0;
+      else if (A_en)
+          A_ctrl_rot <= A_ctrl_rot_nxt;
+    end
+
+
+  assign W_ctrl_rot_nxt = A_ctrl_rot;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_rot <= 0;
+      else if (W_en)
+          W_ctrl_rot <= W_ctrl_rot_nxt;
     end
 
 
@@ -5091,78 +11102,415 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_ori|
     D_op_xori;
 
-  assign R_ctrl_logic_nxt = D_ctrl_logic;
+  assign E_ctrl_logic_nxt = D_ctrl_logic;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_logic <= 0;
-      else if (R_en)
-          R_ctrl_logic <= R_ctrl_logic_nxt;
+          E_ctrl_logic <= 0;
+      else if (E_en)
+          E_ctrl_logic <= E_ctrl_logic_nxt;
     end
 
 
-  assign D_ctrl_hi_imm16 = D_op_andhi|D_op_orhi|D_op_xorhi;
-  assign R_ctrl_hi_imm16_nxt = D_ctrl_hi_imm16;
+  assign M_ctrl_logic_nxt = E_ctrl_logic;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_hi_imm16 <= 0;
-      else if (R_en)
-          R_ctrl_hi_imm16 <= R_ctrl_hi_imm16_nxt;
+          M_ctrl_logic <= 0;
+      else if (M_en)
+          M_ctrl_logic <= M_ctrl_logic_nxt;
     end
 
 
-  assign D_ctrl_unsigned_lo_imm16 = D_op_cmpgeui|
+  assign A_ctrl_logic_nxt = M_ctrl_logic;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_logic <= 0;
+      else if (A_en)
+          A_ctrl_logic <= A_ctrl_logic_nxt;
+    end
+
+
+  assign W_ctrl_logic_nxt = A_ctrl_logic;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_logic <= 0;
+      else if (W_en)
+          W_ctrl_logic <= W_ctrl_logic_nxt;
+    end
+
+
+  assign F_ctrl_hi_imm16 = F_op_andhi|F_op_orhi|F_op_xorhi;
+  assign D_ctrl_hi_imm16_nxt = F_ctrl_hi_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_hi_imm16 <= 0;
+      else if (D_en)
+          D_ctrl_hi_imm16 <= D_ctrl_hi_imm16_nxt;
+    end
+
+
+  assign E_ctrl_hi_imm16_nxt = D_ctrl_hi_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_hi_imm16 <= 0;
+      else if (E_en)
+          E_ctrl_hi_imm16 <= E_ctrl_hi_imm16_nxt;
+    end
+
+
+  assign M_ctrl_hi_imm16_nxt = E_ctrl_hi_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_hi_imm16 <= 0;
+      else if (M_en)
+          M_ctrl_hi_imm16 <= M_ctrl_hi_imm16_nxt;
+    end
+
+
+  assign A_ctrl_hi_imm16_nxt = M_ctrl_hi_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_hi_imm16 <= 0;
+      else if (A_en)
+          A_ctrl_hi_imm16 <= A_ctrl_hi_imm16_nxt;
+    end
+
+
+  assign W_ctrl_hi_imm16_nxt = A_ctrl_hi_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_hi_imm16 <= 0;
+      else if (W_en)
+          W_ctrl_hi_imm16 <= W_ctrl_hi_imm16_nxt;
+    end
+
+
+  assign F_ctrl_unsigned_lo_imm16 = F_op_cmpgeui|
+    F_op_cmpltui|
+    F_op_andi|
+    F_op_ori|
+    F_op_xori|
+    F_op_roli|
+    F_op_rsvx10|
+    F_op_slli|
+    F_op_srli|
+    F_op_rsvx34|
+    F_op_rsvx42|
+    F_op_rsvx50|
+    F_op_srai;
+
+  assign D_ctrl_unsigned_lo_imm16_nxt = F_ctrl_unsigned_lo_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_unsigned_lo_imm16 <= 0;
+      else if (D_en)
+          D_ctrl_unsigned_lo_imm16 <= D_ctrl_unsigned_lo_imm16_nxt;
+    end
+
+
+  assign E_ctrl_unsigned_lo_imm16_nxt = D_ctrl_unsigned_lo_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_unsigned_lo_imm16 <= 0;
+      else if (E_en)
+          E_ctrl_unsigned_lo_imm16 <= E_ctrl_unsigned_lo_imm16_nxt;
+    end
+
+
+  assign M_ctrl_unsigned_lo_imm16_nxt = E_ctrl_unsigned_lo_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_unsigned_lo_imm16 <= 0;
+      else if (M_en)
+          M_ctrl_unsigned_lo_imm16 <= M_ctrl_unsigned_lo_imm16_nxt;
+    end
+
+
+  assign A_ctrl_unsigned_lo_imm16_nxt = M_ctrl_unsigned_lo_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_unsigned_lo_imm16 <= 0;
+      else if (A_en)
+          A_ctrl_unsigned_lo_imm16 <= A_ctrl_unsigned_lo_imm16_nxt;
+    end
+
+
+  assign W_ctrl_unsigned_lo_imm16_nxt = A_ctrl_unsigned_lo_imm16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_unsigned_lo_imm16 <= 0;
+      else if (W_en)
+          W_ctrl_unsigned_lo_imm16 <= W_ctrl_unsigned_lo_imm16_nxt;
+    end
+
+
+  assign D_ctrl_cmp = D_op_cmpgei|
+    D_op_cmplti|
+    D_op_cmpnei|
+    D_op_cmpgeui|
     D_op_cmpltui|
-    D_op_andi|
-    D_op_ori|
-    D_op_xori|
-    D_op_roli|
-    D_op_rsvx10|
-    D_op_slli|
-    D_op_srli|
-    D_op_rsvx34|
-    D_op_rsvx42|
-    D_op_rsvx50|
-    D_op_srai;
+    D_op_cmpeqi|
+    D_op_rsvx00|
+    D_op_cmpge|
+    D_op_cmplt|
+    D_op_cmpne|
+    D_op_cmpgeu|
+    D_op_cmpltu|
+    D_op_cmpeq|
+    D_op_rsvx56;
 
-  assign R_ctrl_unsigned_lo_imm16_nxt = D_ctrl_unsigned_lo_imm16;
+  assign E_ctrl_cmp_nxt = D_ctrl_cmp;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_unsigned_lo_imm16 <= 0;
-      else if (R_en)
-          R_ctrl_unsigned_lo_imm16 <= R_ctrl_unsigned_lo_imm16_nxt;
+          E_ctrl_cmp <= 0;
+      else if (E_en)
+          E_ctrl_cmp <= E_ctrl_cmp_nxt;
     end
 
 
-  assign D_ctrl_br_uncond = D_op_br|D_op_rsv02;
-  assign R_ctrl_br_uncond_nxt = D_ctrl_br_uncond;
+  assign M_ctrl_cmp_nxt = E_ctrl_cmp;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_br_uncond <= 0;
-      else if (R_en)
-          R_ctrl_br_uncond <= R_ctrl_br_uncond_nxt;
+          M_ctrl_cmp <= 0;
+      else if (M_en)
+          M_ctrl_cmp <= M_ctrl_cmp_nxt;
     end
 
 
-  assign D_ctrl_br = D_op_br|
-    D_op_bge|
+  assign A_ctrl_cmp_nxt = M_ctrl_cmp;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_cmp <= 0;
+      else if (A_en)
+          A_ctrl_cmp <= A_ctrl_cmp_nxt;
+    end
+
+
+  assign W_ctrl_cmp_nxt = A_ctrl_cmp;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_cmp <= 0;
+      else if (W_en)
+          W_ctrl_cmp <= W_ctrl_cmp_nxt;
+    end
+
+
+  assign D_ctrl_br_cond = D_op_bge|
+    D_op_rsv10|
     D_op_blt|
     D_op_bne|
-    D_op_beq|
+    D_op_rsv62|
     D_op_bgeu|
+    D_op_rsv42|
     D_op_bltu|
-    D_op_rsv62;
+    D_op_beq|
+    D_op_rsv34;
 
-  assign R_ctrl_br_nxt = D_ctrl_br;
+  assign E_ctrl_br_cond_nxt = D_ctrl_br_cond;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_br <= 0;
-      else if (R_en)
-          R_ctrl_br <= R_ctrl_br_nxt;
+          E_ctrl_br_cond <= 0;
+      else if (E_en)
+          E_ctrl_br_cond <= E_ctrl_br_cond_nxt;
+    end
+
+
+  assign M_ctrl_br_cond_nxt = E_ctrl_br_cond;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_br_cond <= 0;
+      else if (M_en)
+          M_ctrl_br_cond <= M_ctrl_br_cond_nxt;
+    end
+
+
+  assign A_ctrl_br_cond_nxt = M_ctrl_br_cond;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_br_cond <= 0;
+      else if (A_en)
+          A_ctrl_br_cond <= A_ctrl_br_cond_nxt;
+    end
+
+
+  assign W_ctrl_br_cond_nxt = A_ctrl_br_cond;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_br_cond <= 0;
+      else if (W_en)
+          W_ctrl_br_cond <= W_ctrl_br_cond_nxt;
+    end
+
+
+  assign F_ctrl_br_uncond = F_op_br|F_op_rsv02;
+  assign D_ctrl_br_uncond_nxt = F_ctrl_br_uncond;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_br_uncond <= 0;
+      else if (D_en)
+          D_ctrl_br_uncond <= D_ctrl_br_uncond_nxt;
+    end
+
+
+  assign E_ctrl_br_uncond_nxt = D_ctrl_br_uncond;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_br_uncond <= 0;
+      else if (E_en)
+          E_ctrl_br_uncond <= E_ctrl_br_uncond_nxt;
+    end
+
+
+  assign M_ctrl_br_uncond_nxt = E_ctrl_br_uncond;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_br_uncond <= 0;
+      else if (M_en)
+          M_ctrl_br_uncond <= M_ctrl_br_uncond_nxt;
+    end
+
+
+  assign A_ctrl_br_uncond_nxt = M_ctrl_br_uncond;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_br_uncond <= 0;
+      else if (A_en)
+          A_ctrl_br_uncond <= A_ctrl_br_uncond_nxt;
+    end
+
+
+  assign W_ctrl_br_uncond_nxt = A_ctrl_br_uncond;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_br_uncond <= 0;
+      else if (W_en)
+          W_ctrl_br_uncond <= W_ctrl_br_uncond_nxt;
+    end
+
+
+  assign D_ctrl_br_always_pred_taken = 1'b0;
+  assign E_ctrl_br_always_pred_taken_nxt = D_ctrl_br_always_pred_taken;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_br_always_pred_taken <= 0;
+      else if (E_en)
+          E_ctrl_br_always_pred_taken <= E_ctrl_br_always_pred_taken_nxt;
+    end
+
+
+  assign M_ctrl_br_always_pred_taken_nxt = E_ctrl_br_always_pred_taken;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_br_always_pred_taken <= 0;
+      else if (M_en)
+          M_ctrl_br_always_pred_taken <= M_ctrl_br_always_pred_taken_nxt;
+    end
+
+
+  assign A_ctrl_br_always_pred_taken_nxt = M_ctrl_br_always_pred_taken;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_br_always_pred_taken <= 0;
+      else if (A_en)
+          A_ctrl_br_always_pred_taken <= A_ctrl_br_always_pred_taken_nxt;
+    end
+
+
+  assign W_ctrl_br_always_pred_taken_nxt = A_ctrl_br_always_pred_taken;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_br_always_pred_taken <= 0;
+      else if (W_en)
+          W_ctrl_br_always_pred_taken <= W_ctrl_br_always_pred_taken_nxt;
+    end
+
+
+  assign F_ctrl_br = F_op_br|
+    F_op_bge|
+    F_op_blt|
+    F_op_bne|
+    F_op_beq|
+    F_op_bgeu|
+    F_op_bltu|
+    F_op_rsv62;
+
+  assign D_ctrl_br_nxt = F_ctrl_br;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_br <= 0;
+      else if (D_en)
+          D_ctrl_br <= D_ctrl_br_nxt;
+    end
+
+
+  assign E_ctrl_br_nxt = D_ctrl_br;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_br <= 0;
+      else if (E_en)
+          E_ctrl_br <= E_ctrl_br_nxt;
+    end
+
+
+  assign M_ctrl_br_nxt = E_ctrl_br;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_br <= 0;
+      else if (M_en)
+          M_ctrl_br <= M_ctrl_br_nxt;
+    end
+
+
+  assign A_ctrl_br_nxt = M_ctrl_br;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_br <= 0;
+      else if (A_en)
+          A_ctrl_br <= A_ctrl_br_nxt;
+    end
+
+
+  assign W_ctrl_br_nxt = A_ctrl_br;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_br <= 0;
+      else if (W_en)
+          W_ctrl_br <= W_ctrl_br_nxt;
     end
 
 
@@ -5183,76 +11531,255 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_bgeu|
     D_op_rsv42;
 
-  assign R_ctrl_alu_subtract_nxt = D_ctrl_alu_subtract;
+  assign E_ctrl_alu_subtract_nxt = D_ctrl_alu_subtract;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_alu_subtract <= 0;
-      else if (R_en)
-          R_ctrl_alu_subtract <= R_ctrl_alu_subtract_nxt;
+          E_ctrl_alu_subtract <= 0;
+      else if (E_en)
+          E_ctrl_alu_subtract <= E_ctrl_alu_subtract_nxt;
+    end
+
+
+  assign M_ctrl_alu_subtract_nxt = E_ctrl_alu_subtract;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_alu_subtract <= 0;
+      else if (M_en)
+          M_ctrl_alu_subtract <= M_ctrl_alu_subtract_nxt;
+    end
+
+
+  assign A_ctrl_alu_subtract_nxt = M_ctrl_alu_subtract;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_alu_subtract <= 0;
+      else if (A_en)
+          A_ctrl_alu_subtract <= A_ctrl_alu_subtract_nxt;
+    end
+
+
+  assign W_ctrl_alu_subtract_nxt = A_ctrl_alu_subtract;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_alu_subtract <= 0;
+      else if (W_en)
+          W_ctrl_alu_subtract <= W_ctrl_alu_subtract_nxt;
     end
 
 
   assign D_ctrl_alu_signed_comparison = D_op_cmpge|D_op_cmpgei|D_op_cmplt|D_op_cmplti|D_op_bge|D_op_blt;
-  assign R_ctrl_alu_signed_comparison_nxt = D_ctrl_alu_signed_comparison;
+  assign E_ctrl_alu_signed_comparison_nxt = D_ctrl_alu_signed_comparison;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_alu_signed_comparison <= 0;
-      else if (R_en)
-          R_ctrl_alu_signed_comparison <= R_ctrl_alu_signed_comparison_nxt;
+          E_ctrl_alu_signed_comparison <= 0;
+      else if (E_en)
+          E_ctrl_alu_signed_comparison <= E_ctrl_alu_signed_comparison_nxt;
     end
 
 
-  assign D_ctrl_br_cmp = D_op_br|
-    D_op_bge|
-    D_op_blt|
-    D_op_bne|
-    D_op_beq|
-    D_op_bgeu|
-    D_op_bltu|
-    D_op_rsv62|
-    D_op_cmpgei|
-    D_op_cmplti|
-    D_op_cmpnei|
-    D_op_cmpgeui|
-    D_op_cmpltui|
-    D_op_cmpeqi|
-    D_op_rsvx00|
-    D_op_cmpge|
-    D_op_cmplt|
-    D_op_cmpne|
-    D_op_cmpgeu|
-    D_op_cmpltu|
-    D_op_cmpeq|
-    D_op_rsvx56;
-
-  assign R_ctrl_br_cmp_nxt = D_ctrl_br_cmp;
+  assign M_ctrl_alu_signed_comparison_nxt = E_ctrl_alu_signed_comparison;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_br_cmp <= 0;
-      else if (R_en)
-          R_ctrl_br_cmp <= R_ctrl_br_cmp_nxt;
+          M_ctrl_alu_signed_comparison <= 0;
+      else if (M_en)
+          M_ctrl_alu_signed_comparison <= M_ctrl_alu_signed_comparison_nxt;
     end
 
 
-  assign D_ctrl_ld_signed = D_op_ldb|
-    D_op_ldh|
-    D_op_ldl|
-    D_op_ldw|
-    D_op_ldbio|
-    D_op_ldhio|
-    D_op_ldwio|
-    D_op_rsv63;
-
-  assign R_ctrl_ld_signed_nxt = D_ctrl_ld_signed;
+  assign A_ctrl_alu_signed_comparison_nxt = M_ctrl_alu_signed_comparison;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_ld_signed <= 0;
-      else if (R_en)
-          R_ctrl_ld_signed <= R_ctrl_ld_signed_nxt;
+          A_ctrl_alu_signed_comparison <= 0;
+      else if (A_en)
+          A_ctrl_alu_signed_comparison <= A_ctrl_alu_signed_comparison_nxt;
+    end
+
+
+  assign W_ctrl_alu_signed_comparison_nxt = A_ctrl_alu_signed_comparison;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_alu_signed_comparison <= 0;
+      else if (W_en)
+          W_ctrl_alu_signed_comparison <= W_ctrl_alu_signed_comparison_nxt;
+    end
+
+
+  assign E_ctrl_ld8 = E_op_ldb|E_op_ldbu|E_op_ldbio|E_op_ldbuio;
+  assign M_ctrl_ld8_nxt = E_ctrl_ld8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld8 <= 0;
+      else if (M_en)
+          M_ctrl_ld8 <= M_ctrl_ld8_nxt;
+    end
+
+
+  assign A_ctrl_ld8_nxt = M_ctrl_ld8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld8 <= 0;
+      else if (A_en)
+          A_ctrl_ld8 <= A_ctrl_ld8_nxt;
+    end
+
+
+  assign W_ctrl_ld8_nxt = A_ctrl_ld8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld8 <= 0;
+      else if (W_en)
+          W_ctrl_ld8 <= W_ctrl_ld8_nxt;
+    end
+
+
+  assign E_ctrl_ld16 = E_op_ldhu|E_op_ldh|E_op_ldhio|E_op_ldhuio;
+  assign M_ctrl_ld16_nxt = E_ctrl_ld16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld16 <= 0;
+      else if (M_en)
+          M_ctrl_ld16 <= M_ctrl_ld16_nxt;
+    end
+
+
+  assign A_ctrl_ld16_nxt = M_ctrl_ld16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld16 <= 0;
+      else if (A_en)
+          A_ctrl_ld16 <= A_ctrl_ld16_nxt;
+    end
+
+
+  assign W_ctrl_ld16_nxt = A_ctrl_ld16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld16 <= 0;
+      else if (W_en)
+          W_ctrl_ld16 <= W_ctrl_ld16_nxt;
+    end
+
+
+  assign E_ctrl_ld8_ld16 = E_op_ldb|
+    E_op_ldbu|
+    E_op_ldbio|
+    E_op_ldbuio|
+    E_op_ldhu|
+    E_op_ldh|
+    E_op_ldhio|
+    E_op_ldhuio;
+
+  assign M_ctrl_ld8_ld16_nxt = E_ctrl_ld8_ld16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld8_ld16 <= 0;
+      else if (M_en)
+          M_ctrl_ld8_ld16 <= M_ctrl_ld8_ld16_nxt;
+    end
+
+
+  assign A_ctrl_ld8_ld16_nxt = M_ctrl_ld8_ld16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld8_ld16 <= 0;
+      else if (A_en)
+          A_ctrl_ld8_ld16 <= A_ctrl_ld8_ld16_nxt;
+    end
+
+
+  assign W_ctrl_ld8_ld16_nxt = A_ctrl_ld8_ld16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld8_ld16 <= 0;
+      else if (W_en)
+          W_ctrl_ld8_ld16 <= W_ctrl_ld8_ld16_nxt;
+    end
+
+
+  assign E_ctrl_ld32 = E_op_ldw|E_op_ldl|E_op_ldwio|E_op_rsv63;
+  assign M_ctrl_ld32_nxt = E_ctrl_ld32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld32 <= 0;
+      else if (M_en)
+          M_ctrl_ld32 <= M_ctrl_ld32_nxt;
+    end
+
+
+  assign A_ctrl_ld32_nxt = M_ctrl_ld32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld32 <= 0;
+      else if (A_en)
+          A_ctrl_ld32 <= A_ctrl_ld32_nxt;
+    end
+
+
+  assign W_ctrl_ld32_nxt = A_ctrl_ld32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld32 <= 0;
+      else if (W_en)
+          W_ctrl_ld32 <= W_ctrl_ld32_nxt;
+    end
+
+
+  assign E_ctrl_ld_signed = E_op_ldb|
+    E_op_ldh|
+    E_op_ldl|
+    E_op_ldw|
+    E_op_ldbio|
+    E_op_ldhio|
+    E_op_ldwio|
+    E_op_rsv63;
+
+  assign M_ctrl_ld_signed_nxt = E_ctrl_ld_signed;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_signed <= 0;
+      else if (M_en)
+          M_ctrl_ld_signed <= M_ctrl_ld_signed_nxt;
+    end
+
+
+  assign A_ctrl_ld_signed_nxt = M_ctrl_ld_signed;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_signed <= 0;
+      else if (A_en)
+          A_ctrl_ld_signed <= A_ctrl_ld_signed_nxt;
+    end
+
+
+  assign W_ctrl_ld_signed_nxt = A_ctrl_ld_signed;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld_signed <= 0;
+      else if (W_en)
+          W_ctrl_ld_signed <= W_ctrl_ld_signed_nxt;
     end
 
 
@@ -5269,256 +11796,1563 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_ldbuio|
     D_op_ldhuio;
 
-  assign R_ctrl_ld_nxt = D_ctrl_ld;
+  assign E_ctrl_ld_nxt = D_ctrl_ld;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_ld <= 0;
-      else if (R_en)
-          R_ctrl_ld <= R_ctrl_ld_nxt;
+          E_ctrl_ld <= 0;
+      else if (E_en)
+          E_ctrl_ld <= E_ctrl_ld_nxt;
     end
 
 
-  assign D_ctrl_ld_non_io = D_op_ldbu|D_op_ldhu|D_op_ldb|D_op_ldh|D_op_ldw|D_op_ldl;
-  assign R_ctrl_ld_non_io_nxt = D_ctrl_ld_non_io;
+  assign M_ctrl_ld_nxt = E_ctrl_ld;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_ld_non_io <= 0;
-      else if (R_en)
-          R_ctrl_ld_non_io <= R_ctrl_ld_non_io_nxt;
+          M_ctrl_ld <= 0;
+      else if (M_en)
+          M_ctrl_ld <= M_ctrl_ld_nxt;
     end
 
 
-  assign D_ctrl_st = D_op_stb|
-    D_op_sth|
-    D_op_stw|
-    D_op_stc|
-    D_op_stbio|
-    D_op_sthio|
-    D_op_stwio|
-    D_op_rsv61;
-
-  assign R_ctrl_st_nxt = D_ctrl_st;
+  assign A_ctrl_ld_nxt = M_ctrl_ld;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_st <= 0;
-      else if (R_en)
-          R_ctrl_st <= R_ctrl_st_nxt;
+          A_ctrl_ld <= 0;
+      else if (A_en)
+          A_ctrl_ld <= A_ctrl_ld_nxt;
     end
 
 
-  assign D_ctrl_ld_io = D_op_ldbuio|D_op_ldhuio|D_op_ldbio|D_op_ldhio|D_op_ldwio|D_op_rsv63;
-  assign R_ctrl_ld_io_nxt = D_ctrl_ld_io;
+  assign W_ctrl_ld_nxt = A_ctrl_ld;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_ld_io <= 0;
-      else if (R_en)
-          R_ctrl_ld_io <= R_ctrl_ld_io_nxt;
+          W_ctrl_ld <= 0;
+      else if (W_en)
+          W_ctrl_ld <= W_ctrl_ld_nxt;
     end
 
 
-  assign D_ctrl_b_is_dst = (D_op_addi|
-    D_op_andhi|
-    D_op_orhi|
-    D_op_xorhi|
-    D_op_andi|
-    D_op_ori|
-    D_op_xori|
-    D_op_call|
-    D_op_rdprs|
-    D_op_cmpgei|
-    D_op_cmplti|
-    D_op_cmpnei|
-    D_op_cmpgeui|
-    D_op_cmpltui|
-    D_op_cmpeqi|
-    D_op_jmpi|
-    D_op_rsv09|
-    D_op_rsv17|
-    D_op_rsv25|
-    D_op_rsv33|
-    D_op_rsv41|
-    D_op_rsv49|
-    D_op_rsv57|
-    D_op_ldb|
-    D_op_ldh|
-    D_op_ldl|
-    D_op_ldw|
-    D_op_ldbio|
-    D_op_ldhio|
-    D_op_ldwio|
-    D_op_rsv63|
-    D_op_ldbu|
-    D_op_ldhu|
-    D_op_ldbuio|
-    D_op_ldhuio|
-    D_op_initd|
-    D_op_initda|
-    D_op_flushd|
-    D_op_flushda) & ~D_op_custom;
+  assign E_ctrl_ld_dcache_management = E_op_initd|
+    E_op_initda|
+    E_op_flushd|
+    E_op_flushda|
+    E_op_ldb|
+    E_op_ldh|
+    E_op_ldl|
+    E_op_ldw|
+    E_op_ldbio|
+    E_op_ldhio|
+    E_op_ldwio|
+    E_op_rsv63|
+    E_op_ldbu|
+    E_op_ldhu|
+    E_op_ldbuio|
+    E_op_ldhuio;
 
-  assign R_ctrl_b_is_dst_nxt = D_ctrl_b_is_dst;
+  assign M_ctrl_ld_dcache_management_nxt = E_ctrl_ld_dcache_management;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_b_is_dst <= 0;
-      else if (R_en)
-          R_ctrl_b_is_dst <= R_ctrl_b_is_dst_nxt;
+          M_ctrl_ld_dcache_management <= 0;
+      else if (M_en)
+          M_ctrl_ld_dcache_management <= M_ctrl_ld_dcache_management_nxt;
     end
 
 
-  assign D_ctrl_ignore_dst = (D_op_br|
-    D_op_bge|
-    D_op_blt|
-    D_op_bne|
-    D_op_beq|
-    D_op_bgeu|
-    D_op_bltu|
-    D_op_rsv62|
-    D_op_stb|
-    D_op_sth|
-    D_op_stw|
-    D_op_stc|
-    D_op_stbio|
-    D_op_sthio|
-    D_op_stwio|
-    D_op_rsv61|
-    D_op_jmpi|
-    D_op_rsv09|
-    D_op_rsv17|
-    D_op_rsv25|
-    D_op_rsv33|
-    D_op_rsv41|
-    D_op_rsv49|
-    D_op_rsv57) | (D_op_custom & ~D_iw_custom_writerc);
-
-  assign R_ctrl_ignore_dst_nxt = D_ctrl_ignore_dst;
+  assign A_ctrl_ld_dcache_management_nxt = M_ctrl_ld_dcache_management;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_ignore_dst <= 0;
-      else if (R_en)
-          R_ctrl_ignore_dst <= R_ctrl_ignore_dst_nxt;
+          A_ctrl_ld_dcache_management <= 0;
+      else if (A_en)
+          A_ctrl_ld_dcache_management <= A_ctrl_ld_dcache_management_nxt;
     end
 
 
-  assign D_ctrl_src2_choose_imm = D_op_addi|
-    D_op_andhi|
-    D_op_orhi|
-    D_op_xorhi|
-    D_op_andi|
-    D_op_ori|
-    D_op_xori|
-    D_op_call|
-    D_op_rdprs|
-    D_op_cmpgei|
-    D_op_cmplti|
-    D_op_cmpnei|
-    D_op_cmpgeui|
-    D_op_cmpltui|
-    D_op_cmpeqi|
-    D_op_jmpi|
-    D_op_rsv09|
-    D_op_rsv17|
-    D_op_rsv25|
-    D_op_rsv33|
-    D_op_rsv41|
-    D_op_rsv49|
-    D_op_rsv57|
-    D_op_ldb|
-    D_op_ldh|
-    D_op_ldl|
-    D_op_ldw|
-    D_op_ldbio|
-    D_op_ldhio|
-    D_op_ldwio|
-    D_op_rsv63|
-    D_op_ldbu|
-    D_op_ldhu|
-    D_op_ldbuio|
-    D_op_ldhuio|
-    D_op_initd|
-    D_op_initda|
-    D_op_flushd|
-    D_op_flushda|
-    D_op_stb|
-    D_op_sth|
-    D_op_stw|
-    D_op_stc|
-    D_op_stbio|
-    D_op_sthio|
-    D_op_stwio|
-    D_op_rsv61|
-    D_op_roli|
-    D_op_rsvx10|
-    D_op_slli|
-    D_op_srli|
-    D_op_rsvx34|
-    D_op_rsvx42|
-    D_op_rsvx50|
-    D_op_srai;
-
-  assign R_ctrl_src2_choose_imm_nxt = D_ctrl_src2_choose_imm;
+  assign W_ctrl_ld_dcache_management_nxt = A_ctrl_ld_dcache_management;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_src2_choose_imm <= 0;
-      else if (R_en)
-          R_ctrl_src2_choose_imm <= R_ctrl_src2_choose_imm_nxt;
+          W_ctrl_ld_dcache_management <= 0;
+      else if (W_en)
+          W_ctrl_ld_dcache_management <= W_ctrl_ld_dcache_management_nxt;
     end
 
 
-  assign D_ctrl_wrctl_inst = D_op_wrctl;
-  assign R_ctrl_wrctl_inst_nxt = D_ctrl_wrctl_inst;
+  assign E_ctrl_ld_non_io = E_op_ldbu|E_op_ldhu|E_op_ldb|E_op_ldh|E_op_ldw|E_op_ldl;
+  assign M_ctrl_ld_non_io_nxt = E_ctrl_ld_non_io;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_wrctl_inst <= 0;
-      else if (R_en)
-          R_ctrl_wrctl_inst <= R_ctrl_wrctl_inst_nxt;
+          M_ctrl_ld_non_io <= 0;
+      else if (M_en)
+          M_ctrl_ld_non_io <= M_ctrl_ld_non_io_nxt;
     end
 
 
-  assign D_ctrl_rdctl_inst = D_op_rdctl;
-  assign R_ctrl_rdctl_inst_nxt = D_ctrl_rdctl_inst;
+  assign A_ctrl_ld_non_io_nxt = M_ctrl_ld_non_io;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_rdctl_inst <= 0;
-      else if (R_en)
-          R_ctrl_rdctl_inst <= R_ctrl_rdctl_inst_nxt;
+          A_ctrl_ld_non_io <= 0;
+      else if (A_en)
+          A_ctrl_ld_non_io <= A_ctrl_ld_non_io_nxt;
     end
 
 
-  assign D_ctrl_force_src2_zero = D_op_call|
-    D_op_rsv02|
-    D_op_nextpc|
-    D_op_callr|
+  assign W_ctrl_ld_non_io_nxt = A_ctrl_ld_non_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld_non_io <= 0;
+      else if (W_en)
+          W_ctrl_ld_non_io <= W_ctrl_ld_non_io_nxt;
+    end
+
+
+  assign E_ctrl_st8 = E_op_stb|E_op_stbio;
+  assign M_ctrl_st8_nxt = E_ctrl_st8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_st8 <= 0;
+      else if (M_en)
+          M_ctrl_st8 <= M_ctrl_st8_nxt;
+    end
+
+
+  assign A_ctrl_st8_nxt = M_ctrl_st8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_st8 <= 0;
+      else if (A_en)
+          A_ctrl_st8 <= A_ctrl_st8_nxt;
+    end
+
+
+  assign W_ctrl_st8_nxt = A_ctrl_st8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_st8 <= 0;
+      else if (W_en)
+          W_ctrl_st8 <= W_ctrl_st8_nxt;
+    end
+
+
+  assign E_ctrl_st16 = E_op_sth|E_op_rsv09|E_op_sthio|E_op_rsv41;
+  assign M_ctrl_st16_nxt = E_ctrl_st16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_st16 <= 0;
+      else if (M_en)
+          M_ctrl_st16 <= M_ctrl_st16_nxt;
+    end
+
+
+  assign A_ctrl_st16_nxt = M_ctrl_st16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_st16 <= 0;
+      else if (A_en)
+          A_ctrl_st16 <= A_ctrl_st16_nxt;
+    end
+
+
+  assign W_ctrl_st16_nxt = A_ctrl_st16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_st16 <= 0;
+      else if (W_en)
+          W_ctrl_st16 <= W_ctrl_st16_nxt;
+    end
+
+
+  assign E_ctrl_st = E_op_stb|
+    E_op_sth|
+    E_op_stw|
+    E_op_stc|
+    E_op_stbio|
+    E_op_sthio|
+    E_op_stwio|
+    E_op_rsv61;
+
+  assign M_ctrl_st_nxt = E_ctrl_st;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_st <= 0;
+      else if (M_en)
+          M_ctrl_st <= M_ctrl_st_nxt;
+    end
+
+
+  assign A_ctrl_st_nxt = M_ctrl_st;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_st <= 0;
+      else if (A_en)
+          A_ctrl_st <= A_ctrl_st_nxt;
+    end
+
+
+  assign W_ctrl_st_nxt = A_ctrl_st;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_st <= 0;
+      else if (W_en)
+          W_ctrl_st <= W_ctrl_st_nxt;
+    end
+
+
+  assign E_ctrl_st_non_io = E_op_stb|E_op_sth|E_op_stw|E_op_stc;
+  assign M_ctrl_st_non_io_nxt = E_ctrl_st_non_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_st_non_io <= 0;
+      else if (M_en)
+          M_ctrl_st_non_io <= M_ctrl_st_non_io_nxt;
+    end
+
+
+  assign A_ctrl_st_non_io_nxt = M_ctrl_st_non_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_st_non_io <= 0;
+      else if (A_en)
+          A_ctrl_st_non_io <= A_ctrl_st_non_io_nxt;
+    end
+
+
+  assign W_ctrl_st_non_io_nxt = A_ctrl_st_non_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_st_non_io <= 0;
+      else if (W_en)
+          W_ctrl_st_non_io <= W_ctrl_st_non_io_nxt;
+    end
+
+
+  assign E_ctrl_ld_st = E_op_ldb|
+    E_op_ldh|
+    E_op_ldl|
+    E_op_ldw|
+    E_op_ldbio|
+    E_op_ldhio|
+    E_op_ldwio|
+    E_op_rsv63|
+    E_op_ldbu|
+    E_op_ldhu|
+    E_op_ldbuio|
+    E_op_ldhuio|
+    E_op_stb|
+    E_op_sth|
+    E_op_stw|
+    E_op_stc|
+    E_op_stbio|
+    E_op_sthio|
+    E_op_stwio|
+    E_op_rsv61;
+
+  assign M_ctrl_ld_st_nxt = E_ctrl_ld_st;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st <= 0;
+      else if (M_en)
+          M_ctrl_ld_st <= M_ctrl_ld_st_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_nxt = M_ctrl_ld_st;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st <= 0;
+      else if (A_en)
+          A_ctrl_ld_st <= A_ctrl_ld_st_nxt;
+    end
+
+
+  assign W_ctrl_ld_st_nxt = A_ctrl_ld_st;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld_st <= 0;
+      else if (W_en)
+          W_ctrl_ld_st <= W_ctrl_ld_st_nxt;
+    end
+
+
+  assign E_ctrl_ld_st_io = E_op_ldbuio|
+    E_op_ldhuio|
+    E_op_ldbio|
+    E_op_ldhio|
+    E_op_ldwio|
+    E_op_rsv63|
+    E_op_stbio|
+    E_op_rsv33|
+    E_op_sthio|
+    E_op_rsv41|
+    E_op_stwio|
+    E_op_rsv49|
+    E_op_rsv61|
+    E_op_rsv57;
+
+  assign M_ctrl_ld_st_io_nxt = E_ctrl_ld_st_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st_io <= 0;
+      else if (M_en)
+          M_ctrl_ld_st_io <= M_ctrl_ld_st_io_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_io_nxt = M_ctrl_ld_st_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st_io <= 0;
+      else if (A_en)
+          A_ctrl_ld_st_io <= A_ctrl_ld_st_io_nxt;
+    end
+
+
+  assign W_ctrl_ld_st_io_nxt = A_ctrl_ld_st_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld_st_io <= 0;
+      else if (W_en)
+          W_ctrl_ld_st_io <= W_ctrl_ld_st_io_nxt;
+    end
+
+
+  assign E_ctrl_ld_st_non_io = E_op_ldbu|
+    E_op_ldhu|
+    E_op_ldb|
+    E_op_ldh|
+    E_op_ldw|
+    E_op_ldl|
+    E_op_stb|
+    E_op_sth|
+    E_op_stw|
+    E_op_stc;
+
+  assign M_ctrl_ld_st_non_io_nxt = E_ctrl_ld_st_non_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st_non_io <= 0;
+      else if (M_en)
+          M_ctrl_ld_st_non_io <= M_ctrl_ld_st_non_io_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_non_io_nxt = M_ctrl_ld_st_non_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st_non_io <= 0;
+      else if (A_en)
+          A_ctrl_ld_st_non_io <= A_ctrl_ld_st_non_io_nxt;
+    end
+
+
+  assign W_ctrl_ld_st_non_io_nxt = A_ctrl_ld_st_non_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld_st_non_io <= 0;
+      else if (W_en)
+          W_ctrl_ld_st_non_io <= W_ctrl_ld_st_non_io_nxt;
+    end
+
+
+  assign E_ctrl_ld_st_non_io_non_st32 = E_op_stb|
+    E_op_sth|
+    E_op_ldbu|
+    E_op_ldhu|
+    E_op_ldb|
+    E_op_ldh|
+    E_op_ldw|
+    E_op_ldl;
+
+  assign M_ctrl_ld_st_non_io_non_st32_nxt = E_ctrl_ld_st_non_io_non_st32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st_non_io_non_st32 <= 0;
+      else if (M_en)
+          M_ctrl_ld_st_non_io_non_st32 <= M_ctrl_ld_st_non_io_non_st32_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_non_io_non_st32_nxt = M_ctrl_ld_st_non_io_non_st32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st_non_io_non_st32 <= 0;
+      else if (A_en)
+          A_ctrl_ld_st_non_io_non_st32 <= A_ctrl_ld_st_non_io_non_st32_nxt;
+    end
+
+
+  assign W_ctrl_ld_st_non_io_non_st32_nxt = A_ctrl_ld_st_non_io_non_st32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld_st_non_io_non_st32 <= 0;
+      else if (W_en)
+          W_ctrl_ld_st_non_io_non_st32 <= W_ctrl_ld_st_non_io_non_st32_nxt;
+    end
+
+
+  assign E_ctrl_ld_st_non_st32 = E_op_ldb|
+    E_op_ldh|
+    E_op_ldl|
+    E_op_ldw|
+    E_op_ldbio|
+    E_op_ldhio|
+    E_op_ldwio|
+    E_op_rsv63|
+    E_op_ldbu|
+    E_op_ldhu|
+    E_op_ldbuio|
+    E_op_ldhuio|
+    E_op_stb|
+    E_op_stbio|
+    E_op_sth|
+    E_op_rsv09|
+    E_op_sthio|
+    E_op_rsv41;
+
+  assign M_ctrl_ld_st_non_st32_nxt = E_ctrl_ld_st_non_st32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_st_non_st32 <= 0;
+      else if (M_en)
+          M_ctrl_ld_st_non_st32 <= M_ctrl_ld_st_non_st32_nxt;
+    end
+
+
+  assign A_ctrl_ld_st_non_st32_nxt = M_ctrl_ld_st_non_st32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_st_non_st32 <= 0;
+      else if (A_en)
+          A_ctrl_ld_st_non_st32 <= A_ctrl_ld_st_non_st32_nxt;
+    end
+
+
+  assign W_ctrl_ld_st_non_st32_nxt = A_ctrl_ld_st_non_st32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld_st_non_st32 <= 0;
+      else if (W_en)
+          W_ctrl_ld_st_non_st32 <= W_ctrl_ld_st_non_st32_nxt;
+    end
+
+
+  assign E_ctrl_mem = E_op_initd|
+    E_op_initda|
+    E_op_flushd|
+    E_op_flushda|
+    E_op_ldb|
+    E_op_ldh|
+    E_op_ldl|
+    E_op_ldw|
+    E_op_ldbio|
+    E_op_ldhio|
+    E_op_ldwio|
+    E_op_rsv63|
+    E_op_ldbu|
+    E_op_ldhu|
+    E_op_ldbuio|
+    E_op_ldhuio|
+    E_op_stb|
+    E_op_sth|
+    E_op_stw|
+    E_op_stc|
+    E_op_stbio|
+    E_op_sthio|
+    E_op_stwio|
+    E_op_rsv61;
+
+  assign M_ctrl_mem_nxt = E_ctrl_mem;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_mem <= 0;
+      else if (M_en)
+          M_ctrl_mem <= M_ctrl_mem_nxt;
+    end
+
+
+  assign A_ctrl_mem_nxt = M_ctrl_mem;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_mem <= 0;
+      else if (A_en)
+          A_ctrl_mem <= A_ctrl_mem_nxt;
+    end
+
+
+  assign W_ctrl_mem_nxt = A_ctrl_mem;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_mem <= 0;
+      else if (W_en)
+          W_ctrl_mem <= W_ctrl_mem_nxt;
+    end
+
+
+  assign E_ctrl_mem_data_access = E_op_flushda|
+    E_op_initda|
+    E_op_ldb|
+    E_op_ldh|
+    E_op_ldl|
+    E_op_ldw|
+    E_op_ldbio|
+    E_op_ldhio|
+    E_op_ldwio|
+    E_op_rsv63|
+    E_op_ldbu|
+    E_op_ldhu|
+    E_op_ldbuio|
+    E_op_ldhuio|
+    E_op_stb|
+    E_op_sth|
+    E_op_stw|
+    E_op_stc|
+    E_op_stbio|
+    E_op_sthio|
+    E_op_stwio|
+    E_op_rsv61;
+
+  assign M_ctrl_mem_data_access_nxt = E_ctrl_mem_data_access;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_mem_data_access <= 0;
+      else if (M_en)
+          M_ctrl_mem_data_access <= M_ctrl_mem_data_access_nxt;
+    end
+
+
+  assign A_ctrl_mem_data_access_nxt = M_ctrl_mem_data_access;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_mem_data_access <= 0;
+      else if (A_en)
+          A_ctrl_mem_data_access <= A_ctrl_mem_data_access_nxt;
+    end
+
+
+  assign W_ctrl_mem_data_access_nxt = A_ctrl_mem_data_access;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_mem_data_access <= 0;
+      else if (W_en)
+          W_ctrl_mem_data_access <= W_ctrl_mem_data_access_nxt;
+    end
+
+
+  assign E_ctrl_mem8 = E_op_ldb|E_op_ldbu|E_op_ldbio|E_op_ldbuio|E_op_stb|E_op_stbio;
+  assign M_ctrl_mem8_nxt = E_ctrl_mem8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_mem8 <= 0;
+      else if (M_en)
+          M_ctrl_mem8 <= M_ctrl_mem8_nxt;
+    end
+
+
+  assign A_ctrl_mem8_nxt = M_ctrl_mem8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_mem8 <= 0;
+      else if (A_en)
+          A_ctrl_mem8 <= A_ctrl_mem8_nxt;
+    end
+
+
+  assign W_ctrl_mem8_nxt = A_ctrl_mem8;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_mem8 <= 0;
+      else if (W_en)
+          W_ctrl_mem8 <= W_ctrl_mem8_nxt;
+    end
+
+
+  assign E_ctrl_mem16 = E_op_ldhu|
+    E_op_ldh|
+    E_op_ldhio|
+    E_op_ldhuio|
+    E_op_sth|
+    E_op_rsv09|
+    E_op_sthio|
+    E_op_rsv41;
+
+  assign M_ctrl_mem16_nxt = E_ctrl_mem16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_mem16 <= 0;
+      else if (M_en)
+          M_ctrl_mem16 <= M_ctrl_mem16_nxt;
+    end
+
+
+  assign A_ctrl_mem16_nxt = M_ctrl_mem16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_mem16 <= 0;
+      else if (A_en)
+          A_ctrl_mem16 <= A_ctrl_mem16_nxt;
+    end
+
+
+  assign W_ctrl_mem16_nxt = A_ctrl_mem16;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_mem16 <= 0;
+      else if (W_en)
+          W_ctrl_mem16 <= W_ctrl_mem16_nxt;
+    end
+
+
+  assign E_ctrl_mem32 = E_op_ldw|
+    E_op_ldl|
+    E_op_ldwio|
+    E_op_rsv63|
+    E_op_stw|
+    E_op_rsv17|
+    E_op_stc|
+    E_op_rsv25|
+    E_op_stwio|
+    E_op_rsv49|
+    E_op_rsv61|
+    E_op_rsv57;
+
+  assign M_ctrl_mem32_nxt = E_ctrl_mem32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_mem32 <= 0;
+      else if (M_en)
+          M_ctrl_mem32 <= M_ctrl_mem32_nxt;
+    end
+
+
+  assign A_ctrl_mem32_nxt = M_ctrl_mem32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_mem32 <= 0;
+      else if (A_en)
+          A_ctrl_mem32 <= A_ctrl_mem32_nxt;
+    end
+
+
+  assign W_ctrl_mem32_nxt = A_ctrl_mem32;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_mem32 <= 0;
+      else if (W_en)
+          W_ctrl_mem32 <= W_ctrl_mem32_nxt;
+    end
+
+
+  assign E_ctrl_dc_index_nowb_inv = E_op_initd|E_op_rsv49;
+  assign M_ctrl_dc_index_nowb_inv_nxt = E_ctrl_dc_index_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_dc_index_nowb_inv <= 0;
+      else if (M_en)
+          M_ctrl_dc_index_nowb_inv <= M_ctrl_dc_index_nowb_inv_nxt;
+    end
+
+
+  assign A_ctrl_dc_index_nowb_inv_nxt = M_ctrl_dc_index_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_dc_index_nowb_inv <= 0;
+      else if (A_en)
+          A_ctrl_dc_index_nowb_inv <= A_ctrl_dc_index_nowb_inv_nxt;
+    end
+
+
+  assign W_ctrl_dc_index_nowb_inv_nxt = A_ctrl_dc_index_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_dc_index_nowb_inv <= 0;
+      else if (W_en)
+          W_ctrl_dc_index_nowb_inv <= W_ctrl_dc_index_nowb_inv_nxt;
+    end
+
+
+  assign E_ctrl_dc_addr_nowb_inv = E_op_initda|E_op_rsv17;
+  assign M_ctrl_dc_addr_nowb_inv_nxt = E_ctrl_dc_addr_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_dc_addr_nowb_inv <= 0;
+      else if (M_en)
+          M_ctrl_dc_addr_nowb_inv <= M_ctrl_dc_addr_nowb_inv_nxt;
+    end
+
+
+  assign A_ctrl_dc_addr_nowb_inv_nxt = M_ctrl_dc_addr_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_dc_addr_nowb_inv <= 0;
+      else if (A_en)
+          A_ctrl_dc_addr_nowb_inv <= A_ctrl_dc_addr_nowb_inv_nxt;
+    end
+
+
+  assign W_ctrl_dc_addr_nowb_inv_nxt = A_ctrl_dc_addr_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_dc_addr_nowb_inv <= 0;
+      else if (W_en)
+          W_ctrl_dc_addr_nowb_inv <= W_ctrl_dc_addr_nowb_inv_nxt;
+    end
+
+
+  assign E_ctrl_dc_index_wb_inv = E_op_flushd|E_op_rsv57;
+  assign M_ctrl_dc_index_wb_inv_nxt = E_ctrl_dc_index_wb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_dc_index_wb_inv <= 0;
+      else if (M_en)
+          M_ctrl_dc_index_wb_inv <= M_ctrl_dc_index_wb_inv_nxt;
+    end
+
+
+  assign A_ctrl_dc_index_wb_inv_nxt = M_ctrl_dc_index_wb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_dc_index_wb_inv <= 0;
+      else if (A_en)
+          A_ctrl_dc_index_wb_inv <= A_ctrl_dc_index_wb_inv_nxt;
+    end
+
+
+  assign W_ctrl_dc_index_wb_inv_nxt = A_ctrl_dc_index_wb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_dc_index_wb_inv <= 0;
+      else if (W_en)
+          W_ctrl_dc_index_wb_inv <= W_ctrl_dc_index_wb_inv_nxt;
+    end
+
+
+  assign E_ctrl_dc_addr_wb_inv = E_op_flushda|E_op_rsv25;
+  assign M_ctrl_dc_addr_wb_inv_nxt = E_ctrl_dc_addr_wb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_dc_addr_wb_inv <= 0;
+      else if (M_en)
+          M_ctrl_dc_addr_wb_inv <= M_ctrl_dc_addr_wb_inv_nxt;
+    end
+
+
+  assign A_ctrl_dc_addr_wb_inv_nxt = M_ctrl_dc_addr_wb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_dc_addr_wb_inv <= 0;
+      else if (A_en)
+          A_ctrl_dc_addr_wb_inv <= A_ctrl_dc_addr_wb_inv_nxt;
+    end
+
+
+  assign W_ctrl_dc_addr_wb_inv_nxt = A_ctrl_dc_addr_wb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_dc_addr_wb_inv <= 0;
+      else if (W_en)
+          W_ctrl_dc_addr_wb_inv <= W_ctrl_dc_addr_wb_inv_nxt;
+    end
+
+
+  assign E_ctrl_dc_index_inv = E_op_initd|E_op_rsv49|E_op_flushd|E_op_rsv57;
+  assign M_ctrl_dc_index_inv_nxt = E_ctrl_dc_index_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_dc_index_inv <= 0;
+      else if (M_en)
+          M_ctrl_dc_index_inv <= M_ctrl_dc_index_inv_nxt;
+    end
+
+
+  assign A_ctrl_dc_index_inv_nxt = M_ctrl_dc_index_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_dc_index_inv <= 0;
+      else if (A_en)
+          A_ctrl_dc_index_inv <= A_ctrl_dc_index_inv_nxt;
+    end
+
+
+  assign W_ctrl_dc_index_inv_nxt = A_ctrl_dc_index_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_dc_index_inv <= 0;
+      else if (W_en)
+          W_ctrl_dc_index_inv <= W_ctrl_dc_index_inv_nxt;
+    end
+
+
+  assign E_ctrl_dc_addr_inv = E_op_initda|E_op_rsv17|E_op_flushda|E_op_rsv25;
+  assign M_ctrl_dc_addr_inv_nxt = E_ctrl_dc_addr_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_dc_addr_inv <= 0;
+      else if (M_en)
+          M_ctrl_dc_addr_inv <= M_ctrl_dc_addr_inv_nxt;
+    end
+
+
+  assign A_ctrl_dc_addr_inv_nxt = M_ctrl_dc_addr_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_dc_addr_inv <= 0;
+      else if (A_en)
+          A_ctrl_dc_addr_inv <= A_ctrl_dc_addr_inv_nxt;
+    end
+
+
+  assign W_ctrl_dc_addr_inv_nxt = A_ctrl_dc_addr_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_dc_addr_inv <= 0;
+      else if (W_en)
+          W_ctrl_dc_addr_inv <= W_ctrl_dc_addr_inv_nxt;
+    end
+
+
+  assign E_ctrl_dc_nowb_inv = E_op_initd|E_op_rsv49|E_op_initda|E_op_rsv17;
+  assign M_ctrl_dc_nowb_inv_nxt = E_ctrl_dc_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_dc_nowb_inv <= 0;
+      else if (M_en)
+          M_ctrl_dc_nowb_inv <= M_ctrl_dc_nowb_inv_nxt;
+    end
+
+
+  assign A_ctrl_dc_nowb_inv_nxt = M_ctrl_dc_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_dc_nowb_inv <= 0;
+      else if (A_en)
+          A_ctrl_dc_nowb_inv <= A_ctrl_dc_nowb_inv_nxt;
+    end
+
+
+  assign W_ctrl_dc_nowb_inv_nxt = A_ctrl_dc_nowb_inv;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_dc_nowb_inv <= 0;
+      else if (W_en)
+          W_ctrl_dc_nowb_inv <= W_ctrl_dc_nowb_inv_nxt;
+    end
+
+
+  assign E_ctrl_dcache_management = E_op_initd|
+    E_op_rsv49|
+    E_op_flushd|
+    E_op_rsv57|
+    E_op_initda|
+    E_op_rsv17|
+    E_op_flushda|
+    E_op_rsv25;
+
+  assign M_ctrl_dcache_management_nxt = E_ctrl_dcache_management;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_dcache_management <= 0;
+      else if (M_en)
+          M_ctrl_dcache_management <= M_ctrl_dcache_management_nxt;
+    end
+
+
+  assign A_ctrl_dcache_management_nxt = M_ctrl_dcache_management;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_dcache_management <= 0;
+      else if (A_en)
+          A_ctrl_dcache_management <= A_ctrl_dcache_management_nxt;
+    end
+
+
+  assign W_ctrl_dcache_management_nxt = A_ctrl_dcache_management;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_dcache_management <= 0;
+      else if (W_en)
+          W_ctrl_dcache_management <= W_ctrl_dcache_management_nxt;
+    end
+
+
+  assign E_ctrl_ld_io = E_op_ldbuio|E_op_ldhuio|E_op_ldbio|E_op_ldhio|E_op_ldwio|E_op_rsv63;
+  assign M_ctrl_ld_io_nxt = E_ctrl_ld_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ld_io <= 0;
+      else if (M_en)
+          M_ctrl_ld_io <= M_ctrl_ld_io_nxt;
+    end
+
+
+  assign A_ctrl_ld_io_nxt = M_ctrl_ld_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ld_io <= 0;
+      else if (A_en)
+          A_ctrl_ld_io <= A_ctrl_ld_io_nxt;
+    end
+
+
+  assign W_ctrl_ld_io_nxt = A_ctrl_ld_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ld_io <= 0;
+      else if (W_en)
+          W_ctrl_ld_io <= W_ctrl_ld_io_nxt;
+    end
+
+
+  assign E_ctrl_st_io = E_op_stbio|
+    E_op_rsv33|
+    E_op_sthio|
+    E_op_rsv41|
+    E_op_stwio|
+    E_op_rsv49|
+    E_op_rsv61|
+    E_op_rsv57;
+
+  assign M_ctrl_st_io_nxt = E_ctrl_st_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_st_io <= 0;
+      else if (M_en)
+          M_ctrl_st_io <= M_ctrl_st_io_nxt;
+    end
+
+
+  assign A_ctrl_st_io_nxt = M_ctrl_st_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_st_io <= 0;
+      else if (A_en)
+          A_ctrl_st_io <= A_ctrl_st_io_nxt;
+    end
+
+
+  assign W_ctrl_st_io_nxt = A_ctrl_st_io;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_st_io <= 0;
+      else if (W_en)
+          W_ctrl_st_io <= W_ctrl_st_io_nxt;
+    end
+
+
+  assign F_ctrl_a_not_src = (F_op_call|F_op_jmpi) | (F_op_custom & ~F_iw_custom_readra);
+  assign D_ctrl_a_not_src_nxt = F_ctrl_a_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_a_not_src <= 0;
+      else if (D_en)
+          D_ctrl_a_not_src <= D_ctrl_a_not_src_nxt;
+    end
+
+
+  assign E_ctrl_a_not_src_nxt = D_ctrl_a_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_a_not_src <= 0;
+      else if (E_en)
+          E_ctrl_a_not_src <= E_ctrl_a_not_src_nxt;
+    end
+
+
+  assign M_ctrl_a_not_src_nxt = E_ctrl_a_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_a_not_src <= 0;
+      else if (M_en)
+          M_ctrl_a_not_src <= M_ctrl_a_not_src_nxt;
+    end
+
+
+  assign A_ctrl_a_not_src_nxt = M_ctrl_a_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_a_not_src <= 0;
+      else if (A_en)
+          A_ctrl_a_not_src <= A_ctrl_a_not_src_nxt;
+    end
+
+
+  assign W_ctrl_a_not_src_nxt = A_ctrl_a_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_a_not_src <= 0;
+      else if (W_en)
+          W_ctrl_a_not_src <= W_ctrl_a_not_src_nxt;
+    end
+
+
+  assign F_ctrl_b_not_src = (F_op_addi|
+    F_op_muli|
+    F_op_andhi|
+    F_op_orhi|
+    F_op_xorhi|
+    F_op_andi|
+    F_op_ori|
+    F_op_xori|
+    F_op_call|
+    F_op_rdprs|
+    F_op_cmpgei|
+    F_op_cmplti|
+    F_op_cmpnei|
+    F_op_cmpgeui|
+    F_op_cmpltui|
+    F_op_cmpeqi|
+    F_op_jmpi|
+    F_op_rsv09|
+    F_op_rsv17|
+    F_op_rsv25|
+    F_op_rsv33|
+    F_op_rsv41|
+    F_op_rsv49|
+    F_op_rsv57|
+    F_op_ldb|
+    F_op_ldh|
+    F_op_ldl|
+    F_op_ldw|
+    F_op_ldbio|
+    F_op_ldhio|
+    F_op_ldwio|
+    F_op_rsv63|
+    F_op_ldbu|
+    F_op_ldhu|
+    F_op_ldbuio|
+    F_op_ldhuio|
+    F_op_initd|
+    F_op_initda|
+    F_op_flushd|
+    F_op_flushda) | (F_op_custom & ~F_iw_custom_readrb);
+
+  assign D_ctrl_b_not_src_nxt = F_ctrl_b_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_b_not_src <= 0;
+      else if (D_en)
+          D_ctrl_b_not_src <= D_ctrl_b_not_src_nxt;
+    end
+
+
+  assign E_ctrl_b_not_src_nxt = D_ctrl_b_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_b_not_src <= 0;
+      else if (E_en)
+          E_ctrl_b_not_src <= E_ctrl_b_not_src_nxt;
+    end
+
+
+  assign M_ctrl_b_not_src_nxt = E_ctrl_b_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_b_not_src <= 0;
+      else if (M_en)
+          M_ctrl_b_not_src <= M_ctrl_b_not_src_nxt;
+    end
+
+
+  assign A_ctrl_b_not_src_nxt = M_ctrl_b_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_b_not_src <= 0;
+      else if (A_en)
+          A_ctrl_b_not_src <= A_ctrl_b_not_src_nxt;
+    end
+
+
+  assign W_ctrl_b_not_src_nxt = A_ctrl_b_not_src;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_b_not_src <= 0;
+      else if (W_en)
+          W_ctrl_b_not_src <= W_ctrl_b_not_src_nxt;
+    end
+
+
+  assign F_ctrl_b_is_dst = (F_op_addi|
+    F_op_muli|
+    F_op_andhi|
+    F_op_orhi|
+    F_op_xorhi|
+    F_op_andi|
+    F_op_ori|
+    F_op_xori|
+    F_op_call|
+    F_op_rdprs|
+    F_op_cmpgei|
+    F_op_cmplti|
+    F_op_cmpnei|
+    F_op_cmpgeui|
+    F_op_cmpltui|
+    F_op_cmpeqi|
+    F_op_jmpi|
+    F_op_rsv09|
+    F_op_rsv17|
+    F_op_rsv25|
+    F_op_rsv33|
+    F_op_rsv41|
+    F_op_rsv49|
+    F_op_rsv57|
+    F_op_ldb|
+    F_op_ldh|
+    F_op_ldl|
+    F_op_ldw|
+    F_op_ldbio|
+    F_op_ldhio|
+    F_op_ldwio|
+    F_op_rsv63|
+    F_op_ldbu|
+    F_op_ldhu|
+    F_op_ldbuio|
+    F_op_ldhuio|
+    F_op_initd|
+    F_op_initda|
+    F_op_flushd|
+    F_op_flushda) & ~F_op_custom;
+
+  assign D_ctrl_b_is_dst_nxt = F_ctrl_b_is_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_b_is_dst <= 0;
+      else if (D_en)
+          D_ctrl_b_is_dst <= D_ctrl_b_is_dst_nxt;
+    end
+
+
+  assign E_ctrl_b_is_dst_nxt = D_ctrl_b_is_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_b_is_dst <= 0;
+      else if (E_en)
+          E_ctrl_b_is_dst <= E_ctrl_b_is_dst_nxt;
+    end
+
+
+  assign M_ctrl_b_is_dst_nxt = E_ctrl_b_is_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_b_is_dst <= 0;
+      else if (M_en)
+          M_ctrl_b_is_dst <= M_ctrl_b_is_dst_nxt;
+    end
+
+
+  assign A_ctrl_b_is_dst_nxt = M_ctrl_b_is_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_b_is_dst <= 0;
+      else if (A_en)
+          A_ctrl_b_is_dst <= A_ctrl_b_is_dst_nxt;
+    end
+
+
+  assign W_ctrl_b_is_dst_nxt = A_ctrl_b_is_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_b_is_dst <= 0;
+      else if (W_en)
+          W_ctrl_b_is_dst <= W_ctrl_b_is_dst_nxt;
+    end
+
+
+  assign F_ctrl_ignore_dst = (F_op_br|
+    F_op_bge|
+    F_op_blt|
+    F_op_bne|
+    F_op_beq|
+    F_op_bgeu|
+    F_op_bltu|
+    F_op_rsv62|
+    F_op_stb|
+    F_op_sth|
+    F_op_stw|
+    F_op_stc|
+    F_op_stbio|
+    F_op_sthio|
+    F_op_stwio|
+    F_op_rsv61|
+    F_op_jmpi|
+    F_op_rsv09|
+    F_op_rsv17|
+    F_op_rsv25|
+    F_op_rsv33|
+    F_op_rsv41|
+    F_op_rsv49|
+    F_op_rsv57) | (F_op_custom & ~F_iw_custom_writerc);
+
+  assign D_ctrl_ignore_dst_nxt = F_ctrl_ignore_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_ignore_dst <= 0;
+      else if (D_en)
+          D_ctrl_ignore_dst <= D_ctrl_ignore_dst_nxt;
+    end
+
+
+  assign E_ctrl_ignore_dst_nxt = D_ctrl_ignore_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_ignore_dst <= 0;
+      else if (E_en)
+          E_ctrl_ignore_dst <= E_ctrl_ignore_dst_nxt;
+    end
+
+
+  assign M_ctrl_ignore_dst_nxt = E_ctrl_ignore_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_ignore_dst <= 0;
+      else if (M_en)
+          M_ctrl_ignore_dst <= M_ctrl_ignore_dst_nxt;
+    end
+
+
+  assign A_ctrl_ignore_dst_nxt = M_ctrl_ignore_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_ignore_dst <= 0;
+      else if (A_en)
+          A_ctrl_ignore_dst <= A_ctrl_ignore_dst_nxt;
+    end
+
+
+  assign W_ctrl_ignore_dst_nxt = A_ctrl_ignore_dst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_ignore_dst <= 0;
+      else if (W_en)
+          W_ctrl_ignore_dst <= W_ctrl_ignore_dst_nxt;
+    end
+
+
+  assign F_ctrl_src2_choose_imm = F_op_addi|
+    F_op_muli|
+    F_op_andhi|
+    F_op_orhi|
+    F_op_xorhi|
+    F_op_andi|
+    F_op_ori|
+    F_op_xori|
+    F_op_call|
+    F_op_rdprs|
+    F_op_cmpgei|
+    F_op_cmplti|
+    F_op_cmpnei|
+    F_op_cmpgeui|
+    F_op_cmpltui|
+    F_op_cmpeqi|
+    F_op_jmpi|
+    F_op_rsv09|
+    F_op_rsv17|
+    F_op_rsv25|
+    F_op_rsv33|
+    F_op_rsv41|
+    F_op_rsv49|
+    F_op_rsv57|
+    F_op_ldb|
+    F_op_ldh|
+    F_op_ldl|
+    F_op_ldw|
+    F_op_ldbio|
+    F_op_ldhio|
+    F_op_ldwio|
+    F_op_rsv63|
+    F_op_ldbu|
+    F_op_ldhu|
+    F_op_ldbuio|
+    F_op_ldhuio|
+    F_op_initd|
+    F_op_initda|
+    F_op_flushd|
+    F_op_flushda|
+    F_op_stb|
+    F_op_sth|
+    F_op_stw|
+    F_op_stc|
+    F_op_stbio|
+    F_op_sthio|
+    F_op_stwio|
+    F_op_rsv61|
+    F_op_roli|
+    F_op_rsvx10|
+    F_op_slli|
+    F_op_srli|
+    F_op_rsvx34|
+    F_op_rsvx42|
+    F_op_rsvx50|
+    F_op_srai;
+
+  assign D_ctrl_src2_choose_imm_nxt = F_ctrl_src2_choose_imm;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          D_ctrl_src2_choose_imm <= 0;
+      else if (D_en)
+          D_ctrl_src2_choose_imm <= D_ctrl_src2_choose_imm_nxt;
+    end
+
+
+  assign E_ctrl_src2_choose_imm_nxt = D_ctrl_src2_choose_imm;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_src2_choose_imm <= 0;
+      else if (E_en)
+          E_ctrl_src2_choose_imm <= E_ctrl_src2_choose_imm_nxt;
+    end
+
+
+  assign M_ctrl_src2_choose_imm_nxt = E_ctrl_src2_choose_imm;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_src2_choose_imm <= 0;
+      else if (M_en)
+          M_ctrl_src2_choose_imm <= M_ctrl_src2_choose_imm_nxt;
+    end
+
+
+  assign A_ctrl_src2_choose_imm_nxt = M_ctrl_src2_choose_imm;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_src2_choose_imm <= 0;
+      else if (A_en)
+          A_ctrl_src2_choose_imm <= A_ctrl_src2_choose_imm_nxt;
+    end
+
+
+  assign W_ctrl_src2_choose_imm_nxt = A_ctrl_src2_choose_imm;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_src2_choose_imm <= 0;
+      else if (W_en)
+          W_ctrl_src2_choose_imm <= W_ctrl_src2_choose_imm_nxt;
+    end
+
+
+  assign E_ctrl_wrctl_inst = E_op_wrctl;
+  assign M_ctrl_wrctl_inst_nxt = E_ctrl_wrctl_inst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_wrctl_inst <= 0;
+      else if (M_en)
+          M_ctrl_wrctl_inst <= M_ctrl_wrctl_inst_nxt;
+    end
+
+
+  assign A_ctrl_wrctl_inst_nxt = M_ctrl_wrctl_inst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_wrctl_inst <= 0;
+      else if (A_en)
+          A_ctrl_wrctl_inst <= A_ctrl_wrctl_inst_nxt;
+    end
+
+
+  assign W_ctrl_wrctl_inst_nxt = A_ctrl_wrctl_inst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_wrctl_inst <= 0;
+      else if (W_en)
+          W_ctrl_wrctl_inst <= W_ctrl_wrctl_inst_nxt;
+    end
+
+
+  assign E_ctrl_rdctl_inst = E_op_rdctl;
+  assign M_ctrl_rdctl_inst_nxt = E_ctrl_rdctl_inst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_rdctl_inst <= 0;
+      else if (M_en)
+          M_ctrl_rdctl_inst <= M_ctrl_rdctl_inst_nxt;
+    end
+
+
+  assign A_ctrl_rdctl_inst_nxt = M_ctrl_rdctl_inst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_rdctl_inst <= 0;
+      else if (A_en)
+          A_ctrl_rdctl_inst <= A_ctrl_rdctl_inst_nxt;
+    end
+
+
+  assign W_ctrl_rdctl_inst_nxt = A_ctrl_rdctl_inst;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_rdctl_inst <= 0;
+      else if (W_en)
+          W_ctrl_rdctl_inst <= W_ctrl_rdctl_inst_nxt;
+    end
+
+
+  assign D_ctrl_flush_pipe_always = D_op_flushp|
+    D_op_bret|
+    D_op_wrprs|
+    D_op_initi|
+    D_op_flushi|
+    D_op_wrctl|
+    D_op_eret|
     D_op_trap|
     D_op_rsvx44|
+    D_op_div|
+    D_op_divu|
+    D_op_mulxss|
+    D_op_mulxsu|
+    D_op_mulxuu|
     D_op_intr|
     D_op_rsvx60|
     D_op_break|
     D_op_hbreak|
-    D_op_eret|
-    D_op_bret|
-    D_op_rsvx17|
-    D_op_rsvx25|
-    D_op_ret|
-    D_op_jmp|
-    D_op_rsvx21|
-    D_op_jmpi;
+    D_op_crst|
+    D_op_rsvx63;
 
-  assign R_ctrl_force_src2_zero_nxt = D_ctrl_force_src2_zero;
+  assign E_ctrl_flush_pipe_always_nxt = D_ctrl_flush_pipe_always;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_force_src2_zero <= 0;
-      else if (R_en)
-          R_ctrl_force_src2_zero <= R_ctrl_force_src2_zero_nxt;
+          E_ctrl_flush_pipe_always <= 0;
+      else if (E_en)
+          E_ctrl_flush_pipe_always <= E_ctrl_flush_pipe_always_nxt;
+    end
+
+
+  assign M_ctrl_flush_pipe_always_nxt = E_ctrl_flush_pipe_always;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_flush_pipe_always <= 0;
+      else if (M_en)
+          M_ctrl_flush_pipe_always <= M_ctrl_flush_pipe_always_nxt;
+    end
+
+
+  assign A_ctrl_flush_pipe_always_nxt = M_ctrl_flush_pipe_always;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_flush_pipe_always <= 0;
+      else if (A_en)
+          A_ctrl_flush_pipe_always <= A_ctrl_flush_pipe_always_nxt;
+    end
+
+
+  assign W_ctrl_flush_pipe_always_nxt = A_ctrl_flush_pipe_always;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_flush_pipe_always <= 0;
+      else if (W_en)
+          W_ctrl_flush_pipe_always <= W_ctrl_flush_pipe_always_nxt;
     end
 
 
@@ -5537,17 +13371,121 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     D_op_beq|
     D_op_rsv34|
     D_op_bne|
-    D_op_rsv62|
-    D_op_br|
-    D_op_rsv02;
+    D_op_rsv62;
 
-  assign R_ctrl_alu_force_xor_nxt = D_ctrl_alu_force_xor;
+  assign E_ctrl_alu_force_xor_nxt = D_ctrl_alu_force_xor;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          R_ctrl_alu_force_xor <= 0;
-      else if (R_en)
-          R_ctrl_alu_force_xor <= R_ctrl_alu_force_xor_nxt;
+          E_ctrl_alu_force_xor <= 0;
+      else if (E_en)
+          E_ctrl_alu_force_xor <= E_ctrl_alu_force_xor_nxt;
+    end
+
+
+  assign M_ctrl_alu_force_xor_nxt = E_ctrl_alu_force_xor;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_alu_force_xor <= 0;
+      else if (M_en)
+          M_ctrl_alu_force_xor <= M_ctrl_alu_force_xor_nxt;
+    end
+
+
+  assign A_ctrl_alu_force_xor_nxt = M_ctrl_alu_force_xor;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_alu_force_xor <= 0;
+      else if (A_en)
+          A_ctrl_alu_force_xor <= A_ctrl_alu_force_xor_nxt;
+    end
+
+
+  assign W_ctrl_alu_force_xor_nxt = A_ctrl_alu_force_xor;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_alu_force_xor <= 0;
+      else if (W_en)
+          W_ctrl_alu_force_xor <= W_ctrl_alu_force_xor_nxt;
+    end
+
+
+  assign D_ctrl_late_result = D_op_ldb|
+    D_op_ldh|
+    D_op_ldl|
+    D_op_ldw|
+    D_op_ldbio|
+    D_op_ldhio|
+    D_op_ldwio|
+    D_op_rsv63|
+    D_op_ldbu|
+    D_op_ldhu|
+    D_op_ldbuio|
+    D_op_ldhuio|
+    D_op_slli|
+    D_op_rsvx50|
+    D_op_sll|
+    D_op_rsvx51|
+    D_op_roli|
+    D_op_rsvx34|
+    D_op_rol|
+    D_op_rsvx35|
+    D_op_srli|
+    D_op_srl|
+    D_op_srai|
+    D_op_sra|
+    D_op_rsvx10|
+    D_op_ror|
+    D_op_rsvx42|
+    D_op_rsvx43|
+    D_op_rdctl|
+    D_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1|
+    D_op_muli|
+    D_op_mul|
+    D_op_rsvx47|
+    D_op_rsvx55|
+    D_op_rsvx63;
+
+  assign E_ctrl_late_result_nxt = D_ctrl_late_result;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_late_result <= 0;
+      else if (E_en)
+          E_ctrl_late_result <= E_ctrl_late_result_nxt;
+    end
+
+
+  assign M_ctrl_late_result_nxt = E_ctrl_late_result;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_late_result <= 0;
+      else if (M_en)
+          M_ctrl_late_result <= M_ctrl_late_result_nxt;
+    end
+
+
+  assign A_ctrl_late_result_nxt = M_ctrl_late_result;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_late_result <= 0;
+      else if (A_en)
+          A_ctrl_late_result <= A_ctrl_late_result_nxt;
+    end
+
+
+  assign W_ctrl_late_result_nxt = A_ctrl_late_result;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_late_result <= 0;
+      else if (W_en)
+          W_ctrl_late_result <= W_ctrl_late_result_nxt;
     end
 
 
@@ -5734,15 +13672,388 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
     (D_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1)? 424'h6370755f305f616c746572615f6e696f735f637573746f6d5f696e7374725f666c6f6174696e675f706f696e745f696e73745f7331 :
     424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020424144;
 
-  assign F_vinst = F_valid ? F_inst : {53{8'h2d}};
-  assign D_vinst = D_valid ? D_inst : {53{8'h2d}};
-  assign R_vinst = R_valid ? D_inst : {53{8'h2d}};
-  assign E_vinst = E_valid ? D_inst : {53{8'h2d}};
-  assign W_vinst = W_valid ? D_inst : {53{8'h2d}};
+  assign E_inst = (E_op_call)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202063616c6c :
+    (E_op_jmpi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206a6d7069 :
+    (E_op_ldbu)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646275 :
+    (E_op_addi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202061646469 :
+    (E_op_stb)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737462 :
+    (E_op_br)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206272 :
+    (E_op_ldb)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6462 :
+    (E_op_cmpgei)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70676569 :
+    (E_op_ldhu)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646875 :
+    (E_op_andi)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e6469 :
+    (E_op_sth)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737468 :
+    (E_op_bge)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626765 :
+    (E_op_ldh)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6468 :
+    (E_op_cmplti)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c7469 :
+    (E_op_initda)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e69746461 :
+    (E_op_ori)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f7269 :
+    (E_op_stw)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737477 :
+    (E_op_blt)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626c74 :
+    (E_op_ldw)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6477 :
+    (E_op_cmpnei)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706e6569 :
+    (E_op_flushda)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c7573686461 :
+    (E_op_xori)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f7269 :
+    (E_op_bne)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626e65 :
+    (E_op_cmpeqi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70657169 :
+    (E_op_ldbuio)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646275696f :
+    (E_op_muli)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c69 :
+    (E_op_stbio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737462696f :
+    (E_op_beq)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626571 :
+    (E_op_ldbio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6462696f :
+    (E_op_cmpgeui)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d7067657569 :
+    (E_op_ldhuio)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646875696f :
+    (E_op_andhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e646869 :
+    (E_op_sthio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737468696f :
+    (E_op_bgeu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202062676575 :
+    (E_op_ldhio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6468696f :
+    (E_op_cmpltui)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c747569 :
+    (E_op_initd)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e697464 :
+    (E_op_orhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f726869 :
+    (E_op_stwio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737477696f :
+    (E_op_bltu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626c7475 :
+    (E_op_ldwio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6477696f :
+    (E_op_flushd)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736864 :
+    (E_op_xorhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f726869 :
+    (E_op_eret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202065726574 :
+    (E_op_roli)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f6c69 :
+    (E_op_rol)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f6c :
+    (E_op_flushp)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736870 :
+    (E_op_ret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726574 :
+    (E_op_nor)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206e6f72 :
+    (E_op_mulxuu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787575 :
+    (E_op_cmpge)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706765 :
+    (E_op_bret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202062726574 :
+    (E_op_ror)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f72 :
+    (E_op_flushi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736869 :
+    (E_op_jmp)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206a6d70 :
+    (E_op_and)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e64 :
+    (E_op_cmplt)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c74 :
+    (E_op_slli)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020736c6c69 :
+    (E_op_sll)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020736c6c :
+    (E_op_or)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f72 :
+    (E_op_mulxsu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787375 :
+    (E_op_cmpne)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706e65 :
+    (E_op_srli)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726c69 :
+    (E_op_srl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726c :
+    (E_op_nextpc)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206e6578747063 :
+    (E_op_callr)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202063616c6c72 :
+    (E_op_xor)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f72 :
+    (E_op_mulxss)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787373 :
+    (E_op_cmpeq)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706571 :
+    (E_op_divu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202064697675 :
+    (E_op_div)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020646976 :
+    (E_op_rdctl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726463746c :
+    (E_op_mul)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c :
+    (E_op_cmpgeu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70676575 :
+    (E_op_initi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e697469 :
+    (E_op_trap)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202074726170 :
+    (E_op_wrctl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020777263746c :
+    (E_op_cmpltu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c7475 :
+    (E_op_add)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616464 :
+    (E_op_break)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020627265616b :
+    (E_op_hbreak)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202068627265616b :
+    (E_op_sync)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073796e63 :
+    (E_op_sub)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737562 :
+    (E_op_srai)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726169 :
+    (E_op_sra)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737261 :
+    (E_op_intr)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e7472 :
+    (E_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1)? 424'h6370755f305f616c746572615f6e696f735f637573746f6d5f696e7374725f666c6f6174696e675f706f696e745f696e73745f7331 :
+    424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020424144;
+
+  assign M_inst = (M_op_call)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202063616c6c :
+    (M_op_jmpi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206a6d7069 :
+    (M_op_ldbu)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646275 :
+    (M_op_addi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202061646469 :
+    (M_op_stb)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737462 :
+    (M_op_br)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206272 :
+    (M_op_ldb)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6462 :
+    (M_op_cmpgei)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70676569 :
+    (M_op_ldhu)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646875 :
+    (M_op_andi)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e6469 :
+    (M_op_sth)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737468 :
+    (M_op_bge)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626765 :
+    (M_op_ldh)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6468 :
+    (M_op_cmplti)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c7469 :
+    (M_op_initda)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e69746461 :
+    (M_op_ori)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f7269 :
+    (M_op_stw)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737477 :
+    (M_op_blt)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626c74 :
+    (M_op_ldw)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6477 :
+    (M_op_cmpnei)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706e6569 :
+    (M_op_flushda)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c7573686461 :
+    (M_op_xori)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f7269 :
+    (M_op_bne)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626e65 :
+    (M_op_cmpeqi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70657169 :
+    (M_op_ldbuio)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646275696f :
+    (M_op_muli)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c69 :
+    (M_op_stbio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737462696f :
+    (M_op_beq)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626571 :
+    (M_op_ldbio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6462696f :
+    (M_op_cmpgeui)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d7067657569 :
+    (M_op_ldhuio)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646875696f :
+    (M_op_andhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e646869 :
+    (M_op_sthio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737468696f :
+    (M_op_bgeu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202062676575 :
+    (M_op_ldhio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6468696f :
+    (M_op_cmpltui)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c747569 :
+    (M_op_initd)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e697464 :
+    (M_op_orhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f726869 :
+    (M_op_stwio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737477696f :
+    (M_op_bltu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626c7475 :
+    (M_op_ldwio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6477696f :
+    (M_op_flushd)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736864 :
+    (M_op_xorhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f726869 :
+    (M_op_eret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202065726574 :
+    (M_op_roli)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f6c69 :
+    (M_op_rol)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f6c :
+    (M_op_flushp)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736870 :
+    (M_op_ret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726574 :
+    (M_op_nor)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206e6f72 :
+    (M_op_mulxuu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787575 :
+    (M_op_cmpge)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706765 :
+    (M_op_bret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202062726574 :
+    (M_op_ror)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f72 :
+    (M_op_flushi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736869 :
+    (M_op_jmp)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206a6d70 :
+    (M_op_and)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e64 :
+    (M_op_cmplt)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c74 :
+    (M_op_slli)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020736c6c69 :
+    (M_op_sll)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020736c6c :
+    (M_op_or)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f72 :
+    (M_op_mulxsu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787375 :
+    (M_op_cmpne)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706e65 :
+    (M_op_srli)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726c69 :
+    (M_op_srl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726c :
+    (M_op_nextpc)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206e6578747063 :
+    (M_op_callr)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202063616c6c72 :
+    (M_op_xor)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f72 :
+    (M_op_mulxss)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787373 :
+    (M_op_cmpeq)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706571 :
+    (M_op_divu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202064697675 :
+    (M_op_div)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020646976 :
+    (M_op_rdctl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726463746c :
+    (M_op_mul)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c :
+    (M_op_cmpgeu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70676575 :
+    (M_op_initi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e697469 :
+    (M_op_trap)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202074726170 :
+    (M_op_wrctl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020777263746c :
+    (M_op_cmpltu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c7475 :
+    (M_op_add)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616464 :
+    (M_op_break)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020627265616b :
+    (M_op_hbreak)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202068627265616b :
+    (M_op_sync)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073796e63 :
+    (M_op_sub)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737562 :
+    (M_op_srai)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726169 :
+    (M_op_sra)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737261 :
+    (M_op_intr)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e7472 :
+    (M_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1)? 424'h6370755f305f616c746572615f6e696f735f637573746f6d5f696e7374725f666c6f6174696e675f706f696e745f696e73745f7331 :
+    424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020424144;
+
+  assign A_inst = (A_op_call)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202063616c6c :
+    (A_op_jmpi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206a6d7069 :
+    (A_op_ldbu)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646275 :
+    (A_op_addi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202061646469 :
+    (A_op_stb)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737462 :
+    (A_op_br)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206272 :
+    (A_op_ldb)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6462 :
+    (A_op_cmpgei)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70676569 :
+    (A_op_ldhu)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646875 :
+    (A_op_andi)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e6469 :
+    (A_op_sth)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737468 :
+    (A_op_bge)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626765 :
+    (A_op_ldh)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6468 :
+    (A_op_cmplti)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c7469 :
+    (A_op_initda)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e69746461 :
+    (A_op_ori)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f7269 :
+    (A_op_stw)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737477 :
+    (A_op_blt)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626c74 :
+    (A_op_ldw)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6477 :
+    (A_op_cmpnei)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706e6569 :
+    (A_op_flushda)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c7573686461 :
+    (A_op_xori)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f7269 :
+    (A_op_bne)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626e65 :
+    (A_op_cmpeqi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70657169 :
+    (A_op_ldbuio)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646275696f :
+    (A_op_muli)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c69 :
+    (A_op_stbio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737462696f :
+    (A_op_beq)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626571 :
+    (A_op_ldbio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6462696f :
+    (A_op_cmpgeui)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d7067657569 :
+    (A_op_ldhuio)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646875696f :
+    (A_op_andhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e646869 :
+    (A_op_sthio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737468696f :
+    (A_op_bgeu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202062676575 :
+    (A_op_ldhio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6468696f :
+    (A_op_cmpltui)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c747569 :
+    (A_op_initd)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e697464 :
+    (A_op_orhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f726869 :
+    (A_op_stwio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737477696f :
+    (A_op_bltu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626c7475 :
+    (A_op_ldwio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6477696f :
+    (A_op_flushd)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736864 :
+    (A_op_xorhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f726869 :
+    (A_op_eret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202065726574 :
+    (A_op_roli)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f6c69 :
+    (A_op_rol)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f6c :
+    (A_op_flushp)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736870 :
+    (A_op_ret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726574 :
+    (A_op_nor)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206e6f72 :
+    (A_op_mulxuu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787575 :
+    (A_op_cmpge)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706765 :
+    (A_op_bret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202062726574 :
+    (A_op_ror)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f72 :
+    (A_op_flushi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736869 :
+    (A_op_jmp)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206a6d70 :
+    (A_op_and)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e64 :
+    (A_op_cmplt)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c74 :
+    (A_op_slli)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020736c6c69 :
+    (A_op_sll)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020736c6c :
+    (A_op_or)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f72 :
+    (A_op_mulxsu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787375 :
+    (A_op_cmpne)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706e65 :
+    (A_op_srli)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726c69 :
+    (A_op_srl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726c :
+    (A_op_nextpc)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206e6578747063 :
+    (A_op_callr)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202063616c6c72 :
+    (A_op_xor)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f72 :
+    (A_op_mulxss)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787373 :
+    (A_op_cmpeq)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706571 :
+    (A_op_divu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202064697675 :
+    (A_op_div)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020646976 :
+    (A_op_rdctl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726463746c :
+    (A_op_mul)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c :
+    (A_op_cmpgeu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70676575 :
+    (A_op_initi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e697469 :
+    (A_op_trap)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202074726170 :
+    (A_op_wrctl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020777263746c :
+    (A_op_cmpltu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c7475 :
+    (A_op_add)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616464 :
+    (A_op_break)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020627265616b :
+    (A_op_hbreak)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202068627265616b :
+    (A_op_sync)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073796e63 :
+    (A_op_sub)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737562 :
+    (A_op_srai)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726169 :
+    (A_op_sra)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737261 :
+    (A_op_intr)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e7472 :
+    (A_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1)? 424'h6370755f305f616c746572615f6e696f735f637573746f6d5f696e7374725f666c6f6174696e675f706f696e745f696e73745f7331 :
+    424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020424144;
+
+  assign W_inst = (W_op_call)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202063616c6c :
+    (W_op_jmpi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206a6d7069 :
+    (W_op_ldbu)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646275 :
+    (W_op_addi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202061646469 :
+    (W_op_stb)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737462 :
+    (W_op_br)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206272 :
+    (W_op_ldb)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6462 :
+    (W_op_cmpgei)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70676569 :
+    (W_op_ldhu)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646875 :
+    (W_op_andi)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e6469 :
+    (W_op_sth)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737468 :
+    (W_op_bge)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626765 :
+    (W_op_ldh)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6468 :
+    (W_op_cmplti)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c7469 :
+    (W_op_initda)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e69746461 :
+    (W_op_ori)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f7269 :
+    (W_op_stw)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737477 :
+    (W_op_blt)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626c74 :
+    (W_op_ldw)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6477 :
+    (W_op_cmpnei)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706e6569 :
+    (W_op_flushda)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c7573686461 :
+    (W_op_xori)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f7269 :
+    (W_op_bne)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626e65 :
+    (W_op_cmpeqi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70657169 :
+    (W_op_ldbuio)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646275696f :
+    (W_op_muli)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c69 :
+    (W_op_stbio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737462696f :
+    (W_op_beq)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626571 :
+    (W_op_ldbio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6462696f :
+    (W_op_cmpgeui)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d7067657569 :
+    (W_op_ldhuio)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c646875696f :
+    (W_op_andhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e646869 :
+    (W_op_sthio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737468696f :
+    (W_op_bgeu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202062676575 :
+    (W_op_ldhio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6468696f :
+    (W_op_cmpltui)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c747569 :
+    (W_op_initd)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e697464 :
+    (W_op_orhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f726869 :
+    (W_op_stwio)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737477696f :
+    (W_op_bltu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020626c7475 :
+    (W_op_ldwio)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206c6477696f :
+    (W_op_flushd)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736864 :
+    (W_op_xorhi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f726869 :
+    (W_op_eret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202065726574 :
+    (W_op_roli)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f6c69 :
+    (W_op_rol)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f6c :
+    (W_op_flushp)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736870 :
+    (W_op_ret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726574 :
+    (W_op_nor)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206e6f72 :
+    (W_op_mulxuu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787575 :
+    (W_op_cmpge)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706765 :
+    (W_op_bret)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202062726574 :
+    (W_op_ror)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726f72 :
+    (W_op_flushi)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020666c75736869 :
+    (W_op_jmp)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206a6d70 :
+    (W_op_and)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616e64 :
+    (W_op_cmplt)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c74 :
+    (W_op_slli)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020736c6c69 :
+    (W_op_sll)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020736c6c :
+    (W_op_or)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206f72 :
+    (W_op_mulxsu)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787375 :
+    (W_op_cmpne)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706e65 :
+    (W_op_srli)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726c69 :
+    (W_op_srl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726c :
+    (W_op_nextpc)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206e6578747063 :
+    (W_op_callr)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202063616c6c72 :
+    (W_op_xor)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020786f72 :
+    (W_op_mulxss)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c787373 :
+    (W_op_cmpeq)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706571 :
+    (W_op_divu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202064697675 :
+    (W_op_div)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020646976 :
+    (W_op_rdctl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020726463746c :
+    (W_op_mul)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020206d756c :
+    (W_op_cmpgeu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d70676575 :
+    (W_op_initi)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e697469 :
+    (W_op_trap)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202074726170 :
+    (W_op_wrctl)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020777263746c :
+    (W_op_cmpltu)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020636d706c7475 :
+    (W_op_add)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020616464 :
+    (W_op_break)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020627265616b :
+    (W_op_hbreak)? 424'h202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202068627265616b :
+    (W_op_sync)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073796e63 :
+    (W_op_sub)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737562 :
+    (W_op_srai)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202073726169 :
+    (W_op_sra)? 424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020737261 :
+    (W_op_intr)? 424'h20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020696e7472 :
+    (W_op_cpu_0_altera_nios_custom_instr_floating_point_inst_s1)? 424'h6370755f305f616c746572615f6e696f735f637573746f6d5f696e7374725f666c6f6174696e675f706f696e745f696e73745f7331 :
+    424'h2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020424144;
+
+  assign F_vinst = F_iw_valid ? F_inst : {53{8'h2d}};
+  assign D_vinst = D_issue ? D_inst : {53{8'h2d}};
+  assign E_vinst = E_valid ? E_inst : {53{8'h2d}};
+  assign M_vinst = M_valid ? M_inst : {53{8'h2d}};
+  assign A_vinst = A_valid ? A_inst : {53{8'h2d}};
+  assign W_vinst = W_valid ? W_inst : {53{8'h2d}};
+  //Clearing 'X' data bits
+  assign D_ic_want_fill_unfiltered_is_x = ^(D_ic_want_fill_unfiltered) === 1'bx;
+
+  assign D_ic_want_fill = D_ic_want_fill_unfiltered_is_x ? 1'b0 : D_ic_want_fill_unfiltered;
+  //Clearing 'X' data bits
+  assign M_dc_potential_hazard_after_st_unfiltered_is_x = ^(M_dc_potential_hazard_after_st_unfiltered) === 1'bx;
+
+  assign M_dc_potential_hazard_after_st = M_dc_potential_hazard_after_st_unfiltered_is_x ? 1'b0 : M_dc_potential_hazard_after_st_unfiltered;
 
 //////////////// END SIMULATION-ONLY CONTENTS
 
 //synthesis translate_on
+//synthesis read_comments_as_HDL on
+//  
+//  assign D_ic_want_fill = D_ic_want_fill_unfiltered;
+//
+//  
+//  assign M_dc_potential_hazard_after_st = M_dc_potential_hazard_after_st_unfiltered;
+//
+//synthesis read_comments_as_HDL off
 
 endmodule
 

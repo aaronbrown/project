@@ -29,11 +29,12 @@ module cpu_0_jtag_debug_module_arbitrator (
                                              cpu_0_data_master_address_to_slave,
                                              cpu_0_data_master_byteenable,
                                              cpu_0_data_master_debugaccess,
+                                             cpu_0_data_master_latency_counter,
                                              cpu_0_data_master_read,
-                                             cpu_0_data_master_waitrequest,
                                              cpu_0_data_master_write,
                                              cpu_0_data_master_writedata,
                                              cpu_0_instruction_master_address_to_slave,
+                                             cpu_0_instruction_master_latency_counter,
                                              cpu_0_instruction_master_read,
                                              cpu_0_jtag_debug_module_readdata,
                                              cpu_0_jtag_debug_module_resetrequest,
@@ -83,11 +84,12 @@ module cpu_0_jtag_debug_module_arbitrator (
   input   [ 24: 0] cpu_0_data_master_address_to_slave;
   input   [  3: 0] cpu_0_data_master_byteenable;
   input            cpu_0_data_master_debugaccess;
+  input            cpu_0_data_master_latency_counter;
   input            cpu_0_data_master_read;
-  input            cpu_0_data_master_waitrequest;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 24: 0] cpu_0_instruction_master_address_to_slave;
+  input            cpu_0_instruction_master_latency_counter;
   input            cpu_0_instruction_master_read;
   input   [ 31: 0] cpu_0_jtag_debug_module_readdata;
   input            cpu_0_jtag_debug_module_resetrequest;
@@ -254,7 +256,10 @@ module cpu_0_jtag_debug_module_arbitrator (
   assign cpu_0_jtag_debug_module_any_continuerequest = cpu_0_instruction_master_continuerequest |
     cpu_0_data_master_continuerequest;
 
-  assign cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module = cpu_0_data_master_requests_cpu_0_jtag_debug_module & ~(((~cpu_0_data_master_waitrequest) & cpu_0_data_master_write) | cpu_0_instruction_master_arbiterlock);
+  assign cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module = cpu_0_data_master_requests_cpu_0_jtag_debug_module & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0))) | cpu_0_instruction_master_arbiterlock);
+  //local readdatavalid cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module = cpu_0_data_master_granted_cpu_0_jtag_debug_module & cpu_0_data_master_read & ~cpu_0_jtag_debug_module_waits_for_read;
+
   //cpu_0_jtag_debug_module_writedata mux, which is an e_mux
   assign cpu_0_jtag_debug_module_writedata = cpu_0_data_master_writedata;
 
@@ -272,7 +277,10 @@ module cpu_0_jtag_debug_module_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_mux
   assign cpu_0_data_master_continuerequest = last_cycle_cpu_0_data_master_granted_slave_cpu_0_jtag_debug_module & cpu_0_data_master_requests_cpu_0_jtag_debug_module;
 
-  assign cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module = cpu_0_instruction_master_requests_cpu_0_jtag_debug_module & ~(cpu_0_data_master_arbiterlock);
+  assign cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module = cpu_0_instruction_master_requests_cpu_0_jtag_debug_module & ~((cpu_0_instruction_master_read & ((cpu_0_instruction_master_latency_counter != 0))) | cpu_0_data_master_arbiterlock);
+  //local readdatavalid cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module, which is an e_mux
+  assign cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module = cpu_0_instruction_master_granted_cpu_0_jtag_debug_module & cpu_0_instruction_master_read & ~cpu_0_jtag_debug_module_waits_for_read;
+
   //allow new arb cycle for cpu_0/jtag_debug_module, which is an e_assign
   assign cpu_0_jtag_debug_module_allow_new_arb_cycle = ~cpu_0_data_master_arbiterlock & ~cpu_0_instruction_master_arbiterlock;
 
@@ -456,41 +464,41 @@ module cpu_0_custom_instruction_master_arbitrator (
                                                      clk,
                                                      cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa,
                                                      cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa,
-                                                     cpu_0_custom_instruction_master_start,
+                                                     cpu_0_custom_instruction_master_multi_start,
                                                      reset_n,
 
                                                     // outputs:
                                                      cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select,
-                                                     cpu_0_custom_instruction_master_done,
+                                                     cpu_0_custom_instruction_master_multi_done,
+                                                     cpu_0_custom_instruction_master_multi_result,
                                                      cpu_0_custom_instruction_master_reset_n,
-                                                     cpu_0_custom_instruction_master_result,
                                                      cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1
                                                   )
 ;
 
   output           cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select;
-  output           cpu_0_custom_instruction_master_done;
+  output           cpu_0_custom_instruction_master_multi_done;
+  output  [ 31: 0] cpu_0_custom_instruction_master_multi_result;
   output           cpu_0_custom_instruction_master_reset_n;
-  output  [ 31: 0] cpu_0_custom_instruction_master_result;
   output           cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
   input            clk;
   input            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa;
   input   [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
-  input            cpu_0_custom_instruction_master_start;
+  input            cpu_0_custom_instruction_master_multi_start;
   input            reset_n;
 
   wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select;
-  wire             cpu_0_custom_instruction_master_done;
+  wire             cpu_0_custom_instruction_master_multi_done;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_multi_result;
   wire             cpu_0_custom_instruction_master_reset_n;
-  wire    [ 31: 0] cpu_0_custom_instruction_master_result;
   wire             cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
   assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select = 1'b1;
-  assign cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select & cpu_0_custom_instruction_master_start;
-  //cpu_0_custom_instruction_master_result mux, which is an e_mux
-  assign cpu_0_custom_instruction_master_result = {32 {cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select}} & cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
+  assign cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select & cpu_0_custom_instruction_master_multi_start;
+  //cpu_0_custom_instruction_master_multi_result mux, which is an e_mux
+  assign cpu_0_custom_instruction_master_multi_result = {32 {cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select}} & cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
 
   //multi_done mux, which is an e_mux
-  assign cpu_0_custom_instruction_master_done = {1 {cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select}} & cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa;
+  assign cpu_0_custom_instruction_master_multi_done = {1 {cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select}} & cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa;
 
   //cpu_0_custom_instruction_master_reset_n local reset_n, which is an e_assign
   assign cpu_0_custom_instruction_master_reset_n = reset_n;
@@ -511,39 +519,39 @@ module cpu_0_data_master_arbitrator (
                                       // inputs:
                                        clk,
                                        cpu_0_data_master_address,
-                                       cpu_0_data_master_byteenable_sdram_0_s1,
+                                       cpu_0_data_master_byteenable,
+                                       cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in,
                                        cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_granted_cpu_0_jtag_debug_module,
                                        cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave,
+                                       cpu_0_data_master_granted_niosSystemCamControl_clock_1_in,
                                        cpu_0_data_master_granted_onchip_memory2_0_s1,
                                        cpu_0_data_master_granted_procHasControl_s1,
-                                       cpu_0_data_master_granted_sdram_0_s1,
                                        cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_granted_sysid_control_slave,
                                        cpu_0_data_master_granted_timer_0_s1,
                                        cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module,
                                        cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave,
+                                       cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in,
                                        cpu_0_data_master_qualified_request_onchip_memory2_0_s1,
                                        cpu_0_data_master_qualified_request_procHasControl_s1,
-                                       cpu_0_data_master_qualified_request_sdram_0_s1,
                                        cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_qualified_request_sysid_control_slave,
                                        cpu_0_data_master_qualified_request_timer_0_s1,
                                        cpu_0_data_master_read,
                                        cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module,
                                        cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave,
+                                       cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in,
                                        cpu_0_data_master_read_data_valid_onchip_memory2_0_s1,
                                        cpu_0_data_master_read_data_valid_procHasControl_s1,
-                                       cpu_0_data_master_read_data_valid_sdram_0_s1,
-                                       cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register,
                                        cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_read_data_valid_sysid_control_slave,
                                        cpu_0_data_master_read_data_valid_timer_0_s1,
                                        cpu_0_data_master_requests_cpu_0_jtag_debug_module,
                                        cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave,
+                                       cpu_0_data_master_requests_niosSystemCamControl_clock_1_in,
                                        cpu_0_data_master_requests_onchip_memory2_0_s1,
                                        cpu_0_data_master_requests_procHasControl_s1,
-                                       cpu_0_data_master_requests_sdram_0_s1,
                                        cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0,
                                        cpu_0_data_master_requests_sysid_control_slave,
                                        cpu_0_data_master_requests_timer_0_s1,
@@ -552,21 +560,20 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_jtag_debug_module_readdata_from_sa,
                                        d1_cpu_0_jtag_debug_module_end_xfer,
                                        d1_jtag_uart_0_avalon_jtag_slave_end_xfer,
+                                       d1_niosSystemCamControl_clock_1_in_end_xfer,
                                        d1_onchip_memory2_0_s1_end_xfer,
                                        d1_procHasControl_s1_end_xfer,
-                                       d1_sdram_0_s1_end_xfer,
                                        d1_sram_16bit_512k_0_avalon_slave_0_end_xfer,
                                        d1_sysid_control_slave_end_xfer,
                                        d1_timer_0_s1_end_xfer,
                                        jtag_uart_0_avalon_jtag_slave_irq_from_sa,
                                        jtag_uart_0_avalon_jtag_slave_readdata_from_sa,
                                        jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa,
+                                       niosSystemCamControl_clock_1_in_readdata_from_sa,
+                                       niosSystemCamControl_clock_1_in_waitrequest_from_sa,
                                        onchip_memory2_0_s1_readdata_from_sa,
                                        procHasControl_s1_readdata_from_sa,
-                                       registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1,
                                        reset_n,
-                                       sdram_0_s1_readdata_from_sa,
-                                       sdram_0_s1_waitrequest_from_sa,
                                        sram_16bit_512k_0_avalon_slave_0_readdata_from_sa,
                                        sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0,
                                        sysid_control_slave_readdata_from_sa,
@@ -578,8 +585,9 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_dbs_address,
                                        cpu_0_data_master_dbs_write_16,
                                        cpu_0_data_master_irq,
-                                       cpu_0_data_master_no_byte_enables_and_last_term,
+                                       cpu_0_data_master_latency_counter,
                                        cpu_0_data_master_readdata,
+                                       cpu_0_data_master_readdatavalid,
                                        cpu_0_data_master_waitrequest
                                     )
 ;
@@ -588,44 +596,45 @@ module cpu_0_data_master_arbitrator (
   output  [  1: 0] cpu_0_data_master_dbs_address;
   output  [ 15: 0] cpu_0_data_master_dbs_write_16;
   output  [ 31: 0] cpu_0_data_master_irq;
-  output           cpu_0_data_master_no_byte_enables_and_last_term;
+  output           cpu_0_data_master_latency_counter;
   output  [ 31: 0] cpu_0_data_master_readdata;
+  output           cpu_0_data_master_readdatavalid;
   output           cpu_0_data_master_waitrequest;
   input            clk;
   input   [ 24: 0] cpu_0_data_master_address;
-  input   [  1: 0] cpu_0_data_master_byteenable_sdram_0_s1;
+  input   [  3: 0] cpu_0_data_master_byteenable;
+  input   [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in;
   input   [  1: 0] cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_granted_cpu_0_jtag_debug_module;
   input            cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave;
+  input            cpu_0_data_master_granted_niosSystemCamControl_clock_1_in;
   input            cpu_0_data_master_granted_onchip_memory2_0_s1;
   input            cpu_0_data_master_granted_procHasControl_s1;
-  input            cpu_0_data_master_granted_sdram_0_s1;
   input            cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_granted_sysid_control_slave;
   input            cpu_0_data_master_granted_timer_0_s1;
   input            cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module;
   input            cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave;
+  input            cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in;
   input            cpu_0_data_master_qualified_request_onchip_memory2_0_s1;
   input            cpu_0_data_master_qualified_request_procHasControl_s1;
-  input            cpu_0_data_master_qualified_request_sdram_0_s1;
   input            cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_qualified_request_sysid_control_slave;
   input            cpu_0_data_master_qualified_request_timer_0_s1;
   input            cpu_0_data_master_read;
   input            cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module;
   input            cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in;
   input            cpu_0_data_master_read_data_valid_onchip_memory2_0_s1;
   input            cpu_0_data_master_read_data_valid_procHasControl_s1;
-  input            cpu_0_data_master_read_data_valid_sdram_0_s1;
-  input            cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register;
   input            cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_read_data_valid_sysid_control_slave;
   input            cpu_0_data_master_read_data_valid_timer_0_s1;
   input            cpu_0_data_master_requests_cpu_0_jtag_debug_module;
   input            cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave;
+  input            cpu_0_data_master_requests_niosSystemCamControl_clock_1_in;
   input            cpu_0_data_master_requests_onchip_memory2_0_s1;
   input            cpu_0_data_master_requests_procHasControl_s1;
-  input            cpu_0_data_master_requests_sdram_0_s1;
   input            cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_data_master_requests_sysid_control_slave;
   input            cpu_0_data_master_requests_timer_0_s1;
@@ -634,94 +643,147 @@ module cpu_0_data_master_arbitrator (
   input   [ 31: 0] cpu_0_jtag_debug_module_readdata_from_sa;
   input            d1_cpu_0_jtag_debug_module_end_xfer;
   input            d1_jtag_uart_0_avalon_jtag_slave_end_xfer;
+  input            d1_niosSystemCamControl_clock_1_in_end_xfer;
   input            d1_onchip_memory2_0_s1_end_xfer;
   input            d1_procHasControl_s1_end_xfer;
-  input            d1_sdram_0_s1_end_xfer;
   input            d1_sram_16bit_512k_0_avalon_slave_0_end_xfer;
   input            d1_sysid_control_slave_end_xfer;
   input            d1_timer_0_s1_end_xfer;
   input            jtag_uart_0_avalon_jtag_slave_irq_from_sa;
   input   [ 31: 0] jtag_uart_0_avalon_jtag_slave_readdata_from_sa;
   input            jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa;
+  input   [ 15: 0] niosSystemCamControl_clock_1_in_readdata_from_sa;
+  input            niosSystemCamControl_clock_1_in_waitrequest_from_sa;
   input   [ 31: 0] onchip_memory2_0_s1_readdata_from_sa;
   input   [ 31: 0] procHasControl_s1_readdata_from_sa;
-  input            registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1;
   input            reset_n;
-  input   [ 15: 0] sdram_0_s1_readdata_from_sa;
-  input            sdram_0_s1_waitrequest_from_sa;
   input   [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
   input            sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0;
   input   [ 31: 0] sysid_control_slave_readdata_from_sa;
   input            timer_0_s1_irq_from_sa;
   input   [ 15: 0] timer_0_s1_readdata_from_sa;
 
+  reg              active_and_waiting_last_time;
+  reg     [ 24: 0] cpu_0_data_master_address_last_time;
   wire    [ 24: 0] cpu_0_data_master_address_to_slave;
+  reg     [  3: 0] cpu_0_data_master_byteenable_last_time;
   reg     [  1: 0] cpu_0_data_master_dbs_address;
   wire    [  1: 0] cpu_0_data_master_dbs_increment;
   wire    [ 15: 0] cpu_0_data_master_dbs_write_16;
   wire    [ 31: 0] cpu_0_data_master_irq;
-  reg              cpu_0_data_master_no_byte_enables_and_last_term;
+  wire             cpu_0_data_master_is_granted_some_slave;
+  reg              cpu_0_data_master_latency_counter;
+  reg              cpu_0_data_master_read_but_no_slave_selected;
+  reg              cpu_0_data_master_read_last_time;
   wire    [ 31: 0] cpu_0_data_master_readdata;
+  wire             cpu_0_data_master_readdatavalid;
   wire             cpu_0_data_master_run;
-  reg              cpu_0_data_master_waitrequest;
+  wire             cpu_0_data_master_waitrequest;
+  reg              cpu_0_data_master_write_last_time;
+  reg     [ 31: 0] cpu_0_data_master_writedata_last_time;
   reg     [ 15: 0] dbs_16_reg_segment_0;
   wire             dbs_count_enable;
   wire             dbs_counter_overflow;
-  wire             last_dbs_term_and_run;
+  wire             latency_load_value;
   wire    [  1: 0] next_dbs_address;
+  wire             p1_cpu_0_data_master_latency_counter;
   wire    [ 15: 0] p1_dbs_16_reg_segment_0;
-  wire    [ 31: 0] p1_registered_cpu_0_data_master_readdata;
   wire             pre_dbs_count_enable;
+  wire             pre_flush_cpu_0_data_master_readdatavalid;
   wire             r_0;
   wire             r_1;
-  reg     [ 31: 0] registered_cpu_0_data_master_readdata;
   //r_0 master_run cascaded wait assignment, which is an e_assign
-  assign r_0 = 1 & (cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_data_master_requests_cpu_0_jtag_debug_module) & (cpu_0_data_master_granted_cpu_0_jtag_debug_module | ~cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module) & ((~cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_data_master_read | (1 & 1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave | ~cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave) & ((~cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & ((~cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & 1 & (cpu_0_data_master_qualified_request_onchip_memory2_0_s1 | registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1 | ~cpu_0_data_master_requests_onchip_memory2_0_s1) & (cpu_0_data_master_granted_onchip_memory2_0_s1 | ~cpu_0_data_master_qualified_request_onchip_memory2_0_s1) & ((~cpu_0_data_master_qualified_request_onchip_memory2_0_s1 | ~cpu_0_data_master_read | (registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_onchip_memory2_0_s1 | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & (cpu_0_data_master_read | cpu_0_data_master_write)))) & 1 & (cpu_0_data_master_qualified_request_procHasControl_s1 | ~cpu_0_data_master_requests_procHasControl_s1) & ((~cpu_0_data_master_qualified_request_procHasControl_s1 | ~cpu_0_data_master_read | (1 & 1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_procHasControl_s1 | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_sdram_0_s1 | (cpu_0_data_master_read_data_valid_sdram_0_s1 & cpu_0_data_master_dbs_address[1]) | (cpu_0_data_master_write & !cpu_0_data_master_byteenable_sdram_0_s1 & cpu_0_data_master_dbs_address[1]) | ~cpu_0_data_master_requests_sdram_0_s1);
+  assign r_0 = 1 & (cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_data_master_requests_cpu_0_jtag_debug_module) & (cpu_0_data_master_granted_cpu_0_jtag_debug_module | ~cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module) & ((~cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_data_master_read | (1 & ~d1_cpu_0_jtag_debug_module_end_xfer & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave | ~cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave) & ((~cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & ((~cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & 1 & (cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in | (cpu_0_data_master_write & !cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in & cpu_0_data_master_dbs_address[1]) | ~cpu_0_data_master_requests_niosSystemCamControl_clock_1_in) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in | ~cpu_0_data_master_read | (1 & ~niosSystemCamControl_clock_1_in_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in | ~cpu_0_data_master_write | (1 & ~niosSystemCamControl_clock_1_in_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_onchip_memory2_0_s1 | ~cpu_0_data_master_requests_onchip_memory2_0_s1) & (cpu_0_data_master_granted_onchip_memory2_0_s1 | ~cpu_0_data_master_qualified_request_onchip_memory2_0_s1) & ((~cpu_0_data_master_qualified_request_onchip_memory2_0_s1 | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & (cpu_0_data_master_read | cpu_0_data_master_write)))) & ((~cpu_0_data_master_qualified_request_onchip_memory2_0_s1 | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & (cpu_0_data_master_read | cpu_0_data_master_write)))) & 1 & (cpu_0_data_master_qualified_request_procHasControl_s1 | ~cpu_0_data_master_requests_procHasControl_s1);
 
   //cascaded wait assignment, which is an e_assign
   assign cpu_0_data_master_run = r_0 & r_1;
 
   //r_1 master_run cascaded wait assignment, which is an e_assign
-  assign r_1 = (cpu_0_data_master_granted_sdram_0_s1 | ~cpu_0_data_master_qualified_request_sdram_0_s1) & ((~cpu_0_data_master_qualified_request_sdram_0_s1 | ~cpu_0_data_master_read | (cpu_0_data_master_read_data_valid_sdram_0_s1 & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sdram_0_s1 | ~cpu_0_data_master_write | (1 & ~sdram_0_s1_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | (cpu_0_data_master_write & !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_dbs_address[1]) | ~cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0) & (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0) & ((~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_read | (1 & 1 & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_write | (1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & ((~cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_read | (1 & 1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_requests_timer_0_s1) & ((~cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_read | (1 & 1 & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write)));
+  assign r_1 = ((~cpu_0_data_master_qualified_request_procHasControl_s1 | ~cpu_0_data_master_read | (1 & ~d1_procHasControl_s1_end_xfer & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_procHasControl_s1 | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | (cpu_0_data_master_write & !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_dbs_address[1]) | ~cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0) & (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0) & ((~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_read | (1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_data_master_write | (1 & ((sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer)) & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_requests_sysid_control_slave) & ((~cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_read | (1 & ~d1_sysid_control_slave_end_xfer & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_sysid_control_slave | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_requests_timer_0_s1) & ((~cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_read | (1 & ~d1_timer_0_s1_end_xfer & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_timer_0_s1 | ~cpu_0_data_master_write | (1 & cpu_0_data_master_write)));
 
   //optimize select-logic by passing only those address bits which matter.
   assign cpu_0_data_master_address_to_slave = cpu_0_data_master_address[24 : 0];
 
+  //cpu_0_data_master_read_but_no_slave_selected assignment, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          cpu_0_data_master_read_but_no_slave_selected <= 0;
+      else 
+        cpu_0_data_master_read_but_no_slave_selected <= cpu_0_data_master_read & cpu_0_data_master_run & ~cpu_0_data_master_is_granted_some_slave;
+    end
+
+
+  //some slave is getting selected, which is an e_mux
+  assign cpu_0_data_master_is_granted_some_slave = cpu_0_data_master_granted_cpu_0_jtag_debug_module |
+    cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave |
+    cpu_0_data_master_granted_niosSystemCamControl_clock_1_in |
+    cpu_0_data_master_granted_onchip_memory2_0_s1 |
+    cpu_0_data_master_granted_procHasControl_s1 |
+    cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 |
+    cpu_0_data_master_granted_sysid_control_slave |
+    cpu_0_data_master_granted_timer_0_s1;
+
+  //latent slave read data valids which may be flushed, which is an e_mux
+  assign pre_flush_cpu_0_data_master_readdatavalid = cpu_0_data_master_read_data_valid_onchip_memory2_0_s1;
+
+  //latent slave read data valid which is not flushed, which is an e_mux
+  assign cpu_0_data_master_readdatavalid = cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module |
+    cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave |
+    cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    (cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in & dbs_counter_overflow) |
+    cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    cpu_0_data_master_read_data_valid_procHasControl_s1 |
+    cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    (cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0 & dbs_counter_overflow) |
+    cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    cpu_0_data_master_read_data_valid_sysid_control_slave |
+    cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    cpu_0_data_master_read_data_valid_timer_0_s1;
+
   //cpu_0/data_master readdata mux, which is an e_mux
-  assign cpu_0_data_master_readdata = ({32 {~cpu_0_data_master_requests_cpu_0_jtag_debug_module}} | cpu_0_jtag_debug_module_readdata_from_sa) &
-    ({32 {~cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave}} | registered_cpu_0_data_master_readdata) &
-    ({32 {~cpu_0_data_master_requests_onchip_memory2_0_s1}} | onchip_memory2_0_s1_readdata_from_sa) &
-    ({32 {~cpu_0_data_master_requests_procHasControl_s1}} | procHasControl_s1_readdata_from_sa) &
-    ({32 {~cpu_0_data_master_requests_sdram_0_s1}} | registered_cpu_0_data_master_readdata) &
-    ({32 {~cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0}} | {sram_16bit_512k_0_avalon_slave_0_readdata_from_sa[15 : 0],
+  assign cpu_0_data_master_readdata = ({32 {~(cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module & cpu_0_data_master_read)}} | cpu_0_jtag_debug_module_readdata_from_sa) &
+    ({32 {~(cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave & cpu_0_data_master_read)}} | jtag_uart_0_avalon_jtag_slave_readdata_from_sa) &
+    ({32 {~(cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in & cpu_0_data_master_read)}} | {niosSystemCamControl_clock_1_in_readdata_from_sa[15 : 0],
     dbs_16_reg_segment_0}) &
-    ({32 {~cpu_0_data_master_requests_sysid_control_slave}} | sysid_control_slave_readdata_from_sa) &
-    ({32 {~cpu_0_data_master_requests_timer_0_s1}} | timer_0_s1_readdata_from_sa);
+    ({32 {~cpu_0_data_master_read_data_valid_onchip_memory2_0_s1}} | onchip_memory2_0_s1_readdata_from_sa) &
+    ({32 {~(cpu_0_data_master_qualified_request_procHasControl_s1 & cpu_0_data_master_read)}} | procHasControl_s1_readdata_from_sa) &
+    ({32 {~(cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_read)}} | {sram_16bit_512k_0_avalon_slave_0_readdata_from_sa[15 : 0],
+    dbs_16_reg_segment_0}) &
+    ({32 {~(cpu_0_data_master_qualified_request_sysid_control_slave & cpu_0_data_master_read)}} | sysid_control_slave_readdata_from_sa) &
+    ({32 {~(cpu_0_data_master_qualified_request_timer_0_s1 & cpu_0_data_master_read)}} | timer_0_s1_readdata_from_sa);
 
-  //actual waitrequest port, which is an e_register
+  //actual waitrequest port, which is an e_assign
+  assign cpu_0_data_master_waitrequest = ~cpu_0_data_master_run;
+
+  //latent max counter, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          cpu_0_data_master_waitrequest <= ~0;
+          cpu_0_data_master_latency_counter <= 0;
       else 
-        cpu_0_data_master_waitrequest <= ~((~(cpu_0_data_master_read | cpu_0_data_master_write))? 0: (cpu_0_data_master_run & cpu_0_data_master_waitrequest));
+        cpu_0_data_master_latency_counter <= p1_cpu_0_data_master_latency_counter;
     end
 
 
-  //unpredictable registered wait state incoming data, which is an e_register
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          registered_cpu_0_data_master_readdata <= 0;
-      else 
-        registered_cpu_0_data_master_readdata <= p1_registered_cpu_0_data_master_readdata;
-    end
+  //latency counter load mux, which is an e_mux
+  assign p1_cpu_0_data_master_latency_counter = ((cpu_0_data_master_run & cpu_0_data_master_read))? latency_load_value :
+    (cpu_0_data_master_latency_counter)? cpu_0_data_master_latency_counter - 1 :
+    0;
 
-
-  //registered readdata mux, which is an e_mux
-  assign p1_registered_cpu_0_data_master_readdata = ({32 {~cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave}} | jtag_uart_0_avalon_jtag_slave_readdata_from_sa) &
-    ({32 {~cpu_0_data_master_requests_sdram_0_s1}} | {sdram_0_s1_readdata_from_sa[15 : 0],
-    dbs_16_reg_segment_0});
+  //read latency load values, which is an e_mux
+  assign latency_load_value = {1 {cpu_0_data_master_requests_onchip_memory2_0_s1}} & 1;
 
   //irq assign, which is an e_assign
   assign cpu_0_data_master_irq = {1'b0,
@@ -757,30 +819,16 @@ module cpu_0_data_master_arbitrator (
     timer_0_s1_irq_from_sa,
     jtag_uart_0_avalon_jtag_slave_irq_from_sa};
 
-  //no_byte_enables_and_last_term, which is an e_register
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          cpu_0_data_master_no_byte_enables_and_last_term <= 0;
-      else 
-        cpu_0_data_master_no_byte_enables_and_last_term <= last_dbs_term_and_run;
-    end
-
-
-  //compute the last dbs term, which is an e_mux
-  assign last_dbs_term_and_run = (cpu_0_data_master_requests_sdram_0_s1)? (((cpu_0_data_master_dbs_address == 2'b10) & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sdram_0_s1)) :
-    (((cpu_0_data_master_dbs_address == 2'b10) & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0));
-
   //pre dbs count enable, which is an e_mux
-  assign pre_dbs_count_enable = (((~cpu_0_data_master_no_byte_enables_and_last_term) & cpu_0_data_master_requests_sdram_0_s1 & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sdram_0_s1)) |
-    cpu_0_data_master_read_data_valid_sdram_0_s1 |
-    (cpu_0_data_master_granted_sdram_0_s1 & cpu_0_data_master_write & 1 & 1 & ~sdram_0_s1_waitrequest_from_sa) |
-    (((~cpu_0_data_master_no_byte_enables_and_last_term) & cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0)) |
+  assign pre_dbs_count_enable = (((~0) & cpu_0_data_master_requests_niosSystemCamControl_clock_1_in & cpu_0_data_master_write & !cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in)) |
+    (cpu_0_data_master_granted_niosSystemCamControl_clock_1_in & cpu_0_data_master_read & 1 & 1 & ~niosSystemCamControl_clock_1_in_waitrequest_from_sa) |
+    (cpu_0_data_master_granted_niosSystemCamControl_clock_1_in & cpu_0_data_master_write & 1 & 1 & ~niosSystemCamControl_clock_1_in_waitrequest_from_sa) |
+    (((~0) & cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_write & !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0)) |
     (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_read & 1 & 1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer) |
     ((cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_write & 1 & 1 & ({sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer})));
 
   //input to dbs-16 stored 0, which is an e_mux
-  assign p1_dbs_16_reg_segment_0 = (cpu_0_data_master_requests_sdram_0_s1)? sdram_0_s1_readdata_from_sa :
+  assign p1_dbs_16_reg_segment_0 = ((cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in & cpu_0_data_master_read))? niosSystemCamControl_clock_1_in_readdata_from_sa :
     sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
 
   //dbs register for dbs-16 segment 0, which is an e_register
@@ -800,7 +848,7 @@ module cpu_0_data_master_arbitrator (
     cpu_0_data_master_writedata[15 : 0];
 
   //dbs count increment, which is an e_mux
-  assign cpu_0_data_master_dbs_increment = (cpu_0_data_master_requests_sdram_0_s1)? 2 :
+  assign cpu_0_data_master_dbs_increment = (cpu_0_data_master_requests_niosSystemCamControl_clock_1_in)? 2 :
     (cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0)? 2 :
     0;
 
@@ -811,8 +859,7 @@ module cpu_0_data_master_arbitrator (
   assign next_dbs_address = cpu_0_data_master_dbs_address + cpu_0_data_master_dbs_increment;
 
   //dbs count enable, which is an e_mux
-  assign dbs_count_enable = pre_dbs_count_enable &
-    (~(cpu_0_data_master_requests_sdram_0_s1 & ~cpu_0_data_master_waitrequest));
+  assign dbs_count_enable = pre_dbs_count_enable;
 
   //dbs counter, which is an e_register
   always @(posedge clk or negedge reset_n)
@@ -824,6 +871,128 @@ module cpu_0_data_master_arbitrator (
     end
 
 
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //cpu_0_data_master_address check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          cpu_0_data_master_address_last_time <= 0;
+      else 
+        cpu_0_data_master_address_last_time <= cpu_0_data_master_address;
+    end
+
+
+  //cpu_0/data_master waited last time, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          active_and_waiting_last_time <= 0;
+      else 
+        active_and_waiting_last_time <= cpu_0_data_master_waitrequest & (cpu_0_data_master_read | cpu_0_data_master_write);
+    end
+
+
+  //cpu_0_data_master_address matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (cpu_0_data_master_address != cpu_0_data_master_address_last_time))
+        begin
+          $write("%0d ns: cpu_0_data_master_address did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //cpu_0_data_master_byteenable check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          cpu_0_data_master_byteenable_last_time <= 0;
+      else 
+        cpu_0_data_master_byteenable_last_time <= cpu_0_data_master_byteenable;
+    end
+
+
+  //cpu_0_data_master_byteenable matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (cpu_0_data_master_byteenable != cpu_0_data_master_byteenable_last_time))
+        begin
+          $write("%0d ns: cpu_0_data_master_byteenable did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //cpu_0_data_master_read check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          cpu_0_data_master_read_last_time <= 0;
+      else 
+        cpu_0_data_master_read_last_time <= cpu_0_data_master_read;
+    end
+
+
+  //cpu_0_data_master_read matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (cpu_0_data_master_read != cpu_0_data_master_read_last_time))
+        begin
+          $write("%0d ns: cpu_0_data_master_read did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //cpu_0_data_master_write check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          cpu_0_data_master_write_last_time <= 0;
+      else 
+        cpu_0_data_master_write_last_time <= cpu_0_data_master_write;
+    end
+
+
+  //cpu_0_data_master_write matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (cpu_0_data_master_write != cpu_0_data_master_write_last_time))
+        begin
+          $write("%0d ns: cpu_0_data_master_write did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //cpu_0_data_master_writedata check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          cpu_0_data_master_writedata_last_time <= 0;
+      else 
+        cpu_0_data_master_writedata_last_time <= cpu_0_data_master_writedata;
+    end
+
+
+  //cpu_0_data_master_writedata matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (cpu_0_data_master_writedata != cpu_0_data_master_writedata_last_time) & cpu_0_data_master_write)
+        begin
+          $write("%0d ns: cpu_0_data_master_writedata did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
 
 endmodule
 
@@ -841,76 +1010,78 @@ module cpu_0_instruction_master_arbitrator (
                                               clk,
                                               cpu_0_instruction_master_address,
                                               cpu_0_instruction_master_granted_cpu_0_jtag_debug_module,
+                                              cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in,
                                               cpu_0_instruction_master_granted_onchip_memory2_0_s1,
-                                              cpu_0_instruction_master_granted_sdram_0_s1,
                                               cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0,
                                               cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module,
+                                              cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in,
                                               cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1,
-                                              cpu_0_instruction_master_qualified_request_sdram_0_s1,
                                               cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0,
                                               cpu_0_instruction_master_read,
                                               cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module,
+                                              cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in,
                                               cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1,
-                                              cpu_0_instruction_master_read_data_valid_sdram_0_s1,
-                                              cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register,
                                               cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0,
                                               cpu_0_instruction_master_requests_cpu_0_jtag_debug_module,
+                                              cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in,
                                               cpu_0_instruction_master_requests_onchip_memory2_0_s1,
-                                              cpu_0_instruction_master_requests_sdram_0_s1,
                                               cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0,
                                               cpu_0_jtag_debug_module_readdata_from_sa,
                                               d1_cpu_0_jtag_debug_module_end_xfer,
+                                              d1_niosSystemCamControl_clock_0_in_end_xfer,
                                               d1_onchip_memory2_0_s1_end_xfer,
-                                              d1_sdram_0_s1_end_xfer,
                                               d1_sram_16bit_512k_0_avalon_slave_0_end_xfer,
+                                              niosSystemCamControl_clock_0_in_readdata_from_sa,
+                                              niosSystemCamControl_clock_0_in_waitrequest_from_sa,
                                               onchip_memory2_0_s1_readdata_from_sa,
                                               reset_n,
-                                              sdram_0_s1_readdata_from_sa,
-                                              sdram_0_s1_waitrequest_from_sa,
                                               sram_16bit_512k_0_avalon_slave_0_readdata_from_sa,
                                               sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0,
 
                                              // outputs:
                                               cpu_0_instruction_master_address_to_slave,
                                               cpu_0_instruction_master_dbs_address,
+                                              cpu_0_instruction_master_latency_counter,
                                               cpu_0_instruction_master_readdata,
+                                              cpu_0_instruction_master_readdatavalid,
                                               cpu_0_instruction_master_waitrequest
                                            )
 ;
 
   output  [ 24: 0] cpu_0_instruction_master_address_to_slave;
   output  [  1: 0] cpu_0_instruction_master_dbs_address;
+  output           cpu_0_instruction_master_latency_counter;
   output  [ 31: 0] cpu_0_instruction_master_readdata;
+  output           cpu_0_instruction_master_readdatavalid;
   output           cpu_0_instruction_master_waitrequest;
   input            clk;
   input   [ 24: 0] cpu_0_instruction_master_address;
   input            cpu_0_instruction_master_granted_cpu_0_jtag_debug_module;
+  input            cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in;
   input            cpu_0_instruction_master_granted_onchip_memory2_0_s1;
-  input            cpu_0_instruction_master_granted_sdram_0_s1;
   input            cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module;
+  input            cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in;
   input            cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1;
-  input            cpu_0_instruction_master_qualified_request_sdram_0_s1;
   input            cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_instruction_master_read;
   input            cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module;
+  input            cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in;
   input            cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1;
-  input            cpu_0_instruction_master_read_data_valid_sdram_0_s1;
-  input            cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register;
   input            cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
   input            cpu_0_instruction_master_requests_cpu_0_jtag_debug_module;
+  input            cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in;
   input            cpu_0_instruction_master_requests_onchip_memory2_0_s1;
-  input            cpu_0_instruction_master_requests_sdram_0_s1;
   input            cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
   input   [ 31: 0] cpu_0_jtag_debug_module_readdata_from_sa;
   input            d1_cpu_0_jtag_debug_module_end_xfer;
+  input            d1_niosSystemCamControl_clock_0_in_end_xfer;
   input            d1_onchip_memory2_0_s1_end_xfer;
-  input            d1_sdram_0_s1_end_xfer;
   input            d1_sram_16bit_512k_0_avalon_slave_0_end_xfer;
+  input   [ 15: 0] niosSystemCamControl_clock_0_in_readdata_from_sa;
+  input            niosSystemCamControl_clock_0_in_waitrequest_from_sa;
   input   [ 31: 0] onchip_memory2_0_s1_readdata_from_sa;
   input            reset_n;
-  input   [ 15: 0] sdram_0_s1_readdata_from_sa;
-  input            sdram_0_s1_waitrequest_from_sa;
   input   [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
   input            sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0;
 
@@ -919,43 +1090,100 @@ module cpu_0_instruction_master_arbitrator (
   wire    [ 24: 0] cpu_0_instruction_master_address_to_slave;
   reg     [  1: 0] cpu_0_instruction_master_dbs_address;
   wire    [  1: 0] cpu_0_instruction_master_dbs_increment;
+  wire             cpu_0_instruction_master_is_granted_some_slave;
+  reg              cpu_0_instruction_master_latency_counter;
+  reg              cpu_0_instruction_master_read_but_no_slave_selected;
   reg              cpu_0_instruction_master_read_last_time;
   wire    [ 31: 0] cpu_0_instruction_master_readdata;
+  wire             cpu_0_instruction_master_readdatavalid;
   wire             cpu_0_instruction_master_run;
   wire             cpu_0_instruction_master_waitrequest;
   reg     [ 15: 0] dbs_16_reg_segment_0;
   wire             dbs_count_enable;
   wire             dbs_counter_overflow;
+  wire             latency_load_value;
   wire    [  1: 0] next_dbs_address;
+  wire             p1_cpu_0_instruction_master_latency_counter;
   wire    [ 15: 0] p1_dbs_16_reg_segment_0;
   wire             pre_dbs_count_enable;
+  wire             pre_flush_cpu_0_instruction_master_readdatavalid;
   wire             r_0;
   wire             r_1;
   //r_0 master_run cascaded wait assignment, which is an e_assign
-  assign r_0 = 1 & (cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_instruction_master_requests_cpu_0_jtag_debug_module) & (cpu_0_instruction_master_granted_cpu_0_jtag_debug_module | ~cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module) & ((~cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_instruction_master_read | (1 & ~d1_cpu_0_jtag_debug_module_end_xfer & cpu_0_instruction_master_read))) & 1 & (cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1 | cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1 | ~cpu_0_instruction_master_requests_onchip_memory2_0_s1) & (cpu_0_instruction_master_granted_onchip_memory2_0_s1 | ~cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1) & ((~cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1 | ~cpu_0_instruction_master_read | (cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1 & cpu_0_instruction_master_read)));
+  assign r_0 = 1 & (cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_instruction_master_requests_cpu_0_jtag_debug_module) & (cpu_0_instruction_master_granted_cpu_0_jtag_debug_module | ~cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module) & ((~cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module | ~cpu_0_instruction_master_read | (1 & ~d1_cpu_0_jtag_debug_module_end_xfer & cpu_0_instruction_master_read))) & 1 & (cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in | ~cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in) & ((~cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in | ~cpu_0_instruction_master_read | (1 & ~niosSystemCamControl_clock_0_in_waitrequest_from_sa & (cpu_0_instruction_master_dbs_address[1]) & cpu_0_instruction_master_read))) & 1 & (cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1 | ~cpu_0_instruction_master_requests_onchip_memory2_0_s1) & (cpu_0_instruction_master_granted_onchip_memory2_0_s1 | ~cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1) & ((~cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1 | ~(cpu_0_instruction_master_read) | (1 & (cpu_0_instruction_master_read))));
 
   //cascaded wait assignment, which is an e_assign
   assign cpu_0_instruction_master_run = r_0 & r_1;
 
   //r_1 master_run cascaded wait assignment, which is an e_assign
-  assign r_1 = 1 & (cpu_0_instruction_master_qualified_request_sdram_0_s1 | (cpu_0_instruction_master_read_data_valid_sdram_0_s1 & cpu_0_instruction_master_dbs_address[1]) | ~cpu_0_instruction_master_requests_sdram_0_s1) & (cpu_0_instruction_master_granted_sdram_0_s1 | ~cpu_0_instruction_master_qualified_request_sdram_0_s1) & ((~cpu_0_instruction_master_qualified_request_sdram_0_s1 | ~cpu_0_instruction_master_read | (cpu_0_instruction_master_read_data_valid_sdram_0_s1 & (cpu_0_instruction_master_dbs_address[1]) & cpu_0_instruction_master_read))) & 1 & (cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0) & (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0) & ((~cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_read | (1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer & (cpu_0_instruction_master_dbs_address[1]) & cpu_0_instruction_master_read)));
+  assign r_1 = 1 & (cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0) & (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0) & ((~cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 | ~cpu_0_instruction_master_read | (1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer & (cpu_0_instruction_master_dbs_address[1]) & cpu_0_instruction_master_read)));
 
   //optimize select-logic by passing only those address bits which matter.
   assign cpu_0_instruction_master_address_to_slave = cpu_0_instruction_master_address[24 : 0];
 
+  //cpu_0_instruction_master_read_but_no_slave_selected assignment, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          cpu_0_instruction_master_read_but_no_slave_selected <= 0;
+      else 
+        cpu_0_instruction_master_read_but_no_slave_selected <= cpu_0_instruction_master_read & cpu_0_instruction_master_run & ~cpu_0_instruction_master_is_granted_some_slave;
+    end
+
+
+  //some slave is getting selected, which is an e_mux
+  assign cpu_0_instruction_master_is_granted_some_slave = cpu_0_instruction_master_granted_cpu_0_jtag_debug_module |
+    cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in |
+    cpu_0_instruction_master_granted_onchip_memory2_0_s1 |
+    cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0;
+
+  //latent slave read data valids which may be flushed, which is an e_mux
+  assign pre_flush_cpu_0_instruction_master_readdatavalid = cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1;
+
+  //latent slave read data valid which is not flushed, which is an e_mux
+  assign cpu_0_instruction_master_readdatavalid = cpu_0_instruction_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_instruction_master_readdatavalid |
+    cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module |
+    cpu_0_instruction_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_instruction_master_readdatavalid |
+    (cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in & dbs_counter_overflow) |
+    cpu_0_instruction_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_instruction_master_readdatavalid |
+    cpu_0_instruction_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_instruction_master_readdatavalid |
+    (cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0 & dbs_counter_overflow);
+
   //cpu_0/instruction_master readdata mux, which is an e_mux
-  assign cpu_0_instruction_master_readdata = ({32 {~cpu_0_instruction_master_requests_cpu_0_jtag_debug_module}} | cpu_0_jtag_debug_module_readdata_from_sa) &
-    ({32 {~cpu_0_instruction_master_requests_onchip_memory2_0_s1}} | onchip_memory2_0_s1_readdata_from_sa) &
-    ({32 {~cpu_0_instruction_master_requests_sdram_0_s1}} | {sdram_0_s1_readdata_from_sa[15 : 0],
+  assign cpu_0_instruction_master_readdata = ({32 {~(cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module & cpu_0_instruction_master_read)}} | cpu_0_jtag_debug_module_readdata_from_sa) &
+    ({32 {~(cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in & cpu_0_instruction_master_read)}} | {niosSystemCamControl_clock_0_in_readdata_from_sa[15 : 0],
     dbs_16_reg_segment_0}) &
-    ({32 {~cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0}} | {sram_16bit_512k_0_avalon_slave_0_readdata_from_sa[15 : 0],
+    ({32 {~cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1}} | onchip_memory2_0_s1_readdata_from_sa) &
+    ({32 {~(cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_read)}} | {sram_16bit_512k_0_avalon_slave_0_readdata_from_sa[15 : 0],
     dbs_16_reg_segment_0});
 
   //actual waitrequest port, which is an e_assign
   assign cpu_0_instruction_master_waitrequest = ~cpu_0_instruction_master_run;
 
+  //latent max counter, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          cpu_0_instruction_master_latency_counter <= 0;
+      else 
+        cpu_0_instruction_master_latency_counter <= p1_cpu_0_instruction_master_latency_counter;
+    end
+
+
+  //latency counter load mux, which is an e_mux
+  assign p1_cpu_0_instruction_master_latency_counter = ((cpu_0_instruction_master_run & cpu_0_instruction_master_read))? latency_load_value :
+    (cpu_0_instruction_master_latency_counter)? cpu_0_instruction_master_latency_counter - 1 :
+    0;
+
+  //read latency load values, which is an e_mux
+  assign latency_load_value = {1 {cpu_0_instruction_master_requests_onchip_memory2_0_s1}} & 1;
+
   //input to dbs-16 stored 0, which is an e_mux
-  assign p1_dbs_16_reg_segment_0 = (cpu_0_instruction_master_requests_sdram_0_s1)? sdram_0_s1_readdata_from_sa :
+  assign p1_dbs_16_reg_segment_0 = ((cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in & cpu_0_instruction_master_read))? niosSystemCamControl_clock_0_in_readdata_from_sa :
     sram_16bit_512k_0_avalon_slave_0_readdata_from_sa;
 
   //dbs register for dbs-16 segment 0, which is an e_register
@@ -969,7 +1197,7 @@ module cpu_0_instruction_master_arbitrator (
 
 
   //dbs count increment, which is an e_mux
-  assign cpu_0_instruction_master_dbs_increment = (cpu_0_instruction_master_requests_sdram_0_s1)? 2 :
+  assign cpu_0_instruction_master_dbs_increment = (cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in)? 2 :
     (cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0)? 2 :
     0;
 
@@ -993,7 +1221,7 @@ module cpu_0_instruction_master_arbitrator (
 
 
   //pre dbs count enable, which is an e_mux
-  assign pre_dbs_count_enable = cpu_0_instruction_master_read_data_valid_sdram_0_s1 |
+  assign pre_dbs_count_enable = (cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in & cpu_0_instruction_master_read & 1 & 1 & ~niosSystemCamControl_clock_0_in_waitrequest_from_sa) |
     (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_read & 1 & 1 & ~d1_sram_16bit_512k_0_avalon_slave_0_end_xfer);
 
 
@@ -1073,10 +1301,10 @@ module cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator (
                                                                            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done,
                                                                            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result,
                                                                            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select,
-                                                                           cpu_0_custom_instruction_master_clk_en,
-                                                                           cpu_0_custom_instruction_master_dataa,
-                                                                           cpu_0_custom_instruction_master_datab,
-                                                                           cpu_0_custom_instruction_master_n,
+                                                                           cpu_0_custom_instruction_master_multi_clk_en,
+                                                                           cpu_0_custom_instruction_master_multi_dataa,
+                                                                           cpu_0_custom_instruction_master_multi_datab,
+                                                                           cpu_0_custom_instruction_master_multi_n,
                                                                            cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1,
                                                                            reset_n,
 
@@ -1104,10 +1332,10 @@ module cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator (
   input            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done;
   input   [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result;
   input            cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select;
-  input            cpu_0_custom_instruction_master_clk_en;
-  input   [ 31: 0] cpu_0_custom_instruction_master_dataa;
-  input   [ 31: 0] cpu_0_custom_instruction_master_datab;
-  input   [  7: 0] cpu_0_custom_instruction_master_n;
+  input            cpu_0_custom_instruction_master_multi_clk_en;
+  input   [ 31: 0] cpu_0_custom_instruction_master_multi_dataa;
+  input   [ 31: 0] cpu_0_custom_instruction_master_multi_datab;
+  input   [  7: 0] cpu_0_custom_instruction_master_multi_n;
   input            cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
   input            reset_n;
 
@@ -1119,10 +1347,10 @@ module cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator (
   wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_reset;
   wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
   wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start;
-  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en = cpu_0_custom_instruction_master_clk_en;
-  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa = cpu_0_custom_instruction_master_dataa;
-  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab = cpu_0_custom_instruction_master_datab;
-  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n = cpu_0_custom_instruction_master_n;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en = cpu_0_custom_instruction_master_multi_clk_en;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa = cpu_0_custom_instruction_master_multi_dataa;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab = cpu_0_custom_instruction_master_multi_datab;
+  assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_n = cpu_0_custom_instruction_master_multi_n;
   assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start = cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
   //assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa = cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result;
@@ -1149,8 +1377,8 @@ module jtag_uart_0_avalon_jtag_slave_arbitrator (
                                                   // inputs:
                                                    clk,
                                                    cpu_0_data_master_address_to_slave,
+                                                   cpu_0_data_master_latency_counter,
                                                    cpu_0_data_master_read,
-                                                   cpu_0_data_master_waitrequest,
                                                    cpu_0_data_master_write,
                                                    cpu_0_data_master_writedata,
                                                    jtag_uart_0_avalon_jtag_slave_dataavailable,
@@ -1198,8 +1426,8 @@ module jtag_uart_0_avalon_jtag_slave_arbitrator (
   output  [ 31: 0] jtag_uart_0_avalon_jtag_slave_writedata;
   input            clk;
   input   [ 24: 0] cpu_0_data_master_address_to_slave;
+  input            cpu_0_data_master_latency_counter;
   input            cpu_0_data_master_read;
-  input            cpu_0_data_master_waitrequest;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input            jtag_uart_0_avalon_jtag_slave_dataavailable;
@@ -1341,7 +1569,10 @@ module jtag_uart_0_avalon_jtag_slave_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave = cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave & ~((cpu_0_data_master_read & (~cpu_0_data_master_waitrequest)) | ((~cpu_0_data_master_waitrequest) & cpu_0_data_master_write));
+  assign cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave = cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0))));
+  //local readdatavalid cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave = cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave & cpu_0_data_master_read & ~jtag_uart_0_avalon_jtag_slave_waits_for_read;
+
   //jtag_uart_0_avalon_jtag_slave_writedata mux, which is an e_mux
   assign jtag_uart_0_avalon_jtag_slave_writedata = cpu_0_data_master_writedata;
 
@@ -1454,16 +1685,1054 @@ endmodule
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
+module niosSystemCamControl_clock_0_in_arbitrator (
+                                                    // inputs:
+                                                     clk,
+                                                     cpu_0_instruction_master_address_to_slave,
+                                                     cpu_0_instruction_master_dbs_address,
+                                                     cpu_0_instruction_master_latency_counter,
+                                                     cpu_0_instruction_master_read,
+                                                     niosSystemCamControl_clock_0_in_endofpacket,
+                                                     niosSystemCamControl_clock_0_in_readdata,
+                                                     niosSystemCamControl_clock_0_in_waitrequest,
+                                                     reset_n,
+
+                                                    // outputs:
+                                                     cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in,
+                                                     cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in,
+                                                     cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in,
+                                                     cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in,
+                                                     d1_niosSystemCamControl_clock_0_in_end_xfer,
+                                                     niosSystemCamControl_clock_0_in_address,
+                                                     niosSystemCamControl_clock_0_in_byteenable,
+                                                     niosSystemCamControl_clock_0_in_endofpacket_from_sa,
+                                                     niosSystemCamControl_clock_0_in_nativeaddress,
+                                                     niosSystemCamControl_clock_0_in_read,
+                                                     niosSystemCamControl_clock_0_in_readdata_from_sa,
+                                                     niosSystemCamControl_clock_0_in_reset_n,
+                                                     niosSystemCamControl_clock_0_in_waitrequest_from_sa,
+                                                     niosSystemCamControl_clock_0_in_write
+                                                  )
+;
+
+  output           cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in;
+  output           cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in;
+  output           cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in;
+  output           cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in;
+  output           d1_niosSystemCamControl_clock_0_in_end_xfer;
+  output  [ 22: 0] niosSystemCamControl_clock_0_in_address;
+  output  [  1: 0] niosSystemCamControl_clock_0_in_byteenable;
+  output           niosSystemCamControl_clock_0_in_endofpacket_from_sa;
+  output  [ 21: 0] niosSystemCamControl_clock_0_in_nativeaddress;
+  output           niosSystemCamControl_clock_0_in_read;
+  output  [ 15: 0] niosSystemCamControl_clock_0_in_readdata_from_sa;
+  output           niosSystemCamControl_clock_0_in_reset_n;
+  output           niosSystemCamControl_clock_0_in_waitrequest_from_sa;
+  output           niosSystemCamControl_clock_0_in_write;
+  input            clk;
+  input   [ 24: 0] cpu_0_instruction_master_address_to_slave;
+  input   [  1: 0] cpu_0_instruction_master_dbs_address;
+  input            cpu_0_instruction_master_latency_counter;
+  input            cpu_0_instruction_master_read;
+  input            niosSystemCamControl_clock_0_in_endofpacket;
+  input   [ 15: 0] niosSystemCamControl_clock_0_in_readdata;
+  input            niosSystemCamControl_clock_0_in_waitrequest;
+  input            reset_n;
+
+  wire             cpu_0_instruction_master_arbiterlock;
+  wire             cpu_0_instruction_master_arbiterlock2;
+  wire             cpu_0_instruction_master_continuerequest;
+  wire             cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in;
+  wire             cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in;
+  wire             cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in;
+  wire             cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in;
+  wire             cpu_0_instruction_master_saved_grant_niosSystemCamControl_clock_0_in;
+  reg              d1_niosSystemCamControl_clock_0_in_end_xfer;
+  reg              d1_reasons_to_wait;
+  reg              enable_nonzero_assertions;
+  wire             end_xfer_arb_share_counter_term_niosSystemCamControl_clock_0_in;
+  wire             in_a_read_cycle;
+  wire             in_a_write_cycle;
+  wire    [ 22: 0] niosSystemCamControl_clock_0_in_address;
+  wire             niosSystemCamControl_clock_0_in_allgrants;
+  wire             niosSystemCamControl_clock_0_in_allow_new_arb_cycle;
+  wire             niosSystemCamControl_clock_0_in_any_bursting_master_saved_grant;
+  wire             niosSystemCamControl_clock_0_in_any_continuerequest;
+  wire             niosSystemCamControl_clock_0_in_arb_counter_enable;
+  reg     [  1: 0] niosSystemCamControl_clock_0_in_arb_share_counter;
+  wire    [  1: 0] niosSystemCamControl_clock_0_in_arb_share_counter_next_value;
+  wire    [  1: 0] niosSystemCamControl_clock_0_in_arb_share_set_values;
+  wire             niosSystemCamControl_clock_0_in_beginbursttransfer_internal;
+  wire             niosSystemCamControl_clock_0_in_begins_xfer;
+  wire    [  1: 0] niosSystemCamControl_clock_0_in_byteenable;
+  wire             niosSystemCamControl_clock_0_in_end_xfer;
+  wire             niosSystemCamControl_clock_0_in_endofpacket_from_sa;
+  wire             niosSystemCamControl_clock_0_in_firsttransfer;
+  wire             niosSystemCamControl_clock_0_in_grant_vector;
+  wire             niosSystemCamControl_clock_0_in_in_a_read_cycle;
+  wire             niosSystemCamControl_clock_0_in_in_a_write_cycle;
+  wire             niosSystemCamControl_clock_0_in_master_qreq_vector;
+  wire    [ 21: 0] niosSystemCamControl_clock_0_in_nativeaddress;
+  wire             niosSystemCamControl_clock_0_in_non_bursting_master_requests;
+  wire             niosSystemCamControl_clock_0_in_read;
+  wire    [ 15: 0] niosSystemCamControl_clock_0_in_readdata_from_sa;
+  reg              niosSystemCamControl_clock_0_in_reg_firsttransfer;
+  wire             niosSystemCamControl_clock_0_in_reset_n;
+  reg              niosSystemCamControl_clock_0_in_slavearbiterlockenable;
+  wire             niosSystemCamControl_clock_0_in_slavearbiterlockenable2;
+  wire             niosSystemCamControl_clock_0_in_unreg_firsttransfer;
+  wire             niosSystemCamControl_clock_0_in_waitrequest_from_sa;
+  wire             niosSystemCamControl_clock_0_in_waits_for_read;
+  wire             niosSystemCamControl_clock_0_in_waits_for_write;
+  wire             niosSystemCamControl_clock_0_in_write;
+  wire             wait_for_niosSystemCamControl_clock_0_in_counter;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_reasons_to_wait <= 0;
+      else 
+        d1_reasons_to_wait <= ~niosSystemCamControl_clock_0_in_end_xfer;
+    end
+
+
+  assign niosSystemCamControl_clock_0_in_begins_xfer = ~d1_reasons_to_wait & ((cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in));
+  //assign niosSystemCamControl_clock_0_in_readdata_from_sa = niosSystemCamControl_clock_0_in_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_readdata_from_sa = niosSystemCamControl_clock_0_in_readdata;
+
+  assign cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in = (({cpu_0_instruction_master_address_to_slave[24 : 23] , 23'b0} == 25'h800000) & (cpu_0_instruction_master_read)) & cpu_0_instruction_master_read;
+  //assign niosSystemCamControl_clock_0_in_waitrequest_from_sa = niosSystemCamControl_clock_0_in_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_waitrequest_from_sa = niosSystemCamControl_clock_0_in_waitrequest;
+
+  //niosSystemCamControl_clock_0_in_arb_share_counter set values, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_arb_share_set_values = (cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in)? 2 :
+    1;
+
+  //niosSystemCamControl_clock_0_in_non_bursting_master_requests mux, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_non_bursting_master_requests = cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in;
+
+  //niosSystemCamControl_clock_0_in_any_bursting_master_saved_grant mux, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_any_bursting_master_saved_grant = 0;
+
+  //niosSystemCamControl_clock_0_in_arb_share_counter_next_value assignment, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_arb_share_counter_next_value = niosSystemCamControl_clock_0_in_firsttransfer ? (niosSystemCamControl_clock_0_in_arb_share_set_values - 1) : |niosSystemCamControl_clock_0_in_arb_share_counter ? (niosSystemCamControl_clock_0_in_arb_share_counter - 1) : 0;
+
+  //niosSystemCamControl_clock_0_in_allgrants all slave grants, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_allgrants = |niosSystemCamControl_clock_0_in_grant_vector;
+
+  //niosSystemCamControl_clock_0_in_end_xfer assignment, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_end_xfer = ~(niosSystemCamControl_clock_0_in_waits_for_read | niosSystemCamControl_clock_0_in_waits_for_write);
+
+  //end_xfer_arb_share_counter_term_niosSystemCamControl_clock_0_in arb share counter enable term, which is an e_assign
+  assign end_xfer_arb_share_counter_term_niosSystemCamControl_clock_0_in = niosSystemCamControl_clock_0_in_end_xfer & (~niosSystemCamControl_clock_0_in_any_bursting_master_saved_grant | in_a_read_cycle | in_a_write_cycle);
+
+  //niosSystemCamControl_clock_0_in_arb_share_counter arbitration counter enable, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_arb_counter_enable = (end_xfer_arb_share_counter_term_niosSystemCamControl_clock_0_in & niosSystemCamControl_clock_0_in_allgrants) | (end_xfer_arb_share_counter_term_niosSystemCamControl_clock_0_in & ~niosSystemCamControl_clock_0_in_non_bursting_master_requests);
+
+  //niosSystemCamControl_clock_0_in_arb_share_counter counter, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_0_in_arb_share_counter <= 0;
+      else if (niosSystemCamControl_clock_0_in_arb_counter_enable)
+          niosSystemCamControl_clock_0_in_arb_share_counter <= niosSystemCamControl_clock_0_in_arb_share_counter_next_value;
+    end
+
+
+  //niosSystemCamControl_clock_0_in_slavearbiterlockenable slave enables arbiterlock, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_0_in_slavearbiterlockenable <= 0;
+      else if ((|niosSystemCamControl_clock_0_in_master_qreq_vector & end_xfer_arb_share_counter_term_niosSystemCamControl_clock_0_in) | (end_xfer_arb_share_counter_term_niosSystemCamControl_clock_0_in & ~niosSystemCamControl_clock_0_in_non_bursting_master_requests))
+          niosSystemCamControl_clock_0_in_slavearbiterlockenable <= |niosSystemCamControl_clock_0_in_arb_share_counter_next_value;
+    end
+
+
+  //cpu_0/instruction_master niosSystemCamControl_clock_0/in arbiterlock, which is an e_assign
+  assign cpu_0_instruction_master_arbiterlock = niosSystemCamControl_clock_0_in_slavearbiterlockenable & cpu_0_instruction_master_continuerequest;
+
+  //niosSystemCamControl_clock_0_in_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_slavearbiterlockenable2 = |niosSystemCamControl_clock_0_in_arb_share_counter_next_value;
+
+  //cpu_0/instruction_master niosSystemCamControl_clock_0/in arbiterlock2, which is an e_assign
+  assign cpu_0_instruction_master_arbiterlock2 = niosSystemCamControl_clock_0_in_slavearbiterlockenable2 & cpu_0_instruction_master_continuerequest;
+
+  //niosSystemCamControl_clock_0_in_any_continuerequest at least one master continues requesting, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_any_continuerequest = 1;
+
+  //cpu_0_instruction_master_continuerequest continued request, which is an e_assign
+  assign cpu_0_instruction_master_continuerequest = 1;
+
+  assign cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in = cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in & ~((cpu_0_instruction_master_read & ((cpu_0_instruction_master_latency_counter != 0))));
+  //local readdatavalid cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in, which is an e_mux
+  assign cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in = cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in & cpu_0_instruction_master_read & ~niosSystemCamControl_clock_0_in_waits_for_read;
+
+  //assign niosSystemCamControl_clock_0_in_endofpacket_from_sa = niosSystemCamControl_clock_0_in_endofpacket so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_endofpacket_from_sa = niosSystemCamControl_clock_0_in_endofpacket;
+
+  //master is always granted when requested
+  assign cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in = cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in;
+
+  //cpu_0/instruction_master saved-grant niosSystemCamControl_clock_0/in, which is an e_assign
+  assign cpu_0_instruction_master_saved_grant_niosSystemCamControl_clock_0_in = cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in;
+
+  //allow new arb cycle for niosSystemCamControl_clock_0/in, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_allow_new_arb_cycle = 1;
+
+  //placeholder chosen master
+  assign niosSystemCamControl_clock_0_in_grant_vector = 1;
+
+  //placeholder vector of master qualified-requests
+  assign niosSystemCamControl_clock_0_in_master_qreq_vector = 1;
+
+  //niosSystemCamControl_clock_0_in_reset_n assignment, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_reset_n = reset_n;
+
+  //niosSystemCamControl_clock_0_in_firsttransfer first transaction, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_firsttransfer = niosSystemCamControl_clock_0_in_begins_xfer ? niosSystemCamControl_clock_0_in_unreg_firsttransfer : niosSystemCamControl_clock_0_in_reg_firsttransfer;
+
+  //niosSystemCamControl_clock_0_in_unreg_firsttransfer first transaction, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_unreg_firsttransfer = ~(niosSystemCamControl_clock_0_in_slavearbiterlockenable & niosSystemCamControl_clock_0_in_any_continuerequest);
+
+  //niosSystemCamControl_clock_0_in_reg_firsttransfer first transaction, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_0_in_reg_firsttransfer <= 1'b1;
+      else if (niosSystemCamControl_clock_0_in_begins_xfer)
+          niosSystemCamControl_clock_0_in_reg_firsttransfer <= niosSystemCamControl_clock_0_in_unreg_firsttransfer;
+    end
+
+
+  //niosSystemCamControl_clock_0_in_beginbursttransfer_internal begin burst transfer, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_beginbursttransfer_internal = niosSystemCamControl_clock_0_in_begins_xfer;
+
+  //niosSystemCamControl_clock_0_in_read assignment, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_read = cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in & cpu_0_instruction_master_read;
+
+  //niosSystemCamControl_clock_0_in_write assignment, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_write = 0;
+
+  //niosSystemCamControl_clock_0_in_address mux, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_address = {cpu_0_instruction_master_address_to_slave >> 2,
+    cpu_0_instruction_master_dbs_address[1],
+    {1 {1'b0}}};
+
+  //slaveid niosSystemCamControl_clock_0_in_nativeaddress nativeaddress mux, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_nativeaddress = cpu_0_instruction_master_address_to_slave >> 2;
+
+  //d1_niosSystemCamControl_clock_0_in_end_xfer register, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_niosSystemCamControl_clock_0_in_end_xfer <= 1;
+      else 
+        d1_niosSystemCamControl_clock_0_in_end_xfer <= niosSystemCamControl_clock_0_in_end_xfer;
+    end
+
+
+  //niosSystemCamControl_clock_0_in_waits_for_read in a cycle, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_waits_for_read = niosSystemCamControl_clock_0_in_in_a_read_cycle & niosSystemCamControl_clock_0_in_waitrequest_from_sa;
+
+  //niosSystemCamControl_clock_0_in_in_a_read_cycle assignment, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_in_a_read_cycle = cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in & cpu_0_instruction_master_read;
+
+  //in_a_read_cycle assignment, which is an e_mux
+  assign in_a_read_cycle = niosSystemCamControl_clock_0_in_in_a_read_cycle;
+
+  //niosSystemCamControl_clock_0_in_waits_for_write in a cycle, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_waits_for_write = niosSystemCamControl_clock_0_in_in_a_write_cycle & niosSystemCamControl_clock_0_in_waitrequest_from_sa;
+
+  //niosSystemCamControl_clock_0_in_in_a_write_cycle assignment, which is an e_assign
+  assign niosSystemCamControl_clock_0_in_in_a_write_cycle = 0;
+
+  //in_a_write_cycle assignment, which is an e_mux
+  assign in_a_write_cycle = niosSystemCamControl_clock_0_in_in_a_write_cycle;
+
+  assign wait_for_niosSystemCamControl_clock_0_in_counter = 0;
+  //niosSystemCamControl_clock_0_in_byteenable byte enable port mux, which is an e_mux
+  assign niosSystemCamControl_clock_0_in_byteenable = -1;
+
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //niosSystemCamControl_clock_0/in enable non-zero assertions, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          enable_nonzero_assertions <= 0;
+      else 
+        enable_nonzero_assertions <= 1'b1;
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module niosSystemCamControl_clock_0_out_arbitrator (
+                                                     // inputs:
+                                                      clk,
+                                                      d1_sdram_0_s1_end_xfer,
+                                                      niosSystemCamControl_clock_0_out_address,
+                                                      niosSystemCamControl_clock_0_out_byteenable,
+                                                      niosSystemCamControl_clock_0_out_granted_sdram_0_s1,
+                                                      niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1,
+                                                      niosSystemCamControl_clock_0_out_read,
+                                                      niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1,
+                                                      niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register,
+                                                      niosSystemCamControl_clock_0_out_requests_sdram_0_s1,
+                                                      niosSystemCamControl_clock_0_out_write,
+                                                      niosSystemCamControl_clock_0_out_writedata,
+                                                      reset_n,
+                                                      sdram_0_s1_readdata_from_sa,
+                                                      sdram_0_s1_waitrequest_from_sa,
+
+                                                     // outputs:
+                                                      niosSystemCamControl_clock_0_out_address_to_slave,
+                                                      niosSystemCamControl_clock_0_out_readdata,
+                                                      niosSystemCamControl_clock_0_out_reset_n,
+                                                      niosSystemCamControl_clock_0_out_waitrequest
+                                                   )
+;
+
+  output  [ 22: 0] niosSystemCamControl_clock_0_out_address_to_slave;
+  output  [ 15: 0] niosSystemCamControl_clock_0_out_readdata;
+  output           niosSystemCamControl_clock_0_out_reset_n;
+  output           niosSystemCamControl_clock_0_out_waitrequest;
+  input            clk;
+  input            d1_sdram_0_s1_end_xfer;
+  input   [ 22: 0] niosSystemCamControl_clock_0_out_address;
+  input   [  1: 0] niosSystemCamControl_clock_0_out_byteenable;
+  input            niosSystemCamControl_clock_0_out_granted_sdram_0_s1;
+  input            niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1;
+  input            niosSystemCamControl_clock_0_out_read;
+  input            niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1;
+  input            niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register;
+  input            niosSystemCamControl_clock_0_out_requests_sdram_0_s1;
+  input            niosSystemCamControl_clock_0_out_write;
+  input   [ 15: 0] niosSystemCamControl_clock_0_out_writedata;
+  input            reset_n;
+  input   [ 15: 0] sdram_0_s1_readdata_from_sa;
+  input            sdram_0_s1_waitrequest_from_sa;
+
+  reg              active_and_waiting_last_time;
+  reg     [ 22: 0] niosSystemCamControl_clock_0_out_address_last_time;
+  wire    [ 22: 0] niosSystemCamControl_clock_0_out_address_to_slave;
+  reg     [  1: 0] niosSystemCamControl_clock_0_out_byteenable_last_time;
+  reg              niosSystemCamControl_clock_0_out_read_last_time;
+  wire    [ 15: 0] niosSystemCamControl_clock_0_out_readdata;
+  wire             niosSystemCamControl_clock_0_out_reset_n;
+  wire             niosSystemCamControl_clock_0_out_run;
+  wire             niosSystemCamControl_clock_0_out_waitrequest;
+  reg              niosSystemCamControl_clock_0_out_write_last_time;
+  reg     [ 15: 0] niosSystemCamControl_clock_0_out_writedata_last_time;
+  wire             r_1;
+  //r_1 master_run cascaded wait assignment, which is an e_assign
+  assign r_1 = 1 & (niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1 | niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1 | ~niosSystemCamControl_clock_0_out_requests_sdram_0_s1) & (niosSystemCamControl_clock_0_out_granted_sdram_0_s1 | ~niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1) & ((~niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1 | ~niosSystemCamControl_clock_0_out_read | (niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1 & niosSystemCamControl_clock_0_out_read))) & ((~niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1 | ~(niosSystemCamControl_clock_0_out_read | niosSystemCamControl_clock_0_out_write) | (1 & ~sdram_0_s1_waitrequest_from_sa & (niosSystemCamControl_clock_0_out_read | niosSystemCamControl_clock_0_out_write))));
+
+  //cascaded wait assignment, which is an e_assign
+  assign niosSystemCamControl_clock_0_out_run = r_1;
+
+  //optimize select-logic by passing only those address bits which matter.
+  assign niosSystemCamControl_clock_0_out_address_to_slave = niosSystemCamControl_clock_0_out_address;
+
+  //niosSystemCamControl_clock_0/out readdata mux, which is an e_mux
+  assign niosSystemCamControl_clock_0_out_readdata = sdram_0_s1_readdata_from_sa;
+
+  //actual waitrequest port, which is an e_assign
+  assign niosSystemCamControl_clock_0_out_waitrequest = ~niosSystemCamControl_clock_0_out_run;
+
+  //niosSystemCamControl_clock_0_out_reset_n assignment, which is an e_assign
+  assign niosSystemCamControl_clock_0_out_reset_n = reset_n;
+
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //niosSystemCamControl_clock_0_out_address check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_0_out_address_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_0_out_address_last_time <= niosSystemCamControl_clock_0_out_address;
+    end
+
+
+  //niosSystemCamControl_clock_0/out waited last time, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          active_and_waiting_last_time <= 0;
+      else 
+        active_and_waiting_last_time <= niosSystemCamControl_clock_0_out_waitrequest & (niosSystemCamControl_clock_0_out_read | niosSystemCamControl_clock_0_out_write);
+    end
+
+
+  //niosSystemCamControl_clock_0_out_address matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_0_out_address != niosSystemCamControl_clock_0_out_address_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_0_out_address did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_clock_0_out_byteenable check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_0_out_byteenable_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_0_out_byteenable_last_time <= niosSystemCamControl_clock_0_out_byteenable;
+    end
+
+
+  //niosSystemCamControl_clock_0_out_byteenable matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_0_out_byteenable != niosSystemCamControl_clock_0_out_byteenable_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_0_out_byteenable did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_clock_0_out_read check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_0_out_read_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_0_out_read_last_time <= niosSystemCamControl_clock_0_out_read;
+    end
+
+
+  //niosSystemCamControl_clock_0_out_read matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_0_out_read != niosSystemCamControl_clock_0_out_read_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_0_out_read did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_clock_0_out_write check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_0_out_write_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_0_out_write_last_time <= niosSystemCamControl_clock_0_out_write;
+    end
+
+
+  //niosSystemCamControl_clock_0_out_write matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_0_out_write != niosSystemCamControl_clock_0_out_write_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_0_out_write did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_clock_0_out_writedata check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_0_out_writedata_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_0_out_writedata_last_time <= niosSystemCamControl_clock_0_out_writedata;
+    end
+
+
+  //niosSystemCamControl_clock_0_out_writedata matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_0_out_writedata != niosSystemCamControl_clock_0_out_writedata_last_time) & niosSystemCamControl_clock_0_out_write)
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_0_out_writedata did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module niosSystemCamControl_clock_1_in_arbitrator (
+                                                    // inputs:
+                                                     clk,
+                                                     cpu_0_data_master_address_to_slave,
+                                                     cpu_0_data_master_byteenable,
+                                                     cpu_0_data_master_dbs_address,
+                                                     cpu_0_data_master_dbs_write_16,
+                                                     cpu_0_data_master_latency_counter,
+                                                     cpu_0_data_master_read,
+                                                     cpu_0_data_master_write,
+                                                     niosSystemCamControl_clock_1_in_endofpacket,
+                                                     niosSystemCamControl_clock_1_in_readdata,
+                                                     niosSystemCamControl_clock_1_in_waitrequest,
+                                                     reset_n,
+
+                                                    // outputs:
+                                                     cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in,
+                                                     cpu_0_data_master_granted_niosSystemCamControl_clock_1_in,
+                                                     cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in,
+                                                     cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in,
+                                                     cpu_0_data_master_requests_niosSystemCamControl_clock_1_in,
+                                                     d1_niosSystemCamControl_clock_1_in_end_xfer,
+                                                     niosSystemCamControl_clock_1_in_address,
+                                                     niosSystemCamControl_clock_1_in_byteenable,
+                                                     niosSystemCamControl_clock_1_in_endofpacket_from_sa,
+                                                     niosSystemCamControl_clock_1_in_nativeaddress,
+                                                     niosSystemCamControl_clock_1_in_read,
+                                                     niosSystemCamControl_clock_1_in_readdata_from_sa,
+                                                     niosSystemCamControl_clock_1_in_reset_n,
+                                                     niosSystemCamControl_clock_1_in_waitrequest_from_sa,
+                                                     niosSystemCamControl_clock_1_in_write,
+                                                     niosSystemCamControl_clock_1_in_writedata
+                                                  )
+;
+
+  output  [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in;
+  output           cpu_0_data_master_granted_niosSystemCamControl_clock_1_in;
+  output           cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in;
+  output           cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in;
+  output           cpu_0_data_master_requests_niosSystemCamControl_clock_1_in;
+  output           d1_niosSystemCamControl_clock_1_in_end_xfer;
+  output  [ 22: 0] niosSystemCamControl_clock_1_in_address;
+  output  [  1: 0] niosSystemCamControl_clock_1_in_byteenable;
+  output           niosSystemCamControl_clock_1_in_endofpacket_from_sa;
+  output  [ 21: 0] niosSystemCamControl_clock_1_in_nativeaddress;
+  output           niosSystemCamControl_clock_1_in_read;
+  output  [ 15: 0] niosSystemCamControl_clock_1_in_readdata_from_sa;
+  output           niosSystemCamControl_clock_1_in_reset_n;
+  output           niosSystemCamControl_clock_1_in_waitrequest_from_sa;
+  output           niosSystemCamControl_clock_1_in_write;
+  output  [ 15: 0] niosSystemCamControl_clock_1_in_writedata;
+  input            clk;
+  input   [ 24: 0] cpu_0_data_master_address_to_slave;
+  input   [  3: 0] cpu_0_data_master_byteenable;
+  input   [  1: 0] cpu_0_data_master_dbs_address;
+  input   [ 15: 0] cpu_0_data_master_dbs_write_16;
+  input            cpu_0_data_master_latency_counter;
+  input            cpu_0_data_master_read;
+  input            cpu_0_data_master_write;
+  input            niosSystemCamControl_clock_1_in_endofpacket;
+  input   [ 15: 0] niosSystemCamControl_clock_1_in_readdata;
+  input            niosSystemCamControl_clock_1_in_waitrequest;
+  input            reset_n;
+
+  wire             cpu_0_data_master_arbiterlock;
+  wire             cpu_0_data_master_arbiterlock2;
+  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in;
+  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in_segment_0;
+  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in_segment_1;
+  wire             cpu_0_data_master_continuerequest;
+  wire             cpu_0_data_master_granted_niosSystemCamControl_clock_1_in;
+  wire             cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in;
+  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in;
+  wire             cpu_0_data_master_requests_niosSystemCamControl_clock_1_in;
+  wire             cpu_0_data_master_saved_grant_niosSystemCamControl_clock_1_in;
+  reg              d1_niosSystemCamControl_clock_1_in_end_xfer;
+  reg              d1_reasons_to_wait;
+  reg              enable_nonzero_assertions;
+  wire             end_xfer_arb_share_counter_term_niosSystemCamControl_clock_1_in;
+  wire             in_a_read_cycle;
+  wire             in_a_write_cycle;
+  wire    [ 22: 0] niosSystemCamControl_clock_1_in_address;
+  wire             niosSystemCamControl_clock_1_in_allgrants;
+  wire             niosSystemCamControl_clock_1_in_allow_new_arb_cycle;
+  wire             niosSystemCamControl_clock_1_in_any_bursting_master_saved_grant;
+  wire             niosSystemCamControl_clock_1_in_any_continuerequest;
+  wire             niosSystemCamControl_clock_1_in_arb_counter_enable;
+  reg     [  1: 0] niosSystemCamControl_clock_1_in_arb_share_counter;
+  wire    [  1: 0] niosSystemCamControl_clock_1_in_arb_share_counter_next_value;
+  wire    [  1: 0] niosSystemCamControl_clock_1_in_arb_share_set_values;
+  wire             niosSystemCamControl_clock_1_in_beginbursttransfer_internal;
+  wire             niosSystemCamControl_clock_1_in_begins_xfer;
+  wire    [  1: 0] niosSystemCamControl_clock_1_in_byteenable;
+  wire             niosSystemCamControl_clock_1_in_end_xfer;
+  wire             niosSystemCamControl_clock_1_in_endofpacket_from_sa;
+  wire             niosSystemCamControl_clock_1_in_firsttransfer;
+  wire             niosSystemCamControl_clock_1_in_grant_vector;
+  wire             niosSystemCamControl_clock_1_in_in_a_read_cycle;
+  wire             niosSystemCamControl_clock_1_in_in_a_write_cycle;
+  wire             niosSystemCamControl_clock_1_in_master_qreq_vector;
+  wire    [ 21: 0] niosSystemCamControl_clock_1_in_nativeaddress;
+  wire             niosSystemCamControl_clock_1_in_non_bursting_master_requests;
+  wire             niosSystemCamControl_clock_1_in_read;
+  wire    [ 15: 0] niosSystemCamControl_clock_1_in_readdata_from_sa;
+  reg              niosSystemCamControl_clock_1_in_reg_firsttransfer;
+  wire             niosSystemCamControl_clock_1_in_reset_n;
+  reg              niosSystemCamControl_clock_1_in_slavearbiterlockenable;
+  wire             niosSystemCamControl_clock_1_in_slavearbiterlockenable2;
+  wire             niosSystemCamControl_clock_1_in_unreg_firsttransfer;
+  wire             niosSystemCamControl_clock_1_in_waitrequest_from_sa;
+  wire             niosSystemCamControl_clock_1_in_waits_for_read;
+  wire             niosSystemCamControl_clock_1_in_waits_for_write;
+  wire             niosSystemCamControl_clock_1_in_write;
+  wire    [ 15: 0] niosSystemCamControl_clock_1_in_writedata;
+  wire             wait_for_niosSystemCamControl_clock_1_in_counter;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_reasons_to_wait <= 0;
+      else 
+        d1_reasons_to_wait <= ~niosSystemCamControl_clock_1_in_end_xfer;
+    end
+
+
+  assign niosSystemCamControl_clock_1_in_begins_xfer = ~d1_reasons_to_wait & ((cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in));
+  //assign niosSystemCamControl_clock_1_in_readdata_from_sa = niosSystemCamControl_clock_1_in_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_readdata_from_sa = niosSystemCamControl_clock_1_in_readdata;
+
+  assign cpu_0_data_master_requests_niosSystemCamControl_clock_1_in = ({cpu_0_data_master_address_to_slave[24 : 23] , 23'b0} == 25'h800000) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  //assign niosSystemCamControl_clock_1_in_waitrequest_from_sa = niosSystemCamControl_clock_1_in_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_waitrequest_from_sa = niosSystemCamControl_clock_1_in_waitrequest;
+
+  //niosSystemCamControl_clock_1_in_arb_share_counter set values, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_arb_share_set_values = (cpu_0_data_master_granted_niosSystemCamControl_clock_1_in)? 2 :
+    1;
+
+  //niosSystemCamControl_clock_1_in_non_bursting_master_requests mux, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_non_bursting_master_requests = cpu_0_data_master_requests_niosSystemCamControl_clock_1_in;
+
+  //niosSystemCamControl_clock_1_in_any_bursting_master_saved_grant mux, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_any_bursting_master_saved_grant = 0;
+
+  //niosSystemCamControl_clock_1_in_arb_share_counter_next_value assignment, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_arb_share_counter_next_value = niosSystemCamControl_clock_1_in_firsttransfer ? (niosSystemCamControl_clock_1_in_arb_share_set_values - 1) : |niosSystemCamControl_clock_1_in_arb_share_counter ? (niosSystemCamControl_clock_1_in_arb_share_counter - 1) : 0;
+
+  //niosSystemCamControl_clock_1_in_allgrants all slave grants, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_allgrants = |niosSystemCamControl_clock_1_in_grant_vector;
+
+  //niosSystemCamControl_clock_1_in_end_xfer assignment, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_end_xfer = ~(niosSystemCamControl_clock_1_in_waits_for_read | niosSystemCamControl_clock_1_in_waits_for_write);
+
+  //end_xfer_arb_share_counter_term_niosSystemCamControl_clock_1_in arb share counter enable term, which is an e_assign
+  assign end_xfer_arb_share_counter_term_niosSystemCamControl_clock_1_in = niosSystemCamControl_clock_1_in_end_xfer & (~niosSystemCamControl_clock_1_in_any_bursting_master_saved_grant | in_a_read_cycle | in_a_write_cycle);
+
+  //niosSystemCamControl_clock_1_in_arb_share_counter arbitration counter enable, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_arb_counter_enable = (end_xfer_arb_share_counter_term_niosSystemCamControl_clock_1_in & niosSystemCamControl_clock_1_in_allgrants) | (end_xfer_arb_share_counter_term_niosSystemCamControl_clock_1_in & ~niosSystemCamControl_clock_1_in_non_bursting_master_requests);
+
+  //niosSystemCamControl_clock_1_in_arb_share_counter counter, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_1_in_arb_share_counter <= 0;
+      else if (niosSystemCamControl_clock_1_in_arb_counter_enable)
+          niosSystemCamControl_clock_1_in_arb_share_counter <= niosSystemCamControl_clock_1_in_arb_share_counter_next_value;
+    end
+
+
+  //niosSystemCamControl_clock_1_in_slavearbiterlockenable slave enables arbiterlock, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_1_in_slavearbiterlockenable <= 0;
+      else if ((|niosSystemCamControl_clock_1_in_master_qreq_vector & end_xfer_arb_share_counter_term_niosSystemCamControl_clock_1_in) | (end_xfer_arb_share_counter_term_niosSystemCamControl_clock_1_in & ~niosSystemCamControl_clock_1_in_non_bursting_master_requests))
+          niosSystemCamControl_clock_1_in_slavearbiterlockenable <= |niosSystemCamControl_clock_1_in_arb_share_counter_next_value;
+    end
+
+
+  //cpu_0/data_master niosSystemCamControl_clock_1/in arbiterlock, which is an e_assign
+  assign cpu_0_data_master_arbiterlock = niosSystemCamControl_clock_1_in_slavearbiterlockenable & cpu_0_data_master_continuerequest;
+
+  //niosSystemCamControl_clock_1_in_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_slavearbiterlockenable2 = |niosSystemCamControl_clock_1_in_arb_share_counter_next_value;
+
+  //cpu_0/data_master niosSystemCamControl_clock_1/in arbiterlock2, which is an e_assign
+  assign cpu_0_data_master_arbiterlock2 = niosSystemCamControl_clock_1_in_slavearbiterlockenable2 & cpu_0_data_master_continuerequest;
+
+  //niosSystemCamControl_clock_1_in_any_continuerequest at least one master continues requesting, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_any_continuerequest = 1;
+
+  //cpu_0_data_master_continuerequest continued request, which is an e_assign
+  assign cpu_0_data_master_continuerequest = 1;
+
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in = cpu_0_data_master_requests_niosSystemCamControl_clock_1_in & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0))) | ((!cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in) & cpu_0_data_master_write));
+  //local readdatavalid cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in = cpu_0_data_master_granted_niosSystemCamControl_clock_1_in & cpu_0_data_master_read & ~niosSystemCamControl_clock_1_in_waits_for_read;
+
+  //niosSystemCamControl_clock_1_in_writedata mux, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_writedata = cpu_0_data_master_dbs_write_16;
+
+  //assign niosSystemCamControl_clock_1_in_endofpacket_from_sa = niosSystemCamControl_clock_1_in_endofpacket so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_endofpacket_from_sa = niosSystemCamControl_clock_1_in_endofpacket;
+
+  //master is always granted when requested
+  assign cpu_0_data_master_granted_niosSystemCamControl_clock_1_in = cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in;
+
+  //cpu_0/data_master saved-grant niosSystemCamControl_clock_1/in, which is an e_assign
+  assign cpu_0_data_master_saved_grant_niosSystemCamControl_clock_1_in = cpu_0_data_master_requests_niosSystemCamControl_clock_1_in;
+
+  //allow new arb cycle for niosSystemCamControl_clock_1/in, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_allow_new_arb_cycle = 1;
+
+  //placeholder chosen master
+  assign niosSystemCamControl_clock_1_in_grant_vector = 1;
+
+  //placeholder vector of master qualified-requests
+  assign niosSystemCamControl_clock_1_in_master_qreq_vector = 1;
+
+  //niosSystemCamControl_clock_1_in_reset_n assignment, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_reset_n = reset_n;
+
+  //niosSystemCamControl_clock_1_in_firsttransfer first transaction, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_firsttransfer = niosSystemCamControl_clock_1_in_begins_xfer ? niosSystemCamControl_clock_1_in_unreg_firsttransfer : niosSystemCamControl_clock_1_in_reg_firsttransfer;
+
+  //niosSystemCamControl_clock_1_in_unreg_firsttransfer first transaction, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_unreg_firsttransfer = ~(niosSystemCamControl_clock_1_in_slavearbiterlockenable & niosSystemCamControl_clock_1_in_any_continuerequest);
+
+  //niosSystemCamControl_clock_1_in_reg_firsttransfer first transaction, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_1_in_reg_firsttransfer <= 1'b1;
+      else if (niosSystemCamControl_clock_1_in_begins_xfer)
+          niosSystemCamControl_clock_1_in_reg_firsttransfer <= niosSystemCamControl_clock_1_in_unreg_firsttransfer;
+    end
+
+
+  //niosSystemCamControl_clock_1_in_beginbursttransfer_internal begin burst transfer, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_beginbursttransfer_internal = niosSystemCamControl_clock_1_in_begins_xfer;
+
+  //niosSystemCamControl_clock_1_in_read assignment, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_read = cpu_0_data_master_granted_niosSystemCamControl_clock_1_in & cpu_0_data_master_read;
+
+  //niosSystemCamControl_clock_1_in_write assignment, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_write = cpu_0_data_master_granted_niosSystemCamControl_clock_1_in & cpu_0_data_master_write;
+
+  //niosSystemCamControl_clock_1_in_address mux, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_address = {cpu_0_data_master_address_to_slave >> 2,
+    cpu_0_data_master_dbs_address[1],
+    {1 {1'b0}}};
+
+  //slaveid niosSystemCamControl_clock_1_in_nativeaddress nativeaddress mux, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_nativeaddress = cpu_0_data_master_address_to_slave >> 2;
+
+  //d1_niosSystemCamControl_clock_1_in_end_xfer register, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_niosSystemCamControl_clock_1_in_end_xfer <= 1;
+      else 
+        d1_niosSystemCamControl_clock_1_in_end_xfer <= niosSystemCamControl_clock_1_in_end_xfer;
+    end
+
+
+  //niosSystemCamControl_clock_1_in_waits_for_read in a cycle, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_waits_for_read = niosSystemCamControl_clock_1_in_in_a_read_cycle & niosSystemCamControl_clock_1_in_waitrequest_from_sa;
+
+  //niosSystemCamControl_clock_1_in_in_a_read_cycle assignment, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_in_a_read_cycle = cpu_0_data_master_granted_niosSystemCamControl_clock_1_in & cpu_0_data_master_read;
+
+  //in_a_read_cycle assignment, which is an e_mux
+  assign in_a_read_cycle = niosSystemCamControl_clock_1_in_in_a_read_cycle;
+
+  //niosSystemCamControl_clock_1_in_waits_for_write in a cycle, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_waits_for_write = niosSystemCamControl_clock_1_in_in_a_write_cycle & niosSystemCamControl_clock_1_in_waitrequest_from_sa;
+
+  //niosSystemCamControl_clock_1_in_in_a_write_cycle assignment, which is an e_assign
+  assign niosSystemCamControl_clock_1_in_in_a_write_cycle = cpu_0_data_master_granted_niosSystemCamControl_clock_1_in & cpu_0_data_master_write;
+
+  //in_a_write_cycle assignment, which is an e_mux
+  assign in_a_write_cycle = niosSystemCamControl_clock_1_in_in_a_write_cycle;
+
+  assign wait_for_niosSystemCamControl_clock_1_in_counter = 0;
+  //niosSystemCamControl_clock_1_in_byteenable byte enable port mux, which is an e_mux
+  assign niosSystemCamControl_clock_1_in_byteenable = (cpu_0_data_master_granted_niosSystemCamControl_clock_1_in)? cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in :
+    -1;
+
+  assign {cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in_segment_1,
+cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in_segment_0} = cpu_0_data_master_byteenable;
+  assign cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in = ((cpu_0_data_master_dbs_address[1] == 0))? cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in_segment_0 :
+    cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in_segment_1;
+
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //niosSystemCamControl_clock_1/in enable non-zero assertions, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          enable_nonzero_assertions <= 0;
+      else 
+        enable_nonzero_assertions <= 1'b1;
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module niosSystemCamControl_clock_1_out_arbitrator (
+                                                     // inputs:
+                                                      clk,
+                                                      d1_sdram_0_s1_end_xfer,
+                                                      niosSystemCamControl_clock_1_out_address,
+                                                      niosSystemCamControl_clock_1_out_byteenable,
+                                                      niosSystemCamControl_clock_1_out_granted_sdram_0_s1,
+                                                      niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1,
+                                                      niosSystemCamControl_clock_1_out_read,
+                                                      niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1,
+                                                      niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register,
+                                                      niosSystemCamControl_clock_1_out_requests_sdram_0_s1,
+                                                      niosSystemCamControl_clock_1_out_write,
+                                                      niosSystemCamControl_clock_1_out_writedata,
+                                                      reset_n,
+                                                      sdram_0_s1_readdata_from_sa,
+                                                      sdram_0_s1_waitrequest_from_sa,
+
+                                                     // outputs:
+                                                      niosSystemCamControl_clock_1_out_address_to_slave,
+                                                      niosSystemCamControl_clock_1_out_readdata,
+                                                      niosSystemCamControl_clock_1_out_reset_n,
+                                                      niosSystemCamControl_clock_1_out_waitrequest
+                                                   )
+;
+
+  output  [ 22: 0] niosSystemCamControl_clock_1_out_address_to_slave;
+  output  [ 15: 0] niosSystemCamControl_clock_1_out_readdata;
+  output           niosSystemCamControl_clock_1_out_reset_n;
+  output           niosSystemCamControl_clock_1_out_waitrequest;
+  input            clk;
+  input            d1_sdram_0_s1_end_xfer;
+  input   [ 22: 0] niosSystemCamControl_clock_1_out_address;
+  input   [  1: 0] niosSystemCamControl_clock_1_out_byteenable;
+  input            niosSystemCamControl_clock_1_out_granted_sdram_0_s1;
+  input            niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1;
+  input            niosSystemCamControl_clock_1_out_read;
+  input            niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1;
+  input            niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register;
+  input            niosSystemCamControl_clock_1_out_requests_sdram_0_s1;
+  input            niosSystemCamControl_clock_1_out_write;
+  input   [ 15: 0] niosSystemCamControl_clock_1_out_writedata;
+  input            reset_n;
+  input   [ 15: 0] sdram_0_s1_readdata_from_sa;
+  input            sdram_0_s1_waitrequest_from_sa;
+
+  reg              active_and_waiting_last_time;
+  reg     [ 22: 0] niosSystemCamControl_clock_1_out_address_last_time;
+  wire    [ 22: 0] niosSystemCamControl_clock_1_out_address_to_slave;
+  reg     [  1: 0] niosSystemCamControl_clock_1_out_byteenable_last_time;
+  reg              niosSystemCamControl_clock_1_out_read_last_time;
+  wire    [ 15: 0] niosSystemCamControl_clock_1_out_readdata;
+  wire             niosSystemCamControl_clock_1_out_reset_n;
+  wire             niosSystemCamControl_clock_1_out_run;
+  wire             niosSystemCamControl_clock_1_out_waitrequest;
+  reg              niosSystemCamControl_clock_1_out_write_last_time;
+  reg     [ 15: 0] niosSystemCamControl_clock_1_out_writedata_last_time;
+  wire             r_1;
+  //r_1 master_run cascaded wait assignment, which is an e_assign
+  assign r_1 = 1 & (niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1 | niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1 | ~niosSystemCamControl_clock_1_out_requests_sdram_0_s1) & (niosSystemCamControl_clock_1_out_granted_sdram_0_s1 | ~niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1) & ((~niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1 | ~niosSystemCamControl_clock_1_out_read | (niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1 & niosSystemCamControl_clock_1_out_read))) & ((~niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1 | ~(niosSystemCamControl_clock_1_out_read | niosSystemCamControl_clock_1_out_write) | (1 & ~sdram_0_s1_waitrequest_from_sa & (niosSystemCamControl_clock_1_out_read | niosSystemCamControl_clock_1_out_write))));
+
+  //cascaded wait assignment, which is an e_assign
+  assign niosSystemCamControl_clock_1_out_run = r_1;
+
+  //optimize select-logic by passing only those address bits which matter.
+  assign niosSystemCamControl_clock_1_out_address_to_slave = niosSystemCamControl_clock_1_out_address;
+
+  //niosSystemCamControl_clock_1/out readdata mux, which is an e_mux
+  assign niosSystemCamControl_clock_1_out_readdata = sdram_0_s1_readdata_from_sa;
+
+  //actual waitrequest port, which is an e_assign
+  assign niosSystemCamControl_clock_1_out_waitrequest = ~niosSystemCamControl_clock_1_out_run;
+
+  //niosSystemCamControl_clock_1_out_reset_n assignment, which is an e_assign
+  assign niosSystemCamControl_clock_1_out_reset_n = reset_n;
+
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //niosSystemCamControl_clock_1_out_address check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_1_out_address_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_1_out_address_last_time <= niosSystemCamControl_clock_1_out_address;
+    end
+
+
+  //niosSystemCamControl_clock_1/out waited last time, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          active_and_waiting_last_time <= 0;
+      else 
+        active_and_waiting_last_time <= niosSystemCamControl_clock_1_out_waitrequest & (niosSystemCamControl_clock_1_out_read | niosSystemCamControl_clock_1_out_write);
+    end
+
+
+  //niosSystemCamControl_clock_1_out_address matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_1_out_address != niosSystemCamControl_clock_1_out_address_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_1_out_address did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_clock_1_out_byteenable check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_1_out_byteenable_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_1_out_byteenable_last_time <= niosSystemCamControl_clock_1_out_byteenable;
+    end
+
+
+  //niosSystemCamControl_clock_1_out_byteenable matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_1_out_byteenable != niosSystemCamControl_clock_1_out_byteenable_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_1_out_byteenable did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_clock_1_out_read check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_1_out_read_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_1_out_read_last_time <= niosSystemCamControl_clock_1_out_read;
+    end
+
+
+  //niosSystemCamControl_clock_1_out_read matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_1_out_read != niosSystemCamControl_clock_1_out_read_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_1_out_read did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_clock_1_out_write check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_1_out_write_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_1_out_write_last_time <= niosSystemCamControl_clock_1_out_write;
+    end
+
+
+  //niosSystemCamControl_clock_1_out_write matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_1_out_write != niosSystemCamControl_clock_1_out_write_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_1_out_write did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_clock_1_out_writedata check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_clock_1_out_writedata_last_time <= 0;
+      else 
+        niosSystemCamControl_clock_1_out_writedata_last_time <= niosSystemCamControl_clock_1_out_writedata;
+    end
+
+
+  //niosSystemCamControl_clock_1_out_writedata matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_clock_1_out_writedata != niosSystemCamControl_clock_1_out_writedata_last_time) & niosSystemCamControl_clock_1_out_write)
+        begin
+          $write("%0d ns: niosSystemCamControl_clock_1_out_writedata did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
 module onchip_memory2_0_s1_arbitrator (
                                         // inputs:
                                          clk,
                                          cpu_0_data_master_address_to_slave,
                                          cpu_0_data_master_byteenable,
+                                         cpu_0_data_master_latency_counter,
                                          cpu_0_data_master_read,
-                                         cpu_0_data_master_waitrequest,
                                          cpu_0_data_master_write,
                                          cpu_0_data_master_writedata,
                                          cpu_0_instruction_master_address_to_slave,
+                                         cpu_0_instruction_master_latency_counter,
                                          cpu_0_instruction_master_read,
                                          onchip_memory2_0_s1_readdata,
                                          reset_n,
@@ -1485,8 +2754,7 @@ module onchip_memory2_0_s1_arbitrator (
                                          onchip_memory2_0_s1_readdata_from_sa,
                                          onchip_memory2_0_s1_reset,
                                          onchip_memory2_0_s1_write,
-                                         onchip_memory2_0_s1_writedata,
-                                         registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1
+                                         onchip_memory2_0_s1_writedata
                                       )
 ;
 
@@ -1507,15 +2775,15 @@ module onchip_memory2_0_s1_arbitrator (
   output           onchip_memory2_0_s1_reset;
   output           onchip_memory2_0_s1_write;
   output  [ 31: 0] onchip_memory2_0_s1_writedata;
-  output           registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1;
   input            clk;
   input   [ 24: 0] cpu_0_data_master_address_to_slave;
   input   [  3: 0] cpu_0_data_master_byteenable;
+  input            cpu_0_data_master_latency_counter;
   input            cpu_0_data_master_read;
-  input            cpu_0_data_master_waitrequest;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 24: 0] cpu_0_instruction_master_address_to_slave;
+  input            cpu_0_instruction_master_latency_counter;
   input            cpu_0_instruction_master_read;
   input   [ 31: 0] onchip_memory2_0_s1_readdata;
   input            reset_n;
@@ -1587,7 +2855,6 @@ module onchip_memory2_0_s1_arbitrator (
   wire    [ 31: 0] onchip_memory2_0_s1_writedata;
   wire             p1_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register;
   wire             p1_cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register;
-  wire             registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1;
   wire    [ 24: 0] shifted_address_to_onchip_memory2_0_s1_from_cpu_0_data_master;
   wire    [ 24: 0] shifted_address_to_onchip_memory2_0_s1_from_cpu_0_instruction_master;
   wire             wait_for_onchip_memory2_0_s1_counter;
@@ -1605,9 +2872,6 @@ module onchip_memory2_0_s1_arbitrator (
   assign onchip_memory2_0_s1_readdata_from_sa = onchip_memory2_0_s1_readdata;
 
   assign cpu_0_data_master_requests_onchip_memory2_0_s1 = ({cpu_0_data_master_address_to_slave[24 : 14] , 14'b0} == 25'h1104000) & (cpu_0_data_master_read | cpu_0_data_master_write);
-  //registered rdv signal_name registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1 assignment, which is an e_assign
-  assign registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1 = cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register_in;
-
   //onchip_memory2_0_s1_arb_share_counter set values, which is an e_mux
   assign onchip_memory2_0_s1_arb_share_set_values = 1;
 
@@ -1690,9 +2954,9 @@ module onchip_memory2_0_s1_arbitrator (
   assign onchip_memory2_0_s1_any_continuerequest = cpu_0_instruction_master_continuerequest |
     cpu_0_data_master_continuerequest;
 
-  assign cpu_0_data_master_qualified_request_onchip_memory2_0_s1 = cpu_0_data_master_requests_onchip_memory2_0_s1 & ~((cpu_0_data_master_read & ((|cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register))) | ((~cpu_0_data_master_waitrequest) & cpu_0_data_master_write) | cpu_0_instruction_master_arbiterlock);
+  assign cpu_0_data_master_qualified_request_onchip_memory2_0_s1 = cpu_0_data_master_requests_onchip_memory2_0_s1 & ~((cpu_0_data_master_read & ((1 < cpu_0_data_master_latency_counter))) | cpu_0_instruction_master_arbiterlock);
   //cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register_in mux for readlatency shift register, which is an e_mux
-  assign cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register_in = cpu_0_data_master_granted_onchip_memory2_0_s1 & cpu_0_data_master_read & ~onchip_memory2_0_s1_waits_for_read & ~(|cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register);
+  assign cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register_in = cpu_0_data_master_granted_onchip_memory2_0_s1 & cpu_0_data_master_read & ~onchip_memory2_0_s1_waits_for_read;
 
   //shift register p1 cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register in if flush, otherwise shift left, which is an e_mux
   assign p1_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register = {cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register, cpu_0_data_master_read_data_valid_onchip_memory2_0_s1_shift_register_in};
@@ -1730,9 +2994,9 @@ module onchip_memory2_0_s1_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_mux
   assign cpu_0_data_master_continuerequest = last_cycle_cpu_0_data_master_granted_slave_onchip_memory2_0_s1 & cpu_0_data_master_requests_onchip_memory2_0_s1;
 
-  assign cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1 = cpu_0_instruction_master_requests_onchip_memory2_0_s1 & ~((cpu_0_instruction_master_read & ((|cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register))) | cpu_0_data_master_arbiterlock);
+  assign cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1 = cpu_0_instruction_master_requests_onchip_memory2_0_s1 & ~((cpu_0_instruction_master_read & ((1 < cpu_0_instruction_master_latency_counter))) | cpu_0_data_master_arbiterlock);
   //cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register_in mux for readlatency shift register, which is an e_mux
-  assign cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register_in = cpu_0_instruction_master_granted_onchip_memory2_0_s1 & cpu_0_instruction_master_read & ~onchip_memory2_0_s1_waits_for_read & ~(|cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register);
+  assign cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register_in = cpu_0_instruction_master_granted_onchip_memory2_0_s1 & cpu_0_instruction_master_read & ~onchip_memory2_0_s1_waits_for_read;
 
   //shift register p1 cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register in if flush, otherwise shift left, which is an e_mux
   assign p1_cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register = {cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register, cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1_shift_register_in};
@@ -1927,8 +3191,8 @@ module procHasControl_s1_arbitrator (
                                       // inputs:
                                        clk,
                                        cpu_0_data_master_address_to_slave,
+                                       cpu_0_data_master_latency_counter,
                                        cpu_0_data_master_read,
-                                       cpu_0_data_master_waitrequest,
                                        cpu_0_data_master_write,
                                        cpu_0_data_master_writedata,
                                        procHasControl_s1_readdata,
@@ -1962,8 +3226,8 @@ module procHasControl_s1_arbitrator (
   output  [ 31: 0] procHasControl_s1_writedata;
   input            clk;
   input   [ 24: 0] cpu_0_data_master_address_to_slave;
+  input            cpu_0_data_master_latency_counter;
   input            cpu_0_data_master_read;
-  input            cpu_0_data_master_waitrequest;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 31: 0] procHasControl_s1_readdata;
@@ -2087,7 +3351,10 @@ module procHasControl_s1_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_procHasControl_s1 = cpu_0_data_master_requests_procHasControl_s1 & ~(((~cpu_0_data_master_waitrequest) & cpu_0_data_master_write));
+  assign cpu_0_data_master_qualified_request_procHasControl_s1 = cpu_0_data_master_requests_procHasControl_s1 & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0))));
+  //local readdatavalid cpu_0_data_master_read_data_valid_procHasControl_s1, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_procHasControl_s1 = cpu_0_data_master_granted_procHasControl_s1 & cpu_0_data_master_read & ~procHasControl_s1_waits_for_read;
+
   //procHasControl_s1_writedata mux, which is an e_mux
   assign procHasControl_s1_writedata = cpu_0_data_master_writedata;
 
@@ -2194,22 +3461,22 @@ endmodule
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
-module rdv_fifo_for_cpu_0_data_master_to_sdram_0_s1_module (
-                                                             // inputs:
-                                                              clear_fifo,
-                                                              clk,
-                                                              data_in,
-                                                              read,
-                                                              reset_n,
-                                                              sync_reset,
-                                                              write,
+module rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1_module (
+                                                                            // inputs:
+                                                                             clear_fifo,
+                                                                             clk,
+                                                                             data_in,
+                                                                             read,
+                                                                             reset_n,
+                                                                             sync_reset,
+                                                                             write,
 
-                                                             // outputs:
-                                                              data_out,
-                                                              empty,
-                                                              fifo_contains_ones_n,
-                                                              full
-                                                           )
+                                                                            // outputs:
+                                                                             data_out,
+                                                                             empty,
+                                                                             fifo_contains_ones_n,
+                                                                             full
+                                                                          )
 ;
 
   output           data_out;
@@ -2545,22 +3812,22 @@ endmodule
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
-module rdv_fifo_for_cpu_0_instruction_master_to_sdram_0_s1_module (
-                                                                    // inputs:
-                                                                     clear_fifo,
-                                                                     clk,
-                                                                     data_in,
-                                                                     read,
-                                                                     reset_n,
-                                                                     sync_reset,
-                                                                     write,
+module rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1_module (
+                                                                            // inputs:
+                                                                             clear_fifo,
+                                                                             clk,
+                                                                             data_in,
+                                                                             read,
+                                                                             reset_n,
+                                                                             sync_reset,
+                                                                             write,
 
-                                                                    // outputs:
-                                                                     data_out,
-                                                                     empty,
-                                                                     fifo_contains_ones_n,
-                                                                     full
-                                                                  )
+                                                                            // outputs:
+                                                                             data_out,
+                                                                             empty,
+                                                                             fifo_contains_ones_n,
+                                                                             full
+                                                                          )
 ;
 
   output           data_out;
@@ -2899,35 +4166,33 @@ endmodule
 module sdram_0_s1_arbitrator (
                                // inputs:
                                 clk,
-                                cpu_0_data_master_address_to_slave,
-                                cpu_0_data_master_byteenable,
-                                cpu_0_data_master_dbs_address,
-                                cpu_0_data_master_dbs_write_16,
-                                cpu_0_data_master_no_byte_enables_and_last_term,
-                                cpu_0_data_master_read,
-                                cpu_0_data_master_waitrequest,
-                                cpu_0_data_master_write,
-                                cpu_0_instruction_master_address_to_slave,
-                                cpu_0_instruction_master_dbs_address,
-                                cpu_0_instruction_master_read,
+                                niosSystemCamControl_clock_0_out_address_to_slave,
+                                niosSystemCamControl_clock_0_out_byteenable,
+                                niosSystemCamControl_clock_0_out_read,
+                                niosSystemCamControl_clock_0_out_write,
+                                niosSystemCamControl_clock_0_out_writedata,
+                                niosSystemCamControl_clock_1_out_address_to_slave,
+                                niosSystemCamControl_clock_1_out_byteenable,
+                                niosSystemCamControl_clock_1_out_read,
+                                niosSystemCamControl_clock_1_out_write,
+                                niosSystemCamControl_clock_1_out_writedata,
                                 reset_n,
                                 sdram_0_s1_readdata,
                                 sdram_0_s1_readdatavalid,
                                 sdram_0_s1_waitrequest,
 
                                // outputs:
-                                cpu_0_data_master_byteenable_sdram_0_s1,
-                                cpu_0_data_master_granted_sdram_0_s1,
-                                cpu_0_data_master_qualified_request_sdram_0_s1,
-                                cpu_0_data_master_read_data_valid_sdram_0_s1,
-                                cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register,
-                                cpu_0_data_master_requests_sdram_0_s1,
-                                cpu_0_instruction_master_granted_sdram_0_s1,
-                                cpu_0_instruction_master_qualified_request_sdram_0_s1,
-                                cpu_0_instruction_master_read_data_valid_sdram_0_s1,
-                                cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register,
-                                cpu_0_instruction_master_requests_sdram_0_s1,
                                 d1_sdram_0_s1_end_xfer,
+                                niosSystemCamControl_clock_0_out_granted_sdram_0_s1,
+                                niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1,
+                                niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1,
+                                niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register,
+                                niosSystemCamControl_clock_0_out_requests_sdram_0_s1,
+                                niosSystemCamControl_clock_1_out_granted_sdram_0_s1,
+                                niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1,
+                                niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1,
+                                niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register,
+                                niosSystemCamControl_clock_1_out_requests_sdram_0_s1,
                                 sdram_0_s1_address,
                                 sdram_0_s1_byteenable_n,
                                 sdram_0_s1_chipselect,
@@ -2940,18 +4205,17 @@ module sdram_0_s1_arbitrator (
                              )
 ;
 
-  output  [  1: 0] cpu_0_data_master_byteenable_sdram_0_s1;
-  output           cpu_0_data_master_granted_sdram_0_s1;
-  output           cpu_0_data_master_qualified_request_sdram_0_s1;
-  output           cpu_0_data_master_read_data_valid_sdram_0_s1;
-  output           cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register;
-  output           cpu_0_data_master_requests_sdram_0_s1;
-  output           cpu_0_instruction_master_granted_sdram_0_s1;
-  output           cpu_0_instruction_master_qualified_request_sdram_0_s1;
-  output           cpu_0_instruction_master_read_data_valid_sdram_0_s1;
-  output           cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register;
-  output           cpu_0_instruction_master_requests_sdram_0_s1;
   output           d1_sdram_0_s1_end_xfer;
+  output           niosSystemCamControl_clock_0_out_granted_sdram_0_s1;
+  output           niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1;
+  output           niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1;
+  output           niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register;
+  output           niosSystemCamControl_clock_0_out_requests_sdram_0_s1;
+  output           niosSystemCamControl_clock_1_out_granted_sdram_0_s1;
+  output           niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1;
+  output           niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1;
+  output           niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register;
+  output           niosSystemCamControl_clock_1_out_requests_sdram_0_s1;
   output  [ 21: 0] sdram_0_s1_address;
   output  [  1: 0] sdram_0_s1_byteenable_n;
   output           sdram_0_s1_chipselect;
@@ -2962,55 +4226,51 @@ module sdram_0_s1_arbitrator (
   output           sdram_0_s1_write_n;
   output  [ 15: 0] sdram_0_s1_writedata;
   input            clk;
-  input   [ 24: 0] cpu_0_data_master_address_to_slave;
-  input   [  3: 0] cpu_0_data_master_byteenable;
-  input   [  1: 0] cpu_0_data_master_dbs_address;
-  input   [ 15: 0] cpu_0_data_master_dbs_write_16;
-  input            cpu_0_data_master_no_byte_enables_and_last_term;
-  input            cpu_0_data_master_read;
-  input            cpu_0_data_master_waitrequest;
-  input            cpu_0_data_master_write;
-  input   [ 24: 0] cpu_0_instruction_master_address_to_slave;
-  input   [  1: 0] cpu_0_instruction_master_dbs_address;
-  input            cpu_0_instruction_master_read;
+  input   [ 22: 0] niosSystemCamControl_clock_0_out_address_to_slave;
+  input   [  1: 0] niosSystemCamControl_clock_0_out_byteenable;
+  input            niosSystemCamControl_clock_0_out_read;
+  input            niosSystemCamControl_clock_0_out_write;
+  input   [ 15: 0] niosSystemCamControl_clock_0_out_writedata;
+  input   [ 22: 0] niosSystemCamControl_clock_1_out_address_to_slave;
+  input   [  1: 0] niosSystemCamControl_clock_1_out_byteenable;
+  input            niosSystemCamControl_clock_1_out_read;
+  input            niosSystemCamControl_clock_1_out_write;
+  input   [ 15: 0] niosSystemCamControl_clock_1_out_writedata;
   input            reset_n;
   input   [ 15: 0] sdram_0_s1_readdata;
   input            sdram_0_s1_readdatavalid;
   input            sdram_0_s1_waitrequest;
 
-  wire             cpu_0_data_master_arbiterlock;
-  wire             cpu_0_data_master_arbiterlock2;
-  wire    [  1: 0] cpu_0_data_master_byteenable_sdram_0_s1;
-  wire    [  1: 0] cpu_0_data_master_byteenable_sdram_0_s1_segment_0;
-  wire    [  1: 0] cpu_0_data_master_byteenable_sdram_0_s1_segment_1;
-  wire             cpu_0_data_master_continuerequest;
-  wire             cpu_0_data_master_granted_sdram_0_s1;
-  wire             cpu_0_data_master_qualified_request_sdram_0_s1;
-  wire             cpu_0_data_master_rdv_fifo_empty_sdram_0_s1;
-  wire             cpu_0_data_master_rdv_fifo_output_from_sdram_0_s1;
-  wire             cpu_0_data_master_read_data_valid_sdram_0_s1;
-  wire             cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register;
-  wire             cpu_0_data_master_requests_sdram_0_s1;
-  wire             cpu_0_data_master_saved_grant_sdram_0_s1;
-  wire             cpu_0_instruction_master_arbiterlock;
-  wire             cpu_0_instruction_master_arbiterlock2;
-  wire             cpu_0_instruction_master_continuerequest;
-  wire             cpu_0_instruction_master_granted_sdram_0_s1;
-  wire             cpu_0_instruction_master_qualified_request_sdram_0_s1;
-  wire             cpu_0_instruction_master_rdv_fifo_empty_sdram_0_s1;
-  wire             cpu_0_instruction_master_rdv_fifo_output_from_sdram_0_s1;
-  wire             cpu_0_instruction_master_read_data_valid_sdram_0_s1;
-  wire             cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register;
-  wire             cpu_0_instruction_master_requests_sdram_0_s1;
-  wire             cpu_0_instruction_master_saved_grant_sdram_0_s1;
   reg              d1_reasons_to_wait;
   reg              d1_sdram_0_s1_end_xfer;
   reg              enable_nonzero_assertions;
   wire             end_xfer_arb_share_counter_term_sdram_0_s1;
   wire             in_a_read_cycle;
   wire             in_a_write_cycle;
-  reg              last_cycle_cpu_0_data_master_granted_slave_sdram_0_s1;
-  reg              last_cycle_cpu_0_instruction_master_granted_slave_sdram_0_s1;
+  reg              last_cycle_niosSystemCamControl_clock_0_out_granted_slave_sdram_0_s1;
+  reg              last_cycle_niosSystemCamControl_clock_1_out_granted_slave_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_arbiterlock;
+  wire             niosSystemCamControl_clock_0_out_arbiterlock2;
+  wire             niosSystemCamControl_clock_0_out_continuerequest;
+  wire             niosSystemCamControl_clock_0_out_granted_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_rdv_fifo_empty_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_rdv_fifo_output_from_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register;
+  wire             niosSystemCamControl_clock_0_out_requests_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_saved_grant_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_arbiterlock;
+  wire             niosSystemCamControl_clock_1_out_arbiterlock2;
+  wire             niosSystemCamControl_clock_1_out_continuerequest;
+  wire             niosSystemCamControl_clock_1_out_granted_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_rdv_fifo_empty_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_rdv_fifo_output_from_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register;
+  wire             niosSystemCamControl_clock_1_out_requests_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_saved_grant_sdram_0_s1;
   wire    [ 21: 0] sdram_0_s1_address;
   wire             sdram_0_s1_allgrants;
   wire             sdram_0_s1_allow_new_arb_cycle;
@@ -3018,9 +4278,9 @@ module sdram_0_s1_arbitrator (
   wire             sdram_0_s1_any_continuerequest;
   reg     [  1: 0] sdram_0_s1_arb_addend;
   wire             sdram_0_s1_arb_counter_enable;
-  reg     [  1: 0] sdram_0_s1_arb_share_counter;
-  wire    [  1: 0] sdram_0_s1_arb_share_counter_next_value;
-  wire    [  1: 0] sdram_0_s1_arb_share_set_values;
+  reg              sdram_0_s1_arb_share_counter;
+  wire             sdram_0_s1_arb_share_counter_next_value;
+  wire             sdram_0_s1_arb_share_set_values;
   wire    [  1: 0] sdram_0_s1_arb_winner;
   wire             sdram_0_s1_arbitration_holdoff_internal;
   wire             sdram_0_s1_beginbursttransfer_internal;
@@ -3051,8 +4311,8 @@ module sdram_0_s1_arbitrator (
   wire             sdram_0_s1_waits_for_write;
   wire             sdram_0_s1_write_n;
   wire    [ 15: 0] sdram_0_s1_writedata;
-  wire    [ 24: 0] shifted_address_to_sdram_0_s1_from_cpu_0_data_master;
-  wire    [ 24: 0] shifted_address_to_sdram_0_s1_from_cpu_0_instruction_master;
+  wire    [ 22: 0] shifted_address_to_sdram_0_s1_from_niosSystemCamControl_clock_0_out;
+  wire    [ 22: 0] shifted_address_to_sdram_0_s1_from_niosSystemCamControl_clock_1_out;
   wire             wait_for_sdram_0_s1_counter;
   always @(posedge clk or negedge reset_n)
     begin
@@ -3063,11 +4323,11 @@ module sdram_0_s1_arbitrator (
     end
 
 
-  assign sdram_0_s1_begins_xfer = ~d1_reasons_to_wait & ((cpu_0_data_master_qualified_request_sdram_0_s1 | cpu_0_instruction_master_qualified_request_sdram_0_s1));
+  assign sdram_0_s1_begins_xfer = ~d1_reasons_to_wait & ((niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1 | niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1));
   //assign sdram_0_s1_readdata_from_sa = sdram_0_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign sdram_0_s1_readdata_from_sa = sdram_0_s1_readdata;
 
-  assign cpu_0_data_master_requests_sdram_0_s1 = ({cpu_0_data_master_address_to_slave[24 : 23] , 23'b0} == 25'h800000) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign niosSystemCamControl_clock_0_out_requests_sdram_0_s1 = (1) & (niosSystemCamControl_clock_0_out_read | niosSystemCamControl_clock_0_out_write);
   //assign sdram_0_s1_waitrequest_from_sa = sdram_0_s1_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign sdram_0_s1_waitrequest_from_sa = sdram_0_s1_waitrequest;
 
@@ -3075,17 +4335,13 @@ module sdram_0_s1_arbitrator (
   assign sdram_0_s1_readdatavalid_from_sa = sdram_0_s1_readdatavalid;
 
   //sdram_0_s1_arb_share_counter set values, which is an e_mux
-  assign sdram_0_s1_arb_share_set_values = (cpu_0_data_master_granted_sdram_0_s1)? 2 :
-    (cpu_0_instruction_master_granted_sdram_0_s1)? 2 :
-    (cpu_0_data_master_granted_sdram_0_s1)? 2 :
-    (cpu_0_instruction_master_granted_sdram_0_s1)? 2 :
-    1;
+  assign sdram_0_s1_arb_share_set_values = 1;
 
   //sdram_0_s1_non_bursting_master_requests mux, which is an e_mux
-  assign sdram_0_s1_non_bursting_master_requests = cpu_0_data_master_requests_sdram_0_s1 |
-    cpu_0_instruction_master_requests_sdram_0_s1 |
-    cpu_0_data_master_requests_sdram_0_s1 |
-    cpu_0_instruction_master_requests_sdram_0_s1;
+  assign sdram_0_s1_non_bursting_master_requests = niosSystemCamControl_clock_0_out_requests_sdram_0_s1 |
+    niosSystemCamControl_clock_1_out_requests_sdram_0_s1 |
+    niosSystemCamControl_clock_0_out_requests_sdram_0_s1 |
+    niosSystemCamControl_clock_1_out_requests_sdram_0_s1;
 
   //sdram_0_s1_any_bursting_master_saved_grant mux, which is an e_mux
   assign sdram_0_s1_any_bursting_master_saved_grant = 0;
@@ -3128,51 +4384,51 @@ module sdram_0_s1_arbitrator (
     end
 
 
-  //cpu_0/data_master sdram_0/s1 arbiterlock, which is an e_assign
-  assign cpu_0_data_master_arbiterlock = sdram_0_s1_slavearbiterlockenable & cpu_0_data_master_continuerequest;
+  //niosSystemCamControl_clock_0/out sdram_0/s1 arbiterlock, which is an e_assign
+  assign niosSystemCamControl_clock_0_out_arbiterlock = sdram_0_s1_slavearbiterlockenable & niosSystemCamControl_clock_0_out_continuerequest;
 
   //sdram_0_s1_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
   assign sdram_0_s1_slavearbiterlockenable2 = |sdram_0_s1_arb_share_counter_next_value;
 
-  //cpu_0/data_master sdram_0/s1 arbiterlock2, which is an e_assign
-  assign cpu_0_data_master_arbiterlock2 = sdram_0_s1_slavearbiterlockenable2 & cpu_0_data_master_continuerequest;
+  //niosSystemCamControl_clock_0/out sdram_0/s1 arbiterlock2, which is an e_assign
+  assign niosSystemCamControl_clock_0_out_arbiterlock2 = sdram_0_s1_slavearbiterlockenable2 & niosSystemCamControl_clock_0_out_continuerequest;
 
-  //cpu_0/instruction_master sdram_0/s1 arbiterlock, which is an e_assign
-  assign cpu_0_instruction_master_arbiterlock = sdram_0_s1_slavearbiterlockenable & cpu_0_instruction_master_continuerequest;
+  //niosSystemCamControl_clock_1/out sdram_0/s1 arbiterlock, which is an e_assign
+  assign niosSystemCamControl_clock_1_out_arbiterlock = sdram_0_s1_slavearbiterlockenable & niosSystemCamControl_clock_1_out_continuerequest;
 
-  //cpu_0/instruction_master sdram_0/s1 arbiterlock2, which is an e_assign
-  assign cpu_0_instruction_master_arbiterlock2 = sdram_0_s1_slavearbiterlockenable2 & cpu_0_instruction_master_continuerequest;
+  //niosSystemCamControl_clock_1/out sdram_0/s1 arbiterlock2, which is an e_assign
+  assign niosSystemCamControl_clock_1_out_arbiterlock2 = sdram_0_s1_slavearbiterlockenable2 & niosSystemCamControl_clock_1_out_continuerequest;
 
-  //cpu_0/instruction_master granted sdram_0/s1 last time, which is an e_register
+  //niosSystemCamControl_clock_1/out granted sdram_0/s1 last time, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          last_cycle_cpu_0_instruction_master_granted_slave_sdram_0_s1 <= 0;
+          last_cycle_niosSystemCamControl_clock_1_out_granted_slave_sdram_0_s1 <= 0;
       else 
-        last_cycle_cpu_0_instruction_master_granted_slave_sdram_0_s1 <= cpu_0_instruction_master_saved_grant_sdram_0_s1 ? 1 : (sdram_0_s1_arbitration_holdoff_internal | ~cpu_0_instruction_master_requests_sdram_0_s1) ? 0 : last_cycle_cpu_0_instruction_master_granted_slave_sdram_0_s1;
+        last_cycle_niosSystemCamControl_clock_1_out_granted_slave_sdram_0_s1 <= niosSystemCamControl_clock_1_out_saved_grant_sdram_0_s1 ? 1 : (sdram_0_s1_arbitration_holdoff_internal | ~niosSystemCamControl_clock_1_out_requests_sdram_0_s1) ? 0 : last_cycle_niosSystemCamControl_clock_1_out_granted_slave_sdram_0_s1;
     end
 
 
-  //cpu_0_instruction_master_continuerequest continued request, which is an e_mux
-  assign cpu_0_instruction_master_continuerequest = last_cycle_cpu_0_instruction_master_granted_slave_sdram_0_s1 & cpu_0_instruction_master_requests_sdram_0_s1;
+  //niosSystemCamControl_clock_1_out_continuerequest continued request, which is an e_mux
+  assign niosSystemCamControl_clock_1_out_continuerequest = last_cycle_niosSystemCamControl_clock_1_out_granted_slave_sdram_0_s1 & niosSystemCamControl_clock_1_out_requests_sdram_0_s1;
 
   //sdram_0_s1_any_continuerequest at least one master continues requesting, which is an e_mux
-  assign sdram_0_s1_any_continuerequest = cpu_0_instruction_master_continuerequest |
-    cpu_0_data_master_continuerequest;
+  assign sdram_0_s1_any_continuerequest = niosSystemCamControl_clock_1_out_continuerequest |
+    niosSystemCamControl_clock_0_out_continuerequest;
 
-  assign cpu_0_data_master_qualified_request_sdram_0_s1 = cpu_0_data_master_requests_sdram_0_s1 & ~((cpu_0_data_master_read & (~cpu_0_data_master_waitrequest | (|cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register))) | ((~cpu_0_data_master_waitrequest | cpu_0_data_master_no_byte_enables_and_last_term | !cpu_0_data_master_byteenable_sdram_0_s1) & cpu_0_data_master_write) | cpu_0_instruction_master_arbiterlock);
+  assign niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1 = niosSystemCamControl_clock_0_out_requests_sdram_0_s1 & ~((niosSystemCamControl_clock_0_out_read & ((|niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register))) | niosSystemCamControl_clock_1_out_arbiterlock);
   //unique name for sdram_0_s1_move_on_to_next_transaction, which is an e_assign
   assign sdram_0_s1_move_on_to_next_transaction = sdram_0_s1_readdatavalid_from_sa;
 
-  //rdv_fifo_for_cpu_0_data_master_to_sdram_0_s1, which is an e_fifo_with_registered_outputs
-  rdv_fifo_for_cpu_0_data_master_to_sdram_0_s1_module rdv_fifo_for_cpu_0_data_master_to_sdram_0_s1
+  //rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1, which is an e_fifo_with_registered_outputs
+  rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1_module rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1
     (
       .clear_fifo           (1'b0),
       .clk                  (clk),
-      .data_in              (cpu_0_data_master_granted_sdram_0_s1),
-      .data_out             (cpu_0_data_master_rdv_fifo_output_from_sdram_0_s1),
+      .data_in              (niosSystemCamControl_clock_0_out_granted_sdram_0_s1),
+      .data_out             (niosSystemCamControl_clock_0_out_rdv_fifo_output_from_sdram_0_s1),
       .empty                (),
-      .fifo_contains_ones_n (cpu_0_data_master_rdv_fifo_empty_sdram_0_s1),
+      .fifo_contains_ones_n (niosSystemCamControl_clock_0_out_rdv_fifo_empty_sdram_0_s1),
       .full                 (),
       .read                 (sdram_0_s1_move_on_to_next_transaction),
       .reset_n              (reset_n),
@@ -3180,37 +4436,38 @@ module sdram_0_s1_arbitrator (
       .write                (in_a_read_cycle & ~sdram_0_s1_waits_for_read)
     );
 
-  assign cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register = ~cpu_0_data_master_rdv_fifo_empty_sdram_0_s1;
-  //local readdatavalid cpu_0_data_master_read_data_valid_sdram_0_s1, which is an e_mux
-  assign cpu_0_data_master_read_data_valid_sdram_0_s1 = (sdram_0_s1_readdatavalid_from_sa & cpu_0_data_master_rdv_fifo_output_from_sdram_0_s1) & ~ cpu_0_data_master_rdv_fifo_empty_sdram_0_s1;
+  assign niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register = ~niosSystemCamControl_clock_0_out_rdv_fifo_empty_sdram_0_s1;
+  //local readdatavalid niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1, which is an e_mux
+  assign niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1 = (sdram_0_s1_readdatavalid_from_sa & niosSystemCamControl_clock_0_out_rdv_fifo_output_from_sdram_0_s1) & ~ niosSystemCamControl_clock_0_out_rdv_fifo_empty_sdram_0_s1;
 
   //sdram_0_s1_writedata mux, which is an e_mux
-  assign sdram_0_s1_writedata = cpu_0_data_master_dbs_write_16;
+  assign sdram_0_s1_writedata = (niosSystemCamControl_clock_0_out_granted_sdram_0_s1)? niosSystemCamControl_clock_0_out_writedata :
+    niosSystemCamControl_clock_1_out_writedata;
 
-  assign cpu_0_instruction_master_requests_sdram_0_s1 = (({cpu_0_instruction_master_address_to_slave[24 : 23] , 23'b0} == 25'h800000) & (cpu_0_instruction_master_read)) & cpu_0_instruction_master_read;
-  //cpu_0/data_master granted sdram_0/s1 last time, which is an e_register
+  assign niosSystemCamControl_clock_1_out_requests_sdram_0_s1 = (1) & (niosSystemCamControl_clock_1_out_read | niosSystemCamControl_clock_1_out_write);
+  //niosSystemCamControl_clock_0/out granted sdram_0/s1 last time, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          last_cycle_cpu_0_data_master_granted_slave_sdram_0_s1 <= 0;
+          last_cycle_niosSystemCamControl_clock_0_out_granted_slave_sdram_0_s1 <= 0;
       else 
-        last_cycle_cpu_0_data_master_granted_slave_sdram_0_s1 <= cpu_0_data_master_saved_grant_sdram_0_s1 ? 1 : (sdram_0_s1_arbitration_holdoff_internal | ~cpu_0_data_master_requests_sdram_0_s1) ? 0 : last_cycle_cpu_0_data_master_granted_slave_sdram_0_s1;
+        last_cycle_niosSystemCamControl_clock_0_out_granted_slave_sdram_0_s1 <= niosSystemCamControl_clock_0_out_saved_grant_sdram_0_s1 ? 1 : (sdram_0_s1_arbitration_holdoff_internal | ~niosSystemCamControl_clock_0_out_requests_sdram_0_s1) ? 0 : last_cycle_niosSystemCamControl_clock_0_out_granted_slave_sdram_0_s1;
     end
 
 
-  //cpu_0_data_master_continuerequest continued request, which is an e_mux
-  assign cpu_0_data_master_continuerequest = last_cycle_cpu_0_data_master_granted_slave_sdram_0_s1 & cpu_0_data_master_requests_sdram_0_s1;
+  //niosSystemCamControl_clock_0_out_continuerequest continued request, which is an e_mux
+  assign niosSystemCamControl_clock_0_out_continuerequest = last_cycle_niosSystemCamControl_clock_0_out_granted_slave_sdram_0_s1 & niosSystemCamControl_clock_0_out_requests_sdram_0_s1;
 
-  assign cpu_0_instruction_master_qualified_request_sdram_0_s1 = cpu_0_instruction_master_requests_sdram_0_s1 & ~((cpu_0_instruction_master_read & ((|cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register))) | cpu_0_data_master_arbiterlock);
-  //rdv_fifo_for_cpu_0_instruction_master_to_sdram_0_s1, which is an e_fifo_with_registered_outputs
-  rdv_fifo_for_cpu_0_instruction_master_to_sdram_0_s1_module rdv_fifo_for_cpu_0_instruction_master_to_sdram_0_s1
+  assign niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1 = niosSystemCamControl_clock_1_out_requests_sdram_0_s1 & ~((niosSystemCamControl_clock_1_out_read & ((|niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register))) | niosSystemCamControl_clock_0_out_arbiterlock);
+  //rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1, which is an e_fifo_with_registered_outputs
+  rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1_module rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1
     (
       .clear_fifo           (1'b0),
       .clk                  (clk),
-      .data_in              (cpu_0_instruction_master_granted_sdram_0_s1),
-      .data_out             (cpu_0_instruction_master_rdv_fifo_output_from_sdram_0_s1),
+      .data_in              (niosSystemCamControl_clock_1_out_granted_sdram_0_s1),
+      .data_out             (niosSystemCamControl_clock_1_out_rdv_fifo_output_from_sdram_0_s1),
       .empty                (),
-      .fifo_contains_ones_n (cpu_0_instruction_master_rdv_fifo_empty_sdram_0_s1),
+      .fifo_contains_ones_n (niosSystemCamControl_clock_1_out_rdv_fifo_empty_sdram_0_s1),
       .full                 (),
       .read                 (sdram_0_s1_move_on_to_next_transaction),
       .reset_n              (reset_n),
@@ -3218,30 +4475,30 @@ module sdram_0_s1_arbitrator (
       .write                (in_a_read_cycle & ~sdram_0_s1_waits_for_read)
     );
 
-  assign cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register = ~cpu_0_instruction_master_rdv_fifo_empty_sdram_0_s1;
-  //local readdatavalid cpu_0_instruction_master_read_data_valid_sdram_0_s1, which is an e_mux
-  assign cpu_0_instruction_master_read_data_valid_sdram_0_s1 = (sdram_0_s1_readdatavalid_from_sa & cpu_0_instruction_master_rdv_fifo_output_from_sdram_0_s1) & ~ cpu_0_instruction_master_rdv_fifo_empty_sdram_0_s1;
+  assign niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register = ~niosSystemCamControl_clock_1_out_rdv_fifo_empty_sdram_0_s1;
+  //local readdatavalid niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1, which is an e_mux
+  assign niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1 = (sdram_0_s1_readdatavalid_from_sa & niosSystemCamControl_clock_1_out_rdv_fifo_output_from_sdram_0_s1) & ~ niosSystemCamControl_clock_1_out_rdv_fifo_empty_sdram_0_s1;
 
   //allow new arb cycle for sdram_0/s1, which is an e_assign
-  assign sdram_0_s1_allow_new_arb_cycle = ~cpu_0_data_master_arbiterlock & ~cpu_0_instruction_master_arbiterlock;
+  assign sdram_0_s1_allow_new_arb_cycle = ~niosSystemCamControl_clock_0_out_arbiterlock & ~niosSystemCamControl_clock_1_out_arbiterlock;
 
-  //cpu_0/instruction_master assignment into master qualified-requests vector for sdram_0/s1, which is an e_assign
-  assign sdram_0_s1_master_qreq_vector[0] = cpu_0_instruction_master_qualified_request_sdram_0_s1;
+  //niosSystemCamControl_clock_1/out assignment into master qualified-requests vector for sdram_0/s1, which is an e_assign
+  assign sdram_0_s1_master_qreq_vector[0] = niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1;
 
-  //cpu_0/instruction_master grant sdram_0/s1, which is an e_assign
-  assign cpu_0_instruction_master_granted_sdram_0_s1 = sdram_0_s1_grant_vector[0];
+  //niosSystemCamControl_clock_1/out grant sdram_0/s1, which is an e_assign
+  assign niosSystemCamControl_clock_1_out_granted_sdram_0_s1 = sdram_0_s1_grant_vector[0];
 
-  //cpu_0/instruction_master saved-grant sdram_0/s1, which is an e_assign
-  assign cpu_0_instruction_master_saved_grant_sdram_0_s1 = sdram_0_s1_arb_winner[0] && cpu_0_instruction_master_requests_sdram_0_s1;
+  //niosSystemCamControl_clock_1/out saved-grant sdram_0/s1, which is an e_assign
+  assign niosSystemCamControl_clock_1_out_saved_grant_sdram_0_s1 = sdram_0_s1_arb_winner[0] && niosSystemCamControl_clock_1_out_requests_sdram_0_s1;
 
-  //cpu_0/data_master assignment into master qualified-requests vector for sdram_0/s1, which is an e_assign
-  assign sdram_0_s1_master_qreq_vector[1] = cpu_0_data_master_qualified_request_sdram_0_s1;
+  //niosSystemCamControl_clock_0/out assignment into master qualified-requests vector for sdram_0/s1, which is an e_assign
+  assign sdram_0_s1_master_qreq_vector[1] = niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1;
 
-  //cpu_0/data_master grant sdram_0/s1, which is an e_assign
-  assign cpu_0_data_master_granted_sdram_0_s1 = sdram_0_s1_grant_vector[1];
+  //niosSystemCamControl_clock_0/out grant sdram_0/s1, which is an e_assign
+  assign niosSystemCamControl_clock_0_out_granted_sdram_0_s1 = sdram_0_s1_grant_vector[1];
 
-  //cpu_0/data_master saved-grant sdram_0/s1, which is an e_assign
-  assign cpu_0_data_master_saved_grant_sdram_0_s1 = sdram_0_s1_arb_winner[1] && cpu_0_data_master_requests_sdram_0_s1;
+  //niosSystemCamControl_clock_0/out saved-grant sdram_0/s1, which is an e_assign
+  assign niosSystemCamControl_clock_0_out_saved_grant_sdram_0_s1 = sdram_0_s1_arb_winner[1] && niosSystemCamControl_clock_0_out_requests_sdram_0_s1;
 
   //sdram_0/s1 chosen-master double-vector, which is an e_assign
   assign sdram_0_s1_chosen_master_double_vector = {sdram_0_s1_master_qreq_vector, sdram_0_s1_master_qreq_vector} & ({~sdram_0_s1_master_qreq_vector, ~sdram_0_s1_master_qreq_vector} + sdram_0_s1_arb_addend);
@@ -3279,7 +4536,7 @@ module sdram_0_s1_arbitrator (
   //sdram_0_s1_reset_n assignment, which is an e_assign
   assign sdram_0_s1_reset_n = reset_n;
 
-  assign sdram_0_s1_chipselect = cpu_0_data_master_granted_sdram_0_s1 | cpu_0_instruction_master_granted_sdram_0_s1;
+  assign sdram_0_s1_chipselect = niosSystemCamControl_clock_0_out_granted_sdram_0_s1 | niosSystemCamControl_clock_1_out_granted_sdram_0_s1;
   //sdram_0_s1_firsttransfer first transaction, which is an e_assign
   assign sdram_0_s1_firsttransfer = sdram_0_s1_begins_xfer ? sdram_0_s1_unreg_firsttransfer : sdram_0_s1_reg_firsttransfer;
 
@@ -3303,23 +4560,17 @@ module sdram_0_s1_arbitrator (
   assign sdram_0_s1_arbitration_holdoff_internal = sdram_0_s1_begins_xfer & sdram_0_s1_firsttransfer;
 
   //~sdram_0_s1_read_n assignment, which is an e_mux
-  assign sdram_0_s1_read_n = ~((cpu_0_data_master_granted_sdram_0_s1 & cpu_0_data_master_read) | (cpu_0_instruction_master_granted_sdram_0_s1 & cpu_0_instruction_master_read));
+  assign sdram_0_s1_read_n = ~((niosSystemCamControl_clock_0_out_granted_sdram_0_s1 & niosSystemCamControl_clock_0_out_read) | (niosSystemCamControl_clock_1_out_granted_sdram_0_s1 & niosSystemCamControl_clock_1_out_read));
 
   //~sdram_0_s1_write_n assignment, which is an e_mux
-  assign sdram_0_s1_write_n = ~(cpu_0_data_master_granted_sdram_0_s1 & cpu_0_data_master_write);
+  assign sdram_0_s1_write_n = ~((niosSystemCamControl_clock_0_out_granted_sdram_0_s1 & niosSystemCamControl_clock_0_out_write) | (niosSystemCamControl_clock_1_out_granted_sdram_0_s1 & niosSystemCamControl_clock_1_out_write));
 
-  assign shifted_address_to_sdram_0_s1_from_cpu_0_data_master = {cpu_0_data_master_address_to_slave >> 2,
-    cpu_0_data_master_dbs_address[1],
-    {1 {1'b0}}};
-
+  assign shifted_address_to_sdram_0_s1_from_niosSystemCamControl_clock_0_out = niosSystemCamControl_clock_0_out_address_to_slave;
   //sdram_0_s1_address mux, which is an e_mux
-  assign sdram_0_s1_address = (cpu_0_data_master_granted_sdram_0_s1)? (shifted_address_to_sdram_0_s1_from_cpu_0_data_master >> 1) :
-    (shifted_address_to_sdram_0_s1_from_cpu_0_instruction_master >> 1);
+  assign sdram_0_s1_address = (niosSystemCamControl_clock_0_out_granted_sdram_0_s1)? (shifted_address_to_sdram_0_s1_from_niosSystemCamControl_clock_0_out >> 1) :
+    (shifted_address_to_sdram_0_s1_from_niosSystemCamControl_clock_1_out >> 1);
 
-  assign shifted_address_to_sdram_0_s1_from_cpu_0_instruction_master = {cpu_0_instruction_master_address_to_slave >> 2,
-    cpu_0_instruction_master_dbs_address[1],
-    {1 {1'b0}}};
-
+  assign shifted_address_to_sdram_0_s1_from_niosSystemCamControl_clock_1_out = niosSystemCamControl_clock_1_out_address_to_slave;
   //d1_sdram_0_s1_end_xfer register, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
@@ -3334,7 +4585,7 @@ module sdram_0_s1_arbitrator (
   assign sdram_0_s1_waits_for_read = sdram_0_s1_in_a_read_cycle & sdram_0_s1_waitrequest_from_sa;
 
   //sdram_0_s1_in_a_read_cycle assignment, which is an e_assign
-  assign sdram_0_s1_in_a_read_cycle = (cpu_0_data_master_granted_sdram_0_s1 & cpu_0_data_master_read) | (cpu_0_instruction_master_granted_sdram_0_s1 & cpu_0_instruction_master_read);
+  assign sdram_0_s1_in_a_read_cycle = (niosSystemCamControl_clock_0_out_granted_sdram_0_s1 & niosSystemCamControl_clock_0_out_read) | (niosSystemCamControl_clock_1_out_granted_sdram_0_s1 & niosSystemCamControl_clock_1_out_read);
 
   //in_a_read_cycle assignment, which is an e_mux
   assign in_a_read_cycle = sdram_0_s1_in_a_read_cycle;
@@ -3343,20 +4594,16 @@ module sdram_0_s1_arbitrator (
   assign sdram_0_s1_waits_for_write = sdram_0_s1_in_a_write_cycle & sdram_0_s1_waitrequest_from_sa;
 
   //sdram_0_s1_in_a_write_cycle assignment, which is an e_assign
-  assign sdram_0_s1_in_a_write_cycle = cpu_0_data_master_granted_sdram_0_s1 & cpu_0_data_master_write;
+  assign sdram_0_s1_in_a_write_cycle = (niosSystemCamControl_clock_0_out_granted_sdram_0_s1 & niosSystemCamControl_clock_0_out_write) | (niosSystemCamControl_clock_1_out_granted_sdram_0_s1 & niosSystemCamControl_clock_1_out_write);
 
   //in_a_write_cycle assignment, which is an e_mux
   assign in_a_write_cycle = sdram_0_s1_in_a_write_cycle;
 
   assign wait_for_sdram_0_s1_counter = 0;
   //~sdram_0_s1_byteenable_n byte enable port mux, which is an e_mux
-  assign sdram_0_s1_byteenable_n = ~((cpu_0_data_master_granted_sdram_0_s1)? cpu_0_data_master_byteenable_sdram_0_s1 :
+  assign sdram_0_s1_byteenable_n = ~((niosSystemCamControl_clock_0_out_granted_sdram_0_s1)? niosSystemCamControl_clock_0_out_byteenable :
+    (niosSystemCamControl_clock_1_out_granted_sdram_0_s1)? niosSystemCamControl_clock_1_out_byteenable :
     -1);
-
-  assign {cpu_0_data_master_byteenable_sdram_0_s1_segment_1,
-cpu_0_data_master_byteenable_sdram_0_s1_segment_0} = cpu_0_data_master_byteenable;
-  assign cpu_0_data_master_byteenable_sdram_0_s1 = ((cpu_0_data_master_dbs_address[1] == 0))? cpu_0_data_master_byteenable_sdram_0_s1_segment_0 :
-    cpu_0_data_master_byteenable_sdram_0_s1_segment_1;
 
 
 //synthesis translate_off
@@ -3374,7 +4621,7 @@ cpu_0_data_master_byteenable_sdram_0_s1_segment_0} = cpu_0_data_master_byteenabl
   //grant signals are active simultaneously, which is an e_process
   always @(posedge clk)
     begin
-      if (cpu_0_data_master_granted_sdram_0_s1 + cpu_0_instruction_master_granted_sdram_0_s1 > 1)
+      if (niosSystemCamControl_clock_0_out_granted_sdram_0_s1 + niosSystemCamControl_clock_1_out_granted_sdram_0_s1 > 1)
         begin
           $write("%0d ns: > 1 of grant signals are active simultaneously", $time);
           $stop;
@@ -3385,7 +4632,7 @@ cpu_0_data_master_byteenable_sdram_0_s1_segment_0} = cpu_0_data_master_byteenabl
   //saved_grant signals are active simultaneously, which is an e_process
   always @(posedge clk)
     begin
-      if (cpu_0_data_master_saved_grant_sdram_0_s1 + cpu_0_instruction_master_saved_grant_sdram_0_s1 > 1)
+      if (niosSystemCamControl_clock_0_out_saved_grant_sdram_0_s1 + niosSystemCamControl_clock_1_out_saved_grant_sdram_0_s1 > 1)
         begin
           $write("%0d ns: > 1 of saved_grant signals are active simultaneously", $time);
           $stop;
@@ -3416,11 +4663,12 @@ module sram_16bit_512k_0_avalon_slave_0_arbitrator (
                                                       cpu_0_data_master_byteenable,
                                                       cpu_0_data_master_dbs_address,
                                                       cpu_0_data_master_dbs_write_16,
-                                                      cpu_0_data_master_no_byte_enables_and_last_term,
+                                                      cpu_0_data_master_latency_counter,
                                                       cpu_0_data_master_read,
                                                       cpu_0_data_master_write,
                                                       cpu_0_instruction_master_address_to_slave,
                                                       cpu_0_instruction_master_dbs_address,
+                                                      cpu_0_instruction_master_latency_counter,
                                                       cpu_0_instruction_master_read,
                                                       reset_n,
                                                       sram_16bit_512k_0_avalon_slave_0_readdata,
@@ -3472,11 +4720,12 @@ module sram_16bit_512k_0_avalon_slave_0_arbitrator (
   input   [  3: 0] cpu_0_data_master_byteenable;
   input   [  1: 0] cpu_0_data_master_dbs_address;
   input   [ 15: 0] cpu_0_data_master_dbs_write_16;
-  input            cpu_0_data_master_no_byte_enables_and_last_term;
+  input            cpu_0_data_master_latency_counter;
   input            cpu_0_data_master_read;
   input            cpu_0_data_master_write;
   input   [ 24: 0] cpu_0_instruction_master_address_to_slave;
   input   [  1: 0] cpu_0_instruction_master_dbs_address;
+  input            cpu_0_instruction_master_latency_counter;
   input            cpu_0_instruction_master_read;
   input            reset_n;
   input   [ 15: 0] sram_16bit_512k_0_avalon_slave_0_readdata;
@@ -3651,7 +4900,10 @@ module sram_16bit_512k_0_avalon_slave_0_arbitrator (
   assign sram_16bit_512k_0_avalon_slave_0_any_continuerequest = cpu_0_instruction_master_continuerequest |
     cpu_0_data_master_continuerequest;
 
-  assign cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 = cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 & ~(((cpu_0_data_master_no_byte_enables_and_last_term | !cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0) & cpu_0_data_master_write) | cpu_0_instruction_master_arbiterlock);
+  assign cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 = cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0 & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0))) | ((!cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0) & cpu_0_data_master_write) | cpu_0_instruction_master_arbiterlock);
+  //local readdatavalid cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0 = cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_read & ~sram_16bit_512k_0_avalon_slave_0_waits_for_read;
+
   //sram_16bit_512k_0_avalon_slave_0_writedata mux, which is an e_mux
   assign sram_16bit_512k_0_avalon_slave_0_writedata = cpu_0_data_master_dbs_write_16;
 
@@ -3669,7 +4921,10 @@ module sram_16bit_512k_0_avalon_slave_0_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_mux
   assign cpu_0_data_master_continuerequest = last_cycle_cpu_0_data_master_granted_slave_sram_16bit_512k_0_avalon_slave_0 & cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
 
-  assign cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 = cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0 & ~(cpu_0_data_master_arbiterlock);
+  assign cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 = cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0 & ~((cpu_0_instruction_master_read & ((cpu_0_instruction_master_latency_counter != 0))) | cpu_0_data_master_arbiterlock);
+  //local readdatavalid cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0, which is an e_mux
+  assign cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0 = cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_read & ~sram_16bit_512k_0_avalon_slave_0_waits_for_read;
+
   //allow new arb cycle for sram_16bit_512k_0/avalon_slave_0, which is an e_assign
   assign sram_16bit_512k_0_avalon_slave_0_allow_new_arb_cycle = ~cpu_0_data_master_arbiterlock & ~cpu_0_instruction_master_arbiterlock;
 
@@ -3875,6 +5130,7 @@ module sysid_control_slave_arbitrator (
                                         // inputs:
                                          clk,
                                          cpu_0_data_master_address_to_slave,
+                                         cpu_0_data_master_latency_counter,
                                          cpu_0_data_master_read,
                                          cpu_0_data_master_write,
                                          reset_n,
@@ -3902,6 +5158,7 @@ module sysid_control_slave_arbitrator (
   output           sysid_control_slave_reset_n;
   input            clk;
   input   [ 24: 0] cpu_0_data_master_address_to_slave;
+  input            cpu_0_data_master_latency_counter;
   input            cpu_0_data_master_read;
   input            cpu_0_data_master_write;
   input            reset_n;
@@ -4022,7 +5279,10 @@ module sysid_control_slave_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_sysid_control_slave = cpu_0_data_master_requests_sysid_control_slave;
+  assign cpu_0_data_master_qualified_request_sysid_control_slave = cpu_0_data_master_requests_sysid_control_slave & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0))));
+  //local readdatavalid cpu_0_data_master_read_data_valid_sysid_control_slave, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_sysid_control_slave = cpu_0_data_master_granted_sysid_control_slave & cpu_0_data_master_read & ~sysid_control_slave_waits_for_read;
+
   //master is always granted when requested
   assign cpu_0_data_master_granted_sysid_control_slave = cpu_0_data_master_qualified_request_sysid_control_slave;
 
@@ -4126,8 +5386,8 @@ module timer_0_s1_arbitrator (
                                // inputs:
                                 clk,
                                 cpu_0_data_master_address_to_slave,
+                                cpu_0_data_master_latency_counter,
                                 cpu_0_data_master_read,
-                                cpu_0_data_master_waitrequest,
                                 cpu_0_data_master_write,
                                 cpu_0_data_master_writedata,
                                 reset_n,
@@ -4164,8 +5424,8 @@ module timer_0_s1_arbitrator (
   output  [ 15: 0] timer_0_s1_writedata;
   input            clk;
   input   [ 24: 0] cpu_0_data_master_address_to_slave;
+  input            cpu_0_data_master_latency_counter;
   input            cpu_0_data_master_read;
-  input            cpu_0_data_master_waitrequest;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input            reset_n;
@@ -4291,7 +5551,10 @@ module timer_0_s1_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_timer_0_s1 = cpu_0_data_master_requests_timer_0_s1 & ~(((~cpu_0_data_master_waitrequest) & cpu_0_data_master_write));
+  assign cpu_0_data_master_qualified_request_timer_0_s1 = cpu_0_data_master_requests_timer_0_s1 & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0))));
+  //local readdatavalid cpu_0_data_master_read_data_valid_timer_0_s1, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_timer_0_s1 = cpu_0_data_master_granted_timer_0_s1 & cpu_0_data_master_read & ~timer_0_s1_waits_for_read;
+
   //timer_0_s1_writedata mux, which is an e_mux
   assign timer_0_s1_writedata = cpu_0_data_master_writedata;
 
@@ -4449,9 +5712,58 @@ endmodule
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
+module niosSystemCamControl_reset_clk_1_domain_synch_module (
+                                                              // inputs:
+                                                               clk,
+                                                               data_in,
+                                                               reset_n,
+
+                                                              // outputs:
+                                                               data_out
+                                                            )
+;
+
+  output           data_out;
+  input            clk;
+  input            data_in;
+  input            reset_n;
+
+  reg              data_in_d1 /* synthesis ALTERA_ATTRIBUTE = "{-from \"*\"} CUT=ON ; PRESERVE_REGISTER=ON ; SUPPRESS_DA_RULE_INTERNAL=R101"  */;
+  reg              data_out /* synthesis ALTERA_ATTRIBUTE = "PRESERVE_REGISTER=ON ; SUPPRESS_DA_RULE_INTERNAL=R101"  */;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          data_in_d1 <= 0;
+      else 
+        data_in_d1 <= data_in;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          data_out <= 0;
+      else 
+        data_out <= data_in_d1;
+    end
+
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
 module niosSystemCamControl (
                               // 1) global signals:
                                clk_0,
+                               clk_1,
                                reset_n,
 
                               // the_procHasControl
@@ -4497,6 +5809,7 @@ module niosSystemCamControl (
   output           zs_ras_n_from_the_sdram_0;
   output           zs_we_n_from_the_sdram_0;
   input            clk_0;
+  input            clk_1;
   input            reset_n;
 
   wire    [ 17: 0] SRAM_ADDR_from_the_sram_16bit_512k_0;
@@ -4507,6 +5820,7 @@ module niosSystemCamControl (
   wire             SRAM_UB_N_from_the_sram_16bit_512k_0;
   wire             SRAM_WE_N_from_the_sram_16bit_512k_0;
   wire             clk_0_reset_n;
+  wire             clk_1_reset_n;
   wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_clk_en;
   wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_dataa;
   wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_datab;
@@ -4518,68 +5832,68 @@ module niosSystemCamControl (
   wire    [ 31: 0] cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa;
   wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select;
   wire             cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start;
-  wire    [  4: 0] cpu_0_custom_instruction_master_a;
-  wire    [  4: 0] cpu_0_custom_instruction_master_b;
-  wire    [  4: 0] cpu_0_custom_instruction_master_c;
-  wire             cpu_0_custom_instruction_master_clk_en;
-  wire    [ 31: 0] cpu_0_custom_instruction_master_dataa;
-  wire    [ 31: 0] cpu_0_custom_instruction_master_datab;
-  wire             cpu_0_custom_instruction_master_done;
-  wire             cpu_0_custom_instruction_master_estatus;
-  wire    [ 31: 0] cpu_0_custom_instruction_master_ipending;
+  wire    [  4: 0] cpu_0_custom_instruction_master_multi_a;
+  wire    [  4: 0] cpu_0_custom_instruction_master_multi_b;
+  wire    [  4: 0] cpu_0_custom_instruction_master_multi_c;
   wire             cpu_0_custom_instruction_master_multi_clk;
+  wire             cpu_0_custom_instruction_master_multi_clk_en;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_multi_dataa;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_multi_datab;
+  wire             cpu_0_custom_instruction_master_multi_done;
+  wire             cpu_0_custom_instruction_master_multi_estatus;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_multi_ipending;
+  wire    [  7: 0] cpu_0_custom_instruction_master_multi_n;
+  wire             cpu_0_custom_instruction_master_multi_readra;
+  wire             cpu_0_custom_instruction_master_multi_readrb;
   wire             cpu_0_custom_instruction_master_multi_reset;
-  wire    [  7: 0] cpu_0_custom_instruction_master_n;
-  wire             cpu_0_custom_instruction_master_readra;
-  wire             cpu_0_custom_instruction_master_readrb;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_multi_result;
+  wire             cpu_0_custom_instruction_master_multi_start;
+  wire             cpu_0_custom_instruction_master_multi_status;
+  wire             cpu_0_custom_instruction_master_multi_writerc;
   wire             cpu_0_custom_instruction_master_reset_n;
-  wire    [ 31: 0] cpu_0_custom_instruction_master_result;
-  wire             cpu_0_custom_instruction_master_start;
   wire             cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1;
-  wire             cpu_0_custom_instruction_master_status;
-  wire             cpu_0_custom_instruction_master_writerc;
   wire    [ 24: 0] cpu_0_data_master_address;
   wire    [ 24: 0] cpu_0_data_master_address_to_slave;
   wire    [  3: 0] cpu_0_data_master_byteenable;
-  wire    [  1: 0] cpu_0_data_master_byteenable_sdram_0_s1;
+  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in;
   wire    [  1: 0] cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0;
   wire    [  1: 0] cpu_0_data_master_dbs_address;
   wire    [ 15: 0] cpu_0_data_master_dbs_write_16;
   wire             cpu_0_data_master_debugaccess;
   wire             cpu_0_data_master_granted_cpu_0_jtag_debug_module;
   wire             cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave;
+  wire             cpu_0_data_master_granted_niosSystemCamControl_clock_1_in;
   wire             cpu_0_data_master_granted_onchip_memory2_0_s1;
   wire             cpu_0_data_master_granted_procHasControl_s1;
-  wire             cpu_0_data_master_granted_sdram_0_s1;
   wire             cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_data_master_granted_sysid_control_slave;
   wire             cpu_0_data_master_granted_timer_0_s1;
   wire    [ 31: 0] cpu_0_data_master_irq;
-  wire             cpu_0_data_master_no_byte_enables_and_last_term;
+  wire             cpu_0_data_master_latency_counter;
   wire             cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module;
   wire             cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave;
+  wire             cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in;
   wire             cpu_0_data_master_qualified_request_onchip_memory2_0_s1;
   wire             cpu_0_data_master_qualified_request_procHasControl_s1;
-  wire             cpu_0_data_master_qualified_request_sdram_0_s1;
   wire             cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_data_master_qualified_request_sysid_control_slave;
   wire             cpu_0_data_master_qualified_request_timer_0_s1;
   wire             cpu_0_data_master_read;
   wire             cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module;
   wire             cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave;
+  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in;
   wire             cpu_0_data_master_read_data_valid_onchip_memory2_0_s1;
   wire             cpu_0_data_master_read_data_valid_procHasControl_s1;
-  wire             cpu_0_data_master_read_data_valid_sdram_0_s1;
-  wire             cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register;
   wire             cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_data_master_read_data_valid_sysid_control_slave;
   wire             cpu_0_data_master_read_data_valid_timer_0_s1;
   wire    [ 31: 0] cpu_0_data_master_readdata;
+  wire             cpu_0_data_master_readdatavalid;
   wire             cpu_0_data_master_requests_cpu_0_jtag_debug_module;
   wire             cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave;
+  wire             cpu_0_data_master_requests_niosSystemCamControl_clock_1_in;
   wire             cpu_0_data_master_requests_onchip_memory2_0_s1;
   wire             cpu_0_data_master_requests_procHasControl_s1;
-  wire             cpu_0_data_master_requests_sdram_0_s1;
   wire             cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_data_master_requests_sysid_control_slave;
   wire             cpu_0_data_master_requests_timer_0_s1;
@@ -4590,23 +5904,24 @@ module niosSystemCamControl (
   wire    [ 24: 0] cpu_0_instruction_master_address_to_slave;
   wire    [  1: 0] cpu_0_instruction_master_dbs_address;
   wire             cpu_0_instruction_master_granted_cpu_0_jtag_debug_module;
+  wire             cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in;
   wire             cpu_0_instruction_master_granted_onchip_memory2_0_s1;
-  wire             cpu_0_instruction_master_granted_sdram_0_s1;
   wire             cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0;
+  wire             cpu_0_instruction_master_latency_counter;
   wire             cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module;
+  wire             cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in;
   wire             cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1;
-  wire             cpu_0_instruction_master_qualified_request_sdram_0_s1;
   wire             cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_instruction_master_read;
   wire             cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module;
+  wire             cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in;
   wire             cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1;
-  wire             cpu_0_instruction_master_read_data_valid_sdram_0_s1;
-  wire             cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register;
   wire             cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0;
   wire    [ 31: 0] cpu_0_instruction_master_readdata;
+  wire             cpu_0_instruction_master_readdatavalid;
   wire             cpu_0_instruction_master_requests_cpu_0_jtag_debug_module;
+  wire             cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in;
   wire             cpu_0_instruction_master_requests_onchip_memory2_0_s1;
-  wire             cpu_0_instruction_master_requests_sdram_0_s1;
   wire             cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0;
   wire             cpu_0_instruction_master_waitrequest;
   wire    [  8: 0] cpu_0_jtag_debug_module_address;
@@ -4622,6 +5937,8 @@ module niosSystemCamControl (
   wire    [ 31: 0] cpu_0_jtag_debug_module_writedata;
   wire             d1_cpu_0_jtag_debug_module_end_xfer;
   wire             d1_jtag_uart_0_avalon_jtag_slave_end_xfer;
+  wire             d1_niosSystemCamControl_clock_0_in_end_xfer;
+  wire             d1_niosSystemCamControl_clock_1_in_end_xfer;
   wire             d1_onchip_memory2_0_s1_end_xfer;
   wire             d1_procHasControl_s1_end_xfer;
   wire             d1_sdram_0_s1_end_xfer;
@@ -4644,6 +5961,64 @@ module niosSystemCamControl (
   wire             jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa;
   wire             jtag_uart_0_avalon_jtag_slave_write_n;
   wire    [ 31: 0] jtag_uart_0_avalon_jtag_slave_writedata;
+  wire    [ 22: 0] niosSystemCamControl_clock_0_in_address;
+  wire    [  1: 0] niosSystemCamControl_clock_0_in_byteenable;
+  wire             niosSystemCamControl_clock_0_in_endofpacket;
+  wire             niosSystemCamControl_clock_0_in_endofpacket_from_sa;
+  wire    [ 21: 0] niosSystemCamControl_clock_0_in_nativeaddress;
+  wire             niosSystemCamControl_clock_0_in_read;
+  wire    [ 15: 0] niosSystemCamControl_clock_0_in_readdata;
+  wire    [ 15: 0] niosSystemCamControl_clock_0_in_readdata_from_sa;
+  wire             niosSystemCamControl_clock_0_in_reset_n;
+  wire             niosSystemCamControl_clock_0_in_waitrequest;
+  wire             niosSystemCamControl_clock_0_in_waitrequest_from_sa;
+  wire             niosSystemCamControl_clock_0_in_write;
+  wire    [ 15: 0] niosSystemCamControl_clock_0_in_writedata;
+  wire    [ 22: 0] niosSystemCamControl_clock_0_out_address;
+  wire    [ 22: 0] niosSystemCamControl_clock_0_out_address_to_slave;
+  wire    [  1: 0] niosSystemCamControl_clock_0_out_byteenable;
+  wire             niosSystemCamControl_clock_0_out_endofpacket;
+  wire             niosSystemCamControl_clock_0_out_granted_sdram_0_s1;
+  wire    [ 21: 0] niosSystemCamControl_clock_0_out_nativeaddress;
+  wire             niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_read;
+  wire             niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register;
+  wire    [ 15: 0] niosSystemCamControl_clock_0_out_readdata;
+  wire             niosSystemCamControl_clock_0_out_requests_sdram_0_s1;
+  wire             niosSystemCamControl_clock_0_out_reset_n;
+  wire             niosSystemCamControl_clock_0_out_waitrequest;
+  wire             niosSystemCamControl_clock_0_out_write;
+  wire    [ 15: 0] niosSystemCamControl_clock_0_out_writedata;
+  wire    [ 22: 0] niosSystemCamControl_clock_1_in_address;
+  wire    [  1: 0] niosSystemCamControl_clock_1_in_byteenable;
+  wire             niosSystemCamControl_clock_1_in_endofpacket;
+  wire             niosSystemCamControl_clock_1_in_endofpacket_from_sa;
+  wire    [ 21: 0] niosSystemCamControl_clock_1_in_nativeaddress;
+  wire             niosSystemCamControl_clock_1_in_read;
+  wire    [ 15: 0] niosSystemCamControl_clock_1_in_readdata;
+  wire    [ 15: 0] niosSystemCamControl_clock_1_in_readdata_from_sa;
+  wire             niosSystemCamControl_clock_1_in_reset_n;
+  wire             niosSystemCamControl_clock_1_in_waitrequest;
+  wire             niosSystemCamControl_clock_1_in_waitrequest_from_sa;
+  wire             niosSystemCamControl_clock_1_in_write;
+  wire    [ 15: 0] niosSystemCamControl_clock_1_in_writedata;
+  wire    [ 22: 0] niosSystemCamControl_clock_1_out_address;
+  wire    [ 22: 0] niosSystemCamControl_clock_1_out_address_to_slave;
+  wire    [  1: 0] niosSystemCamControl_clock_1_out_byteenable;
+  wire             niosSystemCamControl_clock_1_out_endofpacket;
+  wire             niosSystemCamControl_clock_1_out_granted_sdram_0_s1;
+  wire    [ 21: 0] niosSystemCamControl_clock_1_out_nativeaddress;
+  wire             niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_read;
+  wire             niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register;
+  wire    [ 15: 0] niosSystemCamControl_clock_1_out_readdata;
+  wire             niosSystemCamControl_clock_1_out_requests_sdram_0_s1;
+  wire             niosSystemCamControl_clock_1_out_reset_n;
+  wire             niosSystemCamControl_clock_1_out_waitrequest;
+  wire             niosSystemCamControl_clock_1_out_write;
+  wire    [ 15: 0] niosSystemCamControl_clock_1_out_writedata;
   wire    [ 11: 0] onchip_memory2_0_s1_address;
   wire    [  3: 0] onchip_memory2_0_s1_byteenable;
   wire             onchip_memory2_0_s1_chipselect;
@@ -4661,7 +6036,6 @@ module niosSystemCamControl (
   wire             procHasControl_s1_reset_n;
   wire             procHasControl_s1_write_n;
   wire    [ 31: 0] procHasControl_s1_writedata;
-  wire             registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1;
   wire             reset_n_sources;
   wire    [ 21: 0] sdram_0_s1_address;
   wire    [  1: 0] sdram_0_s1_byteenable_n;
@@ -4715,15 +6089,16 @@ module niosSystemCamControl (
       .cpu_0_data_master_byteenable                                       (cpu_0_data_master_byteenable),
       .cpu_0_data_master_debugaccess                                      (cpu_0_data_master_debugaccess),
       .cpu_0_data_master_granted_cpu_0_jtag_debug_module                  (cpu_0_data_master_granted_cpu_0_jtag_debug_module),
+      .cpu_0_data_master_latency_counter                                  (cpu_0_data_master_latency_counter),
       .cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module        (cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module),
       .cpu_0_data_master_read                                             (cpu_0_data_master_read),
       .cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module          (cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module),
       .cpu_0_data_master_requests_cpu_0_jtag_debug_module                 (cpu_0_data_master_requests_cpu_0_jtag_debug_module),
-      .cpu_0_data_master_waitrequest                                      (cpu_0_data_master_waitrequest),
       .cpu_0_data_master_write                                            (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                        (cpu_0_data_master_writedata),
       .cpu_0_instruction_master_address_to_slave                          (cpu_0_instruction_master_address_to_slave),
       .cpu_0_instruction_master_granted_cpu_0_jtag_debug_module           (cpu_0_instruction_master_granted_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_latency_counter                           (cpu_0_instruction_master_latency_counter),
       .cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module (cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module),
       .cpu_0_instruction_master_read                                      (cpu_0_instruction_master_read),
       .cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module   (cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module),
@@ -4749,10 +6124,10 @@ module niosSystemCamControl (
       .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa                          (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_done_from_sa),
       .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa                        (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa),
       .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select                                (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select),
-      .cpu_0_custom_instruction_master_done                                                        (cpu_0_custom_instruction_master_done),
+      .cpu_0_custom_instruction_master_multi_done                                                  (cpu_0_custom_instruction_master_multi_done),
+      .cpu_0_custom_instruction_master_multi_result                                                (cpu_0_custom_instruction_master_multi_result),
+      .cpu_0_custom_instruction_master_multi_start                                                 (cpu_0_custom_instruction_master_multi_start),
       .cpu_0_custom_instruction_master_reset_n                                                     (cpu_0_custom_instruction_master_reset_n),
-      .cpu_0_custom_instruction_master_result                                                      (cpu_0_custom_instruction_master_result),
-      .cpu_0_custom_instruction_master_start                                                       (cpu_0_custom_instruction_master_start),
       .cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 (cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1),
       .reset_n                                                                                     (clk_0_reset_n)
     );
@@ -4762,44 +6137,45 @@ module niosSystemCamControl (
       .clk                                                                  (clk_0),
       .cpu_0_data_master_address                                            (cpu_0_data_master_address),
       .cpu_0_data_master_address_to_slave                                   (cpu_0_data_master_address_to_slave),
-      .cpu_0_data_master_byteenable_sdram_0_s1                              (cpu_0_data_master_byteenable_sdram_0_s1),
+      .cpu_0_data_master_byteenable                                         (cpu_0_data_master_byteenable),
+      .cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in         (cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in),
       .cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0        (cpu_0_data_master_byteenable_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_data_master_dbs_address                                        (cpu_0_data_master_dbs_address),
       .cpu_0_data_master_dbs_write_16                                       (cpu_0_data_master_dbs_write_16),
       .cpu_0_data_master_granted_cpu_0_jtag_debug_module                    (cpu_0_data_master_granted_cpu_0_jtag_debug_module),
       .cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave              (cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_granted_niosSystemCamControl_clock_1_in            (cpu_0_data_master_granted_niosSystemCamControl_clock_1_in),
       .cpu_0_data_master_granted_onchip_memory2_0_s1                        (cpu_0_data_master_granted_onchip_memory2_0_s1),
       .cpu_0_data_master_granted_procHasControl_s1                          (cpu_0_data_master_granted_procHasControl_s1),
-      .cpu_0_data_master_granted_sdram_0_s1                                 (cpu_0_data_master_granted_sdram_0_s1),
       .cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0           (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_data_master_granted_sysid_control_slave                        (cpu_0_data_master_granted_sysid_control_slave),
       .cpu_0_data_master_granted_timer_0_s1                                 (cpu_0_data_master_granted_timer_0_s1),
       .cpu_0_data_master_irq                                                (cpu_0_data_master_irq),
-      .cpu_0_data_master_no_byte_enables_and_last_term                      (cpu_0_data_master_no_byte_enables_and_last_term),
+      .cpu_0_data_master_latency_counter                                    (cpu_0_data_master_latency_counter),
       .cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module          (cpu_0_data_master_qualified_request_cpu_0_jtag_debug_module),
       .cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave    (cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in  (cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in),
       .cpu_0_data_master_qualified_request_onchip_memory2_0_s1              (cpu_0_data_master_qualified_request_onchip_memory2_0_s1),
       .cpu_0_data_master_qualified_request_procHasControl_s1                (cpu_0_data_master_qualified_request_procHasControl_s1),
-      .cpu_0_data_master_qualified_request_sdram_0_s1                       (cpu_0_data_master_qualified_request_sdram_0_s1),
       .cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 (cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_data_master_qualified_request_sysid_control_slave              (cpu_0_data_master_qualified_request_sysid_control_slave),
       .cpu_0_data_master_qualified_request_timer_0_s1                       (cpu_0_data_master_qualified_request_timer_0_s1),
       .cpu_0_data_master_read                                               (cpu_0_data_master_read),
       .cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module            (cpu_0_data_master_read_data_valid_cpu_0_jtag_debug_module),
       .cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave      (cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in    (cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in),
       .cpu_0_data_master_read_data_valid_onchip_memory2_0_s1                (cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
       .cpu_0_data_master_read_data_valid_procHasControl_s1                  (cpu_0_data_master_read_data_valid_procHasControl_s1),
-      .cpu_0_data_master_read_data_valid_sdram_0_s1                         (cpu_0_data_master_read_data_valid_sdram_0_s1),
-      .cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register          (cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register),
       .cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0   (cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_data_master_read_data_valid_sysid_control_slave                (cpu_0_data_master_read_data_valid_sysid_control_slave),
       .cpu_0_data_master_read_data_valid_timer_0_s1                         (cpu_0_data_master_read_data_valid_timer_0_s1),
       .cpu_0_data_master_readdata                                           (cpu_0_data_master_readdata),
+      .cpu_0_data_master_readdatavalid                                      (cpu_0_data_master_readdatavalid),
       .cpu_0_data_master_requests_cpu_0_jtag_debug_module                   (cpu_0_data_master_requests_cpu_0_jtag_debug_module),
       .cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave             (cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_requests_niosSystemCamControl_clock_1_in           (cpu_0_data_master_requests_niosSystemCamControl_clock_1_in),
       .cpu_0_data_master_requests_onchip_memory2_0_s1                       (cpu_0_data_master_requests_onchip_memory2_0_s1),
       .cpu_0_data_master_requests_procHasControl_s1                         (cpu_0_data_master_requests_procHasControl_s1),
-      .cpu_0_data_master_requests_sdram_0_s1                                (cpu_0_data_master_requests_sdram_0_s1),
       .cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0          (cpu_0_data_master_requests_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_data_master_requests_sysid_control_slave                       (cpu_0_data_master_requests_sysid_control_slave),
       .cpu_0_data_master_requests_timer_0_s1                                (cpu_0_data_master_requests_timer_0_s1),
@@ -4809,21 +6185,20 @@ module niosSystemCamControl (
       .cpu_0_jtag_debug_module_readdata_from_sa                             (cpu_0_jtag_debug_module_readdata_from_sa),
       .d1_cpu_0_jtag_debug_module_end_xfer                                  (d1_cpu_0_jtag_debug_module_end_xfer),
       .d1_jtag_uart_0_avalon_jtag_slave_end_xfer                            (d1_jtag_uart_0_avalon_jtag_slave_end_xfer),
+      .d1_niosSystemCamControl_clock_1_in_end_xfer                          (d1_niosSystemCamControl_clock_1_in_end_xfer),
       .d1_onchip_memory2_0_s1_end_xfer                                      (d1_onchip_memory2_0_s1_end_xfer),
       .d1_procHasControl_s1_end_xfer                                        (d1_procHasControl_s1_end_xfer),
-      .d1_sdram_0_s1_end_xfer                                               (d1_sdram_0_s1_end_xfer),
       .d1_sram_16bit_512k_0_avalon_slave_0_end_xfer                         (d1_sram_16bit_512k_0_avalon_slave_0_end_xfer),
       .d1_sysid_control_slave_end_xfer                                      (d1_sysid_control_slave_end_xfer),
       .d1_timer_0_s1_end_xfer                                               (d1_timer_0_s1_end_xfer),
       .jtag_uart_0_avalon_jtag_slave_irq_from_sa                            (jtag_uart_0_avalon_jtag_slave_irq_from_sa),
       .jtag_uart_0_avalon_jtag_slave_readdata_from_sa                       (jtag_uart_0_avalon_jtag_slave_readdata_from_sa),
       .jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa                    (jtag_uart_0_avalon_jtag_slave_waitrequest_from_sa),
+      .niosSystemCamControl_clock_1_in_readdata_from_sa                     (niosSystemCamControl_clock_1_in_readdata_from_sa),
+      .niosSystemCamControl_clock_1_in_waitrequest_from_sa                  (niosSystemCamControl_clock_1_in_waitrequest_from_sa),
       .onchip_memory2_0_s1_readdata_from_sa                                 (onchip_memory2_0_s1_readdata_from_sa),
       .procHasControl_s1_readdata_from_sa                                   (procHasControl_s1_readdata_from_sa),
-      .registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1     (registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
       .reset_n                                                              (clk_0_reset_n),
-      .sdram_0_s1_readdata_from_sa                                          (sdram_0_s1_readdata_from_sa),
-      .sdram_0_s1_waitrequest_from_sa                                       (sdram_0_s1_waitrequest_from_sa),
       .sram_16bit_512k_0_avalon_slave_0_readdata_from_sa                    (sram_16bit_512k_0_avalon_slave_0_readdata_from_sa),
       .sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0                   (sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0),
       .sysid_control_slave_readdata_from_sa                                 (sysid_control_slave_readdata_from_sa),
@@ -4838,70 +6213,73 @@ module niosSystemCamControl (
       .cpu_0_instruction_master_address_to_slave                                   (cpu_0_instruction_master_address_to_slave),
       .cpu_0_instruction_master_dbs_address                                        (cpu_0_instruction_master_dbs_address),
       .cpu_0_instruction_master_granted_cpu_0_jtag_debug_module                    (cpu_0_instruction_master_granted_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in            (cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in),
       .cpu_0_instruction_master_granted_onchip_memory2_0_s1                        (cpu_0_instruction_master_granted_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_granted_sdram_0_s1                                 (cpu_0_instruction_master_granted_sdram_0_s1),
       .cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0           (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_latency_counter                                    (cpu_0_instruction_master_latency_counter),
       .cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module          (cpu_0_instruction_master_qualified_request_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in  (cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in),
       .cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1              (cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_qualified_request_sdram_0_s1                       (cpu_0_instruction_master_qualified_request_sdram_0_s1),
       .cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 (cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_instruction_master_read                                               (cpu_0_instruction_master_read),
       .cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module            (cpu_0_instruction_master_read_data_valid_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in    (cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in),
       .cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1                (cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_read_data_valid_sdram_0_s1                         (cpu_0_instruction_master_read_data_valid_sdram_0_s1),
-      .cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register          (cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register),
       .cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0   (cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_instruction_master_readdata                                           (cpu_0_instruction_master_readdata),
+      .cpu_0_instruction_master_readdatavalid                                      (cpu_0_instruction_master_readdatavalid),
       .cpu_0_instruction_master_requests_cpu_0_jtag_debug_module                   (cpu_0_instruction_master_requests_cpu_0_jtag_debug_module),
+      .cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in           (cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in),
       .cpu_0_instruction_master_requests_onchip_memory2_0_s1                       (cpu_0_instruction_master_requests_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_requests_sdram_0_s1                                (cpu_0_instruction_master_requests_sdram_0_s1),
       .cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0          (cpu_0_instruction_master_requests_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_instruction_master_waitrequest                                        (cpu_0_instruction_master_waitrequest),
       .cpu_0_jtag_debug_module_readdata_from_sa                                    (cpu_0_jtag_debug_module_readdata_from_sa),
       .d1_cpu_0_jtag_debug_module_end_xfer                                         (d1_cpu_0_jtag_debug_module_end_xfer),
+      .d1_niosSystemCamControl_clock_0_in_end_xfer                                 (d1_niosSystemCamControl_clock_0_in_end_xfer),
       .d1_onchip_memory2_0_s1_end_xfer                                             (d1_onchip_memory2_0_s1_end_xfer),
-      .d1_sdram_0_s1_end_xfer                                                      (d1_sdram_0_s1_end_xfer),
       .d1_sram_16bit_512k_0_avalon_slave_0_end_xfer                                (d1_sram_16bit_512k_0_avalon_slave_0_end_xfer),
+      .niosSystemCamControl_clock_0_in_readdata_from_sa                            (niosSystemCamControl_clock_0_in_readdata_from_sa),
+      .niosSystemCamControl_clock_0_in_waitrequest_from_sa                         (niosSystemCamControl_clock_0_in_waitrequest_from_sa),
       .onchip_memory2_0_s1_readdata_from_sa                                        (onchip_memory2_0_s1_readdata_from_sa),
       .reset_n                                                                     (clk_0_reset_n),
-      .sdram_0_s1_readdata_from_sa                                                 (sdram_0_s1_readdata_from_sa),
-      .sdram_0_s1_waitrequest_from_sa                                              (sdram_0_s1_waitrequest_from_sa),
       .sram_16bit_512k_0_avalon_slave_0_readdata_from_sa                           (sram_16bit_512k_0_avalon_slave_0_readdata_from_sa),
       .sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0                          (sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0)
     );
 
   cpu_0 the_cpu_0
     (
-      .D_ci_a                                (cpu_0_custom_instruction_master_a),
-      .D_ci_b                                (cpu_0_custom_instruction_master_b),
-      .D_ci_c                                (cpu_0_custom_instruction_master_c),
-      .D_ci_n                                (cpu_0_custom_instruction_master_n),
-      .D_ci_readra                           (cpu_0_custom_instruction_master_readra),
-      .D_ci_readrb                           (cpu_0_custom_instruction_master_readrb),
-      .D_ci_writerc                          (cpu_0_custom_instruction_master_writerc),
-      .E_ci_dataa                            (cpu_0_custom_instruction_master_dataa),
-      .E_ci_datab                            (cpu_0_custom_instruction_master_datab),
-      .E_ci_multi_clk_en                     (cpu_0_custom_instruction_master_clk_en),
-      .E_ci_multi_clock                      (cpu_0_custom_instruction_master_multi_clk),
-      .E_ci_multi_done                       (cpu_0_custom_instruction_master_done),
-      .E_ci_multi_reset                      (cpu_0_custom_instruction_master_multi_reset),
-      .E_ci_multi_start                      (cpu_0_custom_instruction_master_start),
-      .E_ci_result                           (cpu_0_custom_instruction_master_result),
-      .W_ci_estatus                          (cpu_0_custom_instruction_master_estatus),
-      .W_ci_ipending                         (cpu_0_custom_instruction_master_ipending),
-      .W_ci_status                           (cpu_0_custom_instruction_master_status),
+      .A_ci_multi_a                          (cpu_0_custom_instruction_master_multi_a),
+      .A_ci_multi_b                          (cpu_0_custom_instruction_master_multi_b),
+      .A_ci_multi_c                          (cpu_0_custom_instruction_master_multi_c),
+      .A_ci_multi_clk_en                     (cpu_0_custom_instruction_master_multi_clk_en),
+      .A_ci_multi_clock                      (cpu_0_custom_instruction_master_multi_clk),
+      .A_ci_multi_dataa                      (cpu_0_custom_instruction_master_multi_dataa),
+      .A_ci_multi_datab                      (cpu_0_custom_instruction_master_multi_datab),
+      .A_ci_multi_done                       (cpu_0_custom_instruction_master_multi_done),
+      .A_ci_multi_estatus                    (cpu_0_custom_instruction_master_multi_estatus),
+      .A_ci_multi_ipending                   (cpu_0_custom_instruction_master_multi_ipending),
+      .A_ci_multi_n                          (cpu_0_custom_instruction_master_multi_n),
+      .A_ci_multi_readra                     (cpu_0_custom_instruction_master_multi_readra),
+      .A_ci_multi_readrb                     (cpu_0_custom_instruction_master_multi_readrb),
+      .A_ci_multi_reset                      (cpu_0_custom_instruction_master_multi_reset),
+      .A_ci_multi_result                     (cpu_0_custom_instruction_master_multi_result),
+      .A_ci_multi_start                      (cpu_0_custom_instruction_master_multi_start),
+      .A_ci_multi_status                     (cpu_0_custom_instruction_master_multi_status),
+      .A_ci_multi_writerc                    (cpu_0_custom_instruction_master_multi_writerc),
       .clk                                   (clk_0),
       .d_address                             (cpu_0_data_master_address),
       .d_byteenable                          (cpu_0_data_master_byteenable),
       .d_irq                                 (cpu_0_data_master_irq),
       .d_read                                (cpu_0_data_master_read),
       .d_readdata                            (cpu_0_data_master_readdata),
+      .d_readdatavalid                       (cpu_0_data_master_readdatavalid),
       .d_waitrequest                         (cpu_0_data_master_waitrequest),
       .d_write                               (cpu_0_data_master_write),
       .d_writedata                           (cpu_0_data_master_writedata),
       .i_address                             (cpu_0_instruction_master_address),
       .i_read                                (cpu_0_instruction_master_read),
       .i_readdata                            (cpu_0_instruction_master_readdata),
+      .i_readdatavalid                       (cpu_0_instruction_master_readdatavalid),
       .i_waitrequest                         (cpu_0_instruction_master_waitrequest),
       .jtag_debug_module_address             (cpu_0_jtag_debug_module_address),
       .jtag_debug_module_begintransfer       (cpu_0_jtag_debug_module_begintransfer),
@@ -4930,10 +6308,10 @@ module niosSystemCamControl (
       .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa                        (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_result_from_sa),
       .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select                                (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_select),
       .cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start                                 (cpu_0_altera_nios_custom_instr_floating_point_inst_s1_start),
-      .cpu_0_custom_instruction_master_clk_en                                                      (cpu_0_custom_instruction_master_clk_en),
-      .cpu_0_custom_instruction_master_dataa                                                       (cpu_0_custom_instruction_master_dataa),
-      .cpu_0_custom_instruction_master_datab                                                       (cpu_0_custom_instruction_master_datab),
-      .cpu_0_custom_instruction_master_n                                                           (cpu_0_custom_instruction_master_n),
+      .cpu_0_custom_instruction_master_multi_clk_en                                                (cpu_0_custom_instruction_master_multi_clk_en),
+      .cpu_0_custom_instruction_master_multi_dataa                                                 (cpu_0_custom_instruction_master_multi_dataa),
+      .cpu_0_custom_instruction_master_multi_datab                                                 (cpu_0_custom_instruction_master_multi_datab),
+      .cpu_0_custom_instruction_master_multi_n                                                     (cpu_0_custom_instruction_master_multi_n),
       .cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1 (cpu_0_custom_instruction_master_start_cpu_0_altera_nios_custom_instr_floating_point_inst_s1),
       .reset_n                                                                                     (clk_0_reset_n)
     );
@@ -4956,11 +6334,11 @@ module niosSystemCamControl (
       .clk                                                               (clk_0),
       .cpu_0_data_master_address_to_slave                                (cpu_0_data_master_address_to_slave),
       .cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave           (cpu_0_data_master_granted_jtag_uart_0_avalon_jtag_slave),
+      .cpu_0_data_master_latency_counter                                 (cpu_0_data_master_latency_counter),
       .cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave (cpu_0_data_master_qualified_request_jtag_uart_0_avalon_jtag_slave),
       .cpu_0_data_master_read                                            (cpu_0_data_master_read),
       .cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave   (cpu_0_data_master_read_data_valid_jtag_uart_0_avalon_jtag_slave),
       .cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave          (cpu_0_data_master_requests_jtag_uart_0_avalon_jtag_slave),
-      .cpu_0_data_master_waitrequest                                     (cpu_0_data_master_waitrequest),
       .cpu_0_data_master_write                                           (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                       (cpu_0_data_master_writedata),
       .d1_jtag_uart_0_avalon_jtag_slave_end_xfer                         (d1_jtag_uart_0_avalon_jtag_slave_end_xfer),
@@ -4999,37 +6377,194 @@ module niosSystemCamControl (
       .rst_n          (jtag_uart_0_avalon_jtag_slave_reset_n)
     );
 
+  niosSystemCamControl_clock_0_in_arbitrator the_niosSystemCamControl_clock_0_in
+    (
+      .clk                                                                        (clk_0),
+      .cpu_0_instruction_master_address_to_slave                                  (cpu_0_instruction_master_address_to_slave),
+      .cpu_0_instruction_master_dbs_address                                       (cpu_0_instruction_master_dbs_address),
+      .cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in           (cpu_0_instruction_master_granted_niosSystemCamControl_clock_0_in),
+      .cpu_0_instruction_master_latency_counter                                   (cpu_0_instruction_master_latency_counter),
+      .cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in (cpu_0_instruction_master_qualified_request_niosSystemCamControl_clock_0_in),
+      .cpu_0_instruction_master_read                                              (cpu_0_instruction_master_read),
+      .cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in   (cpu_0_instruction_master_read_data_valid_niosSystemCamControl_clock_0_in),
+      .cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in          (cpu_0_instruction_master_requests_niosSystemCamControl_clock_0_in),
+      .d1_niosSystemCamControl_clock_0_in_end_xfer                                (d1_niosSystemCamControl_clock_0_in_end_xfer),
+      .niosSystemCamControl_clock_0_in_address                                    (niosSystemCamControl_clock_0_in_address),
+      .niosSystemCamControl_clock_0_in_byteenable                                 (niosSystemCamControl_clock_0_in_byteenable),
+      .niosSystemCamControl_clock_0_in_endofpacket                                (niosSystemCamControl_clock_0_in_endofpacket),
+      .niosSystemCamControl_clock_0_in_endofpacket_from_sa                        (niosSystemCamControl_clock_0_in_endofpacket_from_sa),
+      .niosSystemCamControl_clock_0_in_nativeaddress                              (niosSystemCamControl_clock_0_in_nativeaddress),
+      .niosSystemCamControl_clock_0_in_read                                       (niosSystemCamControl_clock_0_in_read),
+      .niosSystemCamControl_clock_0_in_readdata                                   (niosSystemCamControl_clock_0_in_readdata),
+      .niosSystemCamControl_clock_0_in_readdata_from_sa                           (niosSystemCamControl_clock_0_in_readdata_from_sa),
+      .niosSystemCamControl_clock_0_in_reset_n                                    (niosSystemCamControl_clock_0_in_reset_n),
+      .niosSystemCamControl_clock_0_in_waitrequest                                (niosSystemCamControl_clock_0_in_waitrequest),
+      .niosSystemCamControl_clock_0_in_waitrequest_from_sa                        (niosSystemCamControl_clock_0_in_waitrequest_from_sa),
+      .niosSystemCamControl_clock_0_in_write                                      (niosSystemCamControl_clock_0_in_write),
+      .reset_n                                                                    (clk_0_reset_n)
+    );
+
+  niosSystemCamControl_clock_0_out_arbitrator the_niosSystemCamControl_clock_0_out
+    (
+      .clk                                                                        (clk_1),
+      .d1_sdram_0_s1_end_xfer                                                     (d1_sdram_0_s1_end_xfer),
+      .niosSystemCamControl_clock_0_out_address                                   (niosSystemCamControl_clock_0_out_address),
+      .niosSystemCamControl_clock_0_out_address_to_slave                          (niosSystemCamControl_clock_0_out_address_to_slave),
+      .niosSystemCamControl_clock_0_out_byteenable                                (niosSystemCamControl_clock_0_out_byteenable),
+      .niosSystemCamControl_clock_0_out_granted_sdram_0_s1                        (niosSystemCamControl_clock_0_out_granted_sdram_0_s1),
+      .niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1              (niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1),
+      .niosSystemCamControl_clock_0_out_read                                      (niosSystemCamControl_clock_0_out_read),
+      .niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1                (niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1),
+      .niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register (niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register),
+      .niosSystemCamControl_clock_0_out_readdata                                  (niosSystemCamControl_clock_0_out_readdata),
+      .niosSystemCamControl_clock_0_out_requests_sdram_0_s1                       (niosSystemCamControl_clock_0_out_requests_sdram_0_s1),
+      .niosSystemCamControl_clock_0_out_reset_n                                   (niosSystemCamControl_clock_0_out_reset_n),
+      .niosSystemCamControl_clock_0_out_waitrequest                               (niosSystemCamControl_clock_0_out_waitrequest),
+      .niosSystemCamControl_clock_0_out_write                                     (niosSystemCamControl_clock_0_out_write),
+      .niosSystemCamControl_clock_0_out_writedata                                 (niosSystemCamControl_clock_0_out_writedata),
+      .reset_n                                                                    (clk_1_reset_n),
+      .sdram_0_s1_readdata_from_sa                                                (sdram_0_s1_readdata_from_sa),
+      .sdram_0_s1_waitrequest_from_sa                                             (sdram_0_s1_waitrequest_from_sa)
+    );
+
+  niosSystemCamControl_clock_0 the_niosSystemCamControl_clock_0
+    (
+      .master_address       (niosSystemCamControl_clock_0_out_address),
+      .master_byteenable    (niosSystemCamControl_clock_0_out_byteenable),
+      .master_clk           (clk_1),
+      .master_endofpacket   (niosSystemCamControl_clock_0_out_endofpacket),
+      .master_nativeaddress (niosSystemCamControl_clock_0_out_nativeaddress),
+      .master_read          (niosSystemCamControl_clock_0_out_read),
+      .master_readdata      (niosSystemCamControl_clock_0_out_readdata),
+      .master_reset_n       (niosSystemCamControl_clock_0_out_reset_n),
+      .master_waitrequest   (niosSystemCamControl_clock_0_out_waitrequest),
+      .master_write         (niosSystemCamControl_clock_0_out_write),
+      .master_writedata     (niosSystemCamControl_clock_0_out_writedata),
+      .slave_address        (niosSystemCamControl_clock_0_in_address),
+      .slave_byteenable     (niosSystemCamControl_clock_0_in_byteenable),
+      .slave_clk            (clk_0),
+      .slave_endofpacket    (niosSystemCamControl_clock_0_in_endofpacket),
+      .slave_nativeaddress  (niosSystemCamControl_clock_0_in_nativeaddress),
+      .slave_read           (niosSystemCamControl_clock_0_in_read),
+      .slave_readdata       (niosSystemCamControl_clock_0_in_readdata),
+      .slave_reset_n        (niosSystemCamControl_clock_0_in_reset_n),
+      .slave_waitrequest    (niosSystemCamControl_clock_0_in_waitrequest),
+      .slave_write          (niosSystemCamControl_clock_0_in_write),
+      .slave_writedata      (niosSystemCamControl_clock_0_in_writedata)
+    );
+
+  niosSystemCamControl_clock_1_in_arbitrator the_niosSystemCamControl_clock_1_in
+    (
+      .clk                                                                 (clk_0),
+      .cpu_0_data_master_address_to_slave                                  (cpu_0_data_master_address_to_slave),
+      .cpu_0_data_master_byteenable                                        (cpu_0_data_master_byteenable),
+      .cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in        (cpu_0_data_master_byteenable_niosSystemCamControl_clock_1_in),
+      .cpu_0_data_master_dbs_address                                       (cpu_0_data_master_dbs_address),
+      .cpu_0_data_master_dbs_write_16                                      (cpu_0_data_master_dbs_write_16),
+      .cpu_0_data_master_granted_niosSystemCamControl_clock_1_in           (cpu_0_data_master_granted_niosSystemCamControl_clock_1_in),
+      .cpu_0_data_master_latency_counter                                   (cpu_0_data_master_latency_counter),
+      .cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in (cpu_0_data_master_qualified_request_niosSystemCamControl_clock_1_in),
+      .cpu_0_data_master_read                                              (cpu_0_data_master_read),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in   (cpu_0_data_master_read_data_valid_niosSystemCamControl_clock_1_in),
+      .cpu_0_data_master_requests_niosSystemCamControl_clock_1_in          (cpu_0_data_master_requests_niosSystemCamControl_clock_1_in),
+      .cpu_0_data_master_write                                             (cpu_0_data_master_write),
+      .d1_niosSystemCamControl_clock_1_in_end_xfer                         (d1_niosSystemCamControl_clock_1_in_end_xfer),
+      .niosSystemCamControl_clock_1_in_address                             (niosSystemCamControl_clock_1_in_address),
+      .niosSystemCamControl_clock_1_in_byteenable                          (niosSystemCamControl_clock_1_in_byteenable),
+      .niosSystemCamControl_clock_1_in_endofpacket                         (niosSystemCamControl_clock_1_in_endofpacket),
+      .niosSystemCamControl_clock_1_in_endofpacket_from_sa                 (niosSystemCamControl_clock_1_in_endofpacket_from_sa),
+      .niosSystemCamControl_clock_1_in_nativeaddress                       (niosSystemCamControl_clock_1_in_nativeaddress),
+      .niosSystemCamControl_clock_1_in_read                                (niosSystemCamControl_clock_1_in_read),
+      .niosSystemCamControl_clock_1_in_readdata                            (niosSystemCamControl_clock_1_in_readdata),
+      .niosSystemCamControl_clock_1_in_readdata_from_sa                    (niosSystemCamControl_clock_1_in_readdata_from_sa),
+      .niosSystemCamControl_clock_1_in_reset_n                             (niosSystemCamControl_clock_1_in_reset_n),
+      .niosSystemCamControl_clock_1_in_waitrequest                         (niosSystemCamControl_clock_1_in_waitrequest),
+      .niosSystemCamControl_clock_1_in_waitrequest_from_sa                 (niosSystemCamControl_clock_1_in_waitrequest_from_sa),
+      .niosSystemCamControl_clock_1_in_write                               (niosSystemCamControl_clock_1_in_write),
+      .niosSystemCamControl_clock_1_in_writedata                           (niosSystemCamControl_clock_1_in_writedata),
+      .reset_n                                                             (clk_0_reset_n)
+    );
+
+  niosSystemCamControl_clock_1_out_arbitrator the_niosSystemCamControl_clock_1_out
+    (
+      .clk                                                                        (clk_1),
+      .d1_sdram_0_s1_end_xfer                                                     (d1_sdram_0_s1_end_xfer),
+      .niosSystemCamControl_clock_1_out_address                                   (niosSystemCamControl_clock_1_out_address),
+      .niosSystemCamControl_clock_1_out_address_to_slave                          (niosSystemCamControl_clock_1_out_address_to_slave),
+      .niosSystemCamControl_clock_1_out_byteenable                                (niosSystemCamControl_clock_1_out_byteenable),
+      .niosSystemCamControl_clock_1_out_granted_sdram_0_s1                        (niosSystemCamControl_clock_1_out_granted_sdram_0_s1),
+      .niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1              (niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1),
+      .niosSystemCamControl_clock_1_out_read                                      (niosSystemCamControl_clock_1_out_read),
+      .niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1                (niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1),
+      .niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register (niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register),
+      .niosSystemCamControl_clock_1_out_readdata                                  (niosSystemCamControl_clock_1_out_readdata),
+      .niosSystemCamControl_clock_1_out_requests_sdram_0_s1                       (niosSystemCamControl_clock_1_out_requests_sdram_0_s1),
+      .niosSystemCamControl_clock_1_out_reset_n                                   (niosSystemCamControl_clock_1_out_reset_n),
+      .niosSystemCamControl_clock_1_out_waitrequest                               (niosSystemCamControl_clock_1_out_waitrequest),
+      .niosSystemCamControl_clock_1_out_write                                     (niosSystemCamControl_clock_1_out_write),
+      .niosSystemCamControl_clock_1_out_writedata                                 (niosSystemCamControl_clock_1_out_writedata),
+      .reset_n                                                                    (clk_1_reset_n),
+      .sdram_0_s1_readdata_from_sa                                                (sdram_0_s1_readdata_from_sa),
+      .sdram_0_s1_waitrequest_from_sa                                             (sdram_0_s1_waitrequest_from_sa)
+    );
+
+  niosSystemCamControl_clock_1 the_niosSystemCamControl_clock_1
+    (
+      .master_address       (niosSystemCamControl_clock_1_out_address),
+      .master_byteenable    (niosSystemCamControl_clock_1_out_byteenable),
+      .master_clk           (clk_1),
+      .master_endofpacket   (niosSystemCamControl_clock_1_out_endofpacket),
+      .master_nativeaddress (niosSystemCamControl_clock_1_out_nativeaddress),
+      .master_read          (niosSystemCamControl_clock_1_out_read),
+      .master_readdata      (niosSystemCamControl_clock_1_out_readdata),
+      .master_reset_n       (niosSystemCamControl_clock_1_out_reset_n),
+      .master_waitrequest   (niosSystemCamControl_clock_1_out_waitrequest),
+      .master_write         (niosSystemCamControl_clock_1_out_write),
+      .master_writedata     (niosSystemCamControl_clock_1_out_writedata),
+      .slave_address        (niosSystemCamControl_clock_1_in_address),
+      .slave_byteenable     (niosSystemCamControl_clock_1_in_byteenable),
+      .slave_clk            (clk_0),
+      .slave_endofpacket    (niosSystemCamControl_clock_1_in_endofpacket),
+      .slave_nativeaddress  (niosSystemCamControl_clock_1_in_nativeaddress),
+      .slave_read           (niosSystemCamControl_clock_1_in_read),
+      .slave_readdata       (niosSystemCamControl_clock_1_in_readdata),
+      .slave_reset_n        (niosSystemCamControl_clock_1_in_reset_n),
+      .slave_waitrequest    (niosSystemCamControl_clock_1_in_waitrequest),
+      .slave_write          (niosSystemCamControl_clock_1_in_write),
+      .slave_writedata      (niosSystemCamControl_clock_1_in_writedata)
+    );
+
   onchip_memory2_0_s1_arbitrator the_onchip_memory2_0_s1
     (
-      .clk                                                              (clk_0),
-      .cpu_0_data_master_address_to_slave                               (cpu_0_data_master_address_to_slave),
-      .cpu_0_data_master_byteenable                                     (cpu_0_data_master_byteenable),
-      .cpu_0_data_master_granted_onchip_memory2_0_s1                    (cpu_0_data_master_granted_onchip_memory2_0_s1),
-      .cpu_0_data_master_qualified_request_onchip_memory2_0_s1          (cpu_0_data_master_qualified_request_onchip_memory2_0_s1),
-      .cpu_0_data_master_read                                           (cpu_0_data_master_read),
-      .cpu_0_data_master_read_data_valid_onchip_memory2_0_s1            (cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
-      .cpu_0_data_master_requests_onchip_memory2_0_s1                   (cpu_0_data_master_requests_onchip_memory2_0_s1),
-      .cpu_0_data_master_waitrequest                                    (cpu_0_data_master_waitrequest),
-      .cpu_0_data_master_write                                          (cpu_0_data_master_write),
-      .cpu_0_data_master_writedata                                      (cpu_0_data_master_writedata),
-      .cpu_0_instruction_master_address_to_slave                        (cpu_0_instruction_master_address_to_slave),
-      .cpu_0_instruction_master_granted_onchip_memory2_0_s1             (cpu_0_instruction_master_granted_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1   (cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_read                                    (cpu_0_instruction_master_read),
-      .cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1     (cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1),
-      .cpu_0_instruction_master_requests_onchip_memory2_0_s1            (cpu_0_instruction_master_requests_onchip_memory2_0_s1),
-      .d1_onchip_memory2_0_s1_end_xfer                                  (d1_onchip_memory2_0_s1_end_xfer),
-      .onchip_memory2_0_s1_address                                      (onchip_memory2_0_s1_address),
-      .onchip_memory2_0_s1_byteenable                                   (onchip_memory2_0_s1_byteenable),
-      .onchip_memory2_0_s1_chipselect                                   (onchip_memory2_0_s1_chipselect),
-      .onchip_memory2_0_s1_clken                                        (onchip_memory2_0_s1_clken),
-      .onchip_memory2_0_s1_readdata                                     (onchip_memory2_0_s1_readdata),
-      .onchip_memory2_0_s1_readdata_from_sa                             (onchip_memory2_0_s1_readdata_from_sa),
-      .onchip_memory2_0_s1_reset                                        (onchip_memory2_0_s1_reset),
-      .onchip_memory2_0_s1_write                                        (onchip_memory2_0_s1_write),
-      .onchip_memory2_0_s1_writedata                                    (onchip_memory2_0_s1_writedata),
-      .registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1 (registered_cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
-      .reset_n                                                          (clk_0_reset_n)
+      .clk                                                            (clk_0),
+      .cpu_0_data_master_address_to_slave                             (cpu_0_data_master_address_to_slave),
+      .cpu_0_data_master_byteenable                                   (cpu_0_data_master_byteenable),
+      .cpu_0_data_master_granted_onchip_memory2_0_s1                  (cpu_0_data_master_granted_onchip_memory2_0_s1),
+      .cpu_0_data_master_latency_counter                              (cpu_0_data_master_latency_counter),
+      .cpu_0_data_master_qualified_request_onchip_memory2_0_s1        (cpu_0_data_master_qualified_request_onchip_memory2_0_s1),
+      .cpu_0_data_master_read                                         (cpu_0_data_master_read),
+      .cpu_0_data_master_read_data_valid_onchip_memory2_0_s1          (cpu_0_data_master_read_data_valid_onchip_memory2_0_s1),
+      .cpu_0_data_master_requests_onchip_memory2_0_s1                 (cpu_0_data_master_requests_onchip_memory2_0_s1),
+      .cpu_0_data_master_write                                        (cpu_0_data_master_write),
+      .cpu_0_data_master_writedata                                    (cpu_0_data_master_writedata),
+      .cpu_0_instruction_master_address_to_slave                      (cpu_0_instruction_master_address_to_slave),
+      .cpu_0_instruction_master_granted_onchip_memory2_0_s1           (cpu_0_instruction_master_granted_onchip_memory2_0_s1),
+      .cpu_0_instruction_master_latency_counter                       (cpu_0_instruction_master_latency_counter),
+      .cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1 (cpu_0_instruction_master_qualified_request_onchip_memory2_0_s1),
+      .cpu_0_instruction_master_read                                  (cpu_0_instruction_master_read),
+      .cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1   (cpu_0_instruction_master_read_data_valid_onchip_memory2_0_s1),
+      .cpu_0_instruction_master_requests_onchip_memory2_0_s1          (cpu_0_instruction_master_requests_onchip_memory2_0_s1),
+      .d1_onchip_memory2_0_s1_end_xfer                                (d1_onchip_memory2_0_s1_end_xfer),
+      .onchip_memory2_0_s1_address                                    (onchip_memory2_0_s1_address),
+      .onchip_memory2_0_s1_byteenable                                 (onchip_memory2_0_s1_byteenable),
+      .onchip_memory2_0_s1_chipselect                                 (onchip_memory2_0_s1_chipselect),
+      .onchip_memory2_0_s1_clken                                      (onchip_memory2_0_s1_clken),
+      .onchip_memory2_0_s1_readdata                                   (onchip_memory2_0_s1_readdata),
+      .onchip_memory2_0_s1_readdata_from_sa                           (onchip_memory2_0_s1_readdata_from_sa),
+      .onchip_memory2_0_s1_reset                                      (onchip_memory2_0_s1_reset),
+      .onchip_memory2_0_s1_write                                      (onchip_memory2_0_s1_write),
+      .onchip_memory2_0_s1_writedata                                  (onchip_memory2_0_s1_writedata),
+      .reset_n                                                        (clk_0_reset_n)
     );
 
   onchip_memory2_0 the_onchip_memory2_0
@@ -5050,11 +6585,11 @@ module niosSystemCamControl (
       .clk                                                   (clk_0),
       .cpu_0_data_master_address_to_slave                    (cpu_0_data_master_address_to_slave),
       .cpu_0_data_master_granted_procHasControl_s1           (cpu_0_data_master_granted_procHasControl_s1),
+      .cpu_0_data_master_latency_counter                     (cpu_0_data_master_latency_counter),
       .cpu_0_data_master_qualified_request_procHasControl_s1 (cpu_0_data_master_qualified_request_procHasControl_s1),
       .cpu_0_data_master_read                                (cpu_0_data_master_read),
       .cpu_0_data_master_read_data_valid_procHasControl_s1   (cpu_0_data_master_read_data_valid_procHasControl_s1),
       .cpu_0_data_master_requests_procHasControl_s1          (cpu_0_data_master_requests_procHasControl_s1),
-      .cpu_0_data_master_waitrequest                         (cpu_0_data_master_waitrequest),
       .cpu_0_data_master_write                               (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                           (cpu_0_data_master_writedata),
       .d1_procHasControl_s1_end_xfer                         (d1_procHasControl_s1_end_xfer),
@@ -5082,43 +6617,41 @@ module niosSystemCamControl (
 
   sdram_0_s1_arbitrator the_sdram_0_s1
     (
-      .clk                                                                (clk_0),
-      .cpu_0_data_master_address_to_slave                                 (cpu_0_data_master_address_to_slave),
-      .cpu_0_data_master_byteenable                                       (cpu_0_data_master_byteenable),
-      .cpu_0_data_master_byteenable_sdram_0_s1                            (cpu_0_data_master_byteenable_sdram_0_s1),
-      .cpu_0_data_master_dbs_address                                      (cpu_0_data_master_dbs_address),
-      .cpu_0_data_master_dbs_write_16                                     (cpu_0_data_master_dbs_write_16),
-      .cpu_0_data_master_granted_sdram_0_s1                               (cpu_0_data_master_granted_sdram_0_s1),
-      .cpu_0_data_master_no_byte_enables_and_last_term                    (cpu_0_data_master_no_byte_enables_and_last_term),
-      .cpu_0_data_master_qualified_request_sdram_0_s1                     (cpu_0_data_master_qualified_request_sdram_0_s1),
-      .cpu_0_data_master_read                                             (cpu_0_data_master_read),
-      .cpu_0_data_master_read_data_valid_sdram_0_s1                       (cpu_0_data_master_read_data_valid_sdram_0_s1),
-      .cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register        (cpu_0_data_master_read_data_valid_sdram_0_s1_shift_register),
-      .cpu_0_data_master_requests_sdram_0_s1                              (cpu_0_data_master_requests_sdram_0_s1),
-      .cpu_0_data_master_waitrequest                                      (cpu_0_data_master_waitrequest),
-      .cpu_0_data_master_write                                            (cpu_0_data_master_write),
-      .cpu_0_instruction_master_address_to_slave                          (cpu_0_instruction_master_address_to_slave),
-      .cpu_0_instruction_master_dbs_address                               (cpu_0_instruction_master_dbs_address),
-      .cpu_0_instruction_master_granted_sdram_0_s1                        (cpu_0_instruction_master_granted_sdram_0_s1),
-      .cpu_0_instruction_master_qualified_request_sdram_0_s1              (cpu_0_instruction_master_qualified_request_sdram_0_s1),
-      .cpu_0_instruction_master_read                                      (cpu_0_instruction_master_read),
-      .cpu_0_instruction_master_read_data_valid_sdram_0_s1                (cpu_0_instruction_master_read_data_valid_sdram_0_s1),
-      .cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register (cpu_0_instruction_master_read_data_valid_sdram_0_s1_shift_register),
-      .cpu_0_instruction_master_requests_sdram_0_s1                       (cpu_0_instruction_master_requests_sdram_0_s1),
-      .d1_sdram_0_s1_end_xfer                                             (d1_sdram_0_s1_end_xfer),
-      .reset_n                                                            (clk_0_reset_n),
-      .sdram_0_s1_address                                                 (sdram_0_s1_address),
-      .sdram_0_s1_byteenable_n                                            (sdram_0_s1_byteenable_n),
-      .sdram_0_s1_chipselect                                              (sdram_0_s1_chipselect),
-      .sdram_0_s1_read_n                                                  (sdram_0_s1_read_n),
-      .sdram_0_s1_readdata                                                (sdram_0_s1_readdata),
-      .sdram_0_s1_readdata_from_sa                                        (sdram_0_s1_readdata_from_sa),
-      .sdram_0_s1_readdatavalid                                           (sdram_0_s1_readdatavalid),
-      .sdram_0_s1_reset_n                                                 (sdram_0_s1_reset_n),
-      .sdram_0_s1_waitrequest                                             (sdram_0_s1_waitrequest),
-      .sdram_0_s1_waitrequest_from_sa                                     (sdram_0_s1_waitrequest_from_sa),
-      .sdram_0_s1_write_n                                                 (sdram_0_s1_write_n),
-      .sdram_0_s1_writedata                                               (sdram_0_s1_writedata)
+      .clk                                                                        (clk_1),
+      .d1_sdram_0_s1_end_xfer                                                     (d1_sdram_0_s1_end_xfer),
+      .niosSystemCamControl_clock_0_out_address_to_slave                          (niosSystemCamControl_clock_0_out_address_to_slave),
+      .niosSystemCamControl_clock_0_out_byteenable                                (niosSystemCamControl_clock_0_out_byteenable),
+      .niosSystemCamControl_clock_0_out_granted_sdram_0_s1                        (niosSystemCamControl_clock_0_out_granted_sdram_0_s1),
+      .niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1              (niosSystemCamControl_clock_0_out_qualified_request_sdram_0_s1),
+      .niosSystemCamControl_clock_0_out_read                                      (niosSystemCamControl_clock_0_out_read),
+      .niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1                (niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1),
+      .niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register (niosSystemCamControl_clock_0_out_read_data_valid_sdram_0_s1_shift_register),
+      .niosSystemCamControl_clock_0_out_requests_sdram_0_s1                       (niosSystemCamControl_clock_0_out_requests_sdram_0_s1),
+      .niosSystemCamControl_clock_0_out_write                                     (niosSystemCamControl_clock_0_out_write),
+      .niosSystemCamControl_clock_0_out_writedata                                 (niosSystemCamControl_clock_0_out_writedata),
+      .niosSystemCamControl_clock_1_out_address_to_slave                          (niosSystemCamControl_clock_1_out_address_to_slave),
+      .niosSystemCamControl_clock_1_out_byteenable                                (niosSystemCamControl_clock_1_out_byteenable),
+      .niosSystemCamControl_clock_1_out_granted_sdram_0_s1                        (niosSystemCamControl_clock_1_out_granted_sdram_0_s1),
+      .niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1              (niosSystemCamControl_clock_1_out_qualified_request_sdram_0_s1),
+      .niosSystemCamControl_clock_1_out_read                                      (niosSystemCamControl_clock_1_out_read),
+      .niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1                (niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1),
+      .niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register (niosSystemCamControl_clock_1_out_read_data_valid_sdram_0_s1_shift_register),
+      .niosSystemCamControl_clock_1_out_requests_sdram_0_s1                       (niosSystemCamControl_clock_1_out_requests_sdram_0_s1),
+      .niosSystemCamControl_clock_1_out_write                                     (niosSystemCamControl_clock_1_out_write),
+      .niosSystemCamControl_clock_1_out_writedata                                 (niosSystemCamControl_clock_1_out_writedata),
+      .reset_n                                                                    (clk_1_reset_n),
+      .sdram_0_s1_address                                                         (sdram_0_s1_address),
+      .sdram_0_s1_byteenable_n                                                    (sdram_0_s1_byteenable_n),
+      .sdram_0_s1_chipselect                                                      (sdram_0_s1_chipselect),
+      .sdram_0_s1_read_n                                                          (sdram_0_s1_read_n),
+      .sdram_0_s1_readdata                                                        (sdram_0_s1_readdata),
+      .sdram_0_s1_readdata_from_sa                                                (sdram_0_s1_readdata_from_sa),
+      .sdram_0_s1_readdatavalid                                                   (sdram_0_s1_readdatavalid),
+      .sdram_0_s1_reset_n                                                         (sdram_0_s1_reset_n),
+      .sdram_0_s1_waitrequest                                                     (sdram_0_s1_waitrequest),
+      .sdram_0_s1_waitrequest_from_sa                                             (sdram_0_s1_waitrequest_from_sa),
+      .sdram_0_s1_write_n                                                         (sdram_0_s1_write_n),
+      .sdram_0_s1_writedata                                                       (sdram_0_s1_writedata)
     );
 
   sdram_0 the_sdram_0
@@ -5129,7 +6662,7 @@ module niosSystemCamControl (
       .az_data        (sdram_0_s1_writedata),
       .az_rd_n        (sdram_0_s1_read_n),
       .az_wr_n        (sdram_0_s1_write_n),
-      .clk            (clk_0),
+      .clk            (clk_1),
       .reset_n        (sdram_0_s1_reset_n),
       .za_data        (sdram_0_s1_readdata),
       .za_valid       (sdram_0_s1_readdatavalid),
@@ -5154,7 +6687,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_dbs_address                                               (cpu_0_data_master_dbs_address),
       .cpu_0_data_master_dbs_write_16                                              (cpu_0_data_master_dbs_write_16),
       .cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0                  (cpu_0_data_master_granted_sram_16bit_512k_0_avalon_slave_0),
-      .cpu_0_data_master_no_byte_enables_and_last_term                             (cpu_0_data_master_no_byte_enables_and_last_term),
+      .cpu_0_data_master_latency_counter                                           (cpu_0_data_master_latency_counter),
       .cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0        (cpu_0_data_master_qualified_request_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_data_master_read                                                      (cpu_0_data_master_read),
       .cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0          (cpu_0_data_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0),
@@ -5163,6 +6696,7 @@ module niosSystemCamControl (
       .cpu_0_instruction_master_address_to_slave                                   (cpu_0_instruction_master_address_to_slave),
       .cpu_0_instruction_master_dbs_address                                        (cpu_0_instruction_master_dbs_address),
       .cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0           (cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0),
+      .cpu_0_instruction_master_latency_counter                                    (cpu_0_instruction_master_latency_counter),
       .cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0 (cpu_0_instruction_master_qualified_request_sram_16bit_512k_0_avalon_slave_0),
       .cpu_0_instruction_master_read                                               (cpu_0_instruction_master_read),
       .cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0   (cpu_0_instruction_master_read_data_valid_sram_16bit_512k_0_avalon_slave_0),
@@ -5206,6 +6740,7 @@ module niosSystemCamControl (
       .clk                                                     (clk_0),
       .cpu_0_data_master_address_to_slave                      (cpu_0_data_master_address_to_slave),
       .cpu_0_data_master_granted_sysid_control_slave           (cpu_0_data_master_granted_sysid_control_slave),
+      .cpu_0_data_master_latency_counter                       (cpu_0_data_master_latency_counter),
       .cpu_0_data_master_qualified_request_sysid_control_slave (cpu_0_data_master_qualified_request_sysid_control_slave),
       .cpu_0_data_master_read                                  (cpu_0_data_master_read),
       .cpu_0_data_master_read_data_valid_sysid_control_slave   (cpu_0_data_master_read_data_valid_sysid_control_slave),
@@ -5232,11 +6767,11 @@ module niosSystemCamControl (
       .clk                                            (clk_0),
       .cpu_0_data_master_address_to_slave             (cpu_0_data_master_address_to_slave),
       .cpu_0_data_master_granted_timer_0_s1           (cpu_0_data_master_granted_timer_0_s1),
+      .cpu_0_data_master_latency_counter              (cpu_0_data_master_latency_counter),
       .cpu_0_data_master_qualified_request_timer_0_s1 (cpu_0_data_master_qualified_request_timer_0_s1),
       .cpu_0_data_master_read                         (cpu_0_data_master_read),
       .cpu_0_data_master_read_data_valid_timer_0_s1   (cpu_0_data_master_read_data_valid_timer_0_s1),
       .cpu_0_data_master_requests_timer_0_s1          (cpu_0_data_master_requests_timer_0_s1),
-      .cpu_0_data_master_waitrequest                  (cpu_0_data_master_waitrequest),
       .cpu_0_data_master_write                        (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                    (cpu_0_data_master_writedata),
       .d1_timer_0_s1_end_xfer                         (d1_timer_0_s1_end_xfer),
@@ -5277,7 +6812,26 @@ module niosSystemCamControl (
   assign reset_n_sources = ~(~reset_n |
     0 |
     cpu_0_jtag_debug_module_resetrequest_from_sa |
-    cpu_0_jtag_debug_module_resetrequest_from_sa);
+    cpu_0_jtag_debug_module_resetrequest_from_sa |
+    0);
+
+  //reset is asserted asynchronously and deasserted synchronously
+  niosSystemCamControl_reset_clk_1_domain_synch_module niosSystemCamControl_reset_clk_1_domain_synch
+    (
+      .clk      (clk_1),
+      .data_in  (1'b1),
+      .data_out (clk_1_reset_n),
+      .reset_n  (reset_n_sources)
+    );
+
+  //niosSystemCamControl_clock_0_in_writedata of type writedata does not connect to anything so wire it to default (0)
+  assign niosSystemCamControl_clock_0_in_writedata = 0;
+
+  //niosSystemCamControl_clock_0_out_endofpacket of type endofpacket does not connect to anything so wire it to default (0)
+  assign niosSystemCamControl_clock_0_out_endofpacket = 0;
+
+  //niosSystemCamControl_clock_1_out_endofpacket of type endofpacket does not connect to anything so wire it to default (0)
+  assign niosSystemCamControl_clock_1_out_endofpacket = 0;
 
   //sysid_control_slave_clock of type clock does not connect to anything so wire it to default (0)
   assign sysid_control_slave_clock = 0;
@@ -5312,16 +6866,19 @@ endmodule
 `include "cpu_0_altera_nios_custom_instr_floating_point_inst.v"
 `include "hdl/SRAM_16Bit_512K.v"
 `include "sram_16bit_512k_0.v"
+`include "niosSystemCamControl_clock_1.v"
 `include "sdram_0.v"
 `include "timer_0.v"
 `include "sysid.v"
 `include "cpu_0_test_bench.v"
+`include "cpu_0_mult_cell.v"
 `include "cpu_0_oci_test_bench.v"
 `include "cpu_0_jtag_debug_module_tck.v"
 `include "cpu_0_jtag_debug_module_sysclk.v"
 `include "cpu_0_jtag_debug_module_wrapper.v"
 `include "cpu_0.v"
 `include "jtag_uart_0.v"
+`include "niosSystemCamControl_clock_0.v"
 `include "onchip_memory2_0.v"
 `include "procHasControl.v"
 
@@ -5340,19 +6897,27 @@ module test_bench
   wire             SRAM_WE_N_from_the_sram_16bit_512k_0;
   wire             clk;
   reg              clk_0;
-  wire    [  4: 0] cpu_0_custom_instruction_master_a;
-  wire    [  4: 0] cpu_0_custom_instruction_master_b;
-  wire    [  4: 0] cpu_0_custom_instruction_master_c;
-  wire             cpu_0_custom_instruction_master_estatus;
-  wire    [ 31: 0] cpu_0_custom_instruction_master_ipending;
+  reg              clk_1;
+  wire    [  4: 0] cpu_0_custom_instruction_master_multi_a;
+  wire    [  4: 0] cpu_0_custom_instruction_master_multi_b;
+  wire    [  4: 0] cpu_0_custom_instruction_master_multi_c;
   wire             cpu_0_custom_instruction_master_multi_clk;
+  wire             cpu_0_custom_instruction_master_multi_estatus;
+  wire    [ 31: 0] cpu_0_custom_instruction_master_multi_ipending;
+  wire             cpu_0_custom_instruction_master_multi_readra;
+  wire             cpu_0_custom_instruction_master_multi_readrb;
   wire             cpu_0_custom_instruction_master_multi_reset;
-  wire             cpu_0_custom_instruction_master_readra;
-  wire             cpu_0_custom_instruction_master_readrb;
-  wire             cpu_0_custom_instruction_master_status;
-  wire             cpu_0_custom_instruction_master_writerc;
+  wire             cpu_0_custom_instruction_master_multi_status;
+  wire             cpu_0_custom_instruction_master_multi_writerc;
   wire             jtag_uart_0_avalon_jtag_slave_dataavailable_from_sa;
   wire             jtag_uart_0_avalon_jtag_slave_readyfordata_from_sa;
+  wire             niosSystemCamControl_clock_0_in_endofpacket_from_sa;
+  wire    [ 15: 0] niosSystemCamControl_clock_0_in_writedata;
+  wire             niosSystemCamControl_clock_0_out_endofpacket;
+  wire    [ 21: 0] niosSystemCamControl_clock_0_out_nativeaddress;
+  wire             niosSystemCamControl_clock_1_in_endofpacket_from_sa;
+  wire             niosSystemCamControl_clock_1_out_endofpacket;
+  wire    [ 21: 0] niosSystemCamControl_clock_1_out_nativeaddress;
   wire             out_port_from_the_procHasControl;
   reg              reset_n;
   wire             sysid_control_slave_clock;
@@ -5382,6 +6947,7 @@ module test_bench
       .SRAM_UB_N_from_the_sram_16bit_512k_0      (SRAM_UB_N_from_the_sram_16bit_512k_0),
       .SRAM_WE_N_from_the_sram_16bit_512k_0      (SRAM_WE_N_from_the_sram_16bit_512k_0),
       .clk_0                                     (clk_0),
+      .clk_1                                     (clk_1),
       .out_port_from_the_procHasControl          (out_port_from_the_procHasControl),
       .reset_n                                   (reset_n),
       .zs_addr_from_the_sdram_0                  (zs_addr_from_the_sdram_0),
@@ -5399,6 +6965,11 @@ module test_bench
     clk_0 = 1'b0;
   always
     #10 clk_0 <= ~clk_0;
+  
+  initial
+    clk_1 = 1'b0;
+  always
+    #5 clk_1 <= ~clk_1;
   
   initial 
     begin

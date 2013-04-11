@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.altera.sbtgui.launch.modelsim.Nios2ModelsimLaunchConfiguration">
+<stringAttribute key="elfFile" value="C:\Data\Projects\School\EEC_181AB\project\niosControl3CamOnly\software\siftPlusPlusNiosNew\siftPlusPlusNiosNew.elf"/>
+<booleanAttribute key="elfSimulationEnabled" value="true"/>
+<stringAttribute key="modelSimPath" value="C:\altera\12.1\modelsim_ase\win32aloem"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="siftPlusPlusNiosNew.elf"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="siftPlusPlusNiosNew"/>
+<stringAttribute key="spdPath" value="C:\Data\Projects\School\EEC_181AB\project\niosControl3CamOnly\niosSystemCamControl_tb.spd"/>
+</launchConfiguration>

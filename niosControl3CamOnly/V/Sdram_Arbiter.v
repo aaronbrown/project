@@ -143,7 +143,16 @@ always @* begin
     default :              ;
   endcase
 end
-
+/*
+always @ (posedge clk) 
+	if ((CS_N_nios == 0) &&
+	(RAS_N_nios == 0) &&
+	(CAS_N_nios == 0) &&
+	(WE_N_nios == 0))
+		NiosModeBits <= SA_nios;
+	else 
+		NiosModeBits <= NiosModeBits;
+*/
 assign SA_arbiter = NiosLoadMode ? NiosModeBits : CamModeBits;
 
 assign SA    = ArbiterHasControl ? SA_arbiter : NiosHasControl ? SA_nios    : SA_cam;
