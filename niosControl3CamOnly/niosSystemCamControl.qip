@@ -18,8 +18,8 @@ set_global_assignment -name VERILOG_FILE [file join $::quartus(ip_rootpath) alte
 set_global_assignment -name VERILOG_FILE [file join $::quartus(ip_rootpath) altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_qsys.v]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(ip_rootpath) altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_hw_qsys.v]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) cpu_0_altera_nios_custom_instr_floating_point_inst.v]
+# clk_1
 # null
 set_global_assignment -name SDC_FILE [file join $::quartus(ip_rootpath) altera/sopc_builder_ip/altera_avalon_clock_adapter/altera_avalon_clock_adapter.sdc]
-# clk_1
-set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID F04DA25B30410000013DFA6A4201 
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID F04DA25B30410000013E04C2A297 
  

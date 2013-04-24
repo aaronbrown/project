@@ -151,9 +151,9 @@ SOPC_SYSID_FLAG += --sidp=0x1109038
 ELF_PATCH_FLAG  += --sidp 0x1109038
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1365705896
-SOPC_SYSID_FLAG += --timestamp=1365705896
-ELF_PATCH_FLAG  += --timestamp 1365705896
+# setting SOPC_TIMESTAMP is 1365879267
+SOPC_SYSID_FLAG += --timestamp=1365879267
+ELF_PATCH_FLAG  += --timestamp 1365879267
 
 # Small-footprint (polled mode) driver none 
 # setting altera_avalon_jtag_uart_driver.enable_small_driver is false
@@ -184,7 +184,7 @@ ELF_PATCH_FLAG  += --timestamp 1365705896
 # Causes code to be compiled with gprof profiling enabled and the application 
 # ELF to be linked with the GPROF library. If true, adds -DALT_PROVIDE_GMON to 
 # ALT_CPPFLAGS and -pg to ALT_CFLAGS in public.mk. none 
-# setting hal.enable_gprof is 0
+# setting hal.enable_gprof is false
 
 # Enables lightweight device driver API. This reduces code and data footprint 
 # by removing the HAL layer that maps device names (e.g. /dev/uart0) to file 

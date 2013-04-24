@@ -66,7 +66,7 @@
 #define PROC_HAS_CONTROL 0x1109020
 //#define PROC_CONTROL_ON *((volatile unsigned short*)PROC_HAS_CONTROL) = 1
 //#define PROC_CONTROL_OFF *((volatile unsigned short*)PROC_HAS_CONTROL) = 0
-#define PROC_CONTROL_ON IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 1);
+#define PROC_CONTROL_ON IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 1);usleep(1*1000*1000);
 #define PROC_CONTROL_OFF IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 0);
 #define SIFT_DATA_START 0x92c000
 
@@ -240,7 +240,7 @@ private:
               VL::float_t s) ;
 
   void prepareGrad(int o) ;
-  
+  void onTheFlyGrad(int o, pixel_t* grad, float_t &m, float_t &t) ;
   // scale space parameters
   VL::float_t sigman ;
   VL::float_t sigma0 ;

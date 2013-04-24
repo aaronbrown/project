@@ -3714,6 +3714,7 @@ module cpu_0 (
                 A_ci_multi_status,
                 A_ci_multi_writerc,
                 d_address,
+                d_burstcount,
                 d_byteenable,
                 d_read,
                 d_write,
@@ -3743,6 +3744,7 @@ module cpu_0 (
   output           A_ci_multi_status;
   output           A_ci_multi_writerc;
   output  [ 24: 0] d_address;
+  output  [  3: 0] d_burstcount;
   output  [  3: 0] d_byteenable;
   output           d_read;
   output           d_write;
@@ -3998,12 +4000,9 @@ module cpu_0 (
   wire             A_dc_index_wb_inv_done_nxt;
   wire             A_dc_index_wb_inv_want_xfer;
   reg              A_dc_potential_hazard_after_st;
-  reg     [  3: 0] A_dc_rd_addr_cnt;
-  wire    [  3: 0] A_dc_rd_addr_cnt_nxt;
   reg     [ 31: 0] A_dc_rd_data;
   reg     [  3: 0] A_dc_rd_data_cnt;
   wire    [  3: 0] A_dc_rd_data_cnt_nxt;
-  wire             A_dc_rd_last_driven;
   wire             A_dc_rd_last_transfer;
   reg              A_dc_rd_last_transfer_d1;
   reg              A_dc_valid_st_bypass_hit;
@@ -5893,8 +5892,6 @@ module cpu_0 (
   wire    [423: 0] W_vinst;
   reg     [ 31: 0] W_wr_data;
   reg              W_wr_dst_reg;
-  wire             av_addr_accepted;
-  wire             av_rd_addr_accepted;
   wire             av_wr_data_transfer;
   reg              clr_break_line;
   wire    [ 24: 0] d_address;
@@ -5906,6 +5903,8 @@ module cpu_0 (
   wire    [  2: 0] d_address_offset_field_nxt;
   reg     [ 13: 0] d_address_tag_field;
   wire    [ 13: 0] d_address_tag_field_nxt;
+  reg     [  3: 0] d_burstcount;
+  wire    [  3: 0] d_burstcount_nxt;
   reg     [  3: 0] d_byteenable;
   wire    [  3: 0] d_byteenable_nxt;
   reg              d_read;
@@ -8482,32 +8481,26 @@ cpu_0_dc_victim_module cpu_0_dc_victim
 
   assign A_dc_wr_last_driven = A_dc_wr_data_cnt[3];
   assign A_dc_wr_last_transfer = A_dc_wr_last_driven & d_write & ~d_waitrequest;
-  assign av_addr_accepted = (d_read | d_write) & ~d_waitrequest;
-  assign d_address_offset_field_nxt = av_addr_accepted ? (d_address_offset_field + 1) :
-    (A_dc_wb_wr_starting | A_dc_fill_starting) ? 0 :
-    (A_dc_wb_wr_active | A_dc_fill_active) ? d_address_offset_field :
-    A_mem_bypass_pending                ? A_mem_baddr_offset_field :
+  assign d_burstcount_nxt = (A_dc_wb_wr_want_dmaster | A_dc_fill_want_dmaster) ? 
+    8 :
+    1;
+
+  assign d_address_offset_field_nxt = (A_dc_wb_wr_want_dmaster | A_dc_fill_want_dmaster) ? 0 : 
+    A_mem_bypass_pending                  ? A_mem_baddr_offset_field :
     M_mem_baddr_offset_field;
 
-  assign d_read_nxt = A_dc_fill_starting |
-    (M_ctrl_ld_bypass & M_valid & A_en & ~A_dc_wb_active) | 
+  assign d_read_nxt = A_dc_fill_starting | 
+    (M_ctrl_ld_bypass & M_valid & A_en & ~A_dc_wb_active) |
     (A_ld_bypass_delayed & ~A_ld_bypass_delayed_started & 
     ~A_dc_wb_active) |
-    (d_read & (d_waitrequest | ~A_dc_rd_last_driven));
+    (d_read & d_waitrequest);
 
-  assign av_rd_addr_accepted = d_read & ~d_waitrequest;
-  assign A_dc_rd_addr_cnt_nxt = av_rd_addr_accepted ? (A_dc_rd_addr_cnt + 1) :
-    A_dc_fill_starting  ? 1 :
-    A_dc_fill_active    ? A_dc_rd_addr_cnt :
-    8;
-
-  assign A_dc_rd_last_driven = A_dc_rd_addr_cnt[3];
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          A_dc_rd_addr_cnt <= 0;
+          d_burstcount <= 0;
       else 
-        A_dc_rd_addr_cnt <= A_dc_rd_addr_cnt_nxt;
+        d_burstcount <= d_burstcount_nxt;
     end
 
 

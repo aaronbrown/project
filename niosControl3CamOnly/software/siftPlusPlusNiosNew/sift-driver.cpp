@@ -37,7 +37,7 @@ bool cmpKeypoints (Keypoints::value_type const&a,
 
 void extractImageData(VL::PgmBuffer& buffer)
 {
-  VL::pixel_t* im_pt = new VL::pixel_t[480*360];
+  VL::pixel_t* im_pt = (VL::pixel_t*)0x92c000;
   VL::pixel_t* start = im_pt;
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short* imgPtr = 0;
@@ -300,6 +300,8 @@ void drawCircle(int x0, int y0, int radius, unsigned short r, unsigned short g, 
 int
 main(int argc, char** argv)
 {
+	PROC_CONTROL_OFF;
+	usleep(10*1000*1000);
 	// Switch control to processor
 	// Otherwise heap allocations and sdram access
 	// will not work properly
@@ -307,7 +309,7 @@ main(int argc, char** argv)
 
 	// move heap past camera image in SDRAM. We don't want the image being
 	// overwritten or the heap being corrupted
-	VL::pixel_t* OriginalImage = (VL::pixel_t*) new VL::pixel_t[640*480];
+	//VL::pixel_t* OriginalImage = (VL::pixel_t*) new VL::pixel_t[640*480];
 /*
 	//
 	// Code I used to write a test square to VGA part of SDRAM using
@@ -333,16 +335,18 @@ main(int argc, char** argv)
   int    first          = 0 ;
   int    octaves        = 3 ;
   int    levels         = 1 ;
-  VL::float_t  threshold      (0.001f / levels / 2.0f) ;
-  VL::float_t  edgeThreshold  (20.0f);
+  VL::float_t  threshold      (0.04f / levels / 2.0f) ;
+  VL::float_t  edgeThreshold  (10.0f);
   VL::float_t  magnif         (3.0) ;
-  int    verbose        = 1 ;
+  int    verbose        = 0 ;
 
   VL::PgmBuffer buffer ;
 
   cout << "Hello!\n";
   extractImageData(buffer);
 
+  cout << "siftpp: done extracting floats\n" ;
+/*
 	cout << "writing extracted image data to VGA...";
 	moveImageToVGA(buffer.data, 1.0, 0.0, buffer.width, buffer.height, 80, 60);
 	PROC_CONTROL_OFF;
@@ -351,7 +355,7 @@ main(int argc, char** argv)
 	usleep(10*1000*1000);
 	PROC_CONTROL_ON;
 	cout << "done\n";
-
+*/
   //replaceImageData();
   // -----------------------------------------------------------------
   //                                            Retrieve input image
@@ -432,16 +436,18 @@ main(int argc, char** argv)
         << "siftpp:   levels per octave     : " << S
         << endl ;
 
-  for (int omin = first; omin < O; omin++)
+  for (int omin = first; omin < first+O; omin++)
   {
-    verbose && cout << "siftpp:   current octave        : " << omin << endl;
+    cout << "siftpp:   current octave        : " << omin << endl;
 
     // initialize scalespace
     VL::Sift sift(buffer.data, buffer.width, buffer.height,
         sigman, sigma0,
         1, S,
 		    omin, -1, S+1) ;
-      
+
+    cout << "siftpp: done computing scale space\n" ;
+
     verbose && cout
         << "siftpp: Gaussian scale space completed"
         << endl ;
@@ -454,6 +460,8 @@ main(int argc, char** argv)
           << "siftpp: running detector  "<< endl;
 	
     sift.detectKeypoints(threshold, edgeThreshold) ;
+
+    cout << "siftpp: done detecting\n" ;
 	
     verbose && cout
           << "siftpp: detector completed with " 
@@ -464,8 +472,8 @@ main(int argc, char** argv)
     for (VL::Sift::KeypointsConstIter iter = sift.keypointsBegin();
     			iter != sift.keypointsEnd(); ++iter)
     {
-    	drawCircle(iter->ix + 80, iter->iy + 60, 5*(2+iter->s),0,0,0x3ff);
-    	writeRedPixelAt(iter->ix + 80, iter->iy + 60);
+    	//drawCircle((1 << omin)*iter->ix + 80, (1 << omin)*iter->iy + 60, 5*(2+iter->s),0,0,0x3ff);
+    	//writeRedPixelAt((1 << omin)*iter->ix + 80, (1 << omin)*iter->iy + 60);
     }
       
     // -------------------------------------------------------------
@@ -489,14 +497,19 @@ main(int argc, char** argv)
       int nangles ;
 
       nangles = sift.computeKeypointOrientations(angles, *iter) ;
+      cout << "siftpp: done computing orientation\n" ;
 	    
       // compute descriptors
       for(int a = 0 ; a < nangles ; ++a) {
         // compute descriptor
         VL::float_t descr_pt [128] ;
         sift.computeKeypointDescriptor(descr_pt, *iter, angles[a]) ;
+        cout << "siftpp: done computing descriptor\n" ;
       } // next angle
     } // next keypoint
+
+    cout << "siftpp: done computing all orientations and descriptors\n" ;
+
     */
 	} // next octave
 
@@ -504,7 +517,6 @@ main(int argc, char** argv)
           << "siftpp: job completed"<<endl ;
 
 	PROC_CONTROL_OFF;
-  while(1);
 
   return 0 ;
 } // main()

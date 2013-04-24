@@ -20,6 +20,42 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
+DE2_D5M
+# storage
+db|DE2_D5M.(0).cnf
+db|DE2_D5M.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+de2_d5m.v
+4eab117ae331b56a50b7699fc12e15c1
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# entity
 VGA_Controller
 # storage
 db|DE2_D5M.(1).cnf
@@ -315,12 +351,12 @@ clken
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_compare.inc
-bbd3e8c93afb7320934629e5fb11566
 lpm_constant.inc
 97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
 }
 # hierarchies {
 RAW2RGB:u4|Line_Buffer:u0|altshift_taps:altshift_taps_component
@@ -2524,14 +2560,14 @@ clkena
 2
 }
 # include_file {
-stratix_pll.inc
-a9a94c5be18105f7ae8c218a67ec9f7
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
 cycloneii_pll.inc
 c2ee779f89b3bc181df753ea85b3ef
 stratixii_pll.inc
 6797ab505ed70f1a221e4a213e16a6
+stratix_pll.inc
+a9a94c5be18105f7ae8c218a67ec9f7
 }
 # hierarchies {
 sdram_pll2:unew|altpll:altpll_component
@@ -2540,18 +2576,18 @@ sdram_pll2:unew|altpll:altpll_component
 
 # end
 # entity
-cpu_0
+niosSystemCamControl
 # storage
-db|DE2_D5M.(20).cnf
-db|DE2_D5M.(20).cnf
+db|DE2_D5M.(15).cnf
+db|DE2_D5M.(15).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2570,7 +2606,151 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0
+niosSystemCamControl:niosSystemCamControl_inst
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_jtag_debug_module_arbitrator
+# storage
+db|DE2_D5M.(16).cnf
+db|DE2_D5M.(16).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0_jtag_debug_module_arbitrator:the_cpu_0_jtag_debug_module
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_custom_instruction_master_arbitrator
+# storage
+db|DE2_D5M.(17).cnf
+db|DE2_D5M.(17).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0_custom_instruction_master_arbitrator:the_cpu_0_custom_instruction_master
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_data_master_arbitrator
+# storage
+db|DE2_D5M.(18).cnf
+db|DE2_D5M.(18).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0_data_master_arbitrator:the_cpu_0_data_master
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_instruction_master_arbitrator
+# storage
+db|DE2_D5M.(19).cnf
+db|DE2_D5M.(19).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0_instruction_master_arbitrator:the_cpu_0_instruction_master
 }
 # macro_sequence
 
@@ -2607,48 +2787,6 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_test_bench:the_cpu_0_test_bench
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_ic_data_module
-# storage
-db|DE2_D5M.(22).cnf
-db|DE2_D5M.(22).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-UNUSED
-PARAMETER_STRING
-DEF
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_data_module:cpu_0_ic_data
 }
 # macro_sequence
 
@@ -2893,22 +3031,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_data_module:cpu_0_ic_data|altsyncram:the_altsyncram
@@ -3196,48 +3334,6 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_data_mod
 
 # end
 # entity
-cpu_0_ic_tag_module
-# storage
-db|DE2_D5M.(25).cnf
-db|DE2_D5M.(25).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-cpu_0_ic_tag_ram.mif
-PARAMETER_STRING
-USR
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_tag_module:cpu_0_ic_tag
-}
-# macro_sequence
-
-# end
-# entity
 altsyncram
 # storage
 db|DE2_D5M.(26).cnf
@@ -3477,22 +3573,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_tag_module:cpu_0_ic_tag|altsyncram:the_altsyncram
@@ -3700,48 +3796,6 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_tag_modu
 
 # end
 # entity
-cpu_0_bht_module
-# storage
-db|DE2_D5M.(28).cnf
-db|DE2_D5M.(28).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-cpu_0_bht_ram.mif
-PARAMETER_STRING
-USR
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_bht_module:cpu_0_bht
-}
-# macro_sequence
-
-# end
-# entity
 altsyncram
 # storage
 db|DE2_D5M.(29).cnf
@@ -3981,22 +4035,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_bht_module:cpu_0_bht|altsyncram:the_altsyncram
@@ -4091,48 +4145,6 @@ def5dad3df639851de8d78ef17df4f2e
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_bht_module:cpu_0_bht|altsyncram:the_altsyncram|altsyncram_8pf1:auto_generated
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_register_bank_a_module
-# storage
-db|DE2_D5M.(31).cnf
-db|DE2_D5M.(31).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-cpu_0_rf_ram_a.mif
-PARAMETER_STRING
-USR
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_register_bank_a_module:cpu_0_register_bank_a
 }
 # macro_sequence
 
@@ -4374,22 +4386,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_register_bank_a_module:cpu_0_register_bank_a|altsyncram:the_altsyncram
@@ -4648,48 +4660,6 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_register_ba
 
 # end
 # entity
-cpu_0_register_bank_b_module
-# storage
-db|DE2_D5M.(34).cnf
-db|DE2_D5M.(34).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-cpu_0_rf_ram_b.mif
-PARAMETER_STRING
-USR
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_register_bank_b_module:cpu_0_register_bank_b
-}
-# macro_sequence
-
-# end
-# entity
 altsyncram
 # storage
 db|DE2_D5M.(35).cnf
@@ -4926,22 +4896,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_register_bank_b_module:cpu_0_register_bank_b|altsyncram:the_altsyncram
@@ -5200,48 +5170,6 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_register_ba
 
 # end
 # entity
-cpu_0_dc_tag_module
-# storage
-db|DE2_D5M.(37).cnf
-db|DE2_D5M.(37).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-cpu_0_dc_tag_ram.mif
-PARAMETER_STRING
-USR
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_tag_module:cpu_0_dc_tag
-}
-# macro_sequence
-
-# end
-# entity
 altsyncram
 # storage
 db|DE2_D5M.(38).cnf
@@ -5478,22 +5406,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_tag_module:cpu_0_dc_tag|altsyncram:the_altsyncram
@@ -5657,48 +5585,6 @@ cpu_0_dc_tag_ram.mif
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_tag_module:cpu_0_dc_tag|altsyncram:the_altsyncram|altsyncram_2ef1:auto_generated
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_dc_data_module
-# storage
-db|DE2_D5M.(40).cnf
-db|DE2_D5M.(40).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-UNUSED
-PARAMETER_STRING
-DEF
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_data_module:cpu_0_dc_data
 }
 # macro_sequence
 
@@ -5943,22 +5829,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_data_module:cpu_0_dc_data|altsyncram:the_altsyncram
@@ -6249,48 +6135,6 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_data_mod
 
 # end
 # entity
-cpu_0_dc_victim_module
-# storage
-db|DE2_D5M.(43).cnf
-db|DE2_D5M.(43).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-UNUSED
-PARAMETER_STRING
-DEF
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_victim_module:cpu_0_dc_victim
-}
-# macro_sequence
-
-# end
-# entity
 altsyncram
 # storage
 db|DE2_D5M.(44).cnf
@@ -6530,22 +6374,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_victim_module:cpu_0_dc_victim|altsyncram:the_altsyncram
@@ -7715,12 +7559,12 @@ ena0
 2
 }
 # include_file {
+stratix_mac_out.inc
+9ac89b9d6c98d3e379f29a56f74933
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
 stratix_mac_mult.inc
 39994655f1ee0a1246f2c1a60bc98e4
-stratix_mac_out.inc
-9ac89b9d6c98d3e379f29a56f74933
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_mult_cell:the_cpu_0_mult_cell|altmult_add:the_altmult_add_part_1
@@ -9291,12 +9135,12 @@ ena0
 2
 }
 # include_file {
+stratix_mac_out.inc
+9ac89b9d6c98d3e379f29a56f74933
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
 stratix_mac_mult.inc
 39994655f1ee0a1246f2c1a60bc98e4
-stratix_mac_out.inc
-9ac89b9d6c98d3e379f29a56f74933
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_mult_cell:the_cpu_0_mult_cell|altmult_add:the_altmult_add_part_2
@@ -9468,156 +9312,6 @@ aclr0
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_mult_cell:the_cpu_0_mult_cell|altmult_add:the_altmult_add_part_2|mult_add_6cr2:auto_generated
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci
-# storage
-db|DE2_D5M.(53).cnf
-db|DE2_D5M.(53).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_debug
-# storage
-db|DE2_D5M.(54).cnf
-db|DE2_D5M.(54).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_debug:the_cpu_0_nios2_oci_debug
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_ocimem
-# storage
-db|DE2_D5M.(55).cnf
-db|DE2_D5M.(55).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_ocimem:the_cpu_0_nios2_ocimem
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_ociram_lpm_dram_bdp_component_module
-# storage
-db|DE2_D5M.(56).cnf
-db|DE2_D5M.(56).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-cpu_0_ociram_default_contents.mif
-PARAMETER_STRING
-USR
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_ocimem:the_cpu_0_nios2_ocimem|cpu_0_ociram_lpm_dram_bdp_component_module:cpu_0_ociram_lpm_dram_bdp_component
 }
 # macro_sequence
 
@@ -9880,421 +9574,25 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_ocimem:the_cpu_0_nios2_ocimem|cpu_0_ociram_lpm_dram_bdp_component_module:cpu_0_ociram_lpm_dram_bdp_component|altsyncram:the_altsyncram
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_avalon_reg
-# storage
-db|DE2_D5M.(59).cnf
-db|DE2_D5M.(59).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_avalon_reg:the_cpu_0_nios2_avalon_reg
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_break
-# storage
-db|DE2_D5M.(60).cnf
-db|DE2_D5M.(60).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_break:the_cpu_0_nios2_oci_break
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_xbrk
-# storage
-db|DE2_D5M.(61).cnf
-db|DE2_D5M.(61).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_xbrk:the_cpu_0_nios2_oci_xbrk
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_dbrk
-# storage
-db|DE2_D5M.(62).cnf
-db|DE2_D5M.(62).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_dbrk:the_cpu_0_nios2_oci_dbrk
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_itrace
-# storage
-db|DE2_D5M.(63).cnf
-db|DE2_D5M.(63).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_itrace:the_cpu_0_nios2_oci_itrace
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_dtrace
-# storage
-db|DE2_D5M.(64).cnf
-db|DE2_D5M.(64).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_dtrace:the_cpu_0_nios2_oci_dtrace
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_td_mode
-# storage
-db|DE2_D5M.(65).cnf
-db|DE2_D5M.(65).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_dtrace:the_cpu_0_nios2_oci_dtrace|cpu_0_nios2_oci_td_mode:cpu_0_nios2_oci_trc_ctrl_td_mode
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_fifo
-# storage
-db|DE2_D5M.(66).cnf
-db|DE2_D5M.(66).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_compute_tm_count
-# storage
-db|DE2_D5M.(67).cnf
-db|DE2_D5M.(67).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo|cpu_0_nios2_oci_compute_tm_count:cpu_0_nios2_oci_compute_tm_count_tm_count
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_fifowp_inc
-# storage
-db|DE2_D5M.(68).cnf
-db|DE2_D5M.(68).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo|cpu_0_nios2_oci_fifowp_inc:cpu_0_nios2_oci_fifowp_inc_fifowp
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_fifocount_inc
-# storage
-db|DE2_D5M.(69).cnf
-db|DE2_D5M.(69).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo|cpu_0_nios2_oci_fifocount_inc:cpu_0_nios2_oci_fifocount_inc_fifocount
 }
 # macro_sequence
 
@@ -10331,120 +9629,6 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo|cpu_0_oci_test_bench:the_cpu_0_oci_test_bench
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_pib
-# storage
-db|DE2_D5M.(71).cnf
-db|DE2_D5M.(71).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_pib:the_cpu_0_nios2_oci_pib
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_nios2_oci_im
-# storage
-db|DE2_D5M.(72).cnf
-db|DE2_D5M.(72).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_im:the_cpu_0_nios2_oci_im
-}
-# macro_sequence
-
-# end
-# entity
-cpu_0_traceram_lpm_dram_bdp_component_module
-# storage
-db|DE2_D5M.(73).cnf
-db|DE2_D5M.(73).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cpu_0.v
-8eee5a7d171fa6177244e2c44ab68ef5
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-lpm_file
-UNUSED
-PARAMETER_STRING
-DEF
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_im:the_cpu_0_nios2_oci_im|cpu_0_traceram_lpm_dram_bdp_component_module:cpu_0_traceram_lpm_dram_bdp_component
 }
 # macro_sequence
 
@@ -10704,22 +9888,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_im:the_cpu_0_nios2_oci_im|cpu_0_traceram_lpm_dram_bdp_component_module:cpu_0_traceram_lpm_dram_bdp_component|altsyncram:the_altsyncram
@@ -11547,6 +10731,42 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:t
 MASK_8_BITS255INST_BIT_INDEX0MASK_11_BITS2047MFG_BIT_INDEX8MASK_8_BITS255TYPE_BIT_INDEX19MASK_5_BITS31VERION_BIT_INDEX27
 # end
 # entity
+cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator
+# storage
+db|DE2_D5M.(82).cnf
+db|DE2_D5M.(82).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator:the_cpu_0_altera_nios_custom_instr_floating_point_inst_s1
+}
+# macro_sequence
+
+# end
+# entity
 cpu_0_altera_nios_custom_instr_floating_point_inst
 # storage
 db|DE2_D5M.(83).cnf
@@ -11808,18 +11028,18 @@ cin
 1
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_add_sub:exp_add_adder
@@ -12041,18 +11261,18 @@ cin
 1
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_add_sub:exp_adj_adder
@@ -12271,18 +11491,18 @@ dataa
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_add_sub:exp_bias_subtr
@@ -12498,18 +11718,18 @@ dataa
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_add_sub:man_round_adder
@@ -12899,14 +12119,14 @@ aclr
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-lpm_add_sub.inc
-144a73b61081a2a03554ff5acc5e8842
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 multcore.inc
 ee598ea39a3d6bdc35b167eefc3ee3da
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
+lpm_add_sub.inc
+144a73b61081a2a03554ff5acc5e8842
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_mult:man_product2_mult
@@ -14138,18 +13358,18 @@ aclr
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:add_sub1
@@ -14369,18 +13589,18 @@ dataa
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:add_sub3
@@ -14560,18 +13780,18 @@ dataa
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:add_sub4
@@ -14789,18 +14009,18 @@ aclr
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:add_sub5
@@ -15034,18 +14254,18 @@ aclr
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_2comp_res_lower
@@ -15332,18 +14552,18 @@ cin
 1
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_2comp_res_upper0
@@ -15629,18 +14849,18 @@ cin
 2
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_2comp_res_upper1
@@ -15752,18 +14972,18 @@ cout
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_res_rounding_add_sub_lower
@@ -16012,18 +15232,18 @@ cin
 2
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_res_rounding_add_sub_upper1
@@ -16501,18 +15721,18 @@ cin
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_csa_vhf:altfp_div_csa8|lpm_add_sub:csa_lower
@@ -16759,18 +15979,18 @@ cin
 2
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_csa_vhf:altfp_div_csa8|lpm_add_sub:csa_upper1
@@ -16953,18 +16173,18 @@ cout
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_mke:altfp_div_csa25|lpm_add_sub:csa_lower
@@ -17204,18 +16424,18 @@ cin
 1
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_mke:altfp_div_csa25|lpm_add_sub:csa_upper0
@@ -17456,18 +16676,18 @@ cin
 2
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_mke:altfp_div_csa25|lpm_add_sub:csa_upper1
@@ -17623,18 +16843,18 @@ aclr
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_2jh:altfp_div_csa26|lpm_add_sub:csa_lower
@@ -17910,18 +17130,18 @@ cin
 1
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_2jh:altfp_div_csa26|lpm_add_sub:csa_upper0
@@ -18198,18 +17418,18 @@ cin
 2
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_2jh:altfp_div_csa26|lpm_add_sub:csa_upper1
@@ -18356,18 +17576,18 @@ cout
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_rle:altfp_div_csa27|lpm_add_sub:csa_lower
@@ -18681,18 +17901,18 @@ cin
 1
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_rle:altfp_div_csa27|lpm_add_sub:csa_upper0
@@ -18951,18 +18171,18 @@ cin
 2
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_rle:altfp_div_csa27|lpm_add_sub:csa_upper1
@@ -19172,18 +18392,18 @@ cout
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_pke:altfp_div_csa29|lpm_add_sub:csa_lower
@@ -19495,18 +18715,18 @@ cin
 1
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_pke:altfp_div_csa29|lpm_add_sub:csa_upper0
@@ -19837,18 +19057,18 @@ cin
 2
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_pke:altfp_div_csa29|lpm_add_sub:csa_upper1
@@ -20049,18 +19269,18 @@ cin
 1
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_qle:altfp_div_csa31|lpm_add_sub:csa_upper0
@@ -20391,18 +19611,18 @@ cin
 2
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_qle:altfp_div_csa31|lpm_add_sub:csa_upper1
@@ -24396,18 +23616,18 @@ dataa
 3
 }
 # include_file {
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|lpm_add_sub:add_sub10
@@ -25571,6 +24791,42 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_fl
 
 # end
 # entity
+jtag_uart_0_avalon_jtag_slave_arbitrator
+# storage
+db|DE2_D5M.(198).cnf
+db|DE2_D5M.(198).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|jtag_uart_0_avalon_jtag_slave_arbitrator:the_jtag_uart_0_avalon_jtag_slave
+}
+# macro_sequence
+
+# end
+# entity
 jtag_uart_0
 # storage
 db|DE2_D5M.(199).cnf
@@ -25760,12 +25016,12 @@ aclr
 3
 }
 # include_file {
+a_i2fifo.inc
+bfe272f05af0cf849bd8b4748efceffe
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
 a_f2fifo.inc
 cebe3836bad826c95e765f77477e8a8b
-a_i2fifo.inc
-bfe272f05af0cf849bd8b4748efceffe
 a_dpfifo.inc
 37c2d0bb70d5a3f83a4aa09e62c75080
 a_fffifo.inc
@@ -26493,10 +25749,1996 @@ niosSystemCamControl:niosSystemCamControl_inst|jtag_uart_0:the_jtag_uart_0|alt_j
 
 # end
 # entity
-onchip_memory2_0
+niosSystemCamControl_burst_0_upstream_arbitrator
+# storage
+db|DE2_D5M.(211).cnf
+db|DE2_D5M.(211).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_0_upstream_arbitrator:the_niosSystemCamControl_burst_0_upstream
+}
+# macro_sequence
+
+# end
+# entity
+burstcount_fifo_for_niosSystemCamControl_burst_0_upstream_module
 # storage
 db|DE2_D5M.(212).cnf
 db|DE2_D5M.(212).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_0_upstream_arbitrator:the_niosSystemCamControl_burst_0_upstream|burstcount_fifo_for_niosSystemCamControl_burst_0_upstream_module:burstcount_fifo_for_niosSystemCamControl_burst_0_upstream
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_0_upstream_module
+# storage
+db|DE2_D5M.(213).cnf
+db|DE2_D5M.(213).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_0_upstream_arbitrator:the_niosSystemCamControl_burst_0_upstream|rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_0_upstream_module:rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_0_upstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_0_downstream_arbitrator
+# storage
+db|DE2_D5M.(214).cnf
+db|DE2_D5M.(214).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_0_downstream_arbitrator:the_niosSystemCamControl_burst_0_downstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_0
+# storage
+db|DE2_D5M.(215).cnf
+db|DE2_D5M.(215).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_burst_0.v
+367687ff7738a9b57c6f2188bae1bde
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_0:the_niosSystemCamControl_burst_0
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_1_upstream_arbitrator
+# storage
+db|DE2_D5M.(216).cnf
+db|DE2_D5M.(216).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_1_upstream_arbitrator:the_niosSystemCamControl_burst_1_upstream
+}
+# macro_sequence
+
+# end
+# entity
+burstcount_fifo_for_niosSystemCamControl_burst_1_upstream_module
+# storage
+db|DE2_D5M.(217).cnf
+db|DE2_D5M.(217).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_1_upstream_arbitrator:the_niosSystemCamControl_burst_1_upstream|burstcount_fifo_for_niosSystemCamControl_burst_1_upstream_module:burstcount_fifo_for_niosSystemCamControl_burst_1_upstream
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_1_upstream_module
+# storage
+db|DE2_D5M.(218).cnf
+db|DE2_D5M.(218).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_1_upstream_arbitrator:the_niosSystemCamControl_burst_1_upstream|rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_1_upstream_module:rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_1_upstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_1_downstream_arbitrator
+# storage
+db|DE2_D5M.(219).cnf
+db|DE2_D5M.(219).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_1_downstream_arbitrator:the_niosSystemCamControl_burst_1_downstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_1
+# storage
+db|DE2_D5M.(220).cnf
+db|DE2_D5M.(220).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_burst_1.v
+a024dd59bc5537c6d36a66286d0d
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_1:the_niosSystemCamControl_burst_1
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_2_upstream_arbitrator
+# storage
+db|DE2_D5M.(221).cnf
+db|DE2_D5M.(221).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_2_upstream_arbitrator:the_niosSystemCamControl_burst_2_upstream
+}
+# macro_sequence
+
+# end
+# entity
+burstcount_fifo_for_niosSystemCamControl_burst_2_upstream_module
+# storage
+db|DE2_D5M.(222).cnf
+db|DE2_D5M.(222).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_2_upstream_arbitrator:the_niosSystemCamControl_burst_2_upstream|burstcount_fifo_for_niosSystemCamControl_burst_2_upstream_module:burstcount_fifo_for_niosSystemCamControl_burst_2_upstream
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_2_upstream_module
+# storage
+db|DE2_D5M.(223).cnf
+db|DE2_D5M.(223).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_2_upstream_arbitrator:the_niosSystemCamControl_burst_2_upstream|rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_2_upstream_module:rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_2_upstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_2_downstream_arbitrator
+# storage
+db|DE2_D5M.(224).cnf
+db|DE2_D5M.(224).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_2_downstream_arbitrator:the_niosSystemCamControl_burst_2_downstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_2
+# storage
+db|DE2_D5M.(225).cnf
+db|DE2_D5M.(225).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_burst_2.v
+8cfe11547ab62b546d449601ba2d52
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_2:the_niosSystemCamControl_burst_2
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_3_upstream_arbitrator
+# storage
+db|DE2_D5M.(226).cnf
+db|DE2_D5M.(226).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_3_upstream_arbitrator:the_niosSystemCamControl_burst_3_upstream
+}
+# macro_sequence
+
+# end
+# entity
+burstcount_fifo_for_niosSystemCamControl_burst_3_upstream_module
+# storage
+db|DE2_D5M.(227).cnf
+db|DE2_D5M.(227).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_3_upstream_arbitrator:the_niosSystemCamControl_burst_3_upstream|burstcount_fifo_for_niosSystemCamControl_burst_3_upstream_module:burstcount_fifo_for_niosSystemCamControl_burst_3_upstream
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_3_upstream_module
+# storage
+db|DE2_D5M.(228).cnf
+db|DE2_D5M.(228).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_3_upstream_arbitrator:the_niosSystemCamControl_burst_3_upstream|rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_3_upstream_module:rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_3_upstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_3_downstream_arbitrator
+# storage
+db|DE2_D5M.(229).cnf
+db|DE2_D5M.(229).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_3_downstream_arbitrator:the_niosSystemCamControl_burst_3_downstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_3
+# storage
+db|DE2_D5M.(230).cnf
+db|DE2_D5M.(230).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_burst_3.v
+a4cc91b976764846e274a24a18d981f
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_3:the_niosSystemCamControl_burst_3
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_4_upstream_arbitrator
+# storage
+db|DE2_D5M.(231).cnf
+db|DE2_D5M.(231).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_4_upstream_arbitrator:the_niosSystemCamControl_burst_4_upstream
+}
+# macro_sequence
+
+# end
+# entity
+burstcount_fifo_for_niosSystemCamControl_burst_4_upstream_module
+# storage
+db|DE2_D5M.(232).cnf
+db|DE2_D5M.(232).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_4_upstream_arbitrator:the_niosSystemCamControl_burst_4_upstream|burstcount_fifo_for_niosSystemCamControl_burst_4_upstream_module:burstcount_fifo_for_niosSystemCamControl_burst_4_upstream
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_4_upstream_module
+# storage
+db|DE2_D5M.(233).cnf
+db|DE2_D5M.(233).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_4_upstream_arbitrator:the_niosSystemCamControl_burst_4_upstream|rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_4_upstream_module:rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_4_upstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_4_downstream_arbitrator
+# storage
+db|DE2_D5M.(234).cnf
+db|DE2_D5M.(234).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_4_downstream_arbitrator:the_niosSystemCamControl_burst_4_downstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_4
+# storage
+db|DE2_D5M.(235).cnf
+db|DE2_D5M.(235).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_burst_4.v
+3e3e2bb8adfc45e29366cb99cc653b8
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_4:the_niosSystemCamControl_burst_4
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_5_upstream_arbitrator
+# storage
+db|DE2_D5M.(236).cnf
+db|DE2_D5M.(236).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_5_upstream_arbitrator:the_niosSystemCamControl_burst_5_upstream
+}
+# macro_sequence
+
+# end
+# entity
+burstcount_fifo_for_niosSystemCamControl_burst_5_upstream_module
+# storage
+db|DE2_D5M.(237).cnf
+db|DE2_D5M.(237).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_5_upstream_arbitrator:the_niosSystemCamControl_burst_5_upstream|burstcount_fifo_for_niosSystemCamControl_burst_5_upstream_module:burstcount_fifo_for_niosSystemCamControl_burst_5_upstream
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_5_upstream_module
+# storage
+db|DE2_D5M.(238).cnf
+db|DE2_D5M.(238).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_5_upstream_arbitrator:the_niosSystemCamControl_burst_5_upstream|rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_5_upstream_module:rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_5_upstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_5_downstream_arbitrator
+# storage
+db|DE2_D5M.(239).cnf
+db|DE2_D5M.(239).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_5_downstream_arbitrator:the_niosSystemCamControl_burst_5_downstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_5
+# storage
+db|DE2_D5M.(240).cnf
+db|DE2_D5M.(240).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_burst_5.v
+d3d6e7a2df952998418f7cfcf32f13
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_5:the_niosSystemCamControl_burst_5
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_6_upstream_arbitrator
+# storage
+db|DE2_D5M.(241).cnf
+db|DE2_D5M.(241).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_6_upstream_arbitrator:the_niosSystemCamControl_burst_6_upstream
+}
+# macro_sequence
+
+# end
+# entity
+burstcount_fifo_for_niosSystemCamControl_burst_6_upstream_module
+# storage
+db|DE2_D5M.(242).cnf
+db|DE2_D5M.(242).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_6_upstream_arbitrator:the_niosSystemCamControl_burst_6_upstream|burstcount_fifo_for_niosSystemCamControl_burst_6_upstream_module:burstcount_fifo_for_niosSystemCamControl_burst_6_upstream
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_6_upstream_module
+# storage
+db|DE2_D5M.(243).cnf
+db|DE2_D5M.(243).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_6_upstream_arbitrator:the_niosSystemCamControl_burst_6_upstream|rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_6_upstream_module:rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_6_upstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_6_downstream_arbitrator
+# storage
+db|DE2_D5M.(244).cnf
+db|DE2_D5M.(244).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_6_downstream_arbitrator:the_niosSystemCamControl_burst_6_downstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_6
+# storage
+db|DE2_D5M.(245).cnf
+db|DE2_D5M.(245).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_burst_6.v
+44b234bb9bfdd01979249bf02c354d5a
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_6:the_niosSystemCamControl_burst_6
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_7_upstream_arbitrator
+# storage
+db|DE2_D5M.(246).cnf
+db|DE2_D5M.(246).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_7_upstream_arbitrator:the_niosSystemCamControl_burst_7_upstream
+}
+# macro_sequence
+
+# end
+# entity
+burstcount_fifo_for_niosSystemCamControl_burst_7_upstream_module
+# storage
+db|DE2_D5M.(247).cnf
+db|DE2_D5M.(247).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_7_upstream_arbitrator:the_niosSystemCamControl_burst_7_upstream|burstcount_fifo_for_niosSystemCamControl_burst_7_upstream_module:burstcount_fifo_for_niosSystemCamControl_burst_7_upstream
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream_module
+# storage
+db|DE2_D5M.(248).cnf
+db|DE2_D5M.(248).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_7_upstream_arbitrator:the_niosSystemCamControl_burst_7_upstream|rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream_module:rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_7_downstream_arbitrator
+# storage
+db|DE2_D5M.(249).cnf
+db|DE2_D5M.(249).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_7_downstream_arbitrator:the_niosSystemCamControl_burst_7_downstream
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_burst_7
+# storage
+db|DE2_D5M.(250).cnf
+db|DE2_D5M.(250).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_burst_7.v
+e46eae7effbf909c14cadcc6d7da6
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_burst_7:the_niosSystemCamControl_burst_7
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_0_in_arbitrator
+# storage
+db|DE2_D5M.(251).cnf
+db|DE2_D5M.(251).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0_in_arbitrator:the_niosSystemCamControl_clock_0_in
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_0_out_arbitrator
+# storage
+db|DE2_D5M.(252).cnf
+db|DE2_D5M.(252).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0_out_arbitrator:the_niosSystemCamControl_clock_0_out
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_0
+# storage
+db|DE2_D5M.(253).cnf
+db|DE2_D5M.(253).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_0.v
+ec3afc1c7e32670e7d3984490c4518
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_0_edge_to_pulse
+# storage
+db|DE2_D5M.(254).cnf
+db|DE2_D5M.(254).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_0.v
+ec3afc1c7e32670e7d3984490c4518
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_edge_to_pulse:read_done_edge_to_pulse
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_edge_to_pulse:write_done_edge_to_pulse
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_edge_to_pulse:read_request_edge_to_pulse
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_edge_to_pulse:write_request_edge_to_pulse
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_0_slave_FSM
+# storage
+db|DE2_D5M.(255).cnf
+db|DE2_D5M.(255).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_0.v
+ec3afc1c7e32670e7d3984490c4518
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_slave_FSM:slave_FSM
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_0_master_FSM
+# storage
+db|DE2_D5M.(256).cnf
+db|DE2_D5M.(256).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_0.v
+ec3afc1c7e32670e7d3984490c4518
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_master_FSM:master_FSM
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_0_bit_pipe
+# storage
+db|DE2_D5M.(257).cnf
+db|DE2_D5M.(257).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_0.v
+ec3afc1c7e32670e7d3984490c4518
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_bit_pipe:endofpacket_bit_pipe
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_1_in_arbitrator
+# storage
+db|DE2_D5M.(258).cnf
+db|DE2_D5M.(258).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1_in_arbitrator:the_niosSystemCamControl_clock_1_in
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_1_out_arbitrator
+# storage
+db|DE2_D5M.(259).cnf
+db|DE2_D5M.(259).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1_out_arbitrator:the_niosSystemCamControl_clock_1_out
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_1
+# storage
+db|DE2_D5M.(260).cnf
+db|DE2_D5M.(260).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_1.v
+3d10c5eaff6ae0e1ee91281e3cf6f4ed
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_1_edge_to_pulse
+# storage
+db|DE2_D5M.(261).cnf
+db|DE2_D5M.(261).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_1.v
+3d10c5eaff6ae0e1ee91281e3cf6f4ed
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_edge_to_pulse:read_done_edge_to_pulse
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_edge_to_pulse:write_done_edge_to_pulse
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_edge_to_pulse:read_request_edge_to_pulse
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_edge_to_pulse:write_request_edge_to_pulse
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_1_slave_FSM
+# storage
+db|DE2_D5M.(262).cnf
+db|DE2_D5M.(262).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_1.v
+3d10c5eaff6ae0e1ee91281e3cf6f4ed
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_slave_FSM:slave_FSM
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_1_master_FSM
+# storage
+db|DE2_D5M.(263).cnf
+db|DE2_D5M.(263).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_1.v
+3d10c5eaff6ae0e1ee91281e3cf6f4ed
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_master_FSM:master_FSM
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_clock_1_bit_pipe
+# storage
+db|DE2_D5M.(264).cnf
+db|DE2_D5M.(264).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol_clock_1.v
+3d10c5eaff6ae0e1ee91281e3cf6f4ed
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_bit_pipe:endofpacket_bit_pipe
+}
+# macro_sequence
+
+# end
+# entity
+onchip_memory2_0_s1_arbitrator
+# storage
+db|DE2_D5M.(265).cnf
+db|DE2_D5M.(265).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|onchip_memory2_0_s1_arbitrator:the_onchip_memory2_0_s1
+}
+# macro_sequence
+
+# end
+# entity
+onchip_memory2_0
+# storage
+db|DE2_D5M.(266).cnf
+db|DE2_D5M.(266).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -26537,8 +27779,8 @@ niosSystemCamControl:niosSystemCamControl_inst|onchip_memory2_0:the_onchip_memor
 # entity
 altsyncram
 # storage
-db|DE2_D5M.(213).cnf
-db|DE2_D5M.(213).cnf
+db|DE2_D5M.(267).cnf
+db|DE2_D5M.(267).cnf
 # case_insensitive
 # source_file
 altsyncram.tdf
@@ -26774,22 +28016,22 @@ address_a
 3
 }
 # include_file {
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
-lpm_mux.inc
-dd87bed9959d6126db09970164b7ba6
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
+lpm_mux.inc
+dd87bed9959d6126db09970164b7ba6
 altram.inc
 ad5518b39ffd3cf1df377e6360d1c9b6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|onchip_memory2_0:the_onchip_memory2_0|altsyncram:the_altsyncram
@@ -26800,8 +28042,8 @@ niosSystemCamControl:niosSystemCamControl_inst|onchip_memory2_0:the_onchip_memor
 # entity
 altsyncram_94c1
 # storage
-db|DE2_D5M.(214).cnf
-db|DE2_D5M.(214).cnf
+db|DE2_D5M.(268).cnf
+db|DE2_D5M.(268).cnf
 # case_insensitive
 # source_file
 db|altsyncram_94c1.tdf
@@ -27069,10 +28311,46 @@ niosSystemCamControl:niosSystemCamControl_inst|onchip_memory2_0:the_onchip_memor
 
 # end
 # entity
+procHasControl_s1_arbitrator
+# storage
+db|DE2_D5M.(269).cnf
+db|DE2_D5M.(269).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|procHasControl_s1_arbitrator:the_procHasControl_s1
+}
+# macro_sequence
+
+# end
+# entity
 procHasControl
 # storage
-db|DE2_D5M.(216).cnf
-db|DE2_D5M.(216).cnf
+db|DE2_D5M.(270).cnf
+db|DE2_D5M.(270).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -27105,10 +28383,226 @@ niosSystemCamControl:niosSystemCamControl_inst|procHasControl:the_procHasControl
 
 # end
 # entity
+sdram_0_s1_arbitrator
+# storage
+db|DE2_D5M.(271).cnf
+db|DE2_D5M.(271).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|sdram_0_s1_arbitrator:the_sdram_0_s1
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1_module
+# storage
+db|DE2_D5M.(272).cnf
+db|DE2_D5M.(272).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|sdram_0_s1_arbitrator:the_sdram_0_s1|rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1_module:rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1
+}
+# macro_sequence
+
+# end
+# entity
+rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1_module
+# storage
+db|DE2_D5M.(273).cnf
+db|DE2_D5M.(273).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|sdram_0_s1_arbitrator:the_sdram_0_s1|rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1_module:rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1
+}
+# macro_sequence
+
+# end
+# entity
+sdram_0
+# storage
+db|DE2_D5M.(274).cnf
+db|DE2_D5M.(274).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_0.v
+8aff7cc9419430e53def9982b5d125bc
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|sdram_0:the_sdram_0
+}
+# macro_sequence
+
+# end
+# entity
+sdram_0_input_efifo_module
+# storage
+db|DE2_D5M.(275).cnf
+db|DE2_D5M.(275).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_0.v
+8aff7cc9419430e53def9982b5d125bc
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|sdram_0:the_sdram_0|sdram_0_input_efifo_module:the_sdram_0_input_efifo_module
+}
+# macro_sequence
+
+# end
+# entity
+sram_16bit_512k_0_avalon_slave_0_arbitrator
+# storage
+db|DE2_D5M.(276).cnf
+db|DE2_D5M.(276).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|sram_16bit_512k_0_avalon_slave_0_arbitrator:the_sram_16bit_512k_0_avalon_slave_0
+}
+# macro_sequence
+
+# end
+# entity
 SRAM_16Bit_512K
 # storage
-db|DE2_D5M.(224).cnf
-db|DE2_D5M.(224).cnf
+db|DE2_D5M.(278).cnf
+db|DE2_D5M.(278).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -27141,18 +28635,18 @@ niosSystemCamControl:niosSystemCamControl_inst|sram_16bit_512k_0:the_sram_16bit_
 
 # end
 # entity
-timer_0
+sysid_control_slave_arbitrator
 # storage
-db|DE2_D5M.(228).cnf
-db|DE2_D5M.(228).cnf
+db|DE2_D5M.(279).cnf
+db|DE2_D5M.(279).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-timer_0.v
-acb183e236c064b3f894f5ca3ee8d892
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27171,7 +28665,115 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|timer_0:the_timer_0
+niosSystemCamControl:niosSystemCamControl_inst|sysid_control_slave_arbitrator:the_sysid_control_slave
+}
+# macro_sequence
+
+# end
+# entity
+timer_0_s1_arbitrator
+# storage
+db|DE2_D5M.(281).cnf
+db|DE2_D5M.(281).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|timer_0_s1_arbitrator:the_timer_0_s1
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_reset_clk_0_domain_synch_module
+# storage
+db|DE2_D5M.(283).cnf
+db|DE2_D5M.(283).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_reset_clk_0_domain_synch_module:niosSystemCamControl_reset_clk_0_domain_synch
+}
+# macro_sequence
+
+# end
+# entity
+niosSystemCamControl_reset_clk_1_domain_synch_module
+# storage
+db|DE2_D5M.(284).cnf
+db|DE2_D5M.(284).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+niossystemcamcontrol.v
+1551e7d61d95f756aade036dd161681
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_reset_clk_1_domain_synch_module:niosSystemCamControl_reset_clk_1_domain_synch
 }
 # macro_sequence
 
@@ -27179,8 +28781,8 @@ niosSystemCamControl:niosSystemCamControl_inst|timer_0:the_timer_0
 # entity
 Sdram_Arbiter
 # storage
-db|DE2_D5M.(230).cnf
-db|DE2_D5M.(230).cnf
+db|DE2_D5M.(285).cnf
+db|DE2_D5M.(285).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -27241,8 +28843,8 @@ Sdram_Arbiter:sdramArbiter0
 # entity
 Sdram_Control_4Port
 # storage
-db|DE2_D5M.(231).cnf
-db|DE2_D5M.(231).cnf
+db|DE2_D5M.(286).cnf
+db|DE2_D5M.(286).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -27323,8 +28925,8 @@ DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DS
 # entity
 control_interface
 # storage
-db|DE2_D5M.(232).cnf
-db|DE2_D5M.(232).cnf
+db|DE2_D5M.(287).cnf
+db|DE2_D5M.(287).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -27405,8 +29007,8 @@ ASIZE23      ASIZE23      ASIZE23
 # entity
 command
 # storage
-db|DE2_D5M.(233).cnf
-db|DE2_D5M.(233).cnf
+db|DE2_D5M.(288).cnf
+db|DE2_D5M.(288).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -27487,8 +29089,8 @@ ASIZE23      ROWSIZE12COLSIZE8BANKSIZE2ROWSTART8          ROWSIZE12ROWSTART8    
 # entity
 sdr_data_path
 # storage
-db|DE2_D5M.(234).cnf
-db|DE2_D5M.(234).cnf
+db|DE2_D5M.(289).cnf
+db|DE2_D5M.(289).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -27569,8 +29171,8 @@ DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16
 # entity
 Sdram_FIFO
 # storage
-db|DE2_D5M.(235).cnf
-db|DE2_D5M.(235).cnf
+db|DE2_D5M.(290).cnf
+db|DE2_D5M.(290).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -27608,8 +29210,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2
 # entity
 dcfifo
 # storage
-db|DE2_D5M.(236).cnf
-db|DE2_D5M.(236).cnf
+db|DE2_D5M.(291).cnf
+db|DE2_D5M.(291).cnf
 # case_insensitive
 # source_file
 dcfifo.tdf
@@ -27745,28 +29347,28 @@ aclr
 3
 }
 # include_file {
+a_graycounter.inc
+c8eabdd6f8e7d384595a15fec505aa8
 altsyncram_fifo.inc
 4b2b21790828dd59a04a16f08af58b
-alt_sync_fifo.inc
-a019bef5b1e7379dfab915daa2a6c4
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
+dffpipe.inc
+5471cd80ee441dd293deca0963c9aa0
+a_fefifo.inc
+5a44f50e786a1d286adceb22796b9f
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_compare.inc
-bbd3e8c93afb7320934629e5fb11566
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+alt_sync_fifo.inc
+a019bef5b1e7379dfab915daa2a6c4
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-a_graycounter.inc
-c8eabdd6f8e7d384595a15fec505aa8
-a_fefifo.inc
-5a44f50e786a1d286adceb22796b9f
-dffpipe.inc
-5471cd80ee441dd293deca0963c9aa0
 a_gray2bin.inc
 7e4b761bbeb1a382a47a2f89c3e13e
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
 }
 # hierarchies {
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component
@@ -27780,8 +29382,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component
 # entity
 dcfifo_m2o1
 # storage
-db|DE2_D5M.(237).cnf
-db|DE2_D5M.(237).cnf
+db|DE2_D5M.(292).cnf
+db|DE2_D5M.(292).cnf
 # case_insensitive
 # source_file
 db|dcfifo_m2o1.tdf
@@ -27972,8 +29574,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 a_gray2bin_kdb
 # storage
-db|DE2_D5M.(238).cnf
-db|DE2_D5M.(238).cnf
+db|DE2_D5M.(293).cnf
+db|DE2_D5M.(293).cnf
 # case_insensitive
 # source_file
 db|a_gray2bin_kdb.tdf
@@ -28065,8 +29667,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 a_graycounter_o96
 # storage
-db|DE2_D5M.(239).cnf
-db|DE2_D5M.(239).cnf
+db|DE2_D5M.(294).cnf
+db|DE2_D5M.(294).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_o96.tdf
@@ -28125,8 +29727,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 a_graycounter_fgc
 # storage
-db|DE2_D5M.(240).cnf
-db|DE2_D5M.(240).cnf
+db|DE2_D5M.(295).cnf
+db|DE2_D5M.(295).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_fgc.tdf
@@ -28155,8 +29757,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 a_graycounter_egc
 # storage
-db|DE2_D5M.(241).cnf
-db|DE2_D5M.(241).cnf
+db|DE2_D5M.(296).cnf
+db|DE2_D5M.(296).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_egc.tdf
@@ -28215,8 +29817,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 altsyncram_1l81
 # storage
-db|DE2_D5M.(242).cnf
-db|DE2_D5M.(242).cnf
+db|DE2_D5M.(297).cnf
+db|DE2_D5M.(297).cnf
 # case_insensitive
 # source_file
 db|altsyncram_1l81.tdf
@@ -28404,8 +30006,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 altsyncram_drg1
 # storage
-db|DE2_D5M.(243).cnf
-db|DE2_D5M.(243).cnf
+db|DE2_D5M.(298).cnf
+db|DE2_D5M.(298).cnf
 # case_insensitive
 # source_file
 db|altsyncram_drg1.tdf
@@ -28647,8 +30249,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 dffpipe_ngh
 # storage
-db|DE2_D5M.(244).cnf
-db|DE2_D5M.(244).cnf
+db|DE2_D5M.(299).cnf
+db|DE2_D5M.(299).cnf
 # case_insensitive
 # source_file
 db|dffpipe_ngh.tdf
@@ -28680,8 +30282,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 dffpipe_kec
 # storage
-db|DE2_D5M.(245).cnf
-db|DE2_D5M.(245).cnf
+db|DE2_D5M.(300).cnf
+db|DE2_D5M.(300).cnf
 # case_insensitive
 # source_file
 db|dffpipe_kec.tdf
@@ -28771,8 +30373,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 alt_synch_pipe_rdb
 # storage
-db|DE2_D5M.(246).cnf
-db|DE2_D5M.(246).cnf
+db|DE2_D5M.(301).cnf
+db|DE2_D5M.(301).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_rdb.tdf
@@ -28858,8 +30460,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 dffpipe_pe9
 # storage
-db|DE2_D5M.(247).cnf
-db|DE2_D5M.(247).cnf
+db|DE2_D5M.(302).cnf
+db|DE2_D5M.(302).cnf
 # case_insensitive
 # source_file
 db|dffpipe_pe9.tdf
@@ -28945,8 +30547,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 dffpipe_oe9
 # storage
-db|DE2_D5M.(248).cnf
-db|DE2_D5M.(248).cnf
+db|DE2_D5M.(303).cnf
+db|DE2_D5M.(303).cnf
 # case_insensitive
 # source_file
 db|dffpipe_oe9.tdf
@@ -29036,8 +30638,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 alt_synch_pipe_vd8
 # storage
-db|DE2_D5M.(249).cnf
-db|DE2_D5M.(249).cnf
+db|DE2_D5M.(304).cnf
+db|DE2_D5M.(304).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_vd8.tdf
@@ -29123,8 +30725,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 dffpipe_qe9
 # storage
-db|DE2_D5M.(250).cnf
-db|DE2_D5M.(250).cnf
+db|DE2_D5M.(305).cnf
+db|DE2_D5M.(305).cnf
 # case_insensitive
 # source_file
 db|dffpipe_qe9.tdf
@@ -29210,8 +30812,8 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 # entity
 cmpr_536
 # storage
-db|DE2_D5M.(251).cnf
-db|DE2_D5M.(251).cnf
+db|DE2_D5M.(306).cnf
+db|DE2_D5M.(306).cnf
 # case_insensitive
 # source_file
 db|cmpr_536.tdf
@@ -29296,68 +30898,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 
 # end
 # entity
-I2C_CCD_Config
-# storage
-db|DE2_D5M.(252).cnf
-db|DE2_D5M.(252).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|i2c_ccd_config.v
-4b7b5586ff6c6df8eca13cbc893d9b
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-default_exposure
-0000011111000000
-PARAMETER_UNSIGNED_BIN
-DEF
-exposure_change_value
-0000000011001000
-PARAMETER_UNSIGNED_BIN
-DEF
-CLK_Freq
-50000000
-PARAMETER_SIGNED_DEC
-DEF
-I2C_Freq
-20000
-PARAMETER_SIGNED_DEC
-DEF
-LUT_SIZE
-25
-PARAMETER_SIGNED_DEC
-DEF
-}
-# hierarchies {
-I2C_CCD_Config:u8
-}
-# macro_sequence
-
-# end
-# entity
 I2C_Controller
 # storage
-db|DE2_D5M.(253).cnf
-db|DE2_D5M.(253).cnf
+db|DE2_D5M.(308).cnf
+db|DE2_D5M.(308).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -29392,8 +30936,8 @@ I2C_CCD_Config:u8|I2C_Controller:u0
 # entity
 sld_hub
 # storage
-db|DE2_D5M.(254).cnf
-db|DE2_D5M.(254).cnf
+db|DE2_D5M.(309).cnf
+db|DE2_D5M.(309).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -29467,8 +31011,8 @@ DEF
 # entity
 sld_shadow_jsm
 # storage
-db|DE2_D5M.(255).cnf
-db|DE2_D5M.(255).cnf
+db|DE2_D5M.(310).cnf
+db|DE2_D5M.(310).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -29514,8 +31058,8 @@ USR
 # entity
 sld_rom_sr
 # storage
-db|DE2_D5M.(256).cnf
-db|DE2_D5M.(256).cnf
+db|DE2_D5M.(311).cnf
+db|DE2_D5M.(311).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -29561,8 +31105,8 @@ USR
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(257).cnf
-db|DE2_D5M.(257).cnf
+db|DE2_D5M.(312).cnf
+db|DE2_D5M.(312).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -29900,10 +31444,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -29915,8 +31459,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_f1n
 # storage
-db|DE2_D5M.(258).cnf
-db|DE2_D5M.(258).cnf
+db|DE2_D5M.(313).cnf
+db|DE2_D5M.(313).cnf
 # case_insensitive
 # source_file
 db|shift_taps_f1n.tdf
@@ -30233,8 +31777,8 @@ aclr
 # entity
 altsyncram_r461
 # storage
-db|DE2_D5M.(259).cnf
-db|DE2_D5M.(259).cnf
+db|DE2_D5M.(314).cnf
+db|DE2_D5M.(314).cnf
 # case_insensitive
 # source_file
 db|altsyncram_r461.tdf
@@ -30572,8 +32116,8 @@ wren_a
 # entity
 add_sub_gvd
 # storage
-db|DE2_D5M.(260).cnf
-db|DE2_D5M.(260).cnf
+db|DE2_D5M.(315).cnf
+db|DE2_D5M.(315).cnf
 # case_insensitive
 # source_file
 db|add_sub_gvd.tdf
@@ -30605,8 +32149,8 @@ datab0
 # entity
 cntr_kkf
 # storage
-db|DE2_D5M.(261).cnf
-db|DE2_D5M.(261).cnf
+db|DE2_D5M.(316).cnf
+db|DE2_D5M.(316).cnf
 # case_insensitive
 # source_file
 db|cntr_kkf.tdf
@@ -30632,8 +32176,8 @@ clk_en
 # entity
 cmpr_6cc
 # storage
-db|DE2_D5M.(262).cnf
-db|DE2_D5M.(262).cnf
+db|DE2_D5M.(317).cnf
+db|DE2_D5M.(317).cnf
 # case_insensitive
 # source_file
 db|cmpr_6cc.tdf
@@ -30662,8 +32206,8 @@ datab1
 # entity
 cntr_74h
 # storage
-db|DE2_D5M.(263).cnf
-db|DE2_D5M.(263).cnf
+db|DE2_D5M.(318).cnf
+db|DE2_D5M.(318).cnf
 # case_insensitive
 # source_file
 db|cntr_74h.tdf
@@ -30692,8 +32236,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(264).cnf
-db|DE2_D5M.(264).cnf
+db|DE2_D5M.(319).cnf
+db|DE2_D5M.(319).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -30773,10 +32317,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -30788,8 +32332,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_rvm
 # storage
-db|DE2_D5M.(265).cnf
-db|DE2_D5M.(265).cnf
+db|DE2_D5M.(320).cnf
+db|DE2_D5M.(320).cnf
 # case_insensitive
 # source_file
 db|shift_taps_rvm.tdf
@@ -30848,8 +32392,8 @@ aclr
 # entity
 altsyncram_eqa1
 # storage
-db|DE2_D5M.(266).cnf
-db|DE2_D5M.(266).cnf
+db|DE2_D5M.(321).cnf
+db|DE2_D5M.(321).cnf
 # case_insensitive
 # source_file
 db|altsyncram_eqa1.tdf
@@ -30923,8 +32467,8 @@ wren_a
 # entity
 cntr_lkf
 # storage
-db|DE2_D5M.(267).cnf
-db|DE2_D5M.(267).cnf
+db|DE2_D5M.(322).cnf
+db|DE2_D5M.(322).cnf
 # case_insensitive
 # source_file
 db|cntr_lkf.tdf
@@ -30950,8 +32494,8 @@ clk_en
 # entity
 cntr_c4h
 # storage
-db|DE2_D5M.(268).cnf
-db|DE2_D5M.(268).cnf
+db|DE2_D5M.(323).cnf
+db|DE2_D5M.(323).cnf
 # case_insensitive
 # source_file
 db|cntr_c4h.tdf
@@ -30980,8 +32524,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(269).cnf
-db|DE2_D5M.(269).cnf
+db|DE2_D5M.(324).cnf
+db|DE2_D5M.(324).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -31061,10 +32605,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -31076,8 +32620,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_tvm
 # storage
-db|DE2_D5M.(270).cnf
-db|DE2_D5M.(270).cnf
+db|DE2_D5M.(325).cnf
+db|DE2_D5M.(325).cnf
 # case_insensitive
 # source_file
 db|shift_taps_tvm.tdf
@@ -31136,8 +32680,8 @@ aclr
 # entity
 altsyncram_kqa1
 # storage
-db|DE2_D5M.(271).cnf
-db|DE2_D5M.(271).cnf
+db|DE2_D5M.(326).cnf
+db|DE2_D5M.(326).cnf
 # case_insensitive
 # source_file
 db|altsyncram_kqa1.tdf
@@ -31217,8 +32761,8 @@ wren_a
 # entity
 cntr_okf
 # storage
-db|DE2_D5M.(272).cnf
-db|DE2_D5M.(272).cnf
+db|DE2_D5M.(327).cnf
+db|DE2_D5M.(327).cnf
 # case_insensitive
 # source_file
 db|cntr_okf.tdf
@@ -31247,8 +32791,8 @@ clk_en
 # entity
 cmpr_7cc
 # storage
-db|DE2_D5M.(273).cnf
-db|DE2_D5M.(273).cnf
+db|DE2_D5M.(328).cnf
+db|DE2_D5M.(328).cnf
 # case_insensitive
 # source_file
 db|cmpr_7cc.tdf
@@ -31283,8 +32827,8 @@ datab0
 # entity
 cntr_e4h
 # storage
-db|DE2_D5M.(274).cnf
-db|DE2_D5M.(274).cnf
+db|DE2_D5M.(329).cnf
+db|DE2_D5M.(329).cnf
 # case_insensitive
 # source_file
 db|cntr_e4h.tdf
@@ -31313,8 +32857,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(275).cnf
-db|DE2_D5M.(275).cnf
+db|DE2_D5M.(330).cnf
+db|DE2_D5M.(330).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -31382,10 +32926,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -31397,8 +32941,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_41n
 # storage
-db|DE2_D5M.(276).cnf
-db|DE2_D5M.(276).cnf
+db|DE2_D5M.(331).cnf
+db|DE2_D5M.(331).cnf
 # case_insensitive
 # source_file
 db|shift_taps_41n.tdf
@@ -31445,8 +32989,8 @@ aclr
 # entity
 altsyncram_lqa1
 # storage
-db|DE2_D5M.(277).cnf
-db|DE2_D5M.(277).cnf
+db|DE2_D5M.(332).cnf
+db|DE2_D5M.(332).cnf
 # case_insensitive
 # source_file
 db|altsyncram_lqa1.tdf
@@ -31514,8 +33058,8 @@ wren_a
 # entity
 cntr_qkf
 # storage
-db|DE2_D5M.(278).cnf
-db|DE2_D5M.(278).cnf
+db|DE2_D5M.(333).cnf
+db|DE2_D5M.(333).cnf
 # case_insensitive
 # source_file
 db|cntr_qkf.tdf
@@ -31544,8 +33088,8 @@ clk_en
 # entity
 cntr_h4h
 # storage
-db|DE2_D5M.(279).cnf
-db|DE2_D5M.(279).cnf
+db|DE2_D5M.(334).cnf
+db|DE2_D5M.(334).cnf
 # case_insensitive
 # source_file
 db|cntr_h4h.tdf
@@ -31574,8 +33118,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(280).cnf
-db|DE2_D5M.(280).cnf
+db|DE2_D5M.(335).cnf
+db|DE2_D5M.(335).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -31637,10 +33181,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -31652,8 +33196,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_51n
 # storage
-db|DE2_D5M.(281).cnf
-db|DE2_D5M.(281).cnf
+db|DE2_D5M.(336).cnf
+db|DE2_D5M.(336).cnf
 # case_insensitive
 # source_file
 db|shift_taps_51n.tdf
@@ -31694,8 +33238,8 @@ aclr
 # entity
 altsyncram_6ta1
 # storage
-db|DE2_D5M.(282).cnf
-db|DE2_D5M.(282).cnf
+db|DE2_D5M.(337).cnf
+db|DE2_D5M.(337).cnf
 # case_insensitive
 # source_file
 db|altsyncram_6ta1.tdf
@@ -31763,8 +33307,8 @@ wren_a
 # entity
 cntr_4mf
 # storage
-db|DE2_D5M.(283).cnf
-db|DE2_D5M.(283).cnf
+db|DE2_D5M.(338).cnf
+db|DE2_D5M.(338).cnf
 # case_insensitive
 # source_file
 db|cntr_4mf.tdf
@@ -31796,8 +33340,8 @@ clk_en
 # entity
 cmpr_8cc
 # storage
-db|DE2_D5M.(284).cnf
-db|DE2_D5M.(284).cnf
+db|DE2_D5M.(339).cnf
+db|DE2_D5M.(339).cnf
 # case_insensitive
 # source_file
 db|cmpr_8cc.tdf
@@ -31838,8 +33382,8 @@ datab0
 # entity
 cntr_q5h
 # storage
-db|DE2_D5M.(285).cnf
-db|DE2_D5M.(285).cnf
+db|DE2_D5M.(340).cnf
+db|DE2_D5M.(340).cnf
 # case_insensitive
 # source_file
 db|cntr_q5h.tdf
@@ -31868,8 +33412,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(286).cnf
-db|DE2_D5M.(286).cnf
+db|DE2_D5M.(341).cnf
+db|DE2_D5M.(341).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -31931,10 +33475,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -31946,8 +33490,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_71n
 # storage
-db|DE2_D5M.(287).cnf
-db|DE2_D5M.(287).cnf
+db|DE2_D5M.(342).cnf
+db|DE2_D5M.(342).cnf
 # case_insensitive
 # source_file
 db|shift_taps_71n.tdf
@@ -31988,8 +33532,8 @@ aclr
 # entity
 altsyncram_ata1
 # storage
-db|DE2_D5M.(288).cnf
-db|DE2_D5M.(288).cnf
+db|DE2_D5M.(343).cnf
+db|DE2_D5M.(343).cnf
 # case_insensitive
 # source_file
 db|altsyncram_ata1.tdf
@@ -32057,8 +33601,8 @@ wren_a
 # entity
 cntr_6mf
 # storage
-db|DE2_D5M.(289).cnf
-db|DE2_D5M.(289).cnf
+db|DE2_D5M.(344).cnf
+db|DE2_D5M.(344).cnf
 # case_insensitive
 # source_file
 db|cntr_6mf.tdf
@@ -32090,8 +33634,8 @@ clk_en
 # entity
 cmpr_8cc
 # storage
-db|DE2_D5M.(290).cnf
-db|DE2_D5M.(290).cnf
+db|DE2_D5M.(345).cnf
+db|DE2_D5M.(345).cnf
 # case_insensitive
 # source_file
 db|cmpr_8cc.tdf
@@ -32132,8 +33676,8 @@ datab0
 # entity
 cntr_s5h
 # storage
-db|DE2_D5M.(291).cnf
-db|DE2_D5M.(291).cnf
+db|DE2_D5M.(346).cnf
+db|DE2_D5M.(346).cnf
 # case_insensitive
 # source_file
 db|cntr_s5h.tdf
@@ -32162,8 +33706,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(292).cnf
-db|DE2_D5M.(292).cnf
+db|DE2_D5M.(347).cnf
+db|DE2_D5M.(347).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -32225,10 +33769,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -32240,8 +33784,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_91n
 # storage
-db|DE2_D5M.(293).cnf
-db|DE2_D5M.(293).cnf
+db|DE2_D5M.(348).cnf
+db|DE2_D5M.(348).cnf
 # case_insensitive
 # source_file
 db|shift_taps_91n.tdf
@@ -32282,8 +33826,8 @@ aclr
 # entity
 altsyncram_eta1
 # storage
-db|DE2_D5M.(294).cnf
-db|DE2_D5M.(294).cnf
+db|DE2_D5M.(349).cnf
+db|DE2_D5M.(349).cnf
 # case_insensitive
 # source_file
 db|altsyncram_eta1.tdf
@@ -32351,8 +33895,8 @@ wren_a
 # entity
 cntr_8mf
 # storage
-db|DE2_D5M.(295).cnf
-db|DE2_D5M.(295).cnf
+db|DE2_D5M.(350).cnf
+db|DE2_D5M.(350).cnf
 # case_insensitive
 # source_file
 db|cntr_8mf.tdf
@@ -32384,8 +33928,8 @@ clk_en
 # entity
 cmpr_8cc
 # storage
-db|DE2_D5M.(296).cnf
-db|DE2_D5M.(296).cnf
+db|DE2_D5M.(351).cnf
+db|DE2_D5M.(351).cnf
 # case_insensitive
 # source_file
 db|cmpr_8cc.tdf
@@ -32426,8 +33970,8 @@ datab0
 # entity
 cntr_u5h
 # storage
-db|DE2_D5M.(297).cnf
-db|DE2_D5M.(297).cnf
+db|DE2_D5M.(352).cnf
+db|DE2_D5M.(352).cnf
 # case_insensitive
 # source_file
 db|cntr_u5h.tdf
@@ -32456,8 +34000,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(298).cnf
-db|DE2_D5M.(298).cnf
+db|DE2_D5M.(353).cnf
+db|DE2_D5M.(353).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -32519,10 +34063,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -32534,8 +34078,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_b1n
 # storage
-db|DE2_D5M.(299).cnf
-db|DE2_D5M.(299).cnf
+db|DE2_D5M.(354).cnf
+db|DE2_D5M.(354).cnf
 # case_insensitive
 # source_file
 db|shift_taps_b1n.tdf
@@ -32576,8 +34120,8 @@ aclr
 # entity
 altsyncram_ita1
 # storage
-db|DE2_D5M.(300).cnf
-db|DE2_D5M.(300).cnf
+db|DE2_D5M.(355).cnf
+db|DE2_D5M.(355).cnf
 # case_insensitive
 # source_file
 db|altsyncram_ita1.tdf
@@ -32645,8 +34189,8 @@ wren_a
 # entity
 cntr_amf
 # storage
-db|DE2_D5M.(301).cnf
-db|DE2_D5M.(301).cnf
+db|DE2_D5M.(356).cnf
+db|DE2_D5M.(356).cnf
 # case_insensitive
 # source_file
 db|cntr_amf.tdf
@@ -32678,8 +34222,8 @@ clk_en
 # entity
 cntr_16h
 # storage
-db|DE2_D5M.(302).cnf
-db|DE2_D5M.(302).cnf
+db|DE2_D5M.(357).cnf
+db|DE2_D5M.(357).cnf
 # case_insensitive
 # source_file
 db|cntr_16h.tdf
@@ -32708,8 +34252,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(303).cnf
-db|DE2_D5M.(303).cnf
+db|DE2_D5M.(358).cnf
+db|DE2_D5M.(358).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -32771,10 +34315,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -32786,8 +34330,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_61n
 # storage
-db|DE2_D5M.(304).cnf
-db|DE2_D5M.(304).cnf
+db|DE2_D5M.(359).cnf
+db|DE2_D5M.(359).cnf
 # case_insensitive
 # source_file
 db|shift_taps_61n.tdf
@@ -32828,8 +34372,8 @@ aclr
 # entity
 altsyncram_ota1
 # storage
-db|DE2_D5M.(305).cnf
-db|DE2_D5M.(305).cnf
+db|DE2_D5M.(360).cnf
+db|DE2_D5M.(360).cnf
 # case_insensitive
 # source_file
 db|altsyncram_ota1.tdf
@@ -32903,8 +34447,8 @@ wren_a
 # entity
 cntr_dmf
 # storage
-db|DE2_D5M.(306).cnf
-db|DE2_D5M.(306).cnf
+db|DE2_D5M.(361).cnf
+db|DE2_D5M.(361).cnf
 # case_insensitive
 # source_file
 db|cntr_dmf.tdf
@@ -32939,8 +34483,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(307).cnf
-db|DE2_D5M.(307).cnf
+db|DE2_D5M.(362).cnf
+db|DE2_D5M.(362).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -32987,8 +34531,8 @@ datab0
 # entity
 cntr_36h
 # storage
-db|DE2_D5M.(308).cnf
-db|DE2_D5M.(308).cnf
+db|DE2_D5M.(363).cnf
+db|DE2_D5M.(363).cnf
 # case_insensitive
 # source_file
 db|cntr_36h.tdf
@@ -33017,8 +34561,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(309).cnf
-db|DE2_D5M.(309).cnf
+db|DE2_D5M.(364).cnf
+db|DE2_D5M.(364).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -33080,10 +34624,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -33095,8 +34639,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_81n
 # storage
-db|DE2_D5M.(310).cnf
-db|DE2_D5M.(310).cnf
+db|DE2_D5M.(365).cnf
+db|DE2_D5M.(365).cnf
 # case_insensitive
 # source_file
 db|shift_taps_81n.tdf
@@ -33137,8 +34681,8 @@ aclr
 # entity
 altsyncram_bta1
 # storage
-db|DE2_D5M.(311).cnf
-db|DE2_D5M.(311).cnf
+db|DE2_D5M.(366).cnf
+db|DE2_D5M.(366).cnf
 # case_insensitive
 # source_file
 db|altsyncram_bta1.tdf
@@ -33212,8 +34756,8 @@ wren_a
 # entity
 cntr_7mf
 # storage
-db|DE2_D5M.(312).cnf
-db|DE2_D5M.(312).cnf
+db|DE2_D5M.(367).cnf
+db|DE2_D5M.(367).cnf
 # case_insensitive
 # source_file
 db|cntr_7mf.tdf
@@ -33248,8 +34792,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(313).cnf
-db|DE2_D5M.(313).cnf
+db|DE2_D5M.(368).cnf
+db|DE2_D5M.(368).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -33296,8 +34840,8 @@ datab0
 # entity
 cntr_t5h
 # storage
-db|DE2_D5M.(314).cnf
-db|DE2_D5M.(314).cnf
+db|DE2_D5M.(369).cnf
+db|DE2_D5M.(369).cnf
 # case_insensitive
 # source_file
 db|cntr_t5h.tdf
@@ -33326,8 +34870,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(315).cnf
-db|DE2_D5M.(315).cnf
+db|DE2_D5M.(370).cnf
+db|DE2_D5M.(370).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -33389,10 +34933,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -33404,8 +34948,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_a1n
 # storage
-db|DE2_D5M.(316).cnf
-db|DE2_D5M.(316).cnf
+db|DE2_D5M.(371).cnf
+db|DE2_D5M.(371).cnf
 # case_insensitive
 # source_file
 db|shift_taps_a1n.tdf
@@ -33446,8 +34990,8 @@ aclr
 # entity
 altsyncram_fta1
 # storage
-db|DE2_D5M.(317).cnf
-db|DE2_D5M.(317).cnf
+db|DE2_D5M.(372).cnf
+db|DE2_D5M.(372).cnf
 # case_insensitive
 # source_file
 db|altsyncram_fta1.tdf
@@ -33521,8 +35065,8 @@ wren_a
 # entity
 cntr_9mf
 # storage
-db|DE2_D5M.(318).cnf
-db|DE2_D5M.(318).cnf
+db|DE2_D5M.(373).cnf
+db|DE2_D5M.(373).cnf
 # case_insensitive
 # source_file
 db|cntr_9mf.tdf
@@ -33557,8 +35101,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(319).cnf
-db|DE2_D5M.(319).cnf
+db|DE2_D5M.(374).cnf
+db|DE2_D5M.(374).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -33605,8 +35149,8 @@ datab0
 # entity
 cntr_v5h
 # storage
-db|DE2_D5M.(320).cnf
-db|DE2_D5M.(320).cnf
+db|DE2_D5M.(375).cnf
+db|DE2_D5M.(375).cnf
 # case_insensitive
 # source_file
 db|cntr_v5h.tdf
@@ -33635,8 +35179,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(321).cnf
-db|DE2_D5M.(321).cnf
+db|DE2_D5M.(376).cnf
+db|DE2_D5M.(376).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -33734,10 +35278,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -33749,8 +35293,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_j1n
 # storage
-db|DE2_D5M.(322).cnf
-db|DE2_D5M.(322).cnf
+db|DE2_D5M.(377).cnf
+db|DE2_D5M.(377).cnf
 # case_insensitive
 # source_file
 db|shift_taps_j1n.tdf
@@ -33827,8 +35371,8 @@ aclr
 # entity
 altsyncram_4ua1
 # storage
-db|DE2_D5M.(323).cnf
-db|DE2_D5M.(323).cnf
+db|DE2_D5M.(378).cnf
+db|DE2_D5M.(378).cnf
 # case_insensitive
 # source_file
 db|altsyncram_4ua1.tdf
@@ -33938,8 +35482,8 @@ wren_a
 # entity
 cntr_emf
 # storage
-db|DE2_D5M.(324).cnf
-db|DE2_D5M.(324).cnf
+db|DE2_D5M.(379).cnf
+db|DE2_D5M.(379).cnf
 # case_insensitive
 # source_file
 db|cntr_emf.tdf
@@ -33974,8 +35518,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(325).cnf
-db|DE2_D5M.(325).cnf
+db|DE2_D5M.(380).cnf
+db|DE2_D5M.(380).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -34022,8 +35566,8 @@ datab1
 # entity
 cntr_46h
 # storage
-db|DE2_D5M.(326).cnf
-db|DE2_D5M.(326).cnf
+db|DE2_D5M.(381).cnf
+db|DE2_D5M.(381).cnf
 # case_insensitive
 # source_file
 db|cntr_46h.tdf
@@ -34052,8 +35596,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(327).cnf
-db|DE2_D5M.(327).cnf
+db|DE2_D5M.(382).cnf
+db|DE2_D5M.(382).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -34139,10 +35683,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -34154,8 +35698,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_d1n
 # storage
-db|DE2_D5M.(328).cnf
-db|DE2_D5M.(328).cnf
+db|DE2_D5M.(383).cnf
+db|DE2_D5M.(383).cnf
 # case_insensitive
 # source_file
 db|shift_taps_d1n.tdf
@@ -34220,8 +35764,8 @@ aclr
 # entity
 altsyncram_kta1
 # storage
-db|DE2_D5M.(329).cnf
-db|DE2_D5M.(329).cnf
+db|DE2_D5M.(384).cnf
+db|DE2_D5M.(384).cnf
 # case_insensitive
 # source_file
 db|altsyncram_kta1.tdf
@@ -34319,8 +35863,8 @@ wren_a
 # entity
 cntr_bmf
 # storage
-db|DE2_D5M.(330).cnf
-db|DE2_D5M.(330).cnf
+db|DE2_D5M.(385).cnf
+db|DE2_D5M.(385).cnf
 # case_insensitive
 # source_file
 db|cntr_bmf.tdf
@@ -34355,8 +35899,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(331).cnf
-db|DE2_D5M.(331).cnf
+db|DE2_D5M.(386).cnf
+db|DE2_D5M.(386).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -34403,8 +35947,8 @@ datab0
 # entity
 cntr_06h
 # storage
-db|DE2_D5M.(332).cnf
-db|DE2_D5M.(332).cnf
+db|DE2_D5M.(387).cnf
+db|DE2_D5M.(387).cnf
 # case_insensitive
 # source_file
 db|cntr_06h.tdf
@@ -34433,8 +35977,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(333).cnf
-db|DE2_D5M.(333).cnf
+db|DE2_D5M.(388).cnf
+db|DE2_D5M.(388).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -34490,10 +36034,10 @@ aclr
 3
 }
 # include_file {
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
@@ -34505,8 +36049,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_c1n
 # storage
-db|DE2_D5M.(334).cnf
-db|DE2_D5M.(334).cnf
+db|DE2_D5M.(389).cnf
+db|DE2_D5M.(389).cnf
 # case_insensitive
 # source_file
 db|shift_taps_c1n.tdf
@@ -34541,8 +36085,8 @@ aclr
 # entity
 altsyncram_pta1
 # storage
-db|DE2_D5M.(335).cnf
-db|DE2_D5M.(335).cnf
+db|DE2_D5M.(390).cnf
+db|DE2_D5M.(390).cnf
 # case_insensitive
 # source_file
 db|altsyncram_pta1.tdf
@@ -34610,8 +36154,8 @@ wren_a
 # entity
 cntr_fmf
 # storage
-db|DE2_D5M.(336).cnf
-db|DE2_D5M.(336).cnf
+db|DE2_D5M.(391).cnf
+db|DE2_D5M.(391).cnf
 # case_insensitive
 # source_file
 db|cntr_fmf.tdf
@@ -34646,8 +36190,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(337).cnf
-db|DE2_D5M.(337).cnf
+db|DE2_D5M.(392).cnf
+db|DE2_D5M.(392).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -34694,8 +36238,8 @@ datab0
 # entity
 cntr_56h
 # storage
-db|DE2_D5M.(338).cnf
-db|DE2_D5M.(338).cnf
+db|DE2_D5M.(393).cnf
+db|DE2_D5M.(393).cnf
 # case_insensitive
 # source_file
 db|cntr_56h.tdf
@@ -34724,8 +36268,8 @@ aset
 # entity
 lpm_add_sub
 # storage
-db|DE2_D5M.(339).cnf
-db|DE2_D5M.(339).cnf
+db|DE2_D5M.(394).cnf
+db|DE2_D5M.(394).cnf
 # case_insensitive
 # source_file
 lpm_add_sub.tdf
@@ -35112,18 +36656,18 @@ dataa32
 1
 }
 # include_file {
-look_add.inc
-9091c394592369a07bdf7fbf1ce9ced6
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 alt_stratix_add_sub.inc
 16df31198e4f1dce2b8df944fbafaefe
 addcore.inc
 e15993f131a5367862d6283fbb5a133
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
+look_add.inc
+9091c394592369a07bdf7fbf1ce9ced6
 }
 # macro_sequence
 
@@ -35131,8 +36675,8 @@ f560f9a992734abc3e37886b3957a26a
 # entity
 add_sub_8ri
 # storage
-db|DE2_D5M.(340).cnf
-db|DE2_D5M.(340).cnf
+db|DE2_D5M.(395).cnf
+db|DE2_D5M.(395).cnf
 # case_insensitive
 # source_file
 db|add_sub_8ri.tdf
@@ -35444,20 +36988,22 @@ add_sub
 
 # end
 # entity
-niosSystemCamControl
+pzdyqx
 # storage
-db|DE2_D5M.(15).cnf
-db|DE2_D5M.(15).cnf
+db|DE2_D5M.(396).cnf
+db|DE2_D5M.(396).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
-# case_sensitive
+# case_insensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
+pzdyqx.vhd
+719912c539beca52296673aba6df5442
+5
 # internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
 HDL_INITIAL_FANOUT_LIMIT
 OFF
 AUTO_RESOURCE_SHARING
@@ -35466,34 +37012,65 @@ AUTO_RAM_RECOGNITION
 ON
 AUTO_ROM_RECOGNITION
 ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
 }
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst
+# user_parameter {
+pzdyqx0
+8
+PARAMETER_UNKNOWN
+USR
+pzdyqx9
+1
+PARAMETER_SIGNED_DEC
+DEF
+SLD_NODE_INFO
+552448
+PARAMETER_SIGNED_DEC
+DEF
+pzdyqx5
+1
+PARAMETER_UNKNOWN
+USR
+pzdyqx6
+01101010111101110000000010100010
+PARAMETER_UNKNOWN
+USR
+pzdyqx1
+3600
+PARAMETER_UNKNOWN
+USR
+pzdyqx3
+12
+PARAMETER_UNKNOWN
+USR
+pzdyqx2
+0
+PARAMETER_UNKNOWN
+USR
+pzdyqx4
+1
+PARAMETER_UNKNOWN
+USR
 }
 # macro_sequence
 
 # end
 # entity
-cpu_0_jtag_debug_module_arbitrator
+pzdyqx_impl
 # storage
-db|DE2_D5M.(16).cnf
-db|DE2_D5M.(16).cnf
+db|DE2_D5M.(397).cnf
+db|DE2_D5M.(397).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
-# case_sensitive
+# case_insensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
+pzdyqx.vhd
+719912c539beca52296673aba6df5442
+5
 # internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
 HDL_INITIAL_FANOUT_LIMIT
 OFF
 AUTO_RESOURCE_SHARING
@@ -35502,34 +37079,73 @@ AUTO_RAM_RECOGNITION
 ON
 AUTO_ROM_RECOGNITION
 ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
 }
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0_jtag_debug_module_arbitrator:the_cpu_0_jtag_debug_module
+# user_parameter {
+pzdyqx0
+8
+PARAMETER_SIGNED_DEC
+USR
+pzdyqx9
+1
+PARAMETER_SIGNED_DEC
+USR
+pzdyqx5
+1
+PARAMETER_SIGNED_DEC
+USR
+pzdyqx6
+01101010111101110000000010100010
+PARAMETER_UNSIGNED_BIN
+USR
+pzdyqx1
+3600
+PARAMETER_SIGNED_DEC
+USR
+pzdyqx3
+12
+PARAMETER_SIGNED_DEC
+USR
+pzdyqx2
+0
+PARAMETER_SIGNED_DEC
+USR
+pzdyqx4
+1
+PARAMETER_SIGNED_DEC
+USR
+ constraint(pzdyqx6)
+0 to 31
+PARAMETER_STRING
+USR
+ constraint(ir_in)
+1 downto 0
+PARAMETER_STRING
+USR
+ constraint(ir_out)
+1 downto 0
+PARAMETER_STRING
+USR
 }
 # macro_sequence
 
 # end
 # entity
-cpu_0_custom_instruction_master_arbitrator
+MDCK2395
 # storage
-db|DE2_D5M.(17).cnf
-db|DE2_D5M.(17).cnf
+db|DE2_D5M.(398).cnf
+db|DE2_D5M.(398).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
-# case_sensitive
+# case_insensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
+pzdyqx.vhd
+719912c539beca52296673aba6df5442
+5
 # internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
 HDL_INITIAL_FANOUT_LIMIT
 OFF
 AUTO_RESOURCE_SHARING
@@ -35538,34 +37154,87 @@ AUTO_RAM_RECOGNITION
 ON
 AUTO_ROM_RECOGNITION
 ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
 }
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0_custom_instruction_master_arbitrator:the_cpu_0_custom_instruction_master
+# user_parameter {
+osc_stages
+13
+PARAMETER_SIGNED_DEC
+USR
+osc_prescaler
+8
+PARAMETER_SIGNED_DEC
+USR
+clk_gen_width
+27
+PARAMETER_SIGNED_DEC
+USR
+}
+# lmf
+|altera|11.0sp1|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+CJQJ5354
+# storage
+db|DE2_D5M.(399).cnf
+db|DE2_D5M.(399).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+pzdyqx.vhd
+719912c539beca52296673aba6df5442
+5
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+width
+19
+PARAMETER_SIGNED_DEC
+USR
+modulus
+0
+PARAMETER_SIGNED_DEC
+USR
+ constraint(kvqq4224)
+18 downto 0
+PARAMETER_STRING
+USR
 }
 # macro_sequence
 
 # end
 # entity
-cpu_0_data_master_arbitrator
+CJQJ5354
 # storage
-db|DE2_D5M.(18).cnf
-db|DE2_D5M.(18).cnf
+db|DE2_D5M.(400).cnf
+db|DE2_D5M.(400).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
-# case_sensitive
+# case_insensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
+pzdyqx.vhd
+719912c539beca52296673aba6df5442
+5
 # internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
 HDL_INITIAL_FANOUT_LIMIT
 OFF
 AUTO_RESOURCE_SHARING
@@ -35574,32 +37243,241 @@ AUTO_RAM_RECOGNITION
 ON
 AUTO_ROM_RECOGNITION
 ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
 }
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0_data_master_arbitrator:the_cpu_0_data_master
+# user_parameter {
+width
+12
+PARAMETER_SIGNED_DEC
+USR
+modulus
+3600
+PARAMETER_SIGNED_DEC
+USR
+ constraint(kvqq4224)
+11 downto 0
+PARAMETER_STRING
+USR
 }
 # macro_sequence
 
 # end
 # entity
-cpu_0_instruction_master_arbitrator
+PZMU7345
 # storage
-db|DE2_D5M.(19).cnf
-db|DE2_D5M.(19).cnf
+db|DE2_D5M.(401).cnf
+db|DE2_D5M.(401).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+pzdyqx.vhd
+719912c539beca52296673aba6df5442
+5
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+width
+13
+PARAMETER_SIGNED_DEC
+USR
+ constraint(yjoq9945)
+12 downto 0
+PARAMETER_STRING
+USR
+}
+# macro_sequence
+
+# end
+# entity
+VELJ8121
+# storage
+db|DE2_D5M.(402).cnf
+db|DE2_D5M.(402).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+pzdyqx.vhd
+719912c539beca52296673aba6df5442
+5
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+n_bits
+72
+PARAMETER_SIGNED_DEC
+USR
+word_size
+4
+PARAMETER_SIGNED_DEC
+USR
+ constraint(gisa9786)
+71 downto 0
+PARAMETER_STRING
+USR
+}
+# macro_sequence
+
+# end
+# entity
+sld_hub
+# storage
+db|DE2_D5M.(403).cnf
+db|DE2_D5M.(403).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+sld_hub.vhd
+1ece43ac49d8a7c0efc372cb6d8b3a5f
+5
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+sld_hub_ip_version
+1
+PARAMETER_UNKNOWN
+USR
+sld_hub_ip_minor_version
+4
+PARAMETER_UNKNOWN
+USR
+sld_common_ip_version
+0
+PARAMETER_UNKNOWN
+USR
+device_family
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+n_nodes
+3
+PARAMETER_UNKNOWN
+USR
+n_sel_bits
+2
+PARAMETER_UNKNOWN
+USR
+n_node_ir_bits
+5
+PARAMETER_UNKNOWN
+USR
+node_info
+000000000000100001101110000000000000110000000000011011100000000000011001000100000100011000000000
+PARAMETER_UNSIGNED_BIN
+USR
+compilation_mode
+1
+PARAMETER_UNKNOWN
+USR
+BROADCAST_FEATURE
+1
+PARAMETER_SIGNED_DEC
+DEF
+FORCE_IR_CAPTURE_FEATURE
+1
+PARAMETER_SIGNED_DEC
+DEF
+}
+# macro_sequence
+
+# end
+# entity
+sld_rom_sr
+# storage
+db|DE2_D5M.(404).cnf
+db|DE2_D5M.(404).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+sld_rom_sr.vhd
+1b22dddef98ea9f9486572028b88d8
+5
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+common_ip_version
+0
+PARAMETER_SIGNED_DEC
+USR
+n_bits
+128
+PARAMETER_SIGNED_DEC
+USR
+word_size
+4
+PARAMETER_SIGNED_DEC
+USR
+ constraint(rom_data)
+127 downto 0
+PARAMETER_STRING
+USR
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0
+# storage
+db|DE2_D5M.(20).cnf
+db|DE2_D5M.(20).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -35618,7 +37496,493 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0_instruction_master_arbitrator:the_cpu_0_instruction_master
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_ic_data_module
+# storage
+db|DE2_D5M.(22).cnf
+db|DE2_D5M.(22).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+UNUSED
+PARAMETER_STRING
+DEF
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_data_module:cpu_0_ic_data
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_ic_tag_module
+# storage
+db|DE2_D5M.(25).cnf
+db|DE2_D5M.(25).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+cpu_0_ic_tag_ram.mif
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_tag_module:cpu_0_ic_tag
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_bht_module
+# storage
+db|DE2_D5M.(28).cnf
+db|DE2_D5M.(28).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+cpu_0_bht_ram.mif
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_bht_module:cpu_0_bht
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_register_bank_a_module
+# storage
+db|DE2_D5M.(31).cnf
+db|DE2_D5M.(31).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+cpu_0_rf_ram_a.mif
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_register_bank_a_module:cpu_0_register_bank_a
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_register_bank_b_module
+# storage
+db|DE2_D5M.(34).cnf
+db|DE2_D5M.(34).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+cpu_0_rf_ram_b.mif
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_register_bank_b_module:cpu_0_register_bank_b
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_dc_tag_module
+# storage
+db|DE2_D5M.(37).cnf
+db|DE2_D5M.(37).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+cpu_0_dc_tag_ram.mif
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_tag_module:cpu_0_dc_tag
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_dc_data_module
+# storage
+db|DE2_D5M.(40).cnf
+db|DE2_D5M.(40).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+UNUSED
+PARAMETER_STRING
+DEF
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_data_module:cpu_0_dc_data
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_dc_victim_module
+# storage
+db|DE2_D5M.(43).cnf
+db|DE2_D5M.(43).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+UNUSED
+PARAMETER_STRING
+DEF
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_victim_module:cpu_0_dc_victim
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_nios2_oci
+# storage
+db|DE2_D5M.(53).cnf
+db|DE2_D5M.(53).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_nios2_oci_debug
+# storage
+db|DE2_D5M.(54).cnf
+db|DE2_D5M.(54).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_debug:the_cpu_0_nios2_oci_debug
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_nios2_ocimem
+# storage
+db|DE2_D5M.(55).cnf
+db|DE2_D5M.(55).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_ocimem:the_cpu_0_nios2_ocimem
+}
+# macro_sequence
+
+# end
+# entity
+cpu_0_ociram_lpm_dram_bdp_component_module
+# storage
+db|DE2_D5M.(56).cnf
+db|DE2_D5M.(56).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+lpm_file
+cpu_0_ociram_default_contents.mif
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_ocimem:the_cpu_0_nios2_ocimem|cpu_0_ociram_lpm_dram_bdp_component_module:cpu_0_ociram_lpm_dram_bdp_component
 }
 # macro_sequence
 
@@ -36099,7 +38463,7 @@ address_a0
 }
 # memory_file {
 cpu_0_ociram_default_contents.mif
-ccd7914fab9b1e375d4d43c279b17a3
+b2e0932570f3df27fda2242f376f974d
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_ocimem:the_cpu_0_nios2_ocimem|cpu_0_ociram_lpm_dram_bdp_component_module:cpu_0_ociram_lpm_dram_bdp_component|altsyncram:the_altsyncram|altsyncram_c572:auto_generated
@@ -36108,18 +38472,18 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:t
 
 # end
 # entity
-cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator
+cpu_0_nios2_avalon_reg
 # storage
-db|DE2_D5M.(82).cnf
-db|DE2_D5M.(82).cnf
+db|DE2_D5M.(59).cnf
+db|DE2_D5M.(59).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36138,24 +38502,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst_s1_arbitrator:the_cpu_0_altera_nios_custom_instr_floating_point_inst_s1
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_avalon_reg:the_cpu_0_nios2_avalon_reg
 }
 # macro_sequence
 
 # end
 # entity
-jtag_uart_0_avalon_jtag_slave_arbitrator
+cpu_0_nios2_oci_break
 # storage
-db|DE2_D5M.(198).cnf
-db|DE2_D5M.(198).cnf
+db|DE2_D5M.(60).cnf
+db|DE2_D5M.(60).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36174,24 +38538,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|jtag_uart_0_avalon_jtag_slave_arbitrator:the_jtag_uart_0_avalon_jtag_slave
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_break:the_cpu_0_nios2_oci_break
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_0_in_arbitrator
+cpu_0_nios2_oci_xbrk
 # storage
-db|DE2_D5M.(211).cnf
-db|DE2_D5M.(211).cnf
+db|DE2_D5M.(61).cnf
+db|DE2_D5M.(61).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36210,24 +38574,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0_in_arbitrator:the_niosSystemCamControl_clock_0_in
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_xbrk:the_cpu_0_nios2_oci_xbrk
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_0_out_arbitrator
+cpu_0_nios2_oci_dbrk
 # storage
-db|DE2_D5M.(215).cnf
-db|DE2_D5M.(215).cnf
+db|DE2_D5M.(62).cnf
+db|DE2_D5M.(62).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36246,24 +38610,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0_out_arbitrator:the_niosSystemCamControl_clock_0_out
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_dbrk:the_cpu_0_nios2_oci_dbrk
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_0
+cpu_0_nios2_oci_itrace
 # storage
-db|DE2_D5M.(217).cnf
-db|DE2_D5M.(217).cnf
+db|DE2_D5M.(63).cnf
+db|DE2_D5M.(63).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol_clock_0.v
-ec3afc1c7e32670e7d3984490c4518
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36282,24 +38646,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_itrace:the_cpu_0_nios2_oci_itrace
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_0_edge_to_pulse
+cpu_0_nios2_oci_dtrace
 # storage
-db|DE2_D5M.(218).cnf
-db|DE2_D5M.(218).cnf
+db|DE2_D5M.(64).cnf
+db|DE2_D5M.(64).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol_clock_0.v
-ec3afc1c7e32670e7d3984490c4518
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36318,27 +38682,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_edge_to_pulse:read_done_edge_to_pulse
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_edge_to_pulse:write_done_edge_to_pulse
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_edge_to_pulse:read_request_edge_to_pulse
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_edge_to_pulse:write_request_edge_to_pulse
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_dtrace:the_cpu_0_nios2_oci_dtrace
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_0_slave_FSM
+cpu_0_nios2_oci_td_mode
 # storage
-db|DE2_D5M.(219).cnf
-db|DE2_D5M.(219).cnf
+db|DE2_D5M.(65).cnf
+db|DE2_D5M.(65).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol_clock_0.v
-ec3afc1c7e32670e7d3984490c4518
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36357,24 +38718,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_slave_FSM:slave_FSM
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_dtrace:the_cpu_0_nios2_oci_dtrace|cpu_0_nios2_oci_td_mode:cpu_0_nios2_oci_trc_ctrl_td_mode
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_0_master_FSM
+cpu_0_nios2_oci_fifo
 # storage
-db|DE2_D5M.(220).cnf
-db|DE2_D5M.(220).cnf
+db|DE2_D5M.(66).cnf
+db|DE2_D5M.(66).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol_clock_0.v
-ec3afc1c7e32670e7d3984490c4518
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36393,24 +38754,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_master_FSM:master_FSM
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_0_bit_pipe
+cpu_0_nios2_oci_compute_tm_count
 # storage
-db|DE2_D5M.(221).cnf
-db|DE2_D5M.(221).cnf
+db|DE2_D5M.(67).cnf
+db|DE2_D5M.(67).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol_clock_0.v
-ec3afc1c7e32670e7d3984490c4518
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36429,24 +38790,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_0:the_niosSystemCamControl_clock_0|niosSystemCamControl_clock_0_bit_pipe:endofpacket_bit_pipe
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo|cpu_0_nios2_oci_compute_tm_count:cpu_0_nios2_oci_compute_tm_count_tm_count
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_1_in_arbitrator
+cpu_0_nios2_oci_fifowp_inc
 # storage
-db|DE2_D5M.(222).cnf
-db|DE2_D5M.(222).cnf
+db|DE2_D5M.(68).cnf
+db|DE2_D5M.(68).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36465,24 +38826,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1_in_arbitrator:the_niosSystemCamControl_clock_1_in
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo|cpu_0_nios2_oci_fifowp_inc:cpu_0_nios2_oci_fifowp_inc_fifowp
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_1_out_arbitrator
+cpu_0_nios2_oci_fifocount_inc
 # storage
-db|DE2_D5M.(223).cnf
-db|DE2_D5M.(223).cnf
+db|DE2_D5M.(69).cnf
+db|DE2_D5M.(69).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36501,24 +38862,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1_out_arbitrator:the_niosSystemCamControl_clock_1_out
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_fifo:the_cpu_0_nios2_oci_fifo|cpu_0_nios2_oci_fifocount_inc:cpu_0_nios2_oci_fifocount_inc_fifocount
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_1
+cpu_0_nios2_oci_pib
 # storage
-db|DE2_D5M.(225).cnf
-db|DE2_D5M.(225).cnf
+db|DE2_D5M.(71).cnf
+db|DE2_D5M.(71).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol_clock_1.v
-3d10c5eaff6ae0e1ee91281e3cf6f4ed
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36537,24 +38898,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_pib:the_cpu_0_nios2_oci_pib
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_1_edge_to_pulse
+cpu_0_nios2_oci_im
 # storage
-db|DE2_D5M.(226).cnf
-db|DE2_D5M.(226).cnf
+db|DE2_D5M.(72).cnf
+db|DE2_D5M.(72).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol_clock_1.v
-3d10c5eaff6ae0e1ee91281e3cf6f4ed
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36573,27 +38934,24 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_edge_to_pulse:read_done_edge_to_pulse
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_edge_to_pulse:write_done_edge_to_pulse
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_edge_to_pulse:read_request_edge_to_pulse
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_edge_to_pulse:write_request_edge_to_pulse
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_im:the_cpu_0_nios2_oci_im
 }
 # macro_sequence
 
 # end
 # entity
-niosSystemCamControl_clock_1_slave_FSM
+cpu_0_traceram_lpm_dram_bdp_component_module
 # storage
-db|DE2_D5M.(227).cnf
-db|DE2_D5M.(227).cnf
+db|DE2_D5M.(73).cnf
+db|DE2_D5M.(73).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol_clock_1.v
-3d10c5eaff6ae0e1ee91281e3cf6f4ed
+cpu_0.v
+b9fcf49a2214c63b9b1af9ed5127d15
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -36611,404 +38969,14 @@ VERILOG_CONSTANT_LOOP_LIMIT
 VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_slave_FSM:slave_FSM
-}
-# macro_sequence
-
-# end
-# entity
-niosSystemCamControl_clock_1_master_FSM
-# storage
-db|DE2_D5M.(229).cnf
-db|DE2_D5M.(229).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol_clock_1.v
-3d10c5eaff6ae0e1ee91281e3cf6f4ed
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
+# user_parameter {
+lpm_file
+UNUSED
+PARAMETER_STRING
+DEF
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_master_FSM:master_FSM
-}
-# macro_sequence
-
-# end
-# entity
-niosSystemCamControl_clock_1_bit_pipe
-# storage
-db|DE2_D5M.(341).cnf
-db|DE2_D5M.(341).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol_clock_1.v
-3d10c5eaff6ae0e1ee91281e3cf6f4ed
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_clock_1:the_niosSystemCamControl_clock_1|niosSystemCamControl_clock_1_bit_pipe:endofpacket_bit_pipe
-}
-# macro_sequence
-
-# end
-# entity
-onchip_memory2_0_s1_arbitrator
-# storage
-db|DE2_D5M.(342).cnf
-db|DE2_D5M.(342).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|onchip_memory2_0_s1_arbitrator:the_onchip_memory2_0_s1
-}
-# macro_sequence
-
-# end
-# entity
-procHasControl_s1_arbitrator
-# storage
-db|DE2_D5M.(343).cnf
-db|DE2_D5M.(343).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|procHasControl_s1_arbitrator:the_procHasControl_s1
-}
-# macro_sequence
-
-# end
-# entity
-sdram_0_s1_arbitrator
-# storage
-db|DE2_D5M.(344).cnf
-db|DE2_D5M.(344).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|sdram_0_s1_arbitrator:the_sdram_0_s1
-}
-# macro_sequence
-
-# end
-# entity
-rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1_module
-# storage
-db|DE2_D5M.(345).cnf
-db|DE2_D5M.(345).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|sdram_0_s1_arbitrator:the_sdram_0_s1|rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1_module:rdv_fifo_for_niosSystemCamControl_clock_0_out_to_sdram_0_s1
-}
-# macro_sequence
-
-# end
-# entity
-rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1_module
-# storage
-db|DE2_D5M.(346).cnf
-db|DE2_D5M.(346).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|sdram_0_s1_arbitrator:the_sdram_0_s1|rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1_module:rdv_fifo_for_niosSystemCamControl_clock_1_out_to_sdram_0_s1
-}
-# macro_sequence
-
-# end
-# entity
-sdram_0
-# storage
-db|DE2_D5M.(347).cnf
-db|DE2_D5M.(347).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sdram_0.v
-8aff7cc9419430e53def9982b5d125bc
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|sdram_0:the_sdram_0
-}
-# macro_sequence
-
-# end
-# entity
-sdram_0_input_efifo_module
-# storage
-db|DE2_D5M.(348).cnf
-db|DE2_D5M.(348).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sdram_0.v
-8aff7cc9419430e53def9982b5d125bc
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|sdram_0:the_sdram_0|sdram_0_input_efifo_module:the_sdram_0_input_efifo_module
-}
-# macro_sequence
-
-# end
-# entity
-sram_16bit_512k_0_avalon_slave_0_arbitrator
-# storage
-db|DE2_D5M.(349).cnf
-db|DE2_D5M.(349).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|sram_16bit_512k_0_avalon_slave_0_arbitrator:the_sram_16bit_512k_0_avalon_slave_0
-}
-# macro_sequence
-
-# end
-# entity
-sysid_control_slave_arbitrator
-# storage
-db|DE2_D5M.(351).cnf
-db|DE2_D5M.(351).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|sysid_control_slave_arbitrator:the_sysid_control_slave
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_oci_im:the_cpu_0_nios2_oci_im|cpu_0_traceram_lpm_dram_bdp_component_module:cpu_0_traceram_lpm_dram_bdp_component
 }
 # macro_sequence
 
@@ -37016,8 +38984,8 @@ niosSystemCamControl:niosSystemCamControl_inst|sysid_control_slave_arbitrator:th
 # entity
 sysid
 # storage
-db|DE2_D5M.(352).cnf
-db|DE2_D5M.(352).cnf
+db|DE2_D5M.(280).cnf
+db|DE2_D5M.(280).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -37025,7 +38993,7 @@ ON
 # case_sensitive
 # source_file
 sysid.v
-a21ce5c98ca5d8810c44b5fe5179a5c
+637955cfd6aff5655fb39a446fc1108
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -37050,18 +39018,18 @@ niosSystemCamControl:niosSystemCamControl_inst|sysid:the_sysid
 
 # end
 # entity
-timer_0_s1_arbitrator
+timer_0
 # storage
-db|DE2_D5M.(353).cnf
-db|DE2_D5M.(353).cnf
+db|DE2_D5M.(282).cnf
+db|DE2_D5M.(282).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
+timer_0.v
+acb183e236c064b3f894f5ca3ee8d892
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -37080,79 +39048,7 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|timer_0_s1_arbitrator:the_timer_0_s1
-}
-# macro_sequence
-
-# end
-# entity
-niosSystemCamControl_reset_clk_0_domain_synch_module
-# storage
-db|DE2_D5M.(354).cnf
-db|DE2_D5M.(354).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_reset_clk_0_domain_synch_module:niosSystemCamControl_reset_clk_0_domain_synch
-}
-# macro_sequence
-
-# end
-# entity
-niosSystemCamControl_reset_clk_1_domain_synch_module
-# storage
-db|DE2_D5M.(355).cnf
-db|DE2_D5M.(355).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-niossystemcamcontrol.v
-64fec65426e26c394f217de57ce0548d
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_reset_clk_1_domain_synch_module:niosSystemCamControl_reset_clk_1_domain_synch
+niosSystemCamControl:niosSystemCamControl_inst|timer_0:the_timer_0
 }
 # macro_sequence
 
@@ -37160,8 +39056,8 @@ niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_reset_clk_1_
 # entity
 sram_16bit_512k_0
 # storage
-db|DE2_D5M.(350).cnf
-db|DE2_D5M.(350).cnf
+db|DE2_D5M.(277).cnf
+db|DE2_D5M.(277).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -37169,7 +39065,7 @@ ON
 # case_sensitive
 # source_file
 sram_16bit_512k_0.v
-e445601ccb78eed463755bdd3a94061
+58fb618365e5ae4c998cf487154c94e
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -37194,18 +39090,18 @@ niosSystemCamControl:niosSystemCamControl_inst|sram_16bit_512k_0:the_sram_16bit_
 
 # end
 # entity
-DE2_D5M
+I2C_CCD_Config
 # storage
-db|DE2_D5M.(0).cnf
-db|DE2_D5M.(0).cnf
+db|DE2_D5M.(307).cnf
+db|DE2_D5M.(307).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-de2_d5m.v
-4eab117ae331b56a50b7699fc12e15c1
+v|i2c_ccd_config.v
+51852b90ac5f83d7a4d2289bdbb571ad
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -37223,8 +39119,30 @@ VERILOG_CONSTANT_LOOP_LIMIT
 VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
+# user_parameter {
+default_exposure
+0000011111000000
+PARAMETER_UNSIGNED_BIN
+DEF
+exposure_change_value
+0000000011001000
+PARAMETER_UNSIGNED_BIN
+DEF
+CLK_Freq
+50000000
+PARAMETER_SIGNED_DEC
+DEF
+I2C_Freq
+20000
+PARAMETER_SIGNED_DEC
+DEF
+LUT_SIZE
+25
+PARAMETER_SIGNED_DEC
+DEF
+}
 # hierarchies {
-|
+I2C_CCD_Config:u8
 }
 # macro_sequence
 

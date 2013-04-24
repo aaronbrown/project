@@ -679,7 +679,7 @@
    <SOPCModuleParameter>
     <C>136</C>
     <Name>dcache_bursts</Name>
-    <Value>false</Value>
+    <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>137</C>
@@ -1029,7 +1029,7 @@
    <SOPCModuleParameter>
     <C>207</C>
     <Name>timestamp</Name>
-    <Value>1365705896</Value>
+    <Value>1365879267</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
@@ -1476,7 +1476,7 @@
     </SOPCPort>
    </SOPCInterface>
   </SOPCModule>
-  <SystemID>2053861184</SystemID>
+  <SystemID>79968274</SystemID>
  </SOPCSystem>
  <SchemaVersion>schema_2011-03-02</SchemaVersion>
 </ProgramExecution>

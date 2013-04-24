@@ -98,11 +98,11 @@
          type = "int";
       }
    }
-   element sdram_0.s1
+   element onchip_memory2_0.s1
    {
       datum baseAddress
       {
-         value = "8388608";
+         value = "17842176";
          type = "long";
       }
    }
@@ -122,11 +122,11 @@
          type = "long";
       }
    }
-   element onchip_memory2_0.s1
+   element sdram_0.s1
    {
       datum baseAddress
       {
-         value = "17842176";
+         value = "8388608";
          type = "long";
       }
    }
@@ -179,8 +179,8 @@
  <parameter name="maxAdditionalLatency" value="0" />
  <parameter name="projectName">niosControl3CamOnly.qpf</parameter>
  <parameter name="sopcBorderPoints" value="true" />
- <parameter name="systemHash" value="-33764146329" />
- <parameter name="timeStamp" value="1365705896020" />
+ <parameter name="systemHash" value="-32354534717" />
+ <parameter name="timeStamp" value="1365879267472" />
  <module kind="clock_source" version="11.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -304,7 +304,7 @@
   <parameter name="dcache_omitDataMaster" value="false" />
   <parameter name="dcache_numTCDM" value="_0" />
   <parameter name="dcache_lineSize" value="_32" />
-  <parameter name="dcache_bursts" value="false" />
+  <parameter name="dcache_bursts" value="true" />
   <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='timer_0.s1' start='0x1109000' end='0x1109020' /><slave name='procHasControl.s1' start='0x1109020' end='0x1109030' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1109030' end='0x1109038' /><slave name='sysid.control_slave' start='0x1109038' end='0x1109040' /></address-map>]]></parameter>
   <parameter name="dataAddrWidth" value="25" />
   <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="altera_nios_custom_instr_floating_point_inst" baseAddress="252" addressSpan="4" clockCycleType="VARIABLE" /></info>]]></parameter>
