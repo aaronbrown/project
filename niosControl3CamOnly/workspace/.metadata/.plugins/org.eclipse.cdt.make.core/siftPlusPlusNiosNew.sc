@@ -4,6 +4,10 @@
 <scannerInfo id="org.eclipse.cdt.make.core.discoveredScannerInfo">
 <instance id="preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1063989064;preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1063989064.;cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.base.910335262;cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin.1059515009">
 <collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
+<includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++"/>
+<includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++\i686-pc-cygwin"/>
+<includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include\c++\backward"/>
+<includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include"/>
 <includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\4.5.3\include\c++" removed="true"/>
 <includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\4.5.3\include\c++\i686-pc-cygwin" removed="true"/>
 <includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\4.5.3\include\c++\backward" removed="true"/>
@@ -263,6 +267,7 @@
 </instance>
 <instance id="preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1063989064;preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1063989064.;cdt.managedbuild.tool.gnu.c.compiler.cygwin.base.1890265625;cdt.managedbuild.tool.gnu.c.compiler.input.cygwin.1570010844">
 <collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
+<includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\3.4.4\include"/>
 <includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\4.5.3\include" removed="true"/>
 <includePath path="C:\cygwin\lib\gcc\i686-pc-cygwin\4.5.3\include-fixed" removed="true"/>
 <includePath path="C:\cygwin\usr\include"/>

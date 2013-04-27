@@ -46,15 +46,15 @@ void extractImageData(VL::PgmBuffer& buffer)
 	float minVal = 1.0;
 	float floatIntensity;
 
-  buffer.width  = 480 ;
-  buffer.height = 360 ;
+  buffer.width  = 320 ;
+  buffer.height = 240 ;
   buffer.data   = im_pt ;
 
-	for (y = 60; y < 420; y++)
+	for (y = 0; y < 240; y++)
 	{
-		for (x = 80; x < 560; x++)
+		for (x = 0; x < 320; x++)
 		{
-				byteNum = (y*640 + x);
+				byteNum = (y*320 + x);
         blockNum = byteNum / 256;
         offset = byteNum % 256;
 
@@ -95,9 +95,9 @@ void replaceImageData()
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short *imgPtr = 0;
 
-	for (y = 0; y < 480; y++)
+	for (y = 0; y < 240; y++)
 	{
-		for (x = 0; x < 640; x++)
+		for (x = 0; x < 320; x++)
 		{
 				byteNum = (y*640 + x);
         blockNum = byteNum / 256;
@@ -144,12 +144,12 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 	// in case VGA was overwritten with the image.
 	// We will write to the red parts of all pixels first
 	// Then after we will copy those to the blue parts
-	for (y = 479; y >= 0; y--)
+	for (y = 239; y >= 0; y--)
 	{
-		for (x = 639; x >= 0; x--)
+		for (x = 319; x >= 0; x--)
 		{
 			// calculate VGA/SDRAM red pixel address
-			byteNum = (y*640 + x);
+			byteNum = (y*320 + x);
 			blockNum = byteNum / 256;
 			offset = byteNum % 256;
 			vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset + 256;
@@ -185,12 +185,12 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 	}
 
 	// Now copy the blue parts
-	for (y = 479; y >= 0; y--)
+	for (y = 239; y >= 0; y--)
 	{
-		for (x = 639; x >= 0; x--)
+		for (x = 319; x >= 0; x--)
 		{
 			// calculate VGA/SDRAM blue pixel address
-			byteNum = (y*640 + x);
+			byteNum = (y*320 + x);
 			blockNum = byteNum / 256;
 			offset = byteNum % 256;
 			vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset;
@@ -216,10 +216,12 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 }
 void writePixelAt(int x, int y, unsigned short r, unsigned short g, unsigned short b)
 {
+	if ( x < 0 || x > 319 ) return;
+	if ( y < 0 || y > 239 ) return;
 	r &= 0x3ff;
 	g &= 0x3ff;
 	b &= 0x3ff;
-	int byteNum = (y*640 + x);
+	int byteNum = (y*320 + x);
 	int blockNum = byteNum / 256;
 	int offset = byteNum % 256;
 	unsigned short *vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset;
@@ -334,11 +336,11 @@ main(int argc, char** argv)
 
   int    first          = 0 ;
   int    octaves        = 3 ;
-  int    levels         = 1 ;
-  VL::float_t  threshold      (0.04f / levels / 2.0f) ;
+  int    levels         = 2 ;
+  VL::float_t  threshold      (0.001f / levels / 2.0f) ;
   VL::float_t  edgeThreshold  (10.0f);
   VL::float_t  magnif         (3.0) ;
-  int    verbose        = 0 ;
+  int    verbose        = 1 ;
 
   VL::PgmBuffer buffer ;
 
@@ -472,8 +474,8 @@ main(int argc, char** argv)
     for (VL::Sift::KeypointsConstIter iter = sift.keypointsBegin();
     			iter != sift.keypointsEnd(); ++iter)
     {
-    	//drawCircle((1 << omin)*iter->ix + 80, (1 << omin)*iter->iy + 60, 5*(2+iter->s),0,0,0x3ff);
-    	//writeRedPixelAt((1 << omin)*iter->ix + 80, (1 << omin)*iter->iy + 60);
+    	drawCircle((1 << omin)*iter->ix , (1 << omin)*iter->iy , 5*(2+iter->s),0,0,0x3ff);
+    	writeRedPixelAt((1 << omin)*iter->ix , (1 << omin)*iter->iy );
     }
       
     // -------------------------------------------------------------

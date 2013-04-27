@@ -44,7 +44,6 @@ module I2C_CCD_Config (	//	Host Side
 						iCLK,
 						iRST_N,
 						iUART_CTRL,
-						iZOOM_MODE_SW,
 						iEXPOSURE_ADJ,
 						iEXPOSURE_DEC_p,
 						//	I2C Side
@@ -56,7 +55,6 @@ module I2C_CCD_Config (	//	Host Side
 input			iCLK;
 input			iRST_N;
 input 			iUART_CTRL;
-input 			iZOOM_MODE_SW;
 
 //	I2C Side
 output		I2C_SCLK;
@@ -85,8 +83,6 @@ parameter 	exposure_change_value	 	= 16'd200;
 reg	[24:0]	combo_cnt;
 wire		combo_pulse;
 
-reg	[1:0]	izoom_mode_sw_delay;
-
 reg	[3:0]	iexposure_adj_delay;
 wire		exposure_adj_set;	
 wire		exposure_adj_reset;
@@ -99,12 +95,12 @@ wire [23:0] sensor_column_size;
 wire [23:0] sensor_row_mode;
 wire [23:0] sensor_column_mode;
 
-assign sensor_start_row 		= iZOOM_MODE_SW ?  24'h010036 : 24'h010000;
-assign sensor_start_column 		= iZOOM_MODE_SW ?  24'h020010 : 24'h020000;
-assign sensor_row_size	 		= iZOOM_MODE_SW ?  24'h0301DF : 24'h03077F;
-assign sensor_column_size 		= iZOOM_MODE_SW ?  24'h04027F : 24'h0409FF;
-assign sensor_row_mode 			= iZOOM_MODE_SW ?  24'h220000 : 24'h220011;
-assign sensor_column_mode		= iZOOM_MODE_SW ?  24'h230000 : 24'h230011;
+assign sensor_start_row 		= 24'h010000;
+assign sensor_start_column 	= 24'h020000;
+assign sensor_row_size	 		= 24'h03077F;
+assign sensor_column_size 		= 24'h0409FF;
+assign sensor_row_mode 			= 24'h220003;
+assign sensor_column_mode		= 24'h230003;
 
 	
 always@(posedge iCLK or negedge iRST_N)

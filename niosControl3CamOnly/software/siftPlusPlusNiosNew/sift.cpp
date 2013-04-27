@@ -956,23 +956,23 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
             
             diter->o  = o ;
 
-            std::cout << o << "\t";
+            //std::cout << o << "\t";
 
             diter->ix = x ;
             diter->iy = y ;
             diter->is = s ;
 
-            std::cout << s << "\t"  << x << "\t"  << y << "\t";
+            //std::cout << s << "\t"  << x << "\t"  << y << "\t";
 
             diter->x = xn * xperiod ; 
             diter->y = yn * xperiod ; 
             diter->s = sn ;
 
-            std::cout << diter->s << "\t"  << (diter->x) << "\t"  << (diter->y) << "\t";
+            //std::cout << diter->s << "\t"  << (diter->x) << "\t"  << (diter->y) << "\t";
 
             diter->sigma = getScaleFromIndex(o,sn) ;
 
-            std::cout << diter->sigma << std::endl;
+            //std::cout << diter->sigma << std::endl;
 
             ++diter ;
           }

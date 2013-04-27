@@ -144,8 +144,8 @@ begin
 	oRequest	<=	0;
 	else
 	begin
-		if(	H_Cont>=X_START-2 && H_Cont<X_START+H_SYNC_ACT-2 &&
-			V_Cont>=Y_START && V_Cont<Y_START+V_SYNC_ACT )
+		if(	H_Cont>=X_START-2 && H_Cont<X_START-2+320 &&
+			V_Cont>=Y_START && V_Cont<Y_START+240 )
 		oRequest	<=	1;
 		else
 		oRequest	<=	0;

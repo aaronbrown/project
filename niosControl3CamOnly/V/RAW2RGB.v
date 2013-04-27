@@ -64,8 +64,9 @@ output	[11:0]	oBlue;
 output			oDVAL;
 wire	[11:0]	mDATA_0;
 wire	[11:0]	mDATA_1;
-reg		[11:0]	mDATAd_0;
-reg		[11:0]	mDATAd_1;
+reg		[11:0]	mDATAd_0, mDATAdd_0;
+reg		[11:0]	mDATAd_1, mDATAdd_1;
+reg		[11:0]	iDATAd, iDATAdd;
 wire		[11:0]	mCCD_R;
 wire		[12:0]	mCCD_G;
 wire		[11:0]	mCCD_B;
@@ -90,8 +91,8 @@ assign mCCD_B	= GREY;
 Line_Buffer 	u0	(	.clken(iDVAL),
 						.clock(iCLK),
 						.shiftin(iDATA),
-						.taps0x(mDATA_1),
-						.taps1x(mDATA_0)	);
+						.taps({mDATA_1,mDATA_0}	)
+						);
 
 always@(posedge iCLK or negedge iRST)
 begin
@@ -100,38 +101,46 @@ begin
 		//mCCD_R	<=	0;
 		//mCCD_G	<=	0;
 		//mCCD_B	<=	0;
+		iDATAd <= 0;
+		iDATAdd <= 0;
 		mDATAd_0<=	0;
+		mDATAdd_0<=	0;
 		mDATAd_1<=	0;
+		mDATAdd_1<=	0;
 		mDVAL	<=	0;
 	end
 	else
 	begin
 		mDATAd_0	<=	mDATA_0;
 		mDATAd_1	<=	mDATA_1;
+		mDATAdd_0	<=	mDATAd_0;
+		mDATAdd_1	<=	mDATAd_1;
+		iDATAd   <= iDATA;
+		iDATAdd  <= iDATAd;
 		mDVAL		<=	{iY_Cont[0]|iX_Cont[0]}	?	1'b0	:	iDVAL;
 		if({iY_Cont[0],iX_Cont[0]}==2'b10)
 		begin
-			tempR <= mDATA_0;
-			tempG <= (mDATAd_0+mDATA_1) >> 1;
-			tempB <= mDATAd_1;
+			tempR <= 12'h0;
+			tempG <= 12'h0;
+			tempB <= 12'h0;
 		end	
 		else if({iY_Cont[0],iX_Cont[0]}==2'b11)
 		begin
-			tempR <=	mDATAd_0;
-			tempG	<=	(mDATA_0+mDATAd_1) >> 1;
-			tempB	<=	mDATA_1;
+			tempR <=	12'h0;
+			tempG	<=	12'h0;
+			tempB	<=	12'h0;
 		end
 		else if({iY_Cont[0],iX_Cont[0]}==2'b00)
 		begin
-			tempR	<=	mDATA_1;
-			tempG	<=	(mDATA_0+mDATAd_1) >> 1;
-			tempB	<=	mDATAd_0;
+			tempR	<=	(mDATAdd_1[11:1]+mDATA_1[11:1]);
+			tempG	<=	(mDATAdd_0[11:2]+mDATA_0[11:2]+iDATAdd[11:2]+iDATA[11:2]);
+			tempB	<=	(mDATAd_0[11:1]+iDATAd[11:1]);
 		end
 		else if({iY_Cont[0],iX_Cont[0]}==2'b01)
 		begin
-			tempR	<=	mDATAd_1;
-			tempG	<=	(mDATAd_0+mDATA_1) >> 1;
-			tempB	<=	mDATA_0;
+			tempR	<=	12'h0;
+			tempG	<=	12'h0;
+			tempB	<=	12'h0;
 		end
 		
 		
