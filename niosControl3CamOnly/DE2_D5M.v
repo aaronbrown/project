@@ -380,24 +380,15 @@ assign	CCD_LVAL	=	GPIO_1[21];
 assign	CCD_PIXCLK	=	GPIO_1[0];
 assign	GPIO_1[19]	=	1'b1;  // tRIGGER
 assign	GPIO_1[17]	=	DLY_RST_1;
-reg [17:0] mode = 0;
 
-always @ (posedge unshifted_nios_clk) 
-	if ((DRAM_CS_N == 0) &&
-	(DRAM_RAS_N == 0) &&
-	(DRAM_CAS_N == 0) &&
-	(DRAM_WE_N == 0))
-		mode <= DRAM_ADDR;
-	else 
-		mode <= mode;
+
 		
-assign	LEDR		=	mode;
 assign	LEDG		=	Y_Cont;
 
 assign	VGA_CTRL_CLK=	rClk[0];
 assign	VGA_CLK		=	~rClk[0];
 
-always@(posedge unshifted_nios_clk)	rClk	<=	rClk+1;
+always@(posedge CLOCK_50)	rClk	<=	rClk+1;
 
 
 always@(posedge CCD_PIXCLK)
@@ -427,7 +418,7 @@ VGA_Controller		u1	(	//	Host Side
 						);
 
 
-Reset_Delay			u2	(	.iCLK(unshifted_nios_clk),
+Reset_Delay			u2	(	.iCLK(CLOCK_50),
 							.iRST(KEY[0]),
 							.oRST_0(DLY_RST_0),
 							.oRST_1(DLY_RST_1),
@@ -472,7 +463,7 @@ SEG7_LUT_8 			u5	(	.oSEG0(HEX0),.oSEG1(HEX1),
 wire unshifted_nios_clk, sdram_ctrl_clk;
 
 sdram_pll2			unew (
-							.inclk0(CLOCK_50),
+							.inclk0(CLOCK_27),
 							.c0(DRAM_CLK),
 							.c1(unshifted_nios_clk),
 							.c2(sdram_ctrl_clk)
@@ -555,7 +546,7 @@ Sdram_Arbiter sdramArbiter0 (
 		  
 		  
 Sdram_Control_4Port	u7	(	//	HOST Side						
-						    .REF_CLK(unshifted_nios_clk),
+						    .REF_CLK(CLOCK_50),
 						    .RESET_N(1'b1),
 							.CLK(sdram_ctrl_clk),
 
@@ -612,7 +603,7 @@ Sdram_Control_4Port	u7	(	//	HOST Side
 assign	UART_TXD = UART_RXD;
 
 I2C_CCD_Config 		u8	(	//	Host Side
-							.iCLK(unshifted_nios_clk),
+							.iCLK(CLOCK_50),
 							.iRST_N(DLY_RST_2),
 							.iZOOM_MODE_SW(SW[16]),
 							.iEXPOSURE_ADJ(KEY[1]),

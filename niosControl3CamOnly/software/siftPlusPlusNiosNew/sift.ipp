@@ -40,6 +40,7 @@
 // BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO PROVIDE
 // MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+#define VL_USEFASTMATH
 
 /** 
  ** @file
@@ -265,7 +266,8 @@ int32_t
 fast_floor(VL::float_t x)
 {
 #ifdef VL_USEFASTMATH
-  return (x>=0)? int32_t(x) : std::floor(x) ;
+  //return (x>=0)? int32_t(x) : std::floor(x) ;
+  return int32_t(x + 1024) - 1024;
   //  return int32_t( x - ((x>=0)?0:1) ) ; 
 #else
   return int32_t( std::floor(x) ) ;

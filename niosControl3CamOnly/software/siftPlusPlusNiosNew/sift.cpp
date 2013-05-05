@@ -1002,20 +1002,38 @@ Sift::prepareGrad(int o)
 
   if( ! tempIsGrad || tempOctave != o ) {
 
+	pixel_t* src;
+	pixel_t* srcPtr;
+	pixel_t* end;
+	pixel_t* grad;
+	pixel_t* gradPtr;
+
+	VL::float_t Gx, Gy, m, t;
     // compute dx/dy
     for(int s = smin+1 ; s <= smax-2 ; ++s) {
+      src = getLevel(o, s) + xo;
+      end = src + ow - 1;
+      grad = 2 * (xo + (s-smin-1)*so) + temp;
       for(int y = 1 ; y < oh-1 ; ++y ) {
-        pixel_t* src  = getLevel(o, s) + xo + yo*y ;        
-        pixel_t* end  = src + ow - 1 ;
-        pixel_t* grad = 2 * (xo + yo*y + (s - smin -1)*so) + temp ;
-        while(src != end) {
-          VL::float_t Gx = 0.5 * ( *(src+xo) - *(src-xo) ) ;
-          VL::float_t Gy = 0.5 * ( *(src+yo) - *(src-yo) ) ;
-          VL::float_t m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
-          VL::float_t t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
-          *grad++ = pixel_t( m ) ;
-          *grad++ = pixel_t( t ) ;
-          ++src ;
+        //pixel_t* src  = getLevel(o, s) + xo + yo*y ;
+        //pixel_t* end  = src + ow - 1 ;
+        //pixel_t* grad = 2 * (xo + yo*y + (s - smin -1)*so) + temp ;
+
+    	  // 2*xo + 2*yo*y + 2*(s-smin-1)*so + temp;
+    	src += yo;
+    	end += yo;
+    	srcPtr = src;
+    	grad += 2*yo;
+    	gradPtr = grad;
+
+        while(srcPtr != end) {
+          Gx = 0.5 * ( *(srcPtr+xo) - *(srcPtr-xo) ) ;
+          Gy = 0.5 * ( *(srcPtr+yo) - *(srcPtr-yo) ) ;
+          m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
+          t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
+          *gradPtr++ = pixel_t( m ) ;
+          *gradPtr++ = pixel_t( t ) ;
+          ++srcPtr ;
         }
       }
     }

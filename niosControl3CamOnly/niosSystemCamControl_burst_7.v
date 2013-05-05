@@ -21,9 +21,9 @@
 //
 //Burst adapter parameters:
 //adapter is mastered by: cpu_0/data_master
-//adapter masters: sram_16bit_512k_0/avalon_slave_0
+//adapter masters: niosSystemCamControl_clock_1/in
 //asp_debug: 0
-//byteaddr_width: 20
+//byteaddr_width: 24
 //ceil_data_width: 16
 //data_width: 16
 //dbs_shift: 1
@@ -38,7 +38,7 @@
 //master_data_width: 32
 //master_interleave: 0
 //master_linewrap_bursts: 0
-//nativeaddr_width: 19
+//nativeaddr_width: 23
 //slave_always_burst_max_burst: 0
 //slave_burst_on_burst_boundaries_only: 0
 //slave_interleave: 0
@@ -81,12 +81,12 @@ module niosSystemCamControl_burst_7 (
                                     )
 ;
 
-  output  [ 18: 0] reg_downstream_address;
+  output  [ 22: 0] reg_downstream_address;
   output  [  4: 0] reg_downstream_arbitrationshare;
   output           reg_downstream_burstcount;
   output  [  1: 0] reg_downstream_byteenable;
   output           reg_downstream_debugaccess;
-  output  [ 18: 0] reg_downstream_nativeaddress;
+  output  [ 22: 0] reg_downstream_nativeaddress;
   output           reg_downstream_read;
   output           reg_downstream_write;
   output  [ 15: 0] reg_downstream_writedata;
@@ -98,31 +98,31 @@ module niosSystemCamControl_burst_7 (
   input            downstream_readdatavalid;
   input            downstream_waitrequest;
   input            reset_n;
-  input   [ 19: 0] upstream_address;
+  input   [ 23: 0] upstream_address;
   input   [  3: 0] upstream_burstcount;
   input   [  1: 0] upstream_byteenable;
   input            upstream_debugaccess;
-  input   [ 18: 0] upstream_nativeaddress;
+  input   [ 22: 0] upstream_nativeaddress;
   input            upstream_read;
   input            upstream_write;
   input   [ 15: 0] upstream_writedata;
 
   wire    [  3: 0] address_offset;
   reg              atomic_counter;
-  wire    [ 19: 0] current_upstream_address;
+  wire    [ 23: 0] current_upstream_address;
   wire    [  3: 0] current_upstream_burstcount;
   wire             current_upstream_read;
   wire             current_upstream_write;
   reg     [  4: 0] data_counter;
   wire    [  4: 0] dbs_adjusted_upstream_burstcount;
-  wire    [ 18: 0] downstream_address;
-  wire    [ 19: 0] downstream_address_base;
+  wire    [ 22: 0] downstream_address;
+  wire    [ 23: 0] downstream_address_base;
   wire    [  4: 0] downstream_arbitrationshare;
   wire             downstream_burstcount;
   wire             downstream_burstdone;
   wire    [  1: 0] downstream_byteenable;
   wire             downstream_debugaccess;
-  wire    [ 18: 0] downstream_nativeaddress;
+  wire    [ 22: 0] downstream_nativeaddress;
   reg              downstream_read;
   wire             downstream_write;
   reg              downstream_write_reg;
@@ -142,20 +142,20 @@ module niosSystemCamControl_burst_7 (
   reg     [  3: 0] read_address_offset;
   wire             read_update_count;
   wire    [  4: 0] read_write_dbs_adjusted_upstream_burstcount;
-  reg     [ 18: 0] reg_downstream_address;
+  reg     [ 22: 0] reg_downstream_address;
   reg     [  4: 0] reg_downstream_arbitrationshare;
   reg              reg_downstream_burstcount;
   reg     [  1: 0] reg_downstream_byteenable;
   reg              reg_downstream_debugaccess;
-  reg     [ 18: 0] reg_downstream_nativeaddress;
+  reg     [ 22: 0] reg_downstream_nativeaddress;
   reg              reg_downstream_read;
   reg              reg_downstream_write;
   reg     [ 15: 0] reg_downstream_writedata;
   reg     [  4: 0] registered_read_write_dbs_adjusted_upstream_burstcount;
-  reg     [ 19: 0] registered_upstream_address;
+  reg     [ 23: 0] registered_upstream_address;
   reg     [  3: 0] registered_upstream_burstcount;
   reg     [  1: 0] registered_upstream_byteenable;
-  reg     [ 18: 0] registered_upstream_nativeaddress;
+  reg     [ 22: 0] registered_upstream_nativeaddress;
   reg              registered_upstream_read;
   reg              registered_upstream_write;
   reg              state_busy;
@@ -340,7 +340,7 @@ module niosSystemCamControl_burst_7 (
 
   assign downstream_nativeaddress = registered_upstream_nativeaddress >> 2;
   assign address_offset = current_upstream_read ? read_address_offset : write_address_offset;
-  assign downstream_address_base = {current_upstream_address[19 : 2], 2'b00};
+  assign downstream_address_base = {current_upstream_address[23 : 2], 2'b00};
   assign downstream_address = downstream_address_base + {address_offset, 1'b0};
   always @(posedge clk or negedge reset_n)
     begin

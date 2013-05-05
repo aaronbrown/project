@@ -111,15 +111,15 @@ begin
 		mDVAL		<=	{iY_Cont[0]|iX_Cont[0]}	?	1'b0	:	iDVAL;
 		if({iY_Cont[0],iX_Cont[0]}==2'b10)
 		begin
-			tempR <= mDATA_0;
-			tempG <= (mDATAd_0+mDATA_1) >> 1;
-			tempB <= mDATAd_1;
+			tempR <= 0;
+			tempG <= 0;
+			tempB <= 0;
 		end	
 		else if({iY_Cont[0],iX_Cont[0]}==2'b11)
 		begin
-			tempR <=	mDATAd_0;
-			tempG	<=	(mDATA_0+mDATAd_1) >> 1;
-			tempB	<=	mDATA_1;
+			tempR <=	0;
+			tempG	<=	0;
+			tempB	<=	0;
 		end
 		else if({iY_Cont[0],iX_Cont[0]}==2'b00)
 		begin
@@ -129,9 +129,9 @@ begin
 		end
 		else if({iY_Cont[0],iX_Cont[0]}==2'b01)
 		begin
-			tempR	<=	mDATAd_1;
-			tempG	<=	(mDATAd_0+mDATA_1) >> 1;
-			tempB	<=	mDATA_0;
+			tempR	<=	0;
+			tempG	<=	0;
+			tempB	<=	0;
 		end
 		
 		

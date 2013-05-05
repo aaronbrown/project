@@ -332,9 +332,9 @@ main(int argc, char** argv)
 
   int    first          = 0 ;
   int    octaves        = 3 ;
-  int    levels         = 1 ;
-  VL::float_t  threshold      (0.001f / levels / 2.0f) ;
-  VL::float_t  edgeThreshold  (20.0f);
+  int    levels         = 2 ;
+  VL::float_t  threshold      (0.12f / levels / 2.0f) ;
+  VL::float_t  edgeThreshold  (10.0f);
   VL::float_t  magnif         (3.0) ;
   int    verbose        = 1 ;
 
@@ -464,20 +464,21 @@ main(int argc, char** argv)
     for (VL::Sift::KeypointsConstIter iter = sift.keypointsBegin();
     			iter != sift.keypointsEnd(); ++iter)
     {
-    	drawCircle(iter->ix + 80, iter->iy + 60, 5*(2+iter->s),0,0,0x3ff);
-    	writeRedPixelAt(iter->ix + 80, iter->iy + 60);
+    	drawCircle((iter->ix << omin) + 80, (iter->iy << omin) + 60, 5*(2+iter->s),0,0,0x3ff);
+    	writeRedPixelAt((iter->ix << omin) + 80, (iter->iy << omin) + 60);
     }
       
     // -------------------------------------------------------------
     //                  Run SIFT orientation detector and descriptor
     // -------------------------------------------------------------
-/*
+
     // set descriptor options
-    sift.setNormalizeDescriptor( 1 ) ;
+    sift.setNormalizeDescriptor( 0 ) ;
     sift.setMagnification( magnif ) ;
 
-    verbose && cout << "siftpp: computing orientations and descriptors\n" ;
-      
+
+    verbose && cout << "siftpp: computing orientations and descriptors..." ;
+
     // -------------------------------------------------------------
     //            Run detector, compute orientations and descriptors
     // -------------------------------------------------------------
@@ -497,8 +498,10 @@ main(int argc, char** argv)
         sift.computeKeypointDescriptor(descr_pt, *iter, angles[a]) ;
       } // next angle
     } // next keypoint
-    */
+    verbose && cout << "done\n" ;
+
 	} // next octave
+
 
 	verbose && cout
           << "siftpp: job completed"<<endl ;

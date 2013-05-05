@@ -1,6 +1,6 @@
 Flow report for DE2_D5M
-Thu Apr 11 12:44:14 2013
-Quartus II Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Web Edition
+Sat May 04 19:38:04 2013
+Quartus II 64-Bit Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Full Version
 
 
 ---------------------
@@ -35,26 +35,26 @@ applicable agreement for further details.
 
 
 
-+------------------------------------------------------------------------------------+
-; Flow Summary                                                                       ;
-+------------------------------------+-----------------------------------------------+
-; Flow Status                        ; Successful - Thu Apr 11 12:44:05 2013         ;
-; Quartus II Version                 ; 11.0 Build 208 07/03/2011 SP 1 SJ Web Edition ;
-; Revision Name                      ; DE2_D5M                                       ;
-; Top-level Entity Name              ; DE2_D5M                                       ;
-; Family                             ; Cyclone II                                    ;
-; Device                             ; EP2C35F672C6                                  ;
-; Timing Models                      ; Final                                         ;
-; Total logic elements               ; 12,647 / 33,216 ( 38 % )                      ;
-;     Total combinational functions  ; 10,479 / 33,216 ( 32 % )                      ;
-;     Dedicated logic registers      ; 7,377 / 33,216 ( 22 % )                       ;
-; Total registers                    ; 7393                                          ;
-; Total pins                         ; 425 / 475 ( 89 % )                            ;
-; Total virtual pins                 ; 0                                             ;
-; Total memory bits                  ; 259,468 / 483,840 ( 54 % )                    ;
-; Embedded Multiplier 9-bit elements ; 11 / 70 ( 16 % )                              ;
-; Total PLLs                         ; 1 / 4 ( 25 % )                                ;
-+------------------------------------+-----------------------------------------------+
++-------------------------------------------------------------------------------------+
+; Flow Summary                                                                        ;
++------------------------------------+------------------------------------------------+
+; Flow Status                        ; Successful - Sat May 04 19:37:57 2013          ;
+; Quartus II 64-Bit Version          ; 11.0 Build 208 07/03/2011 SP 1 SJ Full Version ;
+; Revision Name                      ; DE2_D5M                                        ;
+; Top-level Entity Name              ; DE2_D5M                                        ;
+; Family                             ; Cyclone II                                     ;
+; Device                             ; EP2C35F672C6                                   ;
+; Timing Models                      ; Final                                          ;
+; Total logic elements               ; 14,075 / 33,216 ( 42 % )                       ;
+;     Total combinational functions  ; 11,707 / 33,216 ( 35 % )                       ;
+;     Dedicated logic registers      ; 8,098 / 33,216 ( 24 % )                        ;
+; Total registers                    ; 8114                                           ;
+; Total pins                         ; 425 / 475 ( 89 % )                             ;
+; Total virtual pins                 ; 0                                              ;
+; Total memory bits                  ; 293,516 / 483,840 ( 61 % )                     ;
+; Embedded Multiplier 9-bit elements ; 11 / 70 ( 16 % )                               ;
+; Total PLLs                         ; 1 / 4 ( 25 % )                                 ;
++------------------------------------+------------------------------------------------+
 
 
 +-----------------------------------------+
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/11/2013 12:35:10 ;
+; Start date & time ; 05/04/2013 19:27:07 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE2_D5M             ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-----------------------------------------+---------------------------------------+--------------------------------+-------------+------------+
 ; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP     ; On                                    ; Off                            ; --          ; --         ;
 ; AUTO_PACKED_REGISTERS_STRATIXII         ; Normal                                ; Auto                           ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                   ; 164143905090.136570890508028          ; --                             ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                   ; 163358177412.136772082201952          ; --                             ; --          ; --         ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE        ; Speed                                 ; Balanced                       ; --          ; --         ;
 ; FITTER_EFFORT                           ; Standard Fit                          ; Auto Fit                       ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP                  ; 85                                    ; --                             ; --          ; --         ;
@@ -102,11 +102,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:03:28     ; 1.0                     ; 507 MB              ; 00:03:27                           ;
-; Fitter                    ; 00:04:57     ; 2.4                     ; 599 MB              ; 00:07:12                           ;
-; Assembler                 ; 00:00:08     ; 1.0                     ; 348 MB              ; 00:00:08                           ;
-; TimeQuest Timing Analyzer ; 00:00:17     ; 1.2                     ; 377 MB              ; 00:00:17                           ;
-; Total                     ; 00:08:50     ; --                      ; --                  ; 00:11:04                           ;
+; Analysis & Synthesis      ; 00:03:27     ; 1.0                     ; 711 MB              ; 00:03:09                           ;
+; Fitter                    ; 00:06:59     ; 1.4                     ; 768 MB              ; 00:08:02                           ;
+; Assembler                 ; 00:00:18     ; 1.0                     ; 440 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:25     ; 1.0                     ; 531 MB              ; 00:00:12                           ;
+; Total                     ; 00:11:09     ; --                      ; --                  ; 00:11:28                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -115,10 +115,10 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; AM6500           ; Windows 7 ; 6.1        ; x86_64         ;
-; Fitter                    ; AM6500           ; Windows 7 ; 6.1        ; x86_64         ;
-; Assembler                 ; AM6500           ; Windows 7 ; 6.1        ; x86_64         ;
-; TimeQuest Timing Analyzer ; AM6500           ; Windows 7 ; 6.1        ; x86_64         ;
+; Analysis & Synthesis      ; jMacBook-PC      ; Windows 7 ; 6.1        ; x86_64         ;
+; Fitter                    ; jMacBook-PC      ; Windows 7 ; 6.1        ; x86_64         ;
+; Assembler                 ; jMacBook-PC      ; Windows 7 ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; jMacBook-PC      ; Windows 7 ; 6.1        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
