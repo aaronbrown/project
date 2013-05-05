@@ -75,7 +75,7 @@ reg		[15:0]	Y_Cont;
 reg		[31:0]	Frame_Cont;
 reg				mSTART;
 
-parameter COLUMN_WIDTH = 1280;
+parameter COLUMN_WIDTH = 640;
 
 assign	oX_Cont		=	X_Cont;
 assign	oY_Cont		=	Y_Cont;

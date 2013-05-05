@@ -391,7 +391,7 @@ always @ (posedge unshifted_nios_clk)
 	else 
 		mode <= mode;
 		
-assign	LEDR		=	mode;
+//assign	LEDR[8:0]		=	mode;
 assign	LEDG		=	Y_Cont;
 
 assign	VGA_CTRL_CLK=	rClk[0];
@@ -494,8 +494,8 @@ wire niosWantsControl;
       .clk_0                            (unshifted_nios_clk),
       .clk_1                            (sdram_ctrl_clk),
       .out_port_from_the_procHasControl (niosWantsControl),
-      .reset_n                          (KEY[0]),
-      .zs_addr_from_the_sdram_0         (DRAM_ADDR_nios),
+      .reset_n                          (KEY[0])//,
+ /*     .zs_addr_from_the_sdram_0         (DRAM_ADDR_nios),
       .zs_ba_from_the_sdram_0           ({DRAM_BA_1_nios,DRAM_BA_0_nios}),
       .zs_cas_n_from_the_sdram_0        (DRAM_CAS_N_nios),
       .zs_cke_from_the_sdram_0          (DRAM_CKE_nios),
@@ -503,7 +503,7 @@ wire niosWantsControl;
       .zs_dq_to_and_from_the_sdram_0    (DRAM_DQ),
       .zs_dqm_from_the_sdram_0          ({DRAM_UDQM_nios,DRAM_LDQM_nios}),
       .zs_ras_n_from_the_sdram_0        (DRAM_RAS_N_nios),
-      .zs_we_n_from_the_sdram_0         (DRAM_WE_N_nios)
+      .zs_we_n_from_the_sdram_0         (DRAM_WE_N_nios) */
     );
 
 /*	 
@@ -519,8 +519,12 @@ assign {DRAM_UDQM,DRAM_LDQM} = niosHasControl ? {DRAM_UDQM_nios,DRAM_LDQM_nios} 
 
 wire niosHasControl;
 wire camHasControl;
+reg SwitchControl = 0;
+always @ (posedge CLOCK_50)
+SwitchControl <= SW[17];
+
 Sdram_Arbiter sdramArbiter0 (
-	.RequestNiosControl(niosWantsControl),
+	.RequestNiosControl( SwitchControl /*niosWantsControl*/ ),
 	.NiosHasControl(niosHasControl),     
    .CamHasControl(camHasControl),     
    .Reset_N(KEY[0]),              
@@ -606,6 +610,50 @@ Sdram_Control_4Port	u7	(	//	HOST Side
         					.WE_N(DRAM_WE_N_cam),
         					.DQ(DRAM_DQ),
         					.DQM({DRAM_UDQM_cam,DRAM_LDQM_cam})
+						);
+
+HWAcceleration	HWAccelUnit	(	//	HOST Side						
+						    .REF_CLK(unshifted_nios_clk),
+						    .RESET_N(1'b1),
+							.CLK(sdram_ctrl_clk),
+							.GO(SW[16]),
+							.FIFOCLOCK(rClk[1]),
+							.LEDS(LEDR[17:0]),
+							//	FIFO Write Side 1
+							.WR1_ADDR(0),
+							.WR1_MAX_ADDR(320*240),
+							.WR1_LENGTH(9'h100),
+							.WR1_LOAD(!DLY_RST_0),
+
+							//	FIFO Write Side 2
+							.WR2_ADDR(22'h100000),
+							.WR2_MAX_ADDR(22'h100000+320*240),
+							.WR2_LENGTH(9'h100),
+							.WR2_LOAD(!DLY_RST_0),
+
+
+							//	FIFO Read Side 1
+				        	.RD1_ADDR(0),
+							.RD1_MAX_ADDR(320*240),
+							.RD1_LENGTH(9'h100),
+							.RD1_LOAD(!DLY_RST_0),
+							
+							//	FIFO Read Side 2
+							.RD2_ADDR(22'h100000),
+							.RD2_MAX_ADDR(22'h100000+320*240),
+							.RD2_LENGTH(9'h100),
+							.RD2_LOAD(!DLY_RST_0),
+							
+							//	SDRAM Side
+						    .SA(DRAM_ADDR_nios),
+						    .BA({DRAM_BA_1_nios,DRAM_BA_0_nios}),
+        					.CS_N(DRAM_CS_N_nios),
+        					.CKE(DRAM_CKE_nios),
+        					.RAS_N(DRAM_RAS_N_nios),
+        					.CAS_N(DRAM_CAS_N_nios),
+        					.WE_N(DRAM_WE_N_nios),
+        					.DQ(DRAM_DQ),
+        					.DQM({DRAM_UDQM_nios,DRAM_LDQM_nios})
 						);
 
 

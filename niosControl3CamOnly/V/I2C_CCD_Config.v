@@ -78,7 +78,7 @@ input 		iEXPOSURE_ADJ;
 input		iEXPOSURE_DEC_p;	
 
 parameter 	default_exposure 			= 16'h07c0;
-parameter 	exposure_change_value	 	= 16'd200;
+parameter 	exposure_change_value	 	= 16'd100;
 
 reg	[24:0]	combo_cnt;
 wire		combo_pulse;
@@ -94,7 +94,7 @@ wire [23:0] sensor_row_size;
 wire [23:0] sensor_column_size; 
 wire [23:0] sensor_row_mode;
 wire [23:0] sensor_column_mode;
-
+ 
 assign sensor_start_row 		= 24'h010000;
 assign sensor_start_column 	= 24'h020000;
 assign sensor_row_size	 		= 24'h03077F;

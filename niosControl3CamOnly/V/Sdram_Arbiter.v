@@ -117,7 +117,7 @@ end
 //	Controller
 reg NOP, ArbiterHasControl, NiosLoadMode;
 wire [11:0] SA_arbiter;
-reg  [11:0] NiosModeBits = 12'b110000;
+reg  [11:0] NiosModeBits = 12'b110111;
 reg  [11:0] CamModeBits  = 12'b110111;
 
 // Current State Output Logic
