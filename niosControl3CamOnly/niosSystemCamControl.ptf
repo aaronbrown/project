@@ -15,7 +15,7 @@ SYSTEM niosSystemCamControl
       {
          CLOCK clk_0
          {
-            frequency = "50000000";
+            frequency = "100000000";
             source = "External";
             Is_Clock_Source = "0";
             display_name = "clk_0";
@@ -32,8 +32,8 @@ SYSTEM niosSystemCamControl
             clock_module_connection_point_for_c2h = "clk_1.clk";
          }
       }
-      clock_freq = "50000000";
-      clock_freq = "50000000";
+      clock_freq = "100000000";
+      clock_freq = "100000000";
       board_class = "";
       view_master_columns = "1";
       view_master_priorities = "0";
@@ -977,7 +977,7 @@ SYSTEM niosSystemCamControl
       WIZARD_SCRIPT_ARGUMENTS 
       {
          cache_has_dcache = "1";
-         cache_dcache_size = "2048";
+         cache_dcache_size = "8192";
          cache_dcache_line_size = "32";
          cache_dcache_bursts = "1";
          cache_dcache_ram_block_type = "AUTO";
@@ -986,7 +986,7 @@ SYSTEM niosSystemCamControl
          gui_include_tightly_coupled_data_masters = "0";
          gui_omit_avalon_data_master = "0";
          cache_has_icache = "1";
-         cache_icache_size = "4096";
+         cache_icache_size = "2048";
          cache_icache_line_size = "32";
          cache_icache_ram_block_type = "AUTO";
          cache_icache_bursts = "0";
@@ -1144,7 +1144,7 @@ SYSTEM niosSystemCamControl
             }
             CONSTANT nasys_icache_size
             {
-               value = "4096";
+               value = "2048";
                comment = "Size in bytes of instruction cache";
             }
             CONSTANT nasys_icache_line_size
@@ -1164,7 +1164,7 @@ SYSTEM niosSystemCamControl
             }
             CONSTANT nasys_dcache_size
             {
-               value = "2048";
+               value = "8192";
                comment = "Size in bytes of data cache";
             }
             CONSTANT nasys_dcache_line_size
@@ -1200,8 +1200,8 @@ SYSTEM niosSystemCamControl
          View 
          {
             Settings_Summary = "Nios II/f
-            <br>&nbsp;&nbsp;4-Kbyte Instruction Cache
-            <br>&nbsp;&nbsp;2-Kbyte Data Cache
+            <br>&nbsp;&nbsp;2-Kbyte Instruction Cache
+            <br>&nbsp;&nbsp;8-Kbyte Data Cache
             <br>&nbsp;&nbsp;JTAG Debug Module
             ";
             MESSAGES 
@@ -3148,7 +3148,7 @@ SYSTEM niosSystemCamControl
          period_units = "ms";
          reset_output = "0";
          timeout_pulse_output = "0";
-         load_value = "49999";
+         load_value = "99999";
          counter_size = "32";
          mult = "0.0010";
          ticks_per_sec = "1000";
@@ -3255,7 +3255,7 @@ SYSTEM niosSystemCamControl
          Has_Clock = "1";
          View 
          {
-            Settings_Summary = "System ID (at last Generate):<br> <b>00000000</b>    (unique ID tag) <br> <b>5169A9E3</b> (timestamp: Sat Apr 13, 2013 @11:54 AM)";
+            Settings_Summary = "System ID (at last Generate):<br> <b>00000000</b>    (unique ID tag) <br> <b>5186A6D7</b> (timestamp: Sun May 5, 2013 @11:37 AM)";
             MESSAGES 
             {
             }
@@ -3264,7 +3264,7 @@ SYSTEM niosSystemCamControl
       WIZARD_SCRIPT_ARGUMENTS 
       {
          id = "0u";
-         timestamp = "1365879267u";
+         timestamp = "1367779031u";
          regenerate_values = "0";
          MAKE 
          {
@@ -3273,7 +3273,7 @@ SYSTEM niosSystemCamControl
                verifysysid 
                {
                   All_Depends_On = "0";
-                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x01109038 --id=0 --timestamp=1365879267";
+                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x01109038 --id=0 --timestamp=1367779031";
                   Is_Phony = "1";
                   Target_File = "dummy_verifysysid_file";
                }

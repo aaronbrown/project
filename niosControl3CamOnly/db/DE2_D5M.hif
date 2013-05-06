@@ -20,96 +20,6 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
-VGA_Controller
-# storage
-db|DE2_D5M.(1).cnf
-db|DE2_D5M.(1).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|vga_controller.v
-5e73723444978a18d4d7011be36229b
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-H_SYNC_CYC
-96
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_BACK
-48
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_ACT
-640
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_FRONT
-16
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_TOTAL
-800
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_CYC
-2
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_BACK
-33
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_ACT
-480
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_FRONT
-10
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_TOTAL
-525
-PARAMETER_SIGNED_DEC
-DEF
-X_START
-144
-PARAMETER_SIGNED_DEC
-DEF
-Y_START
-35
-PARAMETER_SIGNED_DEC
-DEF
-}
-# include_file {
-v|vga_param.h
-b4f42ba795bd5b1786cd87ebe459a09b
-}
-# hierarchies {
-VGA_Controller:u1
-}
-# macro_sequence
-
-# end
-# entity
 Reset_Delay
 # storage
 db|DE2_D5M.(2).cnf
@@ -146,43 +56,6 @@ Reset_Delay:u2
 
 # end
 # entity
-Line_Buffer
-# storage
-db|DE2_D5M.(5).cnf
-db|DE2_D5M.(5).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|line_buffer.v
-6aeda2ba49618563a66f1a3c14ee5456
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0
-HWAcceleration:HWAccelUnit|Line_Buffer:u0
-}
-# macro_sequence
-
-# end
-# entity
 altshift_taps
 # storage
 db|DE2_D5M.(6).cnf
@@ -202,7 +75,7 @@ NUMBER_OF_TAPS
 PARAMETER_SIGNED_DEC
 USR
 TAP_DISTANCE
-640
+1280
 PARAMETER_SIGNED_DEC
 USR
 WIDTH
@@ -212,9 +85,9 @@ USR
 POWER_UP_STATE
 CLEARED
 PARAMETER_UNKNOWN
-USR
+DEF
 CBXI_PARAMETER
-shift_taps_6u11
+shift_taps_ikn
 PARAMETER_UNKNOWN
 USR
 }
@@ -238,29 +111,25 @@ clken
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_counter.inc
-c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
-}
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
 }
 # macro_sequence
 
 # end
 # entity
-shift_taps_6u11
+shift_taps_ikn
 # storage
 db|DE2_D5M.(7).cnf
 db|DE2_D5M.(7).cnf
 # case_insensitive
 # source_file
-db|shift_taps_6u11.tdf
-69dbe84d9a3f98ef1e966ac9e8dac6
+db|shift_taps_ikn.tdf
+252fedd74c91b1eb0aa5513707192d
 7
 # used_port {
 taps9
@@ -414,22 +283,18 @@ clken
 -1
 3
 }
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated
-}
 # macro_sequence
 
 # end
 # entity
-altsyncram_0fa1
+altsyncram_cm81
 # storage
 db|DE2_D5M.(8).cnf
 db|DE2_D5M.(8).cnf
 # case_insensitive
 # source_file
-db|altsyncram_0fa1.tdf
-4b516dbfad726d4a739de63646d31478
+db|altsyncram_cm81.tdf
+2ff4e5122db667ae9b4b609e6e3b987
 7
 # used_port {
 q_b9
@@ -606,6 +471,9 @@ address_b3
 address_b2
 -1
 3
+address_b10
+-1
+3
 address_b1
 -1
 3
@@ -636,6 +504,9 @@ address_a3
 address_a2
 -1
 3
+address_a10
+-1
+3
 address_a1
 -1
 3
@@ -646,22 +517,18 @@ wren_a
 -1
 2
 }
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|altsyncram_0fa1:altsyncram2
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|altsyncram_0fa1:altsyncram2
-}
 # macro_sequence
 
 # end
 # entity
-cntr_hpf
+cntr_3rf
 # storage
 db|DE2_D5M.(9).cnf
 db|DE2_D5M.(9).cnf
 # case_insensitive
 # source_file
-db|cntr_hpf.tdf
-fce9553471dcb9dd70e9a2b8a71d8afd
+db|cntr_3rf.tdf
+ab208655bc19fe11ea94b58e157b417
 7
 # used_port {
 q9
@@ -688,6 +555,9 @@ q3
 q2
 -1
 3
+q10
+-1
+3
 q1
 -1
 3
@@ -701,22 +571,18 @@ clk_en
 -1
 3
 }
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1
-}
 # macro_sequence
 
 # end
 # entity
-cmpr_ldc
+cmpr_mdc
 # storage
 db|DE2_D5M.(10).cnf
 db|DE2_D5M.(10).cnf
 # case_insensitive
 # source_file
-db|cmpr_ldc.tdf
-c5651add7a9888352f68a8432de45459
+db|cmpr_mdc.tdf
+fa1c5114b1c53fcab72948794bca27
 7
 # used_port {
 datab9
@@ -741,6 +607,9 @@ datab3
 -1
 3
 datab2
+-1
+3
+datab10
 -1
 3
 datab1
@@ -773,6 +642,9 @@ dataa3
 dataa2
 -1
 3
+dataa10
+-1
+3
 dataa1
 -1
 3
@@ -782,10 +654,6 @@ dataa0
 aeb
 -1
 3
-}
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5
 }
 # macro_sequence
 
@@ -881,7 +749,7 @@ ON
 # case_sensitive
 # source_file
 sdram_pll2.v
-a2986ed6eaa305989faee20adb2483a
+35b86be5abcc96dc35ee0625be7887e
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -1061,7 +929,7 @@ CLK2_MULTIPLY_BY
 PARAMETER_SIGNED_DEC
 USR
 CLK1_MULTIPLY_BY
-1
+2
 PARAMETER_SIGNED_DEC
 USR
 CLK0_MULTIPLY_BY
@@ -2437,14 +2305,14 @@ clkena
 2
 }
 # include_file {
-stratix_pll.inc
-a9a94c5be18105f7ae8c218a67ec9f7
-cycloneii_pll.inc
-c2ee779f89b3bc181df753ea85b3ef
 stratixii_pll.inc
 6797ab505ed70f1a221e4a213e16a6
+stratix_pll.inc
+a9a94c5be18105f7ae8c218a67ec9f7
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+cycloneii_pll.inc
+c2ee779f89b3bc181df753ea85b3ef
 }
 # hierarchies {
 sdram_pll2:unew|altpll:altpll_component
@@ -2464,7 +2332,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2500,7 +2368,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2536,7 +2404,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2572,7 +2440,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2608,7 +2476,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2644,7 +2512,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2716,7 +2584,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2790,11 +2658,11 @@ WIDTH_A
 PARAMETER_SIGNED_DEC
 USR
 WIDTHAD_A
-10
+9
 PARAMETER_SIGNED_DEC
 USR
 NUMWORDS_A
-1024
+512
 PARAMETER_SIGNED_DEC
 USR
 OUTDATA_REG_A
@@ -2826,11 +2694,11 @@ WIDTH_B
 PARAMETER_SIGNED_DEC
 USR
 WIDTHAD_B
-10
+9
 PARAMETER_SIGNED_DEC
 USR
 NUMWORDS_B
-1024
+512
 PARAMETER_SIGNED_DEC
 USR
 INDATA_REG_B
@@ -2958,7 +2826,7 @@ Cyclone II
 PARAMETER_UNKNOWN
 USR
 CBXI_PARAMETER
-altsyncram_qed1
+altsyncram_c9d1
 PARAMETER_UNKNOWN
 USR
 }
@@ -2988,18 +2856,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -3010,14 +2878,14 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_data_mod
 
 # end
 # entity
-altsyncram_qed1
+altsyncram_c9d1
 # storage
 db|DE2_D5M.(24).cnf
 db|DE2_D5M.(24).cnf
 # case_insensitive
 # source_file
-db|altsyncram_qed1.tdf
-783f231278aea585ffab68ad16364d
+db|altsyncram_c9d1.tdf
+a451e7e831ee2861c4f55db77633bb1
 7
 # used_port {
 wren_a
@@ -3221,9 +3089,6 @@ data_a0
 clock0
 -1
 3
-address_b9
--1
-3
 address_b8
 -1
 3
@@ -3249,9 +3114,6 @@ address_b1
 -1
 3
 address_b0
--1
-3
-address_a9
 -1
 3
 address_a8
@@ -3283,7 +3145,7 @@ address_a0
 3
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_data_module:cpu_0_ic_data|altsyncram:the_altsyncram|altsyncram_qed1:auto_generated
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_data_module:cpu_0_ic_data|altsyncram:the_altsyncram|altsyncram_c9d1:auto_generated
 }
 # macro_sequence
 
@@ -3300,7 +3162,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -3370,15 +3232,15 @@ DUAL_PORT
 PARAMETER_UNKNOWN
 USR
 WIDTH_A
-21
+22
 PARAMETER_SIGNED_DEC
 USR
 WIDTHAD_A
-7
+6
 PARAMETER_SIGNED_DEC
 USR
 NUMWORDS_A
-128
+64
 PARAMETER_SIGNED_DEC
 USR
 OUTDATA_REG_A
@@ -3406,15 +3268,15 @@ NONE
 PARAMETER_UNKNOWN
 DEF
 WIDTH_B
-21
+22
 PARAMETER_SIGNED_DEC
 USR
 WIDTHAD_B
-7
+6
 PARAMETER_SIGNED_DEC
 USR
 NUMWORDS_B
-128
+64
 PARAMETER_SIGNED_DEC
 USR
 INDATA_REG_B
@@ -3542,7 +3404,7 @@ Cyclone II
 PARAMETER_UNKNOWN
 USR
 CBXI_PARAMETER
-altsyncram_d5g1
+altsyncram_b2g1
 PARAMETER_UNKNOWN
 USR
 }
@@ -3572,18 +3434,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -3594,14 +3456,14 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_tag_modu
 
 # end
 # entity
-altsyncram_d5g1
+altsyncram_b2g1
 # storage
 db|DE2_D5M.(27).cnf
 db|DE2_D5M.(27).cnf
 # case_insensitive
 # source_file
-db|altsyncram_d5g1.tdf
-c26d9d1ff495fb96bec594d84682ce7
+db|altsyncram_b2g1.tdf
+2990cae7cf29c33d948bcfe61084a495
 7
 # used_port {
 wren_a
@@ -3629,6 +3491,9 @@ q_b4
 -1
 3
 q_b3
+-1
+3
+q_b21
 -1
 3
 q_b20
@@ -3694,6 +3559,9 @@ data_a4
 data_a3
 -1
 3
+data_a21
+-1
+3
 data_a20
 -1
 3
@@ -3739,9 +3607,6 @@ data_a0
 clock0
 -1
 3
-address_b6
--1
-3
 address_b5
 -1
 3
@@ -3758,9 +3623,6 @@ address_b1
 -1
 3
 address_b0
--1
-3
-address_a6
 -1
 3
 address_a5
@@ -3784,10 +3646,10 @@ address_a0
 }
 # memory_file {
 cpu_0_ic_tag_ram.mif
-f34b4a525ba8179be2384d8a7806580
+b07defd9fbea53e98718b18a59dcf
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_tag_module:cpu_0_ic_tag|altsyncram:the_altsyncram|altsyncram_d5g1:auto_generated
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_ic_tag_module:cpu_0_ic_tag|altsyncram:the_altsyncram|altsyncram_b2g1:auto_generated
 }
 # macro_sequence
 
@@ -3804,7 +3666,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -4076,18 +3938,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -4180,7 +4042,7 @@ address_a0
 }
 # memory_file {
 cpu_0_bht_ram.mif
-def5dad3df639851de8d78ef17df4f2e
+e8b47733fe3ed86551be0239a29e3ae
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_bht_module:cpu_0_bht|altsyncram:the_altsyncram|altsyncram_8pf1:auto_generated
@@ -4200,7 +4062,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -4469,18 +4331,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -4752,7 +4614,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -5021,18 +4883,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -5304,7 +5166,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -5374,15 +5236,15 @@ DUAL_PORT
 PARAMETER_UNKNOWN
 USR
 WIDTH_A
-16
+14
 PARAMETER_SIGNED_DEC
 USR
 WIDTHAD_A
-6
+8
 PARAMETER_SIGNED_DEC
 USR
 NUMWORDS_A
-64
+256
 PARAMETER_SIGNED_DEC
 USR
 OUTDATA_REG_A
@@ -5410,15 +5272,15 @@ NONE
 PARAMETER_UNKNOWN
 DEF
 WIDTH_B
-16
+14
 PARAMETER_SIGNED_DEC
 USR
 WIDTHAD_B
-6
+8
 PARAMETER_SIGNED_DEC
 USR
 NUMWORDS_B
-64
+256
 PARAMETER_SIGNED_DEC
 USR
 INDATA_REG_B
@@ -5546,7 +5408,7 @@ Cyclone II
 PARAMETER_UNKNOWN
 USR
 CBXI_PARAMETER
-altsyncram_2ef1
+altsyncram_8hf1
 PARAMETER_UNKNOWN
 USR
 }
@@ -5573,18 +5435,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -5595,14 +5457,14 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_tag_modu
 
 # end
 # entity
-altsyncram_2ef1
+altsyncram_8hf1
 # storage
 db|DE2_D5M.(39).cnf
 db|DE2_D5M.(39).cnf
 # case_insensitive
 # source_file
-db|altsyncram_2ef1.tdf
-e9b48ab58ea8213217f5a0e9f57287e3
+db|altsyncram_8hf1.tdf
+a5e09abf64551ff9e444c4121fc6e3b
 7
 # used_port {
 wren_a
@@ -5630,12 +5492,6 @@ q_b3
 -1
 3
 q_b2
--1
-3
-q_b15
--1
-3
-q_b14
 -1
 3
 q_b13
@@ -5680,12 +5536,6 @@ data_a3
 data_a2
 -1
 3
-data_a15
--1
-3
-data_a14
--1
-3
 data_a13
 -1
 3
@@ -5707,6 +5557,12 @@ data_a0
 clock0
 -1
 3
+address_b7
+-1
+3
+address_b6
+-1
+3
 address_b5
 -1
 3
@@ -5723,6 +5579,12 @@ address_b1
 -1
 3
 address_b0
+-1
+3
+address_a7
+-1
+3
+address_a6
 -1
 3
 address_a5
@@ -5746,10 +5608,10 @@ address_a0
 }
 # memory_file {
 cpu_0_dc_tag_ram.mif
-1494b56d5ed9d7e41cf613cea782cd83
+79a6fcbf741e309781f13aa6b0d6bbc8
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_tag_module:cpu_0_dc_tag|altsyncram:the_altsyncram|altsyncram_2ef1:auto_generated
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_tag_module:cpu_0_dc_tag|altsyncram:the_altsyncram|altsyncram_8hf1:auto_generated
 }
 # macro_sequence
 
@@ -5766,7 +5628,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -5840,11 +5702,11 @@ WIDTH_A
 PARAMETER_SIGNED_DEC
 USR
 WIDTHAD_A
-9
+11
 PARAMETER_SIGNED_DEC
 USR
 NUMWORDS_A
-512
+2048
 PARAMETER_SIGNED_DEC
 USR
 OUTDATA_REG_A
@@ -5876,11 +5738,11 @@ WIDTH_B
 PARAMETER_SIGNED_DEC
 USR
 WIDTHAD_B
-9
+11
 PARAMETER_SIGNED_DEC
 USR
 NUMWORDS_B
-512
+2048
 PARAMETER_SIGNED_DEC
 USR
 INDATA_REG_B
@@ -6008,7 +5870,7 @@ Cyclone II
 PARAMETER_UNKNOWN
 USR
 CBXI_PARAMETER
-altsyncram_29f1
+altsyncram_0ff1
 PARAMETER_UNKNOWN
 USR
 }
@@ -6038,18 +5900,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -6060,14 +5922,14 @@ niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_data_mod
 
 # end
 # entity
-altsyncram_29f1
+altsyncram_0ff1
 # storage
 db|DE2_D5M.(42).cnf
 db|DE2_D5M.(42).cnf
 # case_insensitive
 # source_file
-db|altsyncram_29f1.tdf
-97ca1a7eec723cd98ed3faa5275f1329
+db|altsyncram_0ff1.tdf
+24fdd6bd7819423aaa0aebe31290ae
 7
 # used_port {
 wren_a
@@ -6280,6 +6142,9 @@ byteena_a1
 byteena_a0
 -1
 3
+address_b9
+-1
+3
 address_b8
 -1
 3
@@ -6301,10 +6166,16 @@ address_b3
 address_b2
 -1
 3
+address_b10
+-1
+3
 address_b1
 -1
 3
 address_b0
+-1
+3
+address_a9
 -1
 3
 address_a8
@@ -6328,6 +6199,9 @@ address_a3
 address_a2
 -1
 3
+address_a10
+-1
+3
 address_a1
 -1
 3
@@ -6336,7 +6210,7 @@ address_a0
 3
 }
 # hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_data_module:cpu_0_dc_data|altsyncram:the_altsyncram|altsyncram_29f1:auto_generated
+niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_dc_data_module:cpu_0_dc_data|altsyncram:the_altsyncram|altsyncram_0ff1:auto_generated
 }
 # macro_sequence
 
@@ -6353,7 +6227,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -6625,18 +6499,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -7808,10 +7682,10 @@ ena0
 2
 }
 # include_file {
-stratix_mac_out.inc
-9ac89b9d6c98d3e379f29a56f74933
 stratix_mac_mult.inc
 39994655f1ee0a1246f2c1a60bc98e4
+stratix_mac_out.inc
+9ac89b9d6c98d3e379f29a56f74933
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
 }
@@ -9384,10 +9258,10 @@ ena0
 2
 }
 # include_file {
-stratix_mac_out.inc
-9ac89b9d6c98d3e379f29a56f74933
 stratix_mac_mult.inc
 39994655f1ee0a1246f2c1a60bc98e4
+stratix_mac_out.inc
+9ac89b9d6c98d3e379f29a56f74933
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
 }
@@ -9577,7 +9451,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -9613,7 +9487,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -9649,7 +9523,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -9685,7 +9559,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -9975,18 +9849,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -10472,7 +10346,7 @@ address_a0
 }
 # memory_file {
 cpu_0_ociram_default_contents.mif
-b2e0932570f3df27fda2242f376f974d
+1a91a9dd4afc2749de67195ddb47ade
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0:the_cpu_0|cpu_0_nios2_oci:the_cpu_0_nios2_oci|cpu_0_nios2_ocimem:the_cpu_0_nios2_ocimem|cpu_0_ociram_lpm_dram_bdp_component_module:cpu_0_ociram_lpm_dram_bdp_component|altsyncram:the_altsyncram|altsyncram_c572:auto_generated
@@ -10492,7 +10366,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10528,7 +10402,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10564,7 +10438,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10600,7 +10474,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10636,7 +10510,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10672,7 +10546,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10708,7 +10582,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10744,7 +10618,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10780,7 +10654,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10816,7 +10690,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10852,7 +10726,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10924,7 +10798,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10960,7 +10834,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -10996,7 +10870,7 @@ ON
 # case_sensitive
 # source_file
 cpu_0.v
-b9fcf49a2214c63b9b1af9ed5127d15
+8857efe3afbcf777259b34e83e337da
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -11283,18 +11157,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -12135,7 +12009,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -12423,16 +12297,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_add_sub:exp_add_adder
@@ -12656,16 +12530,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_add_sub:exp_adj_adder
@@ -12886,16 +12760,16 @@ dataa
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_add_sub:exp_bias_subtr
@@ -13113,16 +12987,16 @@ dataa
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_add_sub:man_round_adder
@@ -13514,12 +13388,12 @@ bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
-multcore.inc
-ee598ea39a3d6bdc35b167eefc3ee3da
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
+multcore.inc
+ee598ea39a3d6bdc35b167eefc3ee3da
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_mult_single:the_fp_mult|lpm_mult:man_product2_mult
@@ -14753,16 +14627,16 @@ aclr
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:add_sub1
@@ -14984,16 +14858,16 @@ dataa
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:add_sub3
@@ -15175,16 +15049,16 @@ dataa
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:add_sub4
@@ -15404,16 +15278,16 @@ aclr
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:add_sub5
@@ -15649,16 +15523,16 @@ aclr
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_2comp_res_lower
@@ -15947,16 +15821,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_2comp_res_upper0
@@ -16244,16 +16118,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_2comp_res_upper1
@@ -16367,16 +16241,16 @@ cout
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_res_rounding_add_sub_lower
@@ -16627,16 +16501,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_add_sub:man_res_rounding_add_sub_upper1
@@ -16868,10 +16742,10 @@ agb
 # include_file {
 comptree.inc
 17f2438ef7f3db194fa362eabd6d61a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_addsub_single:the_fp_addsub|lpm_compare:trailing_zeros_limit_comparator
@@ -17116,16 +16990,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_csa_vhf:altfp_div_csa8|lpm_add_sub:csa_lower
@@ -17374,16 +17248,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_csa_vhf:altfp_div_csa8|lpm_add_sub:csa_upper1
@@ -17568,16 +17442,16 @@ cout
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_mke:altfp_div_csa25|lpm_add_sub:csa_lower
@@ -17819,16 +17693,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_mke:altfp_div_csa25|lpm_add_sub:csa_upper0
@@ -18071,16 +17945,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_mke:altfp_div_csa25|lpm_add_sub:csa_upper1
@@ -18238,16 +18112,16 @@ aclr
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_2jh:altfp_div_csa26|lpm_add_sub:csa_lower
@@ -18525,16 +18399,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_2jh:altfp_div_csa26|lpm_add_sub:csa_upper0
@@ -18813,16 +18687,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_2jh:altfp_div_csa26|lpm_add_sub:csa_upper1
@@ -18971,16 +18845,16 @@ cout
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_rle:altfp_div_csa27|lpm_add_sub:csa_lower
@@ -19296,16 +19170,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_rle:altfp_div_csa27|lpm_add_sub:csa_upper0
@@ -19566,16 +19440,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_altfp_div_csa_rle:altfp_div_csa27|lpm_add_sub:csa_upper1
@@ -19787,16 +19661,16 @@ cout
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_pke:altfp_div_csa29|lpm_add_sub:csa_lower
@@ -20110,16 +19984,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_pke:altfp_div_csa29|lpm_add_sub:csa_upper0
@@ -20452,16 +20326,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_pke:altfp_div_csa29|lpm_add_sub:csa_upper1
@@ -20664,16 +20538,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_qle:altfp_div_csa31|lpm_add_sub:csa_upper0
@@ -21006,16 +20880,16 @@ cin
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_altfp_div_csa_qle:altfp_div_csa31|lpm_add_sub:csa_upper1
@@ -21116,12 +20990,12 @@ data
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 muxlut.inc
 301e88484af1e8d67bcd099bb975882
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|lpm_mux:mux33
@@ -21977,10 +21851,10 @@ aleb
 # include_file {
 comptree.inc
 17f2438ef7f3db194fa362eabd6d61a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_qds_block_mab:qds_block28|lpm_compare:cmpr35
@@ -22239,12 +22113,12 @@ data
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 muxlut.inc
 301e88484af1e8d67bcd099bb975882
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_02n:srt_block_int11|fpoint_hw_qsys_div_single_qds_block_mab:qds_block28|lpm_mux:mux34
@@ -24137,12 +24011,12 @@ data
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 muxlut.inc
 301e88484af1e8d67bcd099bb975882
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|fpoint_hw_qsys_div_single_altfp_div_srt_ext_5mh:altfp_div_srt_ext1|fpoint_hw_qsys_div_single_srt_block_int_fum:srt_block_int24|lpm_mux:mux55
@@ -25011,16 +24885,16 @@ dataa
 # include_file {
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 addcore.inc
 e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|lpm_add_sub:add_sub10
@@ -25219,10 +25093,10 @@ datab
 # include_file {
 comptree.inc
 17f2438ef7f3db194fa362eabd6d61a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|lpm_compare:cmpr2
@@ -25385,10 +25259,10 @@ datab
 # include_file {
 comptree.inc
 17f2438ef7f3db194fa362eabd6d61a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|lpm_compare:cmpr3
@@ -25548,10 +25422,10 @@ dataa
 # include_file {
 comptree.inc
 17f2438ef7f3db194fa362eabd6d61a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|lpm_compare:cmpr4
@@ -25708,10 +25582,10 @@ dataa
 # include_file {
 comptree.inc
 17f2438ef7f3db194fa362eabd6d61a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|lpm_compare:cmpr5
@@ -25868,10 +25742,10 @@ datab
 # include_file {
 comptree.inc
 17f2438ef7f3db194fa362eabd6d61a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|lpm_compare:cmpr6
@@ -26070,10 +25944,10 @@ dataa
 # include_file {
 comptree.inc
 17f2438ef7f3db194fa362eabd6d61a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|cpu_0_altera_nios_custom_instr_floating_point_inst:the_cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_wrapper:cpu_0_altera_nios_custom_instr_floating_point_inst|fpoint_hw_qsys:fpoint_instance|fpoint_hw_qsys_div_single:the_fp_div|lpm_compare:cmpr7
@@ -26195,7 +26069,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -26411,16 +26285,16 @@ aclr
 # include_file {
 a_dpfifo.inc
 37c2d0bb70d5a3f83a4aa09e62c75080
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
 a_regfifo.inc
 8b2977668c8752c10a1f1977c9b9ee6
 a_i2fifo.inc
 bfe272f05af0cf849bd8b4748efceffe
-a_fffifo.inc
-aa34dd3c645beefc31a3e4ef186db4
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 a_f2fifo.inc
 cebe3836bad826c95e765f77477e8a8b
+a_fffifo.inc
+aa34dd3c645beefc31a3e4ef186db4
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|jtag_uart_0:the_jtag_uart_0|jtag_uart_0_scfifo_w:the_jtag_uart_0_scfifo_w|scfifo:wfifo
@@ -27153,7 +27027,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27189,7 +27063,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27225,7 +27099,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27261,7 +27135,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27333,7 +27207,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27369,7 +27243,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27405,7 +27279,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27441,7 +27315,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27513,7 +27387,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27549,7 +27423,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27585,7 +27459,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27621,7 +27495,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27693,7 +27567,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27729,7 +27603,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27765,7 +27639,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27801,7 +27675,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27873,7 +27747,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27909,7 +27783,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27945,7 +27819,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -27981,7 +27855,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28053,7 +27927,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28089,7 +27963,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28125,7 +27999,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28161,7 +28035,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28233,7 +28107,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28269,7 +28143,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28305,7 +28179,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28341,7 +28215,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28413,7 +28287,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28449,7 +28323,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28485,7 +28359,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28521,7 +28395,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28593,7 +28467,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28629,7 +28503,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28848,7 +28722,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -28884,7 +28758,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -29103,7 +28977,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -29411,18 +29285,18 @@ address_a
 # include_file {
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_decode.inc
-10da69a8bbd590d66779e7a142f73790
-a_rdenreg.inc
-3fcdce755959d5a8afbe64788d21fb
-altram.inc
-ad5518b39ffd3cf1df377e6360d1c9b6
 stratix_ram_block.inc
 e3a03868917fb3dd57b6ed1dd195f22
 lpm_mux.inc
 dd87bed9959d6126db09970164b7ba6
+a_rdenreg.inc
+3fcdce755959d5a8afbe64788d21fb
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+lpm_decode.inc
+10da69a8bbd590d66779e7a142f73790
+altram.inc
+ad5518b39ffd3cf1df377e6360d1c9b6
 altrom.inc
 192b74eafa8debf2248ea73881e77f91
 }
@@ -29715,7 +29589,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -29787,7 +29661,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -29823,7 +29697,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -29859,7 +29733,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -29967,7 +29841,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -29987,42 +29861,6 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|sram_16bit_512k_0_avalon_slave_0_arbitrator:the_sram_16bit_512k_0_avalon_slave_0
-}
-# macro_sequence
-
-# end
-# entity
-sram_16bit_512k_0
-# storage
-db|DE2_D5M.(277).cnf
-db|DE2_D5M.(277).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sram_16bit_512k_0.v
-58fb618365e5ae4c998cf487154c94e
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-niosSystemCamControl:niosSystemCamControl_inst|sram_16bit_512k_0:the_sram_16bit_512k_0
 }
 # macro_sequence
 
@@ -30075,7 +29913,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -30111,7 +29949,7 @@ ON
 # case_sensitive
 # source_file
 sysid.v
-637955cfd6aff5655fb39a446fc1108
+eb6876549d8575e2d2dc6d7988c6124d
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -30147,7 +29985,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -30183,7 +30021,7 @@ ON
 # case_sensitive
 # source_file
 timer_0.v
-acb183e236c064b3f894f5ca3ee8d892
+ec6acd5f6ad3aa36d9f24a9390302c
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -30219,7 +30057,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -30255,7 +30093,7 @@ ON
 # case_sensitive
 # source_file
 niossystemcamcontrol.v
-1551e7d61d95f756aade036dd161681
+5cd49579df21f6531ca2a7bb9d1248f
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -30278,151 +30116,6 @@ niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_reset_clk_1_
 }
 # macro_sequence
 
-# end
-# entity
-Sdram_Arbiter
-# storage
-db|DE2_D5M.(285).cnf
-db|DE2_D5M.(285).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|sdram_arbiter.v
-f5ff5e44b69f9647d1fcf41e1a8c5ae
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-State_CamHasControl
-000
-PARAMETER_UNSIGNED_BIN
-DEF
-State_CamNOP
-001
-PARAMETER_UNSIGNED_BIN
-DEF
-State_LoadNiosMode
-010
-PARAMETER_UNSIGNED_BIN
-DEF
-State_LoadCamMode
-011
-PARAMETER_UNSIGNED_BIN
-DEF
-State_NiosNOP
-100
-PARAMETER_UNSIGNED_BIN
-DEF
-State_NiosHasControl
-101
-PARAMETER_UNSIGNED_BIN
-DEF
-}
-# hierarchies {
-Sdram_Arbiter:sdramArbiter0
-}
-# macro_sequence
-
-# end
-# entity
-Sdram_Control_4Port
-# storage
-db|DE2_D5M.(286).cnf
-db|DE2_D5M.(286).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sdram_control_4port|sdram_control_4port.v
-14d0775e0e14112837d94f49a1e374b
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-INIT_PER
-24000
-PARAMETER_SIGNED_DEC
-DEF
-REF_PER
-1024
-PARAMETER_SIGNED_DEC
-DEF
-SC_CL
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RCD
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RRD
-7
-PARAMETER_SIGNED_DEC
-DEF
-SC_PM
-1
-PARAMETER_SIGNED_DEC
-DEF
-SC_BL
-1
-PARAMETER_SIGNED_DEC
-DEF
-SDR_BL
-111
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_BT
-0
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_CL
-011
-PARAMETER_UNSIGNED_BIN
-DEF
-}
-# include_file {
-sdram_control_4port|sdram_params.h
-625599f965a889cf34497649a6d284d8
-}
-# hierarchies {
-Sdram_Control_4Port:u7
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7
-}
-# macro_sequence
-DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      ASIZE23      DSIZE16      
 # end
 # entity
 control_interface
@@ -30499,10 +30192,6 @@ DEF
 # include_file {
 sdram_control_4port|sdram_params.h
 625599f965a889cf34497649a6d284d8
-}
-# hierarchies {
-Sdram_Control_4Port:u7|control_interface:control1
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|control_interface:control1
 }
 # macro_sequence
 ASIZE23      ASIZE23      ASIZE23      
@@ -30583,10 +30272,6 @@ DEF
 sdram_control_4port|sdram_params.h
 625599f965a889cf34497649a6d284d8
 }
-# hierarchies {
-Sdram_Control_4Port:u7|command:command1
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|command:command1
-}
 # macro_sequence
 ASIZE23      ROWSIZE12COLSIZE8BANKSIZE2ROWSTART8          ROWSIZE12ROWSTART8          COLSTART0COLSIZE8COLSTART0BANKSTART20BANKSIZE2BANKSTART20ASIZE23      ASIZE23      
 # end
@@ -30665,10 +30350,6 @@ DEF
 # include_file {
 sdram_control_4port|sdram_params.h
 625599f965a889cf34497649a6d284d8
-}
-# hierarchies {
-Sdram_Control_4Port:u7|sdr_data_path:data_path1
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|sdr_data_path:data_path1
 }
 # macro_sequence
 DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      
@@ -30856,28 +30537,28 @@ aclr
 3
 }
 # include_file {
-a_fefifo.inc
-5a44f50e786a1d286adceb22796b9f
-altsyncram_fifo.inc
-4b2b21790828dd59a04a16f08af58b
-dffpipe.inc
-5471cd80ee441dd293deca0963c9aa0
 altdpram.inc
 2f9e6727b678ffd76e72bc5a95a2630
-lpm_add_sub.inc
-144a73b61081a2a03554ff5acc5e8842
-a_gray2bin.inc
-7e4b761bbeb1a382a47a2f89c3e13e
-a_graycounter.inc
-c8eabdd6f8e7d384595a15fec505aa8
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-alt_sync_fifo.inc
-a019bef5b1e7379dfab915daa2a6c4
-lpm_counter.inc
-c5cfeeabc5f2ab60b3453f6abbc42b41
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+alt_sync_fifo.inc
+a019bef5b1e7379dfab915daa2a6c4
+dffpipe.inc
+5471cd80ee441dd293deca0963c9aa0
+lpm_add_sub.inc
+144a73b61081a2a03554ff5acc5e8842
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+a_graycounter.inc
+c8eabdd6f8e7d384595a15fec505aa8
+altsyncram_fifo.inc
+4b2b21790828dd59a04a16f08af58b
+a_gray2bin.inc
+7e4b761bbeb1a382a47a2f89c3e13e
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+a_fefifo.inc
+5a44f50e786a1d286adceb22796b9f
 }
 # hierarchies {
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component
@@ -32497,8 +32178,8 @@ HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:d
 # entity
 I2C_Controller
 # storage
-db|DE2_D5M.(309).cnf
-db|DE2_D5M.(309).cnf
+db|DE2_D5M.(308).cnf
+db|DE2_D5M.(308).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -32531,10 +32212,46 @@ I2C_CCD_Config:u8|I2C_Controller:u0
 
 # end
 # entity
+sram_16bit_512k_0
+# storage
+db|DE2_D5M.(277).cnf
+db|DE2_D5M.(277).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sram_16bit_512k_0.v
+e445601ccb78eed463755bdd3a94061
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+niosSystemCamControl:niosSystemCamControl_inst|sram_16bit_512k_0:the_sram_16bit_512k_0
+}
+# macro_sequence
+
+# end
+# entity
 sld_hub
 # storage
-db|DE2_D5M.(310).cnf
-db|DE2_D5M.(310).cnf
+db|DE2_D5M.(309).cnf
+db|DE2_D5M.(309).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -32608,8 +32325,8 @@ DEF
 # entity
 sld_shadow_jsm
 # storage
-db|DE2_D5M.(311).cnf
-db|DE2_D5M.(311).cnf
+db|DE2_D5M.(310).cnf
+db|DE2_D5M.(310).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -32655,8 +32372,8 @@ USR
 # entity
 sld_rom_sr
 # storage
-db|DE2_D5M.(312).cnf
-db|DE2_D5M.(312).cnf
+db|DE2_D5M.(311).cnf
+db|DE2_D5M.(311).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -32702,8 +32419,8 @@ USR
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(313).cnf
-db|DE2_D5M.(313).cnf
+db|DE2_D5M.(312).cnf
+db|DE2_D5M.(312).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -33041,14 +32758,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -33056,8 +32773,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_f1n
 # storage
-db|DE2_D5M.(314).cnf
-db|DE2_D5M.(314).cnf
+db|DE2_D5M.(313).cnf
+db|DE2_D5M.(313).cnf
 # case_insensitive
 # source_file
 db|shift_taps_f1n.tdf
@@ -33374,8 +33091,8 @@ aclr
 # entity
 altsyncram_r461
 # storage
-db|DE2_D5M.(315).cnf
-db|DE2_D5M.(315).cnf
+db|DE2_D5M.(314).cnf
+db|DE2_D5M.(314).cnf
 # case_insensitive
 # source_file
 db|altsyncram_r461.tdf
@@ -33713,8 +33430,8 @@ wren_a
 # entity
 add_sub_gvd
 # storage
-db|DE2_D5M.(316).cnf
-db|DE2_D5M.(316).cnf
+db|DE2_D5M.(315).cnf
+db|DE2_D5M.(315).cnf
 # case_insensitive
 # source_file
 db|add_sub_gvd.tdf
@@ -33746,8 +33463,8 @@ datab0
 # entity
 cntr_kkf
 # storage
-db|DE2_D5M.(317).cnf
-db|DE2_D5M.(317).cnf
+db|DE2_D5M.(316).cnf
+db|DE2_D5M.(316).cnf
 # case_insensitive
 # source_file
 db|cntr_kkf.tdf
@@ -33773,8 +33490,8 @@ clk_en
 # entity
 cmpr_6cc
 # storage
-db|DE2_D5M.(318).cnf
-db|DE2_D5M.(318).cnf
+db|DE2_D5M.(317).cnf
+db|DE2_D5M.(317).cnf
 # case_insensitive
 # source_file
 db|cmpr_6cc.tdf
@@ -33803,8 +33520,8 @@ datab1
 # entity
 cntr_74h
 # storage
-db|DE2_D5M.(319).cnf
-db|DE2_D5M.(319).cnf
+db|DE2_D5M.(318).cnf
+db|DE2_D5M.(318).cnf
 # case_insensitive
 # source_file
 db|cntr_74h.tdf
@@ -33833,8 +33550,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(320).cnf
-db|DE2_D5M.(320).cnf
+db|DE2_D5M.(319).cnf
+db|DE2_D5M.(319).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -33914,14 +33631,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -33929,8 +33646,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_rvm
 # storage
-db|DE2_D5M.(321).cnf
-db|DE2_D5M.(321).cnf
+db|DE2_D5M.(320).cnf
+db|DE2_D5M.(320).cnf
 # case_insensitive
 # source_file
 db|shift_taps_rvm.tdf
@@ -33989,8 +33706,8 @@ aclr
 # entity
 altsyncram_eqa1
 # storage
-db|DE2_D5M.(322).cnf
-db|DE2_D5M.(322).cnf
+db|DE2_D5M.(321).cnf
+db|DE2_D5M.(321).cnf
 # case_insensitive
 # source_file
 db|altsyncram_eqa1.tdf
@@ -34064,8 +33781,8 @@ wren_a
 # entity
 cntr_lkf
 # storage
-db|DE2_D5M.(323).cnf
-db|DE2_D5M.(323).cnf
+db|DE2_D5M.(322).cnf
+db|DE2_D5M.(322).cnf
 # case_insensitive
 # source_file
 db|cntr_lkf.tdf
@@ -34091,8 +33808,8 @@ clk_en
 # entity
 cntr_c4h
 # storage
-db|DE2_D5M.(324).cnf
-db|DE2_D5M.(324).cnf
+db|DE2_D5M.(323).cnf
+db|DE2_D5M.(323).cnf
 # case_insensitive
 # source_file
 db|cntr_c4h.tdf
@@ -34121,8 +33838,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(325).cnf
-db|DE2_D5M.(325).cnf
+db|DE2_D5M.(324).cnf
+db|DE2_D5M.(324).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -34202,14 +33919,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -34217,8 +33934,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_tvm
 # storage
-db|DE2_D5M.(326).cnf
-db|DE2_D5M.(326).cnf
+db|DE2_D5M.(325).cnf
+db|DE2_D5M.(325).cnf
 # case_insensitive
 # source_file
 db|shift_taps_tvm.tdf
@@ -34277,8 +33994,8 @@ aclr
 # entity
 altsyncram_kqa1
 # storage
-db|DE2_D5M.(327).cnf
-db|DE2_D5M.(327).cnf
+db|DE2_D5M.(326).cnf
+db|DE2_D5M.(326).cnf
 # case_insensitive
 # source_file
 db|altsyncram_kqa1.tdf
@@ -34358,8 +34075,8 @@ wren_a
 # entity
 cntr_okf
 # storage
-db|DE2_D5M.(328).cnf
-db|DE2_D5M.(328).cnf
+db|DE2_D5M.(327).cnf
+db|DE2_D5M.(327).cnf
 # case_insensitive
 # source_file
 db|cntr_okf.tdf
@@ -34388,8 +34105,8 @@ clk_en
 # entity
 cmpr_7cc
 # storage
-db|DE2_D5M.(329).cnf
-db|DE2_D5M.(329).cnf
+db|DE2_D5M.(328).cnf
+db|DE2_D5M.(328).cnf
 # case_insensitive
 # source_file
 db|cmpr_7cc.tdf
@@ -34424,8 +34141,8 @@ datab0
 # entity
 cntr_e4h
 # storage
-db|DE2_D5M.(330).cnf
-db|DE2_D5M.(330).cnf
+db|DE2_D5M.(329).cnf
+db|DE2_D5M.(329).cnf
 # case_insensitive
 # source_file
 db|cntr_e4h.tdf
@@ -34454,8 +34171,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(331).cnf
-db|DE2_D5M.(331).cnf
+db|DE2_D5M.(330).cnf
+db|DE2_D5M.(330).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -34523,14 +34240,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -34538,8 +34255,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_41n
 # storage
-db|DE2_D5M.(332).cnf
-db|DE2_D5M.(332).cnf
+db|DE2_D5M.(331).cnf
+db|DE2_D5M.(331).cnf
 # case_insensitive
 # source_file
 db|shift_taps_41n.tdf
@@ -34586,8 +34303,8 @@ aclr
 # entity
 altsyncram_lqa1
 # storage
-db|DE2_D5M.(333).cnf
-db|DE2_D5M.(333).cnf
+db|DE2_D5M.(332).cnf
+db|DE2_D5M.(332).cnf
 # case_insensitive
 # source_file
 db|altsyncram_lqa1.tdf
@@ -34655,8 +34372,8 @@ wren_a
 # entity
 cntr_qkf
 # storage
-db|DE2_D5M.(334).cnf
-db|DE2_D5M.(334).cnf
+db|DE2_D5M.(333).cnf
+db|DE2_D5M.(333).cnf
 # case_insensitive
 # source_file
 db|cntr_qkf.tdf
@@ -34685,8 +34402,8 @@ clk_en
 # entity
 cntr_h4h
 # storage
-db|DE2_D5M.(335).cnf
-db|DE2_D5M.(335).cnf
+db|DE2_D5M.(334).cnf
+db|DE2_D5M.(334).cnf
 # case_insensitive
 # source_file
 db|cntr_h4h.tdf
@@ -34715,8 +34432,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(336).cnf
-db|DE2_D5M.(336).cnf
+db|DE2_D5M.(335).cnf
+db|DE2_D5M.(335).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -34778,14 +34495,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -34793,8 +34510,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_51n
 # storage
-db|DE2_D5M.(337).cnf
-db|DE2_D5M.(337).cnf
+db|DE2_D5M.(336).cnf
+db|DE2_D5M.(336).cnf
 # case_insensitive
 # source_file
 db|shift_taps_51n.tdf
@@ -34835,8 +34552,8 @@ aclr
 # entity
 altsyncram_6ta1
 # storage
-db|DE2_D5M.(338).cnf
-db|DE2_D5M.(338).cnf
+db|DE2_D5M.(337).cnf
+db|DE2_D5M.(337).cnf
 # case_insensitive
 # source_file
 db|altsyncram_6ta1.tdf
@@ -34904,8 +34621,8 @@ wren_a
 # entity
 cntr_4mf
 # storage
-db|DE2_D5M.(339).cnf
-db|DE2_D5M.(339).cnf
+db|DE2_D5M.(338).cnf
+db|DE2_D5M.(338).cnf
 # case_insensitive
 # source_file
 db|cntr_4mf.tdf
@@ -34937,8 +34654,8 @@ clk_en
 # entity
 cmpr_8cc
 # storage
-db|DE2_D5M.(340).cnf
-db|DE2_D5M.(340).cnf
+db|DE2_D5M.(339).cnf
+db|DE2_D5M.(339).cnf
 # case_insensitive
 # source_file
 db|cmpr_8cc.tdf
@@ -34979,8 +34696,8 @@ datab0
 # entity
 cntr_q5h
 # storage
-db|DE2_D5M.(341).cnf
-db|DE2_D5M.(341).cnf
+db|DE2_D5M.(340).cnf
+db|DE2_D5M.(340).cnf
 # case_insensitive
 # source_file
 db|cntr_q5h.tdf
@@ -35009,8 +34726,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(342).cnf
-db|DE2_D5M.(342).cnf
+db|DE2_D5M.(341).cnf
+db|DE2_D5M.(341).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -35072,14 +34789,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -35087,8 +34804,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_71n
 # storage
-db|DE2_D5M.(343).cnf
-db|DE2_D5M.(343).cnf
+db|DE2_D5M.(342).cnf
+db|DE2_D5M.(342).cnf
 # case_insensitive
 # source_file
 db|shift_taps_71n.tdf
@@ -35129,8 +34846,8 @@ aclr
 # entity
 altsyncram_ata1
 # storage
-db|DE2_D5M.(344).cnf
-db|DE2_D5M.(344).cnf
+db|DE2_D5M.(343).cnf
+db|DE2_D5M.(343).cnf
 # case_insensitive
 # source_file
 db|altsyncram_ata1.tdf
@@ -35198,8 +34915,8 @@ wren_a
 # entity
 cntr_6mf
 # storage
-db|DE2_D5M.(345).cnf
-db|DE2_D5M.(345).cnf
+db|DE2_D5M.(344).cnf
+db|DE2_D5M.(344).cnf
 # case_insensitive
 # source_file
 db|cntr_6mf.tdf
@@ -35231,8 +34948,8 @@ clk_en
 # entity
 cmpr_8cc
 # storage
-db|DE2_D5M.(346).cnf
-db|DE2_D5M.(346).cnf
+db|DE2_D5M.(345).cnf
+db|DE2_D5M.(345).cnf
 # case_insensitive
 # source_file
 db|cmpr_8cc.tdf
@@ -35273,8 +34990,8 @@ datab0
 # entity
 cntr_s5h
 # storage
-db|DE2_D5M.(347).cnf
-db|DE2_D5M.(347).cnf
+db|DE2_D5M.(346).cnf
+db|DE2_D5M.(346).cnf
 # case_insensitive
 # source_file
 db|cntr_s5h.tdf
@@ -35303,8 +35020,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(348).cnf
-db|DE2_D5M.(348).cnf
+db|DE2_D5M.(347).cnf
+db|DE2_D5M.(347).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -35366,14 +35083,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -35381,8 +35098,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_91n
 # storage
-db|DE2_D5M.(349).cnf
-db|DE2_D5M.(349).cnf
+db|DE2_D5M.(348).cnf
+db|DE2_D5M.(348).cnf
 # case_insensitive
 # source_file
 db|shift_taps_91n.tdf
@@ -35423,8 +35140,8 @@ aclr
 # entity
 altsyncram_eta1
 # storage
-db|DE2_D5M.(350).cnf
-db|DE2_D5M.(350).cnf
+db|DE2_D5M.(349).cnf
+db|DE2_D5M.(349).cnf
 # case_insensitive
 # source_file
 db|altsyncram_eta1.tdf
@@ -35492,8 +35209,8 @@ wren_a
 # entity
 cntr_8mf
 # storage
-db|DE2_D5M.(351).cnf
-db|DE2_D5M.(351).cnf
+db|DE2_D5M.(350).cnf
+db|DE2_D5M.(350).cnf
 # case_insensitive
 # source_file
 db|cntr_8mf.tdf
@@ -35525,8 +35242,8 @@ clk_en
 # entity
 cmpr_8cc
 # storage
-db|DE2_D5M.(352).cnf
-db|DE2_D5M.(352).cnf
+db|DE2_D5M.(351).cnf
+db|DE2_D5M.(351).cnf
 # case_insensitive
 # source_file
 db|cmpr_8cc.tdf
@@ -35567,8 +35284,8 @@ datab0
 # entity
 cntr_u5h
 # storage
-db|DE2_D5M.(353).cnf
-db|DE2_D5M.(353).cnf
+db|DE2_D5M.(352).cnf
+db|DE2_D5M.(352).cnf
 # case_insensitive
 # source_file
 db|cntr_u5h.tdf
@@ -35597,8 +35314,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(354).cnf
-db|DE2_D5M.(354).cnf
+db|DE2_D5M.(353).cnf
+db|DE2_D5M.(353).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -35660,14 +35377,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -35675,8 +35392,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_b1n
 # storage
-db|DE2_D5M.(355).cnf
-db|DE2_D5M.(355).cnf
+db|DE2_D5M.(354).cnf
+db|DE2_D5M.(354).cnf
 # case_insensitive
 # source_file
 db|shift_taps_b1n.tdf
@@ -35717,8 +35434,8 @@ aclr
 # entity
 altsyncram_ita1
 # storage
-db|DE2_D5M.(356).cnf
-db|DE2_D5M.(356).cnf
+db|DE2_D5M.(355).cnf
+db|DE2_D5M.(355).cnf
 # case_insensitive
 # source_file
 db|altsyncram_ita1.tdf
@@ -35786,8 +35503,8 @@ wren_a
 # entity
 cntr_amf
 # storage
-db|DE2_D5M.(357).cnf
-db|DE2_D5M.(357).cnf
+db|DE2_D5M.(356).cnf
+db|DE2_D5M.(356).cnf
 # case_insensitive
 # source_file
 db|cntr_amf.tdf
@@ -35819,8 +35536,8 @@ clk_en
 # entity
 cntr_16h
 # storage
-db|DE2_D5M.(358).cnf
-db|DE2_D5M.(358).cnf
+db|DE2_D5M.(357).cnf
+db|DE2_D5M.(357).cnf
 # case_insensitive
 # source_file
 db|cntr_16h.tdf
@@ -35849,8 +35566,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(359).cnf
-db|DE2_D5M.(359).cnf
+db|DE2_D5M.(358).cnf
+db|DE2_D5M.(358).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -35912,14 +35629,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -35927,8 +35644,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_61n
 # storage
-db|DE2_D5M.(360).cnf
-db|DE2_D5M.(360).cnf
+db|DE2_D5M.(359).cnf
+db|DE2_D5M.(359).cnf
 # case_insensitive
 # source_file
 db|shift_taps_61n.tdf
@@ -35969,8 +35686,8 @@ aclr
 # entity
 altsyncram_ota1
 # storage
-db|DE2_D5M.(361).cnf
-db|DE2_D5M.(361).cnf
+db|DE2_D5M.(360).cnf
+db|DE2_D5M.(360).cnf
 # case_insensitive
 # source_file
 db|altsyncram_ota1.tdf
@@ -36044,8 +35761,8 @@ wren_a
 # entity
 cntr_dmf
 # storage
-db|DE2_D5M.(362).cnf
-db|DE2_D5M.(362).cnf
+db|DE2_D5M.(361).cnf
+db|DE2_D5M.(361).cnf
 # case_insensitive
 # source_file
 db|cntr_dmf.tdf
@@ -36080,8 +35797,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(363).cnf
-db|DE2_D5M.(363).cnf
+db|DE2_D5M.(362).cnf
+db|DE2_D5M.(362).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -36128,8 +35845,8 @@ datab0
 # entity
 cntr_36h
 # storage
-db|DE2_D5M.(364).cnf
-db|DE2_D5M.(364).cnf
+db|DE2_D5M.(363).cnf
+db|DE2_D5M.(363).cnf
 # case_insensitive
 # source_file
 db|cntr_36h.tdf
@@ -36158,8 +35875,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(365).cnf
-db|DE2_D5M.(365).cnf
+db|DE2_D5M.(364).cnf
+db|DE2_D5M.(364).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -36221,14 +35938,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -36236,8 +35953,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_81n
 # storage
-db|DE2_D5M.(366).cnf
-db|DE2_D5M.(366).cnf
+db|DE2_D5M.(365).cnf
+db|DE2_D5M.(365).cnf
 # case_insensitive
 # source_file
 db|shift_taps_81n.tdf
@@ -36278,8 +35995,8 @@ aclr
 # entity
 altsyncram_bta1
 # storage
-db|DE2_D5M.(367).cnf
-db|DE2_D5M.(367).cnf
+db|DE2_D5M.(366).cnf
+db|DE2_D5M.(366).cnf
 # case_insensitive
 # source_file
 db|altsyncram_bta1.tdf
@@ -36353,8 +36070,8 @@ wren_a
 # entity
 cntr_7mf
 # storage
-db|DE2_D5M.(368).cnf
-db|DE2_D5M.(368).cnf
+db|DE2_D5M.(367).cnf
+db|DE2_D5M.(367).cnf
 # case_insensitive
 # source_file
 db|cntr_7mf.tdf
@@ -36389,8 +36106,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(369).cnf
-db|DE2_D5M.(369).cnf
+db|DE2_D5M.(368).cnf
+db|DE2_D5M.(368).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -36437,8 +36154,8 @@ datab0
 # entity
 cntr_t5h
 # storage
-db|DE2_D5M.(370).cnf
-db|DE2_D5M.(370).cnf
+db|DE2_D5M.(369).cnf
+db|DE2_D5M.(369).cnf
 # case_insensitive
 # source_file
 db|cntr_t5h.tdf
@@ -36467,8 +36184,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(371).cnf
-db|DE2_D5M.(371).cnf
+db|DE2_D5M.(370).cnf
+db|DE2_D5M.(370).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -36530,14 +36247,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -36545,8 +36262,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_a1n
 # storage
-db|DE2_D5M.(372).cnf
-db|DE2_D5M.(372).cnf
+db|DE2_D5M.(371).cnf
+db|DE2_D5M.(371).cnf
 # case_insensitive
 # source_file
 db|shift_taps_a1n.tdf
@@ -36587,8 +36304,8 @@ aclr
 # entity
 altsyncram_fta1
 # storage
-db|DE2_D5M.(373).cnf
-db|DE2_D5M.(373).cnf
+db|DE2_D5M.(372).cnf
+db|DE2_D5M.(372).cnf
 # case_insensitive
 # source_file
 db|altsyncram_fta1.tdf
@@ -36662,8 +36379,8 @@ wren_a
 # entity
 cntr_9mf
 # storage
-db|DE2_D5M.(374).cnf
-db|DE2_D5M.(374).cnf
+db|DE2_D5M.(373).cnf
+db|DE2_D5M.(373).cnf
 # case_insensitive
 # source_file
 db|cntr_9mf.tdf
@@ -36698,8 +36415,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(375).cnf
-db|DE2_D5M.(375).cnf
+db|DE2_D5M.(374).cnf
+db|DE2_D5M.(374).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -36746,8 +36463,8 @@ datab0
 # entity
 cntr_v5h
 # storage
-db|DE2_D5M.(376).cnf
-db|DE2_D5M.(376).cnf
+db|DE2_D5M.(375).cnf
+db|DE2_D5M.(375).cnf
 # case_insensitive
 # source_file
 db|cntr_v5h.tdf
@@ -36776,8 +36493,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(377).cnf
-db|DE2_D5M.(377).cnf
+db|DE2_D5M.(376).cnf
+db|DE2_D5M.(376).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -36875,14 +36592,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -36890,8 +36607,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_j1n
 # storage
-db|DE2_D5M.(378).cnf
-db|DE2_D5M.(378).cnf
+db|DE2_D5M.(377).cnf
+db|DE2_D5M.(377).cnf
 # case_insensitive
 # source_file
 db|shift_taps_j1n.tdf
@@ -36968,8 +36685,8 @@ aclr
 # entity
 altsyncram_4ua1
 # storage
-db|DE2_D5M.(379).cnf
-db|DE2_D5M.(379).cnf
+db|DE2_D5M.(378).cnf
+db|DE2_D5M.(378).cnf
 # case_insensitive
 # source_file
 db|altsyncram_4ua1.tdf
@@ -37079,8 +36796,8 @@ wren_a
 # entity
 cntr_emf
 # storage
-db|DE2_D5M.(380).cnf
-db|DE2_D5M.(380).cnf
+db|DE2_D5M.(379).cnf
+db|DE2_D5M.(379).cnf
 # case_insensitive
 # source_file
 db|cntr_emf.tdf
@@ -37115,8 +36832,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(381).cnf
-db|DE2_D5M.(381).cnf
+db|DE2_D5M.(380).cnf
+db|DE2_D5M.(380).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -37163,8 +36880,8 @@ datab1
 # entity
 cntr_46h
 # storage
-db|DE2_D5M.(382).cnf
-db|DE2_D5M.(382).cnf
+db|DE2_D5M.(381).cnf
+db|DE2_D5M.(381).cnf
 # case_insensitive
 # source_file
 db|cntr_46h.tdf
@@ -37193,8 +36910,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(383).cnf
-db|DE2_D5M.(383).cnf
+db|DE2_D5M.(382).cnf
+db|DE2_D5M.(382).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -37280,14 +36997,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -37295,8 +37012,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_d1n
 # storage
-db|DE2_D5M.(384).cnf
-db|DE2_D5M.(384).cnf
+db|DE2_D5M.(383).cnf
+db|DE2_D5M.(383).cnf
 # case_insensitive
 # source_file
 db|shift_taps_d1n.tdf
@@ -37361,8 +37078,8 @@ aclr
 # entity
 altsyncram_kta1
 # storage
-db|DE2_D5M.(385).cnf
-db|DE2_D5M.(385).cnf
+db|DE2_D5M.(384).cnf
+db|DE2_D5M.(384).cnf
 # case_insensitive
 # source_file
 db|altsyncram_kta1.tdf
@@ -37460,8 +37177,8 @@ wren_a
 # entity
 cntr_bmf
 # storage
-db|DE2_D5M.(386).cnf
-db|DE2_D5M.(386).cnf
+db|DE2_D5M.(385).cnf
+db|DE2_D5M.(385).cnf
 # case_insensitive
 # source_file
 db|cntr_bmf.tdf
@@ -37496,8 +37213,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(387).cnf
-db|DE2_D5M.(387).cnf
+db|DE2_D5M.(386).cnf
+db|DE2_D5M.(386).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -37544,8 +37261,8 @@ datab0
 # entity
 cntr_06h
 # storage
-db|DE2_D5M.(388).cnf
-db|DE2_D5M.(388).cnf
+db|DE2_D5M.(387).cnf
+db|DE2_D5M.(387).cnf
 # case_insensitive
 # source_file
 db|cntr_06h.tdf
@@ -37574,8 +37291,8 @@ aset
 # entity
 altshift_taps
 # storage
-db|DE2_D5M.(389).cnf
-db|DE2_D5M.(389).cnf
+db|DE2_D5M.(388).cnf
+db|DE2_D5M.(388).cnf
 # case_insensitive
 # source_file
 altshift_taps.tdf
@@ -37631,14 +37348,14 @@ aclr
 3
 }
 # include_file {
-altdpram.inc
-2f9e6727b678ffd76e72bc5a95a2630
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-lpm_constant.inc
-97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_compare.inc
 bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
 }
 # macro_sequence
 
@@ -37646,8 +37363,8 @@ bbd3e8c93afb7320934629e5fb11566
 # entity
 shift_taps_c1n
 # storage
-db|DE2_D5M.(390).cnf
-db|DE2_D5M.(390).cnf
+db|DE2_D5M.(389).cnf
+db|DE2_D5M.(389).cnf
 # case_insensitive
 # source_file
 db|shift_taps_c1n.tdf
@@ -37682,8 +37399,8 @@ aclr
 # entity
 altsyncram_pta1
 # storage
-db|DE2_D5M.(391).cnf
-db|DE2_D5M.(391).cnf
+db|DE2_D5M.(390).cnf
+db|DE2_D5M.(390).cnf
 # case_insensitive
 # source_file
 db|altsyncram_pta1.tdf
@@ -37751,8 +37468,8 @@ wren_a
 # entity
 cntr_fmf
 # storage
-db|DE2_D5M.(392).cnf
-db|DE2_D5M.(392).cnf
+db|DE2_D5M.(391).cnf
+db|DE2_D5M.(391).cnf
 # case_insensitive
 # source_file
 db|cntr_fmf.tdf
@@ -37787,8 +37504,8 @@ clk_en
 # entity
 cmpr_9cc
 # storage
-db|DE2_D5M.(393).cnf
-db|DE2_D5M.(393).cnf
+db|DE2_D5M.(392).cnf
+db|DE2_D5M.(392).cnf
 # case_insensitive
 # source_file
 db|cmpr_9cc.tdf
@@ -37835,8 +37552,8 @@ datab0
 # entity
 cntr_56h
 # storage
-db|DE2_D5M.(394).cnf
-db|DE2_D5M.(394).cnf
+db|DE2_D5M.(393).cnf
+db|DE2_D5M.(393).cnf
 # case_insensitive
 # source_file
 db|cntr_56h.tdf
@@ -37865,8 +37582,8 @@ aset
 # entity
 lpm_add_sub
 # storage
-db|DE2_D5M.(395).cnf
-db|DE2_D5M.(395).cnf
+db|DE2_D5M.(394).cnf
+db|DE2_D5M.(394).cnf
 # case_insensitive
 # source_file
 lpm_add_sub.tdf
@@ -38253,18 +37970,18 @@ dataa32
 1
 }
 # include_file {
-bypassff.inc
-42d08f243d3471f724fd61ea21a0eb9f
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
+addcore.inc
+e15993f131a5367862d6283fbb5a133
 aglobal110.inc
 f560f9a992734abc3e37886b3957a26a
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
+bypassff.inc
+42d08f243d3471f724fd61ea21a0eb9f
 }
 # macro_sequence
 
@@ -38272,8 +37989,8 @@ f560f9a992734abc3e37886b3957a26a
 # entity
 add_sub_8ri
 # storage
-db|DE2_D5M.(396).cnf
-db|DE2_D5M.(396).cnf
+db|DE2_D5M.(395).cnf
+db|DE2_D5M.(395).cnf
 # case_insensitive
 # source_file
 db|add_sub_8ri.tdf
@@ -38585,18 +38302,18 @@ add_sub
 
 # end
 # entity
-HWAcceleration
+VGA_Controller
 # storage
-db|DE2_D5M.(307).cnf
-db|DE2_D5M.(307).cnf
+db|DE2_D5M.(1).cnf
+db|DE2_D5M.(1).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-hwacceleration|hwacceleration.v
-de902218adde5a43f636fe169b69aad5
+v|vga_controller.v
+5e73723444978a18d4d7011be36229b
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -38614,9 +38331,1197 @@ VERILOG_CONSTANT_LOOP_LIMIT
 VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
+# user_parameter {
+H_SYNC_CYC
+96
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_BACK
+48
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_ACT
+640
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_FRONT
+16
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_TOTAL
+800
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_CYC
+2
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_BACK
+33
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_ACT
+480
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_FRONT
+10
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_TOTAL
+525
+PARAMETER_SIGNED_DEC
+DEF
+X_START
+144
+PARAMETER_SIGNED_DEC
+DEF
+Y_START
+35
+PARAMETER_SIGNED_DEC
+DEF
+}
 # include_file {
+v|vga_param.h
+b4f42ba795bd5b1786cd87ebe459a09b
+}
+# hierarchies {
+VGA_Controller:u1
+}
+# macro_sequence
+
+# end
+# entity
+CCD_Capture
+# storage
+db|DE2_D5M.(3).cnf
+db|DE2_D5M.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|ccd_capture.v
+5b31c3ff593ac0e4affbde4e25b3e0f2
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+COLUMN_WIDTH
+640
+PARAMETER_SIGNED_DEC
+DEF
+}
+# hierarchies {
+CCD_Capture:u3
+}
+# macro_sequence
+
+# end
+# entity
+RAW2RGB
+# storage
+db|DE2_D5M.(4).cnf
+db|DE2_D5M.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|raw2rgb.v
+13dad5a07e495afb7999abe414793f69
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+RAW2RGB:u4
+}
+# macro_sequence
+
+# end
+# entity
+Line_Buffer
+# storage
+db|DE2_D5M.(5).cnf
+db|DE2_D5M.(5).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|line_buffer.v
+6aeda2ba49618563a66f1a3c14ee5456
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0
+HWAcceleration:HWAccelUnit|Line_Buffer:u0
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(285).cnf
+db|DE2_D5M.(285).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+2
+PARAMETER_SIGNED_DEC
+USR
+TAP_DISTANCE
+640
+PARAMETER_SIGNED_DEC
+USR
+WIDTH
+12
+PARAMETER_SIGNED_DEC
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+shift_taps_6u11
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps
+-1
+3
+shiftout
+-1
+3
+shiftin
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+}
+# include_file {
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_6u11
+# storage
+db|DE2_D5M.(307).cnf
+db|DE2_D5M.(307).cnf
+# case_insensitive
+# source_file
+db|shift_taps_6u11.tdf
+69dbe84d9a3f98ef1e966ac9e8dac6
+7
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps23
+-1
+3
+taps22
+-1
+3
+taps21
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftout9
+-1
+3
+shiftout8
+-1
+3
+shiftout7
+-1
+3
+shiftout6
+-1
+3
+shiftout5
+-1
+3
+shiftout4
+-1
+3
+shiftout3
+-1
+3
+shiftout2
+-1
+3
+shiftout11
+-1
+3
+shiftout10
+-1
+3
+shiftout1
+-1
+3
+shiftout0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_0fa1
+# storage
+db|DE2_D5M.(396).cnf
+db|DE2_D5M.(396).cnf
+# case_insensitive
+# source_file
+db|altsyncram_0fa1.tdf
+4b516dbfad726d4a739de63646d31478
+7
+# used_port {
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b23
+-1
+3
+q_b22
+-1
+3
+q_b21
+-1
+3
+q_b20
+-1
+3
+q_b2
+-1
+3
+q_b19
+-1
+3
+q_b18
+-1
+3
+q_b17
+-1
+3
+q_b16
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a23
+-1
+3
+data_a22
+-1
+3
+data_a21
+-1
+3
+data_a20
+-1
+3
+data_a2
+-1
+3
+data_a19
+-1
+3
+data_a18
+-1
+3
+data_a17
+-1
+3
+data_a16
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b9
+-1
+3
+address_b8
+-1
+3
+address_b7
+-1
+3
+address_b6
+-1
+3
+address_b5
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a9
+-1
+3
+address_a8
+-1
+3
+address_a7
+-1
+3
+address_a6
+-1
+3
+address_a5
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|altsyncram_0fa1:altsyncram2
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|altsyncram_0fa1:altsyncram2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_hpf
+# storage
+db|DE2_D5M.(397).cnf
+db|DE2_D5M.(397).cnf
+# case_insensitive
+# source_file
+db|cntr_hpf.tdf
+fce9553471dcb9dd70e9a2b8a71d8afd
+7
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_ldc
+# storage
+db|DE2_D5M.(398).cnf
+db|DE2_D5M.(398).cnf
+# case_insensitive
+# source_file
+db|cmpr_ldc.tdf
+c5651add7a9888352f68a8432de45459
+7
+# used_port {
+datab9
+-1
+3
+datab8
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa9
+-1
+3
+dataa8
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5
+}
+# macro_sequence
+
+# end
+# entity
+Sdram_Arbiter
+# storage
+db|DE2_D5M.(399).cnf
+db|DE2_D5M.(399).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|sdram_arbiter.v
+1d5c9e11f014e49cb78da7ecad1dc0a1
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+State_CamHasControl
+000
+PARAMETER_UNSIGNED_BIN
+DEF
+State_CamNOP
+001
+PARAMETER_UNSIGNED_BIN
+DEF
+State_LoadNiosMode
+010
+PARAMETER_UNSIGNED_BIN
+DEF
+State_LoadCamMode
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+State_NiosNOP
+100
+PARAMETER_UNSIGNED_BIN
+DEF
+State_NiosHasControl
+101
+PARAMETER_UNSIGNED_BIN
+DEF
+State_AccelHasControl
+110
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# hierarchies {
+Sdram_Arbiter:sdramArbiter0
+}
+# macro_sequence
+
+# end
+# entity
+I2C_CCD_Config
+# storage
+db|DE2_D5M.(400).cnf
+db|DE2_D5M.(400).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|i2c_ccd_config.v
+c7dd3842623e429c9da42eed32fb80e6
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+default_exposure
+0000011111000000
+PARAMETER_UNSIGNED_BIN
+DEF
+exposure_change_value
+0000000001100100
+PARAMETER_UNSIGNED_BIN
+DEF
+CLK_Freq
+50000000
+PARAMETER_SIGNED_DEC
+DEF
+I2C_Freq
+20000
+PARAMETER_SIGNED_DEC
+DEF
+LUT_SIZE
+25
+PARAMETER_SIGNED_DEC
+DEF
+}
+# hierarchies {
+I2C_CCD_Config:u8
+}
+# macro_sequence
+
+# end
+# entity
+control_interface
+# storage
+db|DE2_D5M.(402).cnf
+db|DE2_D5M.(402).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_control_4port|control_interface.v
+9c8a4b0d93e3af78862303b80a269
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
+1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
+1
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# include_file {
+hwacceleration|hwacceleration.v
+31c9f771453b6824eb7e4685c2fed49c
 sdram_control_4port|sdram_params.h
 625599f965a889cf34497649a6d284d8
+}
+# hierarchies {
+Sdram_Control_4Port:u7|control_interface:control1
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|control_interface:control1
+}
+# macro_sequence
+ASIZE23      ASIZE23      ASIZE23      
+# end
+# entity
+command
+# storage
+db|DE2_D5M.(403).cnf
+db|DE2_D5M.(403).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_control_4port|command.v
+bccb6d887eddb7a349a1e2fdcaa8a644
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
+1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
+1
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# include_file {
+hwacceleration|hwacceleration.v
+31c9f771453b6824eb7e4685c2fed49c
+sdram_control_4port|sdram_params.h
+625599f965a889cf34497649a6d284d8
+}
+# hierarchies {
+Sdram_Control_4Port:u7|command:command1
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|command:command1
+}
+# macro_sequence
+ASIZE23      ROWSIZE12COLSIZE8BANKSIZE2ROWSTART8          ROWSIZE12ROWSTART8          COLSTART0COLSIZE8COLSTART0BANKSTART20BANKSIZE2BANKSTART20ASIZE23      ASIZE23      
+# end
+# entity
+sdr_data_path
+# storage
+db|DE2_D5M.(404).cnf
+db|DE2_D5M.(404).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_control_4port|sdr_data_path.v
+09ffc6c2394c9b117fa3b22a267efa8
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
+1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
+1
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# include_file {
+hwacceleration|hwacceleration.v
+31c9f771453b6824eb7e4685c2fed49c
+sdram_control_4port|sdram_params.h
+625599f965a889cf34497649a6d284d8
+}
+# hierarchies {
+Sdram_Control_4Port:u7|sdr_data_path:data_path1
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|sdr_data_path:data_path1
+}
+# macro_sequence
+DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      
+# end
+# entity
+HWAcceleration
+# storage
+db|DE2_D5M.(405).cnf
+db|DE2_D5M.(405).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+hwacceleration|hwacceleration.v
+31c9f771453b6824eb7e4685c2fed49c
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
 }
 # hierarchies {
 HWAcceleration:HWAccelUnit
@@ -38625,10 +39530,46 @@ HWAcceleration:HWAccelUnit
 DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      
 # end
 # entity
+DE2_D5M
+# storage
+db|DE2_D5M.(0).cnf
+db|DE2_D5M.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+de2_d5m.v
+af3940b3ad6f43ecff87dfc29a28719
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# entity
 lpm_mult
 # storage
-db|DE2_D5M.(397).cnf
-db|DE2_D5M.(397).cnf
+db|DE2_D5M.(406).cnf
+db|DE2_D5M.(406).cnf
 # case_insensitive
 # source_file
 lpm_mult.tdf
@@ -38878,14 +39819,14 @@ dataa0
 2
 }
 # include_file {
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
 multcore.inc
 ee598ea39a3d6bdc35b167eefc3ee3da
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 }
@@ -38895,8 +39836,8 @@ bypassff.inc
 # entity
 multcore
 # storage
-db|DE2_D5M.(398).cnf
-db|DE2_D5M.(398).cnf
+db|DE2_D5M.(407).cnf
+db|DE2_D5M.(407).cnf
 # case_insensitive
 # source_file
 multcore.tdf
@@ -39113,24 +40054,24 @@ dataa0
 3
 }
 # include_file {
-mul_boothc.inc
-865041f39baa34821d68d61a3e2fd457
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
-csa_add.inc
-2817bc4fb699031583cb64b99d6e64b
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
 alt_ded_mult_y.inc
 3e7ed647d36279c93ab781e67a0aeb0
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-alt_ded_mult.inc
-ec98c2a73c1944d24ba8366fc29e8d4
 dffpipe.inc
 5471cd80ee441dd293deca0963c9aa0
 mul_lfrg.inc
 47f6e380151c8e526b62c6d1f8cd8ec
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
+mul_boothc.inc
+865041f39baa34821d68d61a3e2fd457
+alt_ded_mult.inc
+ec98c2a73c1944d24ba8366fc29e8d4
+csa_add.inc
+2817bc4fb699031583cb64b99d6e64b
 muleabz.inc
 9022d0f0ac610fb2fcbcdbf329d5b22
 }
@@ -39140,8 +40081,8 @@ muleabz.inc
 # entity
 mpar_add
 # storage
-db|DE2_D5M.(399).cnf
-db|DE2_D5M.(399).cnf
+db|DE2_D5M.(408).cnf
+db|DE2_D5M.(408).cnf
 # case_insensitive
 # source_file
 mpar_add.tdf
@@ -39404,10 +40345,10 @@ data0_0
 3
 }
 # include_file {
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
 }
 # macro_sequence
 
@@ -39415,8 +40356,8 @@ lpm_add_sub.inc
 # entity
 lpm_add_sub
 # storage
-db|DE2_D5M.(400).cnf
-db|DE2_D5M.(400).cnf
+db|DE2_D5M.(409).cnf
+db|DE2_D5M.(409).cnf
 # case_insensitive
 # source_file
 lpm_add_sub.tdf
@@ -39638,18 +40579,18 @@ dataa11
 1
 }
 # include_file {
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 }
 # macro_sequence
 
@@ -39657,8 +40598,8 @@ e15993f131a5367862d6283fbb5a133
 # entity
 add_sub_6ch
 # storage
-db|DE2_D5M.(401).cnf
-db|DE2_D5M.(401).cnf
+db|DE2_D5M.(410).cnf
+db|DE2_D5M.(410).cnf
 # case_insensitive
 # source_file
 db|add_sub_6ch.tdf
@@ -39807,8 +40748,8 @@ dataa0
 # entity
 mpar_add
 # storage
-db|DE2_D5M.(402).cnf
-db|DE2_D5M.(402).cnf
+db|DE2_D5M.(411).cnf
+db|DE2_D5M.(411).cnf
 # case_insensitive
 # source_file
 mpar_add.tdf
@@ -40050,10 +40991,10 @@ data0_0
 3
 }
 # include_file {
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
 }
 # macro_sequence
 
@@ -40061,8 +41002,8 @@ lpm_add_sub.inc
 # entity
 lpm_add_sub
 # storage
-db|DE2_D5M.(403).cnf
-db|DE2_D5M.(403).cnf
+db|DE2_D5M.(412).cnf
+db|DE2_D5M.(412).cnf
 # case_insensitive
 # source_file
 lpm_add_sub.tdf
@@ -40320,18 +41261,18 @@ dataa11
 1
 }
 # include_file {
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 }
 # macro_sequence
 
@@ -40339,8 +41280,8 @@ e15993f131a5367862d6283fbb5a133
 # entity
 add_sub_ach
 # storage
-db|DE2_D5M.(404).cnf
-db|DE2_D5M.(404).cnf
+db|DE2_D5M.(413).cnf
+db|DE2_D5M.(413).cnf
 # case_insensitive
 # source_file
 db|add_sub_ach.tdf
@@ -40525,8 +41466,8 @@ dataa0
 # entity
 altshift
 # storage
-db|DE2_D5M.(405).cnf
-db|DE2_D5M.(405).cnf
+db|DE2_D5M.(414).cnf
+db|DE2_D5M.(414).cnf
 # case_insensitive
 # source_file
 altshift.tdf
@@ -40688,8 +41629,8 @@ data0
 # entity
 lpm_mult
 # storage
-db|DE2_D5M.(406).cnf
-db|DE2_D5M.(406).cnf
+db|DE2_D5M.(415).cnf
+db|DE2_D5M.(415).cnf
 # case_insensitive
 # source_file
 lpm_mult.tdf
@@ -40936,14 +41877,14 @@ dataa0
 2
 }
 # include_file {
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
 multcore.inc
 ee598ea39a3d6bdc35b167eefc3ee3da
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 }
@@ -40953,8 +41894,8 @@ bypassff.inc
 # entity
 multcore
 # storage
-db|DE2_D5M.(407).cnf
-db|DE2_D5M.(407).cnf
+db|DE2_D5M.(416).cnf
+db|DE2_D5M.(416).cnf
 # case_insensitive
 # source_file
 multcore.tdf
@@ -41165,24 +42106,24 @@ dataa0
 3
 }
 # include_file {
-mul_boothc.inc
-865041f39baa34821d68d61a3e2fd457
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
-csa_add.inc
-2817bc4fb699031583cb64b99d6e64b
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
 alt_ded_mult_y.inc
 3e7ed647d36279c93ab781e67a0aeb0
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-alt_ded_mult.inc
-ec98c2a73c1944d24ba8366fc29e8d4
 dffpipe.inc
 5471cd80ee441dd293deca0963c9aa0
 mul_lfrg.inc
 47f6e380151c8e526b62c6d1f8cd8ec
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
+mul_boothc.inc
+865041f39baa34821d68d61a3e2fd457
+alt_ded_mult.inc
+ec98c2a73c1944d24ba8366fc29e8d4
+csa_add.inc
+2817bc4fb699031583cb64b99d6e64b
 muleabz.inc
 9022d0f0ac610fb2fcbcdbf329d5b22
 }
@@ -41192,8 +42133,8 @@ muleabz.inc
 # entity
 mpar_add
 # storage
-db|DE2_D5M.(408).cnf
-db|DE2_D5M.(408).cnf
+db|DE2_D5M.(417).cnf
+db|DE2_D5M.(417).cnf
 # case_insensitive
 # source_file
 mpar_add.tdf
@@ -41462,10 +42403,10 @@ data0_0
 3
 }
 # include_file {
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
 }
 # macro_sequence
 
@@ -41473,8 +42414,8 @@ lpm_add_sub.inc
 # entity
 lpm_add_sub
 # storage
-db|DE2_D5M.(409).cnf
-db|DE2_D5M.(409).cnf
+db|DE2_D5M.(418).cnf
+db|DE2_D5M.(418).cnf
 # case_insensitive
 # source_file
 lpm_add_sub.tdf
@@ -41669,18 +42610,18 @@ dataa10
 1
 }
 # include_file {
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 }
 # macro_sequence
 
@@ -41688,8 +42629,8 @@ e15993f131a5367862d6283fbb5a133
 # entity
 add_sub_3ch
 # storage
-db|DE2_D5M.(410).cnf
-db|DE2_D5M.(410).cnf
+db|DE2_D5M.(419).cnf
+db|DE2_D5M.(419).cnf
 # case_insensitive
 # source_file
 db|add_sub_3ch.tdf
@@ -41811,8 +42752,8 @@ dataa0
 # entity
 mpar_add
 # storage
-db|DE2_D5M.(411).cnf
-db|DE2_D5M.(411).cnf
+db|DE2_D5M.(420).cnf
+db|DE2_D5M.(420).cnf
 # case_insensitive
 # source_file
 mpar_add.tdf
@@ -42039,10 +42980,10 @@ data0_0
 3
 }
 # include_file {
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
 }
 # macro_sequence
 
@@ -42050,8 +42991,8 @@ lpm_add_sub.inc
 # entity
 lpm_add_sub
 # storage
-db|DE2_D5M.(412).cnf
-db|DE2_D5M.(412).cnf
+db|DE2_D5M.(421).cnf
+db|DE2_D5M.(421).cnf
 # case_insensitive
 # source_file
 lpm_add_sub.tdf
@@ -42282,18 +43223,18 @@ dataa10
 1
 }
 # include_file {
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 }
 # macro_sequence
 
@@ -42301,8 +43242,8 @@ e15993f131a5367862d6283fbb5a133
 # entity
 add_sub_7ch
 # storage
-db|DE2_D5M.(413).cnf
-db|DE2_D5M.(413).cnf
+db|DE2_D5M.(422).cnf
+db|DE2_D5M.(422).cnf
 # case_insensitive
 # source_file
 db|add_sub_7ch.tdf
@@ -42460,8 +43401,8 @@ dataa0
 # entity
 altshift
 # storage
-db|DE2_D5M.(414).cnf
-db|DE2_D5M.(414).cnf
+db|DE2_D5M.(423).cnf
+db|DE2_D5M.(423).cnf
 # case_insensitive
 # source_file
 altshift.tdf
@@ -42617,8 +43558,8 @@ data0
 # entity
 lpm_mult
 # storage
-db|DE2_D5M.(415).cnf
-db|DE2_D5M.(415).cnf
+db|DE2_D5M.(424).cnf
+db|DE2_D5M.(424).cnf
 # case_insensitive
 # source_file
 lpm_mult.tdf
@@ -42865,14 +43806,14 @@ dataa2
 2
 }
 # include_file {
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
 multcore.inc
 ee598ea39a3d6bdc35b167eefc3ee3da
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-altshift.inc
-5c767a29f11db3f131fc886ea42a52bd
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 }
@@ -42882,8 +43823,8 @@ bypassff.inc
 # entity
 multcore
 # storage
-db|DE2_D5M.(416).cnf
-db|DE2_D5M.(416).cnf
+db|DE2_D5M.(425).cnf
+db|DE2_D5M.(425).cnf
 # case_insensitive
 # source_file
 multcore.tdf
@@ -43100,24 +44041,24 @@ dataa0
 3
 }
 # include_file {
-mul_boothc.inc
-865041f39baa34821d68d61a3e2fd457
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
-csa_add.inc
-2817bc4fb699031583cb64b99d6e64b
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
 alt_ded_mult_y.inc
 3e7ed647d36279c93ab781e67a0aeb0
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-alt_ded_mult.inc
-ec98c2a73c1944d24ba8366fc29e8d4
 dffpipe.inc
 5471cd80ee441dd293deca0963c9aa0
 mul_lfrg.inc
 47f6e380151c8e526b62c6d1f8cd8ec
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
+mul_boothc.inc
+865041f39baa34821d68d61a3e2fd457
+alt_ded_mult.inc
+ec98c2a73c1944d24ba8366fc29e8d4
+csa_add.inc
+2817bc4fb699031583cb64b99d6e64b
 muleabz.inc
 9022d0f0ac610fb2fcbcdbf329d5b22
 }
@@ -43127,8 +44068,8 @@ muleabz.inc
 # entity
 mpar_add
 # storage
-db|DE2_D5M.(417).cnf
-db|DE2_D5M.(417).cnf
+db|DE2_D5M.(426).cnf
+db|DE2_D5M.(426).cnf
 # case_insensitive
 # source_file
 mpar_add.tdf
@@ -43412,10 +44353,10 @@ data0_0
 3
 }
 # include_file {
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
 }
 # macro_sequence
 
@@ -43423,8 +44364,8 @@ lpm_add_sub.inc
 # entity
 lpm_add_sub
 # storage
-db|DE2_D5M.(418).cnf
-db|DE2_D5M.(418).cnf
+db|DE2_D5M.(427).cnf
+db|DE2_D5M.(427).cnf
 # case_insensitive
 # source_file
 lpm_add_sub.tdf
@@ -43628,18 +44569,18 @@ dataa10
 1
 }
 # include_file {
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 }
 # macro_sequence
 
@@ -43647,8 +44588,8 @@ e15993f131a5367862d6283fbb5a133
 # entity
 add_sub_4ch
 # storage
-db|DE2_D5M.(419).cnf
-db|DE2_D5M.(419).cnf
+db|DE2_D5M.(428).cnf
+db|DE2_D5M.(428).cnf
 # case_insensitive
 # source_file
 db|add_sub_4ch.tdf
@@ -43779,8 +44720,8 @@ dataa0
 # entity
 mpar_add
 # storage
-db|DE2_D5M.(420).cnf
-db|DE2_D5M.(420).cnf
+db|DE2_D5M.(429).cnf
+db|DE2_D5M.(429).cnf
 # case_insensitive
 # source_file
 mpar_add.tdf
@@ -44016,10 +44957,10 @@ data0_0
 3
 }
 # include_file {
-mpar_add.inc
-029862889cd5a4e65712a9cc002ab
 lpm_add_sub.inc
 144a73b61081a2a03554ff5acc5e8842
+mpar_add.inc
+029862889cd5a4e65712a9cc002ab
 }
 # macro_sequence
 
@@ -44027,8 +44968,8 @@ lpm_add_sub.inc
 # entity
 lpm_add_sub
 # storage
-db|DE2_D5M.(421).cnf
-db|DE2_D5M.(421).cnf
+db|DE2_D5M.(430).cnf
+db|DE2_D5M.(430).cnf
 # case_insensitive
 # source_file
 lpm_add_sub.tdf
@@ -44268,18 +45209,18 @@ dataa10
 1
 }
 # include_file {
-alt_stratix_add_sub.inc
-16df31198e4f1dce2b8df944fbafaefe
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
 altshift.inc
 5c767a29f11db3f131fc886ea42a52bd
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+addcore.inc
+e15993f131a5367862d6283fbb5a133
+alt_stratix_add_sub.inc
+16df31198e4f1dce2b8df944fbafaefe
 bypassff.inc
 42d08f243d3471f724fd61ea21a0eb9f
 look_add.inc
 9091c394592369a07bdf7fbf1ce9ced6
-addcore.inc
-e15993f131a5367862d6283fbb5a133
 }
 # macro_sequence
 
@@ -44287,8 +45228,8 @@ e15993f131a5367862d6283fbb5a133
 # entity
 add_sub_8ch
 # storage
-db|DE2_D5M.(422).cnf
-db|DE2_D5M.(422).cnf
+db|DE2_D5M.(431).cnf
+db|DE2_D5M.(431).cnf
 # case_insensitive
 # source_file
 db|add_sub_8ch.tdf
@@ -44453,785 +45394,89 @@ dataa0
 
 # end
 # entity
-lpm_divide
+Sdram_Control_4Port
 # storage
-db|DE2_D5M.(423).cnf
-db|DE2_D5M.(423).cnf
-# case_insensitive
-# source_file
-lpm_divide.tdf
-16d41112e2517c4816bff7191b3eca7
-7
-# user_parameter {
-LPM_WIDTHN
-16
-PARAMETER_UNKNOWN
-USR
-LPM_WIDTHD
-3
-PARAMETER_UNKNOWN
-USR
-LPM_NREPRESENTATION
-UNSIGNED
-PARAMETER_UNKNOWN
-USR
-LPM_DREPRESENTATION
-UNSIGNED
-PARAMETER_UNKNOWN
-USR
-LPM_PIPELINE
-0
-PARAMETER_UNKNOWN
-DEF
-LPM_REMAINDERPOSITIVE
-TRUE
-PARAMETER_UNKNOWN
-DEF
-MAXIMIZE_SPEED
-5
-PARAMETER_UNKNOWN
-DEF
-CBXI_PARAMETER
-lpm_divide_fem
-PARAMETER_UNKNOWN
-USR
-CARRY_CHAIN
-MANUAL
-PARAMETER_UNKNOWN
-USR
-OPTIMIZE_FOR_SPEED
-5
-PARAMETER_UNKNOWN
-USR
-AUTO_CARRY_CHAINS
+db|DE2_D5M.(286).cnf
+db|DE2_D5M.(286).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
 ON
-AUTO_CARRY
-USR
-IGNORE_CARRY_BUFFERS
-OFF
-IGNORE_CARRY
-USR
-AUTO_CASCADE_CHAINS
-ON
-AUTO_CASCADE
-USR
-IGNORE_CASCADE_BUFFERS
-OFF
-IGNORE_CASCADE
-USR
 }
-# used_port {
-quotient9
--1
+# case_sensitive
+# source_file
+sdram_control_4port|sdram_control_4port.v
+14d0775e0e14112837d94f49a1e374b
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
 3
-quotient8
--1
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
 3
-quotient7
--1
-3
-quotient6
--1
-3
-quotient5
--1
-3
-quotient4
--1
-3
-quotient3
--1
-3
-quotient2
--1
-3
-quotient11
--1
-3
-quotient10
--1
-3
-numer9
--1
-3
-numer8
--1
-3
-numer7
--1
-3
-numer6
--1
-3
-numer5
--1
-3
-numer4
--1
-3
-numer3
--1
-3
-numer2
--1
-3
-numer14
--1
-3
-numer13
--1
-3
-numer12
--1
-3
-numer11
--1
-3
-numer10
--1
-3
-numer1
--1
-3
-numer0
--1
-3
-numer15
--1
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
 1
-denom1
--1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
 1
-denom2
--1
-2
-denom0
--1
-2
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
 }
 # include_file {
-abs_divider.inc
-49e0557d5addd986524b344bed283d9
-sign_div_unsign.inc
-535d76a18080ee8f75d090fcce186e19
-aglobal110.inc
-f560f9a992734abc3e37886b3957a26a
-}
-# macro_sequence
-
-# end
-# entity
-lpm_divide_fem
-# storage
-db|DE2_D5M.(424).cnf
-db|DE2_D5M.(424).cnf
-# case_insensitive
-# source_file
-db|lpm_divide_fem.tdf
-cdfd39514522f36f374880ac4ba5a
-7
-# used_port {
-quotient9
--1
-3
-quotient8
--1
-3
-quotient7
--1
-3
-quotient6
--1
-3
-quotient5
--1
-3
-quotient4
--1
-3
-quotient3
--1
-3
-quotient2
--1
-3
-quotient15
--1
-3
-quotient14
--1
-3
-quotient13
--1
-3
-quotient12
--1
-3
-quotient11
--1
-3
-quotient10
--1
-3
-quotient1
--1
-3
-quotient0
--1
-3
-numer9
--1
-3
-numer8
--1
-3
-numer7
--1
-3
-numer6
--1
-3
-numer5
--1
-3
-numer4
--1
-3
-numer3
--1
-3
-numer2
--1
-3
-numer15
--1
-3
-numer14
--1
-3
-numer13
--1
-3
-numer12
--1
-3
-numer11
--1
-3
-numer10
--1
-3
-numer1
--1
-3
-numer0
--1
-3
-denom2
--1
-3
-denom1
--1
-3
-denom0
--1
-3
-}
-# macro_sequence
-
-# end
-# entity
-sign_div_unsign_plh
-# storage
-db|DE2_D5M.(425).cnf
-db|DE2_D5M.(425).cnf
-# case_insensitive
-# source_file
-db|sign_div_unsign_plh.tdf
-f61ae8cdfcfee5c53915365a462e93
-7
-# used_port {
-remainder2
--1
-3
-remainder1
--1
-3
-remainder0
--1
-3
-quotient9
--1
-3
-quotient8
--1
-3
-quotient7
--1
-3
-quotient6
--1
-3
-quotient5
--1
-3
-quotient4
--1
-3
-quotient3
--1
-3
-quotient2
--1
-3
-quotient15
--1
-3
-quotient14
--1
-3
-quotient13
--1
-3
-quotient12
--1
-3
-quotient11
--1
-3
-quotient10
--1
-3
-quotient1
--1
-3
-quotient0
--1
-3
-numerator9
--1
-3
-numerator8
--1
-3
-numerator7
--1
-3
-numerator6
--1
-3
-numerator5
--1
-3
-numerator4
--1
-3
-numerator3
--1
-3
-numerator2
--1
-3
-numerator15
--1
-3
-numerator14
--1
-3
-numerator13
--1
-3
-numerator12
--1
-3
-numerator11
--1
-3
-numerator10
--1
-3
-numerator1
--1
-3
-numerator0
--1
-3
-denominator2
--1
-3
-denominator1
--1
-3
-denominator0
--1
-3
-}
-# macro_sequence
-
-# end
-# entity
-alt_u_div_k2f
-# storage
-db|DE2_D5M.(426).cnf
-db|DE2_D5M.(426).cnf
-# case_insensitive
-# source_file
-db|alt_u_div_k2f.tdf
-c4d0fb1ffc5e6ddca8d9141633964
-7
-# used_port {
-remainder2
--1
-3
-remainder1
--1
-3
-remainder0
--1
-3
-quotient9
--1
-3
-quotient8
--1
-3
-quotient7
--1
-3
-quotient6
--1
-3
-quotient5
--1
-3
-quotient4
--1
-3
-quotient3
--1
-3
-quotient2
--1
-3
-quotient15
--1
-3
-quotient14
--1
-3
-quotient13
--1
-3
-quotient12
--1
-3
-quotient11
--1
-3
-quotient10
--1
-3
-quotient1
--1
-3
-quotient0
--1
-3
-numerator9
--1
-3
-numerator8
--1
-3
-numerator7
--1
-3
-numerator6
--1
-3
-numerator5
--1
-3
-numerator4
--1
-3
-numerator3
--1
-3
-numerator2
--1
-3
-numerator15
--1
-3
-numerator14
--1
-3
-numerator13
--1
-3
-numerator12
--1
-3
-numerator11
--1
-3
-numerator10
--1
-3
-numerator1
--1
-3
-numerator0
--1
-3
-denominator2
--1
-3
-denominator1
--1
-3
-denominator0
--1
-3
-}
-# macro_sequence
-
-# end
-# entity
-add_sub_lkc
-# storage
-db|DE2_D5M.(427).cnf
-db|DE2_D5M.(427).cnf
-# case_insensitive
-# source_file
-db|add_sub_lkc.tdf
-248ea76815d716be782f8147e88aeae
-7
-# used_port {
-result0
--1
-3
-datab0
--1
-3
-dataa0
--1
-3
-cout
--1
-3
-}
-# macro_sequence
-
-# end
-# entity
-add_sub_mkc
-# storage
-db|DE2_D5M.(428).cnf
-db|DE2_D5M.(428).cnf
-# case_insensitive
-# source_file
-db|add_sub_mkc.tdf
-579773b4a7bfa7db38fc91f6ea76135
-7
-# used_port {
-result1
--1
-3
-result0
--1
-3
-datab1
--1
-3
-datab0
--1
-3
-dataa1
--1
-3
-dataa0
--1
-3
-cout
--1
-3
-}
-# macro_sequence
-
-# end
-# entity
-CCD_Capture
-# storage
-db|DE2_D5M.(3).cnf
-db|DE2_D5M.(3).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|ccd_capture.v
-5b31c3ff593ac0e4affbde4e25b3e0f2
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-COLUMN_WIDTH
-640
-PARAMETER_SIGNED_DEC
-DEF
+sdram_control_4port|sdram_params.h
+625599f965a889cf34497649a6d284d8
+hwacceleration|hwacceleration.v
+31c9f771453b6824eb7e4685c2fed49c
 }
 # hierarchies {
-CCD_Capture:u3
+Sdram_Control_4Port:u7
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7
 }
 # macro_sequence
-
-# end
-# entity
-I2C_CCD_Config
-# storage
-db|DE2_D5M.(308).cnf
-db|DE2_D5M.(308).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|i2c_ccd_config.v
-c7dd3842623e429c9da42eed32fb80e6
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-default_exposure
-0000011111000000
-PARAMETER_UNSIGNED_BIN
-DEF
-exposure_change_value
-0000000001100100
-PARAMETER_UNSIGNED_BIN
-DEF
-CLK_Freq
-50000000
-PARAMETER_SIGNED_DEC
-DEF
-I2C_Freq
-20000
-PARAMETER_SIGNED_DEC
-DEF
-LUT_SIZE
-25
-PARAMETER_SIGNED_DEC
-DEF
-}
-# hierarchies {
-I2C_CCD_Config:u8
-}
-# macro_sequence
-
-# end
-# entity
-DE2_D5M
-# storage
-db|DE2_D5M.(0).cnf
-db|DE2_D5M.(0).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-de2_d5m.v
-b4cb3b69efc40b9834e116179c8d47
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-|
-}
-# macro_sequence
-
-# end
-# entity
-RAW2RGB
-# storage
-db|DE2_D5M.(4).cnf
-db|DE2_D5M.(4).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|raw2rgb.v
-13dad5a07e495afb7999abe414793f69
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-RAW2RGB:u4
-}
-# macro_sequence
-
+DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      ASIZE23      DSIZE16      
 # end
 # complete
 

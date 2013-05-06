@@ -347,6 +347,18 @@ wire			DRAM_BA_0_cam;				//	SDRAM Bank Address 0
 wire			DRAM_BA_1_cam;				//	SDRAM Bank Address 0
 wire			DRAM_CKE_cam;				//	SDRAM Clock Enable
 
+///////////////////////		SDRAM Accel Interface	////////////////////////
+wire	[11:0]	DRAM_ADDR_accel;				//	SDRAM Address bus 12 Bits
+wire			DRAM_LDQM_accel;				//	SDRAM Low-byte Data Mask 
+wire			DRAM_UDQM_accel;				//	SDRAM High-byte Data Mask
+wire			DRAM_WE_N_accel;				//	SDRAM Write Enable
+wire			DRAM_CAS_N_accel;				//	SDRAM Column Address Strobe
+wire			DRAM_RAS_N_accel;				//	SDRAM Row Address Strobe
+wire			DRAM_CS_N_accel;				//	SDRAM Chip Select
+wire			DRAM_BA_0_accel;				//	SDRAM Bank Address 0
+wire			DRAM_BA_1_accel;				//	SDRAM Bank Address 0
+wire			DRAM_CKE_accel;				//	SDRAM Clock Enable
+
 ///////////////////////		SDRAM Nios Interface	////////////////////////
 wire	[11:0]	DRAM_ADDR_nios;				//	SDRAM Address bus 12 Bits
 wire			DRAM_LDQM_nios;				//	SDRAM Low-byte Data Mask 
@@ -380,24 +392,15 @@ assign	CCD_LVAL	=	GPIO_1[21];
 assign	CCD_PIXCLK	=	GPIO_1[0];
 assign	GPIO_1[19]	=	1'b1;  // tRIGGER
 assign	GPIO_1[17]	=	DLY_RST_1;
-reg [17:0] mode = 0;
 
-always @ (posedge unshifted_nios_clk) 
-	if ((DRAM_CS_N == 0) &&
-	(DRAM_RAS_N == 0) &&
-	(DRAM_CAS_N == 0) &&
-	(DRAM_WE_N == 0))
-		mode <= DRAM_ADDR;
-	else 
-		mode <= mode;
+
 		
-//assign	LEDR[8:0]		=	mode;
 assign	LEDG		=	Y_Cont;
 
 assign	VGA_CTRL_CLK=	rClk[0];
 assign	VGA_CLK		=	~rClk[0];
 
-always@(posedge unshifted_nios_clk)	rClk	<=	rClk+1;
+always@(posedge CLOCK_50)	rClk	<=	rClk+1;
 
 
 always@(posedge CCD_PIXCLK)
@@ -427,7 +430,7 @@ VGA_Controller		u1	(	//	Host Side
 						);
 
 
-Reset_Delay			u2	(	.iCLK(unshifted_nios_clk),
+Reset_Delay			u2	(	.iCLK(CLOCK_50),
 							.iRST(KEY[0]),
 							.oRST_0(DLY_RST_0),
 							.oRST_1(DLY_RST_1),
@@ -494,8 +497,8 @@ wire niosWantsControl;
       .clk_0                            (unshifted_nios_clk),
       .clk_1                            (sdram_ctrl_clk),
       .out_port_from_the_procHasControl (niosWantsControl),
-      .reset_n                          (KEY[0])//,
- /*     .zs_addr_from_the_sdram_0         (DRAM_ADDR_nios),
+      .reset_n                          (KEY[0]),
+      .zs_addr_from_the_sdram_0         (DRAM_ADDR_nios),
       .zs_ba_from_the_sdram_0           ({DRAM_BA_1_nios,DRAM_BA_0_nios}),
       .zs_cas_n_from_the_sdram_0        (DRAM_CAS_N_nios),
       .zs_cke_from_the_sdram_0          (DRAM_CKE_nios),
@@ -503,7 +506,7 @@ wire niosWantsControl;
       .zs_dq_to_and_from_the_sdram_0    (DRAM_DQ),
       .zs_dqm_from_the_sdram_0          ({DRAM_UDQM_nios,DRAM_LDQM_nios}),
       .zs_ras_n_from_the_sdram_0        (DRAM_RAS_N_nios),
-      .zs_we_n_from_the_sdram_0         (DRAM_WE_N_nios) */
+      .zs_we_n_from_the_sdram_0         (DRAM_WE_N_nios)
     );
 
 /*	 
@@ -519,15 +522,17 @@ assign {DRAM_UDQM,DRAM_LDQM} = niosHasControl ? {DRAM_UDQM_nios,DRAM_LDQM_nios} 
 
 wire niosHasControl;
 wire camHasControl;
-reg SwitchControl = 0;
-always @ (posedge CLOCK_50)
-SwitchControl <= SW[17];
+
+
+
 
 Sdram_Arbiter sdramArbiter0 (
-	.RequestNiosControl( SwitchControl /*niosWantsControl*/ ),
+	.RequestNiosControl(niosWantsControl),
+	.RequestAccelControl(SW[17]),
 	.NiosHasControl(niosHasControl),     
    .CamHasControl(camHasControl),     
-   .Reset_N(KEY[0]),              
+   .AccelHasControl(),
+	.Reset_N(KEY[0]),              
 	.clk(DRAM_CLK),
 	//	Nios Side
    .SA_nios(DRAM_ADDR_nios),
@@ -538,6 +543,15 @@ Sdram_Arbiter sdramArbiter0 (
    .CAS_N_nios(DRAM_CAS_N_nios),
    .WE_N_nios(DRAM_WE_N_nios),
    .DQM_nios({DRAM_UDQM_nios,DRAM_LDQM_nios}),
+	//	Accelerator Side
+   .SA_accel(DRAM_ADDR_accel),
+   .BA_accel({DRAM_BA_1_accel, DRAM_BA_0_accel}),
+   .CS_N_accel(DRAM_CS_N_accel),
+   .CKE_accel(DRAM_CKE_accel),
+   .RAS_N_accel(DRAM_RAS_N_accel),
+   .CAS_N_accel(DRAM_CAS_N_accel),
+   .WE_N_accel(DRAM_WE_N_accel),
+   .DQM_accel({DRAM_UDQM_accel,DRAM_LDQM_accel}),
 	//	Camera Side
    .SA_cam(DRAM_ADDR_cam),
    .BA_cam({DRAM_BA_1_cam, DRAM_BA_0_cam}),
@@ -547,6 +561,7 @@ Sdram_Arbiter sdramArbiter0 (
    .CAS_N_cam(DRAM_CAS_N_cam),
    .WE_N_cam(DRAM_WE_N_cam),
    .DQM_cam({DRAM_UDQM_cam,DRAM_LDQM_cam}),
+	// SDRAM side
 	.SA(DRAM_ADDR),
    .BA({DRAM_BA_1, DRAM_BA_0}),
    .CS_N(DRAM_CS_N),
@@ -645,22 +660,22 @@ HWAcceleration	HWAccelUnit	(	//	HOST Side
 							.RD2_LOAD(!DLY_RST_0),
 							
 							//	SDRAM Side
-						    .SA(DRAM_ADDR_nios),
-						    .BA({DRAM_BA_1_nios,DRAM_BA_0_nios}),
-        					.CS_N(DRAM_CS_N_nios),
-        					.CKE(DRAM_CKE_nios),
-        					.RAS_N(DRAM_RAS_N_nios),
-        					.CAS_N(DRAM_CAS_N_nios),
-        					.WE_N(DRAM_WE_N_nios),
+						    .SA(DRAM_ADDR_accel),
+						    .BA({DRAM_BA_1_accel,DRAM_BA_0_accel}),
+        					.CS_N(DRAM_CS_N_accel),
+        					.CKE(DRAM_CKE_accel),
+        					.RAS_N(DRAM_RAS_N_accel),
+        					.CAS_N(DRAM_CAS_N_accel),
+        					.WE_N(DRAM_WE_N_accel),
         					.DQ(DRAM_DQ),
-        					.DQM({DRAM_UDQM_nios,DRAM_LDQM_nios})
+        					.DQM({DRAM_UDQM_accel,DRAM_LDQM_accel})
 						);
 
 
 assign	UART_TXD = UART_RXD;
 
 I2C_CCD_Config 		u8	(	//	Host Side
-							.iCLK(unshifted_nios_clk),
+							.iCLK(CLOCK_50),
 							.iRST_N(DLY_RST_2),
 							.iEXPOSURE_ADJ(KEY[1]),
 							.iEXPOSURE_DEC_p(SW[0]),

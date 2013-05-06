@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
  * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Sat Apr 13 14:30:02 PDT 2013
+ * Generated: Sun May 05 12:02:08 PDT 2013
  */
 
 /*
@@ -337,6 +337,8 @@ SECTIONS
         *(.sdram_0. sdram_0.*)
         . = ALIGN(4);
         PROVIDE (_alt_partition_sdram_0_end = ABSOLUTE(.));
+        _end = ABSOLUTE(.);
+        end = ABSOLUTE(.);
     } > sdram_0
 
     PROVIDE (_alt_partition_sdram_0_load_addr = LOADADDR(.sdram_0));
@@ -354,8 +356,6 @@ SECTIONS
         *(.sram_16bit_512k_0. sram_16bit_512k_0.*)
         . = ALIGN(4);
         PROVIDE (_alt_partition_sram_16bit_512k_0_end = ABSOLUTE(.));
-        _end = ABSOLUTE(.);
-        end = ABSOLUTE(.);
         __alt_stack_base = ABSOLUTE(.);
     } > sram_16bit_512k_0
 
@@ -441,4 +441,4 @@ PROVIDE( __alt_stack_limit   = __alt_stack_base );
  * Override this symbol to put the heap in a different memory.
  */
 PROVIDE( __alt_heap_start    = end );
-PROVIDE( __alt_heap_limit    = 0x1100000 );
+PROVIDE( __alt_heap_limit    = 0x1000000 );

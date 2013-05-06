@@ -5,8 +5,13 @@
 module Sdram_Arbiter(
 		//	HOST Side
         RequestNiosControl, // hold high for nios to maintain control, otherwise
+		                    // control will be transferred back to camera.
+							// Takes priority over RequestAccelControl
+        RequestAccelControl, // hold high for accel to maintain control, otherwise
 		                    // control will be transferred back to camera
+							// RequestNiosControl must be low for accel to receive control
         NiosHasControl,     // Set when Nios has full control after context switch
+        AccelHasControl,     // Set when accel has full control after context switch
         CamHasControl,      // Set when Cam has full control after context switch
         Reset_N,              // active low, connect to Nios reset signal
 		  clk,
@@ -19,6 +24,15 @@ module Sdram_Arbiter(
         CAS_N_nios,
         WE_N_nios,
         DQM_nios,
+		//	Accelerator Side
+        SA_accel,
+        BA_accel,
+        CS_N_accel,
+        CKE_accel,
+        RAS_N_accel,
+        CAS_N_accel,
+        WE_N_accel,
+        DQM_accel,
 		 // camera Side
         SA_cam,
         BA_cam,
@@ -41,8 +55,10 @@ module Sdram_Arbiter(
 
 //	HOST Side
 input                           RequestNiosControl;
+input                           RequestAccelControl;
 output reg                         NiosHasControl;
 output reg                       CamHasControl;
+output reg                       AccelHasControl;
 input 							clk;
 input 							Reset_N;
 //	Camera Side
@@ -54,6 +70,15 @@ input                           RAS_N_cam;              //SDRAM Row address Stro
 input                           CAS_N_cam;              //SDRAM Column address Strobe
 input                           WE_N_cam;               //SDRAM write enable
 input   [1:0]                   DQM_cam;                //SDRAM data mask lines
+//	Accel Side
+input   [11:0]                  SA_accel;                //SDRAM address output
+input   [1:0]                   BA_accel;                //SDRAM bank address
+input   [1:0]                   CS_N_accel;              //SDRAM Chip Selects
+input                           CKE_accel;               //SDRAM clock enable
+input                           RAS_N_accel;             //SDRAM Row address Strobe
+input                           CAS_N_accel;             //SDRAM Column address Strobe
+input                           WE_N_accel;              //SDRAM write enable
+input   [1:0]                   DQM_accel;               //SDRAM data mask lines
 //	Nios Side
 input   [11:0]                  SA_nios;                //SDRAM address output
 input   [1:0]                   BA_nios;                //SDRAM bank address
@@ -81,6 +106,7 @@ parameter [2:0] State_LoadNiosMode   = 3'h2;
 parameter [2:0] State_LoadCamMode    = 3'h3;
 parameter [2:0] State_NiosNOP        = 3'h4;
 parameter [2:0] State_NiosHasControl = 3'h5;
+parameter [2:0] State_AccelHasControl  = 3'h6;
 reg [2:0] Current_State = State_CamHasControl;
 reg [2:0] Next_State;
 
@@ -94,6 +120,7 @@ always @* begin
   if (RequestNiosControl)
     case (Current_State)
       State_CamHasControl :  Next_State = State_CamNOP;
+      State_AccelHasControl :  Next_State = State_CamNOP;
       State_CamNOP :         Next_State = State_LoadNiosMode;
       State_LoadNiosMode :   Next_State = State_NiosNOP;
       State_LoadCamMode :    Next_State = State_CamNOP;
@@ -101,9 +128,21 @@ always @* begin
       State_NiosHasControl : Next_State = State_NiosHasControl;
       default :              Next_State = State_CamHasControl;
     endcase
+  else if (RequestAccelControl)
+    case (Current_State)
+      State_CamHasControl :  Next_State = State_AccelHasControl;
+      State_AccelHasControl :  Next_State = State_AccelHasControl;
+      State_CamNOP :         Next_State = State_CamHasControl;
+      State_LoadNiosMode :   Next_State = State_NiosNOP;
+      State_LoadCamMode :    Next_State = State_CamNOP;
+      State_NiosNOP :        Next_State = State_LoadCamMode;
+      State_NiosHasControl : Next_State = State_NiosNOP;
+      default :              Next_State = State_CamHasControl;
+    endcase
   else
     case (Current_State)
       State_CamHasControl :  Next_State = State_CamHasControl;
+      State_AccelHasControl :  Next_State = State_CamHasControl;
       State_CamNOP :         Next_State = State_CamHasControl;
       State_LoadNiosMode :   Next_State = State_NiosNOP;
       State_LoadCamMode :    Next_State = State_CamNOP;
@@ -117,7 +156,7 @@ end
 //	Controller
 reg NOP, ArbiterHasControl, NiosLoadMode;
 wire [11:0] SA_arbiter;
-reg  [11:0] NiosModeBits = 12'b110111;
+reg  [11:0] NiosModeBits = 12'b110000;
 reg  [11:0] CamModeBits  = 12'b110111;
 
 // Current State Output Logic
@@ -127,10 +166,15 @@ always @* begin
   NiosLoadMode = 1;
   NiosHasControl = 0;
   CamHasControl = 0;
+  AccelHasControl = 0;
   case (Current_State)
     State_CamHasControl :  begin 
 							ArbiterHasControl = 1'b0;
 							CamHasControl = 1'b1;
+						   end
+    State_AccelHasControl :  begin 
+							ArbiterHasControl = 1'b0;
+							AccelHasControl = 1'b1;
 						   end
     State_CamNOP :         NOP = 1'b1;
     State_LoadNiosMode :   ;
@@ -155,13 +199,13 @@ always @ (posedge clk)
 */
 assign SA_arbiter = NiosLoadMode ? NiosModeBits : CamModeBits;
 
-assign SA    = ArbiterHasControl ? SA_arbiter : NiosHasControl ? SA_nios    : SA_cam;
-assign BA    = ArbiterHasControl ? 2'hx       : NiosHasControl ? BA_nios    : BA_cam;
-assign CS_N  = ArbiterHasControl ? 1'b0       : NiosHasControl ? CS_N_nios  : CS_N_cam;
-assign CKE   = ArbiterHasControl ? 1'b1       : NiosHasControl ? CKE_nios   : CKE_cam;
-assign RAS_N = ArbiterHasControl ? NOP        : NiosHasControl ? RAS_N_nios : RAS_N_cam;
-assign CAS_N = ArbiterHasControl ? NOP        : NiosHasControl ? CAS_N_nios : CAS_N_cam;
-assign WE_N  = ArbiterHasControl ? NOP        : NiosHasControl ? WE_N_nios  : WE_N_cam;
-assign DQM   = ArbiterHasControl ? 2'h3       : NiosHasControl ? DQM_nios   : DQM_cam;
+assign SA    = ArbiterHasControl ? SA_arbiter : NiosHasControl ? SA_nios    : AccelHasControl ? SA_accel    : SA_cam;
+assign BA    = ArbiterHasControl ? 2'hx       : NiosHasControl ? BA_nios    : AccelHasControl ? BA_accel    : BA_cam;
+assign CS_N  = ArbiterHasControl ? 1'b0       : NiosHasControl ? CS_N_nios  : AccelHasControl ? CS_N_accel  : CS_N_cam;
+assign CKE   = ArbiterHasControl ? 1'b1       : NiosHasControl ? CKE_nios   : AccelHasControl ? CKE_accel   : CKE_cam;
+assign RAS_N = ArbiterHasControl ? NOP        : NiosHasControl ? RAS_N_nios : AccelHasControl ? RAS_N_accel : RAS_N_cam;
+assign CAS_N = ArbiterHasControl ? NOP        : NiosHasControl ? CAS_N_nios : AccelHasControl ? CAS_N_accel : CAS_N_cam;
+assign WE_N  = ArbiterHasControl ? NOP        : NiosHasControl ? WE_N_nios  : AccelHasControl ? WE_N_accel  : WE_N_cam;
+assign DQM   = ArbiterHasControl ? 2'h3       : NiosHasControl ? DQM_nios   : AccelHasControl ? DQM_accel   : DQM_cam;
 
 endmodule

@@ -3,7 +3,4 @@
 <project name="12test_bsp">
 <provider id="org.eclipse.cdt.ui.provider1"/>
 </project>
-<project name="siftPlusPlusNiosNew_bsp">
-<provider id="org.eclipse.cdt.ui.provider1"/>
-</project>
 </cHelpSettings>

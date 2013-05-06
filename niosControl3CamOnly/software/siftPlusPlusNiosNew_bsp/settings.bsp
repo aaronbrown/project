@@ -2,10 +2,10 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Apr 25, 2013 10:35:02 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1366911302544</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>May 5, 2013 12:03:27 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1367780607237</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Data\Projects\School\EEC_181AB\project\niosControl3CamOnly\software\siftPlusPlusNiosNew_bsp</BspGeneratedLocation>
-        <BspSettingsFile>settings.bsp</BspSettingsFile>
+        <BspSettingsFile>..\..\..\..\..\..\..\..\Data\Projects\School\EEC_181AB\project\niosControl3CamOnly\software\siftPlusPlusNiosNew_bsp\settings.bsp</BspSettingsFile>
         <SopcDesignFile>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\niosSystemCamControl.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu_0</Cpu>
@@ -386,7 +386,7 @@
                 <SettingName>hal.make.bsp_cflags_optimization</SettingName>
                 <Identifier>BSP_CFLAGS_OPTIMIZATION</Identifier>
                 <Type>UnquotedString</Type>
-                <Value>-O0</Value>
+                <Value>-O3</Value>
                 <DefaultValue>-O0</DefaultValue>
                 <DestinationFile>makefile_variable</DestinationFile>
                 <Description>C/C++ compiler optimization level. "-O0" = no optimization,"-O2" = "normal" optimization, etc. "-O0" is recommended for code that you want to debug since compiler optimization can remove variables and produce non-sequential execution of code while debugging. This setting defines the value of BSP_CFLAGS_OPTIMIZATION in Makefile.</Description>
@@ -910,7 +910,7 @@
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.heap</sectionName>
-                <regionName>sram_16bit_512k_0</regionName>
+                <regionName>sdram_0</regionName>
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.stack</sectionName>

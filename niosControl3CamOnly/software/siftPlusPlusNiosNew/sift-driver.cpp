@@ -24,7 +24,8 @@ extern "C" {
 
 using namespace std ;
 
-
+#define IMAGE_WIDTH 320
+#define IMAGE_HEIGHT 240
 
 /* keypoint list */
 typedef vector<pair<VL::Sift::Keypoint,VL::float_t> > Keypoints ;
@@ -37,7 +38,7 @@ bool cmpKeypoints (Keypoints::value_type const&a,
 
 void extractImageData(VL::PgmBuffer& buffer)
 {
-  VL::pixel_t* im_pt = (VL::pixel_t*)0x92c000;
+  VL::pixel_t* im_pt = new VL::pixel_t[IMAGE_WIDTH*IMAGE_HEIGHT];
   VL::pixel_t* start = im_pt;
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short* imgPtr = 0;
@@ -46,15 +47,15 @@ void extractImageData(VL::PgmBuffer& buffer)
 	float minVal = 1.0;
 	float floatIntensity;
 
-  buffer.width  = 320 ;
-  buffer.height = 240 ;
+  buffer.width  = IMAGE_WIDTH ;
+  buffer.height = IMAGE_HEIGHT ;
   buffer.data   = im_pt ;
 
-	for (y = 0; y < 240; y++)
+	for (y = 0; y < IMAGE_HEIGHT; y++)
 	{
-		for (x = 0; x < 320; x++)
+		for (x = 0; x < IMAGE_WIDTH; x++)
 		{
-				byteNum = (y*320 + x);
+				byteNum = (y*IMAGE_WIDTH + x);
         blockNum = byteNum / 256;
         offset = byteNum % 256;
 
@@ -95,11 +96,11 @@ void replaceImageData()
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short *imgPtr = 0;
 
-	for (y = 0; y < 240; y++)
+	for (y = 0; y < IMAGE_HEIGHT; y++)
 	{
-		for (x = 0; x < 320; x++)
+		for (x = 0; x < IMAGE_WIDTH; x++)
 		{
-				byteNum = (y*640 + x);
+				byteNum = (y*IMAGE_WIDTH + x);
         blockNum = byteNum / 256;
         offset = byteNum % 256;
 
@@ -117,7 +118,7 @@ void replaceImageData()
 // moveImageToVGA
 // This function copies a pixel_t image to the correct location
 // to be displayed via VGA.
-// The pixel_t image does not have to be the full size of the VGA (640 x 480)
+// The pixel_t image does not have to be the full size of the VGA (IMAGE_WIDTH x IMAGE_HEIGHT)
 // but can instead be a subregion, defined by imgWidth and imgHeight,
 // located on the screen at coordinates (VGAoffsetX, VGAoffsetY).
 // The parts of the VGA image that are not part of the pixel_t image
@@ -144,12 +145,12 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 	// in case VGA was overwritten with the image.
 	// We will write to the red parts of all pixels first
 	// Then after we will copy those to the blue parts
-	for (y = 239; y >= 0; y--)
+	for (y = IMAGE_HEIGHT-1; y >= 0; y--)
 	{
-		for (x = 319; x >= 0; x--)
+		for (x = IMAGE_WIDTH-1; x >= 0; x--)
 		{
 			// calculate VGA/SDRAM red pixel address
-			byteNum = (y*320 + x);
+			byteNum = (y*IMAGE_WIDTH + x);
 			blockNum = byteNum / 256;
 			offset = byteNum % 256;
 			vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset + 256;
@@ -185,12 +186,12 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 	}
 
 	// Now copy the blue parts
-	for (y = 239; y >= 0; y--)
+	for (y = IMAGE_HEIGHT-1; y >= 0; y--)
 	{
-		for (x = 319; x >= 0; x--)
+		for (x = IMAGE_WIDTH-1; x >= 0; x--)
 		{
 			// calculate VGA/SDRAM blue pixel address
-			byteNum = (y*320 + x);
+			byteNum = (y*IMAGE_WIDTH + x);
 			blockNum = byteNum / 256;
 			offset = byteNum % 256;
 			vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset;
@@ -216,12 +217,13 @@ void moveImageToVGA(VL::pixel_t* imgPtr, float intensityMax, float intensityMin,
 }
 void writePixelAt(int x, int y, unsigned short r, unsigned short g, unsigned short b)
 {
-	if ( x < 0 || x > 319 ) return;
-	if ( y < 0 || y > 239 ) return;
 	r &= 0x3ff;
 	g &= 0x3ff;
 	b &= 0x3ff;
-	int byteNum = (y*320 + x);
+
+	if ((x<0) | (x>=IMAGE_WIDTH)) return;
+	if ((y<0) | (y>=IMAGE_HEIGHT)) return;
+	int byteNum = (y*IMAGE_WIDTH + x);
 	int blockNum = byteNum / 256;
 	int offset = byteNum % 256;
 	unsigned short *vgaPtr = (unsigned short*)BASE_ADDRESS + 512*blockNum + offset;
@@ -302,8 +304,6 @@ void drawCircle(int x0, int y0, int radius, unsigned short r, unsigned short g, 
 int
 main(int argc, char** argv)
 {
-	PROC_CONTROL_OFF;
-	usleep(10*1000*1000);
 	// Switch control to processor
 	// Otherwise heap allocations and sdram access
 	// will not work properly
@@ -311,7 +311,7 @@ main(int argc, char** argv)
 
 	// move heap past camera image in SDRAM. We don't want the image being
 	// overwritten or the heap being corrupted
-	//VL::pixel_t* OriginalImage = (VL::pixel_t*) new VL::pixel_t[640*480];
+	VL::pixel_t* OriginalImage = (VL::pixel_t*) new VL::pixel_t[IMAGE_WIDTH*IMAGE_HEIGHT];
 /*
 	//
 	// Code I used to write a test square to VGA part of SDRAM using
@@ -337,7 +337,7 @@ main(int argc, char** argv)
   int    first          = 0 ;
   int    octaves        = 3 ;
   int    levels         = 2 ;
-  VL::float_t  threshold      (0.001f / levels / 2.0f) ;
+  VL::float_t  threshold      (0.04f / levels / 2.0f) ;
   VL::float_t  edgeThreshold  (10.0f);
   VL::float_t  magnif         (3.0) ;
   int    verbose        = 1 ;
@@ -347,17 +347,15 @@ main(int argc, char** argv)
   cout << "Hello!\n";
   extractImageData(buffer);
 
-  cout << "siftpp: done extracting floats\n" ;
-/*
 	cout << "writing extracted image data to VGA...";
-	moveImageToVGA(buffer.data, 1.0, 0.0, buffer.width, buffer.height, 80, 60);
+	moveImageToVGA(buffer.data, 1.0, 0.0, buffer.width, buffer.height, 0, 0);
 	PROC_CONTROL_OFF;
 	cout << "done\n";
 	cout << "displaying for 10 seconds before continuing...";
 	usleep(10*1000*1000);
 	PROC_CONTROL_ON;
 	cout << "done\n";
-*/
+
   //replaceImageData();
   // -----------------------------------------------------------------
   //                                            Retrieve input image
@@ -370,12 +368,12 @@ main(int argc, char** argv)
 	unsigned short intensityVal;
 	unsigned char intensityValSmall;
 
-  for (y = 0; y < 480; y++)
+  for (y = 0; y < IMAGE_HEIGHT; y++)
   {
-    for (x = 0; x < 640; x++)
+    for (x = 0; x < IMAGE_WIDTH; x++)
     {
     	if (y >= 60 && y <= 420 && x >= 80 && x <= 560) {
-      byteNum = (y*640 + x);
+      byteNum = (y*IMAGE_WIDTH + x);
       blockNum = byteNum / 256;
       offset = byteNum % 256;
 
@@ -438,18 +436,16 @@ main(int argc, char** argv)
         << "siftpp:   levels per octave     : " << S
         << endl ;
 
-  for (int omin = first; omin < first+O; omin++)
+  for (int omin = first; omin < O; omin++)
   {
-    cout << "siftpp:   current octave        : " << omin << endl;
+    verbose && cout << "siftpp:   current octave        : " << omin << endl;
 
     // initialize scalespace
     VL::Sift sift(buffer.data, buffer.width, buffer.height,
         sigman, sigma0,
         1, S,
 		    omin, -1, S+1) ;
-
-    cout << "siftpp: done computing scale space\n" ;
-
+      
     verbose && cout
         << "siftpp: Gaussian scale space completed"
         << endl ;
@@ -462,8 +458,6 @@ main(int argc, char** argv)
           << "siftpp: running detector  "<< endl;
 	
     sift.detectKeypoints(threshold, edgeThreshold) ;
-
-    cout << "siftpp: done detecting\n" ;
 	
     verbose && cout
           << "siftpp: detector completed with " 
@@ -474,20 +468,21 @@ main(int argc, char** argv)
     for (VL::Sift::KeypointsConstIter iter = sift.keypointsBegin();
     			iter != sift.keypointsEnd(); ++iter)
     {
-    	drawCircle((1 << omin)*iter->ix , (1 << omin)*iter->iy , 5*(2+iter->s),0,0,0x3ff);
-    	writeRedPixelAt((1 << omin)*iter->ix , (1 << omin)*iter->iy );
+    	drawCircle((iter->ix << omin), (iter->iy << omin), 5*(2+iter->s),0,0,0x3ff);
+    	writeRedPixelAt((iter->ix << omin), (iter->iy << omin));
     }
       
     // -------------------------------------------------------------
     //                  Run SIFT orientation detector and descriptor
     // -------------------------------------------------------------
-/*
+
     // set descriptor options
-    sift.setNormalizeDescriptor( 1 ) ;
+    sift.setNormalizeDescriptor( 0 ) ;
     sift.setMagnification( magnif ) ;
 
-    verbose && cout << "siftpp: computing orientations and descriptors\n" ;
-      
+
+    verbose && cout << "siftpp: computing orientations and descriptors..." ;
+
     // -------------------------------------------------------------
     //            Run detector, compute orientations and descriptors
     // -------------------------------------------------------------
@@ -499,26 +494,24 @@ main(int argc, char** argv)
       int nangles ;
 
       nangles = sift.computeKeypointOrientations(angles, *iter) ;
-      cout << "siftpp: done computing orientation\n" ;
 	    
       // compute descriptors
       for(int a = 0 ; a < nangles ; ++a) {
         // compute descriptor
         VL::float_t descr_pt [128] ;
         sift.computeKeypointDescriptor(descr_pt, *iter, angles[a]) ;
-        cout << "siftpp: done computing descriptor\n" ;
       } // next angle
     } // next keypoint
+    verbose && cout << "done\n" ;
 
-    cout << "siftpp: done computing all orientations and descriptors\n" ;
-
-    */
 	} // next octave
+
 
 	verbose && cout
           << "siftpp: job completed"<<endl ;
 
 	PROC_CONTROL_OFF;
+  while(1);
 
   return 0 ;
 } // main()

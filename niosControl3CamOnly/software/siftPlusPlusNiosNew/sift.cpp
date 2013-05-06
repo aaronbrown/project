@@ -197,7 +197,6 @@ extractPgm(std::istream& in, PgmBuffer& buffer)
     VL_THROW("PGM header parsing error") ;
   
   im_pt = new pixel_t [ width*height ];
-  std::cout << "2: im_pt = " << im_pt << " size=" << width*height << std::endl;
   
   try {
     if( is_ascii ) {
@@ -432,21 +431,17 @@ prepareBuffers()
   freeBuffers() ;
   
   // allocate
-  temp           = (pixel_t*)0x9d4c00;
+  temp           = new pixel_t [ size ] ; 
   tempReserved   = size ;
   tempIsGrad     = false ;
   tempOctave     = 0 ;
 
   octaves = new pixel_t* [ O ] ;
-  /*
   for(int o = 0 ; o < O ; ++o) {
     octaves[o] = new pixel_t [ (smax - smin + 1) * w * h ] ;
-    std::cout << "6: octaves[o] = " << octaves[o] << " size=" << (smax - smin + 1) * w * h << std::endl;
     w >>= 1 ;
     h >>= 1 ;
   }
-  */
-  octaves[0] = (pixel_t*)0xa53500;
 }
   
 /** @brief Free buffers.
@@ -465,20 +460,17 @@ freeBuffers()
   filter = 0 ;
 
   if( octaves ) {
-	/*
     for(int o = 0 ; o < O ; ++o) {
       delete [] octaves[ o ] ;
     }
-    */
     delete [] octaves ;
   }
-  /*
   octaves = 0 ;
+  
   if( temp ) {
     delete [] temp ;   
   }
   temp = 0  ; 
-  */
 }
 
 // ===================================================================
@@ -955,24 +947,16 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
              sn <= smax ) {
             
             diter->o  = o ;
-
-            //std::cout << o << "\t";
-
+       
             diter->ix = x ;
             diter->iy = y ;
             diter->is = s ;
-
-            //std::cout << s << "\t"  << x << "\t"  << y << "\t";
 
             diter->x = xn * xperiod ; 
             diter->y = yn * xperiod ; 
             diter->s = sn ;
 
-            //std::cout << diter->s << "\t"  << (diter->x) << "\t"  << (diter->y) << "\t";
-
             diter->sigma = getScaleFromIndex(o,sn) ;
-
-            //std::cout << diter->sigma << std::endl;
 
             ++diter ;
           }
@@ -1018,22 +1002,38 @@ Sift::prepareGrad(int o)
 
   if( ! tempIsGrad || tempOctave != o ) {
 
+	pixel_t* src;
+	pixel_t* srcPtr;
+	pixel_t* end;
+	pixel_t* grad;
+	pixel_t* gradPtr;
+
+	VL::float_t Gx, Gy, m, t;
     // compute dx/dy
     for(int s = smin+1 ; s <= smax-2 ; ++s) {
+      src = getLevel(o, s) + xo;
+      end = src + ow - 1;
+      grad = 2 * (xo + (s-smin-1)*so) + temp;
       for(int y = 1 ; y < oh-1 ; ++y ) {
-        pixel_t* src  = getLevel(o, s) + xo + yo*y ;        
-        pixel_t* end  = src + ow - 1 ;
-        pixel_t* grad = 2 * (xo + yo*y + (s - smin -1)*so) + temp ;
-        while(src != end) {
-          VL::float_t Gx = 0.5 * ( *(src+xo) - *(src-xo) ) ;
-          VL::float_t Gy = 0.5 * ( *(src+yo) - *(src-yo) ) ;
-          VL::float_t m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
-          VL::float_t t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
+        //pixel_t* src  = getLevel(o, s) + xo + yo*y ;
+        //pixel_t* end  = src + ow - 1 ;
+        //pixel_t* grad = 2 * (xo + yo*y + (s - smin -1)*so) + temp ;
 
-          *grad++ = pixel_t( m ) ;
-          *grad++ = pixel_t( t ) ;
+    	  // 2*xo + 2*yo*y + 2*(s-smin-1)*so + temp;
+    	src += yo;
+    	end += yo;
+    	srcPtr = src;
+    	grad += 2*yo;
+    	gradPtr = grad;
 
-          ++src ;
+        while(srcPtr != end) {
+          Gx = 0.5 * ( *(srcPtr+xo) - *(srcPtr-xo) ) ;
+          Gy = 0.5 * ( *(srcPtr+yo) - *(srcPtr-yo) ) ;
+          m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
+          t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
+          *gradPtr++ = pixel_t( m ) ;
+          *gradPtr++ = pixel_t( t ) ;
+          ++srcPtr ;
         }
       }
     }
@@ -1041,46 +1041,6 @@ Sift::prepareGrad(int o)
   
   tempIsGrad = true ;
   tempOctave = o ;
-}
-void
-Sift::onTheFlyGrad(int o, pixel_t* grad, float_t &m, float_t &t)
-{
-  int const ow = getOctaveWidth(o) ;
-  int const oh = getOctaveHeight(o) ;
-  int const xo = 1 ;
-  int const yo = ow ;
-  int const so = oh*ow ;
-
-  // find x,y,s
-
-  // given:
-  // grad = 2 * (xo*x + yo*y + (s - smin -1)*so) + temp ;
-  // 1 <= x < ow-1
-  // 1 <= y < oh-1
-  // smin+1 <= s <= smax-2
-
-  int s = 0;
-  int y = 0;
-  int x = 1;
-
-  while (grad > temp + 2*so) {grad -= 2*so; s += 1;}
-  while (grad > temp + 2*yo) {grad -= 2*yo; y += 1;}
-  while (grad > temp + 2*xo) {grad -= 2*xo; x += 1;}
-
-  pixel_t* src2 = getLevel(o, s) + yo*y + xo*x ;
-  VL::float_t Gx = 0.5 * ( *(src2+xo) - *(src2-xo) ) ;
-  VL::float_t Gy = 0.5 * ( *(src2+yo) - *(src2-yo) ) ;
-  m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
-  t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
-
-  // find:
-  /*
-  	pixel_t* src2 = getLevel(o, s) + yo*y + xo*x ;
-    VL::float_t Gx = 0.5 * ( *(src2+xo) - *(src2-xo) ) ;
-    VL::float_t Gy = 0.5 * ( *(src2+yo) - *(src2-yo) ) ;
-    m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
-    t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
-  */
 }
 
 /** @brief Compute the orientation(s) of a keypoint
@@ -1149,12 +1109,9 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
     std::cerr<<"!"<<std::endl ;
     return 0 ;
   }
-//#define GRAD_ONTHEFLY
   
-#ifndef GRAD_ONTHEFLY
   // make sure that the gradient buffer is filled with octave o
   prepareGrad(o) ;
-#endif
 
   // clear the SIFT histogram
   std::fill(hist, hist + nbins, 0) ;
@@ -1176,15 +1133,8 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
       if(r2 >= W*W+0.5) continue ;
 
       VL::float_t wgt = VL::fast_expn( r2 / (2*sigmaw*sigmaw) ) ;
-
-      VL::float_t mod;
-      VL::float_t ang;
-#ifndef GRAD_ONTHEFLY
-      mod = *(pt + xs*xo + ys*yo) ;
-      ang = *(pt + xs*xo + ys*yo + 1) ;
-#else
-      onTheFlyGrad(o, (VL::float_t*)(pt + xs*xo + ys*yo), mod, ang) ;
-#endif
+      VL::float_t mod = *(pt + xs*xo + ys*yo) ;
+      VL::float_t ang = *(pt + xs*xo + ys*yo + 1) ;
 
       //      int bin = (int) floor( nbins * ang / (2*M_PI) ) ;
       int bin = (int) floor( nbins * ang / (2*M_PI) ) ;
@@ -1359,13 +1309,9 @@ Sift::computeKeypointDescriptor
      si < smin+1 ||
      si > smax-2 )
         return ;
-
-//#define GRAD_ONTHEFLY
   
-#ifndef GRAD_ONTHEFLY
   // make sure gradient buffer is up-to-date
   prepareGrad(o) ;
-#endif
 
   std::fill( descr_pt, descr_pt + NBO*NBP*NBP, 0 ) ;
 
@@ -1385,15 +1331,8 @@ Sift::computeKeypointDescriptor
     for(int dxi = std::max(-W, 1-xi) ; dxi <= std::min(+W, ow-2-xi) ; ++dxi) {
       
       // retrieve 
-
-        VL::float_t mod;
-        VL::float_t angle;
-  #ifndef GRAD_ONTHEFLY
-        mod = *( pt + dxi*xo + dyi*yo + 0 ) ;
-        angle = *( pt + dxi*xo + dyi*yo + 1 ) ;
-  #else
-        onTheFlyGrad(o, (VL::float_t*)( pt + dxi*xo + dyi*yo), mod, angle) ;
-  #endif
+      VL::float_t mod   = *( pt + dxi*xo + dyi*yo + 0 ) ;
+      VL::float_t angle = *( pt + dxi*xo + dyi*yo + 1 ) ;
       VL::float_t theta = fast_mod_2pi(-angle + angle0) ; // lowe compatible ?
       
       // fractional displacement

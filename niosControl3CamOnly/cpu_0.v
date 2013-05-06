@@ -38,9 +38,9 @@ module cpu_0_ic_data_module (
   output  [ 31: 0] q;
   input            clock;
   input   [ 31: 0] data;
-  input   [  9: 0] rdaddress;
+  input   [  8: 0] rdaddress;
   input            rden;
-  input   [  9: 0] wraddress;
+  input   [  8: 0] wraddress;
   input            wren;
 
   wire    [ 31: 0] q;
@@ -59,8 +59,8 @@ module cpu_0_ic_data_module (
 
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 1024,
-           the_altsyncram.numwords_b = 1024,
+           the_altsyncram.numwords_a = 512,
+           the_altsyncram.numwords_b = 512,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
@@ -68,8 +68,8 @@ module cpu_0_ic_data_module (
            the_altsyncram.read_during_write_mode_mixed_ports = "DONT_CARE",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
-           the_altsyncram.widthad_a = 10,
-           the_altsyncram.widthad_b = 10;
+           the_altsyncram.widthad_a = 9,
+           the_altsyncram.widthad_b = 9;
 
 
 endmodule
@@ -100,16 +100,16 @@ module cpu_0_ic_tag_module (
   parameter lpm_file = "UNUSED";
 
 
-  output  [ 20: 0] q;
+  output  [ 21: 0] q;
   input            clock;
-  input   [ 20: 0] data;
-  input   [  6: 0] rdaddress;
+  input   [ 21: 0] data;
+  input   [  5: 0] rdaddress;
   input            rden;
-  input   [  6: 0] wraddress;
+  input   [  5: 0] wraddress;
   input            wren;
 
-  wire    [ 20: 0] q;
-  wire    [ 20: 0] ram_q;
+  wire    [ 21: 0] q;
+  wire    [ 21: 0] ram_q;
   assign q = ram_q;
   altsyncram the_altsyncram
     (
@@ -125,17 +125,17 @@ module cpu_0_ic_tag_module (
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.init_file = lpm_file,
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 128,
-           the_altsyncram.numwords_b = 128,
+           the_altsyncram.numwords_a = 64,
+           the_altsyncram.numwords_b = 64,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
            the_altsyncram.rdcontrol_reg_b = "CLOCK0",
            the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
-           the_altsyncram.width_a = 21,
-           the_altsyncram.width_b = 21,
-           the_altsyncram.widthad_a = 7,
-           the_altsyncram.widthad_b = 7;
+           the_altsyncram.width_a = 22,
+           the_altsyncram.width_b = 22,
+           the_altsyncram.widthad_a = 6,
+           the_altsyncram.widthad_b = 6;
 
 
 endmodule
@@ -357,15 +357,15 @@ module cpu_0_dc_tag_module (
   parameter lpm_file = "UNUSED";
 
 
-  output  [ 15: 0] q;
+  output  [ 13: 0] q;
   input            clock;
-  input   [ 15: 0] data;
-  input   [  5: 0] rdaddress;
-  input   [  5: 0] wraddress;
+  input   [ 13: 0] data;
+  input   [  7: 0] rdaddress;
+  input   [  7: 0] wraddress;
   input            wren;
 
-  wire    [ 15: 0] q;
-  wire    [ 15: 0] ram_q;
+  wire    [ 13: 0] q;
+  wire    [ 13: 0] ram_q;
   assign q = ram_q;
   altsyncram the_altsyncram
     (
@@ -380,17 +380,17 @@ module cpu_0_dc_tag_module (
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.init_file = lpm_file,
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 64,
-           the_altsyncram.numwords_b = 64,
+           the_altsyncram.numwords_a = 256,
+           the_altsyncram.numwords_b = 256,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
            the_altsyncram.rdcontrol_reg_b = "CLOCK0",
            the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
-           the_altsyncram.width_a = 16,
-           the_altsyncram.width_b = 16,
-           the_altsyncram.widthad_a = 6,
-           the_altsyncram.widthad_b = 6;
+           the_altsyncram.width_a = 14,
+           the_altsyncram.width_b = 14,
+           the_altsyncram.widthad_a = 8,
+           the_altsyncram.widthad_b = 8;
 
 
 endmodule
@@ -425,8 +425,8 @@ module cpu_0_dc_data_module (
   input   [  3: 0] byteenable;
   input            clock;
   input   [ 31: 0] data;
-  input   [  8: 0] rdaddress;
-  input   [  8: 0] wraddress;
+  input   [ 10: 0] rdaddress;
+  input   [ 10: 0] wraddress;
   input            wren;
 
   wire    [ 31: 0] q;
@@ -445,8 +445,8 @@ module cpu_0_dc_data_module (
 
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 512,
-           the_altsyncram.numwords_b = 512,
+           the_altsyncram.numwords_a = 2048,
+           the_altsyncram.numwords_b = 2048,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
@@ -455,8 +455,8 @@ module cpu_0_dc_data_module (
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
            the_altsyncram.width_byteena_a = 4,
-           the_altsyncram.widthad_a = 9,
-           the_altsyncram.widthad_b = 9;
+           the_altsyncram.widthad_a = 11,
+           the_altsyncram.widthad_b = 11;
 
 
 endmodule
@@ -885,7 +885,7 @@ defparam cpu_0_ociram_lpm_dram_bdp_component.lpm_file = "cpu_0_ociram_default_co
     (MonAReg[4 : 2] == 3'd1)? 32'h00001919 :
     (MonAReg[4 : 2] == 3'd2)? 32'h00040000 :
     (MonAReg[4 : 2] == 3'd3)? 32'h00000000 :
-    (MonAReg[4 : 2] == 3'd4)? 32'h20000b0c :
+    (MonAReg[4 : 2] == 3'd4)? 32'h20000d0b :
     (MonAReg[4 : 2] == 3'd5)? 32'h01104000 :
     (MonAReg[4 : 2] == 3'd6)? 32'h00000000 :
     32'h00000000;
@@ -3971,13 +3971,13 @@ module cpu_0 (
   wire    [  7: 0] A_data_ram_ld_byte1_data;
   wire    [  7: 0] A_data_ram_ld_byte2_data;
   wire    [  7: 0] A_data_ram_ld_byte3_data;
-  reg     [ 13: 0] A_dc_actual_tag;
+  reg     [ 11: 0] A_dc_actual_tag;
   wire             A_dc_dc_addr_wb_inv_done_nxt;
   wire             A_dc_dc_addr_wb_inv_want_xfer;
   reg              A_dc_dcache_management_done;
   wire             A_dc_dcache_management_done_nxt;
   wire             A_dc_dcache_management_wr_en;
-  wire    [ 13: 0] A_dc_desired_tag;
+  wire    [ 11: 0] A_dc_desired_tag;
   reg              A_dc_dirty;
   reg              A_dc_fill_active;
   wire             A_dc_fill_active_nxt;
@@ -4013,7 +4013,7 @@ module cpu_0 (
   reg              A_dc_wb_active;
   wire             A_dc_wb_active_nxt;
   wire             A_dc_wb_en;
-  reg     [  5: 0] A_dc_wb_line;
+  reg     [  7: 0] A_dc_wb_line;
   reg     [  2: 0] A_dc_wb_rd_addr_offset;
   wire    [  2: 0] A_dc_wb_rd_addr_offset_nxt;
   reg              A_dc_wb_rd_addr_starting;
@@ -4021,7 +4021,7 @@ module cpu_0 (
   reg              A_dc_wb_rd_data_first;
   wire             A_dc_wb_rd_data_first_nxt;
   reg              A_dc_wb_rd_data_starting;
-  reg     [ 13: 0] A_dc_wb_tag;
+  reg     [ 11: 0] A_dc_wb_tag;
   wire             A_dc_wb_update_av_writedata;
   reg              A_dc_wb_wr_active;
   wire             A_dc_wb_wr_active_nxt;
@@ -4106,8 +4106,8 @@ module cpu_0 (
   wire             A_mem8;
   reg     [ 24: 0] A_mem_baddr;
   wire    [  1: 0] A_mem_baddr_byte_field;
-  wire    [  5: 0] A_mem_baddr_line_field;
-  wire    [  8: 0] A_mem_baddr_line_offset_field;
+  wire    [  7: 0] A_mem_baddr_line_field;
+  wire    [ 10: 0] A_mem_baddr_line_offset_field;
   wire    [  2: 0] A_mem_baddr_offset_field;
   wire             A_mem_bypass_pending;
   reg     [  3: 0] A_mem_byte_en;
@@ -4565,10 +4565,10 @@ module cpu_0 (
   wire             D_op_xorhi;
   wire             D_op_xori;
   reg     [ 22: 0] D_pc;
-  wire    [  6: 0] D_pc_line_field;
+  wire    [  5: 0] D_pc_line_field;
   wire    [  2: 0] D_pc_offset_field;
   reg     [ 22: 0] D_pc_plus_one;
-  wire    [ 12: 0] D_pc_tag_field;
+  wire    [ 13: 0] D_pc_tag_field;
   wire    [ 24: 0] D_pcb;
   wire             D_rdprs_stall;
   reg              D_rdprs_stall_done;
@@ -4780,8 +4780,8 @@ module cpu_0 (
   wire             E_mem8;
   wire    [ 24: 0] E_mem_baddr;
   wire    [  1: 0] E_mem_baddr_byte_field;
-  wire    [  5: 0] E_mem_baddr_line_field;
-  wire    [  8: 0] E_mem_baddr_line_offset_field;
+  wire    [  7: 0] E_mem_baddr_line_field;
+  wire    [ 10: 0] E_mem_baddr_line_offset_field;
   wire    [  2: 0] E_mem_baddr_offset_field;
   wire             E_mem_bypass_non_io;
   wire    [  3: 0] E_mem_byte_en;
@@ -4970,14 +4970,14 @@ module cpu_0 (
   wire             F_ctrl_unsigned_lo_imm16;
   wire             F_en;
   wire             F_ic_bypass_req;
-  wire    [  9: 0] F_ic_data_rd_addr_nxt;
-  wire    [ 12: 0] F_ic_desired_tag;
+  wire    [  8: 0] F_ic_data_rd_addr_nxt;
+  wire    [ 13: 0] F_ic_desired_tag;
   wire             F_ic_fill_same_tag_line;
   wire             F_ic_hit;
   wire    [ 31: 0] F_ic_iw;
-  wire    [ 12: 0] F_ic_tag_field;
-  wire    [ 20: 0] F_ic_tag_rd;
-  wire    [  6: 0] F_ic_tag_rd_addr_nxt;
+  wire    [ 13: 0] F_ic_tag_field;
+  wire    [ 21: 0] F_ic_tag_rd;
+  wire    [  5: 0] F_ic_tag_rd_addr_nxt;
   wire             F_ic_valid;
   wire    [  7: 0] F_ic_valid_bits;
   wire    [423: 0] F_inst;
@@ -5137,10 +5137,10 @@ module cpu_0 (
   wire             F_op_xorhi;
   wire             F_op_xori;
   reg     [ 22: 0] F_pc;
-  wire    [  6: 0] F_pc_line_field;
+  wire    [  5: 0] F_pc_line_field;
   wire    [ 22: 0] F_pc_nxt;
   wire    [ 22: 0] F_pc_plus_one;
-  wire    [ 12: 0] F_pc_tag_field;
+  wire    [ 13: 0] F_pc_tag_field;
   wire    [ 24: 0] F_pcb;
   wire    [ 24: 0] F_pcb_nxt;
   wire    [ 31: 0] F_ram_iw;
@@ -5352,8 +5352,8 @@ module cpu_0 (
   wire             M_data_ram_ld_align_sign_bit;
   wire    [  1: 0] M_data_ram_ld_align_sign_bit_16;
   reg              M_data_ram_ld_align_sign_bit_16_hi;
-  wire    [ 13: 0] M_dc_actual_tag;
-  wire    [ 13: 0] M_dc_desired_tag;
+  wire    [ 11: 0] M_dc_actual_tag;
+  wire    [ 11: 0] M_dc_desired_tag;
   wire             M_dc_dirty;
   wire             M_dc_dirty_raw;
   wire             M_dc_hit;
@@ -5362,7 +5362,7 @@ module cpu_0 (
   wire             M_dc_potential_hazard_after_st_unfiltered_is_x;
   wire    [ 31: 0] M_dc_rd_data;
   wire             M_dc_st_wr_en;
-  wire    [ 15: 0] M_dc_tag_entry;
+  wire    [ 13: 0] M_dc_tag_entry;
   wire             M_dc_tag_match;
   wire             M_dc_valid;
   wire             M_dc_valid_st_bypass_hit;
@@ -5401,8 +5401,8 @@ module cpu_0 (
   wire             M_mem8;
   wire    [ 24: 0] M_mem_baddr;
   wire    [  1: 0] M_mem_baddr_byte_field;
-  wire    [  5: 0] M_mem_baddr_line_field;
-  wire    [  8: 0] M_mem_baddr_line_offset_field;
+  wire    [  7: 0] M_mem_baddr_line_field;
+  wire    [ 10: 0] M_mem_baddr_line_offset_field;
   wire    [  2: 0] M_mem_baddr_offset_field;
   reg     [  3: 0] M_mem_byte_en;
   wire             M_op_add;
@@ -5897,12 +5897,12 @@ module cpu_0 (
   wire    [ 24: 0] d_address;
   reg     [  1: 0] d_address_byte_field;
   wire    [  1: 0] d_address_byte_field_nxt;
-  reg     [  5: 0] d_address_line_field;
-  wire    [  5: 0] d_address_line_field_nxt;
+  reg     [  7: 0] d_address_line_field;
+  wire    [  7: 0] d_address_line_field_nxt;
   reg     [  2: 0] d_address_offset_field;
   wire    [  2: 0] d_address_offset_field_nxt;
-  reg     [ 13: 0] d_address_tag_field;
-  wire    [ 13: 0] d_address_tag_field_nxt;
+  reg     [ 11: 0] d_address_tag_field;
+  wire    [ 11: 0] d_address_tag_field_nxt;
   reg     [  3: 0] d_burstcount;
   wire    [  3: 0] d_burstcount_nxt;
   reg     [  3: 0] d_byteenable;
@@ -5915,11 +5915,11 @@ module cpu_0 (
   wire             d_write_nxt;
   reg     [ 31: 0] d_writedata;
   wire    [ 31: 0] d_writedata_nxt;
-  wire    [  8: 0] dc_data_rd_port_addr;
+  wire    [ 10: 0] dc_data_rd_port_addr;
   wire    [ 31: 0] dc_data_rd_port_data;
-  wire    [  5: 0] dc_data_rd_port_line_field;
+  wire    [  7: 0] dc_data_rd_port_line_field;
   wire    [  2: 0] dc_data_rd_port_offset_field;
-  wire    [  8: 0] dc_data_wr_port_addr;
+  wire    [ 10: 0] dc_data_wr_port_addr;
   wire    [  3: 0] dc_data_wr_port_byte_en;
   wire    [ 31: 0] dc_data_wr_port_data;
   wire             dc_data_wr_port_en;
@@ -5927,10 +5927,10 @@ module cpu_0 (
   wire             dc_line_dirty_on;
   wire             dc_line_valid_off;
   wire             dc_line_valid_on;
-  wire    [  5: 0] dc_tag_rd_port_addr;
-  wire    [ 15: 0] dc_tag_rd_port_data;
-  wire    [  5: 0] dc_tag_wr_port_addr;
-  wire    [ 15: 0] dc_tag_wr_port_data;
+  wire    [  7: 0] dc_tag_rd_port_addr;
+  wire    [ 13: 0] dc_tag_rd_port_data;
+  wire    [  7: 0] dc_tag_wr_port_addr;
+  wire    [ 13: 0] dc_tag_wr_port_data;
   wire             dc_tag_wr_port_en;
   reg              hbreak_enabled;
   wire             hbreak_req;
@@ -5955,11 +5955,11 @@ module cpu_0 (
   wire             ic_fill_dp_offset_en;
   wire    [  2: 0] ic_fill_dp_offset_nxt;
   reg     [  2: 0] ic_fill_initial_offset;
-  reg     [  6: 0] ic_fill_line;
+  reg     [  5: 0] ic_fill_line;
   reg              ic_fill_prevent_refill;
   wire             ic_fill_prevent_refill_nxt;
   wire             ic_fill_req_accepted;
-  reg     [ 12: 0] ic_fill_tag;
+  reg     [ 13: 0] ic_fill_tag;
   wire    [  7: 0] ic_fill_valid_bit_new;
   reg     [  7: 0] ic_fill_valid_bits;
   wire             ic_fill_valid_bits_en;
@@ -5967,9 +5967,9 @@ module cpu_0 (
   reg              ic_tag_clr_valid_bits;
   wire             ic_tag_clr_valid_bits_nxt;
   wire             ic_tag_rden;
-  reg     [  6: 0] ic_tag_wraddress;
-  wire    [  6: 0] ic_tag_wraddress_nxt;
-  wire    [ 20: 0] ic_tag_wrdata;
+  reg     [  5: 0] ic_tag_wraddress;
+  wire    [  5: 0] ic_tag_wraddress_nxt;
+  wire    [ 21: 0] ic_tag_wrdata;
   wire             ic_tag_wren;
   wire             jtag_debug_module_clk;
   wire             jtag_debug_module_debugaccess_to_roms;
@@ -7059,7 +7059,7 @@ module cpu_0 (
   assign D_ic_bypass_start_avalon_read = 0;
   assign F_ic_bypass_req = 0;
   assign ic_bypass_active = 0;
-  assign F_ic_data_rd_addr_nxt = F_pc_nxt[9 : 0];
+  assign F_ic_data_rd_addr_nxt = F_pc_nxt[8 : 0];
   assign ic_data_wren = i_readdatavalid_d1 & ~ic_bypass_active;
   assign ic_data_rden = F_en;
 //cpu_0_ic_data, which is an nios_sdp_ram
@@ -7074,7 +7074,7 @@ cpu_0_ic_data_module cpu_0_ic_data
     .wren      (ic_data_wren)
   );
 
-  assign F_ic_tag_rd_addr_nxt = F_pc_nxt[9 : 3];
+  assign F_ic_tag_rd_addr_nxt = F_pc_nxt[8 : 3];
   assign ic_tag_clr_valid_bits_nxt = (M_ctrl_invalidate_i & M_valid) | D_ic_fill_starting | clr_break_line;
   assign ic_fill_valid_bits_nxt = ic_tag_clr_valid_bits_nxt ? 0 :
     D_ic_fill_starting_d1     ? ic_fill_valid_bit_new : 
@@ -7092,9 +7092,9 @@ cpu_0_ic_data_module cpu_0_ic_data
     end
 
 
-  assign ic_tag_wraddress_nxt = (clr_break_line)? 65 :
+  assign ic_tag_wraddress_nxt = (clr_break_line)? 1 :
     ((M_ctrl_crst & M_valid))? 0 :
-    ((M_ctrl_invalidate_i & M_valid))? (M_alu_result[11 : 5]) :
+    ((M_ctrl_invalidate_i & M_valid))? (M_alu_result[10 : 5]) :
     (D_ic_fill_starting)? D_pc_line_field :
     ic_fill_line;
 
@@ -7150,9 +7150,9 @@ defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.hex";
 //synthesis read_comments_as_HDL on
 //defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.mif";
 //synthesis read_comments_as_HDL off
-  assign F_ic_tag_field = F_ic_tag_rd[20 : 8];
+  assign F_ic_tag_field = F_ic_tag_rd[21 : 8];
   assign F_ic_valid_bits = F_ic_tag_rd[7 : 0];
-  assign F_ic_desired_tag = F_pc[22 : 10];
+  assign F_ic_desired_tag = F_pc[22 : 9];
   assign F_ic_valid = (F_pc[2 : 0] == 3'd0)? F_ic_valid_bits[0] :
     (F_pc[2 : 0] == 3'd1)? F_ic_valid_bits[1] :
     (F_pc[2 : 0] == 3'd2)? F_ic_valid_bits[2] :
@@ -7165,10 +7165,10 @@ defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.hex";
   assign F_ic_hit = F_ic_valid & (F_ic_desired_tag == F_ic_tag_field) &
     ~F_ic_bypass_req & ~ic_bypass_active;
 
-  assign F_pc_tag_field = F_pc[22 : 10];
-  assign F_pc_line_field = F_pc[9 : 3];
-  assign D_pc_tag_field = D_pc[22 : 10];
-  assign D_pc_line_field = D_pc[9 : 3];
+  assign F_pc_tag_field = F_pc[22 : 9];
+  assign F_pc_line_field = F_pc[8 : 3];
+  assign D_pc_tag_field = D_pc[22 : 9];
+  assign D_pc_line_field = D_pc[8 : 3];
   assign D_pc_offset_field = D_pc[2 : 0];
   assign D_ic_want_fill_unfiltered = ~D_iw_valid & ~D_kill & ~M_pipe_flush;
   assign ic_fill_prevent_refill_nxt = D_ic_fill_starting | (ic_fill_prevent_refill & ~((M_ctrl_invalidate_i & M_valid) | ic_bypass_active));
@@ -7199,7 +7199,7 @@ defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.hex";
     (~ic_fill_ap_last_word & ic_fill_active)));
 
   assign i_address = {ic_fill_tag, 
-    ic_fill_line[6 : 0],
+    ic_fill_line[5 : 0],
     ic_fill_ap_offset, 
     2'b00};
 
@@ -7896,17 +7896,17 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
 
   assign M_ctrl_st_cache = M_ctrl_st_non_bypass & M_sel_data_master;
   assign M_ctrl_ld_st_cache = M_ctrl_ld_st_non_bypass & M_sel_data_master;
-  assign E_mem_baddr_line_field = E_mem_baddr[10 : 5];
+  assign E_mem_baddr_line_field = E_mem_baddr[12 : 5];
   assign E_mem_baddr_offset_field = E_mem_baddr[4 : 2];
-  assign E_mem_baddr_line_offset_field = E_mem_baddr[10 : 2];
+  assign E_mem_baddr_line_offset_field = E_mem_baddr[12 : 2];
   assign E_mem_baddr_byte_field = E_mem_baddr[1 : 0];
-  assign M_mem_baddr_line_field = M_mem_baddr[10 : 5];
+  assign M_mem_baddr_line_field = M_mem_baddr[12 : 5];
   assign M_mem_baddr_offset_field = M_mem_baddr[4 : 2];
-  assign M_mem_baddr_line_offset_field = M_mem_baddr[10 : 2];
+  assign M_mem_baddr_line_offset_field = M_mem_baddr[12 : 2];
   assign M_mem_baddr_byte_field = M_mem_baddr[1 : 0];
-  assign A_mem_baddr_line_field = A_mem_baddr[10 : 5];
+  assign A_mem_baddr_line_field = A_mem_baddr[12 : 5];
   assign A_mem_baddr_offset_field = A_mem_baddr[4 : 2];
-  assign A_mem_baddr_line_offset_field = A_mem_baddr[10 : 2];
+  assign A_mem_baddr_line_offset_field = A_mem_baddr[12 : 2];
   assign A_mem_baddr_byte_field = A_mem_baddr[1 : 0];
   assign M_dc_st_wr_en = M_ctrl_st_cache & M_valid & A_en;
   assign A_dc_dcache_management_wr_en = (A_ctrl_dc_index_inv | (A_ctrl_dc_addr_inv & A_dc_hit)) &
@@ -7927,9 +7927,9 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
   assign dc_line_valid_on = 1'b1;
   assign dc_line_valid_off = 1'b0;
   assign M_dc_tag_entry = dc_tag_rd_port_data;
-  assign M_dc_dirty_raw = M_dc_tag_entry[15];
-  assign M_dc_valid = M_dc_tag_entry[14];
-  assign M_dc_actual_tag = M_dc_tag_entry[13 : 0];
+  assign M_dc_dirty_raw = M_dc_tag_entry[13];
+  assign M_dc_valid = M_dc_tag_entry[12];
+  assign M_dc_actual_tag = M_dc_tag_entry[11 : 0];
   assign dc_tag_rd_port_addr = M_en                   ? E_mem_baddr_line_field : 
     M_mem_baddr_line_field;
 
@@ -7954,8 +7954,8 @@ defparam cpu_0_dc_tag.lpm_file = "cpu_0_dc_tag_ram.hex";
 //synthesis read_comments_as_HDL on
 //defparam cpu_0_dc_tag.lpm_file = "cpu_0_dc_tag_ram.mif";
 //synthesis read_comments_as_HDL off
-  assign M_dc_desired_tag = M_mem_baddr[24 : 11];
-  assign A_dc_desired_tag = A_mem_baddr[24 : 11];
+  assign M_dc_desired_tag = M_mem_baddr[24 : 13];
+  assign A_dc_desired_tag = A_mem_baddr[24 : 13];
   assign M_dc_tag_match = M_dc_desired_tag == M_dc_actual_tag;
   assign M_dc_hit = M_dc_tag_match & M_dc_valid;
   assign M_dc_dirty = M_dc_dirty_raw | (M_A_dc_line_match & A_dc_valid_st_cache_hit);
@@ -8457,7 +8457,7 @@ cpu_0_dc_victim_module cpu_0_dc_victim
     (d_write & (d_waitrequest | ~A_dc_wr_last_driven));
 
   assign d_address = {d_address_tag_field, 
-    d_address_line_field[5 : 0],
+    d_address_line_field[7 : 0],
     d_address_offset_field,
     d_address_byte_field};
 

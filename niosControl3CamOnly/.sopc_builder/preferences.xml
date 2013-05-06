@@ -11,12 +11,12 @@
  </systemtable>
  <clocktable>
   <columns>
-   <clockname preferredWidth="143" />
-   <clocksource preferredWidth="141" />
-   <frequency preferredWidth="123" />
+   <clockname preferredWidth="251" />
+   <clocksource preferredWidth="249" />
+   <frequency preferredWidth="231" />
   </columns>
  </clocktable>
- <window width="900" height="924" x="979" y="74" />
+ <window width="1376" height="860" x="11" y="2" />
  <library
-   expandedCategories="Project/Terasic Technologies Inc,Library/Bridges and Adapters,Project,Library,Library/Bridges and Adapters/Memory Mapped,Library/custom_memory" />
+   expandedCategories="Library,Project/Terasic Technologies Inc,Library/Memories and Memory Controllers/SDRAM,Library/Memories and Memory Controllers,Project,Library/Bridges and Adapters/DMA,Library/Bridges and Adapters,Library/Memories and Memory Controllers/External Memory Interfaces" />
 </preferences>
