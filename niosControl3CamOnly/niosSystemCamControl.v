@@ -550,7 +550,7 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_burstcount,
                                        cpu_0_data_master_byteenable,
                                        cpu_0_data_master_byteenable_niosSystemCamControl_burst_6_upstream,
-                                       cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream,
+                                       cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream,
                                        cpu_0_data_master_granted_niosSystemCamControl_burst_0_upstream,
                                        cpu_0_data_master_granted_niosSystemCamControl_burst_1_upstream,
                                        cpu_0_data_master_granted_niosSystemCamControl_burst_2_upstream,
@@ -559,6 +559,7 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_granted_niosSystemCamControl_burst_5_upstream,
                                        cpu_0_data_master_granted_niosSystemCamControl_burst_6_upstream,
                                        cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream,
+                                       cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream,
                                        cpu_0_data_master_qualified_request_niosSystemCamControl_burst_0_upstream,
                                        cpu_0_data_master_qualified_request_niosSystemCamControl_burst_1_upstream,
                                        cpu_0_data_master_qualified_request_niosSystemCamControl_burst_2_upstream,
@@ -567,6 +568,7 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream,
                                        cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream,
                                        cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream,
+                                       cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream,
                                        cpu_0_data_master_read,
                                        cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream,
                                        cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register,
@@ -584,6 +586,8 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
                                        cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream,
                                        cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                       cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream,
+                                       cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
                                        cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream,
                                        cpu_0_data_master_requests_niosSystemCamControl_burst_1_upstream,
                                        cpu_0_data_master_requests_niosSystemCamControl_burst_2_upstream,
@@ -592,6 +596,7 @@ module cpu_0_data_master_arbitrator (
                                        cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream,
                                        cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream,
                                        cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream,
+                                       cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream,
                                        cpu_0_data_master_write,
                                        cpu_0_data_master_writedata,
                                        d1_niosSystemCamControl_burst_0_upstream_end_xfer,
@@ -602,6 +607,7 @@ module cpu_0_data_master_arbitrator (
                                        d1_niosSystemCamControl_burst_5_upstream_end_xfer,
                                        d1_niosSystemCamControl_burst_6_upstream_end_xfer,
                                        d1_niosSystemCamControl_burst_7_upstream_end_xfer,
+                                       d1_niosSystemCamControl_burst_8_upstream_end_xfer,
                                        jtag_uart_0_avalon_jtag_slave_irq_from_sa,
                                        niosSystemCamControl_burst_0_upstream_readdata_from_sa,
                                        niosSystemCamControl_burst_0_upstream_waitrequest_from_sa,
@@ -619,6 +625,8 @@ module cpu_0_data_master_arbitrator (
                                        niosSystemCamControl_burst_6_upstream_waitrequest_from_sa,
                                        niosSystemCamControl_burst_7_upstream_readdata_from_sa,
                                        niosSystemCamControl_burst_7_upstream_waitrequest_from_sa,
+                                       niosSystemCamControl_burst_8_upstream_readdata_from_sa,
+                                       niosSystemCamControl_burst_8_upstream_waitrequest_from_sa,
                                        reset_n,
                                        timer_0_s1_irq_from_sa,
 
@@ -647,7 +655,7 @@ module cpu_0_data_master_arbitrator (
   input   [  3: 0] cpu_0_data_master_burstcount;
   input   [  3: 0] cpu_0_data_master_byteenable;
   input   [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_6_upstream;
-  input   [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream;
+  input   [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream;
   input            cpu_0_data_master_granted_niosSystemCamControl_burst_0_upstream;
   input            cpu_0_data_master_granted_niosSystemCamControl_burst_1_upstream;
   input            cpu_0_data_master_granted_niosSystemCamControl_burst_2_upstream;
@@ -656,6 +664,7 @@ module cpu_0_data_master_arbitrator (
   input            cpu_0_data_master_granted_niosSystemCamControl_burst_5_upstream;
   input            cpu_0_data_master_granted_niosSystemCamControl_burst_6_upstream;
   input            cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream;
+  input            cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream;
   input            cpu_0_data_master_qualified_request_niosSystemCamControl_burst_0_upstream;
   input            cpu_0_data_master_qualified_request_niosSystemCamControl_burst_1_upstream;
   input            cpu_0_data_master_qualified_request_niosSystemCamControl_burst_2_upstream;
@@ -664,6 +673,7 @@ module cpu_0_data_master_arbitrator (
   input            cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream;
   input            cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream;
   input            cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream;
+  input            cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream;
   input            cpu_0_data_master_read;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register;
@@ -681,6 +691,8 @@ module cpu_0_data_master_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   input            cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream;
   input            cpu_0_data_master_requests_niosSystemCamControl_burst_1_upstream;
   input            cpu_0_data_master_requests_niosSystemCamControl_burst_2_upstream;
@@ -689,6 +701,7 @@ module cpu_0_data_master_arbitrator (
   input            cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream;
   input            cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream;
   input            cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream;
+  input            cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input            d1_niosSystemCamControl_burst_0_upstream_end_xfer;
@@ -699,6 +712,7 @@ module cpu_0_data_master_arbitrator (
   input            d1_niosSystemCamControl_burst_5_upstream_end_xfer;
   input            d1_niosSystemCamControl_burst_6_upstream_end_xfer;
   input            d1_niosSystemCamControl_burst_7_upstream_end_xfer;
+  input            d1_niosSystemCamControl_burst_8_upstream_end_xfer;
   input            jtag_uart_0_avalon_jtag_slave_irq_from_sa;
   input   [ 31: 0] niosSystemCamControl_burst_0_upstream_readdata_from_sa;
   input            niosSystemCamControl_burst_0_upstream_waitrequest_from_sa;
@@ -714,8 +728,10 @@ module cpu_0_data_master_arbitrator (
   input            niosSystemCamControl_burst_5_upstream_waitrequest_from_sa;
   input   [ 15: 0] niosSystemCamControl_burst_6_upstream_readdata_from_sa;
   input            niosSystemCamControl_burst_6_upstream_waitrequest_from_sa;
-  input   [ 15: 0] niosSystemCamControl_burst_7_upstream_readdata_from_sa;
+  input   [ 31: 0] niosSystemCamControl_burst_7_upstream_readdata_from_sa;
   input            niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
+  input   [ 15: 0] niosSystemCamControl_burst_8_upstream_readdata_from_sa;
+  input            niosSystemCamControl_burst_8_upstream_waitrequest_from_sa;
   input            reset_n;
   input            timer_0_s1_irq_from_sa;
 
@@ -761,7 +777,7 @@ module cpu_0_data_master_arbitrator (
   assign cpu_0_data_master_run = r_0 & r_1;
 
   //r_1 master_run cascaded wait assignment, which is an e_assign
-  assign r_1 = 1 & (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream | ~cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~niosSystemCamControl_burst_5_upstream_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~niosSystemCamControl_burst_5_upstream_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & 1 & (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream | ~cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream | ~cpu_0_data_master_read | (1 & ~niosSystemCamControl_burst_6_upstream_waitrequest_from_sa & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream | ~cpu_0_data_master_write | (1 & ~niosSystemCamControl_burst_6_upstream_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream | ~cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream | ~cpu_0_data_master_read | (1 & ~niosSystemCamControl_burst_7_upstream_waitrequest_from_sa & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream | ~cpu_0_data_master_write | (1 & ~niosSystemCamControl_burst_7_upstream_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write)));
+  assign r_1 = 1 & (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream | ~cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~niosSystemCamControl_burst_5_upstream_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~niosSystemCamControl_burst_5_upstream_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & 1 & (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream | ~cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream | ~cpu_0_data_master_read | (1 & ~niosSystemCamControl_burst_6_upstream_waitrequest_from_sa & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream | ~cpu_0_data_master_write | (1 & ~niosSystemCamControl_burst_6_upstream_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write))) & 1 & (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream | ~cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~niosSystemCamControl_burst_7_upstream_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream | ~(cpu_0_data_master_read | cpu_0_data_master_write) | (1 & ~niosSystemCamControl_burst_7_upstream_waitrequest_from_sa & (cpu_0_data_master_read | cpu_0_data_master_write)))) & 1 & (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream | ~cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream | ~cpu_0_data_master_read | (1 & ~niosSystemCamControl_burst_8_upstream_waitrequest_from_sa & cpu_0_data_master_read))) & ((~cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream | ~cpu_0_data_master_write | (1 & ~niosSystemCamControl_burst_8_upstream_waitrequest_from_sa & (cpu_0_data_master_dbs_address[1]) & cpu_0_data_master_write)));
 
   //irq assign, which is an e_assign
   assign cpu_0_data_master_irq = {1'b0,
@@ -818,7 +834,8 @@ module cpu_0_data_master_arbitrator (
     cpu_0_data_master_granted_niosSystemCamControl_burst_4_upstream |
     cpu_0_data_master_granted_niosSystemCamControl_burst_5_upstream |
     cpu_0_data_master_granted_niosSystemCamControl_burst_6_upstream |
-    cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream;
+    cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream |
+    cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream;
 
   //latent slave read data valids which may be flushed, which is an e_mux
   assign pre_flush_cpu_0_data_master_readdatavalid = cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream |
@@ -828,10 +845,13 @@ module cpu_0_data_master_arbitrator (
     cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream |
     cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream |
     (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream & dbs_rdv_counter_overflow) |
-    (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream & dbs_rdv_counter_overflow);
+    cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream |
+    (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream & dbs_rdv_counter_overflow);
 
   //latent slave read data valid which is not flushed, which is an e_mux
   assign cpu_0_data_master_readdatavalid = cpu_0_data_master_read_but_no_slave_selected |
+    pre_flush_cpu_0_data_master_readdatavalid |
+    cpu_0_data_master_read_but_no_slave_selected |
     pre_flush_cpu_0_data_master_readdatavalid |
     cpu_0_data_master_read_but_no_slave_selected |
     pre_flush_cpu_0_data_master_readdatavalid |
@@ -857,7 +877,8 @@ module cpu_0_data_master_arbitrator (
     ({32 {~cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream}} | niosSystemCamControl_burst_5_upstream_readdata_from_sa) &
     ({32 {~cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream}} | {niosSystemCamControl_burst_6_upstream_readdata_from_sa[15 : 0],
     dbs_latent_16_reg_segment_0}) &
-    ({32 {~cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream}} | {niosSystemCamControl_burst_7_upstream_readdata_from_sa[15 : 0],
+    ({32 {~cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream}} | niosSystemCamControl_burst_7_upstream_readdata_from_sa) &
+    ({32 {~cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream}} | {niosSystemCamControl_burst_8_upstream_readdata_from_sa[15 : 0],
     dbs_latent_16_reg_segment_0});
 
   //actual waitrequest port, which is an e_assign
@@ -883,7 +904,7 @@ module cpu_0_data_master_arbitrator (
 
   //input to latent dbs-16 stored 0, which is an e_mux
   assign p1_dbs_latent_16_reg_segment_0 = (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream)? niosSystemCamControl_burst_6_upstream_readdata_from_sa :
-    niosSystemCamControl_burst_7_upstream_readdata_from_sa;
+    niosSystemCamControl_burst_8_upstream_readdata_from_sa;
 
   //dbs register for latent dbs-16 segment 0, which is an e_register
   always @(posedge clk or negedge reset_n)
@@ -903,7 +924,7 @@ module cpu_0_data_master_arbitrator (
 
   //dbs count increment, which is an e_mux
   assign cpu_0_data_master_dbs_increment = (cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream)? 2 :
-    (cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream)? 2 :
+    (cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream)? 2 :
     0;
 
   //dbs counter overflow, which is an e_assign
@@ -934,7 +955,7 @@ module cpu_0_data_master_arbitrator (
 
   //master any slave rdv, which is an e_mux
   assign dbs_rdv_count_enable = cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream |
-    cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream;
+    cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream;
 
   //dbs rdv counter, which is an e_register
   always @(posedge clk or negedge reset_n)
@@ -952,8 +973,8 @@ module cpu_0_data_master_arbitrator (
   //pre dbs count enable, which is an e_mux
   assign pre_dbs_count_enable = (cpu_0_data_master_granted_niosSystemCamControl_burst_6_upstream & cpu_0_data_master_read & 0 & 1 & ~niosSystemCamControl_burst_6_upstream_waitrequest_from_sa) |
     (cpu_0_data_master_granted_niosSystemCamControl_burst_6_upstream & cpu_0_data_master_write & 1 & 1 & ~niosSystemCamControl_burst_6_upstream_waitrequest_from_sa) |
-    (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_read & 0 & 1 & ~niosSystemCamControl_burst_7_upstream_waitrequest_from_sa) |
-    (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_write & 1 & 1 & ~niosSystemCamControl_burst_7_upstream_waitrequest_from_sa);
+    (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream & cpu_0_data_master_read & 0 & 1 & ~niosSystemCamControl_burst_8_upstream_waitrequest_from_sa) |
+    (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream & cpu_0_data_master_write & 1 & 1 & ~niosSystemCamControl_burst_8_upstream_waitrequest_from_sa);
 
 
 //synthesis translate_off
@@ -2231,6 +2252,7 @@ module niosSystemCamControl_burst_0_upstream_arbitrator (
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
                                                            cpu_0_data_master_write,
                                                            cpu_0_data_master_writedata,
                                                            niosSystemCamControl_burst_0_upstream_readdata,
@@ -2288,6 +2310,7 @@ module niosSystemCamControl_burst_0_upstream_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 31: 0] niosSystemCamControl_burst_0_upstream_readdata;
@@ -2439,7 +2462,7 @@ module niosSystemCamControl_burst_0_upstream_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_0_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register))));
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_0_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register))));
   //unique name for niosSystemCamControl_burst_0_upstream_move_on_to_next_transaction, which is an e_assign
   assign niosSystemCamControl_burst_0_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_0_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_0_upstream_load_fifo;
 
@@ -3282,6 +3305,7 @@ module niosSystemCamControl_burst_1_upstream_arbitrator (
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
                                                            cpu_0_data_master_write,
                                                            cpu_0_data_master_writedata,
                                                            niosSystemCamControl_burst_1_upstream_readdata,
@@ -3339,6 +3363,7 @@ module niosSystemCamControl_burst_1_upstream_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 31: 0] niosSystemCamControl_burst_1_upstream_readdata;
@@ -3490,7 +3515,7 @@ module niosSystemCamControl_burst_1_upstream_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_1_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_1_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register))));
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_1_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_1_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register))));
   //unique name for niosSystemCamControl_burst_1_upstream_move_on_to_next_transaction, which is an e_assign
   assign niosSystemCamControl_burst_1_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_1_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_1_upstream_load_fifo;
 
@@ -4334,6 +4359,7 @@ module niosSystemCamControl_burst_2_upstream_arbitrator (
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
                                                            cpu_0_data_master_write,
                                                            cpu_0_data_master_writedata,
                                                            niosSystemCamControl_burst_2_upstream_readdata,
@@ -4391,6 +4417,7 @@ module niosSystemCamControl_burst_2_upstream_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 31: 0] niosSystemCamControl_burst_2_upstream_readdata;
@@ -4479,7 +4506,7 @@ module niosSystemCamControl_burst_2_upstream_arbitrator (
   //assign niosSystemCamControl_burst_2_upstream_readdata_from_sa = niosSystemCamControl_burst_2_upstream_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_burst_2_upstream_readdata_from_sa = niosSystemCamControl_burst_2_upstream_readdata;
 
-  assign cpu_0_data_master_requests_niosSystemCamControl_burst_2_upstream = ({cpu_0_data_master_address_to_slave[24 : 3] , 3'b0} == 25'h1109030) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_niosSystemCamControl_burst_2_upstream = ({cpu_0_data_master_address_to_slave[24 : 3] , 3'b0} == 25'h11090b0) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //assign niosSystemCamControl_burst_2_upstream_waitrequest_from_sa = niosSystemCamControl_burst_2_upstream_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_burst_2_upstream_waitrequest_from_sa = niosSystemCamControl_burst_2_upstream_waitrequest;
 
@@ -4543,7 +4570,7 @@ module niosSystemCamControl_burst_2_upstream_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_2_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_2_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register))));
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_2_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_2_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register))));
   //unique name for niosSystemCamControl_burst_2_upstream_move_on_to_next_transaction, which is an e_assign
   assign niosSystemCamControl_burst_2_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_2_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_2_upstream_load_fifo;
 
@@ -5358,6 +5385,7 @@ module niosSystemCamControl_burst_3_upstream_arbitrator (
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
                                                            cpu_0_data_master_write,
                                                            cpu_0_data_master_writedata,
                                                            niosSystemCamControl_burst_3_upstream_readdata,
@@ -5415,6 +5443,7 @@ module niosSystemCamControl_burst_3_upstream_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 31: 0] niosSystemCamControl_burst_3_upstream_readdata;
@@ -5503,7 +5532,7 @@ module niosSystemCamControl_burst_3_upstream_arbitrator (
   //assign niosSystemCamControl_burst_3_upstream_readdata_from_sa = niosSystemCamControl_burst_3_upstream_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_burst_3_upstream_readdata_from_sa = niosSystemCamControl_burst_3_upstream_readdata;
 
-  assign cpu_0_data_master_requests_niosSystemCamControl_burst_3_upstream = ({cpu_0_data_master_address_to_slave[24 : 4] , 4'b0} == 25'h1109020) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_niosSystemCamControl_burst_3_upstream = ({cpu_0_data_master_address_to_slave[24 : 4] , 4'b0} == 25'h11090a0) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //assign niosSystemCamControl_burst_3_upstream_waitrequest_from_sa = niosSystemCamControl_burst_3_upstream_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_burst_3_upstream_waitrequest_from_sa = niosSystemCamControl_burst_3_upstream_waitrequest;
 
@@ -5567,7 +5596,7 @@ module niosSystemCamControl_burst_3_upstream_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_3_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_3_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register))));
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_3_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_3_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register))));
   //unique name for niosSystemCamControl_burst_3_upstream_move_on_to_next_transaction, which is an e_assign
   assign niosSystemCamControl_burst_3_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_3_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_3_upstream_load_fifo;
 
@@ -6380,6 +6409,7 @@ module niosSystemCamControl_burst_4_upstream_arbitrator (
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
                                                            cpu_0_data_master_write,
                                                            cpu_0_data_master_writedata,
                                                            niosSystemCamControl_burst_4_upstream_readdata,
@@ -6437,6 +6467,7 @@ module niosSystemCamControl_burst_4_upstream_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 15: 0] niosSystemCamControl_burst_4_upstream_readdata;
@@ -6525,7 +6556,7 @@ module niosSystemCamControl_burst_4_upstream_arbitrator (
   //assign niosSystemCamControl_burst_4_upstream_readdata_from_sa = niosSystemCamControl_burst_4_upstream_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_burst_4_upstream_readdata_from_sa = niosSystemCamControl_burst_4_upstream_readdata;
 
-  assign cpu_0_data_master_requests_niosSystemCamControl_burst_4_upstream = ({cpu_0_data_master_address_to_slave[24 : 5] , 5'b0} == 25'h1109000) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_niosSystemCamControl_burst_4_upstream = ({cpu_0_data_master_address_to_slave[24 : 5] , 5'b0} == 25'h1109080) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //assign niosSystemCamControl_burst_4_upstream_waitrequest_from_sa = niosSystemCamControl_burst_4_upstream_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_burst_4_upstream_waitrequest_from_sa = niosSystemCamControl_burst_4_upstream_waitrequest;
 
@@ -6589,7 +6620,7 @@ module niosSystemCamControl_burst_4_upstream_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_4_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_4_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register))));
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_4_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_4_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register))));
   //unique name for niosSystemCamControl_burst_4_upstream_move_on_to_next_transaction, which is an e_assign
   assign niosSystemCamControl_burst_4_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_4_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_4_upstream_load_fifo;
 
@@ -7402,6 +7433,7 @@ module niosSystemCamControl_burst_5_upstream_arbitrator (
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
                                                            cpu_0_data_master_write,
                                                            cpu_0_data_master_writedata,
                                                            niosSystemCamControl_burst_5_upstream_readdata,
@@ -7459,6 +7491,7 @@ module niosSystemCamControl_burst_5_upstream_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   input            cpu_0_data_master_write;
   input   [ 31: 0] cpu_0_data_master_writedata;
   input   [ 31: 0] niosSystemCamControl_burst_5_upstream_readdata;
@@ -7547,7 +7580,7 @@ module niosSystemCamControl_burst_5_upstream_arbitrator (
   //assign niosSystemCamControl_burst_5_upstream_readdata_from_sa = niosSystemCamControl_burst_5_upstream_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_burst_5_upstream_readdata_from_sa = niosSystemCamControl_burst_5_upstream_readdata;
 
-  assign cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream = ({cpu_0_data_master_address_to_slave[24 : 3] , 3'b0} == 25'h1109038) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  assign cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream = ({cpu_0_data_master_address_to_slave[24 : 3] , 3'b0} == 25'h11090b8) & (cpu_0_data_master_read | cpu_0_data_master_write);
   //assign niosSystemCamControl_burst_5_upstream_waitrequest_from_sa = niosSystemCamControl_burst_5_upstream_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_burst_5_upstream_waitrequest_from_sa = niosSystemCamControl_burst_5_upstream_waitrequest;
 
@@ -7611,7 +7644,7 @@ module niosSystemCamControl_burst_5_upstream_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register))));
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register))));
   //unique name for niosSystemCamControl_burst_5_upstream_move_on_to_next_transaction, which is an e_assign
   assign niosSystemCamControl_burst_5_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_5_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_5_upstream_load_fifo;
 
@@ -8426,6 +8459,7 @@ module niosSystemCamControl_burst_6_upstream_arbitrator (
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
                                                            cpu_0_data_master_write,
                                                            niosSystemCamControl_burst_6_upstream_readdata,
                                                            niosSystemCamControl_burst_6_upstream_readdatavalid,
@@ -8486,6 +8520,7 @@ module niosSystemCamControl_burst_6_upstream_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   input            cpu_0_data_master_write;
   input   [ 15: 0] niosSystemCamControl_burst_6_upstream_readdata;
   input            niosSystemCamControl_burst_6_upstream_readdatavalid;
@@ -8639,7 +8674,7 @@ module niosSystemCamControl_burst_6_upstream_arbitrator (
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register))));
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register))));
   //unique name for niosSystemCamControl_burst_6_upstream_move_on_to_next_transaction, which is an e_assign
   assign niosSystemCamControl_burst_6_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_6_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_6_upstream_load_fifo;
 
@@ -9172,6 +9207,1105 @@ module burstcount_fifo_for_niosSystemCamControl_burst_7_upstream_module (
                                                                         )
 ;
 
+  output  [  3: 0] data_out;
+  output           empty;
+  output           fifo_contains_ones_n;
+  output           full;
+  input            clear_fifo;
+  input            clk;
+  input   [  3: 0] data_in;
+  input            read;
+  input            reset_n;
+  input            sync_reset;
+  input            write;
+
+  wire    [  3: 0] data_out;
+  wire             empty;
+  reg              fifo_contains_ones_n;
+  wire             full;
+  reg              full_0;
+  reg              full_1;
+  reg              full_2;
+  wire             full_3;
+  reg     [  2: 0] how_many_ones;
+  wire    [  2: 0] one_count_minus_one;
+  wire    [  2: 0] one_count_plus_one;
+  wire             p0_full_0;
+  wire    [  3: 0] p0_stage_0;
+  wire             p1_full_1;
+  wire    [  3: 0] p1_stage_1;
+  wire             p2_full_2;
+  wire    [  3: 0] p2_stage_2;
+  reg     [  3: 0] stage_0;
+  reg     [  3: 0] stage_1;
+  reg     [  3: 0] stage_2;
+  wire    [  2: 0] updated_one_count;
+  assign data_out = stage_0;
+  assign full = full_2;
+  assign empty = !full_0;
+  assign full_3 = 0;
+  //data_2, which is an e_mux
+  assign p2_stage_2 = ((full_3 & ~clear_fifo) == 0)? data_in :
+    data_in;
+
+  //data_reg_2, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          stage_2 <= 0;
+      else if (clear_fifo | sync_reset | read | (write & !full_2))
+          if (sync_reset & full_2 & !((full_3 == 0) & read & write))
+              stage_2 <= 0;
+          else 
+            stage_2 <= p2_stage_2;
+    end
+
+
+  //control_2, which is an e_mux
+  assign p2_full_2 = ((read & !write) == 0)? full_1 :
+    0;
+
+  //control_reg_2, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          full_2 <= 0;
+      else if (clear_fifo | (read ^ write) | (write & !full_0))
+          if (clear_fifo)
+              full_2 <= 0;
+          else 
+            full_2 <= p2_full_2;
+    end
+
+
+  //data_1, which is an e_mux
+  assign p1_stage_1 = ((full_2 & ~clear_fifo) == 0)? data_in :
+    stage_2;
+
+  //data_reg_1, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          stage_1 <= 0;
+      else if (clear_fifo | sync_reset | read | (write & !full_1))
+          if (sync_reset & full_1 & !((full_2 == 0) & read & write))
+              stage_1 <= 0;
+          else 
+            stage_1 <= p1_stage_1;
+    end
+
+
+  //control_1, which is an e_mux
+  assign p1_full_1 = ((read & !write) == 0)? full_0 :
+    full_2;
+
+  //control_reg_1, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          full_1 <= 0;
+      else if (clear_fifo | (read ^ write) | (write & !full_0))
+          if (clear_fifo)
+              full_1 <= 0;
+          else 
+            full_1 <= p1_full_1;
+    end
+
+
+  //data_0, which is an e_mux
+  assign p0_stage_0 = ((full_1 & ~clear_fifo) == 0)? data_in :
+    stage_1;
+
+  //data_reg_0, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          stage_0 <= 0;
+      else if (clear_fifo | sync_reset | read | (write & !full_0))
+          if (sync_reset & full_0 & !((full_1 == 0) & read & write))
+              stage_0 <= 0;
+          else 
+            stage_0 <= p0_stage_0;
+    end
+
+
+  //control_0, which is an e_mux
+  assign p0_full_0 = ((read & !write) == 0)? 1 :
+    full_1;
+
+  //control_reg_0, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          full_0 <= 0;
+      else if (clear_fifo | (read ^ write) | (write & !full_0))
+          if (clear_fifo & ~write)
+              full_0 <= 0;
+          else 
+            full_0 <= p0_full_0;
+    end
+
+
+  assign one_count_plus_one = how_many_ones + 1;
+  assign one_count_minus_one = how_many_ones - 1;
+  //updated_one_count, which is an e_mux
+  assign updated_one_count = ((((clear_fifo | sync_reset) & !write)))? 0 :
+    ((((clear_fifo | sync_reset) & write)))? |data_in :
+    ((read & (|data_in) & write & (|stage_0)))? how_many_ones :
+    ((write & (|data_in)))? one_count_plus_one :
+    ((read & (|stage_0)))? one_count_minus_one :
+    how_many_ones;
+
+  //counts how many ones in the data pipeline, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          how_many_ones <= 0;
+      else if (clear_fifo | sync_reset | read | write)
+          how_many_ones <= updated_one_count;
+    end
+
+
+  //this fifo contains ones in the data pipeline, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          fifo_contains_ones_n <= 1;
+      else if (clear_fifo | sync_reset | read | write)
+          fifo_contains_ones_n <= ~(|updated_one_count);
+    end
+
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream_module (
+                                                                                        // inputs:
+                                                                                         clear_fifo,
+                                                                                         clk,
+                                                                                         data_in,
+                                                                                         read,
+                                                                                         reset_n,
+                                                                                         sync_reset,
+                                                                                         write,
+
+                                                                                        // outputs:
+                                                                                         data_out,
+                                                                                         empty,
+                                                                                         fifo_contains_ones_n,
+                                                                                         full
+                                                                                      )
+;
+
+  output           data_out;
+  output           empty;
+  output           fifo_contains_ones_n;
+  output           full;
+  input            clear_fifo;
+  input            clk;
+  input            data_in;
+  input            read;
+  input            reset_n;
+  input            sync_reset;
+  input            write;
+
+  wire             data_out;
+  wire             empty;
+  reg              fifo_contains_ones_n;
+  wire             full;
+  reg              full_0;
+  reg              full_1;
+  reg              full_2;
+  wire             full_3;
+  reg     [  2: 0] how_many_ones;
+  wire    [  2: 0] one_count_minus_one;
+  wire    [  2: 0] one_count_plus_one;
+  wire             p0_full_0;
+  wire             p0_stage_0;
+  wire             p1_full_1;
+  wire             p1_stage_1;
+  wire             p2_full_2;
+  wire             p2_stage_2;
+  reg              stage_0;
+  reg              stage_1;
+  reg              stage_2;
+  wire    [  2: 0] updated_one_count;
+  assign data_out = stage_0;
+  assign full = full_2;
+  assign empty = !full_0;
+  assign full_3 = 0;
+  //data_2, which is an e_mux
+  assign p2_stage_2 = ((full_3 & ~clear_fifo) == 0)? data_in :
+    data_in;
+
+  //data_reg_2, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          stage_2 <= 0;
+      else if (clear_fifo | sync_reset | read | (write & !full_2))
+          if (sync_reset & full_2 & !((full_3 == 0) & read & write))
+              stage_2 <= 0;
+          else 
+            stage_2 <= p2_stage_2;
+    end
+
+
+  //control_2, which is an e_mux
+  assign p2_full_2 = ((read & !write) == 0)? full_1 :
+    0;
+
+  //control_reg_2, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          full_2 <= 0;
+      else if (clear_fifo | (read ^ write) | (write & !full_0))
+          if (clear_fifo)
+              full_2 <= 0;
+          else 
+            full_2 <= p2_full_2;
+    end
+
+
+  //data_1, which is an e_mux
+  assign p1_stage_1 = ((full_2 & ~clear_fifo) == 0)? data_in :
+    stage_2;
+
+  //data_reg_1, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          stage_1 <= 0;
+      else if (clear_fifo | sync_reset | read | (write & !full_1))
+          if (sync_reset & full_1 & !((full_2 == 0) & read & write))
+              stage_1 <= 0;
+          else 
+            stage_1 <= p1_stage_1;
+    end
+
+
+  //control_1, which is an e_mux
+  assign p1_full_1 = ((read & !write) == 0)? full_0 :
+    full_2;
+
+  //control_reg_1, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          full_1 <= 0;
+      else if (clear_fifo | (read ^ write) | (write & !full_0))
+          if (clear_fifo)
+              full_1 <= 0;
+          else 
+            full_1 <= p1_full_1;
+    end
+
+
+  //data_0, which is an e_mux
+  assign p0_stage_0 = ((full_1 & ~clear_fifo) == 0)? data_in :
+    stage_1;
+
+  //data_reg_0, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          stage_0 <= 0;
+      else if (clear_fifo | sync_reset | read | (write & !full_0))
+          if (sync_reset & full_0 & !((full_1 == 0) & read & write))
+              stage_0 <= 0;
+          else 
+            stage_0 <= p0_stage_0;
+    end
+
+
+  //control_0, which is an e_mux
+  assign p0_full_0 = ((read & !write) == 0)? 1 :
+    full_1;
+
+  //control_reg_0, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          full_0 <= 0;
+      else if (clear_fifo | (read ^ write) | (write & !full_0))
+          if (clear_fifo & ~write)
+              full_0 <= 0;
+          else 
+            full_0 <= p0_full_0;
+    end
+
+
+  assign one_count_plus_one = how_many_ones + 1;
+  assign one_count_minus_one = how_many_ones - 1;
+  //updated_one_count, which is an e_mux
+  assign updated_one_count = ((((clear_fifo | sync_reset) & !write)))? 0 :
+    ((((clear_fifo | sync_reset) & write)))? |data_in :
+    ((read & (|data_in) & write & (|stage_0)))? how_many_ones :
+    ((write & (|data_in)))? one_count_plus_one :
+    ((read & (|stage_0)))? one_count_minus_one :
+    how_many_ones;
+
+  //counts how many ones in the data pipeline, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          how_many_ones <= 0;
+      else if (clear_fifo | sync_reset | read | write)
+          how_many_ones <= updated_one_count;
+    end
+
+
+  //this fifo contains ones in the data pipeline, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          fifo_contains_ones_n <= 1;
+      else if (clear_fifo | sync_reset | read | write)
+          fifo_contains_ones_n <= ~(|updated_one_count);
+    end
+
+
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module niosSystemCamControl_burst_7_upstream_arbitrator (
+                                                          // inputs:
+                                                           clk,
+                                                           cpu_0_data_master_address_to_slave,
+                                                           cpu_0_data_master_burstcount,
+                                                           cpu_0_data_master_byteenable,
+                                                           cpu_0_data_master_debugaccess,
+                                                           cpu_0_data_master_latency_counter,
+                                                           cpu_0_data_master_read,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
+                                                           cpu_0_data_master_write,
+                                                           cpu_0_data_master_writedata,
+                                                           niosSystemCamControl_burst_7_upstream_readdata,
+                                                           niosSystemCamControl_burst_7_upstream_readdatavalid,
+                                                           niosSystemCamControl_burst_7_upstream_waitrequest,
+                                                           reset_n,
+
+                                                          // outputs:
+                                                           cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream,
+                                                           cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
+                                                           cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream,
+                                                           d1_niosSystemCamControl_burst_7_upstream_end_xfer,
+                                                           niosSystemCamControl_burst_7_upstream_address,
+                                                           niosSystemCamControl_burst_7_upstream_burstcount,
+                                                           niosSystemCamControl_burst_7_upstream_byteaddress,
+                                                           niosSystemCamControl_burst_7_upstream_byteenable,
+                                                           niosSystemCamControl_burst_7_upstream_debugaccess,
+                                                           niosSystemCamControl_burst_7_upstream_read,
+                                                           niosSystemCamControl_burst_7_upstream_readdata_from_sa,
+                                                           niosSystemCamControl_burst_7_upstream_waitrequest_from_sa,
+                                                           niosSystemCamControl_burst_7_upstream_write,
+                                                           niosSystemCamControl_burst_7_upstream_writedata
+                                                        )
+;
+
+  output           cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream;
+  output           cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream;
+  output           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream;
+  output           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  output           cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream;
+  output           d1_niosSystemCamControl_burst_7_upstream_end_xfer;
+  output  [  6: 0] niosSystemCamControl_burst_7_upstream_address;
+  output  [  3: 0] niosSystemCamControl_burst_7_upstream_burstcount;
+  output  [  8: 0] niosSystemCamControl_burst_7_upstream_byteaddress;
+  output  [  3: 0] niosSystemCamControl_burst_7_upstream_byteenable;
+  output           niosSystemCamControl_burst_7_upstream_debugaccess;
+  output           niosSystemCamControl_burst_7_upstream_read;
+  output  [ 31: 0] niosSystemCamControl_burst_7_upstream_readdata_from_sa;
+  output           niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
+  output           niosSystemCamControl_burst_7_upstream_write;
+  output  [ 31: 0] niosSystemCamControl_burst_7_upstream_writedata;
+  input            clk;
+  input   [ 24: 0] cpu_0_data_master_address_to_slave;
+  input   [  3: 0] cpu_0_data_master_burstcount;
+  input   [  3: 0] cpu_0_data_master_byteenable;
+  input            cpu_0_data_master_debugaccess;
+  input            cpu_0_data_master_latency_counter;
+  input            cpu_0_data_master_read;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
+  input            cpu_0_data_master_write;
+  input   [ 31: 0] cpu_0_data_master_writedata;
+  input   [ 31: 0] niosSystemCamControl_burst_7_upstream_readdata;
+  input            niosSystemCamControl_burst_7_upstream_readdatavalid;
+  input            niosSystemCamControl_burst_7_upstream_waitrequest;
+  input            reset_n;
+
+  wire             cpu_0_data_master_arbiterlock;
+  wire             cpu_0_data_master_arbiterlock2;
+  wire             cpu_0_data_master_continuerequest;
+  wire             cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_rdv_fifo_output_from_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  wire             cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_saved_grant_niosSystemCamControl_burst_7_upstream;
+  reg              d1_niosSystemCamControl_burst_7_upstream_end_xfer;
+  reg              d1_reasons_to_wait;
+  reg              enable_nonzero_assertions;
+  wire             end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream;
+  wire             in_a_read_cycle;
+  wire             in_a_write_cycle;
+  wire    [  6: 0] niosSystemCamControl_burst_7_upstream_address;
+  wire             niosSystemCamControl_burst_7_upstream_allgrants;
+  wire             niosSystemCamControl_burst_7_upstream_allow_new_arb_cycle;
+  wire             niosSystemCamControl_burst_7_upstream_any_bursting_master_saved_grant;
+  wire             niosSystemCamControl_burst_7_upstream_any_continuerequest;
+  wire             niosSystemCamControl_burst_7_upstream_arb_counter_enable;
+  reg     [  5: 0] niosSystemCamControl_burst_7_upstream_arb_share_counter;
+  wire    [  5: 0] niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value;
+  wire    [  5: 0] niosSystemCamControl_burst_7_upstream_arb_share_set_values;
+  reg     [  2: 0] niosSystemCamControl_burst_7_upstream_bbt_burstcounter;
+  wire             niosSystemCamControl_burst_7_upstream_beginbursttransfer_internal;
+  wire             niosSystemCamControl_burst_7_upstream_begins_xfer;
+  wire    [  3: 0] niosSystemCamControl_burst_7_upstream_burstcount;
+  wire             niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty;
+  wire    [  8: 0] niosSystemCamControl_burst_7_upstream_byteaddress;
+  wire    [  3: 0] niosSystemCamControl_burst_7_upstream_byteenable;
+  reg     [  3: 0] niosSystemCamControl_burst_7_upstream_current_burst;
+  wire    [  3: 0] niosSystemCamControl_burst_7_upstream_current_burst_minus_one;
+  wire             niosSystemCamControl_burst_7_upstream_debugaccess;
+  wire             niosSystemCamControl_burst_7_upstream_end_xfer;
+  wire             niosSystemCamControl_burst_7_upstream_firsttransfer;
+  wire             niosSystemCamControl_burst_7_upstream_grant_vector;
+  wire             niosSystemCamControl_burst_7_upstream_in_a_read_cycle;
+  wire             niosSystemCamControl_burst_7_upstream_in_a_write_cycle;
+  reg              niosSystemCamControl_burst_7_upstream_load_fifo;
+  wire             niosSystemCamControl_burst_7_upstream_master_qreq_vector;
+  wire             niosSystemCamControl_burst_7_upstream_move_on_to_next_transaction;
+  wire    [  2: 0] niosSystemCamControl_burst_7_upstream_next_bbt_burstcount;
+  wire    [  3: 0] niosSystemCamControl_burst_7_upstream_next_burst_count;
+  wire             niosSystemCamControl_burst_7_upstream_non_bursting_master_requests;
+  wire             niosSystemCamControl_burst_7_upstream_read;
+  wire    [ 31: 0] niosSystemCamControl_burst_7_upstream_readdata_from_sa;
+  wire             niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa;
+  reg              niosSystemCamControl_burst_7_upstream_reg_firsttransfer;
+  wire    [  3: 0] niosSystemCamControl_burst_7_upstream_selected_burstcount;
+  reg              niosSystemCamControl_burst_7_upstream_slavearbiterlockenable;
+  wire             niosSystemCamControl_burst_7_upstream_slavearbiterlockenable2;
+  wire             niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst;
+  wire    [  3: 0] niosSystemCamControl_burst_7_upstream_transaction_burst_count;
+  wire             niosSystemCamControl_burst_7_upstream_unreg_firsttransfer;
+  wire             niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
+  wire             niosSystemCamControl_burst_7_upstream_waits_for_read;
+  wire             niosSystemCamControl_burst_7_upstream_waits_for_write;
+  wire             niosSystemCamControl_burst_7_upstream_write;
+  wire    [ 31: 0] niosSystemCamControl_burst_7_upstream_writedata;
+  wire             p0_niosSystemCamControl_burst_7_upstream_load_fifo;
+  wire    [ 24: 0] shifted_address_to_niosSystemCamControl_burst_7_upstream_from_cpu_0_data_master;
+  wire             wait_for_niosSystemCamControl_burst_7_upstream_counter;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_reasons_to_wait <= 0;
+      else 
+        d1_reasons_to_wait <= ~niosSystemCamControl_burst_7_upstream_end_xfer;
+    end
+
+
+  assign niosSystemCamControl_burst_7_upstream_begins_xfer = ~d1_reasons_to_wait & ((cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream));
+  //assign niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa = niosSystemCamControl_burst_7_upstream_readdatavalid so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa = niosSystemCamControl_burst_7_upstream_readdatavalid;
+
+  //assign niosSystemCamControl_burst_7_upstream_readdata_from_sa = niosSystemCamControl_burst_7_upstream_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_readdata_from_sa = niosSystemCamControl_burst_7_upstream_readdata;
+
+  assign cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream = ({cpu_0_data_master_address_to_slave[24 : 7] , 7'b0} == 25'h1109000) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  //assign niosSystemCamControl_burst_7_upstream_waitrequest_from_sa = niosSystemCamControl_burst_7_upstream_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_waitrequest_from_sa = niosSystemCamControl_burst_7_upstream_waitrequest;
+
+  //niosSystemCamControl_burst_7_upstream_arb_share_counter set values, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_arb_share_set_values = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? (((cpu_0_data_master_write) ? cpu_0_data_master_burstcount : 1)) :
+    1;
+
+  //niosSystemCamControl_burst_7_upstream_non_bursting_master_requests mux, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_non_bursting_master_requests = 0;
+
+  //niosSystemCamControl_burst_7_upstream_any_bursting_master_saved_grant mux, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_any_bursting_master_saved_grant = cpu_0_data_master_saved_grant_niosSystemCamControl_burst_7_upstream;
+
+  //niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value assignment, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value = niosSystemCamControl_burst_7_upstream_firsttransfer ? (niosSystemCamControl_burst_7_upstream_arb_share_set_values - 1) : |niosSystemCamControl_burst_7_upstream_arb_share_counter ? (niosSystemCamControl_burst_7_upstream_arb_share_counter - 1) : 0;
+
+  //niosSystemCamControl_burst_7_upstream_allgrants all slave grants, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_allgrants = |niosSystemCamControl_burst_7_upstream_grant_vector;
+
+  //niosSystemCamControl_burst_7_upstream_end_xfer assignment, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_end_xfer = ~(niosSystemCamControl_burst_7_upstream_waits_for_read | niosSystemCamControl_burst_7_upstream_waits_for_write);
+
+  //end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream arb share counter enable term, which is an e_assign
+  assign end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream = niosSystemCamControl_burst_7_upstream_end_xfer & (~niosSystemCamControl_burst_7_upstream_any_bursting_master_saved_grant | in_a_read_cycle | in_a_write_cycle);
+
+  //niosSystemCamControl_burst_7_upstream_arb_share_counter arbitration counter enable, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_arb_counter_enable = (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream & niosSystemCamControl_burst_7_upstream_allgrants) | (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream & ~niosSystemCamControl_burst_7_upstream_non_bursting_master_requests);
+
+  //niosSystemCamControl_burst_7_upstream_arb_share_counter counter, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_upstream_arb_share_counter <= 0;
+      else if (niosSystemCamControl_burst_7_upstream_arb_counter_enable)
+          niosSystemCamControl_burst_7_upstream_arb_share_counter <= niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value;
+    end
+
+
+  //niosSystemCamControl_burst_7_upstream_slavearbiterlockenable slave enables arbiterlock, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_upstream_slavearbiterlockenable <= 0;
+      else if ((|niosSystemCamControl_burst_7_upstream_master_qreq_vector & end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream) | (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream & ~niosSystemCamControl_burst_7_upstream_non_bursting_master_requests))
+          niosSystemCamControl_burst_7_upstream_slavearbiterlockenable <= |niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value;
+    end
+
+
+  //cpu_0/data_master niosSystemCamControl_burst_7/upstream arbiterlock, which is an e_assign
+  assign cpu_0_data_master_arbiterlock = niosSystemCamControl_burst_7_upstream_slavearbiterlockenable & cpu_0_data_master_continuerequest;
+
+  //niosSystemCamControl_burst_7_upstream_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_slavearbiterlockenable2 = |niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value;
+
+  //cpu_0/data_master niosSystemCamControl_burst_7/upstream arbiterlock2, which is an e_assign
+  assign cpu_0_data_master_arbiterlock2 = niosSystemCamControl_burst_7_upstream_slavearbiterlockenable2 & cpu_0_data_master_continuerequest;
+
+  //niosSystemCamControl_burst_7_upstream_any_continuerequest at least one master continues requesting, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_any_continuerequest = 1;
+
+  //cpu_0_data_master_continuerequest continued request, which is an e_assign
+  assign cpu_0_data_master_continuerequest = 1;
+
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register))));
+  //unique name for niosSystemCamControl_burst_7_upstream_move_on_to_next_transaction, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_7_upstream_load_fifo;
+
+  //the currently selected burstcount for niosSystemCamControl_burst_7_upstream, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_selected_burstcount = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? cpu_0_data_master_burstcount :
+    1;
+
+  //burstcount_fifo_for_niosSystemCamControl_burst_7_upstream, which is an e_fifo_with_registered_outputs
+  burstcount_fifo_for_niosSystemCamControl_burst_7_upstream_module burstcount_fifo_for_niosSystemCamControl_burst_7_upstream
+    (
+      .clear_fifo           (1'b0),
+      .clk                  (clk),
+      .data_in              (niosSystemCamControl_burst_7_upstream_selected_burstcount),
+      .data_out             (niosSystemCamControl_burst_7_upstream_transaction_burst_count),
+      .empty                (niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty),
+      .fifo_contains_ones_n (),
+      .full                 (),
+      .read                 (niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst),
+      .reset_n              (reset_n),
+      .sync_reset           (1'b0),
+      .write                (in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read & niosSystemCamControl_burst_7_upstream_load_fifo & ~(niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty))
+    );
+
+  //niosSystemCamControl_burst_7_upstream current burst minus one, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_current_burst_minus_one = niosSystemCamControl_burst_7_upstream_current_burst - 1;
+
+  //what to load in current_burst, for niosSystemCamControl_burst_7_upstream, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_next_burst_count = (((in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read) & ~niosSystemCamControl_burst_7_upstream_load_fifo))? niosSystemCamControl_burst_7_upstream_selected_burstcount :
+    ((in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read & niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty))? niosSystemCamControl_burst_7_upstream_selected_burstcount :
+    (niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst)? niosSystemCamControl_burst_7_upstream_transaction_burst_count :
+    niosSystemCamControl_burst_7_upstream_current_burst_minus_one;
+
+  //the current burst count for niosSystemCamControl_burst_7_upstream, to be decremented, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_upstream_current_burst <= 0;
+      else if (niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa | (~niosSystemCamControl_burst_7_upstream_load_fifo & (in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read)))
+          niosSystemCamControl_burst_7_upstream_current_burst <= niosSystemCamControl_burst_7_upstream_next_burst_count;
+    end
+
+
+  //a 1 or burstcount fifo empty, to initialize the counter, which is an e_mux
+  assign p0_niosSystemCamControl_burst_7_upstream_load_fifo = (~niosSystemCamControl_burst_7_upstream_load_fifo)? 1 :
+    (((in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read) & niosSystemCamControl_burst_7_upstream_load_fifo))? 1 :
+    ~niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty;
+
+  //whether to load directly to the counter or to the fifo, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_upstream_load_fifo <= 0;
+      else if ((in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read) & ~niosSystemCamControl_burst_7_upstream_load_fifo | niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst)
+          niosSystemCamControl_burst_7_upstream_load_fifo <= p0_niosSystemCamControl_burst_7_upstream_load_fifo;
+    end
+
+
+  //the last cycle in the burst for niosSystemCamControl_burst_7_upstream, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst = ~(|niosSystemCamControl_burst_7_upstream_current_burst_minus_one) & niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa;
+
+  //rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream, which is an e_fifo_with_registered_outputs
+  rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream_module rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream
+    (
+      .clear_fifo           (1'b0),
+      .clk                  (clk),
+      .data_in              (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream),
+      .data_out             (cpu_0_data_master_rdv_fifo_output_from_niosSystemCamControl_burst_7_upstream),
+      .empty                (),
+      .fifo_contains_ones_n (cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_7_upstream),
+      .full                 (),
+      .read                 (niosSystemCamControl_burst_7_upstream_move_on_to_next_transaction),
+      .reset_n              (reset_n),
+      .sync_reset           (1'b0),
+      .write                (in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read)
+    );
+
+  assign cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register = ~cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_7_upstream;
+  //local readdatavalid cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream = niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa;
+
+  //niosSystemCamControl_burst_7_upstream_writedata mux, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_writedata = cpu_0_data_master_writedata;
+
+  //byteaddress mux for niosSystemCamControl_burst_7/upstream, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_byteaddress = cpu_0_data_master_address_to_slave;
+
+  //master is always granted when requested
+  assign cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream = cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream;
+
+  //cpu_0/data_master saved-grant niosSystemCamControl_burst_7/upstream, which is an e_assign
+  assign cpu_0_data_master_saved_grant_niosSystemCamControl_burst_7_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream;
+
+  //allow new arb cycle for niosSystemCamControl_burst_7/upstream, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_allow_new_arb_cycle = 1;
+
+  //placeholder chosen master
+  assign niosSystemCamControl_burst_7_upstream_grant_vector = 1;
+
+  //placeholder vector of master qualified-requests
+  assign niosSystemCamControl_burst_7_upstream_master_qreq_vector = 1;
+
+  //niosSystemCamControl_burst_7_upstream_firsttransfer first transaction, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_firsttransfer = niosSystemCamControl_burst_7_upstream_begins_xfer ? niosSystemCamControl_burst_7_upstream_unreg_firsttransfer : niosSystemCamControl_burst_7_upstream_reg_firsttransfer;
+
+  //niosSystemCamControl_burst_7_upstream_unreg_firsttransfer first transaction, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_unreg_firsttransfer = ~(niosSystemCamControl_burst_7_upstream_slavearbiterlockenable & niosSystemCamControl_burst_7_upstream_any_continuerequest);
+
+  //niosSystemCamControl_burst_7_upstream_reg_firsttransfer first transaction, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_upstream_reg_firsttransfer <= 1'b1;
+      else if (niosSystemCamControl_burst_7_upstream_begins_xfer)
+          niosSystemCamControl_burst_7_upstream_reg_firsttransfer <= niosSystemCamControl_burst_7_upstream_unreg_firsttransfer;
+    end
+
+
+  //niosSystemCamControl_burst_7_upstream_next_bbt_burstcount next_bbt_burstcount, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_next_bbt_burstcount = ((((niosSystemCamControl_burst_7_upstream_write) && (niosSystemCamControl_burst_7_upstream_bbt_burstcounter == 0))))? (niosSystemCamControl_burst_7_upstream_burstcount - 1) :
+    ((((niosSystemCamControl_burst_7_upstream_read) && (niosSystemCamControl_burst_7_upstream_bbt_burstcounter == 0))))? 0 :
+    (niosSystemCamControl_burst_7_upstream_bbt_burstcounter - 1);
+
+  //niosSystemCamControl_burst_7_upstream_bbt_burstcounter bbt_burstcounter, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_upstream_bbt_burstcounter <= 0;
+      else if (niosSystemCamControl_burst_7_upstream_begins_xfer)
+          niosSystemCamControl_burst_7_upstream_bbt_burstcounter <= niosSystemCamControl_burst_7_upstream_next_bbt_burstcount;
+    end
+
+
+  //niosSystemCamControl_burst_7_upstream_beginbursttransfer_internal begin burst transfer, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_beginbursttransfer_internal = niosSystemCamControl_burst_7_upstream_begins_xfer & (niosSystemCamControl_burst_7_upstream_bbt_burstcounter == 0);
+
+  //niosSystemCamControl_burst_7_upstream_read assignment, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_read = cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_read;
+
+  //niosSystemCamControl_burst_7_upstream_write assignment, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_write = cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_write;
+
+  assign shifted_address_to_niosSystemCamControl_burst_7_upstream_from_cpu_0_data_master = cpu_0_data_master_address_to_slave;
+  //niosSystemCamControl_burst_7_upstream_address mux, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_address = shifted_address_to_niosSystemCamControl_burst_7_upstream_from_cpu_0_data_master >> 2;
+
+  //d1_niosSystemCamControl_burst_7_upstream_end_xfer register, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_niosSystemCamControl_burst_7_upstream_end_xfer <= 1;
+      else 
+        d1_niosSystemCamControl_burst_7_upstream_end_xfer <= niosSystemCamControl_burst_7_upstream_end_xfer;
+    end
+
+
+  //niosSystemCamControl_burst_7_upstream_waits_for_read in a cycle, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_waits_for_read = niosSystemCamControl_burst_7_upstream_in_a_read_cycle & niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
+
+  //niosSystemCamControl_burst_7_upstream_in_a_read_cycle assignment, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_in_a_read_cycle = cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_read;
+
+  //in_a_read_cycle assignment, which is an e_mux
+  assign in_a_read_cycle = niosSystemCamControl_burst_7_upstream_in_a_read_cycle;
+
+  //niosSystemCamControl_burst_7_upstream_waits_for_write in a cycle, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_waits_for_write = niosSystemCamControl_burst_7_upstream_in_a_write_cycle & niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
+
+  //niosSystemCamControl_burst_7_upstream_in_a_write_cycle assignment, which is an e_assign
+  assign niosSystemCamControl_burst_7_upstream_in_a_write_cycle = cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_write;
+
+  //in_a_write_cycle assignment, which is an e_mux
+  assign in_a_write_cycle = niosSystemCamControl_burst_7_upstream_in_a_write_cycle;
+
+  assign wait_for_niosSystemCamControl_burst_7_upstream_counter = 0;
+  //niosSystemCamControl_burst_7_upstream_byteenable byte enable port mux, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_byteenable = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? cpu_0_data_master_byteenable :
+    -1;
+
+  //burstcount mux, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_burstcount = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? cpu_0_data_master_burstcount :
+    1;
+
+  //debugaccess mux, which is an e_mux
+  assign niosSystemCamControl_burst_7_upstream_debugaccess = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? cpu_0_data_master_debugaccess :
+    0;
+
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //niosSystemCamControl_burst_7/upstream enable non-zero assertions, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          enable_nonzero_assertions <= 0;
+      else 
+        enable_nonzero_assertions <= 1'b1;
+    end
+
+
+  //cpu_0/data_master non-zero burstcount assertion, which is an e_process
+  always @(posedge clk)
+    begin
+      if (cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream && (cpu_0_data_master_burstcount == 0) && enable_nonzero_assertions)
+        begin
+          $write("%0d ns: cpu_0/data_master drove 0 on its 'burstcount' port while accessing slave niosSystemCamControl_burst_7/upstream", $time);
+          $stop;
+        end
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module niosSystemCamControl_burst_7_downstream_arbitrator (
+                                                            // inputs:
+                                                             clk,
+                                                             d1_performance_counter_0_control_slave_end_xfer,
+                                                             niosSystemCamControl_burst_7_downstream_address,
+                                                             niosSystemCamControl_burst_7_downstream_burstcount,
+                                                             niosSystemCamControl_burst_7_downstream_byteenable,
+                                                             niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave,
+                                                             niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave,
+                                                             niosSystemCamControl_burst_7_downstream_read,
+                                                             niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave,
+                                                             niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave,
+                                                             niosSystemCamControl_burst_7_downstream_write,
+                                                             niosSystemCamControl_burst_7_downstream_writedata,
+                                                             performance_counter_0_control_slave_readdata_from_sa,
+                                                             reset_n,
+
+                                                            // outputs:
+                                                             niosSystemCamControl_burst_7_downstream_address_to_slave,
+                                                             niosSystemCamControl_burst_7_downstream_latency_counter,
+                                                             niosSystemCamControl_burst_7_downstream_readdata,
+                                                             niosSystemCamControl_burst_7_downstream_readdatavalid,
+                                                             niosSystemCamControl_burst_7_downstream_reset_n,
+                                                             niosSystemCamControl_burst_7_downstream_waitrequest
+                                                          )
+;
+
+  output  [  6: 0] niosSystemCamControl_burst_7_downstream_address_to_slave;
+  output           niosSystemCamControl_burst_7_downstream_latency_counter;
+  output  [ 31: 0] niosSystemCamControl_burst_7_downstream_readdata;
+  output           niosSystemCamControl_burst_7_downstream_readdatavalid;
+  output           niosSystemCamControl_burst_7_downstream_reset_n;
+  output           niosSystemCamControl_burst_7_downstream_waitrequest;
+  input            clk;
+  input            d1_performance_counter_0_control_slave_end_xfer;
+  input   [  6: 0] niosSystemCamControl_burst_7_downstream_address;
+  input            niosSystemCamControl_burst_7_downstream_burstcount;
+  input   [  3: 0] niosSystemCamControl_burst_7_downstream_byteenable;
+  input            niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave;
+  input            niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave;
+  input            niosSystemCamControl_burst_7_downstream_read;
+  input            niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave;
+  input            niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave;
+  input            niosSystemCamControl_burst_7_downstream_write;
+  input   [ 31: 0] niosSystemCamControl_burst_7_downstream_writedata;
+  input   [ 31: 0] performance_counter_0_control_slave_readdata_from_sa;
+  input            reset_n;
+
+  reg              active_and_waiting_last_time;
+  reg     [  6: 0] niosSystemCamControl_burst_7_downstream_address_last_time;
+  wire    [  6: 0] niosSystemCamControl_burst_7_downstream_address_to_slave;
+  reg              niosSystemCamControl_burst_7_downstream_burstcount_last_time;
+  reg     [  3: 0] niosSystemCamControl_burst_7_downstream_byteenable_last_time;
+  wire             niosSystemCamControl_burst_7_downstream_latency_counter;
+  reg              niosSystemCamControl_burst_7_downstream_read_last_time;
+  wire    [ 31: 0] niosSystemCamControl_burst_7_downstream_readdata;
+  wire             niosSystemCamControl_burst_7_downstream_readdatavalid;
+  wire             niosSystemCamControl_burst_7_downstream_reset_n;
+  wire             niosSystemCamControl_burst_7_downstream_run;
+  wire             niosSystemCamControl_burst_7_downstream_waitrequest;
+  reg              niosSystemCamControl_burst_7_downstream_write_last_time;
+  reg     [ 31: 0] niosSystemCamControl_burst_7_downstream_writedata_last_time;
+  wire             pre_flush_niosSystemCamControl_burst_7_downstream_readdatavalid;
+  wire             r_1;
+  //r_1 master_run cascaded wait assignment, which is an e_assign
+  assign r_1 = 1 & ((~niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave | ~(niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write) | (1 & (niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write)))) & ((~niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave | ~(niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write) | (1 & (niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write))));
+
+  //cascaded wait assignment, which is an e_assign
+  assign niosSystemCamControl_burst_7_downstream_run = r_1;
+
+  //optimize select-logic by passing only those address bits which matter.
+  assign niosSystemCamControl_burst_7_downstream_address_to_slave = niosSystemCamControl_burst_7_downstream_address;
+
+  //latent slave read data valids which may be flushed, which is an e_mux
+  assign pre_flush_niosSystemCamControl_burst_7_downstream_readdatavalid = niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave;
+
+  //latent slave read data valid which is not flushed, which is an e_mux
+  assign niosSystemCamControl_burst_7_downstream_readdatavalid = 0 |
+    pre_flush_niosSystemCamControl_burst_7_downstream_readdatavalid;
+
+  //niosSystemCamControl_burst_7/downstream readdata mux, which is an e_mux
+  assign niosSystemCamControl_burst_7_downstream_readdata = performance_counter_0_control_slave_readdata_from_sa;
+
+  //actual waitrequest port, which is an e_assign
+  assign niosSystemCamControl_burst_7_downstream_waitrequest = ~niosSystemCamControl_burst_7_downstream_run;
+
+  //latent max counter, which is an e_assign
+  assign niosSystemCamControl_burst_7_downstream_latency_counter = 0;
+
+  //niosSystemCamControl_burst_7_downstream_reset_n assignment, which is an e_assign
+  assign niosSystemCamControl_burst_7_downstream_reset_n = reset_n;
+
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //niosSystemCamControl_burst_7_downstream_address check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_downstream_address_last_time <= 0;
+      else 
+        niosSystemCamControl_burst_7_downstream_address_last_time <= niosSystemCamControl_burst_7_downstream_address;
+    end
+
+
+  //niosSystemCamControl_burst_7/downstream waited last time, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          active_and_waiting_last_time <= 0;
+      else 
+        active_and_waiting_last_time <= niosSystemCamControl_burst_7_downstream_waitrequest & (niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write);
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_address matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_address != niosSystemCamControl_burst_7_downstream_address_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_burst_7_downstream_address did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_burstcount check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_downstream_burstcount_last_time <= 0;
+      else 
+        niosSystemCamControl_burst_7_downstream_burstcount_last_time <= niosSystemCamControl_burst_7_downstream_burstcount;
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_burstcount matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_burstcount != niosSystemCamControl_burst_7_downstream_burstcount_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_burst_7_downstream_burstcount did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_byteenable check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_downstream_byteenable_last_time <= 0;
+      else 
+        niosSystemCamControl_burst_7_downstream_byteenable_last_time <= niosSystemCamControl_burst_7_downstream_byteenable;
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_byteenable matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_byteenable != niosSystemCamControl_burst_7_downstream_byteenable_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_burst_7_downstream_byteenable did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_read check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_downstream_read_last_time <= 0;
+      else 
+        niosSystemCamControl_burst_7_downstream_read_last_time <= niosSystemCamControl_burst_7_downstream_read;
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_read matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_read != niosSystemCamControl_burst_7_downstream_read_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_burst_7_downstream_read did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_write check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_downstream_write_last_time <= 0;
+      else 
+        niosSystemCamControl_burst_7_downstream_write_last_time <= niosSystemCamControl_burst_7_downstream_write;
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_write matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_write != niosSystemCamControl_burst_7_downstream_write_last_time))
+        begin
+          $write("%0d ns: niosSystemCamControl_burst_7_downstream_write did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_writedata check against wait, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_downstream_writedata_last_time <= 0;
+      else 
+        niosSystemCamControl_burst_7_downstream_writedata_last_time <= niosSystemCamControl_burst_7_downstream_writedata;
+    end
+
+
+  //niosSystemCamControl_burst_7_downstream_writedata matches last port_name, which is an e_process
+  always @(posedge clk)
+    begin
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_writedata != niosSystemCamControl_burst_7_downstream_writedata_last_time) & niosSystemCamControl_burst_7_downstream_write)
+        begin
+          $write("%0d ns: niosSystemCamControl_burst_7_downstream_writedata did not heed wait!!!", $time);
+          $stop;
+        end
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module burstcount_fifo_for_niosSystemCamControl_burst_8_upstream_module (
+                                                                          // inputs:
+                                                                           clear_fifo,
+                                                                           clk,
+                                                                           data_in,
+                                                                           read,
+                                                                           reset_n,
+                                                                           sync_reset,
+                                                                           write,
+
+                                                                          // outputs:
+                                                                           data_out,
+                                                                           empty,
+                                                                           fifo_contains_ones_n,
+                                                                           full
+                                                                        )
+;
+
   output  [  4: 0] data_out;
   output           empty;
   output           fifo_contains_ones_n;
@@ -9505,7 +10639,7 @@ endmodule
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
-module rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream_module (
+module rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_8_upstream_module (
                                                                                         // inputs:
                                                                                          clear_fifo,
                                                                                          clk,
@@ -9856,7 +10990,7 @@ endmodule
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
-module niosSystemCamControl_burst_7_upstream_arbitrator (
+module niosSystemCamControl_burst_8_upstream_arbitrator (
                                                           // inputs:
                                                            clk,
                                                            cpu_0_data_master_address_to_slave,
@@ -9874,50 +11008,51 @@ module niosSystemCamControl_burst_7_upstream_arbitrator (
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register,
                                                            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
                                                            cpu_0_data_master_write,
-                                                           niosSystemCamControl_burst_7_upstream_readdata,
-                                                           niosSystemCamControl_burst_7_upstream_readdatavalid,
-                                                           niosSystemCamControl_burst_7_upstream_waitrequest,
+                                                           niosSystemCamControl_burst_8_upstream_readdata,
+                                                           niosSystemCamControl_burst_8_upstream_readdatavalid,
+                                                           niosSystemCamControl_burst_8_upstream_waitrequest,
                                                            reset_n,
 
                                                           // outputs:
-                                                           cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream,
-                                                           cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream,
-                                                           cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream,
-                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream,
-                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register,
-                                                           cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream,
-                                                           d1_niosSystemCamControl_burst_7_upstream_end_xfer,
-                                                           niosSystemCamControl_burst_7_upstream_address,
-                                                           niosSystemCamControl_burst_7_upstream_burstcount,
-                                                           niosSystemCamControl_burst_7_upstream_byteaddress,
-                                                           niosSystemCamControl_burst_7_upstream_byteenable,
-                                                           niosSystemCamControl_burst_7_upstream_debugaccess,
-                                                           niosSystemCamControl_burst_7_upstream_read,
-                                                           niosSystemCamControl_burst_7_upstream_readdata_from_sa,
-                                                           niosSystemCamControl_burst_7_upstream_waitrequest_from_sa,
-                                                           niosSystemCamControl_burst_7_upstream_write,
-                                                           niosSystemCamControl_burst_7_upstream_writedata
+                                                           cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream,
+                                                           cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream,
+                                                           cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream,
+                                                           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register,
+                                                           cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream,
+                                                           d1_niosSystemCamControl_burst_8_upstream_end_xfer,
+                                                           niosSystemCamControl_burst_8_upstream_address,
+                                                           niosSystemCamControl_burst_8_upstream_burstcount,
+                                                           niosSystemCamControl_burst_8_upstream_byteaddress,
+                                                           niosSystemCamControl_burst_8_upstream_byteenable,
+                                                           niosSystemCamControl_burst_8_upstream_debugaccess,
+                                                           niosSystemCamControl_burst_8_upstream_read,
+                                                           niosSystemCamControl_burst_8_upstream_readdata_from_sa,
+                                                           niosSystemCamControl_burst_8_upstream_waitrequest_from_sa,
+                                                           niosSystemCamControl_burst_8_upstream_write,
+                                                           niosSystemCamControl_burst_8_upstream_writedata
                                                         )
 ;
 
-  output  [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream;
-  output           cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream;
-  output           cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream;
-  output           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream;
-  output           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
-  output           cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream;
-  output           d1_niosSystemCamControl_burst_7_upstream_end_xfer;
-  output  [ 22: 0] niosSystemCamControl_burst_7_upstream_address;
-  output  [  3: 0] niosSystemCamControl_burst_7_upstream_burstcount;
-  output  [ 23: 0] niosSystemCamControl_burst_7_upstream_byteaddress;
-  output  [  1: 0] niosSystemCamControl_burst_7_upstream_byteenable;
-  output           niosSystemCamControl_burst_7_upstream_debugaccess;
-  output           niosSystemCamControl_burst_7_upstream_read;
-  output  [ 15: 0] niosSystemCamControl_burst_7_upstream_readdata_from_sa;
-  output           niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
-  output           niosSystemCamControl_burst_7_upstream_write;
-  output  [ 15: 0] niosSystemCamControl_burst_7_upstream_writedata;
+  output  [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream;
+  output           cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream;
+  output           cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream;
+  output           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream;
+  output           cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
+  output           cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream;
+  output           d1_niosSystemCamControl_burst_8_upstream_end_xfer;
+  output  [ 22: 0] niosSystemCamControl_burst_8_upstream_address;
+  output  [  3: 0] niosSystemCamControl_burst_8_upstream_burstcount;
+  output  [ 23: 0] niosSystemCamControl_burst_8_upstream_byteaddress;
+  output  [  1: 0] niosSystemCamControl_burst_8_upstream_byteenable;
+  output           niosSystemCamControl_burst_8_upstream_debugaccess;
+  output           niosSystemCamControl_burst_8_upstream_read;
+  output  [ 15: 0] niosSystemCamControl_burst_8_upstream_readdata_from_sa;
+  output           niosSystemCamControl_burst_8_upstream_waitrequest_from_sa;
+  output           niosSystemCamControl_burst_8_upstream_write;
+  output  [ 15: 0] niosSystemCamControl_burst_8_upstream_writedata;
   input            clk;
   input   [ 24: 0] cpu_0_data_master_address_to_slave;
   input   [  3: 0] cpu_0_data_master_burstcount;
@@ -9934,356 +11069,357 @@ module niosSystemCamControl_burst_7_upstream_arbitrator (
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register;
   input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
+  input            cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
   input            cpu_0_data_master_write;
-  input   [ 15: 0] niosSystemCamControl_burst_7_upstream_readdata;
-  input            niosSystemCamControl_burst_7_upstream_readdatavalid;
-  input            niosSystemCamControl_burst_7_upstream_waitrequest;
+  input   [ 15: 0] niosSystemCamControl_burst_8_upstream_readdata;
+  input            niosSystemCamControl_burst_8_upstream_readdatavalid;
+  input            niosSystemCamControl_burst_8_upstream_waitrequest;
   input            reset_n;
 
   wire             cpu_0_data_master_arbiterlock;
   wire             cpu_0_data_master_arbiterlock2;
-  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream;
-  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream_segment_0;
-  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream_segment_1;
+  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream;
+  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream_segment_0;
+  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream_segment_1;
   wire             cpu_0_data_master_continuerequest;
-  wire             cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream;
-  wire             cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream;
-  wire             cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_7_upstream;
-  wire             cpu_0_data_master_rdv_fifo_output_from_niosSystemCamControl_burst_7_upstream;
-  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream;
-  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
-  wire             cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream;
-  wire             cpu_0_data_master_saved_grant_niosSystemCamControl_burst_7_upstream;
-  reg              d1_niosSystemCamControl_burst_7_upstream_end_xfer;
+  wire             cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream;
+  wire             cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream;
+  wire             cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_8_upstream;
+  wire             cpu_0_data_master_rdv_fifo_output_from_niosSystemCamControl_burst_8_upstream;
+  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream;
+  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
+  wire             cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream;
+  wire             cpu_0_data_master_saved_grant_niosSystemCamControl_burst_8_upstream;
+  reg              d1_niosSystemCamControl_burst_8_upstream_end_xfer;
   reg              d1_reasons_to_wait;
   reg              enable_nonzero_assertions;
-  wire             end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream;
+  wire             end_xfer_arb_share_counter_term_niosSystemCamControl_burst_8_upstream;
   wire             in_a_read_cycle;
   wire             in_a_write_cycle;
-  wire    [ 22: 0] niosSystemCamControl_burst_7_upstream_address;
-  wire             niosSystemCamControl_burst_7_upstream_allgrants;
-  wire             niosSystemCamControl_burst_7_upstream_allow_new_arb_cycle;
-  wire             niosSystemCamControl_burst_7_upstream_any_bursting_master_saved_grant;
-  wire             niosSystemCamControl_burst_7_upstream_any_continuerequest;
-  wire             niosSystemCamControl_burst_7_upstream_arb_counter_enable;
-  reg     [  5: 0] niosSystemCamControl_burst_7_upstream_arb_share_counter;
-  wire    [  5: 0] niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value;
-  wire    [  5: 0] niosSystemCamControl_burst_7_upstream_arb_share_set_values;
-  reg     [  2: 0] niosSystemCamControl_burst_7_upstream_bbt_burstcounter;
-  wire             niosSystemCamControl_burst_7_upstream_beginbursttransfer_internal;
-  wire             niosSystemCamControl_burst_7_upstream_begins_xfer;
-  wire    [  3: 0] niosSystemCamControl_burst_7_upstream_burstcount;
-  wire             niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty;
-  wire    [ 23: 0] niosSystemCamControl_burst_7_upstream_byteaddress;
-  wire    [  1: 0] niosSystemCamControl_burst_7_upstream_byteenable;
-  reg     [  4: 0] niosSystemCamControl_burst_7_upstream_current_burst;
-  wire    [  4: 0] niosSystemCamControl_burst_7_upstream_current_burst_minus_one;
-  wire             niosSystemCamControl_burst_7_upstream_debugaccess;
-  wire             niosSystemCamControl_burst_7_upstream_end_xfer;
-  wire             niosSystemCamControl_burst_7_upstream_firsttransfer;
-  wire             niosSystemCamControl_burst_7_upstream_grant_vector;
-  wire             niosSystemCamControl_burst_7_upstream_in_a_read_cycle;
-  wire             niosSystemCamControl_burst_7_upstream_in_a_write_cycle;
-  reg              niosSystemCamControl_burst_7_upstream_load_fifo;
-  wire             niosSystemCamControl_burst_7_upstream_master_qreq_vector;
-  wire             niosSystemCamControl_burst_7_upstream_move_on_to_next_transaction;
-  wire    [  2: 0] niosSystemCamControl_burst_7_upstream_next_bbt_burstcount;
-  wire    [  4: 0] niosSystemCamControl_burst_7_upstream_next_burst_count;
-  wire             niosSystemCamControl_burst_7_upstream_non_bursting_master_requests;
-  wire             niosSystemCamControl_burst_7_upstream_read;
-  wire    [ 15: 0] niosSystemCamControl_burst_7_upstream_readdata_from_sa;
-  wire             niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa;
-  reg              niosSystemCamControl_burst_7_upstream_reg_firsttransfer;
-  wire    [  4: 0] niosSystemCamControl_burst_7_upstream_selected_burstcount;
-  reg              niosSystemCamControl_burst_7_upstream_slavearbiterlockenable;
-  wire             niosSystemCamControl_burst_7_upstream_slavearbiterlockenable2;
-  wire             niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst;
-  wire    [  4: 0] niosSystemCamControl_burst_7_upstream_transaction_burst_count;
-  wire             niosSystemCamControl_burst_7_upstream_unreg_firsttransfer;
-  wire             niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
-  wire             niosSystemCamControl_burst_7_upstream_waits_for_read;
-  wire             niosSystemCamControl_burst_7_upstream_waits_for_write;
-  wire             niosSystemCamControl_burst_7_upstream_write;
-  wire    [ 15: 0] niosSystemCamControl_burst_7_upstream_writedata;
-  wire             p0_niosSystemCamControl_burst_7_upstream_load_fifo;
-  wire             wait_for_niosSystemCamControl_burst_7_upstream_counter;
+  wire    [ 22: 0] niosSystemCamControl_burst_8_upstream_address;
+  wire             niosSystemCamControl_burst_8_upstream_allgrants;
+  wire             niosSystemCamControl_burst_8_upstream_allow_new_arb_cycle;
+  wire             niosSystemCamControl_burst_8_upstream_any_bursting_master_saved_grant;
+  wire             niosSystemCamControl_burst_8_upstream_any_continuerequest;
+  wire             niosSystemCamControl_burst_8_upstream_arb_counter_enable;
+  reg     [  5: 0] niosSystemCamControl_burst_8_upstream_arb_share_counter;
+  wire    [  5: 0] niosSystemCamControl_burst_8_upstream_arb_share_counter_next_value;
+  wire    [  5: 0] niosSystemCamControl_burst_8_upstream_arb_share_set_values;
+  reg     [  2: 0] niosSystemCamControl_burst_8_upstream_bbt_burstcounter;
+  wire             niosSystemCamControl_burst_8_upstream_beginbursttransfer_internal;
+  wire             niosSystemCamControl_burst_8_upstream_begins_xfer;
+  wire    [  3: 0] niosSystemCamControl_burst_8_upstream_burstcount;
+  wire             niosSystemCamControl_burst_8_upstream_burstcount_fifo_empty;
+  wire    [ 23: 0] niosSystemCamControl_burst_8_upstream_byteaddress;
+  wire    [  1: 0] niosSystemCamControl_burst_8_upstream_byteenable;
+  reg     [  4: 0] niosSystemCamControl_burst_8_upstream_current_burst;
+  wire    [  4: 0] niosSystemCamControl_burst_8_upstream_current_burst_minus_one;
+  wire             niosSystemCamControl_burst_8_upstream_debugaccess;
+  wire             niosSystemCamControl_burst_8_upstream_end_xfer;
+  wire             niosSystemCamControl_burst_8_upstream_firsttransfer;
+  wire             niosSystemCamControl_burst_8_upstream_grant_vector;
+  wire             niosSystemCamControl_burst_8_upstream_in_a_read_cycle;
+  wire             niosSystemCamControl_burst_8_upstream_in_a_write_cycle;
+  reg              niosSystemCamControl_burst_8_upstream_load_fifo;
+  wire             niosSystemCamControl_burst_8_upstream_master_qreq_vector;
+  wire             niosSystemCamControl_burst_8_upstream_move_on_to_next_transaction;
+  wire    [  2: 0] niosSystemCamControl_burst_8_upstream_next_bbt_burstcount;
+  wire    [  4: 0] niosSystemCamControl_burst_8_upstream_next_burst_count;
+  wire             niosSystemCamControl_burst_8_upstream_non_bursting_master_requests;
+  wire             niosSystemCamControl_burst_8_upstream_read;
+  wire    [ 15: 0] niosSystemCamControl_burst_8_upstream_readdata_from_sa;
+  wire             niosSystemCamControl_burst_8_upstream_readdatavalid_from_sa;
+  reg              niosSystemCamControl_burst_8_upstream_reg_firsttransfer;
+  wire    [  4: 0] niosSystemCamControl_burst_8_upstream_selected_burstcount;
+  reg              niosSystemCamControl_burst_8_upstream_slavearbiterlockenable;
+  wire             niosSystemCamControl_burst_8_upstream_slavearbiterlockenable2;
+  wire             niosSystemCamControl_burst_8_upstream_this_cycle_is_the_last_burst;
+  wire    [  4: 0] niosSystemCamControl_burst_8_upstream_transaction_burst_count;
+  wire             niosSystemCamControl_burst_8_upstream_unreg_firsttransfer;
+  wire             niosSystemCamControl_burst_8_upstream_waitrequest_from_sa;
+  wire             niosSystemCamControl_burst_8_upstream_waits_for_read;
+  wire             niosSystemCamControl_burst_8_upstream_waits_for_write;
+  wire             niosSystemCamControl_burst_8_upstream_write;
+  wire    [ 15: 0] niosSystemCamControl_burst_8_upstream_writedata;
+  wire             p0_niosSystemCamControl_burst_8_upstream_load_fifo;
+  wire             wait_for_niosSystemCamControl_burst_8_upstream_counter;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
           d1_reasons_to_wait <= 0;
       else 
-        d1_reasons_to_wait <= ~niosSystemCamControl_burst_7_upstream_end_xfer;
+        d1_reasons_to_wait <= ~niosSystemCamControl_burst_8_upstream_end_xfer;
     end
 
 
-  assign niosSystemCamControl_burst_7_upstream_begins_xfer = ~d1_reasons_to_wait & ((cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream));
-  //assign niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa = niosSystemCamControl_burst_7_upstream_readdatavalid so that symbol knows where to group signals which may go to master only, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa = niosSystemCamControl_burst_7_upstream_readdatavalid;
+  assign niosSystemCamControl_burst_8_upstream_begins_xfer = ~d1_reasons_to_wait & ((cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream));
+  //assign niosSystemCamControl_burst_8_upstream_readdatavalid_from_sa = niosSystemCamControl_burst_8_upstream_readdatavalid so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_readdatavalid_from_sa = niosSystemCamControl_burst_8_upstream_readdatavalid;
 
-  //assign niosSystemCamControl_burst_7_upstream_readdata_from_sa = niosSystemCamControl_burst_7_upstream_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_readdata_from_sa = niosSystemCamControl_burst_7_upstream_readdata;
+  //assign niosSystemCamControl_burst_8_upstream_readdata_from_sa = niosSystemCamControl_burst_8_upstream_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_readdata_from_sa = niosSystemCamControl_burst_8_upstream_readdata;
 
-  assign cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream = ({cpu_0_data_master_address_to_slave[24 : 23] , 23'b0} == 25'h800000) & (cpu_0_data_master_read | cpu_0_data_master_write);
-  //assign niosSystemCamControl_burst_7_upstream_waitrequest_from_sa = niosSystemCamControl_burst_7_upstream_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_waitrequest_from_sa = niosSystemCamControl_burst_7_upstream_waitrequest;
+  assign cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream = ({cpu_0_data_master_address_to_slave[24 : 23] , 23'b0} == 25'h800000) & (cpu_0_data_master_read | cpu_0_data_master_write);
+  //assign niosSystemCamControl_burst_8_upstream_waitrequest_from_sa = niosSystemCamControl_burst_8_upstream_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_waitrequest_from_sa = niosSystemCamControl_burst_8_upstream_waitrequest;
 
-  //niosSystemCamControl_burst_7_upstream_arb_share_counter set values, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_arb_share_set_values = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? (((cpu_0_data_master_write) ? cpu_0_data_master_burstcount<< 1 : 1)) :
+  //niosSystemCamControl_burst_8_upstream_arb_share_counter set values, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_arb_share_set_values = (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream)? (((cpu_0_data_master_write) ? cpu_0_data_master_burstcount<< 1 : 1)) :
     1;
 
-  //niosSystemCamControl_burst_7_upstream_non_bursting_master_requests mux, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_non_bursting_master_requests = 0;
+  //niosSystemCamControl_burst_8_upstream_non_bursting_master_requests mux, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_non_bursting_master_requests = 0;
 
-  //niosSystemCamControl_burst_7_upstream_any_bursting_master_saved_grant mux, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_any_bursting_master_saved_grant = cpu_0_data_master_saved_grant_niosSystemCamControl_burst_7_upstream;
+  //niosSystemCamControl_burst_8_upstream_any_bursting_master_saved_grant mux, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_any_bursting_master_saved_grant = cpu_0_data_master_saved_grant_niosSystemCamControl_burst_8_upstream;
 
-  //niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value assignment, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value = niosSystemCamControl_burst_7_upstream_firsttransfer ? (niosSystemCamControl_burst_7_upstream_arb_share_set_values - 1) : |niosSystemCamControl_burst_7_upstream_arb_share_counter ? (niosSystemCamControl_burst_7_upstream_arb_share_counter - 1) : 0;
+  //niosSystemCamControl_burst_8_upstream_arb_share_counter_next_value assignment, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_arb_share_counter_next_value = niosSystemCamControl_burst_8_upstream_firsttransfer ? (niosSystemCamControl_burst_8_upstream_arb_share_set_values - 1) : |niosSystemCamControl_burst_8_upstream_arb_share_counter ? (niosSystemCamControl_burst_8_upstream_arb_share_counter - 1) : 0;
 
-  //niosSystemCamControl_burst_7_upstream_allgrants all slave grants, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_allgrants = |niosSystemCamControl_burst_7_upstream_grant_vector;
+  //niosSystemCamControl_burst_8_upstream_allgrants all slave grants, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_allgrants = |niosSystemCamControl_burst_8_upstream_grant_vector;
 
-  //niosSystemCamControl_burst_7_upstream_end_xfer assignment, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_end_xfer = ~(niosSystemCamControl_burst_7_upstream_waits_for_read | niosSystemCamControl_burst_7_upstream_waits_for_write);
+  //niosSystemCamControl_burst_8_upstream_end_xfer assignment, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_end_xfer = ~(niosSystemCamControl_burst_8_upstream_waits_for_read | niosSystemCamControl_burst_8_upstream_waits_for_write);
 
-  //end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream arb share counter enable term, which is an e_assign
-  assign end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream = niosSystemCamControl_burst_7_upstream_end_xfer & (~niosSystemCamControl_burst_7_upstream_any_bursting_master_saved_grant | in_a_read_cycle | in_a_write_cycle);
+  //end_xfer_arb_share_counter_term_niosSystemCamControl_burst_8_upstream arb share counter enable term, which is an e_assign
+  assign end_xfer_arb_share_counter_term_niosSystemCamControl_burst_8_upstream = niosSystemCamControl_burst_8_upstream_end_xfer & (~niosSystemCamControl_burst_8_upstream_any_bursting_master_saved_grant | in_a_read_cycle | in_a_write_cycle);
 
-  //niosSystemCamControl_burst_7_upstream_arb_share_counter arbitration counter enable, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_arb_counter_enable = (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream & niosSystemCamControl_burst_7_upstream_allgrants) | (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream & ~niosSystemCamControl_burst_7_upstream_non_bursting_master_requests);
+  //niosSystemCamControl_burst_8_upstream_arb_share_counter arbitration counter enable, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_arb_counter_enable = (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_8_upstream & niosSystemCamControl_burst_8_upstream_allgrants) | (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_8_upstream & ~niosSystemCamControl_burst_8_upstream_non_bursting_master_requests);
 
-  //niosSystemCamControl_burst_7_upstream_arb_share_counter counter, which is an e_register
+  //niosSystemCamControl_burst_8_upstream_arb_share_counter counter, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_upstream_arb_share_counter <= 0;
-      else if (niosSystemCamControl_burst_7_upstream_arb_counter_enable)
-          niosSystemCamControl_burst_7_upstream_arb_share_counter <= niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value;
+          niosSystemCamControl_burst_8_upstream_arb_share_counter <= 0;
+      else if (niosSystemCamControl_burst_8_upstream_arb_counter_enable)
+          niosSystemCamControl_burst_8_upstream_arb_share_counter <= niosSystemCamControl_burst_8_upstream_arb_share_counter_next_value;
     end
 
 
-  //niosSystemCamControl_burst_7_upstream_slavearbiterlockenable slave enables arbiterlock, which is an e_register
+  //niosSystemCamControl_burst_8_upstream_slavearbiterlockenable slave enables arbiterlock, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_upstream_slavearbiterlockenable <= 0;
-      else if ((|niosSystemCamControl_burst_7_upstream_master_qreq_vector & end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream) | (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_7_upstream & ~niosSystemCamControl_burst_7_upstream_non_bursting_master_requests))
-          niosSystemCamControl_burst_7_upstream_slavearbiterlockenable <= |niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value;
+          niosSystemCamControl_burst_8_upstream_slavearbiterlockenable <= 0;
+      else if ((|niosSystemCamControl_burst_8_upstream_master_qreq_vector & end_xfer_arb_share_counter_term_niosSystemCamControl_burst_8_upstream) | (end_xfer_arb_share_counter_term_niosSystemCamControl_burst_8_upstream & ~niosSystemCamControl_burst_8_upstream_non_bursting_master_requests))
+          niosSystemCamControl_burst_8_upstream_slavearbiterlockenable <= |niosSystemCamControl_burst_8_upstream_arb_share_counter_next_value;
     end
 
 
-  //cpu_0/data_master niosSystemCamControl_burst_7/upstream arbiterlock, which is an e_assign
-  assign cpu_0_data_master_arbiterlock = niosSystemCamControl_burst_7_upstream_slavearbiterlockenable & cpu_0_data_master_continuerequest;
+  //cpu_0/data_master niosSystemCamControl_burst_8/upstream arbiterlock, which is an e_assign
+  assign cpu_0_data_master_arbiterlock = niosSystemCamControl_burst_8_upstream_slavearbiterlockenable & cpu_0_data_master_continuerequest;
 
-  //niosSystemCamControl_burst_7_upstream_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_slavearbiterlockenable2 = |niosSystemCamControl_burst_7_upstream_arb_share_counter_next_value;
+  //niosSystemCamControl_burst_8_upstream_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_slavearbiterlockenable2 = |niosSystemCamControl_burst_8_upstream_arb_share_counter_next_value;
 
-  //cpu_0/data_master niosSystemCamControl_burst_7/upstream arbiterlock2, which is an e_assign
-  assign cpu_0_data_master_arbiterlock2 = niosSystemCamControl_burst_7_upstream_slavearbiterlockenable2 & cpu_0_data_master_continuerequest;
+  //cpu_0/data_master niosSystemCamControl_burst_8/upstream arbiterlock2, which is an e_assign
+  assign cpu_0_data_master_arbiterlock2 = niosSystemCamControl_burst_8_upstream_slavearbiterlockenable2 & cpu_0_data_master_continuerequest;
 
-  //niosSystemCamControl_burst_7_upstream_any_continuerequest at least one master continues requesting, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_any_continuerequest = 1;
+  //niosSystemCamControl_burst_8_upstream_any_continuerequest at least one master continues requesting, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_any_continuerequest = 1;
 
   //cpu_0_data_master_continuerequest continued request, which is an e_assign
   assign cpu_0_data_master_continuerequest = 1;
 
-  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register))));
-  //unique name for niosSystemCamControl_burst_7_upstream_move_on_to_next_transaction, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_7_upstream_load_fifo;
+  assign cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream & ~((cpu_0_data_master_read & ((cpu_0_data_master_latency_counter != 0) | (1 < cpu_0_data_master_latency_counter) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register) | (|cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register))));
+  //unique name for niosSystemCamControl_burst_8_upstream_move_on_to_next_transaction, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_move_on_to_next_transaction = niosSystemCamControl_burst_8_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_8_upstream_load_fifo;
 
-  //the currently selected burstcount for niosSystemCamControl_burst_7_upstream, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_selected_burstcount = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? cpu_0_data_master_burstcount :
+  //the currently selected burstcount for niosSystemCamControl_burst_8_upstream, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_selected_burstcount = (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream)? cpu_0_data_master_burstcount :
     1;
 
-  //burstcount_fifo_for_niosSystemCamControl_burst_7_upstream, which is an e_fifo_with_registered_outputs
-  burstcount_fifo_for_niosSystemCamControl_burst_7_upstream_module burstcount_fifo_for_niosSystemCamControl_burst_7_upstream
+  //burstcount_fifo_for_niosSystemCamControl_burst_8_upstream, which is an e_fifo_with_registered_outputs
+  burstcount_fifo_for_niosSystemCamControl_burst_8_upstream_module burstcount_fifo_for_niosSystemCamControl_burst_8_upstream
     (
       .clear_fifo           (1'b0),
       .clk                  (clk),
-      .data_in              (niosSystemCamControl_burst_7_upstream_selected_burstcount),
-      .data_out             (niosSystemCamControl_burst_7_upstream_transaction_burst_count),
-      .empty                (niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty),
+      .data_in              (niosSystemCamControl_burst_8_upstream_selected_burstcount),
+      .data_out             (niosSystemCamControl_burst_8_upstream_transaction_burst_count),
+      .empty                (niosSystemCamControl_burst_8_upstream_burstcount_fifo_empty),
       .fifo_contains_ones_n (),
       .full                 (),
-      .read                 (niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst),
+      .read                 (niosSystemCamControl_burst_8_upstream_this_cycle_is_the_last_burst),
       .reset_n              (reset_n),
       .sync_reset           (1'b0),
-      .write                (in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read & niosSystemCamControl_burst_7_upstream_load_fifo & ~(niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty))
+      .write                (in_a_read_cycle & ~niosSystemCamControl_burst_8_upstream_waits_for_read & niosSystemCamControl_burst_8_upstream_load_fifo & ~(niosSystemCamControl_burst_8_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_8_upstream_burstcount_fifo_empty))
     );
 
-  //niosSystemCamControl_burst_7_upstream current burst minus one, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_current_burst_minus_one = niosSystemCamControl_burst_7_upstream_current_burst - 1;
+  //niosSystemCamControl_burst_8_upstream current burst minus one, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_current_burst_minus_one = niosSystemCamControl_burst_8_upstream_current_burst - 1;
 
-  //what to load in current_burst, for niosSystemCamControl_burst_7_upstream, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_next_burst_count = (((in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read) & ~niosSystemCamControl_burst_7_upstream_load_fifo))? {niosSystemCamControl_burst_7_upstream_selected_burstcount, 1'b0} :
-    ((in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read & niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty))? {niosSystemCamControl_burst_7_upstream_selected_burstcount, 1'b0} :
-    (niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst)? {niosSystemCamControl_burst_7_upstream_transaction_burst_count,  1'b0} :
-    niosSystemCamControl_burst_7_upstream_current_burst_minus_one;
+  //what to load in current_burst, for niosSystemCamControl_burst_8_upstream, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_next_burst_count = (((in_a_read_cycle & ~niosSystemCamControl_burst_8_upstream_waits_for_read) & ~niosSystemCamControl_burst_8_upstream_load_fifo))? {niosSystemCamControl_burst_8_upstream_selected_burstcount, 1'b0} :
+    ((in_a_read_cycle & ~niosSystemCamControl_burst_8_upstream_waits_for_read & niosSystemCamControl_burst_8_upstream_this_cycle_is_the_last_burst & niosSystemCamControl_burst_8_upstream_burstcount_fifo_empty))? {niosSystemCamControl_burst_8_upstream_selected_burstcount, 1'b0} :
+    (niosSystemCamControl_burst_8_upstream_this_cycle_is_the_last_burst)? {niosSystemCamControl_burst_8_upstream_transaction_burst_count,  1'b0} :
+    niosSystemCamControl_burst_8_upstream_current_burst_minus_one;
 
-  //the current burst count for niosSystemCamControl_burst_7_upstream, to be decremented, which is an e_register
+  //the current burst count for niosSystemCamControl_burst_8_upstream, to be decremented, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_upstream_current_burst <= 0;
-      else if (niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa | (~niosSystemCamControl_burst_7_upstream_load_fifo & (in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read)))
-          niosSystemCamControl_burst_7_upstream_current_burst <= niosSystemCamControl_burst_7_upstream_next_burst_count;
+          niosSystemCamControl_burst_8_upstream_current_burst <= 0;
+      else if (niosSystemCamControl_burst_8_upstream_readdatavalid_from_sa | (~niosSystemCamControl_burst_8_upstream_load_fifo & (in_a_read_cycle & ~niosSystemCamControl_burst_8_upstream_waits_for_read)))
+          niosSystemCamControl_burst_8_upstream_current_burst <= niosSystemCamControl_burst_8_upstream_next_burst_count;
     end
 
 
   //a 1 or burstcount fifo empty, to initialize the counter, which is an e_mux
-  assign p0_niosSystemCamControl_burst_7_upstream_load_fifo = (~niosSystemCamControl_burst_7_upstream_load_fifo)? 1 :
-    (((in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read) & niosSystemCamControl_burst_7_upstream_load_fifo))? 1 :
-    ~niosSystemCamControl_burst_7_upstream_burstcount_fifo_empty;
+  assign p0_niosSystemCamControl_burst_8_upstream_load_fifo = (~niosSystemCamControl_burst_8_upstream_load_fifo)? 1 :
+    (((in_a_read_cycle & ~niosSystemCamControl_burst_8_upstream_waits_for_read) & niosSystemCamControl_burst_8_upstream_load_fifo))? 1 :
+    ~niosSystemCamControl_burst_8_upstream_burstcount_fifo_empty;
 
   //whether to load directly to the counter or to the fifo, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_upstream_load_fifo <= 0;
-      else if ((in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read) & ~niosSystemCamControl_burst_7_upstream_load_fifo | niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst)
-          niosSystemCamControl_burst_7_upstream_load_fifo <= p0_niosSystemCamControl_burst_7_upstream_load_fifo;
+          niosSystemCamControl_burst_8_upstream_load_fifo <= 0;
+      else if ((in_a_read_cycle & ~niosSystemCamControl_burst_8_upstream_waits_for_read) & ~niosSystemCamControl_burst_8_upstream_load_fifo | niosSystemCamControl_burst_8_upstream_this_cycle_is_the_last_burst)
+          niosSystemCamControl_burst_8_upstream_load_fifo <= p0_niosSystemCamControl_burst_8_upstream_load_fifo;
     end
 
 
-  //the last cycle in the burst for niosSystemCamControl_burst_7_upstream, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_this_cycle_is_the_last_burst = ~(|niosSystemCamControl_burst_7_upstream_current_burst_minus_one) & niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa;
+  //the last cycle in the burst for niosSystemCamControl_burst_8_upstream, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_this_cycle_is_the_last_burst = ~(|niosSystemCamControl_burst_8_upstream_current_burst_minus_one) & niosSystemCamControl_burst_8_upstream_readdatavalid_from_sa;
 
-  //rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream, which is an e_fifo_with_registered_outputs
-  rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream_module rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_7_upstream
+  //rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_8_upstream, which is an e_fifo_with_registered_outputs
+  rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_8_upstream_module rdv_fifo_for_cpu_0_data_master_to_niosSystemCamControl_burst_8_upstream
     (
       .clear_fifo           (1'b0),
       .clk                  (clk),
-      .data_in              (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream),
-      .data_out             (cpu_0_data_master_rdv_fifo_output_from_niosSystemCamControl_burst_7_upstream),
+      .data_in              (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream),
+      .data_out             (cpu_0_data_master_rdv_fifo_output_from_niosSystemCamControl_burst_8_upstream),
       .empty                (),
-      .fifo_contains_ones_n (cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_7_upstream),
+      .fifo_contains_ones_n (cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_8_upstream),
       .full                 (),
-      .read                 (niosSystemCamControl_burst_7_upstream_move_on_to_next_transaction),
+      .read                 (niosSystemCamControl_burst_8_upstream_move_on_to_next_transaction),
       .reset_n              (reset_n),
       .sync_reset           (1'b0),
-      .write                (in_a_read_cycle & ~niosSystemCamControl_burst_7_upstream_waits_for_read)
+      .write                (in_a_read_cycle & ~niosSystemCamControl_burst_8_upstream_waits_for_read)
     );
 
-  assign cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register = ~cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_7_upstream;
-  //local readdatavalid cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream, which is an e_mux
-  assign cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream = niosSystemCamControl_burst_7_upstream_readdatavalid_from_sa;
+  assign cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register = ~cpu_0_data_master_rdv_fifo_empty_niosSystemCamControl_burst_8_upstream;
+  //local readdatavalid cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream, which is an e_mux
+  assign cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream = niosSystemCamControl_burst_8_upstream_readdatavalid_from_sa;
 
-  //niosSystemCamControl_burst_7_upstream_writedata mux, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_writedata = cpu_0_data_master_dbs_write_16;
+  //niosSystemCamControl_burst_8_upstream_writedata mux, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_writedata = cpu_0_data_master_dbs_write_16;
 
-  //byteaddress mux for niosSystemCamControl_burst_7/upstream, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_byteaddress = cpu_0_data_master_address_to_slave;
+  //byteaddress mux for niosSystemCamControl_burst_8/upstream, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_byteaddress = cpu_0_data_master_address_to_slave;
 
   //master is always granted when requested
-  assign cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream = cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream;
+  assign cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream = cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream;
 
-  //cpu_0/data_master saved-grant niosSystemCamControl_burst_7/upstream, which is an e_assign
-  assign cpu_0_data_master_saved_grant_niosSystemCamControl_burst_7_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream;
+  //cpu_0/data_master saved-grant niosSystemCamControl_burst_8/upstream, which is an e_assign
+  assign cpu_0_data_master_saved_grant_niosSystemCamControl_burst_8_upstream = cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream;
 
-  //allow new arb cycle for niosSystemCamControl_burst_7/upstream, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_allow_new_arb_cycle = 1;
+  //allow new arb cycle for niosSystemCamControl_burst_8/upstream, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_allow_new_arb_cycle = 1;
 
   //placeholder chosen master
-  assign niosSystemCamControl_burst_7_upstream_grant_vector = 1;
+  assign niosSystemCamControl_burst_8_upstream_grant_vector = 1;
 
   //placeholder vector of master qualified-requests
-  assign niosSystemCamControl_burst_7_upstream_master_qreq_vector = 1;
+  assign niosSystemCamControl_burst_8_upstream_master_qreq_vector = 1;
 
-  //niosSystemCamControl_burst_7_upstream_firsttransfer first transaction, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_firsttransfer = niosSystemCamControl_burst_7_upstream_begins_xfer ? niosSystemCamControl_burst_7_upstream_unreg_firsttransfer : niosSystemCamControl_burst_7_upstream_reg_firsttransfer;
+  //niosSystemCamControl_burst_8_upstream_firsttransfer first transaction, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_firsttransfer = niosSystemCamControl_burst_8_upstream_begins_xfer ? niosSystemCamControl_burst_8_upstream_unreg_firsttransfer : niosSystemCamControl_burst_8_upstream_reg_firsttransfer;
 
-  //niosSystemCamControl_burst_7_upstream_unreg_firsttransfer first transaction, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_unreg_firsttransfer = ~(niosSystemCamControl_burst_7_upstream_slavearbiterlockenable & niosSystemCamControl_burst_7_upstream_any_continuerequest);
+  //niosSystemCamControl_burst_8_upstream_unreg_firsttransfer first transaction, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_unreg_firsttransfer = ~(niosSystemCamControl_burst_8_upstream_slavearbiterlockenable & niosSystemCamControl_burst_8_upstream_any_continuerequest);
 
-  //niosSystemCamControl_burst_7_upstream_reg_firsttransfer first transaction, which is an e_register
+  //niosSystemCamControl_burst_8_upstream_reg_firsttransfer first transaction, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_upstream_reg_firsttransfer <= 1'b1;
-      else if (niosSystemCamControl_burst_7_upstream_begins_xfer)
-          niosSystemCamControl_burst_7_upstream_reg_firsttransfer <= niosSystemCamControl_burst_7_upstream_unreg_firsttransfer;
+          niosSystemCamControl_burst_8_upstream_reg_firsttransfer <= 1'b1;
+      else if (niosSystemCamControl_burst_8_upstream_begins_xfer)
+          niosSystemCamControl_burst_8_upstream_reg_firsttransfer <= niosSystemCamControl_burst_8_upstream_unreg_firsttransfer;
     end
 
 
-  //niosSystemCamControl_burst_7_upstream_next_bbt_burstcount next_bbt_burstcount, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_next_bbt_burstcount = ((((niosSystemCamControl_burst_7_upstream_write) && (niosSystemCamControl_burst_7_upstream_bbt_burstcounter == 0))))? (niosSystemCamControl_burst_7_upstream_burstcount - 1) :
-    ((((niosSystemCamControl_burst_7_upstream_read) && (niosSystemCamControl_burst_7_upstream_bbt_burstcounter == 0))))? 0 :
-    (niosSystemCamControl_burst_7_upstream_bbt_burstcounter - 1);
+  //niosSystemCamControl_burst_8_upstream_next_bbt_burstcount next_bbt_burstcount, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_next_bbt_burstcount = ((((niosSystemCamControl_burst_8_upstream_write) && (niosSystemCamControl_burst_8_upstream_bbt_burstcounter == 0))))? (niosSystemCamControl_burst_8_upstream_burstcount - 1) :
+    ((((niosSystemCamControl_burst_8_upstream_read) && (niosSystemCamControl_burst_8_upstream_bbt_burstcounter == 0))))? 0 :
+    (niosSystemCamControl_burst_8_upstream_bbt_burstcounter - 1);
 
-  //niosSystemCamControl_burst_7_upstream_bbt_burstcounter bbt_burstcounter, which is an e_register
+  //niosSystemCamControl_burst_8_upstream_bbt_burstcounter bbt_burstcounter, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_upstream_bbt_burstcounter <= 0;
-      else if (niosSystemCamControl_burst_7_upstream_begins_xfer)
-          niosSystemCamControl_burst_7_upstream_bbt_burstcounter <= niosSystemCamControl_burst_7_upstream_next_bbt_burstcount;
+          niosSystemCamControl_burst_8_upstream_bbt_burstcounter <= 0;
+      else if (niosSystemCamControl_burst_8_upstream_begins_xfer)
+          niosSystemCamControl_burst_8_upstream_bbt_burstcounter <= niosSystemCamControl_burst_8_upstream_next_bbt_burstcount;
     end
 
 
-  //niosSystemCamControl_burst_7_upstream_beginbursttransfer_internal begin burst transfer, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_beginbursttransfer_internal = niosSystemCamControl_burst_7_upstream_begins_xfer & (niosSystemCamControl_burst_7_upstream_bbt_burstcounter == 0);
+  //niosSystemCamControl_burst_8_upstream_beginbursttransfer_internal begin burst transfer, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_beginbursttransfer_internal = niosSystemCamControl_burst_8_upstream_begins_xfer & (niosSystemCamControl_burst_8_upstream_bbt_burstcounter == 0);
 
-  //niosSystemCamControl_burst_7_upstream_read assignment, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_read = cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_read;
+  //niosSystemCamControl_burst_8_upstream_read assignment, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_read = cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream & cpu_0_data_master_read;
 
-  //niosSystemCamControl_burst_7_upstream_write assignment, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_write = cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_write;
+  //niosSystemCamControl_burst_8_upstream_write assignment, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_write = cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream & cpu_0_data_master_write;
 
-  //niosSystemCamControl_burst_7_upstream_address mux, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_address = {cpu_0_data_master_address_to_slave >> 2,
+  //niosSystemCamControl_burst_8_upstream_address mux, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_address = {cpu_0_data_master_address_to_slave >> 2,
     cpu_0_data_master_dbs_address[1],
     {1 {1'b0}}};
 
-  //d1_niosSystemCamControl_burst_7_upstream_end_xfer register, which is an e_register
+  //d1_niosSystemCamControl_burst_8_upstream_end_xfer register, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          d1_niosSystemCamControl_burst_7_upstream_end_xfer <= 1;
+          d1_niosSystemCamControl_burst_8_upstream_end_xfer <= 1;
       else 
-        d1_niosSystemCamControl_burst_7_upstream_end_xfer <= niosSystemCamControl_burst_7_upstream_end_xfer;
+        d1_niosSystemCamControl_burst_8_upstream_end_xfer <= niosSystemCamControl_burst_8_upstream_end_xfer;
     end
 
 
-  //niosSystemCamControl_burst_7_upstream_waits_for_read in a cycle, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_waits_for_read = niosSystemCamControl_burst_7_upstream_in_a_read_cycle & niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
+  //niosSystemCamControl_burst_8_upstream_waits_for_read in a cycle, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_waits_for_read = niosSystemCamControl_burst_8_upstream_in_a_read_cycle & niosSystemCamControl_burst_8_upstream_waitrequest_from_sa;
 
-  //niosSystemCamControl_burst_7_upstream_in_a_read_cycle assignment, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_in_a_read_cycle = cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_read;
+  //niosSystemCamControl_burst_8_upstream_in_a_read_cycle assignment, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_in_a_read_cycle = cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream & cpu_0_data_master_read;
 
   //in_a_read_cycle assignment, which is an e_mux
-  assign in_a_read_cycle = niosSystemCamControl_burst_7_upstream_in_a_read_cycle;
+  assign in_a_read_cycle = niosSystemCamControl_burst_8_upstream_in_a_read_cycle;
 
-  //niosSystemCamControl_burst_7_upstream_waits_for_write in a cycle, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_waits_for_write = niosSystemCamControl_burst_7_upstream_in_a_write_cycle & niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
+  //niosSystemCamControl_burst_8_upstream_waits_for_write in a cycle, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_waits_for_write = niosSystemCamControl_burst_8_upstream_in_a_write_cycle & niosSystemCamControl_burst_8_upstream_waitrequest_from_sa;
 
-  //niosSystemCamControl_burst_7_upstream_in_a_write_cycle assignment, which is an e_assign
-  assign niosSystemCamControl_burst_7_upstream_in_a_write_cycle = cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream & cpu_0_data_master_write;
+  //niosSystemCamControl_burst_8_upstream_in_a_write_cycle assignment, which is an e_assign
+  assign niosSystemCamControl_burst_8_upstream_in_a_write_cycle = cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream & cpu_0_data_master_write;
 
   //in_a_write_cycle assignment, which is an e_mux
-  assign in_a_write_cycle = niosSystemCamControl_burst_7_upstream_in_a_write_cycle;
+  assign in_a_write_cycle = niosSystemCamControl_burst_8_upstream_in_a_write_cycle;
 
-  assign wait_for_niosSystemCamControl_burst_7_upstream_counter = 0;
-  //niosSystemCamControl_burst_7_upstream_byteenable byte enable port mux, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_byteenable = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream :
+  assign wait_for_niosSystemCamControl_burst_8_upstream_counter = 0;
+  //niosSystemCamControl_burst_8_upstream_byteenable byte enable port mux, which is an e_mux
+  assign niosSystemCamControl_burst_8_upstream_byteenable = (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream)? cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream :
     -1;
 
-  assign {cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream_segment_1,
-cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream_segment_0} = cpu_0_data_master_byteenable;
-  assign cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream = ((cpu_0_data_master_dbs_address[1] == 0))? cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream_segment_0 :
-    cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream_segment_1;
+  assign {cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream_segment_1,
+cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream_segment_0} = cpu_0_data_master_byteenable;
+  assign cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream = ((cpu_0_data_master_dbs_address[1] == 0))? cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream_segment_0 :
+    cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream_segment_1;
 
   //burstcount mux, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_burstcount = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? cpu_0_data_master_burstcount :
+  assign niosSystemCamControl_burst_8_upstream_burstcount = (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream)? cpu_0_data_master_burstcount :
     1;
 
   //debugaccess mux, which is an e_mux
-  assign niosSystemCamControl_burst_7_upstream_debugaccess = (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream)? cpu_0_data_master_debugaccess :
+  assign niosSystemCamControl_burst_8_upstream_debugaccess = (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream)? cpu_0_data_master_debugaccess :
     0;
 
 
 //synthesis translate_off
 //////////////// SIMULATION-ONLY CONTENTS
-  //niosSystemCamControl_burst_7/upstream enable non-zero assertions, which is an e_register
+  //niosSystemCamControl_burst_8/upstream enable non-zero assertions, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -10296,9 +11432,9 @@ cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream_segment_0} = 
   //cpu_0/data_master non-zero burstcount assertion, which is an e_process
   always @(posedge clk)
     begin
-      if (cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream && (cpu_0_data_master_burstcount == 0) && enable_nonzero_assertions)
+      if (cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream && (cpu_0_data_master_burstcount == 0) && enable_nonzero_assertions)
         begin
-          $write("%0d ns: cpu_0/data_master drove 0 on its 'burstcount' port while accessing slave niosSystemCamControl_burst_7/upstream", $time);
+          $write("%0d ns: cpu_0/data_master drove 0 on its 'burstcount' port while accessing slave niosSystemCamControl_burst_8/upstream", $time);
           $stop;
         end
     end
@@ -10320,235 +11456,235 @@ endmodule
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
-module niosSystemCamControl_burst_7_downstream_arbitrator (
+module niosSystemCamControl_burst_8_downstream_arbitrator (
                                                             // inputs:
                                                              clk,
                                                              d1_niosSystemCamControl_clock_1_in_end_xfer,
-                                                             niosSystemCamControl_burst_7_downstream_address,
-                                                             niosSystemCamControl_burst_7_downstream_burstcount,
-                                                             niosSystemCamControl_burst_7_downstream_byteenable,
-                                                             niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in,
-                                                             niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in,
-                                                             niosSystemCamControl_burst_7_downstream_read,
-                                                             niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in,
-                                                             niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in,
-                                                             niosSystemCamControl_burst_7_downstream_write,
-                                                             niosSystemCamControl_burst_7_downstream_writedata,
+                                                             niosSystemCamControl_burst_8_downstream_address,
+                                                             niosSystemCamControl_burst_8_downstream_burstcount,
+                                                             niosSystemCamControl_burst_8_downstream_byteenable,
+                                                             niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in,
+                                                             niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in,
+                                                             niosSystemCamControl_burst_8_downstream_read,
+                                                             niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in,
+                                                             niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in,
+                                                             niosSystemCamControl_burst_8_downstream_write,
+                                                             niosSystemCamControl_burst_8_downstream_writedata,
                                                              niosSystemCamControl_clock_1_in_readdata_from_sa,
                                                              niosSystemCamControl_clock_1_in_waitrequest_from_sa,
                                                              reset_n,
 
                                                             // outputs:
-                                                             niosSystemCamControl_burst_7_downstream_address_to_slave,
-                                                             niosSystemCamControl_burst_7_downstream_latency_counter,
-                                                             niosSystemCamControl_burst_7_downstream_readdata,
-                                                             niosSystemCamControl_burst_7_downstream_readdatavalid,
-                                                             niosSystemCamControl_burst_7_downstream_reset_n,
-                                                             niosSystemCamControl_burst_7_downstream_waitrequest
+                                                             niosSystemCamControl_burst_8_downstream_address_to_slave,
+                                                             niosSystemCamControl_burst_8_downstream_latency_counter,
+                                                             niosSystemCamControl_burst_8_downstream_readdata,
+                                                             niosSystemCamControl_burst_8_downstream_readdatavalid,
+                                                             niosSystemCamControl_burst_8_downstream_reset_n,
+                                                             niosSystemCamControl_burst_8_downstream_waitrequest
                                                           )
 ;
 
-  output  [ 22: 0] niosSystemCamControl_burst_7_downstream_address_to_slave;
-  output           niosSystemCamControl_burst_7_downstream_latency_counter;
-  output  [ 15: 0] niosSystemCamControl_burst_7_downstream_readdata;
-  output           niosSystemCamControl_burst_7_downstream_readdatavalid;
-  output           niosSystemCamControl_burst_7_downstream_reset_n;
-  output           niosSystemCamControl_burst_7_downstream_waitrequest;
+  output  [ 22: 0] niosSystemCamControl_burst_8_downstream_address_to_slave;
+  output           niosSystemCamControl_burst_8_downstream_latency_counter;
+  output  [ 15: 0] niosSystemCamControl_burst_8_downstream_readdata;
+  output           niosSystemCamControl_burst_8_downstream_readdatavalid;
+  output           niosSystemCamControl_burst_8_downstream_reset_n;
+  output           niosSystemCamControl_burst_8_downstream_waitrequest;
   input            clk;
   input            d1_niosSystemCamControl_clock_1_in_end_xfer;
-  input   [ 22: 0] niosSystemCamControl_burst_7_downstream_address;
-  input            niosSystemCamControl_burst_7_downstream_burstcount;
-  input   [  1: 0] niosSystemCamControl_burst_7_downstream_byteenable;
-  input            niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in;
-  input            niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in;
-  input            niosSystemCamControl_burst_7_downstream_read;
-  input            niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
-  input            niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in;
-  input            niosSystemCamControl_burst_7_downstream_write;
-  input   [ 15: 0] niosSystemCamControl_burst_7_downstream_writedata;
+  input   [ 22: 0] niosSystemCamControl_burst_8_downstream_address;
+  input            niosSystemCamControl_burst_8_downstream_burstcount;
+  input   [  1: 0] niosSystemCamControl_burst_8_downstream_byteenable;
+  input            niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in;
+  input            niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in;
+  input            niosSystemCamControl_burst_8_downstream_read;
+  input            niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
+  input            niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in;
+  input            niosSystemCamControl_burst_8_downstream_write;
+  input   [ 15: 0] niosSystemCamControl_burst_8_downstream_writedata;
   input   [ 15: 0] niosSystemCamControl_clock_1_in_readdata_from_sa;
   input            niosSystemCamControl_clock_1_in_waitrequest_from_sa;
   input            reset_n;
 
   reg              active_and_waiting_last_time;
-  reg     [ 22: 0] niosSystemCamControl_burst_7_downstream_address_last_time;
-  wire    [ 22: 0] niosSystemCamControl_burst_7_downstream_address_to_slave;
-  reg              niosSystemCamControl_burst_7_downstream_burstcount_last_time;
-  reg     [  1: 0] niosSystemCamControl_burst_7_downstream_byteenable_last_time;
-  wire             niosSystemCamControl_burst_7_downstream_latency_counter;
-  reg              niosSystemCamControl_burst_7_downstream_read_last_time;
-  wire    [ 15: 0] niosSystemCamControl_burst_7_downstream_readdata;
-  wire             niosSystemCamControl_burst_7_downstream_readdatavalid;
-  wire             niosSystemCamControl_burst_7_downstream_reset_n;
-  wire             niosSystemCamControl_burst_7_downstream_run;
-  wire             niosSystemCamControl_burst_7_downstream_waitrequest;
-  reg              niosSystemCamControl_burst_7_downstream_write_last_time;
-  reg     [ 15: 0] niosSystemCamControl_burst_7_downstream_writedata_last_time;
-  wire             pre_flush_niosSystemCamControl_burst_7_downstream_readdatavalid;
+  reg     [ 22: 0] niosSystemCamControl_burst_8_downstream_address_last_time;
+  wire    [ 22: 0] niosSystemCamControl_burst_8_downstream_address_to_slave;
+  reg              niosSystemCamControl_burst_8_downstream_burstcount_last_time;
+  reg     [  1: 0] niosSystemCamControl_burst_8_downstream_byteenable_last_time;
+  wire             niosSystemCamControl_burst_8_downstream_latency_counter;
+  reg              niosSystemCamControl_burst_8_downstream_read_last_time;
+  wire    [ 15: 0] niosSystemCamControl_burst_8_downstream_readdata;
+  wire             niosSystemCamControl_burst_8_downstream_readdatavalid;
+  wire             niosSystemCamControl_burst_8_downstream_reset_n;
+  wire             niosSystemCamControl_burst_8_downstream_run;
+  wire             niosSystemCamControl_burst_8_downstream_waitrequest;
+  reg              niosSystemCamControl_burst_8_downstream_write_last_time;
+  reg     [ 15: 0] niosSystemCamControl_burst_8_downstream_writedata_last_time;
+  wire             pre_flush_niosSystemCamControl_burst_8_downstream_readdatavalid;
   wire             r_1;
   //r_1 master_run cascaded wait assignment, which is an e_assign
-  assign r_1 = 1 & (niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in | ~niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in) & ((~niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in | ~(niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write) | (1 & ~niosSystemCamControl_clock_1_in_waitrequest_from_sa & (niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write)))) & ((~niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in | ~(niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write) | (1 & ~niosSystemCamControl_clock_1_in_waitrequest_from_sa & (niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write))));
+  assign r_1 = 1 & (niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in | ~niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in) & ((~niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in | ~(niosSystemCamControl_burst_8_downstream_read | niosSystemCamControl_burst_8_downstream_write) | (1 & ~niosSystemCamControl_clock_1_in_waitrequest_from_sa & (niosSystemCamControl_burst_8_downstream_read | niosSystemCamControl_burst_8_downstream_write)))) & ((~niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in | ~(niosSystemCamControl_burst_8_downstream_read | niosSystemCamControl_burst_8_downstream_write) | (1 & ~niosSystemCamControl_clock_1_in_waitrequest_from_sa & (niosSystemCamControl_burst_8_downstream_read | niosSystemCamControl_burst_8_downstream_write))));
 
   //cascaded wait assignment, which is an e_assign
-  assign niosSystemCamControl_burst_7_downstream_run = r_1;
+  assign niosSystemCamControl_burst_8_downstream_run = r_1;
 
   //optimize select-logic by passing only those address bits which matter.
-  assign niosSystemCamControl_burst_7_downstream_address_to_slave = niosSystemCamControl_burst_7_downstream_address;
+  assign niosSystemCamControl_burst_8_downstream_address_to_slave = niosSystemCamControl_burst_8_downstream_address;
 
   //latent slave read data valids which may be flushed, which is an e_mux
-  assign pre_flush_niosSystemCamControl_burst_7_downstream_readdatavalid = 0;
+  assign pre_flush_niosSystemCamControl_burst_8_downstream_readdatavalid = 0;
 
   //latent slave read data valid which is not flushed, which is an e_mux
-  assign niosSystemCamControl_burst_7_downstream_readdatavalid = 0 |
-    pre_flush_niosSystemCamControl_burst_7_downstream_readdatavalid |
-    niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
+  assign niosSystemCamControl_burst_8_downstream_readdatavalid = 0 |
+    pre_flush_niosSystemCamControl_burst_8_downstream_readdatavalid |
+    niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
 
-  //niosSystemCamControl_burst_7/downstream readdata mux, which is an e_mux
-  assign niosSystemCamControl_burst_7_downstream_readdata = niosSystemCamControl_clock_1_in_readdata_from_sa;
+  //niosSystemCamControl_burst_8/downstream readdata mux, which is an e_mux
+  assign niosSystemCamControl_burst_8_downstream_readdata = niosSystemCamControl_clock_1_in_readdata_from_sa;
 
   //actual waitrequest port, which is an e_assign
-  assign niosSystemCamControl_burst_7_downstream_waitrequest = ~niosSystemCamControl_burst_7_downstream_run;
+  assign niosSystemCamControl_burst_8_downstream_waitrequest = ~niosSystemCamControl_burst_8_downstream_run;
 
   //latent max counter, which is an e_assign
-  assign niosSystemCamControl_burst_7_downstream_latency_counter = 0;
+  assign niosSystemCamControl_burst_8_downstream_latency_counter = 0;
 
-  //niosSystemCamControl_burst_7_downstream_reset_n assignment, which is an e_assign
-  assign niosSystemCamControl_burst_7_downstream_reset_n = reset_n;
+  //niosSystemCamControl_burst_8_downstream_reset_n assignment, which is an e_assign
+  assign niosSystemCamControl_burst_8_downstream_reset_n = reset_n;
 
 
 //synthesis translate_off
 //////////////// SIMULATION-ONLY CONTENTS
-  //niosSystemCamControl_burst_7_downstream_address check against wait, which is an e_register
+  //niosSystemCamControl_burst_8_downstream_address check against wait, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_downstream_address_last_time <= 0;
+          niosSystemCamControl_burst_8_downstream_address_last_time <= 0;
       else 
-        niosSystemCamControl_burst_7_downstream_address_last_time <= niosSystemCamControl_burst_7_downstream_address;
+        niosSystemCamControl_burst_8_downstream_address_last_time <= niosSystemCamControl_burst_8_downstream_address;
     end
 
 
-  //niosSystemCamControl_burst_7/downstream waited last time, which is an e_register
+  //niosSystemCamControl_burst_8/downstream waited last time, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
           active_and_waiting_last_time <= 0;
       else 
-        active_and_waiting_last_time <= niosSystemCamControl_burst_7_downstream_waitrequest & (niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write);
+        active_and_waiting_last_time <= niosSystemCamControl_burst_8_downstream_waitrequest & (niosSystemCamControl_burst_8_downstream_read | niosSystemCamControl_burst_8_downstream_write);
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_address matches last port_name, which is an e_process
+  //niosSystemCamControl_burst_8_downstream_address matches last port_name, which is an e_process
   always @(posedge clk)
     begin
-      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_address != niosSystemCamControl_burst_7_downstream_address_last_time))
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_8_downstream_address != niosSystemCamControl_burst_8_downstream_address_last_time))
         begin
-          $write("%0d ns: niosSystemCamControl_burst_7_downstream_address did not heed wait!!!", $time);
+          $write("%0d ns: niosSystemCamControl_burst_8_downstream_address did not heed wait!!!", $time);
           $stop;
         end
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_burstcount check against wait, which is an e_register
+  //niosSystemCamControl_burst_8_downstream_burstcount check against wait, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_downstream_burstcount_last_time <= 0;
+          niosSystemCamControl_burst_8_downstream_burstcount_last_time <= 0;
       else 
-        niosSystemCamControl_burst_7_downstream_burstcount_last_time <= niosSystemCamControl_burst_7_downstream_burstcount;
+        niosSystemCamControl_burst_8_downstream_burstcount_last_time <= niosSystemCamControl_burst_8_downstream_burstcount;
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_burstcount matches last port_name, which is an e_process
+  //niosSystemCamControl_burst_8_downstream_burstcount matches last port_name, which is an e_process
   always @(posedge clk)
     begin
-      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_burstcount != niosSystemCamControl_burst_7_downstream_burstcount_last_time))
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_8_downstream_burstcount != niosSystemCamControl_burst_8_downstream_burstcount_last_time))
         begin
-          $write("%0d ns: niosSystemCamControl_burst_7_downstream_burstcount did not heed wait!!!", $time);
+          $write("%0d ns: niosSystemCamControl_burst_8_downstream_burstcount did not heed wait!!!", $time);
           $stop;
         end
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_byteenable check against wait, which is an e_register
+  //niosSystemCamControl_burst_8_downstream_byteenable check against wait, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_downstream_byteenable_last_time <= 0;
+          niosSystemCamControl_burst_8_downstream_byteenable_last_time <= 0;
       else 
-        niosSystemCamControl_burst_7_downstream_byteenable_last_time <= niosSystemCamControl_burst_7_downstream_byteenable;
+        niosSystemCamControl_burst_8_downstream_byteenable_last_time <= niosSystemCamControl_burst_8_downstream_byteenable;
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_byteenable matches last port_name, which is an e_process
+  //niosSystemCamControl_burst_8_downstream_byteenable matches last port_name, which is an e_process
   always @(posedge clk)
     begin
-      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_byteenable != niosSystemCamControl_burst_7_downstream_byteenable_last_time))
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_8_downstream_byteenable != niosSystemCamControl_burst_8_downstream_byteenable_last_time))
         begin
-          $write("%0d ns: niosSystemCamControl_burst_7_downstream_byteenable did not heed wait!!!", $time);
+          $write("%0d ns: niosSystemCamControl_burst_8_downstream_byteenable did not heed wait!!!", $time);
           $stop;
         end
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_read check against wait, which is an e_register
+  //niosSystemCamControl_burst_8_downstream_read check against wait, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_downstream_read_last_time <= 0;
+          niosSystemCamControl_burst_8_downstream_read_last_time <= 0;
       else 
-        niosSystemCamControl_burst_7_downstream_read_last_time <= niosSystemCamControl_burst_7_downstream_read;
+        niosSystemCamControl_burst_8_downstream_read_last_time <= niosSystemCamControl_burst_8_downstream_read;
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_read matches last port_name, which is an e_process
+  //niosSystemCamControl_burst_8_downstream_read matches last port_name, which is an e_process
   always @(posedge clk)
     begin
-      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_read != niosSystemCamControl_burst_7_downstream_read_last_time))
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_8_downstream_read != niosSystemCamControl_burst_8_downstream_read_last_time))
         begin
-          $write("%0d ns: niosSystemCamControl_burst_7_downstream_read did not heed wait!!!", $time);
+          $write("%0d ns: niosSystemCamControl_burst_8_downstream_read did not heed wait!!!", $time);
           $stop;
         end
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_write check against wait, which is an e_register
+  //niosSystemCamControl_burst_8_downstream_write check against wait, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_downstream_write_last_time <= 0;
+          niosSystemCamControl_burst_8_downstream_write_last_time <= 0;
       else 
-        niosSystemCamControl_burst_7_downstream_write_last_time <= niosSystemCamControl_burst_7_downstream_write;
+        niosSystemCamControl_burst_8_downstream_write_last_time <= niosSystemCamControl_burst_8_downstream_write;
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_write matches last port_name, which is an e_process
+  //niosSystemCamControl_burst_8_downstream_write matches last port_name, which is an e_process
   always @(posedge clk)
     begin
-      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_write != niosSystemCamControl_burst_7_downstream_write_last_time))
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_8_downstream_write != niosSystemCamControl_burst_8_downstream_write_last_time))
         begin
-          $write("%0d ns: niosSystemCamControl_burst_7_downstream_write did not heed wait!!!", $time);
+          $write("%0d ns: niosSystemCamControl_burst_8_downstream_write did not heed wait!!!", $time);
           $stop;
         end
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_writedata check against wait, which is an e_register
+  //niosSystemCamControl_burst_8_downstream_writedata check against wait, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          niosSystemCamControl_burst_7_downstream_writedata_last_time <= 0;
+          niosSystemCamControl_burst_8_downstream_writedata_last_time <= 0;
       else 
-        niosSystemCamControl_burst_7_downstream_writedata_last_time <= niosSystemCamControl_burst_7_downstream_writedata;
+        niosSystemCamControl_burst_8_downstream_writedata_last_time <= niosSystemCamControl_burst_8_downstream_writedata;
     end
 
 
-  //niosSystemCamControl_burst_7_downstream_writedata matches last port_name, which is an e_process
+  //niosSystemCamControl_burst_8_downstream_writedata matches last port_name, which is an e_process
   always @(posedge clk)
     begin
-      if (active_and_waiting_last_time & (niosSystemCamControl_burst_7_downstream_writedata != niosSystemCamControl_burst_7_downstream_writedata_last_time) & niosSystemCamControl_burst_7_downstream_write)
+      if (active_and_waiting_last_time & (niosSystemCamControl_burst_8_downstream_writedata != niosSystemCamControl_burst_8_downstream_writedata_last_time) & niosSystemCamControl_burst_8_downstream_write)
         begin
-          $write("%0d ns: niosSystemCamControl_burst_7_downstream_writedata did not heed wait!!!", $time);
+          $write("%0d ns: niosSystemCamControl_burst_8_downstream_writedata did not heed wait!!!", $time);
           $stop;
         end
     end
@@ -11080,15 +12216,15 @@ endmodule
 module niosSystemCamControl_clock_1_in_arbitrator (
                                                     // inputs:
                                                      clk,
-                                                     niosSystemCamControl_burst_7_downstream_address_to_slave,
-                                                     niosSystemCamControl_burst_7_downstream_arbitrationshare,
-                                                     niosSystemCamControl_burst_7_downstream_burstcount,
-                                                     niosSystemCamControl_burst_7_downstream_byteenable,
-                                                     niosSystemCamControl_burst_7_downstream_latency_counter,
-                                                     niosSystemCamControl_burst_7_downstream_nativeaddress,
-                                                     niosSystemCamControl_burst_7_downstream_read,
-                                                     niosSystemCamControl_burst_7_downstream_write,
-                                                     niosSystemCamControl_burst_7_downstream_writedata,
+                                                     niosSystemCamControl_burst_8_downstream_address_to_slave,
+                                                     niosSystemCamControl_burst_8_downstream_arbitrationshare,
+                                                     niosSystemCamControl_burst_8_downstream_burstcount,
+                                                     niosSystemCamControl_burst_8_downstream_byteenable,
+                                                     niosSystemCamControl_burst_8_downstream_latency_counter,
+                                                     niosSystemCamControl_burst_8_downstream_nativeaddress,
+                                                     niosSystemCamControl_burst_8_downstream_read,
+                                                     niosSystemCamControl_burst_8_downstream_write,
+                                                     niosSystemCamControl_burst_8_downstream_writedata,
                                                      niosSystemCamControl_clock_1_in_endofpacket,
                                                      niosSystemCamControl_clock_1_in_readdata,
                                                      niosSystemCamControl_clock_1_in_waitrequest,
@@ -11096,10 +12232,10 @@ module niosSystemCamControl_clock_1_in_arbitrator (
 
                                                     // outputs:
                                                      d1_niosSystemCamControl_clock_1_in_end_xfer,
-                                                     niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in,
-                                                     niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in,
-                                                     niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in,
-                                                     niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in,
+                                                     niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in,
+                                                     niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in,
+                                                     niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in,
+                                                     niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in,
                                                      niosSystemCamControl_clock_1_in_address,
                                                      niosSystemCamControl_clock_1_in_byteenable,
                                                      niosSystemCamControl_clock_1_in_endofpacket_from_sa,
@@ -11114,10 +12250,10 @@ module niosSystemCamControl_clock_1_in_arbitrator (
 ;
 
   output           d1_niosSystemCamControl_clock_1_in_end_xfer;
-  output           niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in;
-  output           niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in;
-  output           niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
-  output           niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in;
+  output           niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in;
+  output           niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in;
+  output           niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
+  output           niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in;
   output  [ 22: 0] niosSystemCamControl_clock_1_in_address;
   output  [  1: 0] niosSystemCamControl_clock_1_in_byteenable;
   output           niosSystemCamControl_clock_1_in_endofpacket_from_sa;
@@ -11129,15 +12265,15 @@ module niosSystemCamControl_clock_1_in_arbitrator (
   output           niosSystemCamControl_clock_1_in_write;
   output  [ 15: 0] niosSystemCamControl_clock_1_in_writedata;
   input            clk;
-  input   [ 22: 0] niosSystemCamControl_burst_7_downstream_address_to_slave;
-  input   [  4: 0] niosSystemCamControl_burst_7_downstream_arbitrationshare;
-  input            niosSystemCamControl_burst_7_downstream_burstcount;
-  input   [  1: 0] niosSystemCamControl_burst_7_downstream_byteenable;
-  input            niosSystemCamControl_burst_7_downstream_latency_counter;
-  input   [ 22: 0] niosSystemCamControl_burst_7_downstream_nativeaddress;
-  input            niosSystemCamControl_burst_7_downstream_read;
-  input            niosSystemCamControl_burst_7_downstream_write;
-  input   [ 15: 0] niosSystemCamControl_burst_7_downstream_writedata;
+  input   [ 22: 0] niosSystemCamControl_burst_8_downstream_address_to_slave;
+  input   [  4: 0] niosSystemCamControl_burst_8_downstream_arbitrationshare;
+  input            niosSystemCamControl_burst_8_downstream_burstcount;
+  input   [  1: 0] niosSystemCamControl_burst_8_downstream_byteenable;
+  input            niosSystemCamControl_burst_8_downstream_latency_counter;
+  input   [ 22: 0] niosSystemCamControl_burst_8_downstream_nativeaddress;
+  input            niosSystemCamControl_burst_8_downstream_read;
+  input            niosSystemCamControl_burst_8_downstream_write;
+  input   [ 15: 0] niosSystemCamControl_burst_8_downstream_writedata;
   input            niosSystemCamControl_clock_1_in_endofpacket;
   input   [ 15: 0] niosSystemCamControl_clock_1_in_readdata;
   input            niosSystemCamControl_clock_1_in_waitrequest;
@@ -11149,14 +12285,14 @@ module niosSystemCamControl_clock_1_in_arbitrator (
   wire             end_xfer_arb_share_counter_term_niosSystemCamControl_clock_1_in;
   wire             in_a_read_cycle;
   wire             in_a_write_cycle;
-  wire             niosSystemCamControl_burst_7_downstream_arbiterlock;
-  wire             niosSystemCamControl_burst_7_downstream_arbiterlock2;
-  wire             niosSystemCamControl_burst_7_downstream_continuerequest;
-  wire             niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in;
-  wire             niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in;
-  wire             niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
-  wire             niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in;
-  wire             niosSystemCamControl_burst_7_downstream_saved_grant_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_8_downstream_arbiterlock;
+  wire             niosSystemCamControl_burst_8_downstream_arbiterlock2;
+  wire             niosSystemCamControl_burst_8_downstream_continuerequest;
+  wire             niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_8_downstream_saved_grant_niosSystemCamControl_clock_1_in;
   wire    [ 22: 0] niosSystemCamControl_clock_1_in_address;
   wire             niosSystemCamControl_clock_1_in_allgrants;
   wire             niosSystemCamControl_clock_1_in_allow_new_arb_cycle;
@@ -11200,23 +12336,23 @@ module niosSystemCamControl_clock_1_in_arbitrator (
     end
 
 
-  assign niosSystemCamControl_clock_1_in_begins_xfer = ~d1_reasons_to_wait & ((niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in));
+  assign niosSystemCamControl_clock_1_in_begins_xfer = ~d1_reasons_to_wait & ((niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in));
   //assign niosSystemCamControl_clock_1_in_readdata_from_sa = niosSystemCamControl_clock_1_in_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_clock_1_in_readdata_from_sa = niosSystemCamControl_clock_1_in_readdata;
 
-  assign niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in = (1) & (niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write);
+  assign niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in = (1) & (niosSystemCamControl_burst_8_downstream_read | niosSystemCamControl_burst_8_downstream_write);
   //assign niosSystemCamControl_clock_1_in_waitrequest_from_sa = niosSystemCamControl_clock_1_in_waitrequest so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_clock_1_in_waitrequest_from_sa = niosSystemCamControl_clock_1_in_waitrequest;
 
   //niosSystemCamControl_clock_1_in_arb_share_counter set values, which is an e_mux
-  assign niosSystemCamControl_clock_1_in_arb_share_set_values = (niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in)? niosSystemCamControl_burst_7_downstream_arbitrationshare :
+  assign niosSystemCamControl_clock_1_in_arb_share_set_values = (niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in)? niosSystemCamControl_burst_8_downstream_arbitrationshare :
     1;
 
   //niosSystemCamControl_clock_1_in_non_bursting_master_requests mux, which is an e_mux
   assign niosSystemCamControl_clock_1_in_non_bursting_master_requests = 0;
 
   //niosSystemCamControl_clock_1_in_any_bursting_master_saved_grant mux, which is an e_mux
-  assign niosSystemCamControl_clock_1_in_any_bursting_master_saved_grant = niosSystemCamControl_burst_7_downstream_saved_grant_niosSystemCamControl_clock_1_in;
+  assign niosSystemCamControl_clock_1_in_any_bursting_master_saved_grant = niosSystemCamControl_burst_8_downstream_saved_grant_niosSystemCamControl_clock_1_in;
 
   //niosSystemCamControl_clock_1_in_arb_share_counter_next_value assignment, which is an e_assign
   assign niosSystemCamControl_clock_1_in_arb_share_counter_next_value = niosSystemCamControl_clock_1_in_firsttransfer ? (niosSystemCamControl_clock_1_in_arb_share_set_values - 1) : |niosSystemCamControl_clock_1_in_arb_share_counter ? (niosSystemCamControl_clock_1_in_arb_share_counter - 1) : 0;
@@ -11253,36 +12389,36 @@ module niosSystemCamControl_clock_1_in_arbitrator (
     end
 
 
-  //niosSystemCamControl_burst_7/downstream niosSystemCamControl_clock_1/in arbiterlock, which is an e_assign
-  assign niosSystemCamControl_burst_7_downstream_arbiterlock = niosSystemCamControl_clock_1_in_slavearbiterlockenable & niosSystemCamControl_burst_7_downstream_continuerequest;
+  //niosSystemCamControl_burst_8/downstream niosSystemCamControl_clock_1/in arbiterlock, which is an e_assign
+  assign niosSystemCamControl_burst_8_downstream_arbiterlock = niosSystemCamControl_clock_1_in_slavearbiterlockenable & niosSystemCamControl_burst_8_downstream_continuerequest;
 
   //niosSystemCamControl_clock_1_in_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
   assign niosSystemCamControl_clock_1_in_slavearbiterlockenable2 = |niosSystemCamControl_clock_1_in_arb_share_counter_next_value;
 
-  //niosSystemCamControl_burst_7/downstream niosSystemCamControl_clock_1/in arbiterlock2, which is an e_assign
-  assign niosSystemCamControl_burst_7_downstream_arbiterlock2 = niosSystemCamControl_clock_1_in_slavearbiterlockenable2 & niosSystemCamControl_burst_7_downstream_continuerequest;
+  //niosSystemCamControl_burst_8/downstream niosSystemCamControl_clock_1/in arbiterlock2, which is an e_assign
+  assign niosSystemCamControl_burst_8_downstream_arbiterlock2 = niosSystemCamControl_clock_1_in_slavearbiterlockenable2 & niosSystemCamControl_burst_8_downstream_continuerequest;
 
   //niosSystemCamControl_clock_1_in_any_continuerequest at least one master continues requesting, which is an e_assign
   assign niosSystemCamControl_clock_1_in_any_continuerequest = 1;
 
-  //niosSystemCamControl_burst_7_downstream_continuerequest continued request, which is an e_assign
-  assign niosSystemCamControl_burst_7_downstream_continuerequest = 1;
+  //niosSystemCamControl_burst_8_downstream_continuerequest continued request, which is an e_assign
+  assign niosSystemCamControl_burst_8_downstream_continuerequest = 1;
 
-  assign niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in = niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in & ~((niosSystemCamControl_burst_7_downstream_read & ((niosSystemCamControl_burst_7_downstream_latency_counter != 0))));
-  //local readdatavalid niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in, which is an e_mux
-  assign niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in = niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_7_downstream_read & ~niosSystemCamControl_clock_1_in_waits_for_read;
+  assign niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in = niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in & ~((niosSystemCamControl_burst_8_downstream_read & ((niosSystemCamControl_burst_8_downstream_latency_counter != 0))));
+  //local readdatavalid niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in, which is an e_mux
+  assign niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in = niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_8_downstream_read & ~niosSystemCamControl_clock_1_in_waits_for_read;
 
   //niosSystemCamControl_clock_1_in_writedata mux, which is an e_mux
-  assign niosSystemCamControl_clock_1_in_writedata = niosSystemCamControl_burst_7_downstream_writedata;
+  assign niosSystemCamControl_clock_1_in_writedata = niosSystemCamControl_burst_8_downstream_writedata;
 
   //assign niosSystemCamControl_clock_1_in_endofpacket_from_sa = niosSystemCamControl_clock_1_in_endofpacket so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign niosSystemCamControl_clock_1_in_endofpacket_from_sa = niosSystemCamControl_clock_1_in_endofpacket;
 
   //master is always granted when requested
-  assign niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in = niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in;
+  assign niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in = niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in;
 
-  //niosSystemCamControl_burst_7/downstream saved-grant niosSystemCamControl_clock_1/in, which is an e_assign
-  assign niosSystemCamControl_burst_7_downstream_saved_grant_niosSystemCamControl_clock_1_in = niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in;
+  //niosSystemCamControl_burst_8/downstream saved-grant niosSystemCamControl_clock_1/in, which is an e_assign
+  assign niosSystemCamControl_burst_8_downstream_saved_grant_niosSystemCamControl_clock_1_in = niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in;
 
   //allow new arb cycle for niosSystemCamControl_clock_1/in, which is an e_assign
   assign niosSystemCamControl_clock_1_in_allow_new_arb_cycle = 1;
@@ -11316,16 +12452,16 @@ module niosSystemCamControl_clock_1_in_arbitrator (
   assign niosSystemCamControl_clock_1_in_beginbursttransfer_internal = niosSystemCamControl_clock_1_in_begins_xfer;
 
   //niosSystemCamControl_clock_1_in_read assignment, which is an e_mux
-  assign niosSystemCamControl_clock_1_in_read = niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_7_downstream_read;
+  assign niosSystemCamControl_clock_1_in_read = niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_8_downstream_read;
 
   //niosSystemCamControl_clock_1_in_write assignment, which is an e_mux
-  assign niosSystemCamControl_clock_1_in_write = niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_7_downstream_write;
+  assign niosSystemCamControl_clock_1_in_write = niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_8_downstream_write;
 
   //niosSystemCamControl_clock_1_in_address mux, which is an e_mux
-  assign niosSystemCamControl_clock_1_in_address = niosSystemCamControl_burst_7_downstream_address_to_slave;
+  assign niosSystemCamControl_clock_1_in_address = niosSystemCamControl_burst_8_downstream_address_to_slave;
 
   //slaveid niosSystemCamControl_clock_1_in_nativeaddress nativeaddress mux, which is an e_mux
-  assign niosSystemCamControl_clock_1_in_nativeaddress = niosSystemCamControl_burst_7_downstream_nativeaddress;
+  assign niosSystemCamControl_clock_1_in_nativeaddress = niosSystemCamControl_burst_8_downstream_nativeaddress;
 
   //d1_niosSystemCamControl_clock_1_in_end_xfer register, which is an e_register
   always @(posedge clk or negedge reset_n)
@@ -11341,7 +12477,7 @@ module niosSystemCamControl_clock_1_in_arbitrator (
   assign niosSystemCamControl_clock_1_in_waits_for_read = niosSystemCamControl_clock_1_in_in_a_read_cycle & niosSystemCamControl_clock_1_in_waitrequest_from_sa;
 
   //niosSystemCamControl_clock_1_in_in_a_read_cycle assignment, which is an e_assign
-  assign niosSystemCamControl_clock_1_in_in_a_read_cycle = niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_7_downstream_read;
+  assign niosSystemCamControl_clock_1_in_in_a_read_cycle = niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_8_downstream_read;
 
   //in_a_read_cycle assignment, which is an e_mux
   assign in_a_read_cycle = niosSystemCamControl_clock_1_in_in_a_read_cycle;
@@ -11350,14 +12486,14 @@ module niosSystemCamControl_clock_1_in_arbitrator (
   assign niosSystemCamControl_clock_1_in_waits_for_write = niosSystemCamControl_clock_1_in_in_a_write_cycle & niosSystemCamControl_clock_1_in_waitrequest_from_sa;
 
   //niosSystemCamControl_clock_1_in_in_a_write_cycle assignment, which is an e_assign
-  assign niosSystemCamControl_clock_1_in_in_a_write_cycle = niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_7_downstream_write;
+  assign niosSystemCamControl_clock_1_in_in_a_write_cycle = niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in & niosSystemCamControl_burst_8_downstream_write;
 
   //in_a_write_cycle assignment, which is an e_mux
   assign in_a_write_cycle = niosSystemCamControl_clock_1_in_in_a_write_cycle;
 
   assign wait_for_niosSystemCamControl_clock_1_in_counter = 0;
   //niosSystemCamControl_clock_1_in_byteenable byte enable port mux, which is an e_mux
-  assign niosSystemCamControl_clock_1_in_byteenable = (niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in)? niosSystemCamControl_burst_7_downstream_byteenable :
+  assign niosSystemCamControl_clock_1_in_byteenable = (niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in)? niosSystemCamControl_burst_8_downstream_byteenable :
     -1;
 
 
@@ -11373,23 +12509,23 @@ module niosSystemCamControl_clock_1_in_arbitrator (
     end
 
 
-  //niosSystemCamControl_burst_7/downstream non-zero arbitrationshare assertion, which is an e_process
+  //niosSystemCamControl_burst_8/downstream non-zero arbitrationshare assertion, which is an e_process
   always @(posedge clk)
     begin
-      if (niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in && (niosSystemCamControl_burst_7_downstream_arbitrationshare == 0) && enable_nonzero_assertions)
+      if (niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in && (niosSystemCamControl_burst_8_downstream_arbitrationshare == 0) && enable_nonzero_assertions)
         begin
-          $write("%0d ns: niosSystemCamControl_burst_7/downstream drove 0 on its 'arbitrationshare' port while accessing slave niosSystemCamControl_clock_1/in", $time);
+          $write("%0d ns: niosSystemCamControl_burst_8/downstream drove 0 on its 'arbitrationshare' port while accessing slave niosSystemCamControl_clock_1/in", $time);
           $stop;
         end
     end
 
 
-  //niosSystemCamControl_burst_7/downstream non-zero burstcount assertion, which is an e_process
+  //niosSystemCamControl_burst_8/downstream non-zero burstcount assertion, which is an e_process
   always @(posedge clk)
     begin
-      if (niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in && (niosSystemCamControl_burst_7_downstream_burstcount == 0) && enable_nonzero_assertions)
+      if (niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in && (niosSystemCamControl_burst_8_downstream_burstcount == 0) && enable_nonzero_assertions)
         begin
-          $write("%0d ns: niosSystemCamControl_burst_7/downstream drove 0 on its 'burstcount' port while accessing slave niosSystemCamControl_clock_1/in", $time);
+          $write("%0d ns: niosSystemCamControl_burst_8/downstream drove 0 on its 'burstcount' port while accessing slave niosSystemCamControl_clock_1/in", $time);
           $stop;
         end
     end
@@ -12093,6 +13229,326 @@ module onchip_memory2_0_s1_arbitrator (
       if (cpu_0_instruction_master_saved_grant_onchip_memory2_0_s1 + niosSystemCamControl_burst_0_downstream_saved_grant_onchip_memory2_0_s1 > 1)
         begin
           $write("%0d ns: > 1 of saved_grant signals are active simultaneously", $time);
+          $stop;
+        end
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module performance_counter_0_control_slave_arbitrator (
+                                                        // inputs:
+                                                         clk,
+                                                         niosSystemCamControl_burst_7_downstream_address_to_slave,
+                                                         niosSystemCamControl_burst_7_downstream_arbitrationshare,
+                                                         niosSystemCamControl_burst_7_downstream_burstcount,
+                                                         niosSystemCamControl_burst_7_downstream_latency_counter,
+                                                         niosSystemCamControl_burst_7_downstream_nativeaddress,
+                                                         niosSystemCamControl_burst_7_downstream_read,
+                                                         niosSystemCamControl_burst_7_downstream_write,
+                                                         niosSystemCamControl_burst_7_downstream_writedata,
+                                                         performance_counter_0_control_slave_readdata,
+                                                         reset_n,
+
+                                                        // outputs:
+                                                         d1_performance_counter_0_control_slave_end_xfer,
+                                                         niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave,
+                                                         niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave,
+                                                         niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave,
+                                                         niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave,
+                                                         performance_counter_0_control_slave_address,
+                                                         performance_counter_0_control_slave_begintransfer,
+                                                         performance_counter_0_control_slave_readdata_from_sa,
+                                                         performance_counter_0_control_slave_reset_n,
+                                                         performance_counter_0_control_slave_write,
+                                                         performance_counter_0_control_slave_writedata
+                                                      )
+;
+
+  output           d1_performance_counter_0_control_slave_end_xfer;
+  output           niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave;
+  output           niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave;
+  output           niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave;
+  output           niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave;
+  output  [  4: 0] performance_counter_0_control_slave_address;
+  output           performance_counter_0_control_slave_begintransfer;
+  output  [ 31: 0] performance_counter_0_control_slave_readdata_from_sa;
+  output           performance_counter_0_control_slave_reset_n;
+  output           performance_counter_0_control_slave_write;
+  output  [ 31: 0] performance_counter_0_control_slave_writedata;
+  input            clk;
+  input   [  6: 0] niosSystemCamControl_burst_7_downstream_address_to_slave;
+  input   [  3: 0] niosSystemCamControl_burst_7_downstream_arbitrationshare;
+  input            niosSystemCamControl_burst_7_downstream_burstcount;
+  input            niosSystemCamControl_burst_7_downstream_latency_counter;
+  input   [  6: 0] niosSystemCamControl_burst_7_downstream_nativeaddress;
+  input            niosSystemCamControl_burst_7_downstream_read;
+  input            niosSystemCamControl_burst_7_downstream_write;
+  input   [ 31: 0] niosSystemCamControl_burst_7_downstream_writedata;
+  input   [ 31: 0] performance_counter_0_control_slave_readdata;
+  input            reset_n;
+
+  reg              d1_performance_counter_0_control_slave_end_xfer;
+  reg              d1_reasons_to_wait;
+  reg              enable_nonzero_assertions;
+  wire             end_xfer_arb_share_counter_term_performance_counter_0_control_slave;
+  wire             in_a_read_cycle;
+  wire             in_a_write_cycle;
+  wire             niosSystemCamControl_burst_7_downstream_arbiterlock;
+  wire             niosSystemCamControl_burst_7_downstream_arbiterlock2;
+  wire             niosSystemCamControl_burst_7_downstream_continuerequest;
+  wire             niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave;
+  wire             niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave;
+  wire             niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave;
+  reg              niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register;
+  wire             niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register_in;
+  wire             niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave;
+  wire             niosSystemCamControl_burst_7_downstream_saved_grant_performance_counter_0_control_slave;
+  wire             p1_niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register;
+  wire    [  4: 0] performance_counter_0_control_slave_address;
+  wire             performance_counter_0_control_slave_allgrants;
+  wire             performance_counter_0_control_slave_allow_new_arb_cycle;
+  wire             performance_counter_0_control_slave_any_bursting_master_saved_grant;
+  wire             performance_counter_0_control_slave_any_continuerequest;
+  wire             performance_counter_0_control_slave_arb_counter_enable;
+  reg     [  3: 0] performance_counter_0_control_slave_arb_share_counter;
+  wire    [  3: 0] performance_counter_0_control_slave_arb_share_counter_next_value;
+  wire    [  3: 0] performance_counter_0_control_slave_arb_share_set_values;
+  wire             performance_counter_0_control_slave_beginbursttransfer_internal;
+  wire             performance_counter_0_control_slave_begins_xfer;
+  wire             performance_counter_0_control_slave_begintransfer;
+  wire             performance_counter_0_control_slave_end_xfer;
+  wire             performance_counter_0_control_slave_firsttransfer;
+  wire             performance_counter_0_control_slave_grant_vector;
+  wire             performance_counter_0_control_slave_in_a_read_cycle;
+  wire             performance_counter_0_control_slave_in_a_write_cycle;
+  wire             performance_counter_0_control_slave_master_qreq_vector;
+  wire             performance_counter_0_control_slave_non_bursting_master_requests;
+  wire    [ 31: 0] performance_counter_0_control_slave_readdata_from_sa;
+  reg              performance_counter_0_control_slave_reg_firsttransfer;
+  wire             performance_counter_0_control_slave_reset_n;
+  reg              performance_counter_0_control_slave_slavearbiterlockenable;
+  wire             performance_counter_0_control_slave_slavearbiterlockenable2;
+  wire             performance_counter_0_control_slave_unreg_firsttransfer;
+  wire             performance_counter_0_control_slave_waits_for_read;
+  wire             performance_counter_0_control_slave_waits_for_write;
+  wire             performance_counter_0_control_slave_write;
+  wire    [ 31: 0] performance_counter_0_control_slave_writedata;
+  wire             wait_for_performance_counter_0_control_slave_counter;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_reasons_to_wait <= 0;
+      else 
+        d1_reasons_to_wait <= ~performance_counter_0_control_slave_end_xfer;
+    end
+
+
+  assign performance_counter_0_control_slave_begins_xfer = ~d1_reasons_to_wait & ((niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave));
+  //assign performance_counter_0_control_slave_readdata_from_sa = performance_counter_0_control_slave_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign performance_counter_0_control_slave_readdata_from_sa = performance_counter_0_control_slave_readdata;
+
+  assign niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave = (1) & (niosSystemCamControl_burst_7_downstream_read | niosSystemCamControl_burst_7_downstream_write);
+  //performance_counter_0_control_slave_arb_share_counter set values, which is an e_mux
+  assign performance_counter_0_control_slave_arb_share_set_values = (niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave)? niosSystemCamControl_burst_7_downstream_arbitrationshare :
+    1;
+
+  //performance_counter_0_control_slave_non_bursting_master_requests mux, which is an e_mux
+  assign performance_counter_0_control_slave_non_bursting_master_requests = 0;
+
+  //performance_counter_0_control_slave_any_bursting_master_saved_grant mux, which is an e_mux
+  assign performance_counter_0_control_slave_any_bursting_master_saved_grant = niosSystemCamControl_burst_7_downstream_saved_grant_performance_counter_0_control_slave;
+
+  //performance_counter_0_control_slave_arb_share_counter_next_value assignment, which is an e_assign
+  assign performance_counter_0_control_slave_arb_share_counter_next_value = performance_counter_0_control_slave_firsttransfer ? (performance_counter_0_control_slave_arb_share_set_values - 1) : |performance_counter_0_control_slave_arb_share_counter ? (performance_counter_0_control_slave_arb_share_counter - 1) : 0;
+
+  //performance_counter_0_control_slave_allgrants all slave grants, which is an e_mux
+  assign performance_counter_0_control_slave_allgrants = |performance_counter_0_control_slave_grant_vector;
+
+  //performance_counter_0_control_slave_end_xfer assignment, which is an e_assign
+  assign performance_counter_0_control_slave_end_xfer = ~(performance_counter_0_control_slave_waits_for_read | performance_counter_0_control_slave_waits_for_write);
+
+  //end_xfer_arb_share_counter_term_performance_counter_0_control_slave arb share counter enable term, which is an e_assign
+  assign end_xfer_arb_share_counter_term_performance_counter_0_control_slave = performance_counter_0_control_slave_end_xfer & (~performance_counter_0_control_slave_any_bursting_master_saved_grant | in_a_read_cycle | in_a_write_cycle);
+
+  //performance_counter_0_control_slave_arb_share_counter arbitration counter enable, which is an e_assign
+  assign performance_counter_0_control_slave_arb_counter_enable = (end_xfer_arb_share_counter_term_performance_counter_0_control_slave & performance_counter_0_control_slave_allgrants) | (end_xfer_arb_share_counter_term_performance_counter_0_control_slave & ~performance_counter_0_control_slave_non_bursting_master_requests);
+
+  //performance_counter_0_control_slave_arb_share_counter counter, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          performance_counter_0_control_slave_arb_share_counter <= 0;
+      else if (performance_counter_0_control_slave_arb_counter_enable)
+          performance_counter_0_control_slave_arb_share_counter <= performance_counter_0_control_slave_arb_share_counter_next_value;
+    end
+
+
+  //performance_counter_0_control_slave_slavearbiterlockenable slave enables arbiterlock, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          performance_counter_0_control_slave_slavearbiterlockenable <= 0;
+      else if ((|performance_counter_0_control_slave_master_qreq_vector & end_xfer_arb_share_counter_term_performance_counter_0_control_slave) | (end_xfer_arb_share_counter_term_performance_counter_0_control_slave & ~performance_counter_0_control_slave_non_bursting_master_requests))
+          performance_counter_0_control_slave_slavearbiterlockenable <= |performance_counter_0_control_slave_arb_share_counter_next_value;
+    end
+
+
+  //niosSystemCamControl_burst_7/downstream performance_counter_0/control_slave arbiterlock, which is an e_assign
+  assign niosSystemCamControl_burst_7_downstream_arbiterlock = performance_counter_0_control_slave_slavearbiterlockenable & niosSystemCamControl_burst_7_downstream_continuerequest;
+
+  //performance_counter_0_control_slave_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
+  assign performance_counter_0_control_slave_slavearbiterlockenable2 = |performance_counter_0_control_slave_arb_share_counter_next_value;
+
+  //niosSystemCamControl_burst_7/downstream performance_counter_0/control_slave arbiterlock2, which is an e_assign
+  assign niosSystemCamControl_burst_7_downstream_arbiterlock2 = performance_counter_0_control_slave_slavearbiterlockenable2 & niosSystemCamControl_burst_7_downstream_continuerequest;
+
+  //performance_counter_0_control_slave_any_continuerequest at least one master continues requesting, which is an e_assign
+  assign performance_counter_0_control_slave_any_continuerequest = 1;
+
+  //niosSystemCamControl_burst_7_downstream_continuerequest continued request, which is an e_assign
+  assign niosSystemCamControl_burst_7_downstream_continuerequest = 1;
+
+  assign niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave = niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave;
+  //niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register_in mux for readlatency shift register, which is an e_mux
+  assign niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register_in = niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave & niosSystemCamControl_burst_7_downstream_read & ~performance_counter_0_control_slave_waits_for_read;
+
+  //shift register p1 niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register in if flush, otherwise shift left, which is an e_mux
+  assign p1_niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register = {niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register, niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register_in};
+
+  //niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register for remembering which master asked for a fixed latency read, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register <= 0;
+      else 
+        niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register <= p1_niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register;
+    end
+
+
+  //local readdatavalid niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave, which is an e_mux
+  assign niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave = niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave_shift_register;
+
+  //performance_counter_0_control_slave_writedata mux, which is an e_mux
+  assign performance_counter_0_control_slave_writedata = niosSystemCamControl_burst_7_downstream_writedata;
+
+  //master is always granted when requested
+  assign niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave = niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave;
+
+  //niosSystemCamControl_burst_7/downstream saved-grant performance_counter_0/control_slave, which is an e_assign
+  assign niosSystemCamControl_burst_7_downstream_saved_grant_performance_counter_0_control_slave = niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave;
+
+  //allow new arb cycle for performance_counter_0/control_slave, which is an e_assign
+  assign performance_counter_0_control_slave_allow_new_arb_cycle = 1;
+
+  //placeholder chosen master
+  assign performance_counter_0_control_slave_grant_vector = 1;
+
+  //placeholder vector of master qualified-requests
+  assign performance_counter_0_control_slave_master_qreq_vector = 1;
+
+  assign performance_counter_0_control_slave_begintransfer = performance_counter_0_control_slave_begins_xfer;
+  //performance_counter_0_control_slave_reset_n assignment, which is an e_assign
+  assign performance_counter_0_control_slave_reset_n = reset_n;
+
+  //performance_counter_0_control_slave_firsttransfer first transaction, which is an e_assign
+  assign performance_counter_0_control_slave_firsttransfer = performance_counter_0_control_slave_begins_xfer ? performance_counter_0_control_slave_unreg_firsttransfer : performance_counter_0_control_slave_reg_firsttransfer;
+
+  //performance_counter_0_control_slave_unreg_firsttransfer first transaction, which is an e_assign
+  assign performance_counter_0_control_slave_unreg_firsttransfer = ~(performance_counter_0_control_slave_slavearbiterlockenable & performance_counter_0_control_slave_any_continuerequest);
+
+  //performance_counter_0_control_slave_reg_firsttransfer first transaction, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          performance_counter_0_control_slave_reg_firsttransfer <= 1'b1;
+      else if (performance_counter_0_control_slave_begins_xfer)
+          performance_counter_0_control_slave_reg_firsttransfer <= performance_counter_0_control_slave_unreg_firsttransfer;
+    end
+
+
+  //performance_counter_0_control_slave_beginbursttransfer_internal begin burst transfer, which is an e_assign
+  assign performance_counter_0_control_slave_beginbursttransfer_internal = performance_counter_0_control_slave_begins_xfer;
+
+  //performance_counter_0_control_slave_write assignment, which is an e_mux
+  assign performance_counter_0_control_slave_write = niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave & niosSystemCamControl_burst_7_downstream_write;
+
+  //performance_counter_0_control_slave_address mux, which is an e_mux
+  assign performance_counter_0_control_slave_address = niosSystemCamControl_burst_7_downstream_nativeaddress;
+
+  //d1_performance_counter_0_control_slave_end_xfer register, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_performance_counter_0_control_slave_end_xfer <= 1;
+      else 
+        d1_performance_counter_0_control_slave_end_xfer <= performance_counter_0_control_slave_end_xfer;
+    end
+
+
+  //performance_counter_0_control_slave_waits_for_read in a cycle, which is an e_mux
+  assign performance_counter_0_control_slave_waits_for_read = performance_counter_0_control_slave_in_a_read_cycle & 0;
+
+  //performance_counter_0_control_slave_in_a_read_cycle assignment, which is an e_assign
+  assign performance_counter_0_control_slave_in_a_read_cycle = niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave & niosSystemCamControl_burst_7_downstream_read;
+
+  //in_a_read_cycle assignment, which is an e_mux
+  assign in_a_read_cycle = performance_counter_0_control_slave_in_a_read_cycle;
+
+  //performance_counter_0_control_slave_waits_for_write in a cycle, which is an e_mux
+  assign performance_counter_0_control_slave_waits_for_write = performance_counter_0_control_slave_in_a_write_cycle & 0;
+
+  //performance_counter_0_control_slave_in_a_write_cycle assignment, which is an e_assign
+  assign performance_counter_0_control_slave_in_a_write_cycle = niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave & niosSystemCamControl_burst_7_downstream_write;
+
+  //in_a_write_cycle assignment, which is an e_mux
+  assign in_a_write_cycle = performance_counter_0_control_slave_in_a_write_cycle;
+
+  assign wait_for_performance_counter_0_control_slave_counter = 0;
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //performance_counter_0/control_slave enable non-zero assertions, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          enable_nonzero_assertions <= 0;
+      else 
+        enable_nonzero_assertions <= 1'b1;
+    end
+
+
+  //niosSystemCamControl_burst_7/downstream non-zero arbitrationshare assertion, which is an e_process
+  always @(posedge clk)
+    begin
+      if (niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave && (niosSystemCamControl_burst_7_downstream_arbitrationshare == 0) && enable_nonzero_assertions)
+        begin
+          $write("%0d ns: niosSystemCamControl_burst_7/downstream drove 0 on its 'arbitrationshare' port while accessing slave performance_counter_0/control_slave", $time);
+          $stop;
+        end
+    end
+
+
+  //niosSystemCamControl_burst_7/downstream non-zero burstcount assertion, which is an e_process
+  always @(posedge clk)
+    begin
+      if (niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave && (niosSystemCamControl_burst_7_downstream_burstcount == 0) && enable_nonzero_assertions)
+        begin
+          $write("%0d ns: niosSystemCamControl_burst_7/downstream drove 0 on its 'burstcount' port while accessing slave performance_counter_0/control_slave", $time);
           $stop;
         end
     end
@@ -14877,7 +16333,7 @@ module niosSystemCamControl (
   wire    [  3: 0] cpu_0_data_master_burstcount;
   wire    [  3: 0] cpu_0_data_master_byteenable;
   wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_6_upstream;
-  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream;
+  wire    [  1: 0] cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream;
   wire    [  1: 0] cpu_0_data_master_dbs_address;
   wire    [ 15: 0] cpu_0_data_master_dbs_write_16;
   wire             cpu_0_data_master_debugaccess;
@@ -14889,6 +16345,7 @@ module niosSystemCamControl (
   wire             cpu_0_data_master_granted_niosSystemCamControl_burst_5_upstream;
   wire             cpu_0_data_master_granted_niosSystemCamControl_burst_6_upstream;
   wire             cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream;
   wire    [ 31: 0] cpu_0_data_master_irq;
   wire             cpu_0_data_master_latency_counter;
   wire             cpu_0_data_master_qualified_request_niosSystemCamControl_burst_0_upstream;
@@ -14899,6 +16356,7 @@ module niosSystemCamControl (
   wire             cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream;
   wire             cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream;
   wire             cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream;
   wire             cpu_0_data_master_read;
   wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream;
   wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register;
@@ -14916,6 +16374,8 @@ module niosSystemCamControl (
   wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register;
   wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream;
   wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register;
+  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream;
+  wire             cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register;
   wire    [ 31: 0] cpu_0_data_master_readdata;
   wire             cpu_0_data_master_readdatavalid;
   wire             cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream;
@@ -14926,6 +16386,7 @@ module niosSystemCamControl (
   wire             cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream;
   wire             cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream;
   wire             cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream;
+  wire             cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream;
   wire             cpu_0_data_master_waitrequest;
   wire             cpu_0_data_master_write;
   wire    [ 31: 0] cpu_0_data_master_writedata;
@@ -14974,9 +16435,11 @@ module niosSystemCamControl (
   wire             d1_niosSystemCamControl_burst_5_upstream_end_xfer;
   wire             d1_niosSystemCamControl_burst_6_upstream_end_xfer;
   wire             d1_niosSystemCamControl_burst_7_upstream_end_xfer;
+  wire             d1_niosSystemCamControl_burst_8_upstream_end_xfer;
   wire             d1_niosSystemCamControl_clock_0_in_end_xfer;
   wire             d1_niosSystemCamControl_clock_1_in_end_xfer;
   wire             d1_onchip_memory2_0_s1_end_xfer;
+  wire             d1_performance_counter_0_control_slave_end_xfer;
   wire             d1_procHasControl_s1_end_xfer;
   wire             d1_sdram_0_s1_end_xfer;
   wire             d1_sram_16bit_512k_0_avalon_slave_0_end_xfer;
@@ -15222,38 +16685,70 @@ module niosSystemCamControl (
   wire             niosSystemCamControl_burst_6_upstream_waitrequest_from_sa;
   wire             niosSystemCamControl_burst_6_upstream_write;
   wire    [ 15: 0] niosSystemCamControl_burst_6_upstream_writedata;
-  wire    [ 22: 0] niosSystemCamControl_burst_7_downstream_address;
-  wire    [ 22: 0] niosSystemCamControl_burst_7_downstream_address_to_slave;
-  wire    [  4: 0] niosSystemCamControl_burst_7_downstream_arbitrationshare;
+  wire    [  6: 0] niosSystemCamControl_burst_7_downstream_address;
+  wire    [  6: 0] niosSystemCamControl_burst_7_downstream_address_to_slave;
+  wire    [  3: 0] niosSystemCamControl_burst_7_downstream_arbitrationshare;
   wire             niosSystemCamControl_burst_7_downstream_burstcount;
-  wire    [  1: 0] niosSystemCamControl_burst_7_downstream_byteenable;
+  wire    [  3: 0] niosSystemCamControl_burst_7_downstream_byteenable;
   wire             niosSystemCamControl_burst_7_downstream_debugaccess;
-  wire             niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave;
   wire             niosSystemCamControl_burst_7_downstream_latency_counter;
-  wire    [ 22: 0] niosSystemCamControl_burst_7_downstream_nativeaddress;
-  wire             niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in;
+  wire    [  6: 0] niosSystemCamControl_burst_7_downstream_nativeaddress;
+  wire             niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave;
   wire             niosSystemCamControl_burst_7_downstream_read;
-  wire             niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
-  wire    [ 15: 0] niosSystemCamControl_burst_7_downstream_readdata;
+  wire             niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave;
+  wire    [ 31: 0] niosSystemCamControl_burst_7_downstream_readdata;
   wire             niosSystemCamControl_burst_7_downstream_readdatavalid;
-  wire             niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave;
   wire             niosSystemCamControl_burst_7_downstream_reset_n;
   wire             niosSystemCamControl_burst_7_downstream_waitrequest;
   wire             niosSystemCamControl_burst_7_downstream_write;
-  wire    [ 15: 0] niosSystemCamControl_burst_7_downstream_writedata;
-  wire    [ 22: 0] niosSystemCamControl_burst_7_upstream_address;
+  wire    [ 31: 0] niosSystemCamControl_burst_7_downstream_writedata;
+  wire    [  6: 0] niosSystemCamControl_burst_7_upstream_address;
   wire    [  3: 0] niosSystemCamControl_burst_7_upstream_burstcount;
-  wire    [ 23: 0] niosSystemCamControl_burst_7_upstream_byteaddress;
-  wire    [  1: 0] niosSystemCamControl_burst_7_upstream_byteenable;
+  wire    [  8: 0] niosSystemCamControl_burst_7_upstream_byteaddress;
+  wire    [  3: 0] niosSystemCamControl_burst_7_upstream_byteenable;
   wire             niosSystemCamControl_burst_7_upstream_debugaccess;
   wire             niosSystemCamControl_burst_7_upstream_read;
-  wire    [ 15: 0] niosSystemCamControl_burst_7_upstream_readdata;
-  wire    [ 15: 0] niosSystemCamControl_burst_7_upstream_readdata_from_sa;
+  wire    [ 31: 0] niosSystemCamControl_burst_7_upstream_readdata;
+  wire    [ 31: 0] niosSystemCamControl_burst_7_upstream_readdata_from_sa;
   wire             niosSystemCamControl_burst_7_upstream_readdatavalid;
   wire             niosSystemCamControl_burst_7_upstream_waitrequest;
   wire             niosSystemCamControl_burst_7_upstream_waitrequest_from_sa;
   wire             niosSystemCamControl_burst_7_upstream_write;
-  wire    [ 15: 0] niosSystemCamControl_burst_7_upstream_writedata;
+  wire    [ 31: 0] niosSystemCamControl_burst_7_upstream_writedata;
+  wire    [ 22: 0] niosSystemCamControl_burst_8_downstream_address;
+  wire    [ 22: 0] niosSystemCamControl_burst_8_downstream_address_to_slave;
+  wire    [  4: 0] niosSystemCamControl_burst_8_downstream_arbitrationshare;
+  wire             niosSystemCamControl_burst_8_downstream_burstcount;
+  wire    [  1: 0] niosSystemCamControl_burst_8_downstream_byteenable;
+  wire             niosSystemCamControl_burst_8_downstream_debugaccess;
+  wire             niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_8_downstream_latency_counter;
+  wire    [ 22: 0] niosSystemCamControl_burst_8_downstream_nativeaddress;
+  wire             niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_8_downstream_read;
+  wire             niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in;
+  wire    [ 15: 0] niosSystemCamControl_burst_8_downstream_readdata;
+  wire             niosSystemCamControl_burst_8_downstream_readdatavalid;
+  wire             niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in;
+  wire             niosSystemCamControl_burst_8_downstream_reset_n;
+  wire             niosSystemCamControl_burst_8_downstream_waitrequest;
+  wire             niosSystemCamControl_burst_8_downstream_write;
+  wire    [ 15: 0] niosSystemCamControl_burst_8_downstream_writedata;
+  wire    [ 22: 0] niosSystemCamControl_burst_8_upstream_address;
+  wire    [  3: 0] niosSystemCamControl_burst_8_upstream_burstcount;
+  wire    [ 23: 0] niosSystemCamControl_burst_8_upstream_byteaddress;
+  wire    [  1: 0] niosSystemCamControl_burst_8_upstream_byteenable;
+  wire             niosSystemCamControl_burst_8_upstream_debugaccess;
+  wire             niosSystemCamControl_burst_8_upstream_read;
+  wire    [ 15: 0] niosSystemCamControl_burst_8_upstream_readdata;
+  wire    [ 15: 0] niosSystemCamControl_burst_8_upstream_readdata_from_sa;
+  wire             niosSystemCamControl_burst_8_upstream_readdatavalid;
+  wire             niosSystemCamControl_burst_8_upstream_waitrequest;
+  wire             niosSystemCamControl_burst_8_upstream_waitrequest_from_sa;
+  wire             niosSystemCamControl_burst_8_upstream_write;
+  wire    [ 15: 0] niosSystemCamControl_burst_8_upstream_writedata;
   wire    [ 22: 0] niosSystemCamControl_clock_0_in_address;
   wire    [  1: 0] niosSystemCamControl_clock_0_in_byteenable;
   wire             niosSystemCamControl_clock_0_in_endofpacket;
@@ -15322,6 +16817,13 @@ module niosSystemCamControl (
   wire             onchip_memory2_0_s1_write;
   wire    [ 31: 0] onchip_memory2_0_s1_writedata;
   wire             out_port_from_the_procHasControl;
+  wire    [  4: 0] performance_counter_0_control_slave_address;
+  wire             performance_counter_0_control_slave_begintransfer;
+  wire    [ 31: 0] performance_counter_0_control_slave_readdata;
+  wire    [ 31: 0] performance_counter_0_control_slave_readdata_from_sa;
+  wire             performance_counter_0_control_slave_reset_n;
+  wire             performance_counter_0_control_slave_write;
+  wire    [ 31: 0] performance_counter_0_control_slave_writedata;
   wire    [  1: 0] procHasControl_s1_address;
   wire             procHasControl_s1_chipselect;
   wire    [ 31: 0] procHasControl_s1_readdata;
@@ -15435,7 +16937,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_burstcount                                                           (cpu_0_data_master_burstcount),
       .cpu_0_data_master_byteenable                                                           (cpu_0_data_master_byteenable),
       .cpu_0_data_master_byteenable_niosSystemCamControl_burst_6_upstream                     (cpu_0_data_master_byteenable_niosSystemCamControl_burst_6_upstream),
-      .cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream                     (cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream),
+      .cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream                     (cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream),
       .cpu_0_data_master_dbs_address                                                          (cpu_0_data_master_dbs_address),
       .cpu_0_data_master_dbs_write_16                                                         (cpu_0_data_master_dbs_write_16),
       .cpu_0_data_master_granted_niosSystemCamControl_burst_0_upstream                        (cpu_0_data_master_granted_niosSystemCamControl_burst_0_upstream),
@@ -15446,6 +16948,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_granted_niosSystemCamControl_burst_5_upstream                        (cpu_0_data_master_granted_niosSystemCamControl_burst_5_upstream),
       .cpu_0_data_master_granted_niosSystemCamControl_burst_6_upstream                        (cpu_0_data_master_granted_niosSystemCamControl_burst_6_upstream),
       .cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream                        (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream),
+      .cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream                        (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream),
       .cpu_0_data_master_irq                                                                  (cpu_0_data_master_irq),
       .cpu_0_data_master_latency_counter                                                      (cpu_0_data_master_latency_counter),
       .cpu_0_data_master_qualified_request_niosSystemCamControl_burst_0_upstream              (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_0_upstream),
@@ -15456,6 +16959,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream              (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_5_upstream),
       .cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream              (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_6_upstream),
       .cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream              (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_7_upstream),
+      .cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream              (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream),
       .cpu_0_data_master_read                                                                 (cpu_0_data_master_read),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream                (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register),
@@ -15473,6 +16977,8 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream                (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream                (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_readdata                                                             (cpu_0_data_master_readdata),
       .cpu_0_data_master_readdatavalid                                                        (cpu_0_data_master_readdatavalid),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream),
@@ -15483,6 +16989,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream),
+      .cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream),
       .cpu_0_data_master_waitrequest                                                          (cpu_0_data_master_waitrequest),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                                            (cpu_0_data_master_writedata),
@@ -15494,6 +17001,7 @@ module niosSystemCamControl (
       .d1_niosSystemCamControl_burst_5_upstream_end_xfer                                      (d1_niosSystemCamControl_burst_5_upstream_end_xfer),
       .d1_niosSystemCamControl_burst_6_upstream_end_xfer                                      (d1_niosSystemCamControl_burst_6_upstream_end_xfer),
       .d1_niosSystemCamControl_burst_7_upstream_end_xfer                                      (d1_niosSystemCamControl_burst_7_upstream_end_xfer),
+      .d1_niosSystemCamControl_burst_8_upstream_end_xfer                                      (d1_niosSystemCamControl_burst_8_upstream_end_xfer),
       .jtag_uart_0_avalon_jtag_slave_irq_from_sa                                              (jtag_uart_0_avalon_jtag_slave_irq_from_sa),
       .niosSystemCamControl_burst_0_upstream_readdata_from_sa                                 (niosSystemCamControl_burst_0_upstream_readdata_from_sa),
       .niosSystemCamControl_burst_0_upstream_waitrequest_from_sa                              (niosSystemCamControl_burst_0_upstream_waitrequest_from_sa),
@@ -15511,6 +17019,8 @@ module niosSystemCamControl (
       .niosSystemCamControl_burst_6_upstream_waitrequest_from_sa                              (niosSystemCamControl_burst_6_upstream_waitrequest_from_sa),
       .niosSystemCamControl_burst_7_upstream_readdata_from_sa                                 (niosSystemCamControl_burst_7_upstream_readdata_from_sa),
       .niosSystemCamControl_burst_7_upstream_waitrequest_from_sa                              (niosSystemCamControl_burst_7_upstream_waitrequest_from_sa),
+      .niosSystemCamControl_burst_8_upstream_readdata_from_sa                                 (niosSystemCamControl_burst_8_upstream_readdata_from_sa),
+      .niosSystemCamControl_burst_8_upstream_waitrequest_from_sa                              (niosSystemCamControl_burst_8_upstream_waitrequest_from_sa),
       .reset_n                                                                                (clk_0_reset_n),
       .timer_0_s1_irq_from_sa                                                                 (timer_0_s1_irq_from_sa)
     );
@@ -15710,6 +17220,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_0_upstream),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                                            (cpu_0_data_master_writedata),
@@ -15803,6 +17314,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_1_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_1_upstream),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                                            (cpu_0_data_master_writedata),
@@ -15896,6 +17408,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_2_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_2_upstream),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                                            (cpu_0_data_master_writedata),
@@ -15990,6 +17503,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_3_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_3_upstream),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                                            (cpu_0_data_master_writedata),
@@ -16083,6 +17597,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_4_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_4_upstream),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                                            (cpu_0_data_master_writedata),
@@ -16176,6 +17691,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_5_upstream),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
       .cpu_0_data_master_writedata                                                            (cpu_0_data_master_writedata),
@@ -16272,6 +17788,7 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream                (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_6_upstream),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
       .d1_niosSystemCamControl_burst_6_upstream_end_xfer                                      (d1_niosSystemCamControl_burst_6_upstream_end_xfer),
@@ -16351,9 +17868,6 @@ module niosSystemCamControl (
       .cpu_0_data_master_address_to_slave                                                     (cpu_0_data_master_address_to_slave),
       .cpu_0_data_master_burstcount                                                           (cpu_0_data_master_burstcount),
       .cpu_0_data_master_byteenable                                                           (cpu_0_data_master_byteenable),
-      .cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream                     (cpu_0_data_master_byteenable_niosSystemCamControl_burst_7_upstream),
-      .cpu_0_data_master_dbs_address                                                          (cpu_0_data_master_dbs_address),
-      .cpu_0_data_master_dbs_write_16                                                         (cpu_0_data_master_dbs_write_16),
       .cpu_0_data_master_debugaccess                                                          (cpu_0_data_master_debugaccess),
       .cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream                        (cpu_0_data_master_granted_niosSystemCamControl_burst_7_upstream),
       .cpu_0_data_master_latency_counter                                                      (cpu_0_data_master_latency_counter),
@@ -16368,8 +17882,10 @@ module niosSystemCamControl (
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream                (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream),
       .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
       .cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_7_upstream),
       .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
+      .cpu_0_data_master_writedata                                                            (cpu_0_data_master_writedata),
       .d1_niosSystemCamControl_burst_7_upstream_end_xfer                                      (d1_niosSystemCamControl_burst_7_upstream_end_xfer),
       .niosSystemCamControl_burst_7_upstream_address                                          (niosSystemCamControl_burst_7_upstream_address),
       .niosSystemCamControl_burst_7_upstream_burstcount                                       (niosSystemCamControl_burst_7_upstream_burstcount),
@@ -16389,27 +17905,26 @@ module niosSystemCamControl (
 
   niosSystemCamControl_burst_7_downstream_arbitrator the_niosSystemCamControl_burst_7_downstream
     (
-      .clk                                                                                       (clk_0),
-      .d1_niosSystemCamControl_clock_1_in_end_xfer                                               (d1_niosSystemCamControl_clock_1_in_end_xfer),
-      .niosSystemCamControl_burst_7_downstream_address                                           (niosSystemCamControl_burst_7_downstream_address),
-      .niosSystemCamControl_burst_7_downstream_address_to_slave                                  (niosSystemCamControl_burst_7_downstream_address_to_slave),
-      .niosSystemCamControl_burst_7_downstream_burstcount                                        (niosSystemCamControl_burst_7_downstream_burstcount),
-      .niosSystemCamControl_burst_7_downstream_byteenable                                        (niosSystemCamControl_burst_7_downstream_byteenable),
-      .niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in           (niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in),
-      .niosSystemCamControl_burst_7_downstream_latency_counter                                   (niosSystemCamControl_burst_7_downstream_latency_counter),
-      .niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in (niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in),
-      .niosSystemCamControl_burst_7_downstream_read                                              (niosSystemCamControl_burst_7_downstream_read),
-      .niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in   (niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in),
-      .niosSystemCamControl_burst_7_downstream_readdata                                          (niosSystemCamControl_burst_7_downstream_readdata),
-      .niosSystemCamControl_burst_7_downstream_readdatavalid                                     (niosSystemCamControl_burst_7_downstream_readdatavalid),
-      .niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in          (niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in),
-      .niosSystemCamControl_burst_7_downstream_reset_n                                           (niosSystemCamControl_burst_7_downstream_reset_n),
-      .niosSystemCamControl_burst_7_downstream_waitrequest                                       (niosSystemCamControl_burst_7_downstream_waitrequest),
-      .niosSystemCamControl_burst_7_downstream_write                                             (niosSystemCamControl_burst_7_downstream_write),
-      .niosSystemCamControl_burst_7_downstream_writedata                                         (niosSystemCamControl_burst_7_downstream_writedata),
-      .niosSystemCamControl_clock_1_in_readdata_from_sa                                          (niosSystemCamControl_clock_1_in_readdata_from_sa),
-      .niosSystemCamControl_clock_1_in_waitrequest_from_sa                                       (niosSystemCamControl_clock_1_in_waitrequest_from_sa),
-      .reset_n                                                                                   (clk_0_reset_n)
+      .clk                                                                                           (clk_0),
+      .d1_performance_counter_0_control_slave_end_xfer                                               (d1_performance_counter_0_control_slave_end_xfer),
+      .niosSystemCamControl_burst_7_downstream_address                                               (niosSystemCamControl_burst_7_downstream_address),
+      .niosSystemCamControl_burst_7_downstream_address_to_slave                                      (niosSystemCamControl_burst_7_downstream_address_to_slave),
+      .niosSystemCamControl_burst_7_downstream_burstcount                                            (niosSystemCamControl_burst_7_downstream_burstcount),
+      .niosSystemCamControl_burst_7_downstream_byteenable                                            (niosSystemCamControl_burst_7_downstream_byteenable),
+      .niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave           (niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave),
+      .niosSystemCamControl_burst_7_downstream_latency_counter                                       (niosSystemCamControl_burst_7_downstream_latency_counter),
+      .niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave (niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave),
+      .niosSystemCamControl_burst_7_downstream_read                                                  (niosSystemCamControl_burst_7_downstream_read),
+      .niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave   (niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave),
+      .niosSystemCamControl_burst_7_downstream_readdata                                              (niosSystemCamControl_burst_7_downstream_readdata),
+      .niosSystemCamControl_burst_7_downstream_readdatavalid                                         (niosSystemCamControl_burst_7_downstream_readdatavalid),
+      .niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave          (niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave),
+      .niosSystemCamControl_burst_7_downstream_reset_n                                               (niosSystemCamControl_burst_7_downstream_reset_n),
+      .niosSystemCamControl_burst_7_downstream_waitrequest                                           (niosSystemCamControl_burst_7_downstream_waitrequest),
+      .niosSystemCamControl_burst_7_downstream_write                                                 (niosSystemCamControl_burst_7_downstream_write),
+      .niosSystemCamControl_burst_7_downstream_writedata                                             (niosSystemCamControl_burst_7_downstream_writedata),
+      .performance_counter_0_control_slave_readdata_from_sa                                          (performance_counter_0_control_slave_readdata_from_sa),
+      .reset_n                                                                                       (clk_0_reset_n)
     );
 
   niosSystemCamControl_burst_7 the_niosSystemCamControl_burst_7
@@ -16439,6 +17954,103 @@ module niosSystemCamControl (
       .upstream_waitrequest            (niosSystemCamControl_burst_7_upstream_waitrequest),
       .upstream_write                  (niosSystemCamControl_burst_7_upstream_write),
       .upstream_writedata              (niosSystemCamControl_burst_7_upstream_writedata)
+    );
+
+  niosSystemCamControl_burst_8_upstream_arbitrator the_niosSystemCamControl_burst_8_upstream
+    (
+      .clk                                                                                    (clk_0),
+      .cpu_0_data_master_address_to_slave                                                     (cpu_0_data_master_address_to_slave),
+      .cpu_0_data_master_burstcount                                                           (cpu_0_data_master_burstcount),
+      .cpu_0_data_master_byteenable                                                           (cpu_0_data_master_byteenable),
+      .cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream                     (cpu_0_data_master_byteenable_niosSystemCamControl_burst_8_upstream),
+      .cpu_0_data_master_dbs_address                                                          (cpu_0_data_master_dbs_address),
+      .cpu_0_data_master_dbs_write_16                                                         (cpu_0_data_master_dbs_write_16),
+      .cpu_0_data_master_debugaccess                                                          (cpu_0_data_master_debugaccess),
+      .cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream                        (cpu_0_data_master_granted_niosSystemCamControl_burst_8_upstream),
+      .cpu_0_data_master_latency_counter                                                      (cpu_0_data_master_latency_counter),
+      .cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream              (cpu_0_data_master_qualified_request_niosSystemCamControl_burst_8_upstream),
+      .cpu_0_data_master_read                                                                 (cpu_0_data_master_read),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_0_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_1_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_2_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_3_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_4_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_5_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_6_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_7_upstream_shift_register),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream                (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream),
+      .cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register (cpu_0_data_master_read_data_valid_niosSystemCamControl_burst_8_upstream_shift_register),
+      .cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream                       (cpu_0_data_master_requests_niosSystemCamControl_burst_8_upstream),
+      .cpu_0_data_master_write                                                                (cpu_0_data_master_write),
+      .d1_niosSystemCamControl_burst_8_upstream_end_xfer                                      (d1_niosSystemCamControl_burst_8_upstream_end_xfer),
+      .niosSystemCamControl_burst_8_upstream_address                                          (niosSystemCamControl_burst_8_upstream_address),
+      .niosSystemCamControl_burst_8_upstream_burstcount                                       (niosSystemCamControl_burst_8_upstream_burstcount),
+      .niosSystemCamControl_burst_8_upstream_byteaddress                                      (niosSystemCamControl_burst_8_upstream_byteaddress),
+      .niosSystemCamControl_burst_8_upstream_byteenable                                       (niosSystemCamControl_burst_8_upstream_byteenable),
+      .niosSystemCamControl_burst_8_upstream_debugaccess                                      (niosSystemCamControl_burst_8_upstream_debugaccess),
+      .niosSystemCamControl_burst_8_upstream_read                                             (niosSystemCamControl_burst_8_upstream_read),
+      .niosSystemCamControl_burst_8_upstream_readdata                                         (niosSystemCamControl_burst_8_upstream_readdata),
+      .niosSystemCamControl_burst_8_upstream_readdata_from_sa                                 (niosSystemCamControl_burst_8_upstream_readdata_from_sa),
+      .niosSystemCamControl_burst_8_upstream_readdatavalid                                    (niosSystemCamControl_burst_8_upstream_readdatavalid),
+      .niosSystemCamControl_burst_8_upstream_waitrequest                                      (niosSystemCamControl_burst_8_upstream_waitrequest),
+      .niosSystemCamControl_burst_8_upstream_waitrequest_from_sa                              (niosSystemCamControl_burst_8_upstream_waitrequest_from_sa),
+      .niosSystemCamControl_burst_8_upstream_write                                            (niosSystemCamControl_burst_8_upstream_write),
+      .niosSystemCamControl_burst_8_upstream_writedata                                        (niosSystemCamControl_burst_8_upstream_writedata),
+      .reset_n                                                                                (clk_0_reset_n)
+    );
+
+  niosSystemCamControl_burst_8_downstream_arbitrator the_niosSystemCamControl_burst_8_downstream
+    (
+      .clk                                                                                       (clk_0),
+      .d1_niosSystemCamControl_clock_1_in_end_xfer                                               (d1_niosSystemCamControl_clock_1_in_end_xfer),
+      .niosSystemCamControl_burst_8_downstream_address                                           (niosSystemCamControl_burst_8_downstream_address),
+      .niosSystemCamControl_burst_8_downstream_address_to_slave                                  (niosSystemCamControl_burst_8_downstream_address_to_slave),
+      .niosSystemCamControl_burst_8_downstream_burstcount                                        (niosSystemCamControl_burst_8_downstream_burstcount),
+      .niosSystemCamControl_burst_8_downstream_byteenable                                        (niosSystemCamControl_burst_8_downstream_byteenable),
+      .niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in           (niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in),
+      .niosSystemCamControl_burst_8_downstream_latency_counter                                   (niosSystemCamControl_burst_8_downstream_latency_counter),
+      .niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in (niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in),
+      .niosSystemCamControl_burst_8_downstream_read                                              (niosSystemCamControl_burst_8_downstream_read),
+      .niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in   (niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in),
+      .niosSystemCamControl_burst_8_downstream_readdata                                          (niosSystemCamControl_burst_8_downstream_readdata),
+      .niosSystemCamControl_burst_8_downstream_readdatavalid                                     (niosSystemCamControl_burst_8_downstream_readdatavalid),
+      .niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in          (niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in),
+      .niosSystemCamControl_burst_8_downstream_reset_n                                           (niosSystemCamControl_burst_8_downstream_reset_n),
+      .niosSystemCamControl_burst_8_downstream_waitrequest                                       (niosSystemCamControl_burst_8_downstream_waitrequest),
+      .niosSystemCamControl_burst_8_downstream_write                                             (niosSystemCamControl_burst_8_downstream_write),
+      .niosSystemCamControl_burst_8_downstream_writedata                                         (niosSystemCamControl_burst_8_downstream_writedata),
+      .niosSystemCamControl_clock_1_in_readdata_from_sa                                          (niosSystemCamControl_clock_1_in_readdata_from_sa),
+      .niosSystemCamControl_clock_1_in_waitrequest_from_sa                                       (niosSystemCamControl_clock_1_in_waitrequest_from_sa),
+      .reset_n                                                                                   (clk_0_reset_n)
+    );
+
+  niosSystemCamControl_burst_8 the_niosSystemCamControl_burst_8
+    (
+      .clk                             (clk_0),
+      .downstream_readdata             (niosSystemCamControl_burst_8_downstream_readdata),
+      .downstream_readdatavalid        (niosSystemCamControl_burst_8_downstream_readdatavalid),
+      .downstream_waitrequest          (niosSystemCamControl_burst_8_downstream_waitrequest),
+      .reg_downstream_address          (niosSystemCamControl_burst_8_downstream_address),
+      .reg_downstream_arbitrationshare (niosSystemCamControl_burst_8_downstream_arbitrationshare),
+      .reg_downstream_burstcount       (niosSystemCamControl_burst_8_downstream_burstcount),
+      .reg_downstream_byteenable       (niosSystemCamControl_burst_8_downstream_byteenable),
+      .reg_downstream_debugaccess      (niosSystemCamControl_burst_8_downstream_debugaccess),
+      .reg_downstream_nativeaddress    (niosSystemCamControl_burst_8_downstream_nativeaddress),
+      .reg_downstream_read             (niosSystemCamControl_burst_8_downstream_read),
+      .reg_downstream_write            (niosSystemCamControl_burst_8_downstream_write),
+      .reg_downstream_writedata        (niosSystemCamControl_burst_8_downstream_writedata),
+      .reset_n                         (niosSystemCamControl_burst_8_downstream_reset_n),
+      .upstream_address                (niosSystemCamControl_burst_8_upstream_byteaddress),
+      .upstream_burstcount             (niosSystemCamControl_burst_8_upstream_burstcount),
+      .upstream_byteenable             (niosSystemCamControl_burst_8_upstream_byteenable),
+      .upstream_debugaccess            (niosSystemCamControl_burst_8_upstream_debugaccess),
+      .upstream_nativeaddress          (niosSystemCamControl_burst_8_upstream_address),
+      .upstream_read                   (niosSystemCamControl_burst_8_upstream_read),
+      .upstream_readdata               (niosSystemCamControl_burst_8_upstream_readdata),
+      .upstream_readdatavalid          (niosSystemCamControl_burst_8_upstream_readdatavalid),
+      .upstream_waitrequest            (niosSystemCamControl_burst_8_upstream_waitrequest),
+      .upstream_write                  (niosSystemCamControl_burst_8_upstream_write),
+      .upstream_writedata              (niosSystemCamControl_burst_8_upstream_writedata)
     );
 
   niosSystemCamControl_clock_0_in_arbitrator the_niosSystemCamControl_clock_0_in
@@ -16521,19 +18133,19 @@ module niosSystemCamControl (
     (
       .clk                                                                                       (clk_0),
       .d1_niosSystemCamControl_clock_1_in_end_xfer                                               (d1_niosSystemCamControl_clock_1_in_end_xfer),
-      .niosSystemCamControl_burst_7_downstream_address_to_slave                                  (niosSystemCamControl_burst_7_downstream_address_to_slave),
-      .niosSystemCamControl_burst_7_downstream_arbitrationshare                                  (niosSystemCamControl_burst_7_downstream_arbitrationshare),
-      .niosSystemCamControl_burst_7_downstream_burstcount                                        (niosSystemCamControl_burst_7_downstream_burstcount),
-      .niosSystemCamControl_burst_7_downstream_byteenable                                        (niosSystemCamControl_burst_7_downstream_byteenable),
-      .niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in           (niosSystemCamControl_burst_7_downstream_granted_niosSystemCamControl_clock_1_in),
-      .niosSystemCamControl_burst_7_downstream_latency_counter                                   (niosSystemCamControl_burst_7_downstream_latency_counter),
-      .niosSystemCamControl_burst_7_downstream_nativeaddress                                     (niosSystemCamControl_burst_7_downstream_nativeaddress),
-      .niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in (niosSystemCamControl_burst_7_downstream_qualified_request_niosSystemCamControl_clock_1_in),
-      .niosSystemCamControl_burst_7_downstream_read                                              (niosSystemCamControl_burst_7_downstream_read),
-      .niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in   (niosSystemCamControl_burst_7_downstream_read_data_valid_niosSystemCamControl_clock_1_in),
-      .niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in          (niosSystemCamControl_burst_7_downstream_requests_niosSystemCamControl_clock_1_in),
-      .niosSystemCamControl_burst_7_downstream_write                                             (niosSystemCamControl_burst_7_downstream_write),
-      .niosSystemCamControl_burst_7_downstream_writedata                                         (niosSystemCamControl_burst_7_downstream_writedata),
+      .niosSystemCamControl_burst_8_downstream_address_to_slave                                  (niosSystemCamControl_burst_8_downstream_address_to_slave),
+      .niosSystemCamControl_burst_8_downstream_arbitrationshare                                  (niosSystemCamControl_burst_8_downstream_arbitrationshare),
+      .niosSystemCamControl_burst_8_downstream_burstcount                                        (niosSystemCamControl_burst_8_downstream_burstcount),
+      .niosSystemCamControl_burst_8_downstream_byteenable                                        (niosSystemCamControl_burst_8_downstream_byteenable),
+      .niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in           (niosSystemCamControl_burst_8_downstream_granted_niosSystemCamControl_clock_1_in),
+      .niosSystemCamControl_burst_8_downstream_latency_counter                                   (niosSystemCamControl_burst_8_downstream_latency_counter),
+      .niosSystemCamControl_burst_8_downstream_nativeaddress                                     (niosSystemCamControl_burst_8_downstream_nativeaddress),
+      .niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in (niosSystemCamControl_burst_8_downstream_qualified_request_niosSystemCamControl_clock_1_in),
+      .niosSystemCamControl_burst_8_downstream_read                                              (niosSystemCamControl_burst_8_downstream_read),
+      .niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in   (niosSystemCamControl_burst_8_downstream_read_data_valid_niosSystemCamControl_clock_1_in),
+      .niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in          (niosSystemCamControl_burst_8_downstream_requests_niosSystemCamControl_clock_1_in),
+      .niosSystemCamControl_burst_8_downstream_write                                             (niosSystemCamControl_burst_8_downstream_write),
+      .niosSystemCamControl_burst_8_downstream_writedata                                         (niosSystemCamControl_burst_8_downstream_writedata),
       .niosSystemCamControl_clock_1_in_address                                                   (niosSystemCamControl_clock_1_in_address),
       .niosSystemCamControl_clock_1_in_byteenable                                                (niosSystemCamControl_clock_1_in_byteenable),
       .niosSystemCamControl_clock_1_in_endofpacket                                               (niosSystemCamControl_clock_1_in_endofpacket),
@@ -16645,6 +18257,43 @@ module niosSystemCamControl (
       .reset      (onchip_memory2_0_s1_reset),
       .write      (onchip_memory2_0_s1_write),
       .writedata  (onchip_memory2_0_s1_writedata)
+    );
+
+  performance_counter_0_control_slave_arbitrator the_performance_counter_0_control_slave
+    (
+      .clk                                                                                           (clk_0),
+      .d1_performance_counter_0_control_slave_end_xfer                                               (d1_performance_counter_0_control_slave_end_xfer),
+      .niosSystemCamControl_burst_7_downstream_address_to_slave                                      (niosSystemCamControl_burst_7_downstream_address_to_slave),
+      .niosSystemCamControl_burst_7_downstream_arbitrationshare                                      (niosSystemCamControl_burst_7_downstream_arbitrationshare),
+      .niosSystemCamControl_burst_7_downstream_burstcount                                            (niosSystemCamControl_burst_7_downstream_burstcount),
+      .niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave           (niosSystemCamControl_burst_7_downstream_granted_performance_counter_0_control_slave),
+      .niosSystemCamControl_burst_7_downstream_latency_counter                                       (niosSystemCamControl_burst_7_downstream_latency_counter),
+      .niosSystemCamControl_burst_7_downstream_nativeaddress                                         (niosSystemCamControl_burst_7_downstream_nativeaddress),
+      .niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave (niosSystemCamControl_burst_7_downstream_qualified_request_performance_counter_0_control_slave),
+      .niosSystemCamControl_burst_7_downstream_read                                                  (niosSystemCamControl_burst_7_downstream_read),
+      .niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave   (niosSystemCamControl_burst_7_downstream_read_data_valid_performance_counter_0_control_slave),
+      .niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave          (niosSystemCamControl_burst_7_downstream_requests_performance_counter_0_control_slave),
+      .niosSystemCamControl_burst_7_downstream_write                                                 (niosSystemCamControl_burst_7_downstream_write),
+      .niosSystemCamControl_burst_7_downstream_writedata                                             (niosSystemCamControl_burst_7_downstream_writedata),
+      .performance_counter_0_control_slave_address                                                   (performance_counter_0_control_slave_address),
+      .performance_counter_0_control_slave_begintransfer                                             (performance_counter_0_control_slave_begintransfer),
+      .performance_counter_0_control_slave_readdata                                                  (performance_counter_0_control_slave_readdata),
+      .performance_counter_0_control_slave_readdata_from_sa                                          (performance_counter_0_control_slave_readdata_from_sa),
+      .performance_counter_0_control_slave_reset_n                                                   (performance_counter_0_control_slave_reset_n),
+      .performance_counter_0_control_slave_write                                                     (performance_counter_0_control_slave_write),
+      .performance_counter_0_control_slave_writedata                                                 (performance_counter_0_control_slave_writedata),
+      .reset_n                                                                                       (clk_0_reset_n)
+    );
+
+  performance_counter_0 the_performance_counter_0
+    (
+      .address       (performance_counter_0_control_slave_address),
+      .begintransfer (performance_counter_0_control_slave_begintransfer),
+      .clk           (clk_0),
+      .readdata      (performance_counter_0_control_slave_readdata),
+      .reset_n       (performance_counter_0_control_slave_reset_n),
+      .write         (performance_counter_0_control_slave_write),
+      .writedata     (performance_counter_0_control_slave_writedata)
     );
 
   procHasControl_s1_arbitrator the_procHasControl_s1
@@ -16963,7 +18612,9 @@ endmodule
 `include "procHasControl.v"
 `include "sdram_0.v"
 `include "niosSystemCamControl_burst_3.v"
+`include "niosSystemCamControl_burst_8.v"
 `include "niosSystemCamControl_burst_1.v"
+`include "performance_counter_0.v"
 `include "niosSystemCamControl_burst_4.v"
 
 `timescale 1ns / 1ps
@@ -17005,6 +18656,7 @@ module test_bench
   wire             niosSystemCamControl_burst_6_downstream_debugaccess;
   wire    [ 18: 0] niosSystemCamControl_burst_6_downstream_nativeaddress;
   wire             niosSystemCamControl_burst_7_downstream_debugaccess;
+  wire             niosSystemCamControl_burst_8_downstream_debugaccess;
   wire             niosSystemCamControl_clock_0_in_endofpacket_from_sa;
   wire    [ 15: 0] niosSystemCamControl_clock_0_in_writedata;
   wire             niosSystemCamControl_clock_0_out_endofpacket;

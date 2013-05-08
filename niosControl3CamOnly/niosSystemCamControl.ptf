@@ -944,25 +944,25 @@ SYSTEM niosSystemCamControl
             }
             Entry jtag_uart_0/avalon_jtag_slave
             {
-               address = "0x01109030";
+               address = "0x011090b0";
                span = "0x00000008";
                is_bridge = "0";
             }
             Entry procHasControl/s1
             {
-               address = "0x01109020";
+               address = "0x011090a0";
                span = "0x00000010";
                is_bridge = "0";
             }
             Entry timer_0/s1
             {
-               address = "0x01109000";
+               address = "0x01109080";
                span = "0x00000020";
                is_bridge = "0";
             }
             Entry sysid/control_slave
             {
-               address = "0x01109038";
+               address = "0x011090b8";
                span = "0x00000008";
                is_bridge = "0";
             }
@@ -970,6 +970,12 @@ SYSTEM niosSystemCamControl
             {
                address = "0x01080000";
                span = "0x00080000";
+               is_bridge = "0";
+            }
+            Entry performance_counter_0/control_slave
+            {
+               address = "0x01109000";
+               span = "0x00000080";
                is_bridge = "0";
             }
          }
@@ -2724,13 +2730,13 @@ SYSTEM niosSystemCamControl
             MASTERED_BY cpu_0/data_master
             {
                priority = "1";
-               Offset_Address = "0x01109030";
+               Offset_Address = "0x011090b0";
             }
             IRQ_MASTER cpu_0/data_master
             {
                IRQ_Number = "0";
             }
-            Base_Address = "0x01109030";
+            Base_Address = "0x011090b0";
             Address_Group = "0";
          }
       }
@@ -2934,9 +2940,9 @@ SYSTEM niosSystemCamControl
             MASTERED_BY cpu_0/data_master
             {
                priority = "1";
-               Offset_Address = "0x01109020";
+               Offset_Address = "0x011090a0";
             }
-            Base_Address = "0x01109020";
+            Base_Address = "0x011090a0";
             Has_IRQ = "0";
             Address_Group = "0";
             IRQ_MASTER cpu_0/data_master
@@ -3110,13 +3116,13 @@ SYSTEM niosSystemCamControl
             MASTERED_BY cpu_0/data_master
             {
                priority = "1";
-               Offset_Address = "0x01109000";
+               Offset_Address = "0x01109080";
             }
             IRQ_MASTER cpu_0/data_master
             {
                IRQ_Number = "1";
             }
-            Base_Address = "0x01109000";
+            Base_Address = "0x01109080";
             Address_Group = "0";
          }
       }
@@ -3231,9 +3237,9 @@ SYSTEM niosSystemCamControl
             MASTERED_BY cpu_0/data_master
             {
                priority = "1";
-               Offset_Address = "0x01109038";
+               Offset_Address = "0x011090b8";
             }
-            Base_Address = "0x01109038";
+            Base_Address = "0x011090b8";
             Has_IRQ = "0";
             Address_Group = "0";
             IRQ_MASTER cpu_0/data_master
@@ -3255,7 +3261,7 @@ SYSTEM niosSystemCamControl
          Has_Clock = "1";
          View 
          {
-            Settings_Summary = "System ID (at last Generate):<br> <b>00000000</b>    (unique ID tag) <br> <b>51874374</b> (timestamp: Sun May 5, 2013 @10:45 PM)";
+            Settings_Summary = "System ID (at last Generate):<br> <b>00000000</b>    (unique ID tag) <br> <b>518AB941</b> (timestamp: Wed May 8, 2013 @1:44 PM)";
             MESSAGES 
             {
             }
@@ -3264,7 +3270,7 @@ SYSTEM niosSystemCamControl
       WIZARD_SCRIPT_ARGUMENTS 
       {
          id = "0u";
-         timestamp = "1367819124u";
+         timestamp = "1368045889u";
          regenerate_values = "0";
          MAKE 
          {
@@ -3273,7 +3279,7 @@ SYSTEM niosSystemCamControl
                verifysysid 
                {
                   All_Depends_On = "0";
-                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x01109038 --id=0 --timestamp=1367819124";
+                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x011090b8 --id=0 --timestamp=1368045889";
                   Is_Phony = "1";
                   Target_File = "dummy_verifysysid_file";
                }
@@ -3596,6 +3602,137 @@ SYSTEM niosSystemCamControl
          Simulation_HDL_Files = "C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_wrapper.v,C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_qsys.v,C:/altera/11.0sp1/ip/altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_hw_qsys.v,__PROJECT_DIRECTORY__/cpu_0_altera_nios_custom_instr_floating_point_inst.v";
       }
       WIZARD_SCRIPT_ARGUMENTS 
+      {
+      }
+   }
+   MODULE performance_counter_0
+   {
+      SLAVE control_slave
+      {
+         PORT_WIRING 
+         {
+            PORT clk
+            {
+               type = "clk";
+               width = "1";
+               direction = "input";
+               Is_Enabled = "1";
+            }
+            PORT reset_n
+            {
+               type = "reset_n";
+               width = "1";
+               direction = "input";
+               Is_Enabled = "1";
+            }
+            PORT address
+            {
+               type = "address";
+               width = "5";
+               direction = "input";
+               Is_Enabled = "1";
+            }
+            PORT begintransfer
+            {
+               type = "begintransfer";
+               width = "1";
+               direction = "input";
+               Is_Enabled = "1";
+            }
+            PORT readdata
+            {
+               type = "readdata";
+               width = "32";
+               direction = "output";
+               Is_Enabled = "1";
+            }
+            PORT write
+            {
+               type = "write";
+               width = "1";
+               direction = "input";
+               Is_Enabled = "1";
+            }
+            PORT writedata
+            {
+               type = "writedata";
+               width = "32";
+               direction = "input";
+               Is_Enabled = "1";
+            }
+         }
+         SYSTEM_BUILDER_INFO 
+         {
+            Bus_Type = "avalon";
+            Write_Wait_States = "0cycles";
+            Read_Wait_States = "0cycles";
+            Hold_Time = "0cycles";
+            Setup_Time = "0cycles";
+            Is_Printable_Device = "0";
+            Address_Alignment = "native";
+            Well_Behaved_Waitrequest = "0";
+            Is_Nonvolatile_Storage = "0";
+            Read_Latency = "1";
+            Is_Memory_Device = "0";
+            Maximum_Pending_Read_Transactions = "0";
+            Minimum_Uninterrupted_Run_Length = "1";
+            Accepts_Internal_Connections = "1";
+            Write_Latency = "0";
+            Is_Flash = "0";
+            Data_Width = "32";
+            Address_Width = "5";
+            Maximum_Burst_Size = "1";
+            Register_Incoming_Signals = "0";
+            Register_Outgoing_Signals = "0";
+            Interleave_Bursts = "0";
+            Linewrap_Bursts = "0";
+            Burst_On_Burst_Boundaries_Only = "0";
+            Always_Burst_Max_Burst = "0";
+            Is_Big_Endian = "0";
+            Is_Enabled = "1";
+            MASTERED_BY cpu_0/data_master
+            {
+               priority = "1";
+               Offset_Address = "0x01109000";
+            }
+            Base_Address = "0x01109000";
+            Has_IRQ = "0";
+            Address_Group = "0";
+            IRQ_MASTER cpu_0/data_master
+            {
+               IRQ_Number = "NC";
+            }
+         }
+      }
+      WIZARD_SCRIPT_ARGUMENTS 
+      {
+         how_many_sections = "7";
+      }
+      class = "altera_avalon_performance_counter";
+      class_version = "7.08110";
+      SYSTEM_BUILDER_INFO 
+      {
+         Is_Enabled = "1";
+         Clock_Source = "clk_0";
+         Has_Clock = "1";
+         Date_Modified = "";
+         Instantiate_In_System_Module = "1";
+         Top_Level_Ports_Are_Enumerated = "1";
+         View 
+         {
+            MESSAGES 
+            {
+            }
+         }
+      }
+      HDL_INFO 
+      {
+         Precompiled_Simulation_Library_Files = "";
+         Simulation_HDL_Files = "";
+         Synthesis_HDL_Files = "__PROJECT_DIRECTORY__/performance_counter_0.v";
+         Synthesis_Only_Files = "";
+      }
+      PORT_WIRING 
       {
       }
    }

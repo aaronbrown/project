@@ -38,7 +38,7 @@ module sram_16bit_512k_0 (
 		.iWE_N     (iWE_N),     //                      .write_n
 		.iOE_N     (iOE_N),     //                      .read_n
 		.iCE_N     (iCE_N),     //                      .chipselect_n
-		.iBE_N     (iBE_N)      //                      .byteenable_n
+		.iBE_N     (iBE_N)     //                      .byteenable_n
 	);
 
 endmodule

@@ -18,5 +18,5 @@
  </clocktable>
  <window width="1376" height="860" x="42" y="3" />
  <library
-   expandedCategories="Library,Project/Terasic Technologies Inc,Library/Memories and Memory Controllers/SDRAM,Library/Memories and Memory Controllers,Project,Library/Bridges and Adapters/DMA,Library/Bridges and Adapters,Library/Memories and Memory Controllers/External Memory Interfaces" />
+   expandedCategories="Project,Library/Memories and Memory Controllers,Library/Peripherals,Library/Memories and Memory Controllers/SDRAM,Project/Terasic Technologies Inc,Library/Memories and Memory Controllers/External Memory Interfaces,Library/Bridges and Adapters,Library,Library/Peripherals/Debug and Performance,Library/Bridges and Adapters/DMA" />
 </preferences>
