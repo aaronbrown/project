@@ -1,7 +1,7 @@
 PACKAGE install2 
 {
    # This file informs the Nios II IDE of non-legacy component paths.
-   # Generated 2013.05.05.11:37:17
+   # Generated 2013.05.05.22:45:31
    COMPONENT alt_interlaken_pcs_siv 
    {
       VERSION 11.0 
@@ -2134,7 +2134,7 @@ PACKAGE install2
    {
       VERSION 1.0.2 
       {
-         local = "C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly";
+         local = "C:/Users/Justin/Desktop/projectSmallImage0505/project/niosControl3CamOnly";
       }
    }
    COMPONENT sv_xcvr_custom 

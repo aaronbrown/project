@@ -13957,10 +13957,10 @@ module sram_16bit_512k_0_avalon_slave_0_arbitrator (
   assign sram_16bit_512k_0_avalon_slave_0_arbitration_holdoff_internal = sram_16bit_512k_0_avalon_slave_0_begins_xfer & sram_16bit_512k_0_avalon_slave_0_firsttransfer;
 
   //~sram_16bit_512k_0_avalon_slave_0_read_n assignment, which is an e_mux
-  assign sram_16bit_512k_0_avalon_slave_0_read_n = ~(((cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_read) | (niosSystemCamControl_burst_6_downstream_granted_sram_16bit_512k_0_avalon_slave_0 & niosSystemCamControl_burst_6_downstream_read))& ~sram_16bit_512k_0_avalon_slave_0_begins_xfer & (sram_16bit_512k_0_avalon_slave_0_wait_counter < 2));
+  assign sram_16bit_512k_0_avalon_slave_0_read_n = ~(((cpu_0_instruction_master_granted_sram_16bit_512k_0_avalon_slave_0 & cpu_0_instruction_master_read) | (niosSystemCamControl_burst_6_downstream_granted_sram_16bit_512k_0_avalon_slave_0 & niosSystemCamControl_burst_6_downstream_read))& ~sram_16bit_512k_0_avalon_slave_0_begins_xfer & (sram_16bit_512k_0_avalon_slave_0_wait_counter < 3));
 
   //~sram_16bit_512k_0_avalon_slave_0_write_n assignment, which is an e_mux
-  assign sram_16bit_512k_0_avalon_slave_0_write_n = ~(((niosSystemCamControl_burst_6_downstream_granted_sram_16bit_512k_0_avalon_slave_0 & niosSystemCamControl_burst_6_downstream_write)) & ~sram_16bit_512k_0_avalon_slave_0_begins_xfer & (sram_16bit_512k_0_avalon_slave_0_wait_counter >= 2) & (sram_16bit_512k_0_avalon_slave_0_wait_counter < 4));
+  assign sram_16bit_512k_0_avalon_slave_0_write_n = ~(((niosSystemCamControl_burst_6_downstream_granted_sram_16bit_512k_0_avalon_slave_0 & niosSystemCamControl_burst_6_downstream_write)) & ~sram_16bit_512k_0_avalon_slave_0_begins_xfer & (sram_16bit_512k_0_avalon_slave_0_wait_counter >= 3) & (sram_16bit_512k_0_avalon_slave_0_wait_counter < 6));
 
   assign shifted_address_to_sram_16bit_512k_0_avalon_slave_0_from_cpu_0_instruction_master = {cpu_0_instruction_master_address_to_slave >> 2,
     cpu_0_instruction_master_dbs_address[1],
@@ -14009,8 +14009,8 @@ module sram_16bit_512k_0_avalon_slave_0_arbitrator (
     end
 
 
-  assign sram_16bit_512k_0_avalon_slave_0_counter_load_value = ((sram_16bit_512k_0_avalon_slave_0_in_a_write_cycle & sram_16bit_512k_0_avalon_slave_0_begins_xfer))? 4 :
-    ((sram_16bit_512k_0_avalon_slave_0_in_a_read_cycle & sram_16bit_512k_0_avalon_slave_0_begins_xfer))? 2 :
+  assign sram_16bit_512k_0_avalon_slave_0_counter_load_value = ((sram_16bit_512k_0_avalon_slave_0_in_a_write_cycle & sram_16bit_512k_0_avalon_slave_0_begins_xfer))? 7 :
+    ((sram_16bit_512k_0_avalon_slave_0_in_a_read_cycle & sram_16bit_512k_0_avalon_slave_0_begins_xfer))? 4 :
     (~sram_16bit_512k_0_avalon_slave_0_wait_counter_eq_0)? sram_16bit_512k_0_avalon_slave_0_wait_counter - 1 :
     0;
 
@@ -17058,7 +17058,7 @@ module test_bench
   initial
     clk_0 = 1'b0;
   always
-    #5 clk_0 <= ~clk_0;
+    #4 clk_0 <= ~clk_0;
   
   initial
     clk_1 = 1'b0;
@@ -17068,7 +17068,7 @@ module test_bench
   initial 
     begin
       reset_n <= 0;
-      #100 reset_n <= 1;
+      #80 reset_n <= 1;
     end
 
 endmodule

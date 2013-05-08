@@ -36,6 +36,85 @@ bool cmpKeypoints (Keypoints::value_type const&a,
   return a.first.sigma < b.first.sigma ;
 }
 
+/** @brief Insert descriptor into stream
+ **
+ ** The function writes a descriptor in ASCII/binary format
+ ** and in integer/floating point format into the stream.
+ **
+ ** @param os output stream.
+ ** @param descr_pt descriptor (floating point)
+ ** @param binary write binary descriptor?
+ ** @param fp write floating point data?
+ **/
+std::ostream&
+insertDescriptor(std::ostream& os,
+                 VL::float_t const * descr_pt,
+                 bool binary,
+                 bool fp )
+{
+#define RAW_CONST_PT(x) reinterpret_cast<char const*>(x)
+#define RAW_PT(x)       reinterpret_cast<char*>(x)
+
+  if( fp ) {
+
+    /* convert to 32 bits floats (single precision) */
+    VL::float32_t fdescr_pt [128] ;
+    for(int i = 0 ; i < 128 ; ++i)
+      fdescr_pt[i] = VL::float32_t( descr_pt[i]) ;
+
+    if( binary ) {
+      /*
+         Test for endianess. Recall: big_endian = the most significant
+         byte at lower memory address.
+      */
+      short int const word = 0x0001 ;
+      bool little_endian = RAW_CONST_PT(&word)[0] ;
+
+      /*
+         We save in big-endian (network) order. So if this machine is
+         little endiand do the appropriate conversion.
+      */
+      if( little_endian ) {
+        for(int i = 0 ; i < 128 ; ++i) {
+          VL::float32_t tmp = fdescr_pt[ i ] ;
+          char* pt  = RAW_PT(fdescr_pt + i) ;
+          char* spt = RAW_PT(&tmp) ;
+          pt[0] = spt[3] ;
+          pt[1] = spt[2] ;
+          pt[2] = spt[1] ;
+          pt[3] = spt[0] ;
+        }
+      }
+      os.write( RAW_PT(fdescr_pt), 128 * sizeof(VL::float32_t) ) ;
+
+    } else {
+
+      for(int i = 0 ; i < 128 ; ++i)
+        os << ' '
+           << fdescr_pt[i] ;
+    }
+
+  } else {
+
+    VL::uint8_t idescr_pt [128] ;
+
+    for(int i = 0 ; i < 128 ; ++i)
+      idescr_pt[i] = uint8_t(float_t(512) * descr_pt[i]) ;
+
+    if( binary ) {
+
+      os.write( RAW_PT(idescr_pt), 128) ;
+
+    } else {
+
+      for(int i = 0 ; i < 128 ; ++i)
+        os << ' '
+           << uint32_t( idescr_pt[i] ) ;
+    }
+  }
+  return os ;
+}
+
 void extractImageData(VL::PgmBuffer& buffer)
 {
   VL::pixel_t* im_pt = new VL::pixel_t[IMAGE_WIDTH*IMAGE_HEIGHT];
@@ -337,7 +416,7 @@ main(int argc, char** argv)
   int    first          = 0 ;
   int    octaves        = 3 ;
   int    levels         = 2 ;
-  VL::float_t  threshold      (0.04f / levels / 2.0f) ;
+  VL::float_t  threshold      (0.08f / levels / 2.0f) ;
   VL::float_t  edgeThreshold  (10.0f);
   VL::float_t  magnif         (3.0) ;
   int    verbose        = 1 ;
@@ -436,15 +515,15 @@ main(int argc, char** argv)
         << "siftpp:   levels per octave     : " << S
         << endl ;
 
-  for (int omin = first; omin < O; omin++)
-  {
-    verbose && cout << "siftpp:   current octave        : " << omin << endl;
+  //for (int omin = first; omin < O; omin++)
+  //{
+  //  verbose && cout << "siftpp:   current octave        : " << omin << endl;
 
     // initialize scalespace
     VL::Sift sift(buffer.data, buffer.width, buffer.height,
         sigman, sigma0,
-        1, S,
-		    omin, -1, S+1) ;
+        3, S,
+		    0, -1, S+1) ;
       
     verbose && cout
         << "siftpp: Gaussian scale space completed"
@@ -468,8 +547,8 @@ main(int argc, char** argv)
     for (VL::Sift::KeypointsConstIter iter = sift.keypointsBegin();
     			iter != sift.keypointsEnd(); ++iter)
     {
-    	drawCircle((iter->ix << omin), (iter->iy << omin), 5*(2+iter->s),0,0,0x3ff);
-    	writeRedPixelAt((iter->ix << omin), (iter->iy << omin));
+    	drawCircle((iter->ix << iter->o), (iter->iy << iter->o), 5*(2+iter->s),0,0,0x3ff);
+    	writeRedPixelAt((iter->ix << iter->o), (iter->iy << iter->o));
     }
       
     // -------------------------------------------------------------
@@ -477,7 +556,7 @@ main(int argc, char** argv)
     // -------------------------------------------------------------
 
     // set descriptor options
-    sift.setNormalizeDescriptor( 0 ) ;
+    sift.setNormalizeDescriptor( 1 ) ;
     sift.setMagnification( magnif ) ;
 
 
@@ -498,13 +577,20 @@ main(int argc, char** argv)
       // compute descriptors
       for(int a = 0 ; a < nangles ; ++a) {
         // compute descriptor
-        VL::float_t descr_pt [128] ;
-        sift.computeKeypointDescriptor(descr_pt, *iter, angles[a]) ;
+        //cout << setprecision(2) << iter->y << ' '
+        //     << setprecision(2) << iter->x << ' '
+        //     << setprecision(2) << iter->sigma << ' '
+        //     << setprecision(3) << angles[a] ;
+               // compute descriptor
+               VL::float_t descr_pt [128] ;
+               sift.computeKeypointDescriptor(descr_pt, *iter, angles[a]) ;
+        //       insertDescriptor(cout, descr_pt, false, false);
+        //       cout << endl;
       } // next angle
     } // next keypoint
     verbose && cout << "done\n" ;
 
-	} // next octave
+	//} // next octave
 
 
 	verbose && cout

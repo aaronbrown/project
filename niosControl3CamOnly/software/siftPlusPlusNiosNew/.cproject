@@ -12,7 +12,7 @@
 					<folderInfo id="preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1063989064." name="/" resourcePath="">
 						<toolChain id="altera.nios2.mingw.gcc4.1925008428" name="MinGW Nios II GCC4" superClass="altera.nios2.mingw.gcc4">
 							<targetPlatform id="altera.nios2.mingw.gcc4.1614757299" name="Nios II" superClass="altera.nios2.mingw.gcc4"/>
-							<builder buildPath="${workspace_loc://siftPlusPlusNiosNew}" id="cdt.managedbuild.target.gnu.builder.cygwin.base.684993095" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.cygwin.base"/>
+							<builder buildPath="${workspace_loc://siftPlusPlusNiosSmallImage}" id="cdt.managedbuild.target.gnu.builder.cygwin.base.684993095" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.cygwin.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.cygwin.base.366586258" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.cygwin.base">
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1552359170" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

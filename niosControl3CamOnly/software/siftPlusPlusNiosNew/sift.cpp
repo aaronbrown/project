@@ -1007,8 +1007,12 @@ Sift::prepareGrad(int o)
 	pixel_t* end;
 	pixel_t* grad;
 	pixel_t* gradPtr;
+	pixel_t* GxPlusxoPtr;
+	pixel_t* GxMinusxoPtr;
+	pixel_t* GyPlusyoPtr;
+	pixel_t* GyMinusyoPtr;
 
-	VL::float_t Gx, Gy, m, t;
+	VL::float_t Gx, Gy;
     // compute dx/dy
     for(int s = smin+1 ; s <= smax-2 ; ++s) {
       src = getLevel(o, s) + xo;
@@ -1026,13 +1030,18 @@ Sift::prepareGrad(int o)
     	grad += 2*yo;
     	gradPtr = grad;
 
+    	GxPlusxoPtr = srcPtr + xo;
+    	GxMinusxoPtr = srcPtr - xo;
+    	GyPlusyoPtr = srcPtr + yo;
+    	GyMinusyoPtr = srcPtr - yo;
+
         while(srcPtr != end) {
-          Gx = 0.5 * ( *(srcPtr+xo) - *(srcPtr-xo) ) ;
-          Gy = 0.5 * ( *(srcPtr+yo) - *(srcPtr-yo) ) ;
-          m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
-          t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
-          *gradPtr++ = pixel_t( m ) ;
-          *gradPtr++ = pixel_t( t ) ;
+          Gx = 0.5 * ( *GxPlusxoPtr++ - *GxMinusxoPtr++ ) ;
+          Gy = 0.5 * ( *GyPlusyoPtr++ - *GyMinusyoPtr++ ) ;
+          //m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
+          //t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
+          *gradPtr++ = pixel_t( fast_sqrt( Gx*Gx + Gy*Gy ) ) ;
+          *gradPtr++ = pixel_t( fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) ) ) ;
           ++srcPtr ;
         }
       }
@@ -1137,7 +1146,7 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
       VL::float_t ang = *(pt + xs*xo + ys*yo + 1) ;
 
       //      int bin = (int) floor( nbins * ang / (2*M_PI) ) ;
-      int bin = (int) floor( nbins * ang / (2*M_PI) ) ;
+      int bin = fast_floor( nbins * ang / (2*M_PI) ) ;
       hist[bin] += mod * wgt ;        
     }
   }
@@ -1190,10 +1199,9 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
       VL::float_t th = 2*M_PI * (i+di+0.5) / nbins ;      
       angles [ nangles++ ] = th ;
       if( nangles == 4 )
-        goto enough_angles ;
+        return nangles ;
     }
   }
- enough_angles:
   return nangles ;
 }
 
@@ -1327,41 +1335,54 @@ Sift::computeKeypointDescriptor
    * Process pixels in the intersection of the image rectangle
    * (1,1)-(M-1,N-1) and the keypoint bounding box.
    */
-  for(int dyi = std::max(-W, 1-yi) ; dyi <= std::min(+W, oh-2-yi) ; ++dyi) {
-    for(int dxi = std::max(-W, 1-xi) ; dxi <= std::min(+W, ow-2-xi) ; ++dxi) {
+
+  VL::float_t mod, angle, theta;
+  VL::float_t dx, dy;
+  VL::float_t nx, ny, nt;
+  VL::float_t wsigma, win;
+
+  int binx, biny, bint;
+
+  VL::float_t rbinx, rbiny, rbint;
+  int dbinx, dbiny, dbint;
+
+  VL::float_t weight;
+
+  int dyiMax = std::min(+W, oh-2-yi);
+  int dxiMax = std::min(+W, ow-2-xi);
+
+  for(int dyi = std::max(-W, 1-yi) ; dyi <= dyiMax ; ++dyi) {
+    for(int dxi = std::max(-W, 1-xi) ; dxi <= dxiMax ; ++dxi) {
       
       // retrieve 
-      VL::float_t mod   = *( pt + dxi*xo + dyi*yo + 0 ) ;
-      VL::float_t angle = *( pt + dxi*xo + dyi*yo + 1 ) ;
-      VL::float_t theta = fast_mod_2pi(-angle + angle0) ; // lowe compatible ?
+      mod   = *( pt + dxi*xo + dyi*yo + 0 ) ;
+      angle = *( pt + dxi*xo + dyi*yo + 1 ) ;
+      theta = fast_mod_2pi(-angle + angle0) ; // lowe compatible ?
       
       // fractional displacement
-      VL::float_t dx = xi + dxi - x;
-      VL::float_t dy = yi + dyi - y;
+      dx = xi + dxi - x;
+      dy = yi + dyi - y;
       
       // get the displacement normalized w.r.t. the keypoint
       // orientation and extension.
-      VL::float_t nx = ( ct0 * dx + st0 * dy) / SBP ;
-      VL::float_t ny = (-st0 * dx + ct0 * dy) / SBP ; 
-      VL::float_t nt = NBO * theta / (2*M_PI) ;
+      nx = ( ct0 * dx + st0 * dy) / SBP ;
+      ny = (-st0 * dx + ct0 * dy) / SBP ;
+      nt = NBO * theta / (2*M_PI) ;
       
       // Get the gaussian weight of the sample. The gaussian window
       // has a standard deviation equal to NBP/2. Note that dx and dy
       // are in the normalized frame, so that -NBP/2 <= dx <= NBP/2.
-      VL::float_t const wsigma = NBP/2 ;
-      VL::float_t win = VL::fast_expn((nx*nx + ny*ny)/(2.0 * wsigma * wsigma)) ;
+      wsigma = NBP/2 ;
+      win = VL::fast_expn((nx*nx + ny*ny)/(2.0 * wsigma * wsigma)) ;
       
       // The sample will be distributed in 8 adjacent bins.
       // We start from the ``lower-left'' bin.
-      int binx = fast_floor( nx - 0.5 ) ;
-      int biny = fast_floor( ny - 0.5 ) ;
-      int bint = fast_floor( nt ) ;
-      VL::float_t rbinx = nx - (binx+0.5) ;
-      VL::float_t rbiny = ny - (biny+0.5) ;
-      VL::float_t rbint = nt - bint ;
-      int dbinx ;
-      int dbiny ;
-      int dbint ;
+      binx = fast_floor( nx - 0.5 ) ;
+      biny = fast_floor( ny - 0.5 ) ;
+      bint = fast_floor( nt ) ;
+      rbinx = nx - (binx+0.5) ;
+      rbiny = ny - (biny+0.5) ;
+      rbint = nt - bint ;
 
       // Distribute the current sample into the 8 adjacent bins
       for(dbinx = 0 ; dbinx < 2 ; ++dbinx) {
@@ -1372,7 +1393,7 @@ Sift::computeKeypointDescriptor
                 binx+dbinx <   (NBP/2) &&
                 biny+dbiny >= -(NBP/2) &&
                 biny+dbiny <   (NBP/2) ) {
-              VL::float_t weight = win 
+              weight = win
                 * mod 
                 * fast_abs (1 - dbinx - rbinx)
                 * fast_abs (1 - dbiny - rbiny)
