@@ -38,9 +38,9 @@ module cpu_0_ic_data_module (
   output  [ 31: 0] q;
   input            clock;
   input   [ 31: 0] data;
-  input   [  8: 0] rdaddress;
+  input   [  9: 0] rdaddress;
   input            rden;
-  input   [  8: 0] wraddress;
+  input   [  9: 0] wraddress;
   input            wren;
 
   wire    [ 31: 0] q;
@@ -59,8 +59,8 @@ module cpu_0_ic_data_module (
 
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 512,
-           the_altsyncram.numwords_b = 512,
+           the_altsyncram.numwords_a = 1024,
+           the_altsyncram.numwords_b = 1024,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
@@ -68,8 +68,8 @@ module cpu_0_ic_data_module (
            the_altsyncram.read_during_write_mode_mixed_ports = "DONT_CARE",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
-           the_altsyncram.widthad_a = 9,
-           the_altsyncram.widthad_b = 9;
+           the_altsyncram.widthad_a = 10,
+           the_altsyncram.widthad_b = 10;
 
 
 endmodule
@@ -100,16 +100,16 @@ module cpu_0_ic_tag_module (
   parameter lpm_file = "UNUSED";
 
 
-  output  [ 21: 0] q;
+  output  [ 20: 0] q;
   input            clock;
-  input   [ 21: 0] data;
-  input   [  5: 0] rdaddress;
+  input   [ 20: 0] data;
+  input   [  6: 0] rdaddress;
   input            rden;
-  input   [  5: 0] wraddress;
+  input   [  6: 0] wraddress;
   input            wren;
 
-  wire    [ 21: 0] q;
-  wire    [ 21: 0] ram_q;
+  wire    [ 20: 0] q;
+  wire    [ 20: 0] ram_q;
   assign q = ram_q;
   altsyncram the_altsyncram
     (
@@ -125,17 +125,17 @@ module cpu_0_ic_tag_module (
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.init_file = lpm_file,
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 64,
-           the_altsyncram.numwords_b = 64,
+           the_altsyncram.numwords_a = 128,
+           the_altsyncram.numwords_b = 128,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
            the_altsyncram.rdcontrol_reg_b = "CLOCK0",
            the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
-           the_altsyncram.width_a = 22,
-           the_altsyncram.width_b = 22,
-           the_altsyncram.widthad_a = 6,
-           the_altsyncram.widthad_b = 6;
+           the_altsyncram.width_a = 21,
+           the_altsyncram.width_b = 21,
+           the_altsyncram.widthad_a = 7,
+           the_altsyncram.widthad_b = 7;
 
 
 endmodule
@@ -885,7 +885,7 @@ defparam cpu_0_ociram_lpm_dram_bdp_component.lpm_file = "cpu_0_ociram_default_co
     (MonAReg[4 : 2] == 3'd1)? 32'h00001919 :
     (MonAReg[4 : 2] == 3'd2)? 32'h00040000 :
     (MonAReg[4 : 2] == 3'd3)? 32'h00000000 :
-    (MonAReg[4 : 2] == 3'd4)? 32'h20000d0b :
+    (MonAReg[4 : 2] == 3'd4)? 32'h20000d0c :
     (MonAReg[4 : 2] == 3'd5)? 32'h01104000 :
     (MonAReg[4 : 2] == 3'd6)? 32'h00000000 :
     32'h00000000;
@@ -3846,6 +3846,10 @@ module cpu_0 (
   wire             A_ctrl_dc_nowb_inv_nxt;
   reg              A_ctrl_dcache_management;
   wire             A_ctrl_dcache_management_nxt;
+  reg              A_ctrl_div;
+  wire             A_ctrl_div_nxt;
+  reg              A_ctrl_div_signed;
+  wire             A_ctrl_div_signed_nxt;
   reg              A_ctrl_exception;
   wire             A_ctrl_exception_nxt;
   reg              A_ctrl_flush_pipe_always;
@@ -4050,6 +4054,34 @@ module cpu_0 (
   wire    [ 31: 0] A_dc_xfer_wr_data_nxt;
   reg     [  2: 0] A_dc_xfer_wr_offset;
   reg              A_dc_xfer_wr_starting;
+  reg              A_div_accumulate_quotient_bits;
+  reg     [ 31: 0] A_div_den;
+  wire             A_div_den_en;
+  wire             A_div_den_is_normalized;
+  reg              A_div_den_is_normalized_sticky;
+  wire    [ 31: 0] A_div_den_nxt;
+  wire             A_div_discover_quotient_bits;
+  reg              A_div_do_sub;
+  reg              A_div_done;
+  reg              A_div_last_quotient_bit;
+  wire             A_div_last_quotient_bit_nxt;
+  reg              A_div_negate_result;
+  reg     [  5: 0] A_div_norm_cnt;
+  wire    [  5: 0] A_div_norm_cnt_nxt;
+  reg     [ 31: 0] A_div_quot;
+  reg              A_div_quot_bit;
+  wire             A_div_quot_bit_nxt;
+  wire             A_div_quot_en;
+  wire             A_div_quot_hot1;
+  wire    [ 31: 0] A_div_quot_nxt;
+  reg              A_div_quot_ready;
+  wire    [ 31: 0] A_div_quot_shifted;
+  reg     [ 32: 0] A_div_rem;
+  wire    [ 32: 0] A_div_rem_den_sum_diff;
+  wire             A_div_rem_en;
+  wire    [ 32: 0] A_div_rem_nxt;
+  wire             A_div_rem_sign_bit;
+  wire             A_div_stall;
   wire    [  4: 0] A_dst_regnum;
   reg     [  4: 0] A_dst_regnum_from_M;
   wire             A_en;
@@ -4359,6 +4391,8 @@ module cpu_0 (
   wire             D_ctrl_crst;
   wire             D_ctrl_custom_combo;
   wire             D_ctrl_custom_multi;
+  wire             D_ctrl_div;
+  wire             D_ctrl_div_signed;
   wire             D_ctrl_exception;
   wire             D_ctrl_flush_pipe_always;
   reg              D_ctrl_hi_imm16;
@@ -4565,10 +4599,10 @@ module cpu_0 (
   wire             D_op_xorhi;
   wire             D_op_xori;
   reg     [ 22: 0] D_pc;
-  wire    [  5: 0] D_pc_line_field;
+  wire    [  6: 0] D_pc_line_field;
   wire    [  2: 0] D_pc_offset_field;
   reg     [ 22: 0] D_pc_plus_one;
-  wire    [ 13: 0] D_pc_tag_field;
+  wire    [ 12: 0] D_pc_tag_field;
   wire    [ 24: 0] D_pcb;
   wire             D_rdprs_stall;
   reg              D_rdprs_stall_done;
@@ -4663,6 +4697,10 @@ module cpu_0 (
   wire             E_ctrl_dc_index_wb_inv;
   wire             E_ctrl_dc_nowb_inv;
   wire             E_ctrl_dcache_management;
+  reg              E_ctrl_div;
+  wire             E_ctrl_div_nxt;
+  reg              E_ctrl_div_signed;
+  wire             E_ctrl_div_signed_nxt;
   reg              E_ctrl_exception;
   wire             E_ctrl_exception_nxt;
   reg              E_ctrl_flush_pipe_always;
@@ -4747,6 +4785,11 @@ module cpu_0 (
   reg              E_ctrl_unsigned_lo_imm16;
   wire             E_ctrl_unsigned_lo_imm16_nxt;
   wire             E_ctrl_wrctl_inst;
+  wire             E_div_negate_result;
+  wire             E_div_negate_src1;
+  wire             E_div_negate_src2;
+  wire    [ 31: 0] E_div_src1;
+  wire    [ 31: 0] E_div_src2;
   reg     [  4: 0] E_dst_regnum;
   wire             E_en;
   wire             E_eq;
@@ -4970,14 +5013,14 @@ module cpu_0 (
   wire             F_ctrl_unsigned_lo_imm16;
   wire             F_en;
   wire             F_ic_bypass_req;
-  wire    [  8: 0] F_ic_data_rd_addr_nxt;
-  wire    [ 13: 0] F_ic_desired_tag;
+  wire    [  9: 0] F_ic_data_rd_addr_nxt;
+  wire    [ 12: 0] F_ic_desired_tag;
   wire             F_ic_fill_same_tag_line;
   wire             F_ic_hit;
   wire    [ 31: 0] F_ic_iw;
-  wire    [ 13: 0] F_ic_tag_field;
-  wire    [ 21: 0] F_ic_tag_rd;
-  wire    [  5: 0] F_ic_tag_rd_addr_nxt;
+  wire    [ 12: 0] F_ic_tag_field;
+  wire    [ 20: 0] F_ic_tag_rd;
+  wire    [  6: 0] F_ic_tag_rd_addr_nxt;
   wire             F_ic_valid;
   wire    [  7: 0] F_ic_valid_bits;
   wire    [423: 0] F_inst;
@@ -5137,10 +5180,10 @@ module cpu_0 (
   wire             F_op_xorhi;
   wire             F_op_xori;
   reg     [ 22: 0] F_pc;
-  wire    [  5: 0] F_pc_line_field;
+  wire    [  6: 0] F_pc_line_field;
   wire    [ 22: 0] F_pc_nxt;
   wire    [ 22: 0] F_pc_plus_one;
-  wire    [ 13: 0] F_pc_tag_field;
+  wire    [ 12: 0] F_pc_tag_field;
   wire    [ 24: 0] F_pcb;
   wire    [ 24: 0] F_pcb_nxt;
   wire    [ 31: 0] F_ram_iw;
@@ -5229,6 +5272,10 @@ module cpu_0 (
   wire             M_ctrl_dc_nowb_inv_nxt;
   reg              M_ctrl_dcache_management;
   wire             M_ctrl_dcache_management_nxt;
+  reg              M_ctrl_div;
+  wire             M_ctrl_div_nxt;
+  reg              M_ctrl_div_signed;
+  wire             M_ctrl_div_signed_nxt;
   reg              M_ctrl_exception;
   wire             M_ctrl_exception_nxt;
   reg              M_ctrl_flush_pipe_always;
@@ -5369,6 +5416,9 @@ module cpu_0 (
   wire             M_dc_valid_st_cache_hit;
   wire             M_dc_want_fill;
   wire             M_dc_want_mem_bypass_or_dcache_management;
+  reg              M_div_negate_result;
+  reg     [ 31: 0] M_div_src1;
+  reg     [ 31: 0] M_div_src2;
   reg     [  4: 0] M_dst_regnum;
   wire             M_en;
   wire             M_exc_any;
@@ -5561,8 +5611,8 @@ module cpu_0 (
   reg              M_rot_sel_fill3;
   reg     [ 31: 0] M_rot_step1;
   reg              M_sel_data_master;
-  reg     [ 31: 0] M_src1;
-  reg     [ 31: 0] M_src2;
+  wire    [ 31: 0] M_src1;
+  wire    [ 31: 0] M_src2;
   reg     [ 31: 0] M_st_data;
   wire             M_st_dc_wr_en;
   wire             M_stall;
@@ -5631,6 +5681,10 @@ module cpu_0 (
   wire             W_ctrl_dc_nowb_inv_nxt;
   reg              W_ctrl_dcache_management;
   wire             W_ctrl_dcache_management_nxt;
+  reg              W_ctrl_div;
+  wire             W_ctrl_div_nxt;
+  reg              W_ctrl_div_signed;
+  wire             W_ctrl_div_signed_nxt;
   reg              W_ctrl_exception;
   wire             W_ctrl_exception_nxt;
   reg              W_ctrl_flush_pipe_always;
@@ -5955,11 +6009,11 @@ module cpu_0 (
   wire             ic_fill_dp_offset_en;
   wire    [  2: 0] ic_fill_dp_offset_nxt;
   reg     [  2: 0] ic_fill_initial_offset;
-  reg     [  5: 0] ic_fill_line;
+  reg     [  6: 0] ic_fill_line;
   reg              ic_fill_prevent_refill;
   wire             ic_fill_prevent_refill_nxt;
   wire             ic_fill_req_accepted;
-  reg     [ 13: 0] ic_fill_tag;
+  reg     [ 12: 0] ic_fill_tag;
   wire    [  7: 0] ic_fill_valid_bit_new;
   reg     [  7: 0] ic_fill_valid_bits;
   wire             ic_fill_valid_bits_en;
@@ -5967,9 +6021,9 @@ module cpu_0 (
   reg              ic_tag_clr_valid_bits;
   wire             ic_tag_clr_valid_bits_nxt;
   wire             ic_tag_rden;
-  reg     [  5: 0] ic_tag_wraddress;
-  wire    [  5: 0] ic_tag_wraddress_nxt;
-  wire    [ 21: 0] ic_tag_wrdata;
+  reg     [  6: 0] ic_tag_wraddress;
+  wire    [  6: 0] ic_tag_wraddress_nxt;
+  wire    [ 20: 0] ic_tag_wrdata;
   wire             ic_tag_wren;
   wire             jtag_debug_module_clk;
   wire             jtag_debug_module_debugaccess_to_roms;
@@ -7059,7 +7113,7 @@ module cpu_0 (
   assign D_ic_bypass_start_avalon_read = 0;
   assign F_ic_bypass_req = 0;
   assign ic_bypass_active = 0;
-  assign F_ic_data_rd_addr_nxt = F_pc_nxt[8 : 0];
+  assign F_ic_data_rd_addr_nxt = F_pc_nxt[9 : 0];
   assign ic_data_wren = i_readdatavalid_d1 & ~ic_bypass_active;
   assign ic_data_rden = F_en;
 //cpu_0_ic_data, which is an nios_sdp_ram
@@ -7074,7 +7128,7 @@ cpu_0_ic_data_module cpu_0_ic_data
     .wren      (ic_data_wren)
   );
 
-  assign F_ic_tag_rd_addr_nxt = F_pc_nxt[8 : 3];
+  assign F_ic_tag_rd_addr_nxt = F_pc_nxt[9 : 3];
   assign ic_tag_clr_valid_bits_nxt = (M_ctrl_invalidate_i & M_valid) | D_ic_fill_starting | clr_break_line;
   assign ic_fill_valid_bits_nxt = ic_tag_clr_valid_bits_nxt ? 0 :
     D_ic_fill_starting_d1     ? ic_fill_valid_bit_new : 
@@ -7092,9 +7146,9 @@ cpu_0_ic_data_module cpu_0_ic_data
     end
 
 
-  assign ic_tag_wraddress_nxt = (clr_break_line)? 1 :
+  assign ic_tag_wraddress_nxt = (clr_break_line)? 65 :
     ((M_ctrl_crst & M_valid))? 0 :
-    ((M_ctrl_invalidate_i & M_valid))? (M_alu_result[10 : 5]) :
+    ((M_ctrl_invalidate_i & M_valid))? (M_alu_result[11 : 5]) :
     (D_ic_fill_starting)? D_pc_line_field :
     ic_fill_line;
 
@@ -7150,9 +7204,9 @@ defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.hex";
 //synthesis read_comments_as_HDL on
 //defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.mif";
 //synthesis read_comments_as_HDL off
-  assign F_ic_tag_field = F_ic_tag_rd[21 : 8];
+  assign F_ic_tag_field = F_ic_tag_rd[20 : 8];
   assign F_ic_valid_bits = F_ic_tag_rd[7 : 0];
-  assign F_ic_desired_tag = F_pc[22 : 9];
+  assign F_ic_desired_tag = F_pc[22 : 10];
   assign F_ic_valid = (F_pc[2 : 0] == 3'd0)? F_ic_valid_bits[0] :
     (F_pc[2 : 0] == 3'd1)? F_ic_valid_bits[1] :
     (F_pc[2 : 0] == 3'd2)? F_ic_valid_bits[2] :
@@ -7165,10 +7219,10 @@ defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.hex";
   assign F_ic_hit = F_ic_valid & (F_ic_desired_tag == F_ic_tag_field) &
     ~F_ic_bypass_req & ~ic_bypass_active;
 
-  assign F_pc_tag_field = F_pc[22 : 9];
-  assign F_pc_line_field = F_pc[8 : 3];
-  assign D_pc_tag_field = D_pc[22 : 9];
-  assign D_pc_line_field = D_pc[8 : 3];
+  assign F_pc_tag_field = F_pc[22 : 10];
+  assign F_pc_line_field = F_pc[9 : 3];
+  assign D_pc_tag_field = D_pc[22 : 10];
+  assign D_pc_line_field = D_pc[9 : 3];
   assign D_pc_offset_field = D_pc[2 : 0];
   assign D_ic_want_fill_unfiltered = ~D_iw_valid & ~D_kill & ~M_pipe_flush;
   assign ic_fill_prevent_refill_nxt = D_ic_fill_starting | (ic_fill_prevent_refill & ~((M_ctrl_invalidate_i & M_valid) | ic_bypass_active));
@@ -7199,7 +7253,7 @@ defparam cpu_0_ic_tag.lpm_file = "cpu_0_ic_tag_ram.hex";
     (~ic_fill_ap_last_word & ic_fill_active)));
 
   assign i_address = {ic_fill_tag, 
-    ic_fill_line[5 : 0],
+    ic_fill_line[6 : 0],
     ic_fill_ap_offset, 
     2'b00};
 
@@ -7836,6 +7890,174 @@ defparam cpu_0_register_bank_b.lpm_file = "cpu_0_rf_ram_b.hex";
           A_shift_rot_result[31 : 24] <= 0;
       else 
         A_shift_rot_result[31 : 24] <= A_rot_pass3 ? A_rot[31 : 24] : A_rot_lut3;
+    end
+
+
+  assign E_div_negate_src1 = E_ctrl_div_signed & E_src1[31];
+  assign E_div_negate_src2 = E_ctrl_div_signed & E_src2[31];
+  assign E_div_negate_result = E_div_negate_src1 ^ E_div_negate_src2;
+  assign E_div_src1 = E_div_negate_src1 ? -E_src1 : E_src1;
+  assign E_div_src2 = E_div_negate_src2 ? -E_src2 : E_src2;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_div_negate_result <= 0;
+      else if (M_en)
+          M_div_negate_result <= E_div_negate_result;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_negate_result <= 0;
+      else if (A_en)
+          A_div_negate_result <= M_div_negate_result;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_div_src1 <= 0;
+      else if (M_en)
+          M_div_src1 <= E_div_src1;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_div_src2 <= 0;
+      else if (M_en)
+          M_div_src2 <= E_div_src2;
+    end
+
+
+  assign M_src1 = M_div_src1;
+  assign M_src2 = M_div_src2;
+  assign A_div_rem_den_sum_diff = A_div_do_sub ?
+    A_div_rem - {1'b0, A_div_den} :
+    A_div_rem + {1'b0, A_div_den};
+
+  assign A_div_rem_sign_bit = A_div_rem_den_sum_diff[32];
+  assign A_div_quot_bit_nxt = ~A_div_rem_den_sum_diff[32];
+  assign A_div_den_is_normalized = A_div_den_is_normalized_sticky |
+    (A_div_norm_cnt[5] |
+    A_div_den[31] |
+    A_div_rem_sign_bit);
+
+  assign A_div_discover_quotient_bits = A_div_den_is_normalized;
+  assign A_div_last_quotient_bit_nxt = A_div_den_is_normalized & (A_div_norm_cnt == 1);
+  assign A_div_norm_cnt_nxt = A_en ? 1 : 
+    (A_div_den_is_normalized ? 
+    A_div_norm_cnt-1 : 
+    A_div_norm_cnt+1);
+
+  assign A_div_rem_nxt = A_en ? 
+    {1'b0, M_div_src1} : 
+    {A_div_rem_den_sum_diff[31 : 0], 1'b0};
+
+  assign A_div_rem_en = A_en | A_div_discover_quotient_bits;
+  assign A_div_den_nxt = A_en ? M_div_src2 : {A_div_den[30 : 0], 1'b0};
+  assign A_div_den_en = A_en | ~A_div_den_is_normalized;
+  assign A_div_quot_shifted = {A_div_quot[30 : 0], 
+    A_div_quot_bit ^ A_div_negate_result};
+
+  assign A_div_quot_hot1 = A_div_negate_result & A_div_last_quotient_bit;
+  assign A_div_quot_nxt = A_en ? 
+    {32{M_div_negate_result}} : 
+    (A_div_quot_shifted + A_div_quot_hot1);
+
+  assign A_div_quot_en = A_en | A_div_accumulate_quotient_bits;
+  assign A_div_stall = A_ctrl_div & A_valid & ~A_div_done;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_den <= 0;
+      else if (A_div_den_en)
+          A_div_den <= A_div_den_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_rem <= 0;
+      else if (A_div_rem_en)
+          A_div_rem <= A_div_rem_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_quot <= 0;
+      else if (A_div_quot_en)
+          A_div_quot <= A_div_quot_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_accumulate_quotient_bits <= 0;
+      else 
+        A_div_accumulate_quotient_bits <= A_en ? 1'b0 : A_div_discover_quotient_bits;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_quot_bit <= 0;
+      else 
+        A_div_quot_bit <= A_div_quot_bit_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_last_quotient_bit <= 0;
+      else 
+        A_div_last_quotient_bit <= A_en ? 1'b0 : A_div_last_quotient_bit_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_quot_ready <= 0;
+      else 
+        A_div_quot_ready <= A_en ? 1'b0 : A_div_last_quotient_bit;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_den_is_normalized_sticky <= 0;
+      else 
+        A_div_den_is_normalized_sticky <= A_en ? 1'b0 : A_div_den_is_normalized;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_norm_cnt <= 0;
+      else 
+        A_div_norm_cnt <= A_div_norm_cnt_nxt;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_do_sub <= 0;
+      else 
+        A_div_do_sub <= A_en ? 1'b1 : ~A_div_rem_sign_bit;
     end
 
 
@@ -9242,7 +9464,7 @@ cpu_0_dc_victim_module cpu_0_dc_victim
   assign M_valid = M_valid_from_E & ~M_cancel;
   assign M_wr_dst_reg_with_wrprs = M_wr_dst_reg_from_E;
   assign M_wr_dst_reg = M_wr_dst_reg_with_wrprs & ~M_cancel;
-  assign A_stall = A_mem_stall|A_mul_stall|A_shift_rot_stall|A_ci_multi_stall;
+  assign A_stall = A_mem_stall|A_mul_stall|A_div_stall|A_shift_rot_stall|A_ci_multi_stall;
   assign A_en = ~A_stall;
   always @(posedge clk or negedge reset_n)
     begin
@@ -9364,11 +9586,21 @@ cpu_0_dc_victim_module cpu_0_dc_victim
   assign A_pipe_flush = 1'b0;
   assign A_pipe_flush_waddr = 0;
   assign A_valid_crst = 0;
-  assign A_slow_inst_result_en = A_ctrl_custom_multi|((A_dc_fill_miss_offset_is_next | A_ctrl_ld_bypass) &
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_div_done <= 0;
+      else 
+        A_div_done <= A_en ? 0 : A_div_quot_ready;
+    end
+
+
+  assign A_slow_inst_result_en = A_ctrl_div|A_ctrl_custom_multi|((A_dc_fill_miss_offset_is_next | A_ctrl_ld_bypass) &
     d_readdatavalid_d1);
 
-  assign A_slow_inst_sel_nxt = A_en ? 0 : A_ctrl_custom_multi|A_ctrl_ld_bypass|A_dc_want_fill;
-  assign A_slow_inst_result_nxt = (A_ctrl_custom_multi)? A_ci_multi_result :
+  assign A_slow_inst_sel_nxt = A_en ? 0 : A_ctrl_div|A_ctrl_custom_multi|A_ctrl_ld_bypass|A_dc_want_fill;
+  assign A_slow_inst_result_nxt = (A_ctrl_div)? A_div_quot :
+    (A_ctrl_custom_multi)? A_ci_multi_result :
     A_slow_ld_data_aligned_nxt;
 
   always @(posedge clk or negedge reset_n)
@@ -9604,24 +9836,6 @@ cpu_0_dc_victim_module cpu_0_dc_victim
           E_src2_reg <= 0;
       else if (E_en)
           E_src2_reg <= D_src2_reg;
-    end
-
-
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          M_src1 <= 0;
-      else if (M_en)
-          M_src1 <= E_src1;
-    end
-
-
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          M_src2 <= 0;
-      else if (M_en)
-          M_src2 <= E_src2;
     end
 
 
@@ -10080,7 +10294,7 @@ cpu_0_dc_victim_module cpu_0_dc_victim
   //jtag_debug_module, which is an e_avalon_slave
   assign jtag_debug_module_clk = clk;
   assign jtag_debug_module_reset = ~reset_n;
-  assign D_ctrl_unimp_trap = D_op_div|D_op_divu|D_op_mulxss|D_op_mulxsu|D_op_mulxuu;
+  assign D_ctrl_unimp_trap = D_op_mulxss|D_op_mulxsu|D_op_mulxuu;
   assign E_ctrl_unimp_trap_nxt = D_ctrl_unimp_trap;
   always @(posedge clk or negedge reset_n)
     begin
@@ -10498,6 +10712,88 @@ cpu_0_dc_victim_module cpu_0_dc_victim
     end
 
 
+  assign D_ctrl_div_signed = D_op_div;
+  assign E_ctrl_div_signed_nxt = D_ctrl_div_signed;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_div_signed <= 0;
+      else if (E_en)
+          E_ctrl_div_signed <= E_ctrl_div_signed_nxt;
+    end
+
+
+  assign M_ctrl_div_signed_nxt = E_ctrl_div_signed;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_div_signed <= 0;
+      else if (M_en)
+          M_ctrl_div_signed <= M_ctrl_div_signed_nxt;
+    end
+
+
+  assign A_ctrl_div_signed_nxt = M_ctrl_div_signed;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_div_signed <= 0;
+      else if (A_en)
+          A_ctrl_div_signed <= A_ctrl_div_signed_nxt;
+    end
+
+
+  assign W_ctrl_div_signed_nxt = A_ctrl_div_signed;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_div_signed <= 0;
+      else if (W_en)
+          W_ctrl_div_signed <= W_ctrl_div_signed_nxt;
+    end
+
+
+  assign D_ctrl_div = D_op_divu|D_op_div;
+  assign E_ctrl_div_nxt = D_ctrl_div;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_div <= 0;
+      else if (E_en)
+          E_ctrl_div <= E_ctrl_div_nxt;
+    end
+
+
+  assign M_ctrl_div_nxt = E_ctrl_div;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_div <= 0;
+      else if (M_en)
+          M_ctrl_div <= M_ctrl_div_nxt;
+    end
+
+
+  assign A_ctrl_div_nxt = M_ctrl_div;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_div <= 0;
+      else if (A_en)
+          A_ctrl_div <= A_ctrl_div_nxt;
+    end
+
+
+  assign W_ctrl_div_nxt = A_ctrl_div;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_div <= 0;
+      else if (W_en)
+          W_ctrl_div <= W_ctrl_div_nxt;
+    end
+
+
   assign F_ctrl_implicit_dst_retaddr = F_op_call|F_op_rsv02;
   assign D_ctrl_implicit_dst_retaddr_nxt = F_ctrl_implicit_dst_retaddr;
   always @(posedge clk or negedge reset_n)
@@ -10549,7 +10845,7 @@ cpu_0_dc_victim_module cpu_0_dc_victim
     end
 
 
-  assign F_ctrl_implicit_dst_eretaddr = F_op_div|F_op_divu|F_op_mulxss|F_op_mulxsu|F_op_mulxuu;
+  assign F_ctrl_implicit_dst_eretaddr = F_op_mulxss|F_op_mulxsu|F_op_mulxuu;
   assign D_ctrl_implicit_dst_eretaddr_nxt = F_ctrl_implicit_dst_eretaddr;
   always @(posedge clk or negedge reset_n)
     begin
@@ -10600,16 +10896,7 @@ cpu_0_dc_victim_module cpu_0_dc_victim
     end
 
 
-  assign D_ctrl_exception = D_op_trap|
-    D_op_rsvx44|
-    D_op_div|
-    D_op_divu|
-    D_op_mulxss|
-    D_op_mulxsu|
-    D_op_mulxuu|
-    D_op_intr|
-    D_op_rsvx60;
-
+  assign D_ctrl_exception = D_op_trap|D_op_rsvx44|D_op_mulxss|D_op_mulxsu|D_op_mulxuu|D_op_intr|D_op_rsvx60;
   assign E_ctrl_exception_nxt = D_ctrl_exception;
   always @(posedge clk or negedge reset_n)
     begin
@@ -10789,8 +11076,6 @@ cpu_0_dc_victim_module cpu_0_dc_victim
     D_op_callr|
     D_op_trap|
     D_op_rsvx44|
-    D_op_div|
-    D_op_divu|
     D_op_mulxss|
     D_op_mulxsu|
     D_op_mulxuu|
@@ -13297,8 +13582,6 @@ cpu_0_dc_victim_module cpu_0_dc_victim
     D_op_eret|
     D_op_trap|
     D_op_rsvx44|
-    D_op_div|
-    D_op_divu|
     D_op_mulxss|
     D_op_mulxsu|
     D_op_mulxuu|
@@ -13440,7 +13723,9 @@ cpu_0_dc_victim_module cpu_0_dc_victim
     D_op_mul|
     D_op_rsvx47|
     D_op_rsvx55|
-    D_op_rsvx63;
+    D_op_rsvx63|
+    D_op_divu|
+    D_op_div;
 
   assign E_ctrl_late_result_nxt = D_ctrl_late_result;
   always @(posedge clk or negedge reset_n)

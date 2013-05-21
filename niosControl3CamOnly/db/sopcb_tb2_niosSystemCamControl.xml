@@ -6,113 +6,113 @@
   <HDLLanguage>VERILOG</HDLLanguage>
   <Qsys>0</Qsys>
   <SOPCModule>
-   <C>1</C>
+   <C>3425</C>
    <ModuleType>non_altera_module</ModuleType>
    <SOPCInterface>
-    <C>2</C>
+    <C>3426</C>
     <InterfaceType>clock_end</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>3</C>
+     <C>3427</C>
      <Name>clockRate</Name>
      <Value>100000000</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>4</C>
+     <C>3428</C>
      <Name>externallyDriven</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>5</C>
+     <C>3429</C>
      <Name>ptfSchematicName</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>6</C>
+     <C>3430</C>
      <Direction>Input</Direction>
      <Role>clk</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>7</C>
+    <C>3431</C>
     <InterfaceType>reset_end</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>8</C>
+     <C>3432</C>
      <Name>associatedClock</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>9</C>
+     <C>3433</C>
      <Name>synchronousEdges</Name>
      <Value>NONE</Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>10</C>
+     <C>3434</C>
      <Direction>Input</Direction>
      <Role>reset_n</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>11</C>
+    <C>3435</C>
     <InterfaceType>clock_start</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>12</C>
+     <C>3436</C>
      <Name>associatedDirectClock</Name>
      <Value>clk_in</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>13</C>
+     <C>3437</C>
      <Name>clockRate</Name>
      <Value>100000000</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>14</C>
+     <C>3438</C>
      <Name>clockRateKnown</Name>
      <Value>true</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>15</C>
+     <C>3439</C>
      <Name>externallyDriven</Name>
      <Value>true</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>16</C>
+     <C>3440</C>
      <Name>ptfSchematicName</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>17</C>
+     <C>3441</C>
      <Direction>Output</Direction>
      <Role>clk</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>18</C>
+    <C>3442</C>
     <InterfaceType>reset_start</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>19</C>
+     <C>3443</C>
      <Name>associatedClock</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>20</C>
+     <C>3444</C>
      <Name>associatedDirectReset</Name>
      <Value>clk_in_reset</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>21</C>
+     <C>3445</C>
      <Name>associatedResetSinks</Name>
      <Value>clk_in_reset</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>22</C>
+     <C>3446</C>
      <Name>synchronousEdges</Name>
      <Value>NONE</Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>23</C>
+     <C>3447</C>
      <Direction>Output</Direction>
      <Role>reset_n</Role>
      <Width>1</Width>
@@ -120,1228 +120,1228 @@
    </SOPCInterface>
   </SOPCModule>
   <SOPCModule>
-   <C>24</C>
+   <C>3448</C>
    <ModuleType>altera_avalon_onchip_memory2</ModuleType>
    <SOPCModuleParameter>
-    <C>25</C>
+    <C>3449</C>
     <Name>allowInSystemMemoryContentEditor</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>26</C>
+    <C>3450</C>
     <Name>autoInitializationFileName</Name>
     <Value>onchip_memory2_0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>27</C>
+    <C>3451</C>
     <Name>blockType</Name>
     <Value>AUTO</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>28</C>
+    <C>3452</C>
     <Name>dataWidth</Name>
     <Value>32</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>29</C>
+    <C>3453</C>
     <Name>deviceFamily</Name>
     <Value>Cyclone II</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>30</C>
+    <C>3454</C>
     <Name>dualPort</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>31</C>
+    <C>3455</C>
     <Name>initMemContent</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>32</C>
+    <C>3456</C>
     <Name>initializationFileName</Name>
     <Value>onchip_memory2_0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>33</C>
+    <C>3457</C>
     <Name>instanceID</Name>
     <Value>NONE</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>34</C>
+    <C>3458</C>
     <Name>memorySize</Name>
     <Value>16384</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>35</C>
+    <C>3459</C>
     <Name>readDuringWriteMode</Name>
     <Value>DONT_CARE</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>36</C>
+    <C>3460</C>
     <Name>simAllowMRAMContentsFile</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>37</C>
+    <C>3461</C>
     <Name>simMemInitOnlyFilename</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>38</C>
+    <C>3462</C>
     <Name>singleClockOperation</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>39</C>
+    <C>3463</C>
     <Name>slave1Latency</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>40</C>
+    <C>3464</C>
     <Name>slave2Latency</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>41</C>
+    <C>3465</C>
     <Name>useNonDefaultInitFile</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>42</C>
+    <C>3466</C>
     <Name>useShallowMemBlocks</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>43</C>
+    <C>3467</C>
     <Name>writable</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
-   <C>44</C>
+   <C>3468</C>
    <ModuleType>altera_nios2</ModuleType>
    <SOPCModuleParameter>
-    <C>45</C>
+    <C>3469</C>
     <Name>userDefinedSettings</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>46</C>
+    <C>3470</C>
     <Name>tightlyCoupledInstructionMaster3MapParam</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>47</C>
+    <C>3471</C>
     <Name>tightlyCoupledInstructionMaster3AddrWidth</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>48</C>
+    <C>3472</C>
     <Name>tightlyCoupledInstructionMaster2MapParam</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>49</C>
+    <C>3473</C>
     <Name>tightlyCoupledInstructionMaster2AddrWidth</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>50</C>
+    <C>3474</C>
     <Name>tightlyCoupledInstructionMaster1MapParam</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>51</C>
+    <C>3475</C>
     <Name>tightlyCoupledInstructionMaster1AddrWidth</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>52</C>
+    <C>3476</C>
     <Name>tightlyCoupledInstructionMaster0MapParam</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>53</C>
+    <C>3477</C>
     <Name>tightlyCoupledInstructionMaster0AddrWidth</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>54</C>
+    <C>3478</C>
     <Name>tightlyCoupledDataMaster3MapParam</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>55</C>
+    <C>3479</C>
     <Name>tightlyCoupledDataMaster3AddrWidth</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>56</C>
+    <C>3480</C>
     <Name>tightlyCoupledDataMaster2MapParam</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>57</C>
+    <C>3481</C>
     <Name>tightlyCoupledDataMaster2AddrWidth</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>58</C>
+    <C>3482</C>
     <Name>tightlyCoupledDataMaster1MapParam</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>59</C>
+    <C>3483</C>
     <Name>tightlyCoupledDataMaster1AddrWidth</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>60</C>
+    <C>3484</C>
     <Name>tightlyCoupledDataMaster0MapParam</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>61</C>
+    <C>3485</C>
     <Name>tightlyCoupledDataMaster0AddrWidth</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>62</C>
+    <C>3486</C>
     <Name>setting_showUnpublishedSettings</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>63</C>
+    <C>3487</C>
     <Name>setting_showInternalSettings</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>64</C>
+    <C>3488</C>
     <Name>setting_shadowRegisterSets</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>65</C>
+    <C>3489</C>
     <Name>setting_preciseSlaveAccessErrorException</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>66</C>
+    <C>3490</C>
     <Name>setting_preciseIllegalMemAccessException</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>67</C>
+    <C>3491</C>
     <Name>setting_preciseDivisionErrorException</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>68</C>
+    <C>3492</C>
     <Name>setting_performanceCounter</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>69</C>
+    <C>3493</C>
     <Name>setting_perfCounterWidth</Name>
     <Value>_32</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>70</C>
+    <C>3494</C>
     <Name>setting_interruptControllerType</Name>
     <Value>Internal</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>71</C>
+    <C>3495</C>
     <Name>setting_illegalMemAccessDetection</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>72</C>
+    <C>3496</C>
     <Name>setting_illegalInstructionsTrap</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>73</C>
+    <C>3497</C>
     <Name>setting_fullWaveformSignals</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>74</C>
+    <C>3498</C>
     <Name>setting_extraExceptionInfo</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>75</C>
+    <C>3499</C>
     <Name>setting_exportPCB</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>76</C>
+    <C>3500</C>
     <Name>setting_debugSimGen</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>77</C>
+    <C>3501</C>
     <Name>setting_clearXBitsLDNonBypass</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>78</C>
+    <C>3502</C>
     <Name>setting_branchPredictionType</Name>
     <Value>Automatic</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>79</C>
+    <C>3503</C>
     <Name>setting_bit31BypassDCache</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>80</C>
+    <C>3504</C>
     <Name>setting_bigEndian</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>81</C>
+    <C>3505</C>
     <Name>setting_bhtPtrSz</Name>
     <Value>_8</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>82</C>
+    <C>3506</C>
     <Name>setting_bhtIndexPcOnly</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>83</C>
+    <C>3507</C>
     <Name>setting_avalonDebugPortPresent</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>84</C>
+    <C>3508</C>
     <Name>setting_alwaysEncrypt</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>85</C>
+    <C>3509</C>
     <Name>setting_allowFullAddressRange</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>86</C>
+    <C>3510</C>
     <Name>setting_activateTrace</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>87</C>
+    <C>3511</C>
     <Name>setting_activateTestEndChecker</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>88</C>
+    <C>3512</C>
     <Name>setting_activateMonitors</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>89</C>
+    <C>3513</C>
     <Name>setting_activateModelChecker</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>90</C>
+    <C>3514</C>
     <Name>setting_HDLSimCachesCleared</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>91</C>
+    <C>3515</C>
     <Name>setting_HBreakTest</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>92</C>
+    <C>3516</C>
     <Name>resetSlave</Name>
     <Value>onchip_memory2_0.s1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>93</C>
+    <C>3517</C>
     <Name>resetOffset</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>94</C>
+    <C>3518</C>
     <Name>muldiv_multiplierType</Name>
     <Value>EmbeddedMulFast</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>95</C>
+    <C>3519</C>
     <Name>muldiv_divider</Name>
-    <Value>false</Value>
+    <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>96</C>
+    <C>3520</C>
     <Name>mpu_useLimit</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>97</C>
+    <C>3521</C>
     <Name>mpu_numOfInstRegion</Name>
     <Value>8</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>98</C>
+    <C>3522</C>
     <Name>mpu_numOfDataRegion</Name>
     <Value>8</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>99</C>
+    <C>3523</C>
     <Name>mpu_minInstRegionSize</Name>
     <Value>_12</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>100</C>
+    <C>3524</C>
     <Name>mpu_minDataRegionSize</Name>
     <Value>_12</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>101</C>
+    <C>3525</C>
     <Name>mpu_enabled</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>102</C>
+    <C>3526</C>
     <Name>mmu_uitlbNumEntries</Name>
     <Value>_4</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>103</C>
+    <C>3527</C>
     <Name>mmu_udtlbNumEntries</Name>
     <Value>_6</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>104</C>
+    <C>3528</C>
     <Name>mmu_tlbPtrSz</Name>
     <Value>_7</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>105</C>
+    <C>3529</C>
     <Name>mmu_tlbNumWays</Name>
     <Value>_16</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>106</C>
+    <C>3530</C>
     <Name>mmu_processIDNumBits</Name>
     <Value>_8</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>107</C>
+    <C>3531</C>
     <Name>mmu_enabled</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>108</C>
+    <C>3532</C>
     <Name>mmu_autoAssignTlbPtrSz</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>109</C>
+    <C>3533</C>
     <Name>mmu_TLBMissExcSlave</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>110</C>
+    <C>3534</C>
     <Name>mmu_TLBMissExcOffset</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>111</C>
+    <C>3535</C>
     <Name>manuallyAssignCpuID</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>112</C>
+    <C>3536</C>
     <Name>internalIrqMaskSystemInfo</Name>
     <Value>3</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>113</C>
+    <C>3537</C>
     <Name>instSlaveMapParam</Name>
     <Value><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /></address-map>]]></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>114</C>
+    <C>3538</C>
     <Name>instAddrWidth</Name>
     <Value>25</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>115</C>
+    <C>3539</C>
     <Name>impl</Name>
     <Value>Fast</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>116</C>
+    <C>3540</C>
     <Name>icache_size</Name>
-    <Value>_2048</Value>
+    <Value>_4096</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>117</C>
+    <C>3541</C>
     <Name>icache_ramBlockType</Name>
     <Value>Automatic</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>118</C>
+    <C>3542</C>
     <Name>icache_numTCIM</Name>
     <Value>_0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>119</C>
+    <C>3543</C>
     <Name>icache_burstType</Name>
     <Value>None</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>120</C>
+    <C>3544</C>
     <Name>exceptionSlave</Name>
     <Value>onchip_memory2_0.s1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>121</C>
+    <C>3545</C>
     <Name>exceptionOffset</Name>
     <Value>32</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>122</C>
+    <C>3546</C>
     <Name>deviceFeaturesSystemInfo</Name>
     <Value>M512_MEMORY 0 M4K_MEMORY 1 M9K_MEMORY 0 M20K_MEMORY 0 M144K_MEMORY 0 MRAM_MEMORY 0 MLAB_MEMORY 0 ESB 0 EPCS 1 DSP 0 EMUL 1 HARDCOPY 0 LVDS_IO 0 ADDRESS_STALL 1 TRANSCEIVER_3G_BLOCK 0 TRANSCEIVER_6G_BLOCK 0 DSP_SHIFTER_BLOCK 0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>123</C>
+    <C>3547</C>
     <Name>deviceFamilyName</Name>
     <Value>Cyclone II</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>124</C>
+    <C>3548</C>
     <Name>debug_triggerArming</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>125</C>
+    <C>3549</C>
     <Name>debug_level</Name>
     <Value>Level1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>126</C>
+    <C>3550</C>
     <Name>debug_jtagInstanceID</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>127</C>
+    <C>3551</C>
     <Name>debug_embeddedPLL</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>128</C>
+    <C>3552</C>
     <Name>debug_debugReqSignals</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>129</C>
+    <C>3553</C>
     <Name>debug_assignJtagInstanceID</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>130</C>
+    <C>3554</C>
     <Name>debug_OCIOnchipTrace</Name>
     <Value>_128</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>131</C>
+    <C>3555</C>
     <Name>dcache_size</Name>
     <Value>_8192</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>132</C>
+    <C>3556</C>
     <Name>dcache_ramBlockType</Name>
     <Value>Automatic</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>133</C>
+    <C>3557</C>
     <Name>dcache_omitDataMaster</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>134</C>
+    <C>3558</C>
     <Name>dcache_numTCDM</Name>
     <Value>_0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>135</C>
+    <C>3559</C>
     <Name>dcache_lineSize</Name>
     <Value>_32</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>136</C>
+    <C>3560</C>
     <Name>dcache_bursts</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>137</C>
+    <C>3561</C>
     <Name>dataSlaveMapParam</Name>
-    <Value><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='timer_0.s1' start='0x1109000' end='0x1109020' /><slave name='procHasControl.s1' start='0x1109020' end='0x1109030' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1109030' end='0x1109038' /><slave name='sysid.control_slave' start='0x1109038' end='0x1109040' /></address-map>]]></Value>
+    <Value><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='timer_0.s1' start='0x1109000' end='0x1109020' /><slave name='procHasControl.s1' start='0x1109020' end='0x1109030' /><slave name='fp_operand.s1' start='0x1109030' end='0x1109040' /><slave name='fp_result.s1' start='0x1109040' end='0x1109050' /><slave name='fp_op_type.s1' start='0x1109050' end='0x1109060' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1109060' end='0x1109068' /><slave name='sysid.control_slave' start='0x1109068' end='0x1109070' /></address-map>]]></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>138</C>
+    <C>3562</C>
     <Name>dataAddrWidth</Name>
     <Value>25</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>139</C>
+    <C>3563</C>
     <Name>customInstSlavesSystemInfo</Name>
     <Value><![CDATA[<info><slave name="altera_nios_custom_instr_floating_point_inst" baseAddress="252" addressSpan="4" clockCycleType="VARIABLE" /></info>]]></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>140</C>
+    <C>3564</C>
     <Name>cpuReset</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>141</C>
+    <C>3565</C>
     <Name>cpuID</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>142</C>
+    <C>3566</C>
     <Name>clockFrequency</Name>
     <Value>100000000</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>143</C>
+    <C>3567</C>
     <Name>breakSlave</Name>
     <Value>cpu_0.jtag_debug_module</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>144</C>
+    <C>3568</C>
     <Name>breakOffset</Name>
     <Value>32</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
-   <C>145</C>
+   <C>3569</C>
    <ModuleType>altera_avalon_new_sdram_controller</ModuleType>
    <SOPCModuleParameter>
-    <C>146</C>
+    <C>3570</C>
     <Name>TAC</Name>
     <Value>5.5</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>147</C>
+    <C>3571</C>
     <Name>TMRD</Name>
     <Value>3</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>148</C>
+    <C>3572</C>
     <Name>TRCD</Name>
     <Value>20.0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>149</C>
+    <C>3573</C>
     <Name>TRFC</Name>
     <Value>70.0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>150</C>
+    <C>3574</C>
     <Name>TRP</Name>
     <Value>20.0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>151</C>
+    <C>3575</C>
     <Name>TWR</Name>
     <Value>14.0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>152</C>
+    <C>3576</C>
     <Name>casLatency</Name>
     <Value>3</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>153</C>
+    <C>3577</C>
     <Name>clockRate</Name>
     <Value>100000000</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>154</C>
+    <C>3578</C>
     <Name>columnWidth</Name>
     <Value>8</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>155</C>
+    <C>3579</C>
     <Name>dataWidth</Name>
     <Value>16</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>156</C>
+    <C>3580</C>
     <Name>generateSimulationModel</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>157</C>
+    <C>3581</C>
     <Name>initNOPDelay</Name>
     <Value>0.0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>158</C>
+    <C>3582</C>
     <Name>initRefreshCommands</Name>
     <Value>2</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>159</C>
+    <C>3583</C>
     <Name>masteredTristateBridgeSlave</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>160</C>
+    <C>3584</C>
     <Name>model</Name>
     <Value>custom</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>161</C>
+    <C>3585</C>
     <Name>numberOfBanks</Name>
     <Value>4</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>162</C>
+    <C>3586</C>
     <Name>numberOfChipSelects</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>163</C>
+    <C>3587</C>
     <Name>pinsSharedViaTriState</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>164</C>
+    <C>3588</C>
     <Name>powerUpDelay</Name>
     <Value>100.0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>165</C>
+    <C>3589</C>
     <Name>refreshPeriod</Name>
     <Value>15.625</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>166</C>
+    <C>3590</C>
     <Name>registerDataIn</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>167</C>
+    <C>3591</C>
     <Name>rowWidth</Name>
     <Value>12</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>168</C>
+    <C>3592</C>
     <Name>size</Name>
     <Value>8388608</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
-   <C>169</C>
+   <C>3593</C>
    <ModuleType>altera_avalon_jtag_uart</ModuleType>
    <SOPCModuleParameter>
-    <C>170</C>
+    <C>3594</C>
     <Name>allowMultipleConnections</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>171</C>
+    <C>3595</C>
     <Name>hubInstanceID</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>172</C>
+    <C>3596</C>
     <Name>readBufferDepth</Name>
     <Value>64</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>173</C>
+    <C>3597</C>
     <Name>readIRQThreshold</Name>
     <Value>8</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>174</C>
+    <C>3598</C>
     <Name>simInputCharacterStream</Name>
     <Value></Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>175</C>
+    <C>3599</C>
     <Name>simInteractiveOptions</Name>
     <Value>INTERACTIVE_ASCII_OUTPUT</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>176</C>
+    <C>3600</C>
     <Name>useRegistersForReadBuffer</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>177</C>
+    <C>3601</C>
     <Name>useRegistersForWriteBuffer</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>178</C>
+    <C>3602</C>
     <Name>useRelativePathForSimFile</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>179</C>
+    <C>3603</C>
     <Name>writeBufferDepth</Name>
     <Value>64</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>180</C>
+    <C>3604</C>
     <Name>writeIRQThreshold</Name>
     <Value>8</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
-   <C>181</C>
+   <C>3605</C>
    <ModuleType>altera_avalon_pio</ModuleType>
    <SOPCModuleParameter>
-    <C>182</C>
+    <C>3606</C>
     <Name>bitClearingEdgeCapReg</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>183</C>
+    <C>3607</C>
     <Name>bitModifyingOutReg</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>184</C>
+    <C>3608</C>
     <Name>captureEdge</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>185</C>
+    <C>3609</C>
     <Name>clockRate</Name>
     <Value>100000000</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>186</C>
+    <C>3610</C>
     <Name>direction</Name>
     <Value>Output</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>187</C>
+    <C>3611</C>
     <Name>edgeType</Name>
     <Value>RISING</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>188</C>
+    <C>3612</C>
     <Name>generateIRQ</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>189</C>
+    <C>3613</C>
     <Name>irqType</Name>
     <Value>LEVEL</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>190</C>
+    <C>3614</C>
     <Name>resetValue</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>191</C>
+    <C>3615</C>
     <Name>simDoTestBenchWiring</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>192</C>
+    <C>3616</C>
     <Name>simDrivenValue</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>193</C>
+    <C>3617</C>
     <Name>width</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
-   <C>194</C>
+   <C>3618</C>
    <ModuleType>altera_avalon_timer</ModuleType>
    <SOPCModuleParameter>
-    <C>195</C>
+    <C>3619</C>
     <Name>alwaysRun</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>196</C>
+    <C>3620</C>
     <Name>counterSize</Name>
     <Value>32</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>197</C>
+    <C>3621</C>
     <Name>fixedPeriod</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>198</C>
+    <C>3622</C>
     <Name>period</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>199</C>
+    <C>3623</C>
     <Name>periodUnits</Name>
     <Value>MSEC</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>200</C>
+    <C>3624</C>
     <Name>resetOutput</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>201</C>
+    <C>3625</C>
     <Name>snapshot</Name>
     <Value>true</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>202</C>
+    <C>3626</C>
     <Name>systemFrequency</Name>
     <Value>100000000</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>203</C>
+    <C>3627</C>
     <Name>timeoutPulseOutput</Name>
     <Value>false</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>204</C>
+    <C>3628</C>
     <Name>timerPreset</Name>
     <Value>FULL_FEATURED</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
-   <C>205</C>
+   <C>3629</C>
    <ModuleType>altera_avalon_sysid</ModuleType>
    <SOPCModuleParameter>
-    <C>206</C>
+    <C>3630</C>
     <Name>id</Name>
     <Value>0</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>207</C>
+    <C>3631</C>
     <Name>timestamp</Name>
-    <Value>1367779031</Value>
+    <Value>1369035637</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
-   <C>208</C>
+   <C>3632</C>
    <ModuleType>non_altera_module</ModuleType>
    <SOPCInterface>
-    <C>209</C>
+    <C>3633</C>
     <InterfaceType>clock_end</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>210</C>
+     <C>3634</C>
      <Name>clockRate</Name>
      <Value>0</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>211</C>
+     <C>3635</C>
      <Name>externallyDriven</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>212</C>
+     <C>3636</C>
      <Name>ptfSchematicName</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>213</C>
+     <C>3637</C>
      <Direction>Input</Direction>
      <Role>clk</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>214</C>
+    <C>3638</C>
     <InterfaceType>conduit_end</InterfaceType>
     <SOPCPort>
-     <C>215</C>
+     <C>3639</C>
      <Direction>Bidir</Direction>
      <Role>export</Role>
      <Width>16</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>216</C>
+     <C>3640</C>
      <Direction>Output</Direction>
      <Role>export</Role>
      <Width>18</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>217</C>
+     <C>3641</C>
      <Direction>Output</Direction>
      <Role>export</Role>
      <Width>1</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>218</C>
+     <C>3642</C>
      <Direction>Output</Direction>
      <Role>export</Role>
      <Width>1</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>219</C>
+     <C>3643</C>
      <Direction>Output</Direction>
      <Role>export</Role>
      <Width>1</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>220</C>
+     <C>3644</C>
      <Direction>Output</Direction>
      <Role>export</Role>
      <Width>1</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>221</C>
+     <C>3645</C>
      <Direction>Output</Direction>
      <Role>export</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>222</C>
+    <C>3646</C>
     <InterfaceType>avalon_end</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>223</C>
+     <C>3647</C>
      <Name>addressAlignment</Name>
      <Value>DYNAMIC</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>224</C>
+     <C>3648</C>
      <Name>addressGroup</Name>
      <Value>0</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>225</C>
+     <C>3649</C>
      <Name>addressSpan</Name>
      <Value>524288</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>226</C>
+     <C>3650</C>
      <Name>addressUnits</Name>
      <Value>WORDS</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>227</C>
+     <C>3651</C>
      <Name>alwaysBurstMaxBurst</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>228</C>
+     <C>3652</C>
      <Name>associatedClock</Name>
      <Value>clk</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>229</C>
+     <C>3653</C>
      <Name>associatedReset</Name>
      <Value>reset_n</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>230</C>
+     <C>3654</C>
      <Name>bitsPerSymbol</Name>
      <Value>8</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>231</C>
+     <C>3655</C>
      <Name>bridgesToMaster</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>232</C>
+     <C>3656</C>
      <Name>burstOnBurstBoundariesOnly</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>233</C>
+     <C>3657</C>
      <Name>burstcountUnits</Name>
      <Value>WORDS</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>234</C>
+     <C>3658</C>
      <Name>constantBurstBehavior</Name>
      <Value>true</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>235</C>
+     <C>3659</C>
      <Name>explicitAddressSpan</Name>
      <Value>524288</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>236</C>
+     <C>3660</C>
      <Name>holdTime</Name>
      <Value>20</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>237</C>
+     <C>3661</C>
      <Name>interleaveBursts</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>238</C>
+     <C>3662</C>
      <Name>isBigEndian</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>239</C>
+     <C>3663</C>
      <Name>isFlash</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>240</C>
+     <C>3664</C>
      <Name>isMemoryDevice</Name>
      <Value>true</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>241</C>
+     <C>3665</C>
      <Name>isNonVolatileStorage</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>242</C>
+     <C>3666</C>
      <Name>linewrapBursts</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>243</C>
+     <C>3667</C>
      <Name>maximumPendingReadTransactions</Name>
      <Value>0</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>244</C>
+     <C>3668</C>
      <Name>minimumUninterruptedRunLength</Name>
      <Value>1</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>245</C>
+     <C>3669</C>
      <Name>printableDevice</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>246</C>
+     <C>3670</C>
      <Name>readLatency</Name>
      <Value>0</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>247</C>
+     <C>3671</C>
      <Name>readWaitStates</Name>
      <Value>20</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>248</C>
+     <C>3672</C>
      <Name>readWaitTime</Name>
      <Value>20</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>249</C>
+     <C>3673</C>
      <Name>registerIncomingSignals</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>250</C>
+     <C>3674</C>
      <Name>registerOutgoingSignals</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>251</C>
+     <C>3675</C>
      <Name>setupTime</Name>
      <Value>20</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>252</C>
+     <C>3676</C>
      <Name>timingUnits</Name>
      <Value>Nanoseconds</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>253</C>
+     <C>3677</C>
      <Name>transparentBridge</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>254</C>
+     <C>3678</C>
      <Name>wellBehavedWaitrequest</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>255</C>
+     <C>3679</C>
      <Name>writeLatency</Name>
      <Value>0</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>256</C>
+     <C>3680</C>
      <Name>writeWaitStates</Name>
      <Value>20</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>257</C>
+     <C>3681</C>
      <Name>writeWaitTime</Name>
      <Value>20</Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>258</C>
+     <C>3682</C>
      <Direction>Input</Direction>
      <Role>writedata</Role>
      <Width>16</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>259</C>
+     <C>3683</C>
      <Direction>Output</Direction>
      <Role>readdata</Role>
      <Width>16</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>260</C>
+     <C>3684</C>
      <Direction>Input</Direction>
      <Role>address</Role>
      <Width>18</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>261</C>
+     <C>3685</C>
      <Direction>Input</Direction>
      <Role>write_n</Role>
      <Width>1</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>262</C>
+     <C>3686</C>
      <Direction>Input</Direction>
      <Role>read_n</Role>
      <Width>1</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>263</C>
+     <C>3687</C>
      <Direction>Input</Direction>
      <Role>chipselect_n</Role>
      <Width>1</Width>
     </SOPCPort>
     <SOPCPort>
-     <C>264</C>
+     <C>3688</C>
      <Direction>Input</Direction>
      <Role>byteenable_n</Role>
      <Width>2</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>265</C>
+    <C>3689</C>
     <InterfaceType>reset_end</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>266</C>
+     <C>3690</C>
      <Name>associatedClock</Name>
      <Value>clk</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>267</C>
+     <C>3691</C>
      <Name>synchronousEdges</Name>
      <Value>DEASSERT</Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>268</C>
+     <C>3692</C>
      <Direction>Input</Direction>
      <Role>reset_n</Role>
      <Width>1</Width>
@@ -1349,134 +1349,326 @@
    </SOPCInterface>
   </SOPCModule>
   <SOPCModule>
-   <C>269</C>
+   <C>3693</C>
    <ModuleType>altera_nios_custom_instr_floating_point</ModuleType>
    <SOPCModuleParameter>
-    <C>270</C>
+    <C>3694</C>
     <Name>useDivider</Name>
     <Value>1</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
-    <C>271</C>
+    <C>3695</C>
     <Name>AUTO_DEVICE_FAMILY</Name>
     <Value>Cyclone II</Value>
    </SOPCModuleParameter>
   </SOPCModule>
   <SOPCModule>
-   <C>272</C>
+   <C>3696</C>
    <ModuleType>non_altera_module</ModuleType>
    <SOPCInterface>
-    <C>273</C>
+    <C>3697</C>
     <InterfaceType>clock_end</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>274</C>
+     <C>3698</C>
      <Name>clockRate</Name>
      <Value>100000000</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>275</C>
+     <C>3699</C>
      <Name>externallyDriven</Name>
      <Value>false</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>276</C>
+     <C>3700</C>
      <Name>ptfSchematicName</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>277</C>
+     <C>3701</C>
      <Direction>Input</Direction>
      <Role>clk</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>278</C>
+    <C>3702</C>
     <InterfaceType>reset_end</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>279</C>
+     <C>3703</C>
      <Name>associatedClock</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>280</C>
+     <C>3704</C>
      <Name>synchronousEdges</Name>
      <Value>NONE</Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>281</C>
+     <C>3705</C>
      <Direction>Input</Direction>
      <Role>reset_n</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>282</C>
+    <C>3706</C>
     <InterfaceType>clock_start</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>283</C>
+     <C>3707</C>
      <Name>associatedDirectClock</Name>
      <Value>clk_in</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>284</C>
+     <C>3708</C>
      <Name>clockRate</Name>
      <Value>100000000</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>285</C>
+     <C>3709</C>
      <Name>clockRateKnown</Name>
      <Value>true</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>286</C>
+     <C>3710</C>
      <Name>externallyDriven</Name>
      <Value>true</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>287</C>
+     <C>3711</C>
      <Name>ptfSchematicName</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>288</C>
+     <C>3712</C>
      <Direction>Output</Direction>
      <Role>clk</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
    <SOPCInterface>
-    <C>289</C>
+    <C>3713</C>
     <InterfaceType>reset_start</InterfaceType>
     <SOPCInterfaceParameter>
-     <C>290</C>
+     <C>3714</C>
      <Name>associatedClock</Name>
      <Value></Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>291</C>
+     <C>3715</C>
      <Name>associatedDirectReset</Name>
      <Value>clk_in_reset</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>292</C>
+     <C>3716</C>
      <Name>associatedResetSinks</Name>
      <Value>clk_in_reset</Value>
     </SOPCInterfaceParameter>
     <SOPCInterfaceParameter>
-     <C>293</C>
+     <C>3717</C>
      <Name>synchronousEdges</Name>
      <Value>NONE</Value>
     </SOPCInterfaceParameter>
     <SOPCPort>
-     <C>294</C>
+     <C>3718</C>
      <Direction>Output</Direction>
      <Role>reset_n</Role>
      <Width>1</Width>
     </SOPCPort>
    </SOPCInterface>
   </SOPCModule>
-  <SystemID>1979549033</SystemID>
+  <SOPCModule>
+   <C>3719</C>
+   <ModuleType>altera_avalon_pio</ModuleType>
+   <SOPCModuleParameter>
+    <C>3720</C>
+    <Name>bitClearingEdgeCapReg</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3721</C>
+    <Name>bitModifyingOutReg</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3722</C>
+    <Name>captureEdge</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3723</C>
+    <Name>clockRate</Name>
+    <Value>100000000</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3724</C>
+    <Name>direction</Name>
+    <Value>Output</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3725</C>
+    <Name>edgeType</Name>
+    <Value>RISING</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3726</C>
+    <Name>generateIRQ</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3727</C>
+    <Name>irqType</Name>
+    <Value>LEVEL</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3728</C>
+    <Name>resetValue</Name>
+    <Value>0</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3729</C>
+    <Name>simDoTestBenchWiring</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3730</C>
+    <Name>simDrivenValue</Name>
+    <Value>0</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3731</C>
+    <Name>width</Name>
+    <Value>32</Value>
+   </SOPCModuleParameter>
+  </SOPCModule>
+  <SOPCModule>
+   <C>3732</C>
+   <ModuleType>altera_avalon_pio</ModuleType>
+   <SOPCModuleParameter>
+    <C>3733</C>
+    <Name>bitClearingEdgeCapReg</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3734</C>
+    <Name>bitModifyingOutReg</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3735</C>
+    <Name>captureEdge</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3736</C>
+    <Name>clockRate</Name>
+    <Value>100000000</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3737</C>
+    <Name>direction</Name>
+    <Value>Input</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3738</C>
+    <Name>edgeType</Name>
+    <Value>RISING</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3739</C>
+    <Name>generateIRQ</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3740</C>
+    <Name>irqType</Name>
+    <Value>LEVEL</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3741</C>
+    <Name>resetValue</Name>
+    <Value>0</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3742</C>
+    <Name>simDoTestBenchWiring</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3743</C>
+    <Name>simDrivenValue</Name>
+    <Value>0</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3744</C>
+    <Name>width</Name>
+    <Value>32</Value>
+   </SOPCModuleParameter>
+  </SOPCModule>
+  <SOPCModule>
+   <C>3745</C>
+   <ModuleType>altera_avalon_pio</ModuleType>
+   <SOPCModuleParameter>
+    <C>3746</C>
+    <Name>bitClearingEdgeCapReg</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3747</C>
+    <Name>bitModifyingOutReg</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3748</C>
+    <Name>captureEdge</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3749</C>
+    <Name>clockRate</Name>
+    <Value>100000000</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3750</C>
+    <Name>direction</Name>
+    <Value>Output</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3751</C>
+    <Name>edgeType</Name>
+    <Value>RISING</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3752</C>
+    <Name>generateIRQ</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3753</C>
+    <Name>irqType</Name>
+    <Value>LEVEL</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3754</C>
+    <Name>resetValue</Name>
+    <Value>0</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3755</C>
+    <Name>simDoTestBenchWiring</Name>
+    <Value>false</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3756</C>
+    <Name>simDrivenValue</Name>
+    <Value>0</Value>
+   </SOPCModuleParameter>
+   <SOPCModuleParameter>
+    <C>3757</C>
+    <Name>width</Name>
+    <Value>8</Value>
+   </SOPCModuleParameter>
+  </SOPCModule>
+  <SystemID>1088703973</SystemID>
  </SOPCSystem>
  <SchemaVersion>schema_2011-03-02</SchemaVersion>
 </ProgramExecution>

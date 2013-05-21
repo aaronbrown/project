@@ -1,0 +1,26 @@
+
+module ALTFP_EX_CI(clk,
+                              reset,
+                              dataa,
+         //                     n,
+                              clk_en,
+         //                     start,
+			//		done,
+                              result);
+
+										
+  input clk;
+  input reset;
+  input [31:0] dataa;  
+//  input [2:0] n;
+  input clk_en;
+//  input start;
+//  output done;
+  output [31:0] result;
+
+  ALTFP_EXa ALTFP_EXa_inst (
+				.clock (clock),
+				.data (data),
+				.result (result));
+  
+endmodule

@@ -3,28 +3,29 @@ Copyright (c) 1999-2009 Altera Corporation.  All rights reserved.
 
 
 No .sopc_builder configuration file(!)
-# 2013.05.05 11:37:59 (*) mk_custom_sdk starting
-# 2013.05.05 11:37:59 (*) Reading project C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/niosSystemCamControl.ptf.
+# 2013.05.20 00:41:44 (*) mk_custom_sdk starting
+# 2013.05.20 00:41:44 (*) Reading project C:/Users/Justin/Documents/GitHub/project/niosControl3CamOnly/niosSystemCamControl.ptf.
 
-# 2013.05.05 11:37:59 (*) Finding all CPUs
-# 2013.05.05 11:37:59 (*) Finding all available components
-# 2013.05.05 11:37:59 (*) Reading C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/.sopc_builder/install.ptf
+# 2013.05.20 00:41:44 (*) Finding all CPUs
 
-# 2013.05.05 11:37:59 (*) Found 63 components
+# 2013.05.20 00:41:44 (*) Finding all available components
 
-# 2013.05.05 11:38:00 (*) Finding all peripherals
+# 2013.05.20 00:41:44 (*) Reading C:/Users/Justin/Documents/GitHub/project/niosControl3CamOnly/.sopc_builder/install.ptf
 
-# 2013.05.05 11:38:00 (*) Finding software components
+# 2013.05.20 00:41:44 (*) Found 63 components
 
-# 2013.05.05 11:38:00 (*) (Legacy SDK Generation Skipped)
-# 2013.05.05 11:38:00 (*) (All TCL Script Generation Skipped)
-# 2013.05.05 11:38:00 (*) (No Libraries Built)
-# 2013.05.05 11:38:00 (*) (Contents Generation Skipped)
-# 2013.05.05 11:38:00 (*) mk_custom_sdk finishing
+# 2013.05.20 00:41:46 (*) Finding all peripherals
 
-# 2013.05.05 11:38:00 (*) Starting generation for system: niosSystemCamControl.
+# 2013.05.20 00:41:46 (*) Finding software components
 
-.
+# 2013.05.20 00:41:47 (*) (Legacy SDK Generation Skipped)
+# 2013.05.20 00:41:47 (*) (All TCL Script Generation Skipped)
+# 2013.05.20 00:41:47 (*) (No Libraries Built)
+# 2013.05.20 00:41:47 (*) (Contents Generation Skipped)
+# 2013.05.20 00:41:47 (*) mk_custom_sdk finishing
+
+# 2013.05.20 00:41:47 (*) Starting generation for system: niosSystemCamControl.
+
 .
 .
 .
@@ -32,85 +33,98 @@ No .sopc_builder configuration file(!)
 .
 .
 ..
+...
+.
 .......
+....
+
+# 2013.05.20 00:41:49 (*) Running Generator Program for onchip_memory2_0
+
+# 2013.05.20 00:41:50 (*) Running Generator Program for cpu_0
+
+# 2013.05.20 00:41:51 (*) Starting Nios II generation
+# 2013.05.20 00:41:51 (*)   Checking for plaintext license.
+# 2013.05.20 00:42:01 (*)   Plaintext license found.
+# 2013.05.20 00:42:01 (*)   Getting CPU configuration settings
+# 2013.05.20 00:42:01 (*)   Elaborating CPU configuration settings
+# 2013.05.20 00:42:01 (*)   Creating all objects for CPU
+# 2013.05.20 00:42:01 (*)     Testbench
+# 2013.05.20 00:42:02 (*)     Instruction decoding
+# 2013.05.20 00:42:02 (*)       Instruction fields
+# 2013.05.20 00:42:02 (*)       Instruction decodes
+
+# 2013.05.20 00:42:04 (*)       Signals for RTL simulation waveforms
+# 2013.05.20 00:42:04 (*)       Instruction controls
+# 2013.05.20 00:42:04 (*)     Pipeline frontend
+# 2013.05.20 00:42:05 (*)     Pipeline backend
+# 2013.05.20 00:42:10 (*)   Generating HDL from CPU objects
+# 2013.05.20 00:42:10 (*)   Creating plain-text HDL
+# 2013.05.20 00:42:15 (*) Done Nios II generation
+
+# 2013.05.20 00:42:15 (*) Running Generator Program for sdram_0
+
+# 2013.05.20 00:42:17 (*) Running Generator Program for jtag_uart_0
+
+# 2013.05.20 00:42:18 (*) Running Generator Program for procHasControl
+
+# 2013.05.20 00:42:20 (*) Running Generator Program for timer_0
+
+# 2013.05.20 00:42:21 (*) Running Generator Program for sysid
+
+# 2013.05.20 00:42:22 (*) Running Generator Program for fp_operand
+
+# 2013.05.20 00:42:23 (*) Running Generator Program for fp_result
+
+# 2013.05.20 00:42:25 (*) Running Generator Program for fp_op_type
+
+# 2013.05.20 00:42:26 (*) Running Generator Program for niosSystemCamControl_clock_0
+
+# 2013.05.20 00:42:27 (*) Running Generator Program for niosSystemCamControl_clock_1
+
+# 2013.05.20 00:42:29 (*) Running Generator Program for niosSystemCamControl_burst_0
+
+# 2013.05.20 00:42:30 (*) Running Generator Program for niosSystemCamControl_burst_1
+
+# 2013.05.20 00:42:32 (*) Running Generator Program for niosSystemCamControl_burst_2
+
+# 2013.05.20 00:42:33 (*) Running Generator Program for niosSystemCamControl_burst_3
+
+# 2013.05.20 00:42:35 (*) Running Generator Program for niosSystemCamControl_burst_4
+
+# 2013.05.20 00:42:36 (*) Running Generator Program for niosSystemCamControl_burst_5
+
+# 2013.05.20 00:42:38 (*) Running Generator Program for niosSystemCamControl_burst_6
+
+# 2013.05.20 00:42:40 (*) Running Generator Program for niosSystemCamControl_burst_7
+
+# 2013.05.20 00:42:42 (*) Running Generator Program for niosSystemCamControl_burst_8
+
+# 2013.05.20 00:42:43 (*) Running Generator Program for niosSystemCamControl_burst_9
+
+# 2013.05.20 00:42:45 (*) Running Generator Program for niosSystemCamControl_burst_10
+
 .
 
-# 2013.05.05 11:38:02 (*) Running Generator Program for onchip_memory2_0
 
-# 2013.05.05 11:38:03 (*) Running Generator Program for cpu_0
+# 2013.05.20 00:42:47 (*) Running Test Generator Program for sdram_0
 
-# 2013.05.05 11:38:06 (*) Starting Nios II generation
-# 2013.05.05 11:38:06 (*)   Checking for plaintext license.
-# 2013.05.05 11:38:17 (*)   Plaintext license found.
-# 2013.05.05 11:38:17 (*)   Getting CPU configuration settings
-# 2013.05.05 11:38:17 (*)   Elaborating CPU configuration settings
-# 2013.05.05 11:38:17 (*)   Creating all objects for CPU
-# 2013.05.05 11:38:17 (*)     Testbench
-# 2013.05.05 11:38:18 (*)     Instruction decoding
-# 2013.05.05 11:38:18 (*)       Instruction fields
-# 2013.05.05 11:38:18 (*)       Instruction decodes
+# 2013.05.20 00:42:48 (*) Making arbitration and system (top) modules.
 
-# 2013.05.05 11:38:19 (*)       Signals for RTL simulation waveforms
-# 2013.05.05 11:38:19 (*)       Instruction controls
-# 2013.05.05 11:38:19 (*)     Pipeline frontend
-# 2013.05.05 11:38:19 (*)     Pipeline backend
-# 2013.05.05 11:38:23 (*)   Generating HDL from CPU objects
-# 2013.05.05 11:38:23 (*)   Creating plain-text HDL
-# 2013.05.05 11:38:27 (*) Done Nios II generation
+# 2013.05.20 00:43:06 (*) Generating Quartus symbol for top level: niosSystemCamControl
 
-# 2013.05.05 11:38:28 (*) Running Generator Program for sdram_0
+# 2013.05.20 00:43:06 (*) Symbol C:/Users/Justin/Documents/GitHub/project/niosControl3CamOnly/niosSystemCamControl.bsf already exists, no need to regenerate
+# 2013.05.20 00:43:06 (*) Creating command-line system-generation script: C:/Users/Justin/Documents/GitHub/project/niosControl3CamOnly/niosSystemCamControl_generation_script
 
-# 2013.05.05 11:38:29 (*) Running Generator Program for jtag_uart_0
-
-# 2013.05.05 11:38:31 (*) Running Generator Program for procHasControl
-
-# 2013.05.05 11:38:32 (*) Running Generator Program for timer_0
-
-# 2013.05.05 11:38:34 (*) Running Generator Program for sysid
-
-# 2013.05.05 11:38:35 (*) Running Generator Program for niosSystemCamControl_clock_0
-
-# 2013.05.05 11:38:37 (*) Running Generator Program for niosSystemCamControl_clock_1
-
-# 2013.05.05 11:38:39 (*) Running Generator Program for niosSystemCamControl_burst_0
-
-# 2013.05.05 11:38:41 (*) Running Generator Program for niosSystemCamControl_burst_1
-
-# 2013.05.05 11:38:42 (*) Running Generator Program for niosSystemCamControl_burst_2
-
-# 2013.05.05 11:38:44 (*) Running Generator Program for niosSystemCamControl_burst_3
-
-# 2013.05.05 11:38:46 (*) Running Generator Program for niosSystemCamControl_burst_4
-
-# 2013.05.05 11:38:47 (*) Running Generator Program for niosSystemCamControl_burst_5
-
-# 2013.05.05 11:38:49 (*) Running Generator Program for niosSystemCamControl_burst_6
-
-# 2013.05.05 11:38:51 (*) Running Generator Program for niosSystemCamControl_burst_7
-
-.
+# 2013.05.20 00:43:06 (*) Running setup for HDL simulator: modelsim
 
 
-# 2013.05.05 11:38:53 (*) Running Test Generator Program for sdram_0
+# 2013.05.20 00:43:07 (*) Completed generation for system: niosSystemCamControl.
+# 2013.05.20 00:43:07 (*) THE FOLLOWING SYSTEM ITEMS HAVE BEEN GENERATED:
+  SOPC Builder database : C:/Users/Justin/Documents/GitHub/project/niosControl3CamOnly/niosSystemCamControl.ptf 
+  System HDL Model : C:/Users/Justin/Documents/GitHub/project/niosControl3CamOnly/niosSystemCamControl.v 
+  System Generation Script : C:/Users/Justin/Documents/GitHub/project/niosControl3CamOnly/niosSystemCamControl_generation_script 
 
-# 2013.05.05 11:38:54 (*) Making arbitration and system (top) modules.
-
-# 2013.05.05 11:39:07 (*) Generating Quartus symbol for top level: niosSystemCamControl
-
-# 2013.05.05 11:39:07 (*) Symbol C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/niosSystemCamControl.bsf already exists, no need to regenerate
-# 2013.05.05 11:39:07 (*) Creating command-line system-generation script: C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/niosSystemCamControl_generation_script
-
-# 2013.05.05 11:39:07 (*) Running setup for HDL simulator: modelsim
-
-
-# 2013.05.05 11:39:08 (*) Completed generation for system: niosSystemCamControl.
-# 2013.05.05 11:39:08 (*) THE FOLLOWING SYSTEM ITEMS HAVE BEEN GENERATED:
-  SOPC Builder database : C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/niosSystemCamControl.ptf 
-  System HDL Model : C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/niosSystemCamControl.v 
-  System Generation Script : C:/Data/Projects/School/EEC_181AB/project/niosControl3CamOnly/niosSystemCamControl_generation_script 
-
-
-# 2013.05.05 11:39:08 (*) SUCCESS: SYSTEM GENERATION COMPLETED.
+# 2013.05.20 00:43:07 (*) SUCCESS: SYSTEM GENERATION COMPLETED.
 
 
 Press 'Exit' to exit.

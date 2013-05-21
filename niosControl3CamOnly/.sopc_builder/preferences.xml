@@ -16,7 +16,7 @@
    <frequency preferredWidth="231" />
   </columns>
  </clocktable>
- <window width="1376" height="860" x="11" y="2" />
+ <window width="1376" height="860" x="202" y="4" />
  <library
-   expandedCategories="Library,Project/Terasic Technologies Inc,Library/Memories and Memory Controllers/SDRAM,Library/Memories and Memory Controllers,Project,Library/Bridges and Adapters/DMA,Library/Bridges and Adapters,Library/Memories and Memory Controllers/External Memory Interfaces" />
+   expandedCategories="Project,Library,Library/Peripherals/Microcontroller Peripherals,Library/Peripherals" />
 </preferences>

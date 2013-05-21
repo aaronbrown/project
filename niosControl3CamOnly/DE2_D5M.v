@@ -485,6 +485,20 @@ assign CCD_MCLK = rClk[0];
 
 wire niosWantsControl;
 
+wire [31:0] fp_result;
+//wire [31:0] fp_abs_result;
+wire [31:0] fp_exp_result;
+wire [31:0] fp_op;
+wire [7:0] fp_op_type;
+
+	ALTFP_EXa exp_unit0 (
+		.clock(unshifted_nios_clk),
+		.data(fp_op),
+		.result(fp_exp_result));
+		
+	
+	assign fp_result = (fp_op_type == 8'b0) ? fp_exp_result : 0;
+
   niosSystemCamControl niosSystemCamControl_inst
     (
 		.SRAM_ADDR_from_the_sram_16bit_512k_0      (SRAM_ADDR),
@@ -496,6 +510,9 @@ wire niosWantsControl;
       .SRAM_WE_N_from_the_sram_16bit_512k_0      (SRAM_WE_N),
       .clk_0                            (unshifted_nios_clk),
       .clk_1                            (sdram_ctrl_clk),
+		.in_port_to_the_fp_result         (fp_result),
+		.out_port_from_the_fp_op_type     (fp_op_type),
+      .out_port_from_the_fp_operand     (fp_op),
       .out_port_from_the_procHasControl (niosWantsControl),
       .reset_n                          (KEY[0]),
       .zs_addr_from_the_sdram_0         (DRAM_ADDR_nios),
