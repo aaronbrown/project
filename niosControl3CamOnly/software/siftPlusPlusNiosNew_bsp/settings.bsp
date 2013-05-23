@@ -2,10 +2,10 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>May 5, 2013 12:03:27 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1367780607237</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>C:\Data\Projects\School\EEC_181AB\project\niosControl3CamOnly\software\siftPlusPlusNiosNew_bsp</BspGeneratedLocation>
-        <BspSettingsFile>..\..\..\..\..\..\..\..\Data\Projects\School\EEC_181AB\project\niosControl3CamOnly\software\siftPlusPlusNiosNew_bsp\settings.bsp</BspSettingsFile>
+        <BspGeneratedTimeStamp>May 20, 2013 1:00:44 AM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1369036844333</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>C:\Users\Justin\workspace\siftPlusPlusNiosNew_bsp</BspGeneratedLocation>
+        <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\niosSystemCamControl.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu_0</Cpu>
@@ -14,7 +14,7 @@
                 <SettingName>hal.sys_clk_timer</SettingName>
                 <Identifier>ALT_SYS_CLK</Identifier>
                 <Type>UnquotedString</Type>
-                <Value>timer_0</Value>
+                <Value>none</Value>
                 <DefaultValue>none</DefaultValue>
                 <DestinationFile>system_h_define</DestinationFile>
                 <Description>Slave descriptor of the system clock timer device. This device provides a periodic interrupt ("tick") and is typically required for RTOS use. This setting defines the value of ALT_SYS_CLK in system.h.</Description>
@@ -26,7 +26,7 @@
                 <SettingName>hal.timestamp_timer</SettingName>
                 <Identifier>ALT_TIMESTAMP_CLK</Identifier>
                 <Type>UnquotedString</Type>
-                <Value>none</Value>
+                <Value>timer_0</Value>
                 <DefaultValue>none</DefaultValue>
                 <DestinationFile>system_h_define</DestinationFile>
                 <Description>Slave descriptor of timestamp timer device. This device is used by Altera HAL timestamp drivers for high-resolution time measurement. This setting defines the value of ALT_TIMESTAMP_CLK in system.h.</Description>
@@ -881,14 +881,32 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>fp_operand</slaveDescriptor>
+                <addressRange>0x01109030 - 0x0110903F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>fp_result</slaveDescriptor>
+                <addressRange>0x01109040 - 0x0110904F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>fp_op_type</slaveDescriptor>
+                <addressRange>0x01109050 - 0x0110905F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>jtag_uart_0</slaveDescriptor>
-                <addressRange>0x01109030 - 0x01109037</addressRange>
+                <addressRange>0x01109060 - 0x01109067</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sysid</slaveDescriptor>
-                <addressRange>0x01109038 - 0x0110903F</addressRange>
+                <addressRange>0x01109068 - 0x0110906F</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>

@@ -45,13 +45,18 @@
  ** The algorithm is implemented by the class VL::Sift.
  **/
 
+#include <sys/alt_timestamp.h>
 #include"sift.hpp"
 #include"sift-conv.tpp"
-
+#include  "altera_avalon_pio_regs.h"
 #include<algorithm>
 #include<iostream>
 #include<sstream>
 #include<cassert>
+
+#include"system.h"
+
+#define EXP_MACRO(A) __builtin_custom_fnf(0x00, (A));
 
 extern "C" {
 #if defined (VL_MAC)
@@ -65,11 +70,15 @@ using namespace VL ;
 
 // on startup, pre-compute expn(x) = exp(-x)
 namespace VL { 
+
 namespace Detail {
 
 int const         expnTableSize = 256 ;
 VL::float_t const expnTableMax  = VL::float_t(25.0) ;
 VL::float_t       expnTable [ expnTableSize + 1 ] ;
+
+static const VL::float_t ONE_OVER_2PI = 1 / (2 * M_PI);
+static const VL::float_t NBO_TIMES_ONE_OVER_2PI = 8 * ONE_OVER_2PI;
 
 struct buildExpnTable
 {
@@ -994,11 +1003,16 @@ Sift::detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold)
 void
 Sift::prepareGrad(int o)
 { 
+	//alt_timestamp_start();
+	//unsigned tm1 = alt_timestamp();
+	//unsigned tm2;
   int const ow = getOctaveWidth(o) ;
   int const oh = getOctaveHeight(o) ;
   int const xo = 1 ;
   int const yo = ow ;
   int const so = oh*ow ;
+
+	//unsigned long long sum = 0;
 
   if( ! tempIsGrad || tempOctave != o ) {
 
@@ -1025,12 +1039,16 @@ Sift::prepareGrad(int o)
     	srcPtr = src;
     	grad += 2*yo;
     	gradPtr = grad;
+    	//unsigned t1, t2, t3;
 
         while(srcPtr != end) {
           Gx = 0.5 * ( *(srcPtr+xo) - *(srcPtr-xo) ) ;
           Gy = 0.5 * ( *(srcPtr+yo) - *(srcPtr-yo) ) ;
+         // t1 = alt_timestamp();
           m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
           t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
+         // t3 = alt_timestamp();
+         // sum += t3-t1;
           *gradPtr++ = pixel_t( m ) ;
           *gradPtr++ = pixel_t( t ) ;
           ++srcPtr ;
@@ -1038,6 +1056,9 @@ Sift::prepareGrad(int o)
       }
     }
   }
+  //tm2 = alt_timestamp();
+
+ // std::cout << 1.0*sum/(tm2 - tm1);
   
   tempIsGrad = true ;
   tempOctave = o ;
@@ -1069,6 +1090,12 @@ Sift::prepareGrad(int o)
 int
 Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
 {
+  	union
+  	{
+  		unsigned int exp_int;
+  		VL::float_t exp_float;
+  	} exp_union;
+
   int const   nbins = 36 ;
   VL::float_t const winFactor = 1.5 ;
   VL::float_t hist [nbins] ;
@@ -1121,7 +1148,7 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
 
 #undef at
 #define at(dx,dy) (*(pt + (dx)*xo + (dy)*yo))
-
+  IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, 0x00);
   for(int ys = std::max(-W, 1-yi) ; ys <= std::min(+W, oh -2 -yi) ; ++ys) {
     for(int xs = std::max(-W, 1-xi) ; xs <= std::min(+W, ow -2 -xi) ; ++xs) {
       
@@ -1132,12 +1159,25 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
       // limit to a circular window
       if(r2 >= W*W+0.5) continue ;
 
-      VL::float_t wgt = VL::fast_expn( r2 / (2*sigmaw*sigmaw) ) ;
+
+      exp_union.exp_float =  -r2 / (2*sigmaw*sigmaw);
+     // std::cout << "op:  " << exp_union.exp_float << std::endl;
+
+      // place the integer rep of the float to be exponentiated in the fp_operand reg
+      IOWR_ALTERA_AVALON_PIO_DATA(FP_OPERAND_BASE, exp_union.exp_int);
+
+      //VL::float_t wgt = EXP_MACRO( -r2 / (2*sigmaw*sigmaw) ) ;
       VL::float_t mod = *(pt + xs*xo + ys*yo) ;
       VL::float_t ang = *(pt + xs*xo + ys*yo + 1) ;
 
       //      int bin = (int) floor( nbins * ang / (2*M_PI) ) ;
       int bin = (int) floor( nbins * ang / (2*M_PI) ) ;
+
+      // retrieve the integer rep of the exponentiation result
+      exp_union.exp_int = IORD_ALTERA_AVALON_PIO_DATA(FP_RESULT_BASE);
+      VL::float_t wgt = exp_union.exp_float; // convert back to float
+
+      //std::cout << "res: " << exp_union.exp_float << std::endl;
       hist[bin] += mod * wgt ;        
     }
   }
@@ -1196,6 +1236,136 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
  enough_angles:
   return nangles ;
 }
+int
+Sift::computeKeypointOrientations2(VL::float_t angles [4], Keypoint keypoint)
+{
+  int const   nbins = 36 ;
+  VL::float_t const winFactor = 1.5 ;
+  VL::float_t hist [nbins] ;
+
+  // octave
+  int o = keypoint.o ;
+  VL::float_t xperiod = getOctaveSamplingPeriod(o) ;
+
+  // offsets to move in the Gaussian scale space octave
+  const int ow = getOctaveWidth(o) ;
+  const int oh = getOctaveHeight(o) ;
+  const int xo = 2 ;
+  const int yo = xo * ow ;
+  const int so = yo * oh ;
+
+  // keypoint fractional geometry
+  VL::float_t x     = keypoint.x / xperiod ;
+  VL::float_t y     = keypoint.y / xperiod ;
+  VL::float_t sigma = keypoint.sigma / xperiod ;
+
+  // shall we use keypoints.ix,iy,is here?
+  int xi = ((int) (x+0.5)) ;
+  int yi = ((int) (y+0.5)) ;
+  int si = keypoint.is ;
+
+  VL::float_t const sigmaw = winFactor * sigma ;
+  int W = (int) floor(3.0 * sigmaw) ;
+
+  // skip the keypoint if it is out of bounds
+  if(o  < omin   ||
+     o  >=omin+O ||
+     xi < 0      ||
+     xi > ow-1   ||
+     yi < 0      ||
+     yi > oh-1   ||
+     si < smin+1 ||
+     si > smax-2 ) {
+    std::cerr<<"!"<<std::endl ;
+    return 0 ;
+  }
+
+  // make sure that the gradient buffer is filled with octave o
+  prepareGrad(o) ;
+
+  // clear the SIFT histogram
+  std::fill(hist, hist + nbins, 0) ;
+
+  // fill the SIFT histogram
+  pixel_t* pt = temp + xi * xo + yi * yo + (si - smin -1) * so ;
+
+#undef at
+#define at(dx,dy) (*(pt + (dx)*xo + (dy)*yo))
+
+  for(int ys = std::max(-W, 1-yi) ; ys <= std::min(+W, oh -2 -yi) ; ++ys) {
+    for(int xs = std::max(-W, 1-xi) ; xs <= std::min(+W, ow -2 -xi) ; ++xs) {
+
+      VL::float_t dx = xi + xs - x;
+      VL::float_t dy = yi + ys - y;
+      VL::float_t r2 = dx*dx + dy*dy ;
+
+      // limit to a circular window
+      if(r2 >= W*W+0.5) continue ;
+
+      VL::float_t wgt = fast_expn( r2 / (2*sigmaw*sigmaw) ) ;
+      VL::float_t mod = *(pt + xs*xo + ys*yo) ;
+      VL::float_t ang = *(pt + xs*xo + ys*yo + 1) ;
+
+      //      int bin = (int) floor( nbins * ang / (2*M_PI) ) ;
+      int bin = (int) floor( nbins * ang / (2*M_PI) ) ;
+      hist[bin] += mod * wgt ;
+    }
+  }
+
+  // smooth the histogram
+#if defined VL_LOWE_STRICT
+  // Lowe's version apparently has a little issue with orientations
+  // around + or - pi, which we reproduce here for compatibility
+  for (int iter = 0; iter < 6; iter++) {
+    VL::float_t prev  = hist[nbins/2] ;
+    for (int i = nbins/2-1; i >= -nbins/2 ; --i) {
+      int const j  = (i     + nbins) % nbins ;
+      int const jp = (i - 1 + nbins) % nbins ;
+      VL::float_t newh = (prev + hist[j] + hist[jp]) / 3.0;
+      prev = hist[j] ;
+      hist[j] = newh ;
+    }
+  }
+#else
+  // this is slightly more correct
+  for (int iter = 0; iter < 6; iter++) {
+    VL::float_t prev  = hist[nbins-1] ;
+    VL::float_t first = hist[0] ;
+    int i ;
+    for (i = 0; i < nbins - 1; i++) {
+      VL::float_t newh = (prev + hist[i] + hist[(i+1) % nbins]) / 3.0;
+      prev = hist[i] ;
+      hist[i] = newh ;
+    }
+    hist[i] = (prev + hist[i] + first)/3.0 ;
+  }
+#endif
+
+  // find the histogram maximum
+  VL::float_t maxh = * std::max_element(hist, hist + nbins) ;
+
+  // find peaks within 80% from max
+  int nangles = 0 ;
+  for(int i = 0 ; i < nbins ; ++i) {
+    VL::float_t h0 = hist [i] ;
+    VL::float_t hm = hist [(i-1+nbins) % nbins] ;
+    VL::float_t hp = hist [(i+1+nbins) % nbins] ;
+
+    // is this a peak?
+    if( h0 > 0.8*maxh && h0 > hm && h0 > hp ) {
+
+      // quadratic interpolation
+      //      VL::float_t di = -0.5 * (hp - hm) / (hp+hm-2*h0) ;
+      VL::float_t di = -0.5 * (hp - hm) / (hp+hm-2*h0) ;
+      VL::float_t th = 2*M_PI * (i+di+0.5) / nbins ;
+      angles [ nangles++ ] = th ;
+      if( nangles == 4 )
+        goto enough_angles ;
+    }
+  }
+ enough_angles:
+  return nangles ;
+}
 
 // ===================================================================
 //                                         computeKeypointDescriptor()
@@ -1215,8 +1385,10 @@ normalize_histogram(VL::float_t* L_begin, VL::float_t* L_end)
 
   norm = fast_sqrt(norm) ;
 
+  VL::float_t const normFactor = 1 / (norm + std::numeric_limits<VL::float_t>::epsilon() );
+
   for(L_iter = L_begin; L_iter != L_end ; ++L_iter)
-    *L_iter /= (norm + std::numeric_limits<VL::float_t>::epsilon() ) ;
+    *L_iter *= normFactor ;
 }
 
 }
@@ -1244,6 +1416,12 @@ Sift::computeKeypointDescriptor
  Keypoint keypoint, 
  VL::float_t angle0)
 {
+	/*  unsigned tm1, t1;
+	  unsigned tm2, t2;
+	  unsigned sum = 0;
+	  alt_timestamp_start();
+	  tm1 = alt_timestamp();
+*/
 
   /* The SIFT descriptor is a  three dimensional histogram of the position
    * and orientation of the gradient.  There are NBP bins for each spatial
@@ -1259,7 +1437,21 @@ Sift::computeKeypointDescriptor
    * we need to consider  a window 2W += sqrt(2) x SBP  x (NBP + 1) pixels
    * wide.
    */      
+	 // alt_timestamp_start();
+	  unsigned int tm1, tm2, t6, t7, tmoh;
+	  unsigned long long histLoopSum = 0, histLoopSum2 = 0, histLoopSum3 = 0, histLoopSum4=0;
+	  unsigned long long histLoopSum5 = 0, histLoopSum6 = 0, histLoopSum7 = 0, histLoopSum8=0, histLoopSum9 = 0;
+	  unsigned int t1, t2, t3, t4, t5;
+	 // tm1 = alt_timestamp();
 
+
+	union
+	{
+		unsigned int exp_int;
+		VL::float_t exp_float;
+	} exp_union;
+
+	//t1 = alt_timestamp();
   // octave
   int o = keypoint.o ;
   VL::float_t xperiod = getOctaveSamplingPeriod(o) ;
@@ -1271,10 +1463,12 @@ Sift::computeKeypointDescriptor
   const int yo = xo * ow ;
   const int so = yo * oh ;
 
+
   // keypoint fractional geometry
   VL::float_t x     = keypoint.x / xperiod;
   VL::float_t y     = keypoint.y / xperiod ;
   VL::float_t sigma = keypoint.sigma / xperiod ;
+
 
   VL::float_t st0   = sinf( angle0 ) ;
   VL::float_t ct0   = cosf( angle0 ) ;
@@ -1288,6 +1482,7 @@ Sift::computeKeypointDescriptor
   const int NBO = 8 ;
   const int NBP = 4 ;
   const VL::float_t SBP = magnif * sigma ;
+  const VL::float_t ONE_OVER_SBP = 1 / SBP;
   const int   W = (int) floor (sqrt(2.0) * SBP * (NBP + 1) / 2.0 + 0.5) ;
   
   /* Offsets to move in the descriptor. */
@@ -1298,7 +1493,7 @@ Sift::computeKeypointDescriptor
   // const int bino  = NBO * NBP * NBP ;
   
   int bin ;
-  
+
   // check bounds
   if(o  < omin   ||
      o  >=omin+O ||
@@ -1318,7 +1513,7 @@ Sift::computeKeypointDescriptor
   /* Center the scale space and the descriptor on the current keypoint. 
    * Note that dpt is pointing to the bin of center (SBP/2,SBP/2,0).
    */
-  pixel_t const * pt = temp + xi*xo + yi*yo + (si - smin - 1)*so ;
+  pixel_t  * pt = temp + xi*xo + yi*yo + (si - smin - 1)*so ;
   VL::float_t *  dpt = descr_pt + (NBP/2) * binyo + (NBP/2) * binxo ;
      
 #define atd(dbinx,dbiny,dbint) *(dpt + (dbint)*binto + (dbiny)*binyo + (dbinx)*binxo)
@@ -1327,65 +1522,166 @@ Sift::computeKeypointDescriptor
    * Process pixels in the intersection of the image rectangle
    * (1,1)-(M-1,N-1) and the keypoint bounding box.
    */
+  //t2 = alt_timestamp();
+  //histLoopSum += t2-t1;
+
+
+
+  VL::pixel_t *base;
   for(int dyi = std::max(-W, 1-yi) ; dyi <= std::min(+W, oh-2-yi) ; ++dyi) {
     for(int dxi = std::max(-W, 1-xi) ; dxi <= std::min(+W, ow-2-xi) ; ++dxi) {
-      
+     //   unsigned int t1, t2, t3, t4, t5;
       // retrieve 
-      VL::float_t mod   = *( pt + dxi*xo + dyi*yo + 0 ) ;
-      VL::float_t angle = *( pt + dxi*xo + dyi*yo + 1 ) ;
+      base = pt + dxi*xo + dyi*yo;
+    //	t1 = alt_timestamp();
+      VL::float_t mod   = *( base++ ) ;
+      VL::float_t angle = *( base ) ;
+    //  t2 = alt_timestamp();
+     //   histLoopSum2 += t2-t1;
+
+
+      //  t1 = alt_timestamp();
       VL::float_t theta = fast_mod_2pi(-angle + angle0) ; // lowe compatible ?
-      
+      //VL::float_t theta = (((-angle + angle0) / (2*M_PI)) - (int)((-angle + angle0) / (2*M_PI))) * 2*M_PI;
+
+      //      std::cout << t2-t1 - (toh-t2) << std::endl;
+
       // fractional displacement
       VL::float_t dx = xi + dxi - x;
       VL::float_t dy = yi + dyi - y;
+    //  t2 = alt_timestamp();
+     //   histLoopSum3 += t2-t1;
       
       // get the displacement normalized w.r.t. the keypoint
       // orientation and extension.
-      VL::float_t nx = ( ct0 * dx + st0 * dy) / SBP ;
-      VL::float_t ny = (-st0 * dx + ct0 * dy) / SBP ; 
-      VL::float_t nt = NBO * theta / (2*M_PI) ;
+    //  t1 = alt_timestamp();
+      VL::float_t nx = ( ct0 * dx + st0 * dy) * ONE_OVER_SBP ;
+      VL::float_t ny = (-st0 * dx + ct0 * dy) * ONE_OVER_SBP ;
+     // VL::float_t nt = NBO * theta / (2*M_PI) ;
+      VL::float_t nt = theta * VL::Detail::NBO_TIMES_ONE_OVER_2PI ;
+     // t2 = alt_timestamp();
+       //     toh = alt_timestamp();
+     //       histLoopSum4 += t2-t1;
       
       // Get the gaussian weight of the sample. The gaussian window
       // has a standard deviation equal to NBP/2. Note that dx and dy
       // are in the normalized frame, so that -NBP/2 <= dx <= NBP/2.
       VL::float_t const wsigma = NBP/2 ;
-      VL::float_t win = VL::fast_expn((nx*nx + ny*ny)/(2.0 * wsigma * wsigma)) ;
-      
+
+
+      IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, 0x00);
+     // t1 = alt_timestamp();
+      VL::float_t val = (nx*nx + ny*ny)*.125;
+      exp_union.exp_float = -val;
+      //std::cout << exp_union.exp_float << ' ' << std::endl;
+
+      // put the integer rep of the float to be exponentiated in the proper reg
+      IOWR_ALTERA_AVALON_PIO_DATA(FP_OPERAND_BASE, exp_union.exp_int);
+     // t2 = alt_timestamp();
+     //   histLoopSum5 += t2-t1;
+
+      //VL::float_t win = EXP_MACRO(-val) ;
+      //VL::float_t win = fast_expn(val);
+
+     // std::cout << "macro: " << win << std::endl;
+     // std::cout << "func:  " << win2 << std::endl;
+
+
+
       // The sample will be distributed in 8 adjacent bins.
       // We start from the ``lower-left'' bin.
+     // t1 = alt_timestamp();
       int binx = fast_floor( nx - 0.5 ) ;
       int biny = fast_floor( ny - 0.5 ) ;
       int bint = fast_floor( nt ) ;
+    //  t2 = alt_timestamp();
+   //     histLoopSum6 += t2-t1;
+   //     t1 = alt_timestamp();
       VL::float_t rbinx = nx - (binx+0.5) ;
       VL::float_t rbiny = ny - (biny+0.5) ;
       VL::float_t rbint = nt - bint ;
+   //   t2 = alt_timestamp();
+   //     histLoopSum7 += t2-t1;
       int dbinx ;
       int dbiny ;
       int dbint ;
 
+
+      // retrieve the exponentiation result from the earlier operation
+      exp_union.exp_int = IORD_ALTERA_AVALON_PIO_DATA(FP_RESULT_BASE);
+      VL::float_t win = exp_union.exp_float; // convert to float val
+      //std::cout << win << std::endl;
+
+
+      alt_timestamp_start();
+      IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, 0x01);
+
+      const VL::float_t WIN_TIMES_MOD = win * mod;
+    //  t1 = alt_timestamp();
       // Distribute the current sample into the 8 adjacent bins
       for(dbinx = 0 ; dbinx < 2 ; ++dbinx) {
         for(dbiny = 0 ; dbiny < 2 ; ++dbiny) {
+            if( binx+dbinx >= -(NBP/2) &&
+                binx+dbinx <   (NBP/2) &&
+                biny+dbiny >= -(NBP/2) &&
+                biny+dbiny <   (NBP/2) )
+            {
+
+              /*** dbint = 0 ***/
+              VL::float_t weight = WIN_TIMES_MOD
+            		  	  	  	  	  * fast_abs(   (1 - dbinx - rbinx)
+            		  	  	  	  			      * (1 - dbiny - rbiny)
+            		  	  	  	  			      * (1 - rbint) ) ;
+
+
+              /*** dbint = 1 ***/
+              VL::float_t weight2 = WIN_TIMES_MOD
+                              	  	  * fast_abs(   (1 - dbinx - rbinx)
+                              	  			  	  * (1 - dbiny - rbiny)
+                              	  			  	  * (-rbint) ) ;
+
+
+              // add results to the histogram
+              atd(binx+dbinx, biny+dbiny, (bint)   % NBO) += weight ;
+              atd(binx+dbinx, biny+dbiny, (bint+1) % NBO) += weight2 ;
+          } // if
+        } // dbiny
+      } // dbinx
+
+      /*
+       * for(dbinx = 0 ; dbinx < 2 ; ++dbinx) {
+        for(dbiny = 0 ; dbiny < 2 ; ++dbiny) {
           for(dbint = 0 ; dbint < 2 ; ++dbint) {
-            
+
             if( binx+dbinx >= -(NBP/2) &&
                 binx+dbinx <   (NBP/2) &&
                 biny+dbiny >= -(NBP/2) &&
                 biny+dbiny <   (NBP/2) ) {
-              VL::float_t weight = win 
-                * mod 
-                * fast_abs (1 - dbinx - rbinx)
-                * fast_abs (1 - dbiny - rbiny)
-                * fast_abs (1 - dbint - rbint) ;
-              
+
+              VL::float_t weight = win
+                * mod
+                * fast_abs(   (1 - dbinx - rbinx)
+                			* (1 - dbiny - rbiny)
+                			* (1 - dbint - rbint) ) ;
+
+
               atd(binx+dbinx, biny+dbiny, (bint+dbint) % NBO) += weight ;
+
             }
           }            
         }
-      }
+       */
+     // t2 = alt_timestamp();
+     //   histLoopSum8 += t2-t1;
+
+
+      //std::cout << "iter: " << (t2 - t1) - (toh - t2) << std::endl;
     }  
   }
 
+
+
+ // t1 = alt_timestamp();
   /* Standard SIFT descriptors are normalized, truncated and normalized again */
   if( normalizeDescriptor ) {
 
@@ -1400,6 +1696,234 @@ Sift::computeKeypointDescriptor
     /* Normalize again. */
     Detail::normalize_histogram(descr_pt, descr_pt + NBO*NBP*NBP) ;
   }
+  //t2 = alt_timestamp();
+  //  histLoopSum9 += t2-t1;
+
+  /*
+  tm2 = alt_timestamp();
+   // tmoh = alt_timestamp();
+  std::cout << "frac: " << 1.0 * histLoopSum / (tm2-tm1);
+  std::cout << "frac2: " << 1.0 * histLoopSum2 / (tm2-tm1);
+    std::cout << "frac3: " << 1.0 * histLoopSum3 / (tm2-tm1);
+    std::cout << "frac4: " << 1.0 * histLoopSum4 / (tm2-tm1);
+    std::cout << "frac5: " << 1.0 * histLoopSum5 / (tm2-tm1);
+    std::cout << "frac6: " << 1.0 * histLoopSum6 / (tm2-tm1);
+      std::cout << "frac7: " << 1.0 * histLoopSum7 / (tm2-tm1);
+      std::cout << "frac8: " << 1.0 * histLoopSum8 / (tm2-tm1);
+      std::cout << "frac9: " << 1.0 * histLoopSum9 / (tm2-tm1);
+      */
+ // std::cout << tm2-tm1 <<",";
+
+}
+
+void
+Sift::computeKeypointDescriptor2
+(VL::float_t* descr_pt,
+ Keypoint keypoint,
+ VL::float_t angle0)
+{
+	/*  unsigned tm1, t1;
+	  unsigned tm2, t2;
+	  unsigned sum = 0;
+	  alt_timestamp_start();
+	  tm1 = alt_timestamp();
+*/
+
+  /* The SIFT descriptor is a  three dimensional histogram of the position
+   * and orientation of the gradient.  There are NBP bins for each spatial
+   * dimesions and NBO  bins for the orientation dimesion,  for a total of
+   * NBP x NBP x NBO bins.
+   *
+   * The support  of each  spatial bin  has an extension  of SBP  = 3sigma
+   * pixels, where sigma is the scale  of the keypoint.  Thus all the bins
+   * together have a  support SBP x NBP pixels wide  . Since weighting and
+   * interpolation of  pixel is used, another  half bin is  needed at both
+   * ends of  the extension. Therefore, we  need a square window  of SBP x
+   * (NBP + 1) pixels. Finally, since the patch can be arbitrarly rotated,
+   * we need to consider  a window 2W += sqrt(2) x SBP  x (NBP + 1) pixels
+   * wide.
+   */
+	 // alt_timestamp_start();
+	 // unsigned int tm1, tm2, tmoh;
+	 // unsigned long long histLoopSum = 0;
+	 // tm1 = alt_timestamp();
+  // octave
+  int o = keypoint.o ;
+  VL::float_t xperiod = getOctaveSamplingPeriod(o) ;
+
+  // offsets to move in Gaussian scale space octave
+  const int ow = getOctaveWidth(o) ;
+  const int oh = getOctaveHeight(o) ;
+  const int xo = 2 ;
+  const int yo = xo * ow ;
+  const int so = yo * oh ;
+
+  // keypoint fractional geometry
+  VL::float_t x     = keypoint.x / xperiod;
+  VL::float_t y     = keypoint.y / xperiod ;
+  VL::float_t sigma = keypoint.sigma / xperiod ;
+
+  VL::float_t st0   = sinf( angle0 ) ;
+  VL::float_t ct0   = cosf( angle0 ) ;
+
+  // shall we use keypoints.ix,iy,is here?
+  int xi = ((int) (x+0.5)) ;
+  int yi = ((int) (y+0.5)) ;
+  int si = keypoint.is ;
+
+  // const VL::float_t magnif = 3.0f ;
+  const int NBO = 8 ;
+  const int NBP = 4 ;
+  const VL::float_t SBP = magnif * sigma ;
+  const int   W = (int) floor (sqrt(2.0) * SBP * (NBP + 1) / 2.0 + 0.5) ;
+
+  /* Offsets to move in the descriptor. */
+  /* Use Lowe's convention. */
+  const int binto = 1 ;
+  const int binyo = NBO * NBP ;
+  const int binxo = NBO ;
+  // const int bino  = NBO * NBP * NBP ;
+
+  int bin ;
+
+  // check bounds
+  if(o  < omin   ||
+     o  >=omin+O ||
+     xi < 0      ||
+     xi > ow-1   ||
+     yi < 0      ||
+     yi > oh-1   ||
+     si < smin+1 ||
+     si > smax-2 )
+        return ;
+
+  // make sure gradient buffer is up-to-date
+  prepareGrad(o) ;
+
+  std::fill( descr_pt, descr_pt + NBO*NBP*NBP, 0 ) ;
+
+  /* Center the scale space and the descriptor on the current keypoint.
+   * Note that dpt is pointing to the bin of center (SBP/2,SBP/2,0).
+   */
+  pixel_t const * pt = temp + xi*xo + yi*yo + (si - smin - 1)*so ;
+  VL::float_t *  dpt = descr_pt + (NBP/2) * binyo + (NBP/2) * binxo ;
+
+#define atd(dbinx,dbiny,dbint) *(dpt + (dbint)*binto + (dbiny)*binyo + (dbinx)*binxo)
+
+  /*
+   * Process pixels in the intersection of the image rectangle
+   * (1,1)-(M-1,N-1) and the keypoint bounding box.
+   */
+
+
+
+  for(int dyi = std::max(-W, 1-yi) ; dyi <= std::min(+W, oh-2-yi) ; ++dyi) {
+    for(int dxi = std::max(-W, 1-xi) ; dxi <= std::min(+W, ow-2-xi) ; ++dxi) {
+     //   unsigned int t1, t2, toh;
+      // retrieve
+
+      VL::float_t mod   = *( pt + dxi*xo + dyi*yo + 0 ) ;
+      VL::float_t angle = *( pt + dxi*xo + dyi*yo + 1 ) ;
+
+      //t1 = alt_timestamp();
+      VL::float_t theta = fast_mod_2pi(-angle + angle0) ; // lowe compatible ?
+      //VL::float_t theta = (((-angle + angle0) / (2*M_PI)) - (int)((-angle + angle0) / (2*M_PI))) * 2*M_PI;
+      //t2 = alt_timestamp();
+      //      toh = alt_timestamp();
+      //      histLoopSum += t2-t1 - (toh-t2);
+      //      std::cout << t2-t1 - (toh-t2) << std::endl;
+
+      // fractional displacement
+      VL::float_t dx = xi + dxi - x;
+      VL::float_t dy = yi + dyi - y;
+
+      // get the displacement normalized w.r.t. the keypoint
+      // orientation and extension.
+
+      VL::float_t nx = ( ct0 * dx + st0 * dy) / SBP ;
+      VL::float_t ny = (-st0 * dx + ct0 * dy) / SBP ;
+      VL::float_t nt = NBO * theta / (2*M_PI) ;
+
+      // Get the gaussian weight of the sample. The gaussian window
+      // has a standard deviation equal to NBP/2. Note that dx and dy
+      // are in the normalized frame, so that -NBP/2 <= dx <= NBP/2.
+      VL::float_t const wsigma = NBP/2 ;
+
+
+      VL::float_t val = (nx*nx + ny*ny)*.125;
+
+      VL::float_t win = fast_expn(val) ;
+      //VL::float_t win = fast_expn(val);
+
+     // std::cout << "macro: " << win << std::endl;
+     // std::cout << "func:  " << win2 << std::endl;
+
+
+      // The sample will be distributed in 8 adjacent bins.
+      // We start from the ``lower-left'' bin.
+      int binx = fast_floor( nx - 0.5 ) ;
+      int biny = fast_floor( ny - 0.5 ) ;
+      int bint = fast_floor( nt ) ;
+      VL::float_t rbinx = nx - (binx+0.5) ;
+      VL::float_t rbiny = ny - (biny+0.5) ;
+      VL::float_t rbint = nt - bint ;
+      int dbinx ;
+      int dbiny ;
+      int dbint ;
+
+
+
+
+
+      // Distribute the current sample into the 8 adjacent bins
+      for(dbinx = 0 ; dbinx < 2 ; ++dbinx) {
+        for(dbiny = 0 ; dbiny < 2 ; ++dbiny) {
+          for(dbint = 0 ; dbint < 2 ; ++dbint) {
+
+            if( binx+dbinx >= -(NBP/2) &&
+                binx+dbinx <   (NBP/2) &&
+                biny+dbiny >= -(NBP/2) &&
+                biny+dbiny <   (NBP/2) ) {
+
+              VL::float_t weight = win
+                * mod
+                * fast_abs (1 - dbinx - rbinx)
+                * fast_abs (1 - dbiny - rbiny)
+                * fast_abs (1 - dbint - rbint) ;
+
+
+              atd(binx+dbinx, biny+dbiny, (bint+dbint) % NBO) += weight ;
+
+            }
+          }
+        }
+      }
+
+
+      //std::cout << "iter: " << (t2 - t1) - (toh - t2) << std::endl;
+    }
+  }
+
+
+
+  /* Standard SIFT descriptors are normalized, truncated and normalized again */
+  if( normalizeDescriptor ) {
+
+    /* Normalize the histogram to L2 unit length. */
+    Detail::normalize_histogram(descr_pt, descr_pt + NBO*NBP*NBP) ;
+
+    /* Truncate at 0.2. */
+    for(bin = 0; bin < NBO*NBP*NBP ; ++bin) {
+      if (descr_pt[bin] > 0.2) descr_pt[bin] = 0.2;
+    }
+
+    /* Normalize again. */
+    Detail::normalize_histogram(descr_pt, descr_pt + NBO*NBP*NBP) ;
+  }
+  //tm2 = alt_timestamp();
+  //  tmoh = alt_timestamp();
+ // std::cout << "frac: " << 1.0 * sum / (tm2-tm1);
+ // std::cout << tm2-tm1 <<",";
 
 }
 

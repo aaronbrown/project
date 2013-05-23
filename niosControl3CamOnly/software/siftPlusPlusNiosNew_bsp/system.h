@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
  * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Sun May 05 12:02:09 PDT 2013
+ * Generated: Sun May 19 21:43:46 PDT 2013
  */
 
 /*
@@ -74,7 +74,7 @@
 #define ALT_CPU_EXCEPTION_ADDR 0x1104020
 #define ALT_CPU_FLUSHDA_SUPPORTED
 #define ALT_CPU_FREQ 100000000
-#define ALT_CPU_HARDWARE_DIVIDE_PRESENT 0
+#define ALT_CPU_HARDWARE_DIVIDE_PRESENT 1
 #define ALT_CPU_HARDWARE_MULTIPLY_PRESENT 1
 #define ALT_CPU_HARDWARE_MULX_PRESENT 0
 #define ALT_CPU_HAS_DEBUG_CORE 1
@@ -107,7 +107,7 @@
 #define NIOS2_DCACHE_SIZE 8192
 #define NIOS2_EXCEPTION_ADDR 0x1104020
 #define NIOS2_FLUSHDA_SUPPORTED
-#define NIOS2_HARDWARE_DIVIDE_PRESENT 0
+#define NIOS2_HARDWARE_DIVIDE_PRESENT 1
 #define NIOS2_HARDWARE_MULTIPLY_PRESENT 1
 #define NIOS2_HARDWARE_MULX_PRESENT 0
 #define NIOS2_HAS_DEBUG_CORE 1
@@ -164,19 +164,19 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart_0"
-#define ALT_STDERR_BASE 0x1109030
+#define ALT_STDERR_BASE 0x1109060
 #define ALT_STDERR_DEV jtag_uart_0
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart_0"
-#define ALT_STDIN_BASE 0x1109030
+#define ALT_STDIN_BASE 0x1109060
 #define ALT_STDIN_DEV jtag_uart_0
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart_0"
-#define ALT_STDOUT_BASE 0x1109030
+#define ALT_STDOUT_BASE 0x1109060
 #define ALT_STDOUT_DEV jtag_uart_0
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
@@ -185,13 +185,94 @@
 
 
 /*
+ * fp_op_type configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_fp_op_type altera_avalon_pio
+#define FP_OP_TYPE_BASE 0x1109050
+#define FP_OP_TYPE_BIT_CLEARING_EDGE_REGISTER 0
+#define FP_OP_TYPE_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define FP_OP_TYPE_CAPTURE 0
+#define FP_OP_TYPE_DATA_WIDTH 8
+#define FP_OP_TYPE_DO_TEST_BENCH_WIRING 0
+#define FP_OP_TYPE_DRIVEN_SIM_VALUE 0x0
+#define FP_OP_TYPE_EDGE_TYPE "NONE"
+#define FP_OP_TYPE_FREQ 100000000u
+#define FP_OP_TYPE_HAS_IN 0
+#define FP_OP_TYPE_HAS_OUT 1
+#define FP_OP_TYPE_HAS_TRI 0
+#define FP_OP_TYPE_IRQ -1
+#define FP_OP_TYPE_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define FP_OP_TYPE_IRQ_TYPE "NONE"
+#define FP_OP_TYPE_NAME "/dev/fp_op_type"
+#define FP_OP_TYPE_RESET_VALUE 0x0
+#define FP_OP_TYPE_SPAN 16
+#define FP_OP_TYPE_TYPE "altera_avalon_pio"
+
+
+/*
+ * fp_operand configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_fp_operand altera_avalon_pio
+#define FP_OPERAND_BASE 0x1109030
+#define FP_OPERAND_BIT_CLEARING_EDGE_REGISTER 0
+#define FP_OPERAND_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define FP_OPERAND_CAPTURE 0
+#define FP_OPERAND_DATA_WIDTH 32
+#define FP_OPERAND_DO_TEST_BENCH_WIRING 0
+#define FP_OPERAND_DRIVEN_SIM_VALUE 0x0
+#define FP_OPERAND_EDGE_TYPE "NONE"
+#define FP_OPERAND_FREQ 100000000u
+#define FP_OPERAND_HAS_IN 0
+#define FP_OPERAND_HAS_OUT 1
+#define FP_OPERAND_HAS_TRI 0
+#define FP_OPERAND_IRQ -1
+#define FP_OPERAND_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define FP_OPERAND_IRQ_TYPE "NONE"
+#define FP_OPERAND_NAME "/dev/fp_operand"
+#define FP_OPERAND_RESET_VALUE 0x0
+#define FP_OPERAND_SPAN 16
+#define FP_OPERAND_TYPE "altera_avalon_pio"
+
+
+/*
+ * fp_result configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_fp_result altera_avalon_pio
+#define FP_RESULT_BASE 0x1109040
+#define FP_RESULT_BIT_CLEARING_EDGE_REGISTER 0
+#define FP_RESULT_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define FP_RESULT_CAPTURE 0
+#define FP_RESULT_DATA_WIDTH 32
+#define FP_RESULT_DO_TEST_BENCH_WIRING 0
+#define FP_RESULT_DRIVEN_SIM_VALUE 0x0
+#define FP_RESULT_EDGE_TYPE "NONE"
+#define FP_RESULT_FREQ 100000000u
+#define FP_RESULT_HAS_IN 1
+#define FP_RESULT_HAS_OUT 0
+#define FP_RESULT_HAS_TRI 0
+#define FP_RESULT_IRQ -1
+#define FP_RESULT_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define FP_RESULT_IRQ_TYPE "NONE"
+#define FP_RESULT_NAME "/dev/fp_result"
+#define FP_RESULT_RESET_VALUE 0x0
+#define FP_RESULT_SPAN 16
+#define FP_RESULT_TYPE "altera_avalon_pio"
+
+
+/*
  * hal configuration
  *
  */
 
 #define ALT_MAX_FD 32
-#define ALT_SYS_CLK TIMER_0
-#define ALT_TIMESTAMP_CLK none
+#define ALT_SYS_CLK none
+#define ALT_TIMESTAMP_CLK TIMER_0
 
 
 /*
@@ -200,7 +281,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart_0 altera_avalon_jtag_uart
-#define JTAG_UART_0_BASE 0x1109030
+#define JTAG_UART_0_BASE 0x1109060
 #define JTAG_UART_0_IRQ 0
 #define JTAG_UART_0_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_0_NAME "/dev/jtag_uart_0"
@@ -327,13 +408,13 @@
  */
 
 #define ALT_MODULE_CLASS_sysid altera_avalon_sysid
-#define SYSID_BASE 0x1109038
+#define SYSID_BASE 0x1109068
 #define SYSID_ID 0u
 #define SYSID_IRQ -1
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1367779031u
+#define SYSID_TIMESTAMP 1369023104u
 #define SYSID_TYPE "altera_avalon_sysid"
 
 

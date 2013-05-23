@@ -243,14 +243,19 @@ fast_expn(VL::float_t x)
  ** @param x function argument.
  ** @return @c mod(x,2pi)
  **/
+ 
+ static const float TWOPI = 2*M_PI;
+ static const float ONEOVERTWOPI = 1 / TWOPI;
 inline
 VL::float_t 
 fast_mod_2pi(VL::float_t x)
 {
 #ifdef VL_USEFASTMATH
-  while(x < VL::float_t(0)      ) x += VL::float_t(2*M_PI) ;
-  while(x > VL::float_t(2*M_PI) ) x -= VL::float_t(2*M_PI) ;
-  return x ;
+  //while(x < VL::float_t(0)      ) x += VL::float_t(2*M_PI) ;
+  //while(x > VL::float_t(2*M_PI) ) x -= VL::float_t(2*M_PI) ;
+  //return x ;
+  int ax = (int)(x * ONEOVERTWOPI);
+  return (x >= 0) ? (x - ax*TWOPI) : (TWOPI + x - ax*TWOPI);
 #else
   return (x>=0) ? std::fmod(x, VL::float_t(2*M_PI)) 
     : 2*M_PI + std::fmod(x, VL::float_t(2*M_PI)) ;
@@ -283,7 +288,17 @@ VL::float_t
 fast_abs(VL::float_t x)
 {
 #ifdef VL_USEFASTMATH
-  return (x >= 0) ? x : -x ;
+ // return (x >= 0) ? x : -x ;
+ union
+ {
+ 	VL::float_t xf;
+ 	unsigned int xi;
+ } abs_union;
+ 
+ abs_union.xf = x;
+ abs_union.xi = abs_union.xi & 0x7fffffff;
+ return abs_union.xf;
+ 
 #else
   return std::fabs(x) ; 
 #endif

@@ -226,7 +226,9 @@ public:
   /*@{*/
   void detectKeypoints(VL::float_t threshold, VL::float_t edgeThreshold) ;
   int computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint) ; 
+  int computeKeypointOrientations2(VL::float_t angles [4], Keypoint keypoint) ;
   void computeKeypointDescriptor(VL::float_t* descr_pt, Keypoint keypoint, VL::float_t angle) ;
+  void computeKeypointDescriptor2(VL::float_t* descr_pt, Keypoint keypoint, VL::float_t angle) ;
   KeypointsIter keypointsBegin() ;
   KeypointsIter keypointsEnd() ;
   /*@}*/
