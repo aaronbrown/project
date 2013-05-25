@@ -1,3 +1,4 @@
+
 // --------------------------------------------------------------------
 // Copyright (c) 2007 by Terasic Technologies Inc. 
 // --------------------------------------------------------------------
@@ -101,14 +102,14 @@ assign v_mask = 13'd0;
 assign	mVGA_BLANK	=	mVGA_H_SYNC & mVGA_V_SYNC;
 assign	mVGA_SYNC	=	1'b0;
 
-assign	mVGA_R	=	(	H_Cont>=X_START 	&& H_Cont<X_START+320 &&
-						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+240 )
+assign	mVGA_R	=	(	H_Cont>=X_START 	&& H_Cont<X_START+H_SYNC_ACT &&
+						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+V_SYNC_ACT )
 						?	iRed	:	0;
-assign	mVGA_G	=	(	H_Cont>=X_START 	&& H_Cont<X_START+320 &&
-						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+240 )
+assign	mVGA_G	=	(	H_Cont>=X_START 	&& H_Cont<X_START+H_SYNC_ACT &&
+						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+V_SYNC_ACT )
 						?	iGreen	:	0;
-assign	mVGA_B	=	(	H_Cont>=X_START 	&& H_Cont<X_START+320 &&
-						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+240 )
+assign	mVGA_B	=	(	H_Cont>=X_START 	&& H_Cont<X_START+H_SYNC_ACT &&
+						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+V_SYNC_ACT )
 						?	iBlue	:	0;
 
 always@(posedge iCLK or negedge iRST_N)
@@ -144,8 +145,8 @@ begin
 	oRequest	<=	0;
 	else
 	begin
-		if(	H_Cont>=X_START-2 && H_Cont<X_START-2+320 &&
-			V_Cont>=Y_START && V_Cont<Y_START+240 )
+		if(	H_Cont>=X_START-2 && H_Cont<X_START+H_SYNC_ACT-2 &&
+			V_Cont>=Y_START && V_Cont<Y_START+V_SYNC_ACT )
 		oRequest	<=	1;
 		else
 		oRequest	<=	0;

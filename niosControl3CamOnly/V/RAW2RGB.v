@@ -132,15 +132,9 @@ begin
 		end
 		else if({iY_Cont[0],iX_Cont[0]}==2'b00)
 		begin
-		//	tempR <= (mDATAd_0[11:1] + iDATAd[11:1]);
-		//	tempG <= (mDATAdd_0 + mDATA_0 + mDATAd_1 + iDATAdd + iDATA) / 5;
-		//	tempB <= (mDATAdd_1[11:1] + mDATA_1[11:1]);
-	//		tempR <= (mDATAdd_0[11:2] + mDATA_0[11:2] + iDATAdd[11:2] + iDATA[11:2]);
-	//		tempG <= (mDATAd_0[11:2] + mDATAdd_1[11:2] + mDATA_1[11:2] + iDATAd[11:2]);
-	//		tempB <= mDATAd_1;
-			tempB	<=	(mDATAdd_1[11:1]+mDATA_1[11:1]);
-			tempG	<=	(mDATAdd_0[11:2]+mDATA_0[11:2]+iDATAdd[11:2]+iDATA[11:2]);//+mDATA_1[11:1];
-			tempR	<=	(mDATAd_0[11:1]+iDATAd[11:1]);
+			tempR	<=	mDATA_1;
+			tempG	<=	(mDATA_0+mDATAd_1) >> 1;
+			tempB	<=	mDATAd_0;
 		end
 		else if({iY_Cont[0],iX_Cont[0]}==2'b01)
 		begin

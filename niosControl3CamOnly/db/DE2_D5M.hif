@@ -20,96 +20,6 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
-VGA_Controller
-# storage
-db|DE2_D5M.(1).cnf
-db|DE2_D5M.(1).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|vga_controller.v
-5e73723444978a18d4d7011be36229b
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-H_SYNC_CYC
-96
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_BACK
-48
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_ACT
-640
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_FRONT
-16
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_TOTAL
-800
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_CYC
-2
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_BACK
-33
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_ACT
-480
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_FRONT
-10
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_TOTAL
-525
-PARAMETER_SIGNED_DEC
-DEF
-X_START
-144
-PARAMETER_SIGNED_DEC
-DEF
-Y_START
-35
-PARAMETER_SIGNED_DEC
-DEF
-}
-# include_file {
-v|vga_param.h
-b4f42ba795bd5b1786cd87ebe459a09b
-}
-# hierarchies {
-VGA_Controller:u1
-}
-# macro_sequence
-
-# end
-# entity
 Reset_Delay
 # storage
 db|DE2_D5M.(2).cnf
@@ -141,85 +51,6 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 Reset_Delay:u2
-}
-# macro_sequence
-
-# end
-# entity
-CCD_Capture
-# storage
-db|DE2_D5M.(3).cnf
-db|DE2_D5M.(3).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|ccd_capture.v
-5b31c3ff593ac0e4affbde4e25b3e0f2
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-COLUMN_WIDTH
-640
-PARAMETER_SIGNED_DEC
-DEF
-}
-# hierarchies {
-CCD_Capture:u3
-}
-# macro_sequence
-
-# end
-# entity
-Line_Buffer
-# storage
-db|DE2_D5M.(5).cnf
-db|DE2_D5M.(5).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|line_buffer.v
-6aeda2ba49618563a66f1a3c14ee5456
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0
-HWAcceleration:HWAccelUnit|Line_Buffer:u0
 }
 # macro_sequence
 
@@ -286,10 +117,6 @@ lpm_constant.inc
 97ffb7e3fef9ce9fce4eff8455d5da5
 lpm_counter.inc
 c5cfeeabc5f2ab60b3453f6abbc42b41
-}
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
 }
 # macro_sequence
 
@@ -455,10 +282,6 @@ clock
 clken
 -1
 3
-}
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated
 }
 # macro_sequence
 
@@ -688,10 +511,6 @@ wren_a
 -1
 2
 }
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|altsyncram_0fa1:altsyncram2
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|altsyncram_0fa1:altsyncram2
-}
 # macro_sequence
 
 # end
@@ -742,10 +561,6 @@ clock
 clk_en
 -1
 3
-}
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1
 }
 # macro_sequence
 
@@ -824,10 +639,6 @@ dataa0
 aeb
 -1
 3
-}
-# hierarchies {
-RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_6u11:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5
 }
 # macro_sequence
 
@@ -39865,91 +39676,6 @@ Sdram_Arbiter:sdramArbiter0
 
 # end
 # entity
-Sdram_Control_4Port
-# storage
-db|DE2_D5M.(338).cnf
-db|DE2_D5M.(338).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sdram_control_4port|sdram_control_4port.v
-14d0775e0e14112837d94f49a1e374b
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-INIT_PER
-24000
-PARAMETER_SIGNED_DEC
-DEF
-REF_PER
-1024
-PARAMETER_SIGNED_DEC
-DEF
-SC_CL
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RCD
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RRD
-7
-PARAMETER_SIGNED_DEC
-DEF
-SC_PM
-1
-PARAMETER_SIGNED_DEC
-DEF
-SC_BL
-1
-PARAMETER_SIGNED_DEC
-DEF
-SDR_BL
-111
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_BT
-0
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_CL
-011
-PARAMETER_UNSIGNED_BIN
-DEF
-}
-# include_file {
-sdram_control_4port|sdram_params.h
-625599f965a889cf34497649a6d284d8
-hwacceleration|hwacceleration.v
-4b8d2fece81775126989bed7f1eb2069
-}
-# hierarchies {
-Sdram_Control_4Port:u7
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7
-}
-# macro_sequence
-DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      ASIZE23      DSIZE16      
-# end
-# entity
 control_interface
 # storage
 db|DE2_D5M.(339).cnf
@@ -42060,64 +41786,6 @@ HWAcceleration:HWAccelUnit
 }
 # macro_sequence
 DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      
-# end
-# entity
-I2C_CCD_Config
-# storage
-db|DE2_D5M.(360).cnf
-db|DE2_D5M.(360).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|i2c_ccd_config.v
-c7dd3842623e429c9da42eed32fb80e6
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-default_exposure
-0000011111000000
-PARAMETER_UNSIGNED_BIN
-DEF
-exposure_change_value
-0000000001100100
-PARAMETER_UNSIGNED_BIN
-DEF
-CLK_Freq
-50000000
-PARAMETER_SIGNED_DEC
-DEF
-I2C_Freq
-20000
-PARAMETER_SIGNED_DEC
-DEF
-LUT_SIZE
-25
-PARAMETER_SIGNED_DEC
-DEF
-}
-# hierarchies {
-I2C_CCD_Config:u8
-}
-# macro_sequence
-
 # end
 # entity
 I2C_Controller
@@ -63332,42 +63000,6 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 
 # end
 # entity
-RAW2RGB
-# storage
-db|DE2_D5M.(4).cnf
-db|DE2_D5M.(4).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|raw2rgb.v
-13dad5a07e495afb7999abe414793f69
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-RAW2RGB:u4
-}
-# macro_sequence
-
-# end
-# entity
 cpu_0
 # storage
 db|DE2_D5M.(60).cnf
@@ -66947,6 +66579,1442 @@ aclr0
 wren_a
 -1
 2
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(360).cnf
+db|DE2_D5M.(360).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+2
+PARAMETER_SIGNED_DEC
+USR
+TAP_DISTANCE
+1280
+PARAMETER_SIGNED_DEC
+USR
+WIDTH
+12
+PARAMETER_SIGNED_DEC
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_ikn
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps
+-1
+3
+shiftout
+-1
+3
+shiftin
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+}
+# include_file {
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_ikn
+# storage
+db|DE2_D5M.(514).cnf
+db|DE2_D5M.(514).cnf
+# case_insensitive
+# source_file
+db|shift_taps_ikn.tdf
+3d437bd6e965a8d9a316af3362caf71
+7
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps23
+-1
+3
+taps22
+-1
+3
+taps21
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftout9
+-1
+3
+shiftout8
+-1
+3
+shiftout7
+-1
+3
+shiftout6
+-1
+3
+shiftout5
+-1
+3
+shiftout4
+-1
+3
+shiftout3
+-1
+3
+shiftout2
+-1
+3
+shiftout11
+-1
+3
+shiftout10
+-1
+3
+shiftout1
+-1
+3
+shiftout0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_cm81
+# storage
+db|DE2_D5M.(515).cnf
+db|DE2_D5M.(515).cnf
+# case_insensitive
+# source_file
+db|altsyncram_cm81.tdf
+5473d42e777daae3c24d89b46d66826
+7
+# used_port {
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b23
+-1
+3
+q_b22
+-1
+3
+q_b21
+-1
+3
+q_b20
+-1
+3
+q_b2
+-1
+3
+q_b19
+-1
+3
+q_b18
+-1
+3
+q_b17
+-1
+3
+q_b16
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a23
+-1
+3
+data_a22
+-1
+3
+data_a21
+-1
+3
+data_a20
+-1
+3
+data_a2
+-1
+3
+data_a19
+-1
+3
+data_a18
+-1
+3
+data_a17
+-1
+3
+data_a16
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b9
+-1
+3
+address_b8
+-1
+3
+address_b7
+-1
+3
+address_b6
+-1
+3
+address_b5
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b10
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a9
+-1
+3
+address_a8
+-1
+3
+address_a7
+-1
+3
+address_a6
+-1
+3
+address_a5
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a10
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_3rf
+# storage
+db|DE2_D5M.(516).cnf
+db|DE2_D5M.(516).cnf
+# case_insensitive
+# source_file
+db|cntr_3rf.tdf
+2d27b7594bbffd98ab22f62b459cd
+7
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|cntr_3rf:cntr1
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|cntr_3rf:cntr1
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_mdc
+# storage
+db|DE2_D5M.(517).cnf
+db|DE2_D5M.(517).cnf
+# case_insensitive
+# source_file
+db|cmpr_mdc.tdf
+716d424145fe283a735cf81f1519347a
+7
+# used_port {
+datab9
+-1
+3
+datab8
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab10
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa9
+-1
+3
+dataa8
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa10
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|cntr_3rf:cntr1|cmpr_mdc:cmpr5
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|cntr_3rf:cntr1|cmpr_mdc:cmpr5
+}
+# macro_sequence
+
+# end
+# entity
+VGA_Controller
+# storage
+db|DE2_D5M.(1).cnf
+db|DE2_D5M.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|vga_controller.v
+aad626fec12e91d8cb6729379cd846ff
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+H_SYNC_CYC
+96
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_BACK
+48
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_ACT
+640
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_FRONT
+16
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_TOTAL
+800
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_CYC
+2
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_BACK
+33
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_ACT
+480
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_FRONT
+10
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_TOTAL
+525
+PARAMETER_SIGNED_DEC
+DEF
+X_START
+144
+PARAMETER_SIGNED_DEC
+DEF
+Y_START
+35
+PARAMETER_SIGNED_DEC
+DEF
+}
+# include_file {
+v|vga_param.h
+b4f42ba795bd5b1786cd87ebe459a09b
+}
+# hierarchies {
+VGA_Controller:u1
+}
+# macro_sequence
+
+# end
+# entity
+CCD_Capture
+# storage
+db|DE2_D5M.(3).cnf
+db|DE2_D5M.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|ccd_capture.v
+edd32dfabf96abb3fb3d4b111d6b014
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+COLUMN_WIDTH
+1280
+PARAMETER_SIGNED_DEC
+DEF
+}
+# hierarchies {
+CCD_Capture:u3
+}
+# macro_sequence
+
+# end
+# entity
+RAW2RGB
+# storage
+db|DE2_D5M.(4).cnf
+db|DE2_D5M.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|raw2rgb.v
+d1f345f2315efe15b23547e454d9646b
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+RAW2RGB:u4
+}
+# macro_sequence
+
+# end
+# entity
+Line_Buffer
+# storage
+db|DE2_D5M.(5).cnf
+db|DE2_D5M.(5).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|line_buffer.v
+a7a5a7ef33c110b4f14665768d813a6a
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0
+HWAcceleration:HWAccelUnit|Line_Buffer:u0
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(338).cnf
+db|DE2_D5M.(338).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+2
+PARAMETER_SIGNED_DEC
+USR
+TAP_DISTANCE
+1280
+PARAMETER_SIGNED_DEC
+USR
+WIDTH
+12
+PARAMETER_SIGNED_DEC
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+shift_taps_nv11
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps
+-1
+3
+shiftout
+-1
+3
+shiftin
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_nv11
+# storage
+db|DE2_D5M.(518).cnf
+db|DE2_D5M.(518).cnf
+# case_insensitive
+# source_file
+db|shift_taps_nv11.tdf
+b8844345cbacc1c5aeba83a4922b7744
+7
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps23
+-1
+3
+taps22
+-1
+3
+taps21
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftout9
+-1
+3
+shiftout8
+-1
+3
+shiftout7
+-1
+3
+shiftout6
+-1
+3
+shiftout5
+-1
+3
+shiftout4
+-1
+3
+shiftout3
+-1
+3
+shiftout2
+-1
+3
+shiftout11
+-1
+3
+shiftout10
+-1
+3
+shiftout1
+-1
+3
+shiftout0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_4ia1
+# storage
+db|DE2_D5M.(519).cnf
+db|DE2_D5M.(519).cnf
+# case_insensitive
+# source_file
+db|altsyncram_4ia1.tdf
+b18e47c8277a30aca74fe5d7e19a9ad5
+7
+# used_port {
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b23
+-1
+3
+q_b22
+-1
+3
+q_b21
+-1
+3
+q_b20
+-1
+3
+q_b2
+-1
+3
+q_b19
+-1
+3
+q_b18
+-1
+3
+q_b17
+-1
+3
+q_b16
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a23
+-1
+3
+data_a22
+-1
+3
+data_a21
+-1
+3
+data_a20
+-1
+3
+data_a2
+-1
+3
+data_a19
+-1
+3
+data_a18
+-1
+3
+data_a17
+-1
+3
+data_a16
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b9
+-1
+3
+address_b8
+-1
+3
+address_b7
+-1
+3
+address_b6
+-1
+3
+address_b5
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b10
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a9
+-1
+3
+address_a8
+-1
+3
+address_a7
+-1
+3
+address_a6
+-1
+3
+address_a5
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a10
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+}
+# hierarchies {
+RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|altsyncram_4ia1:altsyncram2
+HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|altsyncram_4ia1:altsyncram2
+}
+# macro_sequence
+
+# end
+# entity
+Sdram_Control_4Port
+# storage
+db|DE2_D5M.(520).cnf
+db|DE2_D5M.(520).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_control_4port|sdram_control_4port.v
+96df7b9de36d2d56f73e132e7a7f354
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
+1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
+1
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# include_file {
+sdram_control_4port|sdram_params.h
+625599f965a889cf34497649a6d284d8
+hwacceleration|hwacceleration.v
+4b8d2fece81775126989bed7f1eb2069
+}
+# hierarchies {
+Sdram_Control_4Port:u7
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7
+}
+# macro_sequence
+DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      ASIZE23      DSIZE16      
+# end
+# entity
+I2C_CCD_Config
+# storage
+db|DE2_D5M.(521).cnf
+db|DE2_D5M.(521).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|i2c_ccd_config.v
+1fe289fa4b8713dcc69e78ef442c841
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+default_exposure
+0000011111000000
+PARAMETER_UNSIGNED_BIN
+DEF
+exposure_change_value
+0000000011001000
+PARAMETER_UNSIGNED_BIN
+DEF
+CLK_Freq
+50000000
+PARAMETER_SIGNED_DEC
+DEF
+I2C_Freq
+20000
+PARAMETER_SIGNED_DEC
+DEF
+LUT_SIZE
+25
+PARAMETER_SIGNED_DEC
+DEF
+}
+# hierarchies {
+I2C_CCD_Config:u8
 }
 # macro_sequence
 
