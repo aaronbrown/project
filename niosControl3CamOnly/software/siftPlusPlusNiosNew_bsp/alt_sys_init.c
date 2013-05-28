@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
  * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Tue May 14 21:58:25 PDT 2013
+ * Generated: Mon May 27 23:54:13 PDT 2013
  */
 
 /*
@@ -61,7 +61,7 @@
 #include "altera_nios2_irq.h"
 #include "altera_avalon_jtag_uart.h"
 #include "altera_avalon_sysid.h"
-#include "altera_avalon_timer.h"
+#include "altera_avalon_uart.h"
 
 /*
  * Allocate the device storage
@@ -70,7 +70,7 @@
 ALTERA_NIOS2_IRQ_INSTANCE ( CPU_0, cpu_0);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART_0, jtag_uart_0);
 ALTERA_AVALON_SYSID_INSTANCE ( SYSID, sysid);
-ALTERA_AVALON_TIMER_INSTANCE ( TIMER_0, timer_0);
+ALTERA_AVALON_UART_INSTANCE ( UART_0, uart_0);
 
 /*
  * Initialize the interrupt controller devices
@@ -93,7 +93,7 @@ void alt_irq_init ( const void* base )
 
 void alt_sys_init( void )
 {
-    ALTERA_AVALON_TIMER_INIT ( TIMER_0, timer_0);
     ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART_0, jtag_uart_0);
     ALTERA_AVALON_SYSID_INIT ( SYSID, sysid);
+    ALTERA_AVALON_UART_INIT ( UART_0, uart_0);
 }

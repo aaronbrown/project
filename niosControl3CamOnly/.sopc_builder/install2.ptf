@@ -1,26 +1,19 @@
 PACKAGE install2 
 {
    # This file informs the Nios II IDE of non-legacy component paths.
-   # Generated 2013.05.20.00:40:46
-   COMPONENT ALTFP_EXP_CI 
+   # Generated 2013.05.28.00:21:32
+   COMPONENT Altera_UP_Flash_Memory_IP_Core_Avalon_Interface 
    {
       VERSION 1.0 
       {
-         local = "C:/Users/Justin/Documents/GitHub/project";
+         local = "C:/altera/11.0sp1/ip/University_Program/Memory/altera_up_flash_memory";
       }
    }
-   COMPONENT ALTFP_EX_CI 
+   COMPONENT Altera_UP_SD_Card_Avalon_Interface 
    {
       VERSION 1.0 
       {
-         local = "C:/Users/Justin/Documents/GitHub/project";
-      }
-   }
-   COMPONENT ALTFP_EX_CI 
-   {
-      VERSION 1.0 
-      {
-         local = "C:/Users/Justin/Documents/GitHub/project";
+         local = "C:/altera/11.0sp1/ip/University_Program/Memory/altera_up_sd_card_avalon_interface";
       }
    }
    COMPONENT alt_interlaken_pcs_siv 
@@ -1801,6 +1794,209 @@ PACKAGE install2
          local = "C:/altera/11.0sp1/ip/altera/alt_mem_if/memphy/altera_uniphy_rldramii";
       }
    }
+   COMPONENT altera_up_avalon_audio 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/altera_up_avalon_audio";
+      }
+   }
+   COMPONENT altera_up_avalon_audio_and_video_config 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/altera_up_avalon_audio_and_video_config";
+      }
+   }
+   COMPONENT altera_up_avalon_character_lcd 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/altera_up_avalon_character_lcd";
+      }
+   }
+   COMPONENT altera_up_avalon_clocks 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/altera_up_avalon_clocks";
+      }
+   }
+   COMPONENT altera_up_avalon_irda 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Communications/altera_up_avalon_irda";
+      }
+   }
+   COMPONENT altera_up_avalon_parallel_port 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Input_Output/altera_up_avalon_parallel_port";
+      }
+   }
+   COMPONENT altera_up_avalon_ps2 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Input_Output/altera_up_avalon_ps2";
+      }
+   }
+   COMPONENT altera_up_avalon_rs232 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Communications/altera_up_avalon_rs232";
+      }
+   }
+   COMPONENT altera_up_avalon_sram 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Memory/altera_up_avalon_sram";
+      }
+   }
+   COMPONENT altera_up_avalon_to_external_bus_bridge 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Bridges/altera_up_avalon_to_external_bus_bridge";
+      }
+   }
+   COMPONENT altera_up_avalon_video_alpha_blender 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_alpha_blender";
+      }
+   }
+   COMPONENT altera_up_avalon_video_bayer_resampler 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_bayer_resampler";
+      }
+   }
+   COMPONENT altera_up_avalon_video_bridge_raw_to_vip_bridge 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_vip_bridges";
+      }
+   }
+   COMPONENT altera_up_avalon_video_bridge_vip_to_raw_bridge 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_vip_bridges";
+      }
+   }
+   COMPONENT altera_up_avalon_video_character_buffer_with_dma 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_character_buffer_with_dma";
+      }
+   }
+   COMPONENT altera_up_avalon_video_chroma_resampler 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_chroma_resampler";
+      }
+   }
+   COMPONENT altera_up_avalon_video_clipper 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_clipper";
+      }
+   }
+   COMPONENT altera_up_avalon_video_csc 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_csc";
+      }
+   }
+   COMPONENT altera_up_avalon_video_decoder 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_decoder";
+      }
+   }
+   COMPONENT altera_up_avalon_video_dma_controller 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_dma_controller";
+      }
+   }
+   COMPONENT altera_up_avalon_video_dual_clock_buffer 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_dual_clock_buffer";
+      }
+   }
+   COMPONENT altera_up_avalon_video_edge_detection 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_edge_detection";
+      }
+   }
+   COMPONENT altera_up_avalon_video_pixel_buffer_dma 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_pixel_buffer_dma";
+      }
+   }
+   COMPONENT altera_up_avalon_video_rgb_resampler 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_rgb_resampler";
+      }
+   }
+   COMPONENT altera_up_avalon_video_scaler 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_scaler";
+      }
+   }
+   COMPONENT altera_up_avalon_video_stream_router 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_stream_router";
+      }
+   }
+   COMPONENT altera_up_avalon_video_test_pattern 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_test_pattern";
+      }
+   }
+   COMPONENT altera_up_avalon_video_vga_controller 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Audio_Video/Video/altera_up_avalon_video_vga_controller";
+      }
+   }
+   COMPONENT altera_up_external_bus_to_avalon_bridge 
+   {
+      VERSION 11.0 
+      {
+         local = "C:/altera/11.0sp1/ip/University_Program/Bridges/altera_up_external_bus_to_avalon_bridge";
+      }
+   }
    COMPONENT altera_usb_debug_fifos 
    {
       VERSION 11.0 
@@ -2155,7 +2351,7 @@ PACKAGE install2
    {
       VERSION 1.0.2 
       {
-         local = "C:/Users/Justin/Documents/GitHub/project/niosControl3CamOnly";
+         local = "C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly";
       }
    }
    COMPONENT sv_xcvr_custom 

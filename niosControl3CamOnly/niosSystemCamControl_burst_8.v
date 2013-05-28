@@ -21,7 +21,7 @@
 //
 //Burst adapter parameters:
 //adapter is mastered by: cpu_0/data_master
-//adapter masters: fp_result/s1
+//adapter masters: fp_op_type/s1
 //asp_debug: 0
 //byteaddr_width: 6
 //ceil_data_width: 32

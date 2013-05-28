@@ -30,7 +30,7 @@
    {
       datum _sortIndex
       {
-         value = "10";
+         value = "9";
          type = "int";
       }
    }
@@ -67,7 +67,7 @@
    {
       datum _sortIndex
       {
-         value = "13";
+         value = "12";
          type = "int";
       }
    }
@@ -75,7 +75,7 @@
    {
       datum _sortIndex
       {
-         value = "11";
+         value = "10";
          type = "int";
       }
    }
@@ -83,7 +83,7 @@
    {
       datum _sortIndex
       {
-         value = "12";
+         value = "11";
          type = "int";
       }
    }
@@ -122,27 +122,19 @@
          type = "int";
       }
    }
-   element fp_op_type.s1
-   {
-      datum baseAddress
-      {
-         value = "17862736";
-         type = "long";
-      }
-   }
-   element fp_result.s1
-   {
-      datum baseAddress
-      {
-         value = "17862720";
-         type = "long";
-      }
-   }
    element procHasControl.s1
    {
       datum baseAddress
       {
          value = "17862688";
+         type = "long";
+      }
+   }
+   element onchip_memory2_0.s1
+   {
+      datum baseAddress
+      {
+         value = "17842176";
          type = "long";
       }
    }
@@ -154,6 +146,14 @@
          type = "long";
       }
    }
+   element fp_result.s1
+   {
+      datum baseAddress
+      {
+         value = "17862720";
+         type = "long";
+      }
+   }
    element sdram_0.s1
    {
       datum baseAddress
@@ -162,19 +162,19 @@
          type = "long";
       }
    }
-   element timer_0.s1
+   element fp_op_type.s1
+   {
+      datum baseAddress
+      {
+         value = "17862736";
+         type = "long";
+      }
+   }
+   element uart_0.s1
    {
       datum baseAddress
       {
          value = "17862656";
-         type = "long";
-      }
-   }
-   element onchip_memory2_0.s1
-   {
-      datum baseAddress
-      {
-         value = "17842176";
          type = "long";
       }
    }
@@ -195,7 +195,7 @@
    {
       datum _sortIndex
       {
-         value = "9";
+         value = "8";
          type = "int";
       }
    }
@@ -203,15 +203,15 @@
    {
       datum _sortIndex
       {
-         value = "8";
+         value = "7";
          type = "int";
       }
    }
-   element timer_0
+   element uart_0
    {
       datum _sortIndex
       {
-         value = "7";
+         value = "13";
          type = "int";
       }
    }
@@ -227,8 +227,8 @@
  <parameter name="maxAdditionalLatency" value="0" />
  <parameter name="projectName">niosControl3CamOnly.qpf</parameter>
  <parameter name="sopcBorderPoints" value="true" />
- <parameter name="systemHash" value="-19546005752" />
- <parameter name="timeStamp" value="1369035637116" />
+ <parameter name="systemHash" value="-23492696210" />
+ <parameter name="timeStamp" value="1369725684587" />
  <module kind="clock_source" version="11.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="100000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -311,7 +311,7 @@
   <parameter name="resetSlave" value="onchip_memory2_0.s1" />
   <parameter name="resetOffset" value="0" />
   <parameter name="muldiv_multiplierType" value="EmbeddedMulFast" />
-  <parameter name="muldiv_divider" value="true" />
+  <parameter name="muldiv_divider" value="false" />
   <parameter name="mpu_useLimit" value="false" />
   <parameter name="mpu_numOfInstRegion" value="8" />
   <parameter name="mpu_numOfDataRegion" value="8" />
@@ -353,7 +353,7 @@
   <parameter name="dcache_numTCDM" value="_0" />
   <parameter name="dcache_lineSize" value="_32" />
   <parameter name="dcache_bursts" value="true" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='timer_0.s1' start='0x1109000' end='0x1109020' /><slave name='procHasControl.s1' start='0x1109020' end='0x1109030' /><slave name='fp_operand.s1' start='0x1109030' end='0x1109040' /><slave name='fp_result.s1' start='0x1109040' end='0x1109050' /><slave name='fp_op_type.s1' start='0x1109050' end='0x1109060' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1109060' end='0x1109068' /><slave name='sysid.control_slave' start='0x1109068' end='0x1109070' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='uart_0.s1' start='0x1109000' end='0x1109020' /><slave name='procHasControl.s1' start='0x1109020' end='0x1109030' /><slave name='fp_operand.s1' start='0x1109030' end='0x1109040' /><slave name='fp_result.s1' start='0x1109040' end='0x1109050' /><slave name='fp_op_type.s1' start='0x1109050' end='0x1109060' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1109060' end='0x1109068' /><slave name='sysid.control_slave' start='0x1109068' end='0x1109070' /></address-map>]]></parameter>
   <parameter name="dataAddrWidth" value="25" />
   <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="altera_nios_custom_instr_floating_point_inst" baseAddress="252" addressSpan="4" clockCycleType="VARIABLE" /></info>]]></parameter>
   <parameter name="cpuReset" value="false" />
@@ -374,7 +374,7 @@
   <parameter name="TRP" value="20.0" />
   <parameter name="TWR" value="14.0" />
   <parameter name="casLatency" value="3" />
-  <parameter name="clockRate" value="100000000" />
+  <parameter name="clockRate" value="90000000" />
   <parameter name="columnWidth" value="8" />
   <parameter name="dataWidth" value="16" />
   <parameter name="generateSimulationModel" value="false" />
@@ -425,18 +425,6 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="1" />
  </module>
- <module kind="altera_avalon_timer" version="11.0" enabled="1" name="timer_0">
-  <parameter name="alwaysRun" value="false" />
-  <parameter name="counterSize" value="32" />
-  <parameter name="fixedPeriod" value="false" />
-  <parameter name="period" value="1" />
-  <parameter name="periodUnits" value="MSEC" />
-  <parameter name="resetOutput" value="false" />
-  <parameter name="snapshot" value="true" />
-  <parameter name="systemFrequency" value="100000000" />
-  <parameter name="timeoutPulseOutput" value="false" />
-  <parameter name="timerPreset" value="FULL_FEATURED" />
- </module>
  <module kind="altera_avalon_sysid" version="11.0" enabled="1" name="sysid">
   <parameter name="id" value="0" />
  </module>
@@ -456,7 +444,7 @@
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone II" />
  </module>
  <module kind="clock_source" version="11.0" enabled="1" name="clk_1">
-  <parameter name="clockFrequency" value="100000000" />
+  <parameter name="clockFrequency" value="90000000" />
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
@@ -502,6 +490,22 @@
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="8" />
+ </module>
+ <module kind="altera_avalon_uart" version="11.0" enabled="1" name="uart_0">
+  <parameter name="baud" value="115200" />
+  <parameter name="clockRate" value="100000000" />
+  <parameter name="dataBits" value="8" />
+  <parameter name="fixedBaud" value="true" />
+  <parameter name="parity" value="NONE" />
+  <parameter name="simCharStream" value="" />
+  <parameter name="simInteractiveInputEnable" value="false" />
+  <parameter name="simInteractiveOutputEnable" value="false" />
+  <parameter name="simTrueBaud" value="false" />
+  <parameter name="stopBits" value="1" />
+  <parameter name="syncRegDepth" value="2" />
+  <parameter name="useCtsRts" value="false" />
+  <parameter name="useEopRegister" value="false" />
+  <parameter name="useRelativePathForSimFile" value="false" />
  </module>
  <connection
    kind="clock"
@@ -586,18 +590,6 @@
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x01109020" />
  </connection>
- <connection kind="clock" version="11.0" start="clk_0.clk" end="timer_0.clk" />
- <connection
-   kind="avalon"
-   version="11.0"
-   start="cpu_0.data_master"
-   end="timer_0.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01109000" />
- </connection>
- <connection kind="interrupt" version="11.0" start="cpu_0.d_irq" end="timer_0.irq">
-  <parameter name="irqNumber" value="1" />
- </connection>
  <connection kind="clock" version="11.0" start="clk_0.clk" end="sysid.clk" />
  <connection
    kind="avalon"
@@ -664,5 +656,17 @@
    end="fp_op_type.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x01109050" />
+ </connection>
+ <connection kind="clock" version="11.0" start="clk_0.clk" end="uart_0.clk" />
+ <connection
+   kind="avalon"
+   version="11.0"
+   start="cpu_0.data_master"
+   end="uart_0.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01109000" />
+ </connection>
+ <connection kind="interrupt" version="11.0" start="cpu_0.d_irq" end="uart_0.irq">
+  <parameter name="irqNumber" value="1" />
  </connection>
 </system>

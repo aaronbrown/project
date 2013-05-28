@@ -6,7 +6,6 @@ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu_0.oc
 # sdram_0
 # jtag_uart_0
 # procHasControl
-# timer_0
 # sysid
 # sram_16bit_512k_0
 set_global_assignment -name TCL_FILE [file join $::quartus(qip_path) SRAM_16Bit_512K_hw.tcl]
@@ -19,10 +18,11 @@ set_global_assignment -name VERILOG_FILE [file join $::quartus(ip_rootpath) alte
 set_global_assignment -name VERILOG_FILE [file join $::quartus(ip_rootpath) altera/nios2_ip/altera_nios_custom_instr_floating_point_qsys/fpoint_hw_qsys.v]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) cpu_0_altera_nios_custom_instr_floating_point_inst.v]
 # clk_1
-# null
-set_global_assignment -name SDC_FILE [file join $::quartus(ip_rootpath) altera/sopc_builder_ip/altera_avalon_clock_adapter/altera_avalon_clock_adapter.sdc]
 # fp_operand
 # fp_result
 # fp_op_type
-set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 0025BCE5629C0000013EC0E226E6 
+# null
+set_global_assignment -name SDC_FILE [file join $::quartus(ip_rootpath) altera/sopc_builder_ip/altera_avalon_clock_adapter/altera_avalon_clock_adapter.sdc]
+# uart_0
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 0025BCE5629C0000013EEA0368DC 
  

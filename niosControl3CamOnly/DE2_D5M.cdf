@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP2C35F672) Path("C:/Users/Justin/Desktop/clone527/project/niosControl3CamOnly/") File("DE2_D5M.sof") MfrSpec(OpMask(1));
+		Device PartName(EP2C35F672) Path("C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/") File("DE2_D5M.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

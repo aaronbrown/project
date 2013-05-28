@@ -1,8 +1,8 @@
 (header "symbol" (version "1.1"))
 (symbol
-(rect 0 0 488 512)
+(rect 0 0 488 544)
 (text "niosSystemCamControl" (rect 4 0 155 16)(font "Arial" (font_size 10)))
-(text "inst" (rect 4 496 28 512)(font "Arial"))
+(text "inst" (rect 4 528 28 544)(font "Arial"))
 (port
 (pt 0 32)
 (input)
@@ -30,6 +30,13 @@
 (text "in_port_to_the_fp_result[31..0] " (rect 0 0 146 16)(font "Arial" (font_size 8)))
 (text "in_port_to_the_fp_result[31..0] " (rect 20 153 166 169)(font "Arial" (font_size 8)))
 (line (pt 0 160)(pt 16 160)(line_width 3))
+)
+(port
+(pt 0 512)
+(input)
+(text "rxd_to_the_uart_0 " (rect 0 0 87 16)(font "Arial" (font_size 8)))
+(text "rxd_to_the_uart_0 " (rect 20 505 107 521)(font "Arial" (font_size 8)))
+(line (pt 0 512)(pt 16 512)(line_width 1))
 )
 (port
 (pt 488 96)
@@ -164,6 +171,13 @@
 (text "SRAM_WE_N_from_the_sram_16bit_512k_0 " (rect 239 473 461 489)(font "Arial" (font_size 8)))
 (line (pt 472 480)(pt 488 480)(line_width 1))
 )
+(port
+(pt 488 512)
+(output)
+(text "txd_from_the_uart_0 " (rect 0 0 98 16)(font "Arial" (font_size 8)))
+(text "txd_from_the_uart_0 " (rect 362 505 461 521)(font "Arial" (font_size 8)))
+(line (pt 472 512)(pt 488 512)(line_width 1))
+)
 (drawing
 (line (pt 16 80)(pt 471 80)(color 0 0 0)(dotted)(line_width 1))
 (line (pt 16 112)(pt 471 112)(color 0 0 0)(dotted)(line_width 1))
@@ -171,5 +185,6 @@
 (line (pt 16 176)(pt 471 176)(color 0 0 0)(dotted)(line_width 1))
 (line (pt 16 208)(pt 471 208)(color 0 0 0)(dotted)(line_width 1))
 (line (pt 16 368)(pt 471 368)(color 0 0 0)(dotted)(line_width 1))
-(rectangle (rect 16 16 472 496)(line_width 1)))
+(line (pt 16 496)(pt 471 496)(color 0 0 0)(dotted)(line_width 1))
+(rectangle (rect 16 16 472 528)(line_width 1)))
 )

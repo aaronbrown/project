@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
  * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Mon May 27 20:14:45 PDT 2013
+ * Generated: Tue May 28 00:40:57 PDT 2013
  */
 
 /*
@@ -74,7 +74,7 @@
 #define ALT_CPU_EXCEPTION_ADDR 0x1104020
 #define ALT_CPU_FLUSHDA_SUPPORTED
 #define ALT_CPU_FREQ 100000000
-#define ALT_CPU_HARDWARE_DIVIDE_PRESENT 1
+#define ALT_CPU_HARDWARE_DIVIDE_PRESENT 0
 #define ALT_CPU_HARDWARE_MULTIPLY_PRESENT 1
 #define ALT_CPU_HARDWARE_MULX_PRESENT 0
 #define ALT_CPU_HAS_DEBUG_CORE 1
@@ -107,7 +107,7 @@
 #define NIOS2_DCACHE_SIZE 8192
 #define NIOS2_EXCEPTION_ADDR 0x1104020
 #define NIOS2_FLUSHDA_SUPPORTED
-#define NIOS2_HARDWARE_DIVIDE_PRESENT 1
+#define NIOS2_HARDWARE_DIVIDE_PRESENT 0
 #define NIOS2_HARDWARE_MULTIPLY_PRESENT 1
 #define NIOS2_HARDWARE_MULX_PRESENT 0
 #define NIOS2_HAS_DEBUG_CORE 1
@@ -142,7 +142,7 @@
 #define __ALTERA_AVALON_ONCHIP_MEMORY2
 #define __ALTERA_AVALON_PIO
 #define __ALTERA_AVALON_SYSID
-#define __ALTERA_AVALON_TIMER
+#define __ALTERA_AVALON_UART
 #define __ALTERA_NIOS2
 #define __ALTERA_NIOS_CUSTOM_INSTR_FLOATING_POINT
 #define __SRAM_16BIT_512K
@@ -272,7 +272,7 @@
 
 #define ALT_MAX_FD 32
 #define ALT_SYS_CLK none
-#define ALT_TIMESTAMP_CLK TIMER_0
+#define ALT_TIMESTAMP_CLK none
 
 
 /*
@@ -414,33 +414,32 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1369035637u
+#define SYSID_TIMESTAMP 1369725685u
 #define SYSID_TYPE "altera_avalon_sysid"
 
 
 /*
- * timer_0 configuration
+ * uart_0 configuration
  *
  */
 
-#define ALT_MODULE_CLASS_timer_0 altera_avalon_timer
-#define TIMER_0_ALWAYS_RUN 0
-#define TIMER_0_BASE 0x1109000
-#define TIMER_0_COUNTER_SIZE 32
-#define TIMER_0_FIXED_PERIOD 0
-#define TIMER_0_FREQ 100000000u
-#define TIMER_0_IRQ 1
-#define TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID 0
-#define TIMER_0_LOAD_VALUE 99999ull
-#define TIMER_0_MULT 0.0010
-#define TIMER_0_NAME "/dev/timer_0"
-#define TIMER_0_PERIOD 1
-#define TIMER_0_PERIOD_UNITS "ms"
-#define TIMER_0_RESET_OUTPUT 0
-#define TIMER_0_SNAPSHOT 1
-#define TIMER_0_SPAN 32
-#define TIMER_0_TICKS_PER_SEC 1000u
-#define TIMER_0_TIMEOUT_PULSE_OUTPUT 0
-#define TIMER_0_TYPE "altera_avalon_timer"
+#define ALT_MODULE_CLASS_uart_0 altera_avalon_uart
+#define UART_0_BASE 0x1109000
+#define UART_0_BAUD 115200
+#define UART_0_DATA_BITS 8
+#define UART_0_FIXED_BAUD 1
+#define UART_0_FREQ 100000000u
+#define UART_0_IRQ 1
+#define UART_0_IRQ_INTERRUPT_CONTROLLER_ID 0
+#define UART_0_NAME "/dev/uart_0"
+#define UART_0_PARITY 'N'
+#define UART_0_SIM_CHAR_STREAM ""
+#define UART_0_SIM_TRUE_BAUD 0
+#define UART_0_SPAN 32
+#define UART_0_STOP_BITS 1
+#define UART_0_SYNC_REG_DEPTH 2
+#define UART_0_TYPE "altera_avalon_uart"
+#define UART_0_USE_CTS_RTS 0
+#define UART_0_USE_EOP_REGISTER 0
 
 #endif /* __SYSTEM_H_ */

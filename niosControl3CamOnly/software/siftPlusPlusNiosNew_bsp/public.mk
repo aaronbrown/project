@@ -113,8 +113,8 @@ CPU_NAME = cpu_0
 ELF_PATCH_FLAG  += --cpu_name $(CPU_NAME)
 
 # Hardware Divider present. 
-# setting HARDWARE_DIVIDE is true
-ALT_CFLAGS += -mhw-div
+# setting HARDWARE_DIVIDE is false
+ALT_CFLAGS += -mno-hw-div
 
 # Hardware Floating Point Custom Instruction without Divider present. 
 ALT_CFLAGS += -mcustom-fpu-cfg=60-1
@@ -151,12 +151,21 @@ SOPC_SYSID_FLAG += --sidp=0x1109068
 ELF_PATCH_FLAG  += --sidp 0x1109068
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1369035637
-SOPC_SYSID_FLAG += --timestamp=1369035637
-ELF_PATCH_FLAG  += --timestamp 1369035637
+# setting SOPC_TIMESTAMP is 1369725685
+SOPC_SYSID_FLAG += --timestamp=1369725685
+ELF_PATCH_FLAG  += --timestamp 1369725685
 
 # Small-footprint (polled mode) driver none 
 # setting altera_avalon_jtag_uart_driver.enable_small_driver is false
+
+# Enable driver ioctl() support. This feature is not compatible with the 
+# 'small' driver; ioctl() support will not be compiled if either the UART 
+# 'enable_small_driver' or HAL 'enable_reduced_device_drivers' settings are 
+# enabled. none 
+# setting altera_avalon_uart_driver.enable_ioctl is false
+
+# Small-footprint (polled mode) driver none 
+# setting altera_avalon_uart_driver.enable_small_driver is false
 
 # Build a custom version of newlib with the specified space-separated compiler 
 # flags. The custom newlib build will be placed in the &lt;bsp root>/newlib 

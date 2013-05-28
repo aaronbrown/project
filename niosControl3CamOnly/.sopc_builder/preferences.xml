@@ -16,7 +16,7 @@
    <frequency preferredWidth="231" />
   </columns>
  </clocktable>
- <window width="1376" height="860" x="202" y="4" />
+ <window width="1376" height="860" x="295" y="4" />
  <library
-   expandedCategories="Project,Library,Library/Peripherals/Microcontroller Peripherals,Library/Peripherals" />
+   expandedCategories="Library/Interface Protocols,Library/University Program,Project,Library/Interface Protocols/Serial,Library/University Program/Communications,Library" />
 </preferences>

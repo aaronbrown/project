@@ -1613,7 +1613,7 @@ Sift::computeKeypointDescriptor
       //std::cout << win << std::endl;
 
 
-      alt_timestamp_start();
+      //alt_timestamp_start();
       IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, 0x01);
 
       const VL::float_t WIN_TIMES_MOD = win * mod;

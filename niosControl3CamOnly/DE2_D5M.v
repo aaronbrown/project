@@ -515,6 +515,8 @@ wire [7:0] fp_op_type;
       .out_port_from_the_fp_operand     (fp_op),
       .out_port_from_the_procHasControl (niosWantsControl),
       .reset_n                          (KEY[0]),
+		.rxd_to_the_uart_0                (UART_RXD),
+      .txd_from_the_uart_0              (UART_TXD),
       .zs_addr_from_the_sdram_0         (DRAM_ADDR_nios),
       .zs_ba_from_the_sdram_0           ({DRAM_BA_1_nios,DRAM_BA_0_nios}),
       .zs_cas_n_from_the_sdram_0        (DRAM_CAS_N_nios),
@@ -689,7 +691,7 @@ HWAcceleration	HWAccelUnit	(	//	HOST Side
 						);
 
 
-assign	UART_TXD = UART_RXD;
+//assign	UART_TXD = UART_RXD;
 
 I2C_CCD_Config 		u8	(	//	Host Side
 							.iCLK(CLOCK_50),

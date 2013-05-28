@@ -2,20 +2,20 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow Model Setup 'unew|altpll_component|pll|clk[1]'
-Slack : 0.799
-TNS   : 0.000
-
 Type  : Slow Model Setup 'unew|altpll_component|pll|clk[2]'
-Slack : 1.932
-TNS   : 0.000
+Slack : -1.900
+TNS   : -71.435
 
 Type  : Slow Model Setup 'unew|altpll_component|pll|clk[0]'
-Slack : 5.039
-TNS   : 0.000
+Slack : -0.494
+TNS   : -1.971
+
+Type  : Slow Model Setup 'unew|altpll_component|pll|clk[1]'
+Slack : -0.013
+TNS   : -0.013
 
 Type  : Slow Model Setup 'CLOCK_50'
-Slack : 12.511
+Slack : 13.670
 TNS   : 0.000
 
 Type  : Slow Model Hold 'CLOCK_50'
@@ -35,39 +35,39 @@ Slack : 0.391
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'unew|altpll_component|pll|clk[2]'
-Slack : -0.152
-TNS   : -0.568
+Slack : -4.339
+TNS   : -1673.003
 
 Type  : Slow Model Recovery 'unew|altpll_component|pll|clk[1]'
-Slack : 1.384
+Slack : 1.791
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'CLOCK_50'
-Slack : 14.617
-TNS   : 0.000
-
-Type  : Slow Model Removal 'CLOCK_50'
-Slack : 1.732
+Slack : 14.377
 TNS   : 0.000
 
 Type  : Slow Model Removal 'unew|altpll_component|pll|clk[2]'
-Slack : 1.983
+Slack : 1.426
 TNS   : 0.000
 
 Type  : Slow Model Removal 'unew|altpll_component|pll|clk[1]'
-Slack : 1.990
+Slack : 1.842
 TNS   : 0.000
 
-Type  : Slow Model Minimum Pulse Width 'unew|altpll_component|pll|clk[2]'
-Slack : 2.620
+Type  : Slow Model Removal 'CLOCK_50'
+Slack : 2.381
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'unew|altpll_component|pll|clk[1]'
 Slack : 2.873
 TNS   : 0.000
 
+Type  : Slow Model Minimum Pulse Width 'unew|altpll_component|pll|clk[2]'
+Slack : 3.175
+TNS   : 0.000
+
 Type  : Slow Model Minimum Pulse Width 'unew|altpll_component|pll|clk[0]'
-Slack : 4.000
+Slack : 4.555
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'CLOCK_50'
@@ -78,20 +78,20 @@ Type  : Slow Model Minimum Pulse Width 'altera_reserved_tck'
 Slack : 97.778
 TNS   : 0.000
 
-Type  : Fast Model Setup 'unew|altpll_component|pll|clk[1]'
-Slack : 3.594
-TNS   : 0.000
-
 Type  : Fast Model Setup 'unew|altpll_component|pll|clk[2]'
-Slack : 5.594
-TNS   : 0.000
+Slack : -0.209
+TNS   : -3.913
 
 Type  : Fast Model Setup 'unew|altpll_component|pll|clk[0]'
-Slack : 6.028
+Slack : -0.114
+TNS   : -0.392
+
+Type  : Fast Model Setup 'unew|altpll_component|pll|clk[1]'
+Slack : 0.587
 TNS   : 0.000
 
 Type  : Fast Model Setup 'CLOCK_50'
-Slack : 16.640
+Slack : 17.178
 TNS   : 0.000
 
 Type  : Fast Model Hold 'CLOCK_50'
@@ -111,39 +111,39 @@ Slack : 0.215
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'unew|altpll_component|pll|clk[2]'
-Slack : 1.739
-TNS   : 0.000
+Slack : -2.285
+TNS   : -620.006
 
 Type  : Fast Model Recovery 'unew|altpll_component|pll|clk[1]'
-Slack : 2.891
+Slack : 3.112
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'CLOCK_50'
-Slack : 17.449
+Slack : 17.131
 TNS   : 0.000
 
 Type  : Fast Model Removal 'unew|altpll_component|pll|clk[2]'
-Slack : 0.997
+Slack : 0.745
 TNS   : 0.000
 
 Type  : Fast Model Removal 'unew|altpll_component|pll|clk[1]'
-Slack : 1.010
+Slack : 0.925
 TNS   : 0.000
 
 Type  : Fast Model Removal 'CLOCK_50'
-Slack : 1.018
-TNS   : 0.000
-
-Type  : Fast Model Minimum Pulse Width 'unew|altpll_component|pll|clk[2]'
-Slack : 2.620
+Slack : 1.184
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'unew|altpll_component|pll|clk[1]'
 Slack : 2.873
 TNS   : 0.000
 
+Type  : Fast Model Minimum Pulse Width 'unew|altpll_component|pll|clk[2]'
+Slack : 3.175
+TNS   : 0.000
+
 Type  : Fast Model Minimum Pulse Width 'unew|altpll_component|pll|clk[0]'
-Slack : 4.000
+Slack : 4.555
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'CLOCK_50'

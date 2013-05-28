@@ -300,9 +300,9 @@ module sdram_0 (
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          refresh_counter <= 10000;
+          refresh_counter <= 9000;
       else if (refresh_counter == 0)
-          refresh_counter <= 1562;
+          refresh_counter <= 1406;
       else 
         refresh_counter <= refresh_counter - 1'b1;
     end
@@ -373,7 +373,7 @@ module sdram_0 (
                   i_cmd <= {{1{1'b0}},3'h1};
                   i_refs <= i_refs + 1'b1;
                   i_state <= 3'b011;
-                  i_count <= 7;
+                  i_count <= 6;
                   // Count up init_refresh_commands
                   if (i_refs == 3'h1)
                       i_next <= 3'b111;
@@ -602,7 +602,7 @@ module sdram_0 (
                   ack_refresh_request <= 1'b1;
                   m_state <= 9'b000000100;
                   m_cmd <= {{1{1'b0}},3'h1};
-                  m_count <= 7;
+                  m_count <= 6;
                   m_next <= 9'b000000001;
               end // 9'b010000000 
           

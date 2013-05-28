@@ -15,6 +15,8 @@
       .out_port_from_the_fp_operand              (out_port_from_the_fp_operand),
       .out_port_from_the_procHasControl          (out_port_from_the_procHasControl),
       .reset_n                                   (reset_n),
+      .rxd_to_the_uart_0                         (rxd_to_the_uart_0),
+      .txd_from_the_uart_0                       (txd_from_the_uart_0),
       .zs_addr_from_the_sdram_0                  (zs_addr_from_the_sdram_0),
       .zs_ba_from_the_sdram_0                    (zs_ba_from_the_sdram_0),
       .zs_cas_n_from_the_sdram_0                 (zs_cas_n_from_the_sdram_0),
