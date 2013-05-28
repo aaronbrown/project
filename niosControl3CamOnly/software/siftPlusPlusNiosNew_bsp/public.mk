@@ -151,9 +151,9 @@ SOPC_SYSID_FLAG += --sidp=0x1109068
 ELF_PATCH_FLAG  += --sidp 0x1109068
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1369023104
-SOPC_SYSID_FLAG += --timestamp=1369023104
-ELF_PATCH_FLAG  += --timestamp 1369023104
+# setting SOPC_TIMESTAMP is 1369035637
+SOPC_SYSID_FLAG += --timestamp=1369035637
+ELF_PATCH_FLAG  += --timestamp 1369035637
 
 # Small-footprint (polled mode) driver none 
 # setting altera_avalon_jtag_uart_driver.enable_small_driver is false
