@@ -3123,7 +3123,7 @@ SYSTEM niosSystemCamControl
          Has_Clock = "1";
          View 
          {
-            Settings_Summary = "System ID (at last Generate):<br> <b>00000000</b>    (unique ID tag) <br> <b>51A45AF5</b> (timestamp: Tue May 28, 2013 @0:21 AM)";
+            Settings_Summary = "System ID (at last Generate):<br> <b>00000000</b>    (unique ID tag) <br> <b>51A5B15C</b> (timestamp: Wed May 29, 2013 @0:42 AM)";
             MESSAGES 
             {
             }
@@ -3132,7 +3132,7 @@ SYSTEM niosSystemCamControl
       WIZARD_SCRIPT_ARGUMENTS 
       {
          id = "0u";
-         timestamp = "1369725685u";
+         timestamp = "1369813340u";
          regenerate_values = "0";
          MAKE 
          {
@@ -3141,7 +3141,7 @@ SYSTEM niosSystemCamControl
                verifysysid 
                {
                   All_Depends_On = "0";
-                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x01109068 --id=0 --timestamp=1369725685";
+                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x01109068 --id=0 --timestamp=1369813340";
                   Is_Phony = "1";
                   Target_File = "dummy_verifysysid_file";
                }

@@ -574,6 +574,14 @@ int
 main(int argc, char** argv)
 {
 
+	FILE *fp = fopen("/dev/uart_0", "w");
+
+	if (fp)
+	{
+		cout << "Connected to UART.\n";
+		fprintf(fp, "hello, Ubuntu");
+		fclose(fp);
+	}
 	// Switch control to processor
 	// Otherwise heap allocations and sdram access
 	// will not work properly
