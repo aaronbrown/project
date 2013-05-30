@@ -440,17 +440,23 @@ prepareBuffers()
   freeBuffers() ;
   
   // allocate
-  temp           = new pixel_t [ size ] ; 
+  //temp           = new pixel_t [ size ] ;
+  temp = (pixel_t*)SIFT_DATA_START;
   tempReserved   = size ;
   tempIsGrad     = false ;
   tempOctave     = 0 ;
 
+  // modified this to do one octave at a time!
+  octaves = new pixel_t*[1]; // give octaves a pointer on the heap (SRAM)
+  octaves[0] = temp + size; // point octaves[0] to SDRAM, right after temp
+  /*
   octaves = new pixel_t* [ O ] ;
   for(int o = 0 ; o < O ; ++o) {
     octaves[o] = new pixel_t [ (smax - smin + 1) * w * h ] ;
     w >>= 1 ;
     h >>= 1 ;
   }
+  */
 }
   
 /** @brief Free buffers.
@@ -463,23 +469,25 @@ void
 Sift::
 freeBuffers()
 {
+  // filter and octaves[] are the only things possibly on the heap
+  // at this point
   if( filter ) {
     delete [] filter ;
   }
   filter = 0 ;
 
   if( octaves ) {
-    for(int o = 0 ; o < O ; ++o) {
-      delete [] octaves[ o ] ;
-    }
+    //for(int o = 0 ; o < O ; ++o) {
+    //  delete [] octaves[ o ] ;
+    //}
     delete [] octaves ;
   }
   octaves = 0 ;
   
-  if( temp ) {
-    delete [] temp ;   
-  }
-  temp = 0  ; 
+  //if( temp ) {
+  //  delete [] temp ;
+  //}
+  //temp = 0  ;
 }
 
 // ===================================================================

@@ -62,13 +62,17 @@
 #define VL_XEAS(x) #x
 #define VL_EXPAND_AND_STRINGIFY(x) VL_XEAS(x)
 
+#define IMAGE_WIDTH 400
+#define IMAGE_HEIGHT 400
 #define BASE_ADDRESS 0x800000
+// this is the address where SIFT can start placing its octaves
+// and gradient data--right after the floating point image data
+#define SIFT_DATA_START (BASE_ADDRESS + IMAGE_WIDTH*IMAGE_HEIGHT*4)
 #define PROC_HAS_CONTROL 0x1109020
 //#define PROC_CONTROL_ON *((volatile unsigned short*)PROC_HAS_CONTROL) = 1
 //#define PROC_CONTROL_OFF *((volatile unsigned short*)PROC_HAS_CONTROL) = 0
 #define PROC_CONTROL_ON IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 1);
 #define PROC_CONTROL_OFF IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 0);
-#define SIFT_DATA_START 0x92c000
 
 /** @brief VisionLab namespace */
 namespace VL {

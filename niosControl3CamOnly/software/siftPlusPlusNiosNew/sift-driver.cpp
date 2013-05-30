@@ -16,6 +16,7 @@
 #include<algorithm>
 #include<bitset>
 #include <unistd.h>
+#include <sys/alt_cache.h>
 
 extern "C" {
 #include<getopt.h>
@@ -26,8 +27,7 @@ extern "C" {
 
 using namespace std ;
 
-#define IMAGE_WIDTH 400
-#define IMAGE_HEIGHT 400
+
 
 #define NUM_DESCR 196
 static unsigned char baselineDesc[NUM_DESCR][128] =
@@ -328,8 +328,8 @@ int FindMatches(VL::float_t *descr_pt, bool useSDRAMdesc)
 
 void extractImageData(VL::PgmBuffer& buffer)
 {
-  VL::pixel_t* im_pt = new VL::pixel_t[IMAGE_WIDTH*IMAGE_HEIGHT];
-  im_pt = (VL::pixel_t*)BASE_ADDRESS;
+  //VL::pixel_t* im_pt = new VL::pixel_t[IMAGE_WIDTH*IMAGE_HEIGHT];
+  VL::pixel_t* im_pt = (VL::pixel_t*)BASE_ADDRESS;
   VL::pixel_t* start = im_pt;
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short* imgPtr = 0;
@@ -574,6 +574,7 @@ int
 main(int argc, char** argv)
 {
 
+	/*
 	FILE *fp = fopen("/dev/uart_0", "w");
 
 	if (fp)
@@ -582,6 +583,31 @@ main(int argc, char** argv)
 		fprintf(fp, "hello, Ubuntu");
 		fclose(fp);
 	}
+	*/
+
+
+
+	/*
+	for(unsigned short *s=(unsigned short*)0x800000; s < (unsigned short*)0x1000000; s++)
+		*s = 0x0000;
+	alt_dcache_flush_all();
+	int i;
+	unsigned short *s0 = (unsigned short*)(0xfff800);
+	for (i = 0, s0=s0; s0 < (unsigned short*)0x1000000; s0++, i++)
+	{
+		*s0 = 0x3000 + i;
+		if (*s0 != (0x2000 + i))
+			cout << "error\n";
+	}
+alt_dcache_flush_all();
+	for (i = 0, s0=(unsigned short*)(0xfff800); s0 < (unsigned short*)0x1000000; s0++, i++)
+	{
+		if (*s0 != (0x3000 + i))
+			cout << "error\n";
+	}
+	cout << "done writing\n";
+	exit(1);
+*/
 	// Switch control to processor
 	// Otherwise heap allocations and sdram access
 	// will not work properly
@@ -611,7 +637,10 @@ main(int argc, char** argv)
 		  writePixelAt(x, y, 0x3ff, 0, 0);
 	  }
   }
-PROC_CONTROL_OFF;
+
+  // relinquish SDRAM control so we can verify that the image fits in
+  // the reduced 400x400 frame
+  	PROC_CONTROL_OFF;
 	cout << "displaying for 10 seconds before continuing...";
 	usleep(10*1000*1000);
 	cout << "done\n";
@@ -621,6 +650,13 @@ PROC_CONTROL_OFF;
   //                                            Retrieve input image
   // -----------------------------------------------------------------
 	extractImageData(buffer);
+
+
+
+	//printf("%x %x %x\n", *s0, *(s0+1), *(s0+256));
+	//cout << hex << *s0 << endl;
+	//cout << hex << *(s0+1) << endl;
+	//cout << hex << *(s0 + 256) << endl;
 
 
 
