@@ -20,96 +20,6 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
-VGA_Controller
-# storage
-db|DE2_D5M.(1).cnf
-db|DE2_D5M.(1).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|vga_controller.v
-28daac83a8ef3d7a9216f7fde0e2dc1f
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-H_SYNC_CYC
-96
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_BACK
-48
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_ACT
-640
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_FRONT
-16
-PARAMETER_SIGNED_DEC
-DEF
-H_SYNC_TOTAL
-800
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_CYC
-2
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_BACK
-33
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_ACT
-480
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_FRONT
-10
-PARAMETER_SIGNED_DEC
-DEF
-V_SYNC_TOTAL
-525
-PARAMETER_SIGNED_DEC
-DEF
-X_START
-144
-PARAMETER_SIGNED_DEC
-DEF
-Y_START
-35
-PARAMETER_SIGNED_DEC
-DEF
-}
-# include_file {
-v|vga_param.h
-b4f42ba795bd5b1786cd87ebe459a09b
-}
-# hierarchies {
-VGA_Controller:u1
-}
-# macro_sequence
-
-# end
-# entity
 Reset_Delay
 # storage
 db|DE2_D5M.(2).cnf
@@ -183,42 +93,6 @@ DEF
 }
 # hierarchies {
 CCD_Capture:u3
-}
-# macro_sequence
-
-# end
-# entity
-RAW2RGB
-# storage
-db|DE2_D5M.(4).cnf
-db|DE2_D5M.(4).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|raw2rgb.v
-d1f345f2315efe15b23547e454d9646b
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-RAW2RGB:u4
 }
 # macro_sequence
 
@@ -49875,42 +49749,6 @@ niosSystemCamControl:niosSystemCamControl_inst|uart_0:the_uart_0|uart_0_regs:the
 
 # end
 # entity
-DE2_D5M
-# storage
-db|DE2_D5M.(0).cnf
-db|DE2_D5M.(0).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-de2_d5m.v
-b66b7ac4f7be1849eabfd45d68f07
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-|
-}
-# macro_sequence
-
-# end
-# entity
 niosSystemCamControl_burst_10
 # storage
 db|DE2_D5M.(269).cnf
@@ -55849,6 +55687,168 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|sysid:the_sysid
+}
+# macro_sequence
+
+# end
+# entity
+VGA_Controller
+# storage
+db|DE2_D5M.(1).cnf
+db|DE2_D5M.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|vga_controller.v
+28daac83a8ef3d7a9216f7fde0e2dc1f
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+H_SYNC_CYC
+96
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_BACK
+48
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_ACT
+640
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_FRONT
+16
+PARAMETER_SIGNED_DEC
+DEF
+H_SYNC_TOTAL
+800
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_CYC
+2
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_BACK
+33
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_ACT
+480
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_FRONT
+10
+PARAMETER_SIGNED_DEC
+DEF
+V_SYNC_TOTAL
+525
+PARAMETER_SIGNED_DEC
+DEF
+X_START
+144
+PARAMETER_SIGNED_DEC
+DEF
+Y_START
+35
+PARAMETER_SIGNED_DEC
+DEF
+}
+# include_file {
+v|vga_param.h
+b4f42ba795bd5b1786cd87ebe459a09b
+}
+# hierarchies {
+VGA_Controller:u1
+}
+# macro_sequence
+
+# end
+# entity
+DE2_D5M
+# storage
+db|DE2_D5M.(0).cnf
+db|DE2_D5M.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+de2_d5m.v
+b66b7ac4f7be1849eabfd45d68f07
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# entity
+RAW2RGB
+# storage
+db|DE2_D5M.(4).cnf
+db|DE2_D5M.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|raw2rgb.v
+10451a309d4eb2acb2f62e626a84f2f
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+RAW2RGB:u4
 }
 # macro_sequence
 

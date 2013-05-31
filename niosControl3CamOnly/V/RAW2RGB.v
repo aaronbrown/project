@@ -118,29 +118,17 @@ begin
 		iDATAd   <= iDATA;
 		iDATAdd  <= iDATAd;
 		mDVAL		<=	{iY_Cont[0]|iX_Cont[0]}	?	1'b0	:	iDVAL;
-		if({iY_Cont[0],iX_Cont[0]}==2'b10)
-		begin
-			tempR <= 12'h0;
-			tempG <= 12'h0;
-			tempB <= 12'h0;
-		end	
-		else if({iY_Cont[0],iX_Cont[0]}==2'b11)
-		begin
-			tempR <=	12'h0;
-			tempG	<=	12'h0;
-			tempB	<=	12'h0;
-		end
-		else if({iY_Cont[0],iX_Cont[0]}==2'b00)
+		if(({iY_Cont[0],iX_Cont[0]})==2'b00 && (iY_Cont < 800) && (iX_Cont < 800))
 		begin
 			tempR	<=	mDATA_1;
 			tempG	<=	(mDATA_0+mDATAd_1) >> 1;
 			tempB	<=	mDATAd_0;
 		end
-		else if({iY_Cont[0],iX_Cont[0]}==2'b01)
+		else
 		begin
-			tempR	<=	12'h0;
-			tempG	<=	12'h0;
-			tempB	<=	12'h0;
+			tempR <= 12'h0;
+			tempG <= 12'h0;
+			tempB <= 12'h0;
 		end
 		
 		

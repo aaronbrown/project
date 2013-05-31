@@ -105,6 +105,21 @@ struct descriptorInfoTwoBlocks
 	struct sceneDescriptorInfo sceneInfos[64];
 };
 
+int sendBytesToUART(const uint8_t* data, int n)
+{
+	FILE* fp = fopen("/dev/uart_0", "w");
+
+	if (fp)
+	{
+		fwrite(data, 1, n, fp);
+		fclose(fp);
+		return 0;
+	}
+
+	cout << "sendBytesToUART: UART connection failure\n";
+	return -1;
+}
+
 // This function takes an array of 128 floating point numbers representing a descriptor
 // and the 0-based number of the current descriptor and stores the descriptor as bytes
 // in SDRAM, interleaved with the database descriptors in Nios address space.
@@ -247,6 +262,9 @@ void findDatabaseMatches(int numSceneDescrs)
 			unsigned short yCoord = (yBig << 8) + yLittle;
 			unsigned short uCoord = (uBig << 8) + uLittle;
 			unsigned short vCoord = (vBig << 8) + vLittle;
+
+			const uint8_t pointData[9] = {objID, xLittle, xBig, yLittle, yBig, uLittle, uBig, vLittle, vBig};
+			sendBytesToUART(pointData, 9);
 
 			printf("match found (ID = %d): (x, y) = (%d, %d)...(u, v) = (%d, %d)\n", objID, xCoord, yCoord, uCoord, vCoord);
 		} // if
@@ -559,16 +577,41 @@ void drawCircle(int x0, int y0, int radius, unsigned short r, unsigned short g, 
 int main()
 {
 
-	/*
-	FILE *fp = fopen("/dev/uart_0", "w");
+	const uint8_t advance[]={0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00};
+
+
+	usleep(5*1000*1000);
+	sendBytesToUART(advance, 9);
+	usleep(5*1000*1000);
+	sendBytesToUART(advance, 9);
+	usleep(5*1000*1000);
+	sendBytesToUART(advance, 9);
+	usleep(5*1000*1000);
+	sendBytesToUART(advance, 9);
+	usleep(5*1000*1000);
+	sendBytesToUART(advance, 9);
+	/*FILE *fp = fopen("/dev/uart_0", "w");
 
 	if (fp)
 	{
 		cout << "Connected to UART.\n";
-		fprintf(fp, "hello, Ubuntu");
+		usleep(5*1000*1000);
+		fwrite(advance, 1, 9, fp);
+		usleep(5*1000*1000);
+		fwrite(advance, 1, 9, fp);
+		usleep(5*1000*1000);
+		fwrite(advance, 1, 9, fp);
+		usleep(5*1000*1000);
+		fwrite(advance, 1, 9, fp);
+		usleep(5*1000*1000);
+		fwrite(advance, 1, 9, fp);
 		fclose(fp);
+	} // if
+	else
+	{
+		cout << "UART advance commands failed!";
 	}
-	*/
+*/
 
 
 
@@ -768,6 +811,7 @@ alt_dcache_flush_all();
   // now check for matches!
   int numDescrs = descrNum - 1;
   findDatabaseMatches(numDescrs);
+  sendBytesToUART(advance, 9);
 
   cout << "writing extracted image data to VGA...";
   moveImageToVGA(buffer.data, 1.0, 0.0, buffer.width, buffer.height, 0, 0);

@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
  * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Wed May 29 01:25:56 PDT 2013
+ * Generated: Fri May 31 03:21:48 PDT 2013
  */
 
 /*
