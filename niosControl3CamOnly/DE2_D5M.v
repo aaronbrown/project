@@ -445,8 +445,8 @@ CCD_Capture			u3	(	.oDATA(mCCD_DATA),
 							.iDATA(rCCD_DATA),
 							.iFVAL(rCCD_FVAL),
 							.iLVAL(rCCD_LVAL),
-							.iSTART(!KEY[3]),
-							.iEND(!KEY[2]),
+							.iSTART(!KEY[3] | doRun),
+							.iEND(!KEY[2] | doCapture),
 							.iCLK(CCD_PIXCLK),
 							.iRST(DLY_RST_2)
 						);
@@ -481,24 +481,46 @@ sdram_pll2			unew (
 							.c2(sdram_ctrl_clk)
 						);
 
-assign CCD_MCLK = rClk[0];
+	assign CCD_MCLK = rClk[0];
+	
+	// wires for nios PIOs
+	reg [31:0] result;
+	wire [31:0] operand;
+	wire [7:0] opcode;
 
-wire niosWantsControl;
-
-wire [31:0] fp_result;
-//wire [31:0] fp_abs_result;
-wire [31:0] fp_exp_result;
-wire [31:0] fp_op;
-wire [7:0] fp_op_type;
-
+	wire [31:0] fp_exp_result;
 	ALTFP_EXa exp_unit0 (
 		.clock(unshifted_nios_clk),
-		.data(fp_op),
+		.data(operand),
 		.result(fp_exp_result));
-		
 	
-	assign fp_result = (fp_op_type == 8'b0) ? fp_exp_result : 0;
-
+	// logic to handle opcodes and pass various data to nios
+	always @(posedge unshifted_nios_clk) begin
+		case (opcode)
+			8'h00 	: result <= fp_exp_result; 	// exponentiation
+			8'hee 	: result <= {31'b0, SW[17]};	// switch advance in calibration stage
+			default 	: result <= 32'b0;				// otherwise
+		endcase
+	end
+	
+	// logic for software-controlled image capture
+	wire niosSaysCapture = (opcode == 8'hff);
+	wire niosSaysResetCapture = (opcode == 8'hdd);
+	wire niosSaysRun = (opcode == 8'hcc);
+	wire niosSaysResetRun = (opcode == 8'hbb);
+	wire doCapture;
+	wire doRun;
+	
+	Software_Camera_Control softwareCameraControl0 (
+		.clk(CCD_PIXCLK), 
+		.reset(DLY_RST_2),
+		.NiosSaysCapture(niosSaysCapture), 
+		.NiosSaysResetCapture(niosSaysResetCapture), 
+		.NiosSaysRun(niosSaysRun),
+		.NiosSaysResetRun(niosSaysResetRun),
+		.DoCapture(doCapture), 
+		.DoRun(doRun) ); 
+	
   niosSystemCamControl niosSystemCamControl_inst
     (
 		.SRAM_ADDR_from_the_sram_16bit_512k_0      (SRAM_ADDR),
@@ -510,9 +532,9 @@ wire [7:0] fp_op_type;
       .SRAM_WE_N_from_the_sram_16bit_512k_0      (SRAM_WE_N),
       .clk_0                            (unshifted_nios_clk),
       .clk_1                            (sdram_ctrl_clk),
-		.in_port_to_the_fp_result         (fp_result),
-		.out_port_from_the_fp_op_type     (fp_op_type),
-      .out_port_from_the_fp_operand     (fp_op),
+		.in_port_to_the_fp_result         (result),
+		.out_port_from_the_fp_op_type     (opcode),
+      .out_port_from_the_fp_operand     (operand),
       .out_port_from_the_procHasControl (niosWantsControl),
       .reset_n                          (KEY[0]),
 		.rxd_to_the_uart_0                (UART_RXD),
@@ -528,6 +550,7 @@ wire [7:0] fp_op_type;
       .zs_we_n_from_the_sdram_0         (DRAM_WE_N_nios)
     );
 
+
 /*	 
 assign DRAM_ADDR = niosHasControl ? DRAM_ADDR_nios : DRAM_ADDR_cam;
 assign {DRAM_BA_1, DRAM_BA_0} = niosHasControl ? {DRAM_BA_1_nios, DRAM_BA_0_nios} : {DRAM_BA_1_cam, DRAM_BA_0_cam};
@@ -539,15 +562,14 @@ assign DRAM_WE_N = niosHasControl ? DRAM_WE_N_nios : DRAM_WE_N_cam;
 assign {DRAM_UDQM,DRAM_LDQM} = niosHasControl ? {DRAM_UDQM_nios,DRAM_LDQM_nios} : {DRAM_UDQM_cam,DRAM_LDQM_cam};
 */
 
-wire niosHasControl;
-wire camHasControl;
+	wire niosWantsControl;
+	wire niosHasControl;
+	wire camHasControl;
 
 
-
-
-Sdram_Arbiter sdramArbiter0 (
+	Sdram_Arbiter sdramArbiter0 (
 	.RequestNiosControl(niosWantsControl),
-	.RequestAccelControl(SW[17]),
+	.RequestAccelControl(SW[16]),
 	.NiosHasControl(niosHasControl),     
    .CamHasControl(camHasControl),     
    .AccelHasControl(),
@@ -646,6 +668,7 @@ Sdram_Control_4Port	u7	(	//	HOST Side
         					.DQM({DRAM_UDQM_cam,DRAM_LDQM_cam})
 						);
 
+						/*
 HWAcceleration	HWAccelUnit	(	//	HOST Side						
 						    .REF_CLK(unshifted_nios_clk),
 						    .RESET_N(1'b1),
@@ -689,6 +712,7 @@ HWAcceleration	HWAccelUnit	(	//	HOST Side
         					.DQ(DRAM_DQ),
         					.DQM({DRAM_UDQM_accel,DRAM_LDQM_accel})
 						);
+						*/
 
 
 //assign	UART_TXD = UART_RXD;

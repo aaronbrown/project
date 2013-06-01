@@ -20,42 +20,6 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
-Reset_Delay
-# storage
-db|DE2_D5M.(2).cnf
-db|DE2_D5M.(2).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|reset_delay.v
-d917491e84979ca39647b9ea7a5ed3
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-Reset_Delay:u2
-}
-# macro_sequence
-
-# end
-# entity
 CCD_Capture
 # storage
 db|DE2_D5M.(3).cnf
@@ -129,7 +93,6 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 RAW2RGB:u4|Line_Buffer:u0
-HWAcceleration:HWAccelUnit|Line_Buffer:u0
 }
 # macro_sequence
 
@@ -199,7 +162,6 @@ c5cfeeabc5f2ab60b3453f6abbc42b41
 }
 # hierarchies {
 RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component
 }
 # macro_sequence
 
@@ -368,7 +330,6 @@ clken
 }
 # hierarchies {
 RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated
 }
 # macro_sequence
 
@@ -606,7 +567,6 @@ wren_a
 }
 # hierarchies {
 RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|altsyncram_4ia1:altsyncram2
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|altsyncram_4ia1:altsyncram2
 }
 # macro_sequence
 
@@ -664,7 +624,6 @@ clk_en
 }
 # hierarchies {
 RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|cntr_3rf:cntr1
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|cntr_3rf:cntr1
 }
 # macro_sequence
 
@@ -752,7 +711,6 @@ aeb
 }
 # hierarchies {
 RAW2RGB:u4|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|cntr_3rf:cntr1|cmpr_mdc:cmpr5
-HWAcceleration:HWAccelUnit|Line_Buffer:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_nv11:auto_generated|cntr_3rf:cntr1|cmpr_mdc:cmpr5
 }
 # macro_sequence
 
@@ -40185,7 +40143,6 @@ sdram_control_4port|sdram_params.h
 }
 # hierarchies {
 Sdram_Control_4Port:u7
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7
 }
 # macro_sequence
 DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      ASIZE23      DSIZE16      
@@ -40270,7 +40227,6 @@ sdram_control_4port|sdram_params.h
 }
 # hierarchies {
 Sdram_Control_4Port:u7|control_interface:control1
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|control_interface:control1
 }
 # macro_sequence
 ASIZE23      ASIZE23      ASIZE23      
@@ -40355,7 +40311,6 @@ sdram_control_4port|sdram_params.h
 }
 # hierarchies {
 Sdram_Control_4Port:u7|command:command1
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|command:command1
 }
 # macro_sequence
 ASIZE23      ROWSIZE12COLSIZE8BANKSIZE2ROWSTART8          ROWSIZE12ROWSTART8          COLSTART0COLSIZE8COLSTART0BANKSTART20BANKSIZE2BANKSTART20ASIZE23      ASIZE23      
@@ -40440,7 +40395,6 @@ sdram_control_4port|sdram_params.h
 }
 # hierarchies {
 Sdram_Control_4Port:u7|sdr_data_path:data_path1
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|sdr_data_path:data_path1
 }
 # macro_sequence
 DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      
@@ -40480,10 +40434,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2
 }
 # macro_sequence
 
@@ -40656,10 +40606,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component
 }
 # macro_sequence
 
@@ -40852,10 +40798,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
 }
 # macro_sequence
 
@@ -40949,22 +40891,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
 }
 # macro_sequence
 
@@ -41025,10 +40951,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
 }
 # macro_sequence
 
@@ -41059,10 +40981,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
 }
 # macro_sequence
 
@@ -41123,10 +41041,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
 }
 # macro_sequence
 
@@ -41316,10 +41230,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
 }
 # macro_sequence
 
@@ -41563,10 +41473,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
 }
 # macro_sequence
 
@@ -41600,10 +41506,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
 }
 # macro_sequence
 
@@ -41695,14 +41597,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
 }
 # macro_sequence
 
@@ -41790,10 +41684,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
 }
 # macro_sequence
 
@@ -41881,10 +41771,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
 }
 # macro_sequence
 
@@ -41976,14 +41862,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
 }
 # macro_sequence
 
@@ -42071,10 +41949,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
 }
 # macro_sequence
 
@@ -42162,10 +42036,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
 }
 # macro_sequence
 
@@ -42254,14 +42124,6 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
-HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
 }
 # macro_sequence
 
@@ -42295,9 +42157,6 @@ VERILOG_CONSTANT_LOOP_LIMIT
 5000
 VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
-}
-# hierarchies {
-HWAcceleration:HWAccelUnit
 }
 # macro_sequence
 DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      
@@ -55692,6 +55551,6360 @@ niosSystemCamControl:niosSystemCamControl_inst|sysid:the_sysid
 
 # end
 # entity
+Reset_Delay
+# storage
+db|DE2_D5M.(2).cnf
+db|DE2_D5M.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|reset_delay.v
+d917491e84979ca39647b9ea7a5ed3
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+Reset_Delay:u2
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(342).cnf
+db|DE2_D5M.(342).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+3
+PARAMETER_UNKNOWN
+USR
+WIDTH
+49
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_f1n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps48
+-1
+3
+taps47
+-1
+3
+taps46
+-1
+3
+taps45
+-1
+3
+taps44
+-1
+3
+taps43
+-1
+3
+taps42
+-1
+3
+taps41
+-1
+3
+taps40
+-1
+3
+taps4
+-1
+3
+taps39
+-1
+3
+taps38
+-1
+3
+taps37
+-1
+3
+taps36
+-1
+3
+taps35
+-1
+3
+taps34
+-1
+3
+taps33
+-1
+3
+taps32
+-1
+3
+taps31
+-1
+3
+taps30
+-1
+3
+taps3
+-1
+3
+taps29
+-1
+3
+taps28
+-1
+3
+taps27
+-1
+3
+taps26
+-1
+3
+taps25
+-1
+3
+taps24
+-1
+3
+taps23
+-1
+3
+taps22
+-1
+3
+taps21
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin48
+-1
+3
+shiftin47
+-1
+3
+shiftin46
+-1
+3
+shiftin45
+-1
+3
+shiftin44
+-1
+3
+shiftin43
+-1
+3
+shiftin42
+-1
+3
+shiftin41
+-1
+3
+shiftin40
+-1
+3
+shiftin4
+-1
+3
+shiftin39
+-1
+3
+shiftin38
+-1
+3
+shiftin37
+-1
+3
+shiftin36
+-1
+3
+shiftin35
+-1
+3
+shiftin34
+-1
+3
+shiftin33
+-1
+3
+shiftin32
+-1
+3
+shiftin31
+-1
+3
+shiftin30
+-1
+3
+shiftin3
+-1
+3
+shiftin29
+-1
+3
+shiftin28
+-1
+3
+shiftin27
+-1
+3
+shiftin26
+-1
+3
+shiftin25
+-1
+3
+shiftin24
+-1
+3
+shiftin23
+-1
+3
+shiftin22
+-1
+3
+shiftin21
+-1
+3
+shiftin20
+-1
+3
+shiftin2
+-1
+3
+shiftin19
+-1
+3
+shiftin18
+-1
+3
+shiftin17
+-1
+3
+shiftin16
+-1
+3
+shiftin15
+-1
+3
+shiftin14
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_f1n
+# storage
+db|DE2_D5M.(408).cnf
+db|DE2_D5M.(408).cnf
+# case_insensitive
+# source_file
+db|shift_taps_f1n.tdf
+adccb7a4177f676fe0ac4d4a514d73
+7
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps48
+-1
+3
+taps47
+-1
+3
+taps46
+-1
+3
+taps45
+-1
+3
+taps44
+-1
+3
+taps43
+-1
+3
+taps42
+-1
+3
+taps41
+-1
+3
+taps40
+-1
+3
+taps4
+-1
+3
+taps39
+-1
+3
+taps38
+-1
+3
+taps37
+-1
+3
+taps36
+-1
+3
+taps35
+-1
+3
+taps34
+-1
+3
+taps33
+-1
+3
+taps32
+-1
+3
+taps31
+-1
+3
+taps30
+-1
+3
+taps3
+-1
+3
+taps29
+-1
+3
+taps28
+-1
+3
+taps27
+-1
+3
+taps26
+-1
+3
+taps25
+-1
+3
+taps24
+-1
+3
+taps23
+-1
+3
+taps22
+-1
+3
+taps21
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin48
+-1
+3
+shiftin47
+-1
+3
+shiftin46
+-1
+3
+shiftin45
+-1
+3
+shiftin44
+-1
+3
+shiftin43
+-1
+3
+shiftin42
+-1
+3
+shiftin41
+-1
+3
+shiftin40
+-1
+3
+shiftin4
+-1
+3
+shiftin39
+-1
+3
+shiftin38
+-1
+3
+shiftin37
+-1
+3
+shiftin36
+-1
+3
+shiftin35
+-1
+3
+shiftin34
+-1
+3
+shiftin33
+-1
+3
+shiftin32
+-1
+3
+shiftin31
+-1
+3
+shiftin30
+-1
+3
+shiftin3
+-1
+3
+shiftin29
+-1
+3
+shiftin28
+-1
+3
+shiftin27
+-1
+3
+shiftin26
+-1
+3
+shiftin25
+-1
+3
+shiftin24
+-1
+3
+shiftin23
+-1
+3
+shiftin22
+-1
+3
+shiftin21
+-1
+3
+shiftin20
+-1
+3
+shiftin2
+-1
+3
+shiftin19
+-1
+3
+shiftin18
+-1
+3
+shiftin17
+-1
+3
+shiftin16
+-1
+3
+shiftin15
+-1
+3
+shiftin14
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_r461
+# storage
+db|DE2_D5M.(409).cnf
+db|DE2_D5M.(409).cnf
+# case_insensitive
+# source_file
+db|altsyncram_r461.tdf
+34c3bed9b97612a2f78516bc3bd977f
+7
+# used_port {
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b48
+-1
+3
+q_b47
+-1
+3
+q_b46
+-1
+3
+q_b45
+-1
+3
+q_b44
+-1
+3
+q_b43
+-1
+3
+q_b42
+-1
+3
+q_b41
+-1
+3
+q_b40
+-1
+3
+q_b4
+-1
+3
+q_b39
+-1
+3
+q_b38
+-1
+3
+q_b37
+-1
+3
+q_b36
+-1
+3
+q_b35
+-1
+3
+q_b34
+-1
+3
+q_b33
+-1
+3
+q_b32
+-1
+3
+q_b31
+-1
+3
+q_b30
+-1
+3
+q_b3
+-1
+3
+q_b29
+-1
+3
+q_b28
+-1
+3
+q_b27
+-1
+3
+q_b26
+-1
+3
+q_b25
+-1
+3
+q_b24
+-1
+3
+q_b23
+-1
+3
+q_b22
+-1
+3
+q_b21
+-1
+3
+q_b20
+-1
+3
+q_b2
+-1
+3
+q_b19
+-1
+3
+q_b18
+-1
+3
+q_b17
+-1
+3
+q_b16
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a48
+-1
+3
+data_a47
+-1
+3
+data_a46
+-1
+3
+data_a45
+-1
+3
+data_a44
+-1
+3
+data_a43
+-1
+3
+data_a42
+-1
+3
+data_a41
+-1
+3
+data_a40
+-1
+3
+data_a4
+-1
+3
+data_a39
+-1
+3
+data_a38
+-1
+3
+data_a37
+-1
+3
+data_a36
+-1
+3
+data_a35
+-1
+3
+data_a34
+-1
+3
+data_a33
+-1
+3
+data_a32
+-1
+3
+data_a31
+-1
+3
+data_a30
+-1
+3
+data_a3
+-1
+3
+data_a29
+-1
+3
+data_a28
+-1
+3
+data_a27
+-1
+3
+data_a26
+-1
+3
+data_a25
+-1
+3
+data_a24
+-1
+3
+data_a23
+-1
+3
+data_a22
+-1
+3
+data_a21
+-1
+3
+data_a20
+-1
+3
+data_a2
+-1
+3
+data_a19
+-1
+3
+data_a18
+-1
+3
+data_a17
+-1
+3
+data_a16
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken1
+-1
+3
+clocken0
+-1
+3
+clock1
+-1
+3
+clock0
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+add_sub_gvd
+# storage
+db|DE2_D5M.(415).cnf
+db|DE2_D5M.(415).cnf
+# case_insensitive
+# source_file
+db|add_sub_gvd.tdf
+ac30d411ae3c72229a21bedd692968a
+7
+# used_port {
+result1
+-1
+3
+result0
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+datab1
+-1
+1
+datab0
+-1
+1
+}
+# macro_sequence
+
+# end
+# entity
+cntr_kkf
+# storage
+db|DE2_D5M.(416).cnf
+db|DE2_D5M.(416).cnf
+# case_insensitive
+# source_file
+db|cntr_kkf.tdf
+9cbe8a2d5e981981285250a2fd3a4df
+7
+# used_port {
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_6cc
+# storage
+db|DE2_D5M.(417).cnf
+db|DE2_D5M.(417).cnf
+# case_insensitive
+# source_file
+db|cmpr_6cc.tdf
+3e5d58904f06236b487a8e6b457fed6
+7
+# used_port {
+datab0
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab1
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_74h
+# storage
+db|DE2_D5M.(418).cnf
+db|DE2_D5M.(418).cnf
+# case_insensitive
+# source_file
+db|cntr_74h.tdf
+b263d232a3ce6cf0a052c3c5847b6
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(419).cnf
+db|DE2_D5M.(419).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+6
+PARAMETER_UNKNOWN
+USR
+WIDTH
+6
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_rvm
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_rvm
+# storage
+db|DE2_D5M.(420).cnf
+db|DE2_D5M.(420).cnf
+# case_insensitive
+# source_file
+db|shift_taps_rvm.tdf
+1759bc61cab3d0d769584980fa22cfa0
+7
+# used_port {
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_eqa1
+# storage
+db|DE2_D5M.(421).cnf
+db|DE2_D5M.(421).cnf
+# case_insensitive
+# source_file
+db|altsyncram_eqa1.tdf
+854775f48f9cdd6a73e42b3b5b314d86
+7
+# used_port {
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_lkf
+# storage
+db|DE2_D5M.(422).cnf
+db|DE2_D5M.(422).cnf
+# case_insensitive
+# source_file
+db|cntr_lkf.tdf
+b0ee4ebb40434a276b721138a16816a6
+7
+# used_port {
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cntr_c4h
+# storage
+db|DE2_D5M.(423).cnf
+db|DE2_D5M.(423).cnf
+# case_insensitive
+# source_file
+db|cntr_c4h.tdf
+b95f39f196a9b3eaa47d2583e07ee3ad
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(424).cnf
+db|DE2_D5M.(424).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+5
+PARAMETER_UNKNOWN
+USR
+WIDTH
+14
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_q1m
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_q1m
+# storage
+db|DE2_D5M.(425).cnf
+db|DE2_D5M.(425).cnf
+# case_insensitive
+# source_file
+db|shift_taps_q1m.tdf
+98f060422ac264ca1e3841147b9f3a87
+7
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_c981
+# storage
+db|DE2_D5M.(426).cnf
+db|DE2_D5M.(426).cnf
+# case_insensitive
+# source_file
+db|altsyncram_c981.tdf
+8e53a55f72e898de8eb10e75c080
+7
+# used_port {
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b2
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a2
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clock0
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+clocken0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_kkf
+# storage
+db|DE2_D5M.(427).cnf
+db|DE2_D5M.(427).cnf
+# case_insensitive
+# source_file
+db|cntr_kkf.tdf
+9cbe8a2d5e981981285250a2fd3a4df
+7
+# used_port {
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(428).cnf
+db|DE2_D5M.(428).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+8
+PARAMETER_UNKNOWN
+USR
+WIDTH
+6
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_tvm
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_tvm
+# storage
+db|DE2_D5M.(429).cnf
+db|DE2_D5M.(429).cnf
+# case_insensitive
+# source_file
+db|shift_taps_tvm.tdf
+9e068847525c6ffefd3e4abd4a969d2
+7
+# used_port {
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_kqa1
+# storage
+db|DE2_D5M.(430).cnf
+db|DE2_D5M.(430).cnf
+# case_insensitive
+# source_file
+db|altsyncram_kqa1.tdf
+7a32697cf71e7375f49da477b51a6e8
+7
+# used_port {
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_okf
+# storage
+db|DE2_D5M.(431).cnf
+db|DE2_D5M.(431).cnf
+# case_insensitive
+# source_file
+db|cntr_okf.tdf
+f5c9dbb78962faab46eee971bc17a5c
+7
+# used_port {
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_7cc
+# storage
+db|DE2_D5M.(432).cnf
+db|DE2_D5M.(432).cnf
+# case_insensitive
+# source_file
+db|cmpr_7cc.tdf
+ba51965fa8d079a942b6de643d04d3
+7
+# used_port {
+datab1
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab2
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_e4h
+# storage
+db|DE2_D5M.(433).cnf
+db|DE2_D5M.(433).cnf
+# case_insensitive
+# source_file
+db|cntr_e4h.tdf
+6396ecfeae979d623a80d92d71e51dd
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(434).cnf
+db|DE2_D5M.(434).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+10
+PARAMETER_UNKNOWN
+USR
+WIDTH
+4
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_41n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_41n
+# storage
+db|DE2_D5M.(435).cnf
+db|DE2_D5M.(435).cnf
+# case_insensitive
+# source_file
+db|shift_taps_41n.tdf
+e132473fd0cf9623c398a8675c8e641
+7
+# used_port {
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_lqa1
+# storage
+db|DE2_D5M.(436).cnf
+db|DE2_D5M.(436).cnf
+# case_insensitive
+# source_file
+db|altsyncram_lqa1.tdf
+ab5a501a54846bc1152c4b4dbd33a687
+7
+# used_port {
+q_b3
+-1
+3
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a3
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_qkf
+# storage
+db|DE2_D5M.(437).cnf
+db|DE2_D5M.(437).cnf
+# case_insensitive
+# source_file
+db|cntr_qkf.tdf
+8c6b5b14ff9d1f3716b4b4329801ef8
+7
+# used_port {
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cntr_h4h
+# storage
+db|DE2_D5M.(438).cnf
+db|DE2_D5M.(438).cnf
+# case_insensitive
+# source_file
+db|cntr_h4h.tdf
+ad68f9a64db1b5c35aafb2d4d0c5b4
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(439).cnf
+db|DE2_D5M.(439).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+11
+PARAMETER_UNKNOWN
+USR
+WIDTH
+8
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_r1m
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_r1m
+# storage
+db|DE2_D5M.(440).cnf
+db|DE2_D5M.(440).cnf
+# case_insensitive
+# source_file
+db|shift_taps_r1m.tdf
+e4b8b86b22c562544649c7b9d9eea43f
+7
+# used_port {
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_2781
+# storage
+db|DE2_D5M.(441).cnf
+db|DE2_D5M.(441).cnf
+# case_insensitive
+# source_file
+db|altsyncram_2781.tdf
+98803d78eccc253649b35b7b44f93830
+7
+# used_port {
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clock0
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+clocken0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_skf
+# storage
+db|DE2_D5M.(442).cnf
+db|DE2_D5M.(442).cnf
+# case_insensitive
+# source_file
+db|cntr_skf.tdf
+e4ab65e89a7a8e284d2fc1df152a53f
+7
+# used_port {
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_8cc
+# storage
+db|DE2_D5M.(443).cnf
+db|DE2_D5M.(443).cnf
+# case_insensitive
+# source_file
+db|cmpr_8cc.tdf
+f6dcc0bbb57fd39b2f55cec86c4ce9a
+7
+# used_port {
+datab2
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab3
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(444).cnf
+db|DE2_D5M.(444).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+12
+PARAMETER_UNKNOWN
+USR
+WIDTH
+3
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_51n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_51n
+# storage
+db|DE2_D5M.(445).cnf
+db|DE2_D5M.(445).cnf
+# case_insensitive
+# source_file
+db|shift_taps_51n.tdf
+e5954db984b399d0712460295d9b1f4b
+7
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_6ta1
+# storage
+db|DE2_D5M.(446).cnf
+db|DE2_D5M.(446).cnf
+# case_insensitive
+# source_file
+db|altsyncram_6ta1.tdf
+0fa0d2e040b1681297585499d2d4b
+7
+# used_port {
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_4mf
+# storage
+db|DE2_D5M.(447).cnf
+db|DE2_D5M.(447).cnf
+# case_insensitive
+# source_file
+db|cntr_4mf.tdf
+c0d74bde19a4ef6ab3f42ffa5227f03b
+7
+# used_port {
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_8cc
+# storage
+db|DE2_D5M.(448).cnf
+db|DE2_D5M.(448).cnf
+# case_insensitive
+# source_file
+db|cmpr_8cc.tdf
+f6dcc0bbb57fd39b2f55cec86c4ce9a
+7
+# used_port {
+datab2
+-1
+3
+datab1
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab3
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_q5h
+# storage
+db|DE2_D5M.(449).cnf
+db|DE2_D5M.(449).cnf
+# case_insensitive
+# source_file
+db|cntr_q5h.tdf
+7a49721dd4622c24925fd9471d7377c
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(450).cnf
+db|DE2_D5M.(450).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+6
+PARAMETER_UNKNOWN
+USR
+WIDTH
+26
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_u1m
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps25
+-1
+3
+taps24
+-1
+3
+taps23
+-1
+3
+taps22
+-1
+3
+taps21
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin25
+-1
+3
+shiftin24
+-1
+3
+shiftin23
+-1
+3
+shiftin22
+-1
+3
+shiftin21
+-1
+3
+shiftin20
+-1
+3
+shiftin2
+-1
+3
+shiftin19
+-1
+3
+shiftin18
+-1
+3
+shiftin17
+-1
+3
+shiftin16
+-1
+3
+shiftin15
+-1
+3
+shiftin14
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_u1m
+# storage
+db|DE2_D5M.(451).cnf
+db|DE2_D5M.(451).cnf
+# case_insensitive
+# source_file
+db|shift_taps_u1m.tdf
+e367dbdf5122fbc36d898ababb7aabf
+7
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps25
+-1
+3
+taps24
+-1
+3
+taps23
+-1
+3
+taps22
+-1
+3
+taps21
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin25
+-1
+3
+shiftin24
+-1
+3
+shiftin23
+-1
+3
+shiftin22
+-1
+3
+shiftin21
+-1
+3
+shiftin20
+-1
+3
+shiftin2
+-1
+3
+shiftin19
+-1
+3
+shiftin18
+-1
+3
+shiftin17
+-1
+3
+shiftin16
+-1
+3
+shiftin15
+-1
+3
+shiftin14
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_k981
+# storage
+db|DE2_D5M.(452).cnf
+db|DE2_D5M.(452).cnf
+# case_insensitive
+# source_file
+db|altsyncram_k981.tdf
+a4562e1e328b7c77afd23dc7db449de
+7
+# used_port {
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b25
+-1
+3
+q_b24
+-1
+3
+q_b23
+-1
+3
+q_b22
+-1
+3
+q_b21
+-1
+3
+q_b20
+-1
+3
+q_b2
+-1
+3
+q_b19
+-1
+3
+q_b18
+-1
+3
+q_b17
+-1
+3
+q_b16
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a25
+-1
+3
+data_a24
+-1
+3
+data_a23
+-1
+3
+data_a22
+-1
+3
+data_a21
+-1
+3
+data_a20
+-1
+3
+data_a2
+-1
+3
+data_a19
+-1
+3
+data_a18
+-1
+3
+data_a17
+-1
+3
+data_a16
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clock0
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+clocken0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_lkf
+# storage
+db|DE2_D5M.(453).cnf
+db|DE2_D5M.(453).cnf
+# case_insensitive
+# source_file
+db|cntr_lkf.tdf
+b0ee4ebb40434a276b721138a16816a6
+7
+# used_port {
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(454).cnf
+db|DE2_D5M.(454).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+14
+PARAMETER_UNKNOWN
+USR
+WIDTH
+3
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_71n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_71n
+# storage
+db|DE2_D5M.(455).cnf
+db|DE2_D5M.(455).cnf
+# case_insensitive
+# source_file
+db|shift_taps_71n.tdf
+288fe34764c5af90aa9ad3dc25bb3a26
+7
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_ata1
+# storage
+db|DE2_D5M.(456).cnf
+db|DE2_D5M.(456).cnf
+# case_insensitive
+# source_file
+db|altsyncram_ata1.tdf
+b1db47dde4ba71f11ca9db5aa5af2b84
+7
+# used_port {
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_6mf
+# storage
+db|DE2_D5M.(457).cnf
+db|DE2_D5M.(457).cnf
+# case_insensitive
+# source_file
+db|cntr_6mf.tdf
+bbc3ee84cbf3b1907256babe27560d9
+7
+# used_port {
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_8cc
+# storage
+db|DE2_D5M.(458).cnf
+db|DE2_D5M.(458).cnf
+# case_insensitive
+# source_file
+db|cmpr_8cc.tdf
+f6dcc0bbb57fd39b2f55cec86c4ce9a
+7
+# used_port {
+datab2
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab3
+-1
+2
+datab1
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_s5h
+# storage
+db|DE2_D5M.(459).cnf
+db|DE2_D5M.(459).cnf
+# case_insensitive
+# source_file
+db|cntr_s5h.tdf
+a5c8664eeec0b2d57e97b68efe11abc3
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(460).cnf
+db|DE2_D5M.(460).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+16
+PARAMETER_UNKNOWN
+USR
+WIDTH
+3
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_s1m
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_s1m
+# storage
+db|DE2_D5M.(461).cnf
+db|DE2_D5M.(461).cnf
+# case_insensitive
+# source_file
+db|shift_taps_s1m.tdf
+17cf58e4c7b4cfe986a56bc7acd4e9
+7
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_g981
+# storage
+db|DE2_D5M.(462).cnf
+db|DE2_D5M.(462).cnf
+# case_insensitive
+# source_file
+db|altsyncram_g981.tdf
+e244b32f69318d5d9eecf3e271ebf7f
+7
+# used_port {
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clock0
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+clocken0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_8mf
+# storage
+db|DE2_D5M.(463).cnf
+db|DE2_D5M.(463).cnf
+# case_insensitive
+# source_file
+db|cntr_8mf.tdf
+557abf79ddd4691588c7bb6978ae471
+7
+# used_port {
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_8cc
+# storage
+db|DE2_D5M.(464).cnf
+db|DE2_D5M.(464).cnf
+# case_insensitive
+# source_file
+db|cmpr_8cc.tdf
+f6dcc0bbb57fd39b2f55cec86c4ce9a
+7
+# used_port {
+datab1
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab3
+-1
+2
+datab2
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(465).cnf
+db|DE2_D5M.(465).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+16
+PARAMETER_UNKNOWN
+USR
+WIDTH
+3
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_91n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_91n
+# storage
+db|DE2_D5M.(466).cnf
+db|DE2_D5M.(466).cnf
+# case_insensitive
+# source_file
+db|shift_taps_91n.tdf
+35e63a1ce6ca23a0543d595259f4
+7
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_eta1
+# storage
+db|DE2_D5M.(467).cnf
+db|DE2_D5M.(467).cnf
+# case_insensitive
+# source_file
+db|altsyncram_eta1.tdf
+f05c3fd1d9b7355ad9ce7884ae196b
+7
+# used_port {
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_8mf
+# storage
+db|DE2_D5M.(468).cnf
+db|DE2_D5M.(468).cnf
+# case_insensitive
+# source_file
+db|cntr_8mf.tdf
+557abf79ddd4691588c7bb6978ae471
+7
+# used_port {
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cntr_u5h
+# storage
+db|DE2_D5M.(469).cnf
+db|DE2_D5M.(469).cnf
+# case_insensitive
+# source_file
+db|cntr_u5h.tdf
+eecbe5e67a502142b95f7131875b2d83
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(470).cnf
+db|DE2_D5M.(470).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+18
+PARAMETER_UNKNOWN
+USR
+WIDTH
+3
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_b1n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_b1n
+# storage
+db|DE2_D5M.(471).cnf
+db|DE2_D5M.(471).cnf
+# case_insensitive
+# source_file
+db|shift_taps_b1n.tdf
+cb8da24d70b260ec026ac9b7b33a4fe
+7
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_ita1
+# storage
+db|DE2_D5M.(472).cnf
+db|DE2_D5M.(472).cnf
+# case_insensitive
+# source_file
+db|altsyncram_ita1.tdf
+8f6a5021c73abe4eab947516c69ff
+7
+# used_port {
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_amf
+# storage
+db|DE2_D5M.(473).cnf
+db|DE2_D5M.(473).cnf
+# case_insensitive
+# source_file
+db|cntr_amf.tdf
+314557c188528b17a2344ab121c675
+7
+# used_port {
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cntr_16h
+# storage
+db|DE2_D5M.(474).cnf
+db|DE2_D5M.(474).cnf
+# case_insensitive
+# source_file
+db|cntr_16h.tdf
+8baf6ec02b8eed4812c3f2e075d69a9
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(475).cnf
+db|DE2_D5M.(475).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+20
+PARAMETER_UNKNOWN
+USR
+WIDTH
+3
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_61n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_61n
+# storage
+db|DE2_D5M.(476).cnf
+db|DE2_D5M.(476).cnf
+# case_insensitive
+# source_file
+db|shift_taps_61n.tdf
+98251fa1c11929d9ee9bb032daa39942
+7
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_ota1
+# storage
+db|DE2_D5M.(477).cnf
+db|DE2_D5M.(477).cnf
+# case_insensitive
+# source_file
+db|altsyncram_ota1.tdf
+53a68adc1d526295cd6c54be276282
+7
+# used_port {
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_dmf
+# storage
+db|DE2_D5M.(478).cnf
+db|DE2_D5M.(478).cnf
+# case_insensitive
+# source_file
+db|cntr_dmf.tdf
+c16df5dabdfa6ef559f1e56cdeedaabf
+7
+# used_port {
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_9cc
+# storage
+db|DE2_D5M.(479).cnf
+db|DE2_D5M.(479).cnf
+# case_insensitive
+# source_file
+db|cmpr_9cc.tdf
+c5c7b92c494428fd54c4a6aff867d3
+7
+# used_port {
+datab3
+-1
+3
+datab2
+-1
+3
+datab1
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab4
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_36h
+# storage
+db|DE2_D5M.(480).cnf
+db|DE2_D5M.(480).cnf
+# case_insensitive
+# source_file
+db|cntr_36h.tdf
+59e58883154fc2ecc8b41e8a3eb64849
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(481).cnf
+db|DE2_D5M.(481).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+22
+PARAMETER_UNKNOWN
+USR
+WIDTH
+3
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_81n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_81n
+# storage
+db|DE2_D5M.(482).cnf
+db|DE2_D5M.(482).cnf
+# case_insensitive
+# source_file
+db|shift_taps_81n.tdf
+e92c3816ef924b4124678ecc19b671d9
+7
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_bta1
+# storage
+db|DE2_D5M.(483).cnf
+db|DE2_D5M.(483).cnf
+# case_insensitive
+# source_file
+db|altsyncram_bta1.tdf
+32db3f4150c8e39cc9ee93ab31351d10
+7
+# used_port {
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_7mf
+# storage
+db|DE2_D5M.(484).cnf
+db|DE2_D5M.(484).cnf
+# case_insensitive
+# source_file
+db|cntr_7mf.tdf
+9f2d6cbc7ad71919ca7f7629b96df2d
+7
+# used_port {
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_9cc
+# storage
+db|DE2_D5M.(485).cnf
+db|DE2_D5M.(485).cnf
+# case_insensitive
+# source_file
+db|cmpr_9cc.tdf
+c5c7b92c494428fd54c4a6aff867d3
+7
+# used_port {
+datab3
+-1
+3
+datab2
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab4
+-1
+2
+datab1
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_t5h
+# storage
+db|DE2_D5M.(486).cnf
+db|DE2_D5M.(486).cnf
+# case_insensitive
+# source_file
+db|cntr_t5h.tdf
+153dd44774c3d1d393bd7781433884dc
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(487).cnf
+db|DE2_D5M.(487).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+24
+PARAMETER_UNKNOWN
+USR
+WIDTH
+3
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_a1n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_a1n
+# storage
+db|DE2_D5M.(488).cnf
+db|DE2_D5M.(488).cnf
+# case_insensitive
+# source_file
+db|shift_taps_a1n.tdf
+4b2149d27ae1cad155a4fa1c6d8e588
+7
+# used_port {
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_fta1
+# storage
+db|DE2_D5M.(489).cnf
+db|DE2_D5M.(489).cnf
+# case_insensitive
+# source_file
+db|altsyncram_fta1.tdf
+bb4dda139f3c791d2a69eda7499eeb
+7
+# used_port {
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_9mf
+# storage
+db|DE2_D5M.(490).cnf
+db|DE2_D5M.(490).cnf
+# case_insensitive
+# source_file
+db|cntr_9mf.tdf
+fff7e770138be9856711205630d44ef4
+7
+# used_port {
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_9cc
+# storage
+db|DE2_D5M.(491).cnf
+db|DE2_D5M.(491).cnf
+# case_insensitive
+# source_file
+db|cmpr_9cc.tdf
+c5c7b92c494428fd54c4a6aff867d3
+7
+# used_port {
+datab3
+-1
+3
+datab1
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab4
+-1
+2
+datab2
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_v5h
+# storage
+db|DE2_D5M.(492).cnf
+db|DE2_D5M.(492).cnf
+# case_insensitive
+# source_file
+db|cntr_v5h.tdf
+56b3db4f957cf157cec130c647774c1e
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(493).cnf
+db|DE2_D5M.(493).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+32
+PARAMETER_UNKNOWN
+USR
+WIDTH
+7
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_d1n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_d1n
+# storage
+db|DE2_D5M.(494).cnf
+db|DE2_D5M.(494).cnf
+# case_insensitive
+# source_file
+db|shift_taps_d1n.tdf
+1bd861973e4d20e911d3b034f2b5c480
+7
+# used_port {
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_kta1
+# storage
+db|DE2_D5M.(495).cnf
+db|DE2_D5M.(495).cnf
+# case_insensitive
+# source_file
+db|altsyncram_kta1.tdf
+8b85e81c9d8cd2c4d8b788b5102328
+7
+# used_port {
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_bmf
+# storage
+db|DE2_D5M.(496).cnf
+db|DE2_D5M.(496).cnf
+# case_insensitive
+# source_file
+db|cntr_bmf.tdf
+8fd2763a873875f0527369a76ea86de4
+7
+# used_port {
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_9cc
+# storage
+db|DE2_D5M.(497).cnf
+db|DE2_D5M.(497).cnf
+# case_insensitive
+# source_file
+db|cmpr_9cc.tdf
+c5c7b92c494428fd54c4a6aff867d3
+7
+# used_port {
+datab1
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab4
+-1
+2
+datab3
+-1
+2
+datab2
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_06h
+# storage
+db|DE2_D5M.(498).cnf
+db|DE2_D5M.(498).cnf
+# case_insensitive
+# source_file
+db|cntr_06h.tdf
+bf7a46bc8dacb3b56184109847f8e9e
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(499).cnf
+db|DE2_D5M.(499).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+30
+PARAMETER_UNKNOWN
+USR
+WIDTH
+2
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_c1n
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_c1n
+# storage
+db|DE2_D5M.(500).cnf
+db|DE2_D5M.(500).cnf
+# case_insensitive
+# source_file
+db|shift_taps_c1n.tdf
+d4b99741f2e92330ed2ec3801d732348
+7
+# used_port {
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_pta1
+# storage
+db|DE2_D5M.(501).cnf
+db|DE2_D5M.(501).cnf
+# case_insensitive
+# source_file
+db|altsyncram_pta1.tdf
+7985814d13846a37d676de8f2529c93
+7
+# used_port {
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken0
+-1
+3
+clock0
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr0
+-1
+3
+wren_a
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_fmf
+# storage
+db|DE2_D5M.(502).cnf
+db|DE2_D5M.(502).cnf
+# case_insensitive
+# source_file
+db|cntr_fmf.tdf
+40dcbab36b56f663b442315e87d9ab51
+7
+# used_port {
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_9cc
+# storage
+db|DE2_D5M.(503).cnf
+db|DE2_D5M.(503).cnf
+# case_insensitive
+# source_file
+db|cmpr_9cc.tdf
+c5c7b92c494428fd54c4a6aff867d3
+7
+# used_port {
+datab2
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab4
+-1
+2
+datab3
+-1
+2
+datab1
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_56h
+# storage
+db|DE2_D5M.(504).cnf
+db|DE2_D5M.(504).cnf
+# case_insensitive
+# source_file
+db|cntr_56h.tdf
+3f67a8a9fb42eaa846f57add5552511
+7
+# used_port {
+cout
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+aset
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+RAW2RGB
+# storage
+db|DE2_D5M.(4).cnf
+db|DE2_D5M.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|raw2rgb.v
+e75c567d83e0ad877c5782c674cf6cff
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+RAW2RGB:u4
+}
+# macro_sequence
+
+# end
+# entity
 VGA_Controller
 # storage
 db|DE2_D5M.(1).cnf
@@ -55703,7 +61916,7 @@ ON
 # case_sensitive
 # source_file
 v|vga_controller.v
-28daac83a8ef3d7a9216f7fde0e2dc1f
+1ddaa0ab28a6e218fb1c383bf52dee87
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -55793,7 +62006,7 @@ ON
 # case_sensitive
 # source_file
 de2_d5m.v
-b66b7ac4f7be1849eabfd45d68f07
+64c965b77ca834a246aae81438f08931
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -55818,18 +62031,18 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 
 # end
 # entity
-RAW2RGB
+Software_Camera_Control
 # storage
-db|DE2_D5M.(4).cnf
-db|DE2_D5M.(4).cnf
+db|DE2_D5M.(505).cnf
+db|DE2_D5M.(505).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-v|raw2rgb.v
-10451a309d4eb2acb2f62e626a84f2f
+v|software_camera_control.v
+a8613feb7e792aa97ae81cc8109023
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -55848,7 +62061,7 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # hierarchies {
-RAW2RGB:u4
+Software_Camera_Control:softwareCameraControl0
 }
 # macro_sequence
 

@@ -64,9 +64,9 @@ output	[11:0]	oBlue;
 output			oDVAL;
 wire	[11:0]	mDATA_0;
 wire	[11:0]	mDATA_1;
-reg		[11:0]	mDATAd_0, mDATAdd_0;
-reg		[11:0]	mDATAd_1, mDATAdd_1;
-reg		[11:0]	iDATAd, iDATAdd;
+reg		[11:0]	mDATAd_0;
+reg		[11:0]	mDATAd_1;
+//reg		[11:0]	iDATAd;
 wire		[11:0]	mCCD_R;
 wire		[12:0]	mCCD_G;
 wire		[11:0]	mCCD_B;
@@ -98,27 +98,18 @@ always@(posedge iCLK or negedge iRST)
 begin
 	if(!iRST)
 	begin
-		//mCCD_R	<=	0;
-		//mCCD_G	<=	0;
-		//mCCD_B	<=	0;
-		iDATAd <= 0;
-		iDATAdd <= 0;
+		//iDATAd <= 0;
 		mDATAd_0<=	0;
-		mDATAdd_0<=	0;
 		mDATAd_1<=	0;
-		mDATAdd_1<=	0;
 		mDVAL	<=	0;
 	end
 	else
 	begin
 		mDATAd_0	<=	mDATA_0;
 		mDATAd_1	<=	mDATA_1;
-		mDATAdd_0	<=	mDATAd_0;
-		mDATAdd_1	<=	mDATAd_1;
-		iDATAd   <= iDATA;
-		iDATAdd  <= iDATAd;
+		//iDATAd   <= iDATA;
 		mDVAL		<=	{iY_Cont[0]|iX_Cont[0]}	?	1'b0	:	iDVAL;
-		if(({iY_Cont[0],iX_Cont[0]})==2'b00 && (iY_Cont < 800) && (iX_Cont < 800))
+		if(({iY_Cont[0],iX_Cont[0]})==2'b00)
 		begin
 			tempR	<=	mDATA_1;
 			tempG	<=	(mDATA_0+mDATAd_1) >> 1;

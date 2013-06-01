@@ -102,14 +102,14 @@ assign v_mask = 13'd0;
 assign	mVGA_BLANK	=	mVGA_H_SYNC & mVGA_V_SYNC;
 assign	mVGA_SYNC	=	1'b0;
 
-assign	mVGA_R	=	(	H_Cont>=X_START 	&& H_Cont<X_START+H_SYNC_ACT &&
-						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+V_SYNC_ACT )
+assign	mVGA_R	=	(	H_Cont>=X_START+120 	&& H_Cont<X_START+H_SYNC_ACT-120 &&
+						V_Cont>=Y_START+v_mask+40 	&& V_Cont<Y_START+V_SYNC_ACT-40 )
 						?	iRed	:	0;
-assign	mVGA_G	=	(	H_Cont>=X_START 	&& H_Cont<X_START+H_SYNC_ACT &&
-						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+V_SYNC_ACT )
+assign	mVGA_G	=	(	H_Cont>=X_START+120 	&& H_Cont<X_START+H_SYNC_ACT-120 &&
+						V_Cont>=Y_START+v_mask+40 	&& V_Cont<Y_START+V_SYNC_ACT-40 )
 						?	iGreen	:	0;
-assign	mVGA_B	=	(	H_Cont>=X_START 	&& H_Cont<X_START+H_SYNC_ACT &&
-						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+V_SYNC_ACT )
+assign	mVGA_B	=	(	H_Cont>=X_START+120 	&& H_Cont<X_START+H_SYNC_ACT-120 &&
+						V_Cont>=Y_START+v_mask+40 	&& V_Cont<Y_START+V_SYNC_ACT-40 )
 						?	iBlue	:	0;
 
 always@(posedge iCLK or negedge iRST_N)

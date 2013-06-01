@@ -64,10 +64,22 @@
 
 #define IMAGE_WIDTH 400
 #define IMAGE_HEIGHT 400
-#define BASE_ADDRESS 0x800000
+#define FRAME_X_OFFSET 120
+#define FRAME_Y_OFFSET 40
+
+#define BASE_ADDRESS 0x800000 // SDRAM base
 #define DATABASE_START 0xf00000
 #define DESCRIPTOR_INFO_START 0xfd6400
 #define NUM_DATABASE_DESCRS 3426
+
+#define OPCODE_EXP 0x00
+#define OPCODE_RESET_CAPTURE 0xdd
+#define OPCODE_RESET_RUN 0xbb
+#define OPCODE_RUN 0xcc
+#define OPCODE_WAIT_SWITCH 0xee
+#define OPCODE_CAPTURE 0xff
+
+
 // this is the address where SIFT can start placing its octaves
 // and gradient data--right after the floating point image data
 #define SIFT_DATA_START (BASE_ADDRESS + IMAGE_WIDTH*IMAGE_HEIGHT*4)
