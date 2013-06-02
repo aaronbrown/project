@@ -1,6 +1,6 @@
 module Software_Camera_Control (
 	clk, // pixel clk
-	reset, // delay reset 2
+	resetN, // delay reset 2
 	NiosSaysCapture, // nios is calibrated and ready to capture an image
 	NiosSaysResetCapture, // nios is preparing to calibrate the camera
 	NiosSaysRun,
@@ -9,7 +9,7 @@ module Software_Camera_Control (
 	DoRun ); // tell the CCD module to run the camera
 	
 	input clk;
-	input reset;
+	input resetN;
 	input NiosSaysCapture;
 	input NiosSaysResetCapture;
 	input NiosSaysRun;
@@ -20,9 +20,9 @@ module Software_Camera_Control (
 	reg captureDone;
 	reg runDone;
 	
-	always @(posedge clk or negedge reset) begin
+	always @(posedge clk or negedge resetN) begin
 		// this block controls the camera capture
-		if (!reset) begin
+		if (!resetN) begin
 			// nios is preparing for a new image...we reset the
 			// registers controlling the state of the capture
 			DoCapture <= 1'b0;
@@ -51,7 +51,7 @@ module Software_Camera_Control (
 		end
 		
 		// this block controls the camera running
-		if (!reset) begin
+		if (!resetN) begin
 			DoRun <= 1'b0;
 			runDone <= 1'b0;
 		end

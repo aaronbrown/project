@@ -273,6 +273,12 @@ int main()
 		// prepare the camera to run and capture, then start it running
 		IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, OPCODE_RESET_CAPTURE);
 		IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, OPCODE_RESET_RUN);
+		// after a manual reset with KEY[0], the camera RUN state machine
+		// needs a short delay so that the RUN command is received after
+		// the hardware generated reset_n signal goes high again; otherwise
+		// the camera will not start running here in the case of a manual
+		// reset, and we do not like this behavior.
+		usleep(1*1000*1000);
 		IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, OPCODE_RUN);
 
 		// here, we wait until SW[17] is toggled by the user before advancing
@@ -410,7 +416,7 @@ int main()
 		//       Now match the scene descriptors against the database!
 		// -------------------------------------------------------------
 	
-		cout << "Matching against datahase...";
+		cout << "Matching against database...";
 
 		int numDescrs = descrNum;
 		findDatabaseMatches(numDescrs);

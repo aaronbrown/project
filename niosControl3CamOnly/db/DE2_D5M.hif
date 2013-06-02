@@ -57455,78 +57455,6 @@ VGA_Controller:u1
 
 # end
 # entity
-DE2_D5M
-# storage
-db|DE2_D5M.(0).cnf
-db|DE2_D5M.(0).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-de2_d5m.v
-64c965b77ca834a246aae81438f08931
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-|
-}
-# macro_sequence
-
-# end
-# entity
-Software_Camera_Control
-# storage
-db|DE2_D5M.(505).cnf
-db|DE2_D5M.(505).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-v|software_camera_control.v
-a8613feb7e792aa97ae81cc8109023
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-Software_Camera_Control:softwareCameraControl0
-}
-# macro_sequence
-
-# end
-# entity
 altsyncram
 # storage
 db|DE2_D5M.(67).cnf
@@ -65495,6 +65423,78 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_reset_clk_1_domain_synch_module:niosSystemCamControl_reset_clk_1_domain_synch
+}
+# macro_sequence
+
+# end
+# entity
+DE2_D5M
+# storage
+db|DE2_D5M.(0).cnf
+db|DE2_D5M.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+de2_d5m.v
+7ea1c03bbba04719c1bf031d297ef74
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# entity
+Software_Camera_Control
+# storage
+db|DE2_D5M.(505).cnf
+db|DE2_D5M.(505).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+v|software_camera_control.v
+b43c3e2fc2642760f84c3087d811f3e6
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+Software_Camera_Control:softwareCameraControl0
 }
 # macro_sequence
 

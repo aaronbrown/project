@@ -513,7 +513,7 @@ sdram_pll2			unew (
 	
 	Software_Camera_Control softwareCameraControl0 (
 		.clk(CCD_PIXCLK), 
-		.reset(DLY_RST_2),
+		.resetN(DLY_RST_2),
 		.NiosSaysCapture(niosSaysCapture), 
 		.NiosSaysResetCapture(niosSaysResetCapture), 
 		.NiosSaysRun(niosSaysRun),
