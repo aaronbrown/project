@@ -5,7 +5,8 @@
 
 #include "match.hpp"
 
-// returns the distance squared of the two 128 byte arrays descr1 and descr2.
+// returns the distance squared (Euclidian) of the two 128 byte
+// arrays descr1 and descr2.
 int distSquared(uint8_t const *descr1, uint8_t const *descr2)
 {
     int i, dif, distsq = 0;
@@ -51,7 +52,7 @@ int checkForMatch(uint8_t* sceneDescr)
     	} // else if
     } // for
 
-    // Check whether closest distance is less than 0.6 of second.
+    // check ratio of 2 nearest neighbors
     if (10 * 10 * distsq1 < 7 * 7 * distsq2)
       return minkey;
 
@@ -107,3 +108,61 @@ void findDatabaseMatches(int numSceneDescrs)
 		} // if
 	} // for
 } // findDatabaseMatches()
+
+
+/*
+int DistSquared(unsigned char *descr1, unsigned char *descr2)
+{
+    int i, dif, distsq = 0;
+
+    for (i = 0; i < 128; i++) {
+      dif = (int) *descr1++ - (int) *descr2++;
+      distsq += dif * dif;
+    }
+    return distsq;
+}
+*/
+
+/*
+int CheckForMatch(uint8_t* descr1, uint8_t* descr2)
+{
+    int dsq, distsq1 = 100000000, distsq2 = 100000000;
+    int minkey = -1;
+
+
+    // Find the two closest matches, and put their squared distances in
+    //   distsq1 and distsq2.
+
+    for (int i = 0; i < NUM_DESCR; i++)
+    {
+    	dsq = DistSquared(baselineDesc[i], descr1);
+
+    	if (dsq < distsq1) {
+    		distsq2 = distsq1;
+    		distsq1 = dsq;
+    		minkey = i;
+    	} else if (dsq < distsq2) {
+    		distsq2 = dsq;
+    	}
+    }
+
+    // Check whether closest distance is less than 0.6 of second.
+    if (10 * 10 * distsq1 < 8 * 8 * distsq2)
+      return minkey;
+
+    return -1;
+}
+*/
+
+/*
+int FindMatches(VL::float_t *descr_pt, bool useSDRAMdesc)
+{
+	unsigned char descrBytes[128];
+
+
+	for (int i = 0; i < 128; i++)
+		descrBytes[i] = (unsigned char)(descr_pt[i] * 512);
+
+	return CheckForMatch(descrBytes, 0);
+}
+*/

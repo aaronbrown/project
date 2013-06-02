@@ -14,62 +14,7 @@ extern "C"
 }
 using namespace std ;
 
-/*
-int DistSquared(unsigned char *descr1, unsigned char *descr2)
-{
-    int i, dif, distsq = 0;
 
-    for (i = 0; i < 128; i++) {
-      dif = (int) *descr1++ - (int) *descr2++;
-      distsq += dif * dif;
-    }
-    return distsq;
-}
-*/
-
-/*
-int CheckForMatch(uint8_t* descr1, uint8_t* descr2)
-{
-    int dsq, distsq1 = 100000000, distsq2 = 100000000;
-    int minkey = -1;
-
-
-    // Find the two closest matches, and put their squared distances in
-    //   distsq1 and distsq2.
-
-    for (int i = 0; i < NUM_DESCR; i++)
-    {
-    	dsq = DistSquared(baselineDesc[i], descr1);
-
-    	if (dsq < distsq1) {
-    		distsq2 = distsq1;
-    		distsq1 = dsq;
-    		minkey = i;
-    	} else if (dsq < distsq2) {
-    		distsq2 = dsq;
-    	}
-    }
-
-    // Check whether closest distance is less than 0.6 of second.
-    if (10 * 10 * distsq1 < 7 * 7 * distsq2)
-      return minkey;
-
-    return -1;
-}
-*/
-
-/*
-int FindMatches(VL::float_t *descr_pt, bool useSDRAMdesc)
-{
-	unsigned char descrBytes[128];
-
-
-	for (int i = 0; i < 128; i++)
-		descrBytes[i] = (unsigned char)(descr_pt[i] * 512);
-
-	return CheckForMatch(descrBytes, 0);
-}
-*/
 
 void extractImageData(VL::PgmBuffer& buffer)
 {
@@ -111,18 +56,13 @@ void extractImageData(VL::PgmBuffer& buffer)
         	minVal = floatIntensity;
 
         *start++ = floatIntensity;
-		}
-	}
+		} // for
+	} // for
 
 //	VL::pixel_t *end = start;
 
 //	for (start = im_pt; start != end; start++)
 //		*start = (*start - minVal) / (maxVal - minVal);
-
-//	cout << "im_pt: " << im_pt << endl;
-//	cout << "maxVal: " << maxVal << endl;
-//	cout << "minVal: " << minVal << endl;
-	//cout << im_pt - SIFT_DATA_START <<endl;
 
 }
 
@@ -353,9 +293,10 @@ int main()
 		sendBytesToUART(advance, 9);
 		// calibration image 5
 		waitForUserAdvance();
-		// wait 2 seconds before sending final advance so that
+		// wait 1 second before sending final advance so that
 		// camera is stabilized
-		usleep(2*1000*1000);
+		usleep(1*1000*1000);
+
 		cout << "Calibration complete.\n";
 		sendBytesToUART(advance, 9);
 
@@ -364,6 +305,8 @@ int main()
 		// ---------------------------------------------------------------
 
 		cout << "Capturing image.\n";
+		// wait 3 seconds to give the camera time to expose the image
+		usleep(3*1000*1000);
 		// capture effectively happens as soon as we write the opcode
 		IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, OPCODE_CAPTURE);
 
@@ -467,12 +410,17 @@ int main()
 		//       Now match the scene descriptors against the database!
 		// -------------------------------------------------------------
 	
+		cout << "Matching against datahase...";
+
 		int numDescrs = descrNum;
 		findDatabaseMatches(numDescrs);
+
+		cout << "done\n";
 	
 		// -------------------------------------------------------------
 		//       We're done with this image!
 		// -------------------------------------------------------------
+
 		sendBytesToUART(advance, 9); // final advance signaling that we're done
 		PROC_CONTROL_OFF; // give control back to VGA
 		cout << "siftpp: job completed\n";

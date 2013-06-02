@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>May 31, 2013 3:21:47 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1369995707512</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Jun 1, 2013 9:24:50 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1370147090349</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\software\siftPlusPlusNiosNew_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>C:\Users\Justin\Documents\eec181\project\niosControl3CamOnly\niosSystemCamControl.sopcinfo</SopcDesignFile>
@@ -887,50 +887,56 @@
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>onchip_memory2_0</slaveDescriptor>
+                <slaveDescriptor>onchip_cache</slaveDescriptor>
                 <addressRange>0x01104000 - 0x01107FFF</addressRange>
                 <addressSpan>16384</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>onchip_reset_and_exception</slaveDescriptor>
+                <addressRange>0x01109200 - 0x011093FF</addressRange>
+                <addressSpan>512</addressSpan>
+                <attributes>memory</attributes>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>uart_0</slaveDescriptor>
-                <addressRange>0x01109000 - 0x0110901F</addressRange>
+                <addressRange>0x01109400 - 0x0110941F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>procHasControl</slaveDescriptor>
-                <addressRange>0x01109020 - 0x0110902F</addressRange>
+                <addressRange>0x01109420 - 0x0110942F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>fp_operand</slaveDescriptor>
-                <addressRange>0x01109030 - 0x0110903F</addressRange>
+                <addressRange>0x01109430 - 0x0110943F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>fp_result</slaveDescriptor>
-                <addressRange>0x01109040 - 0x0110904F</addressRange>
+                <addressRange>0x01109440 - 0x0110944F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>fp_op_type</slaveDescriptor>
-                <addressRange>0x01109050 - 0x0110905F</addressRange>
+                <addressRange>0x01109450 - 0x0110945F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart_0</slaveDescriptor>
-                <addressRange>0x01109060 - 0x01109067</addressRange>
+                <addressRange>0x01109460 - 0x01109467</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sysid</slaveDescriptor>
-                <addressRange>0x01109068 - 0x0110906F</addressRange>
+                <addressRange>0x01109468 - 0x0110946F</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>

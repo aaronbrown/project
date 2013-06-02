@@ -1,5 +1,5 @@
 # clk_0
-# onchip_memory2_0
+# onchip_cache
 # cpu_0
 set_global_assignment -name SDC_FILE [file join $::quartus(qip_path) cpu_0.sdc]
 set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu_0.ocp]
@@ -24,5 +24,6 @@ set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) cpu_0_a
 # uart_0
 # null
 set_global_assignment -name SDC_FILE [file join $::quartus(ip_rootpath) altera/sopc_builder_ip/altera_avalon_clock_adapter/altera_avalon_clock_adapter.sdc]
-set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 0025BCE5629C0000013EEF3CE939 
+# onchip_reset_and_exception
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 0025BCE5629C0000013F02B7CDD7 
  

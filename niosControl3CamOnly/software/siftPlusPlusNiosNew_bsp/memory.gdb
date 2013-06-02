@@ -3,7 +3,7 @@
 # Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
 # SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
 #
-# Generated: Tue May 14 21:52:13 PDT 2013
+# Generated: Sat Jun 01 21:24:51 PDT 2013
 
 # DO NOT MODIFY THIS FILE
 #
@@ -52,5 +52,8 @@ memory 0x800000 0x1000000 cache
 # sram_16bit_512k_0
 memory 0x1080000 0x1100000 cache
 
-# onchip_memory2_0
+# onchip_cache
 memory 0x1104000 0x1108000 cache
+
+# onchip_reset_and_exception
+memory 0x1109200 0x1109400 cache

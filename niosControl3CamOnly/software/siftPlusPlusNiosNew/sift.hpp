@@ -49,45 +49,25 @@
 #include<cmath>
 #include<limits>
 
-#if defined (VL_USEFASTMATH)
-#if defined (VL_MAC)
-#define VL_FASTFLOAT float
-#else
-#define VL_FASTFLOAT double
-#endif
-#else
-#define VL_FASTFLOAT float
-#endif
+#include "system.h"
 
-#define VL_XEAS(x) #x
-#define VL_EXPAND_AND_STRINGIFY(x) VL_XEAS(x)
+#define VL_FASTFLOAT float
 
 #define IMAGE_WIDTH 400
 #define IMAGE_HEIGHT 400
 #define FRAME_X_OFFSET 120
 #define FRAME_Y_OFFSET 40
 
-#define BASE_ADDRESS 0x800000 // SDRAM base
-#define DATABASE_START 0xf00000
-#define DESCRIPTOR_INFO_START 0xfd6400
-#define NUM_DATABASE_DESCRS 3426
-
-#define OPCODE_EXP 0x00
-#define OPCODE_RESET_CAPTURE 0xdd
-#define OPCODE_RESET_RUN 0xbb
-#define OPCODE_RUN 0xcc
-#define OPCODE_WAIT_SWITCH 0xee
-#define OPCODE_CAPTURE 0xff
-
 
 // this is the address where SIFT can start placing its octaves
 // and gradient data--right after the floating point image data
-#define SIFT_DATA_START (BASE_ADDRESS + IMAGE_WIDTH*IMAGE_HEIGHT*4)
-#define PROC_HAS_CONTROL 0x1109020
+#define SIFT_DATA_START (SDRAM_0_BASE + IMAGE_WIDTH*IMAGE_HEIGHT*4)
+#define PROC_HAS_CONTROL PROCHASCONTROL_BASE
 //#define PROC_CONTROL_ON *((volatile unsigned short*)PROC_HAS_CONTROL) = 1
 //#define PROC_CONTROL_OFF *((volatile unsigned short*)PROC_HAS_CONTROL) = 0
-#define PROC_CONTROL_ON IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 1);
-#define PROC_CONTROL_OFF IOWR_16DIRECT(PROC_HAS_CONTROL, 0, 0);
+#define PROC_CONTROL_ON IOWR_ALTERA_AVALON_PIO_DATA(PROC_HAS_CONTROL, 1);
+#define PROC_CONTROL_OFF IOWR_ALTERA_AVALON_PIO_DATA(PROC_HAS_CONTROL, 0);
+
 
 /** @brief VisionLab namespace */
 namespace VL {
@@ -156,6 +136,9 @@ int32_t fast_floor(float_t x) ;
  **
  ** The structure describes a gray scale image and it is used by the
  ** PGM input/output functions. The fileds are self-explanatory.
+ **
+ ** Justin Note: Some of the "fast math" functions were actually pretty
+ ** slow on Nios, and were further optimized.
  **/
 struct PgmBuffer
 {

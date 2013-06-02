@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu_0' in SOPC Builder design 'niosSystemCamControl'
  * SOPC Builder design path: C:/Users/Justin/Documents/eec181/project/niosControl3CamOnly/niosSystemCamControl.sopcinfo
  *
- * Generated: Wed May 29 21:00:35 PDT 2013
+ * Generated: Sat Jun 01 21:24:51 PDT 2013
  */
 
 /*
@@ -52,14 +52,16 @@ MEMORY
 {
     sdram_0 : ORIGIN = 0x800000, LENGTH = 8388608
     sram_16bit_512k_0 : ORIGIN = 0x1080000, LENGTH = 524288
-    reset : ORIGIN = 0x1104000, LENGTH = 32
-    onchip_memory2_0 : ORIGIN = 0x1104020, LENGTH = 16352
+    onchip_cache : ORIGIN = 0x1104000, LENGTH = 16384
+    reset : ORIGIN = 0x1109200, LENGTH = 32
+    onchip_reset_and_exception : ORIGIN = 0x1109220, LENGTH = 480
 }
 
 /* Define symbols for each memory base-address */
 __alt_mem_sdram_0 = 0x800000;
 __alt_mem_sram_16bit_512k_0 = 0x1080000;
-__alt_mem_onchip_memory2_0 = 0x1104000;
+__alt_mem_onchip_cache = 0x1104000;
+__alt_mem_onchip_reset_and_exception = 0x1109200;
 
 OUTPUT_FORMAT( "elf32-littlenios2",
                "elf32-littlenios2",
@@ -121,7 +123,7 @@ SECTIONS
         KEEP (*(.exceptions.exit));
         KEEP (*(.exceptions));
         PROVIDE (__ram_exceptions_end = ABSOLUTE(.));
-    } > onchip_memory2_0
+    } > onchip_reset_and_exception
 
     PROVIDE (__flash_exceptions_start = LOADADDR(.exceptions));
 
@@ -368,15 +370,32 @@ SECTIONS
      *
      */
 
-    .onchip_memory2_0 : AT ( LOADADDR (.sram_16bit_512k_0) + SIZEOF (.sram_16bit_512k_0) )
+    .onchip_cache : AT ( LOADADDR (.sram_16bit_512k_0) + SIZEOF (.sram_16bit_512k_0) )
     {
-        PROVIDE (_alt_partition_onchip_memory2_0_start = ABSOLUTE(.));
-        *(.onchip_memory2_0. onchip_memory2_0.*)
+        PROVIDE (_alt_partition_onchip_cache_start = ABSOLUTE(.));
+        *(.onchip_cache. onchip_cache.*)
         . = ALIGN(4);
-        PROVIDE (_alt_partition_onchip_memory2_0_end = ABSOLUTE(.));
-    } > onchip_memory2_0
+        PROVIDE (_alt_partition_onchip_cache_end = ABSOLUTE(.));
+    } > onchip_cache
 
-    PROVIDE (_alt_partition_onchip_memory2_0_load_addr = LOADADDR(.onchip_memory2_0));
+    PROVIDE (_alt_partition_onchip_cache_load_addr = LOADADDR(.onchip_cache));
+
+    /*
+     *
+     * This section's LMA is set to the .text region.
+     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
+     *
+     */
+
+    .onchip_reset_and_exception : AT ( LOADADDR (.onchip_cache) + SIZEOF (.onchip_cache) )
+    {
+        PROVIDE (_alt_partition_onchip_reset_and_exception_start = ABSOLUTE(.));
+        *(.onchip_reset_and_exception. onchip_reset_and_exception.*)
+        . = ALIGN(4);
+        PROVIDE (_alt_partition_onchip_reset_and_exception_end = ABSOLUTE(.));
+    } > onchip_reset_and_exception
+
+    PROVIDE (_alt_partition_onchip_reset_and_exception_load_addr = LOADADDR(.onchip_reset_and_exception));
 
     /*
      * Stabs debugging sections.

@@ -6,7 +6,7 @@
    {
       datum baseAddress
       {
-         value = "17862752";
+         value = "17863776";
          type = "long";
       }
    }
@@ -38,7 +38,7 @@
    {
       datum baseAddress
       {
-         value = "17862760";
+         value = "17863784";
          type = "long";
       }
    }
@@ -51,7 +51,7 @@
       }
       datum megawizard_uipreferences
       {
-         value = "{}";
+         value = "{output_language=VERILOG, output_directory=C:\\Users\\Justin\\Documents\\eec181\\project\\niosControl3CamOnly}";
          type = "String";
       }
    }
@@ -106,11 +106,19 @@
    element niosSystemCamControl
    {
    }
-   element onchip_memory2_0
+   element onchip_cache
    {
       datum _sortIndex
       {
          value = "2";
+         type = "int";
+      }
+   }
+   element onchip_reset_and_exception
+   {
+      datum _sortIndex
+      {
+         value = "14";
          type = "int";
       }
    }
@@ -122,19 +130,11 @@
          type = "int";
       }
    }
-   element procHasControl.s1
+   element uart_0.s1
    {
       datum baseAddress
       {
-         value = "17862688";
-         type = "long";
-      }
-   }
-   element onchip_memory2_0.s1
-   {
-      datum baseAddress
-      {
-         value = "17842176";
+         value = "17863680";
          type = "long";
       }
    }
@@ -142,7 +142,15 @@
    {
       datum baseAddress
       {
-         value = "17862704";
+         value = "17863728";
+         type = "long";
+      }
+   }
+   element procHasControl.s1
+   {
+      datum baseAddress
+      {
+         value = "17863712";
          type = "long";
       }
    }
@@ -150,7 +158,31 @@
    {
       datum baseAddress
       {
-         value = "17862720";
+         value = "17863744";
+         type = "long";
+      }
+   }
+   element fp_op_type.s1
+   {
+      datum baseAddress
+      {
+         value = "17863760";
+         type = "long";
+      }
+   }
+   element onchip_reset_and_exception.s1
+   {
+      datum baseAddress
+      {
+         value = "17863168";
+         type = "long";
+      }
+   }
+   element onchip_cache.s1
+   {
+      datum baseAddress
+      {
+         value = "17842176";
          type = "long";
       }
    }
@@ -159,22 +191,6 @@
       datum baseAddress
       {
          value = "8388608";
-         type = "long";
-      }
-   }
-   element fp_op_type.s1
-   {
-      datum baseAddress
-      {
-         value = "17862736";
-         type = "long";
-      }
-   }
-   element uart_0.s1
-   {
-      datum baseAddress
-      {
-         value = "17862656";
          type = "long";
       }
    }
@@ -227,8 +243,8 @@
  <parameter name="maxAdditionalLatency" value="0" />
  <parameter name="projectName">niosControl3CamOnly.qpf</parameter>
  <parameter name="sopcBorderPoints" value="true" />
- <parameter name="systemHash" value="-23492696210" />
- <parameter name="timeStamp" value="1369725684587" />
+ <parameter name="systemHash" value="-22116108457" />
+ <parameter name="timeStamp" value="1370140082489" />
  <module kind="clock_source" version="11.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="100000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -239,15 +255,15 @@
    kind="altera_avalon_onchip_memory2"
    version="11.0"
    enabled="1"
-   name="onchip_memory2_0">
+   name="onchip_cache">
   <parameter name="allowInSystemMemoryContentEditor" value="false" />
-  <parameter name="autoInitializationFileName" value="onchip_memory2_0" />
+  <parameter name="autoInitializationFileName" value="onchip_cache" />
   <parameter name="blockType" value="AUTO" />
   <parameter name="dataWidth" value="32" />
   <parameter name="deviceFamily" value="Cyclone II" />
   <parameter name="dualPort" value="false" />
   <parameter name="initMemContent" value="true" />
-  <parameter name="initializationFileName" value="onchip_memory2_0" />
+  <parameter name="initializationFileName" value="onchip_cache" />
   <parameter name="instanceID" value="NONE" />
   <parameter name="memorySize" value="16384" />
   <parameter name="readDuringWriteMode" value="DONT_CARE" />
@@ -308,7 +324,7 @@
   <parameter name="setting_activateModelChecker" value="false" />
   <parameter name="setting_HDLSimCachesCleared" value="true" />
   <parameter name="setting_HBreakTest" value="false" />
-  <parameter name="resetSlave" value="onchip_memory2_0.s1" />
+  <parameter name="resetSlave">onchip_reset_and_exception.s1</parameter>
   <parameter name="resetOffset" value="0" />
   <parameter name="muldiv_multiplierType" value="EmbeddedMulFast" />
   <parameter name="muldiv_divider" value="false" />
@@ -329,14 +345,14 @@
   <parameter name="mmu_TLBMissExcOffset" value="0" />
   <parameter name="manuallyAssignCpuID" value="false" />
   <parameter name="internalIrqMaskSystemInfo" value="3" />
-  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /></address-map>]]></parameter>
+  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_cache.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='onchip_reset_and_exception.s1' start='0x1109200' end='0x1109400' /></address-map>]]></parameter>
   <parameter name="instAddrWidth" value="25" />
   <parameter name="impl" value="Fast" />
-  <parameter name="icache_size" value="_4096" />
+  <parameter name="icache_size" value="_8192" />
   <parameter name="icache_ramBlockType" value="Automatic" />
   <parameter name="icache_numTCIM" value="_0" />
   <parameter name="icache_burstType" value="None" />
-  <parameter name="exceptionSlave" value="onchip_memory2_0.s1" />
+  <parameter name="exceptionSlave">onchip_reset_and_exception.s1</parameter>
   <parameter name="exceptionOffset" value="32" />
   <parameter name="deviceFeaturesSystemInfo">M512_MEMORY 0 M4K_MEMORY 1 M9K_MEMORY 0 M20K_MEMORY 0 M144K_MEMORY 0 MRAM_MEMORY 0 MLAB_MEMORY 0 ESB 0 EPCS 1 DSP 0 EMUL 1 HARDCOPY 0 LVDS_IO 0 ADDRESS_STALL 1 TRANSCEIVER_3G_BLOCK 0 TRANSCEIVER_6G_BLOCK 0 DSP_SHIFTER_BLOCK 0</parameter>
   <parameter name="deviceFamilyName" value="Cyclone II" />
@@ -353,7 +369,7 @@
   <parameter name="dcache_numTCDM" value="_0" />
   <parameter name="dcache_lineSize" value="_32" />
   <parameter name="dcache_bursts" value="true" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_memory2_0.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='uart_0.s1' start='0x1109000' end='0x1109020' /><slave name='procHasControl.s1' start='0x1109020' end='0x1109030' /><slave name='fp_operand.s1' start='0x1109030' end='0x1109040' /><slave name='fp_result.s1' start='0x1109040' end='0x1109050' /><slave name='fp_op_type.s1' start='0x1109050' end='0x1109060' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1109060' end='0x1109068' /><slave name='sysid.control_slave' start='0x1109068' end='0x1109070' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram_0.s1' start='0x800000' end='0x1000000' /><slave name='sram_16bit_512k_0.avalon_slave_0' start='0x1080000' end='0x1100000' /><slave name='onchip_cache.s1' start='0x1104000' end='0x1108000' /><slave name='cpu_0.jtag_debug_module' start='0x1108800' end='0x1109000' /><slave name='onchip_reset_and_exception.s1' start='0x1109200' end='0x1109400' /><slave name='uart_0.s1' start='0x1109400' end='0x1109420' /><slave name='procHasControl.s1' start='0x1109420' end='0x1109430' /><slave name='fp_operand.s1' start='0x1109430' end='0x1109440' /><slave name='fp_result.s1' start='0x1109440' end='0x1109450' /><slave name='fp_op_type.s1' start='0x1109450' end='0x1109460' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1109460' end='0x1109468' /><slave name='sysid.control_slave' start='0x1109468' end='0x1109470' /></address-map>]]></parameter>
   <parameter name="dataAddrWidth" value="25" />
   <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="altera_nios_custom_instr_floating_point_inst" baseAddress="252" addressSpan="4" clockCycleType="VARIABLE" /></info>]]></parameter>
   <parameter name="cpuReset" value="false" />
@@ -507,11 +523,32 @@
   <parameter name="useEopRegister" value="false" />
   <parameter name="useRelativePathForSimFile" value="false" />
  </module>
- <connection
-   kind="clock"
+ <module
+   kind="altera_avalon_onchip_memory2"
    version="11.0"
-   start="clk_0.clk"
-   end="onchip_memory2_0.clk1" />
+   enabled="1"
+   name="onchip_reset_and_exception">
+  <parameter name="allowInSystemMemoryContentEditor" value="false" />
+  <parameter name="autoInitializationFileName">onchip_reset_and_exception</parameter>
+  <parameter name="blockType" value="AUTO" />
+  <parameter name="dataWidth" value="32" />
+  <parameter name="deviceFamily" value="Cyclone II" />
+  <parameter name="dualPort" value="false" />
+  <parameter name="initMemContent" value="true" />
+  <parameter name="initializationFileName">onchip_reset_and_exception</parameter>
+  <parameter name="instanceID" value="NONE" />
+  <parameter name="memorySize" value="512" />
+  <parameter name="readDuringWriteMode" value="DONT_CARE" />
+  <parameter name="simAllowMRAMContentsFile" value="false" />
+  <parameter name="simMemInitOnlyFilename" value="0" />
+  <parameter name="singleClockOperation" value="false" />
+  <parameter name="slave1Latency" value="1" />
+  <parameter name="slave2Latency" value="1" />
+  <parameter name="useNonDefaultInitFile" value="false" />
+  <parameter name="useShallowMemBlocks" value="false" />
+  <parameter name="writable" value="true" />
+ </module>
+ <connection kind="clock" version="11.0" start="clk_0.clk" end="onchip_cache.clk1" />
  <connection kind="clock" version="11.0" start="clk_0.clk" end="cpu_0.clk" />
  <connection
    kind="avalon"
@@ -533,7 +570,7 @@
    kind="avalon"
    version="11.0"
    start="cpu_0.instruction_master"
-   end="onchip_memory2_0.s1">
+   end="onchip_cache.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x01104000" />
  </connection>
@@ -541,7 +578,7 @@
    kind="avalon"
    version="11.0"
    start="cpu_0.data_master"
-   end="onchip_memory2_0.s1">
+   end="onchip_cache.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x01104000" />
  </connection>
@@ -568,7 +605,7 @@
    start="cpu_0.data_master"
    end="jtag_uart_0.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01109060" />
+  <parameter name="baseAddress" value="0x01109460" />
  </connection>
  <connection
    kind="interrupt"
@@ -588,7 +625,7 @@
    start="cpu_0.data_master"
    end="procHasControl.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01109020" />
+  <parameter name="baseAddress" value="0x01109420" />
  </connection>
  <connection kind="clock" version="11.0" start="clk_0.clk" end="sysid.clk" />
  <connection
@@ -597,7 +634,7 @@
    start="cpu_0.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01109068" />
+  <parameter name="baseAddress" value="0x01109468" />
  </connection>
  <connection
    kind="clock"
@@ -637,7 +674,7 @@
    start="cpu_0.data_master"
    end="fp_operand.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01109030" />
+  <parameter name="baseAddress" value="0x01109430" />
  </connection>
  <connection kind="clock" version="11.0" start="clk_0.clk" end="fp_result.clk" />
  <connection
@@ -646,7 +683,7 @@
    start="cpu_0.data_master"
    end="fp_result.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01109040" />
+  <parameter name="baseAddress" value="0x01109440" />
  </connection>
  <connection kind="clock" version="11.0" start="clk_0.clk" end="fp_op_type.clk" />
  <connection
@@ -655,7 +692,7 @@
    start="cpu_0.data_master"
    end="fp_op_type.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01109050" />
+  <parameter name="baseAddress" value="0x01109450" />
  </connection>
  <connection kind="clock" version="11.0" start="clk_0.clk" end="uart_0.clk" />
  <connection
@@ -664,9 +701,30 @@
    start="cpu_0.data_master"
    end="uart_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01109000" />
+  <parameter name="baseAddress" value="0x01109400" />
  </connection>
  <connection kind="interrupt" version="11.0" start="cpu_0.d_irq" end="uart_0.irq">
   <parameter name="irqNumber" value="1" />
+ </connection>
+ <connection
+   kind="clock"
+   version="11.0"
+   start="clk_0.clk"
+   end="onchip_reset_and_exception.clk1" />
+ <connection
+   kind="avalon"
+   version="11.0"
+   start="cpu_0.instruction_master"
+   end="onchip_reset_and_exception.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01109200" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="11.0"
+   start="cpu_0.data_master"
+   end="onchip_reset_and_exception.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01109200" />
  </connection>
 </system>

@@ -21,7 +21,7 @@
 //
 //Burst adapter parameters:
 //adapter is mastered by: cpu_0/data_master
-//adapter masters: onchip_memory2_0/s1
+//adapter masters: onchip_cache/s1
 //asp_debug: 0
 //byteaddr_width: 16
 //ceil_data_width: 32

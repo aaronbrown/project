@@ -6,6 +6,7 @@
 #ifndef DATABASE_HPP_
 #define DATABASE_HPP_
 
+// database parameters
 #define DATABASE_START 0xf00000
 #define DESCRIPTOR_INFO_START 0xfd6400
 #define NUM_DATABASE_DESCRS 3426

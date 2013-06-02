@@ -21,14 +21,14 @@
 //
 //Burst adapter parameters:
 //adapter is mastered by: cpu_0/data_master
-//adapter masters: niosSystemCamControl_clock_1/in
+//adapter masters: onchip_reset_and_exception/s1
 //asp_debug: 0
-//byteaddr_width: 24
-//ceil_data_width: 16
-//data_width: 16
-//dbs_shift: 1
-//dbs_upstream_burstcount_width: 5
-//downstream_addr_shift: 1
+//byteaddr_width: 11
+//ceil_data_width: 32
+//data_width: 32
+//dbs_shift: 0
+//dbs_upstream_burstcount_width: 4
+//downstream_addr_shift: 2
 //downstream_burstcount_width: 1
 //downstream_max_burstcount: 1
 //downstream_pipeline: 1
@@ -38,7 +38,7 @@
 //master_data_width: 32
 //master_interleave: 0
 //master_linewrap_bursts: 0
-//nativeaddr_width: 23
+//nativeaddr_width: 9
 //slave_always_burst_max_burst: 0
 //slave_burst_on_burst_boundaries_only: 0
 //slave_interleave: 0
@@ -81,52 +81,52 @@ module niosSystemCamControl_burst_10 (
                                      )
 ;
 
-  output  [ 22: 0] reg_downstream_address;
-  output  [  4: 0] reg_downstream_arbitrationshare;
+  output  [  8: 0] reg_downstream_address;
+  output  [  3: 0] reg_downstream_arbitrationshare;
   output           reg_downstream_burstcount;
-  output  [  1: 0] reg_downstream_byteenable;
+  output  [  3: 0] reg_downstream_byteenable;
   output           reg_downstream_debugaccess;
-  output  [ 22: 0] reg_downstream_nativeaddress;
+  output  [  8: 0] reg_downstream_nativeaddress;
   output           reg_downstream_read;
   output           reg_downstream_write;
-  output  [ 15: 0] reg_downstream_writedata;
-  output  [ 15: 0] upstream_readdata;
+  output  [ 31: 0] reg_downstream_writedata;
+  output  [ 31: 0] upstream_readdata;
   output           upstream_readdatavalid;
   output           upstream_waitrequest;
   input            clk;
-  input   [ 15: 0] downstream_readdata;
+  input   [ 31: 0] downstream_readdata;
   input            downstream_readdatavalid;
   input            downstream_waitrequest;
   input            reset_n;
-  input   [ 23: 0] upstream_address;
+  input   [ 10: 0] upstream_address;
   input   [  3: 0] upstream_burstcount;
-  input   [  1: 0] upstream_byteenable;
+  input   [  3: 0] upstream_byteenable;
   input            upstream_debugaccess;
-  input   [ 22: 0] upstream_nativeaddress;
+  input   [  8: 0] upstream_nativeaddress;
   input            upstream_read;
   input            upstream_write;
-  input   [ 15: 0] upstream_writedata;
+  input   [ 31: 0] upstream_writedata;
 
-  wire    [  3: 0] address_offset;
+  wire    [  2: 0] address_offset;
   reg              atomic_counter;
-  wire    [ 23: 0] current_upstream_address;
+  wire    [ 10: 0] current_upstream_address;
   wire    [  3: 0] current_upstream_burstcount;
   wire             current_upstream_read;
   wire             current_upstream_write;
-  reg     [  4: 0] data_counter;
-  wire    [  4: 0] dbs_adjusted_upstream_burstcount;
-  wire    [ 22: 0] downstream_address;
-  wire    [ 23: 0] downstream_address_base;
-  wire    [  4: 0] downstream_arbitrationshare;
+  reg     [  3: 0] data_counter;
+  wire    [  3: 0] dbs_adjusted_upstream_burstcount;
+  wire    [  8: 0] downstream_address;
+  wire    [ 10: 0] downstream_address_base;
+  wire    [  3: 0] downstream_arbitrationshare;
   wire             downstream_burstcount;
   wire             downstream_burstdone;
-  wire    [  1: 0] downstream_byteenable;
+  wire    [  3: 0] downstream_byteenable;
   wire             downstream_debugaccess;
-  wire    [ 22: 0] downstream_nativeaddress;
+  wire    [  8: 0] downstream_nativeaddress;
   reg              downstream_read;
   wire             downstream_write;
   reg              downstream_write_reg;
-  wire    [ 15: 0] downstream_writedata;
+  wire    [ 31: 0] downstream_writedata;
   wire             enable_state_change;
   wire             fifo_empty;
   wire             max_burst_size;
@@ -139,38 +139,38 @@ module niosSystemCamControl_burst_10 (
   reg              pending_upstream_read_reg;
   wire             pending_upstream_write;
   reg              pending_upstream_write_reg;
-  reg     [  3: 0] read_address_offset;
+  reg     [  2: 0] read_address_offset;
   wire             read_update_count;
-  wire    [  4: 0] read_write_dbs_adjusted_upstream_burstcount;
-  reg     [ 22: 0] reg_downstream_address;
-  reg     [  4: 0] reg_downstream_arbitrationshare;
+  wire    [  3: 0] read_write_dbs_adjusted_upstream_burstcount;
+  reg     [  8: 0] reg_downstream_address;
+  reg     [  3: 0] reg_downstream_arbitrationshare;
   reg              reg_downstream_burstcount;
-  reg     [  1: 0] reg_downstream_byteenable;
+  reg     [  3: 0] reg_downstream_byteenable;
   reg              reg_downstream_debugaccess;
-  reg     [ 22: 0] reg_downstream_nativeaddress;
+  reg     [  8: 0] reg_downstream_nativeaddress;
   reg              reg_downstream_read;
   reg              reg_downstream_write;
-  reg     [ 15: 0] reg_downstream_writedata;
-  reg     [  4: 0] registered_read_write_dbs_adjusted_upstream_burstcount;
-  reg     [ 23: 0] registered_upstream_address;
+  reg     [ 31: 0] reg_downstream_writedata;
+  reg     [  3: 0] registered_read_write_dbs_adjusted_upstream_burstcount;
+  reg     [ 10: 0] registered_upstream_address;
   reg     [  3: 0] registered_upstream_burstcount;
-  reg     [  1: 0] registered_upstream_byteenable;
-  reg     [ 22: 0] registered_upstream_nativeaddress;
+  reg     [  3: 0] registered_upstream_byteenable;
+  reg     [  8: 0] registered_upstream_nativeaddress;
   reg              registered_upstream_read;
   reg              registered_upstream_write;
   reg              state_busy;
   reg              state_idle;
   wire             sync_nativeaddress;
-  wire    [  4: 0] transactions_remaining;
-  reg     [  4: 0] transactions_remaining_reg;
+  wire    [  3: 0] transactions_remaining;
+  reg     [  3: 0] transactions_remaining_reg;
   wire             update_count;
   wire             upstream_burstdone;
   wire             upstream_read_run;
-  wire    [ 15: 0] upstream_readdata;
+  wire    [ 31: 0] upstream_readdata;
   wire             upstream_readdatavalid;
   wire             upstream_waitrequest;
   wire             upstream_write_run;
-  reg     [  3: 0] write_address_offset;
+  reg     [  2: 0] write_address_offset;
   wire             write_update_count;
   assign sync_nativeaddress = |upstream_nativeaddress;
   //downstream, which is an e_avalon_master
@@ -179,9 +179,7 @@ module niosSystemCamControl_burst_10 (
   assign p1_atomic_counter = atomic_counter + (downstream_read ? downstream_burstcount : 1);
   assign downstream_burstdone = (downstream_read | downstream_write) & ~downstream_waitrequest & (p1_atomic_counter == downstream_burstcount);
   assign dbs_adjusted_upstream_burstcount = pending_register_enable ? read_write_dbs_adjusted_upstream_burstcount : registered_read_write_dbs_adjusted_upstream_burstcount;
-  assign read_write_dbs_adjusted_upstream_burstcount = {upstream_burstcount,
-    1'b0};
-
+  assign read_write_dbs_adjusted_upstream_burstcount = upstream_burstcount;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -340,8 +338,8 @@ module niosSystemCamControl_burst_10 (
 
   assign downstream_nativeaddress = registered_upstream_nativeaddress >> 2;
   assign address_offset = current_upstream_read ? read_address_offset : write_address_offset;
-  assign downstream_address_base = {current_upstream_address[23 : 2], 2'b00};
-  assign downstream_address = downstream_address_base + {address_offset, 1'b0};
+  assign downstream_address_base = current_upstream_address;
+  assign downstream_address = downstream_address_base + {address_offset, 2'b00};
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -367,7 +365,7 @@ module niosSystemCamControl_burst_10 (
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          registered_upstream_byteenable <= 2'b11;
+          registered_upstream_byteenable <= 4'b1111;
       else if (pending_register_enable)
           registered_upstream_byteenable <= upstream_byteenable;
     end
