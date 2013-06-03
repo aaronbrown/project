@@ -93,162 +93,6 @@ static const VL::float_t NBO_TIMES_ONE_OVER_2PI = 8 * ONE_OVER_2PI;
 
 
 namespace VL {
-namespace Detail {
-
-/** Comment eater istream manipulator */
-class _cmnt {} cmnt ;
-
-/** @brief Extract a comment from a stream
- **
- ** The function extracts a block of consecutive comments from an
- ** input stream. A comment is a sequence of whitespaces, followed by
- ** a `#' character, other characters and terminated at the next line
- ** ending. A block of comments is just a sequence of comments.
- **/
-std::istream& 
-operator>>(std::istream& is, _cmnt& manip)
-{
-  char c ;
-  char b [1024] ; 
-  is>>c ;
-  if( c != '#' ) 
-    return is.putback(c) ;
-  is.getline(b,1024) ;
-  return is ;
-}
-
-}
-
-/** @brief Insert PGM file into stream
- **
- ** The function iserts into the stream @a os the grayscale image @a
- ** im encoded as a PGM file. The immage is assumed to be normalized
- ** in the range 0.0 - 1.0.
- **
- ** @param os output stream.
- ** @param im pointer to image data.
- ** @param width image width.
- ** @param height image height.
- ** @return the stream @a os.
- **/
-std::ostream& 
-insertPgm(std::ostream& os, pixel_t const* im, int width, int height)
-{
-  os<< "P5"   << "\n"
-    << width  << " "
-    << height << "\n"
-    << "255"  << "\n" ;
-  for(int y = 0 ; y < height ; ++y) {
-    for(int x = 0 ; x < width ; ++x) {
-      unsigned char v = 
-        (unsigned char)
-        (std::max(std::min(*im++, 1.0f),0.f) * 255.0f) ;
-      os << v ;
-    }
-  }
-  return os ;
-}
-
-/** @brief Extract PGM file from stream.
- **
- ** The function extracts from the stream @a in a grayscale image
- ** encoded as a PGM file. The function fills the structure @a buffer,
- ** containing the image dimensions and a pointer to the image data.
- **
- ** The image data is an array of floats and is owned by the caller,
- ** which should erase it as in
- ** 
- ** @code
- **   delete [] buffer.data.
- ** @endcode
- **
- ** When the function encouters an error it throws a generic instance
- ** of VL::Exception.
- **
- ** @param in input stream.
- ** @param buffer buffer descriptor to be filled.
- ** @return the stream @a in.
- **/
-std::istream& 
-extractPgm(std::istream& in, PgmBuffer& buffer)
-{
-  pixel_t* im_pt ;
-  int      width ;
-  int      height ;
-  int      maxval ;
-
-  char c ;
-  in>>c ;
-  if( c != 'P') VL_THROW("File is not in PGM format") ;
-  
-  bool is_ascii ;
-  in>>c ;
-  switch( c ) {
-  case '2' : is_ascii = true ; break ;
-  case '5' : is_ascii = false ; break ;
-  default  : VL_THROW("File is not in PGM format") ;
-  }
-  
-  in >> Detail::cmnt
-     >> width
-     >> Detail::cmnt 
-     >> height
-     >> Detail::cmnt
-     >> maxval ;
-
-  // after maxval no more comments, just a whitespace or newline
-  {char trash ; in.get(trash) ;}
-
-  if(maxval > 255)
-    VL_THROW("Only <= 8-bit per channel PGM files are supported") ;
-
-  if(! in.good()) 
-    VL_THROW("PGM header parsing error") ;
-  
-  im_pt = new pixel_t [ width*height ];
-  
-  try {
-    if( is_ascii ) {
-      pixel_t* start = im_pt ;
-      pixel_t* end   = start + width*height ; 
-      pixel_t  norm  = pixel_t( maxval ) ;
-      
-      while( start != end ) {        
-        int i ;
-        in >> i ;	
-        if( ! in.good() ) VL_THROW
-                            ("PGM parsing error file (width="<<width
-                             <<" height="<<height
-                             <<" maxval="<<maxval
-                             <<" at pixel="<<start-im_pt<<")") ;    
-        *start++ = pixel_t( i ) / norm ;        
-      }
-    } else {
-      std::streampos beg = in.tellg() ;
-      char* buffer = new char [width*height] ;
-      in.read(buffer, width*height) ;
-      if( ! in.good() ) VL_THROW
-			  ("PGM parsing error file (width="<<width
-			   <<" height="<<height
-			   <<" maxval="<<maxval
-			   <<" at pixel="<<in.tellg()-beg<<")") ;
-      
-      pixel_t* start = im_pt ;
-      pixel_t* end   = start + width*height ; 
-      uint8_t* src = reinterpret_cast<uint8_t*>(buffer) ;      
-      while( start != end ) *start++ = *src++ / 255.0f ;
-    }       
-  } catch(...) {
-    delete [] im_pt ; 
-    throw ;
-  }
-  
-  buffer.width  = width ;
-  buffer.height = height ;
-  buffer.data   = im_pt ;
-
-  return in ;
-}
 
 // ===================================================================
 //                                          Low level image operations
@@ -441,7 +285,7 @@ prepareBuffers()
   
   // allocate
   //temp           = new pixel_t [ size ] ;
-  temp = (pixel_t*)SIFT_DATA_START;
+  temp = (pixel_t*)SIFT_DATA_START; // immediately after the fp image buffer
   tempReserved   = size ;
   tempIsGrad     = false ;
   tempOctave     = 0 ;
@@ -471,18 +315,20 @@ freeBuffers()
 {
   // filter and octaves[] are the only things possibly on the heap
   // at this point
-  if( filter ) {
-    delete [] filter ;
+  if( filter )
+  {
+    delete [] filter;
   }
-  filter = 0 ;
+  filter = 0;
 
-  if( octaves ) {
+  if( octaves )
+  {
     //for(int o = 0 ; o < O ; ++o) {
     //  delete [] octaves[ o ] ;
     //}
-    delete [] octaves ;
+    delete [] octaves;
   }
-  octaves = 0 ;
+  octaves = 0;
   
   //if( temp ) {
   //  delete [] temp ;
@@ -1024,13 +870,13 @@ Sift::prepareGrad(int o)
 
   if( ! tempIsGrad || tempOctave != o ) {
 
-	pixel_t* src;
-	pixel_t* srcPtr;
-	pixel_t* end;
-	pixel_t* grad;
-	pixel_t* gradPtr;
+		pixel_t* src;
+		pixel_t* srcPtr;
+		pixel_t* end;
+		pixel_t* grad;
+		pixel_t* gradPtr;
 
-	VL::float_t Gx, Gy, m, t;
+		VL::float_t Gx, Gy, m, t;
     // compute dx/dy
     for(int s = smin+1 ; s <= smax-2 ; ++s) {
       src = getLevel(o, s) + xo;
@@ -1042,21 +888,31 @@ Sift::prepareGrad(int o)
         //pixel_t* grad = 2 * (xo + yo*y + (s - smin -1)*so) + temp ;
 
     	  // 2*xo + 2*yo*y + 2*(s-smin-1)*so + temp;
-    	src += yo;
-    	end += yo;
-    	srcPtr = src;
-    	grad += 2*yo;
-    	gradPtr = grad;
+
+      	// this way is faster than the above, as we do simple increments
+      	// each time through the loop
+      	src += yo;
+      	end += yo;
+      	srcPtr = src;
+      	grad += 2*yo;
+      	gradPtr = grad;
     	//unsigned t1, t2, t3;
 
         while(srcPtr != end) {
           Gx = 0.5 * ( *(srcPtr+xo) - *(srcPtr-xo) ) ;
           Gy = 0.5 * ( *(srcPtr+yo) - *(srcPtr-yo) ) ;
+
          // t1 = alt_timestamp();
+
+          // these two lines are by far the most time-consuming part of this function (~80%)
+          // however, the runtime of this function in relation to other code segments is
+          // very small
           m = fast_sqrt( Gx*Gx + Gy*Gy ) ;
           t = fast_mod_2pi( fast_atan2(Gy, Gx) + VL::float_t(2*M_PI) );
+
          // t3 = alt_timestamp();
          // sum += t3-t1;
+
           *gradPtr++ = pixel_t( m ) ;
           *gradPtr++ = pixel_t( t ) ;
           ++srcPtr ;
@@ -1098,11 +954,13 @@ Sift::prepareGrad(int o)
 int
 Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
 {
-  	union
-  	{
-  		unsigned int exp_int;
-  		VL::float_t exp_float;
-  	} exp_union;
+	// we use this union to easily pass a floating point operand to the
+	// hardware module that does our (REALLY FAST) exponentiation for us
+  union
+  {
+  	unsigned int exp_int;
+  	VL::float_t exp_float;
+  } exp_union;
 
   int const   nbins = 36 ;
   VL::float_t const winFactor = 1.5 ;
@@ -1156,7 +1014,10 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
 
 #undef at
 #define at(dx,dy) (*(pt + (dx)*xo + (dy)*yo))
+
+  // write the exponentiation opcode before entering the main loop
   IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, 0x00);
+
   for(int ys = std::max(-W, 1-yi) ; ys <= std::min(+W, oh -2 -yi) ; ++ys) {
     for(int xs = std::max(-W, 1-xi) ; xs <= std::min(+W, ow -2 -xi) ; ++xs) {
       
@@ -1168,13 +1029,19 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
       if(r2 >= W*W+0.5) continue ;
 
 
+      // this replaces expn(r2 / (2*sigmaw*sigmaw))
+      // The call to fast_expn() in this function originally took a majority of its
+      // overall runtime. Now, it takes only the time to prepare the operand, write
+      // it to a PIO, and read the result back later from another PIO. This all takes
+      // only around 200 CCs according to the timestamp timer, whereas originally, it
+      // was closer to 2000 CCs.
+      // We note that now the exponentiation can happen in parallel with instructions
+      // on Nios...the result can actually not be correctly read back immediately.
       exp_union.exp_float =  -r2 / (2*sigmaw*sigmaw);
-     // std::cout << "op:  " << exp_union.exp_float << std::endl;
 
       // place the integer rep of the float to be exponentiated in the fp_operand reg
       IOWR_ALTERA_AVALON_PIO_DATA(FP_OPERAND_BASE, exp_union.exp_int);
 
-      //VL::float_t wgt = EXP_MACRO( -r2 / (2*sigmaw*sigmaw) ) ;
       VL::float_t mod = *(pt + xs*xo + ys*yo) ;
       VL::float_t ang = *(pt + xs*xo + ys*yo + 1) ;
 
@@ -1183,9 +1050,8 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
 
       // retrieve the integer rep of the exponentiation result
       exp_union.exp_int = IORD_ALTERA_AVALON_PIO_DATA(FP_RESULT_BASE);
-      VL::float_t wgt = exp_union.exp_float; // convert back to float
+      VL::float_t wgt = exp_union.exp_float; // get the result as a float
 
-      //std::cout << "res: " << exp_union.exp_float << std::endl;
       hist[bin] += mod * wgt ;        
     }
   }
@@ -1244,6 +1110,10 @@ Sift::computeKeypointOrientations(VL::float_t angles [4], Keypoint keypoint)
  enough_angles:
   return nangles ;
 }
+
+
+// This is Vedaldi's original implementation of the orientations function, which
+// we've replaced with the above. We keep this here for profiling comparisons.
 int
 Sift::computeKeypointOrientations2(VL::float_t angles [4], Keypoint keypoint)
 {
@@ -1446,13 +1316,43 @@ Sift::computeKeypointDescriptor
    * wide.
    */      
 	 // alt_timestamp_start();
-	  unsigned int tm1, tm2, t6, t7, tmoh;
+	 /* unsigned int tm1, tm2, t6, t7, tmoh;
 	  unsigned long long histLoopSum = 0, histLoopSum2 = 0, histLoopSum3 = 0, histLoopSum4=0;
 	  unsigned long long histLoopSum5 = 0, histLoopSum6 = 0, histLoopSum7 = 0, histLoopSum8=0, histLoopSum9 = 0;
 	  unsigned int t1, t2, t3, t4, t5;
+	  */
 	 // tm1 = alt_timestamp();
 
+	/* BEGIN VERY LONG COMMENT ADDED BY JUSTIN (I AM NOT VEDALDI.) */
+	// Note: This function was profiled repeatedly and in detail. We found that the single exponentiation
+	// instruction was originally 30-40% of the overall runtime of this function. We improved this
+	// by doing exponentiation in hardware, as in the orientations function. Other improvements:
+	// 		1. Improved several of the "fast" math instructions to be faster. This includes improving
+	//			 the fast_floor() function substantially, as well as the fast_abs() function, using some
+	//			 bit hacks and knowledge about the particular operands passed in.
+	//		2. Unrolled the histogram loop ONCE (but not twice), improving performance by another
+	//  		 10-15%. Unrolling the middle loop as well degraded performance.
+	//		3. Precomputed some loop invariant constants, especially those that necessitated division
+	// 			 in the main loop. Precomputing y = 1/x and multiplying by y turned out to be much
+	// 			 faster than dividing by x in some cases. This same technique was used to optimize
+	//			 the fastMod2Pi() function.
+	//		4. Simplified memory address calculations by using a base address and incrementing
+	// 			 rather than performing redundant math in every loop.
+	//		5. A large iCache (i.e. 8K) seemed to improve the speed of this function as well. At this
+	//			 point, we had come from something like 0.5 descriptors/sec to 5 descriptors/sec.
+	//		6. Near the very end, we devised a way to fit a larger dCache on the DE2, which helped
+	//			 speed this, still the slowest part of our algorithm, up IMMENSELY. We can now process
+	//			 about 10-12 descriptors/sec, which, unlike the earlier estimates, includes converting
+	//			 the descriptors to byte representations and storing them to SDRAM.
+	//
+	// Contrary to our initial beliefs, memory accesses in the inner loop do not account for a
+	// very large portion of this function's runtime. When we profiled the memory accesses, they
+	// took up <10% of the runtime. Similarly, normalization (and therefore SRAM) accesses takes
+	// a neglibible amount of time.
+	/* END VERY LONG COMMENT ADDED BY JUSTIN (AGAIN, I AM NOT VEDALDI.) */
 
+
+	// union for communicating exponentation operand and result to/from hardware
 	union
 	{
 		unsigned int exp_int;
@@ -1490,7 +1390,9 @@ Sift::computeKeypointDescriptor
   const int NBO = 8 ;
   const int NBP = 4 ;
   const VL::float_t SBP = magnif * sigma ;
-  const VL::float_t ONE_OVER_SBP = 1 / SBP;
+  const VL::float_t ONE_OVER_SBP = 1 / SBP; // an optimization!
+  // we thought long and hard about changing this window factor, but opted
+  // not to lose the accuracy
   const int   W = (int) floor (sqrt(2.0) * SBP * (NBP + 1) / 2.0 + 0.5) ;
   
   /* Offsets to move in the descriptor. */
@@ -1535,7 +1437,8 @@ Sift::computeKeypointDescriptor
 
 
 
-  VL::pixel_t *base;
+  VL::pixel_t *base; // again, we determine the memory access addresses in a
+  // more efficient way using this
   for(int dyi = std::max(-W, 1-yi) ; dyi <= std::min(+W, oh-2-yi) ; ++dyi) {
     for(int dxi = std::max(-W, 1-xi) ; dxi <= std::min(+W, ow-2-xi) ; ++dxi) {
      //   unsigned int t1, t2, t3, t4, t5;
@@ -1557,26 +1460,33 @@ Sift::computeKeypointDescriptor
       // fractional displacement
       VL::float_t dx = xi + dxi - x;
       VL::float_t dy = yi + dyi - y;
+
     //  t2 = alt_timestamp();
      //   histLoopSum3 += t2-t1;
       
+      //  t1 = alt_timestamp();
+
       // get the displacement normalized w.r.t. the keypoint
       // orientation and extension.
-    //  t1 = alt_timestamp();
       VL::float_t nx = ( ct0 * dx + st0 * dy) * ONE_OVER_SBP ;
       VL::float_t ny = (-st0 * dx + ct0 * dy) * ONE_OVER_SBP ;
      // VL::float_t nt = NBO * theta / (2*M_PI) ;
-      VL::float_t nt = theta * VL::Detail::NBO_TIMES_ONE_OVER_2PI ;
+      VL::float_t nt = theta * VL::Detail::NBO_TIMES_ONE_OVER_2PI ; // optimization!
+
      // t2 = alt_timestamp();
-       //     toh = alt_timestamp();
+     //     toh = alt_timestamp();
      //       histLoopSum4 += t2-t1;
       
       // Get the gaussian weight of the sample. The gaussian window
       // has a standard deviation equal to NBP/2. Note that dx and dy
       // are in the normalized frame, so that -NBP/2 <= dx <= NBP/2.
-      VL::float_t const wsigma = NBP/2 ;
+      //VL::float_t const wsigma = NBP/2 ;
+
+      // wsigma was used in the exponentation below. The necessary value
+      // came out to be 0.125, so no need to recompute this every time
 
 
+      // do hardware exponentiation
       IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, 0x00);
      // t1 = alt_timestamp();
       VL::float_t val = (nx*nx + ny*ny)*.125;
@@ -1596,9 +1506,9 @@ Sift::computeKeypointDescriptor
 
 
 
+      // t1 = alt_timestamp();
       // The sample will be distributed in 8 adjacent bins.
       // We start from the ``lower-left'' bin.
-     // t1 = alt_timestamp();
       int binx = fast_floor( nx - 0.5 ) ;
       int biny = fast_floor( ny - 0.5 ) ;
       int bint = fast_floor( nt ) ;
@@ -1612,20 +1522,19 @@ Sift::computeKeypointDescriptor
    //     histLoopSum7 += t2-t1;
       int dbinx ;
       int dbiny ;
-      int dbint ;
+      //int dbint ; this isn't needed after loop unrolling
 
 
       // retrieve the exponentiation result from the earlier operation
       exp_union.exp_int = IORD_ALTERA_AVALON_PIO_DATA(FP_RESULT_BASE);
-      VL::float_t win = exp_union.exp_float; // convert to float val
-      //std::cout << win << std::endl;
-
+      VL::float_t win = exp_union.exp_float; // retrieve float rep
 
       //alt_timestamp_start();
       IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, 0x01);
 
-      const VL::float_t WIN_TIMES_MOD = win * mod;
-    //  t1 = alt_timestamp();
+      const VL::float_t WIN_TIMES_MOD = win * mod; // precompute this!
+
+      //  t1 = alt_timestamp();
       // Distribute the current sample into the 8 adjacent bins
       for(dbinx = 0 ; dbinx < 2 ; ++dbinx) {
         for(dbiny = 0 ; dbiny < 2 ; ++dbiny) {
@@ -1634,28 +1543,28 @@ Sift::computeKeypointDescriptor
                 biny+dbiny >= -(NBP/2) &&
                 biny+dbiny <   (NBP/2) )
             {
-
-              /*** dbint = 0 ***/
+              /*** unrolled loop: dbint = 0 ***/
               VL::float_t weight = WIN_TIMES_MOD
             		  	  	  	  	  * fast_abs(   (1 - dbinx - rbinx)
             		  	  	  	  			      * (1 - dbiny - rbiny)
             		  	  	  	  			      * (1 - rbint) ) ;
 
 
-              /*** dbint = 1 ***/
+              /*** unrolle loop: dbint = 1 ***/
               VL::float_t weight2 = WIN_TIMES_MOD
                               	  	  * fast_abs(   (1 - dbinx - rbinx)
                               	  			  	  * (1 - dbiny - rbiny)
                               	  			  	  * (-rbint) ) ;
 
 
-              // add results to the histogram
+              // add both results to the histogram
               atd(binx+dbinx, biny+dbiny, (bint)   % NBO) += weight ;
               atd(binx+dbinx, biny+dbiny, (bint+1) % NBO) += weight2 ;
           } // if
         } // dbiny
       } // dbinx
 
+      // original (not unrolled, with loop invariants still inside)
       /*
        * for(dbinx = 0 ; dbinx < 2 ; ++dbinx) {
         for(dbiny = 0 ; dbiny < 2 ; ++dbiny) {
@@ -1679,14 +1588,10 @@ Sift::computeKeypointDescriptor
           }            
         }
        */
-     // t2 = alt_timestamp();
-     //   histLoopSum8 += t2-t1;
-
-
-      //std::cout << "iter: " << (t2 - t1) - (toh - t2) << std::endl;
+      // t2 = alt_timestamp();
+      //   histLoopSum8 += t2-t1;
     }  
   }
-
 
 
  // t1 = alt_timestamp();
@@ -1704,26 +1609,28 @@ Sift::computeKeypointDescriptor
     /* Normalize again. */
     Detail::normalize_histogram(descr_pt, descr_pt + NBO*NBP*NBP) ;
   }
+
   //t2 = alt_timestamp();
   //  histLoopSum9 += t2-t1;
 
   /*
   tm2 = alt_timestamp();
-   // tmoh = alt_timestamp();
+  // tmoh = alt_timestamp();
   std::cout << "frac: " << 1.0 * histLoopSum / (tm2-tm1);
   std::cout << "frac2: " << 1.0 * histLoopSum2 / (tm2-tm1);
-    std::cout << "frac3: " << 1.0 * histLoopSum3 / (tm2-tm1);
-    std::cout << "frac4: " << 1.0 * histLoopSum4 / (tm2-tm1);
-    std::cout << "frac5: " << 1.0 * histLoopSum5 / (tm2-tm1);
-    std::cout << "frac6: " << 1.0 * histLoopSum6 / (tm2-tm1);
-      std::cout << "frac7: " << 1.0 * histLoopSum7 / (tm2-tm1);
-      std::cout << "frac8: " << 1.0 * histLoopSum8 / (tm2-tm1);
-      std::cout << "frac9: " << 1.0 * histLoopSum9 / (tm2-tm1);
-      */
+  std::cout << "frac3: " << 1.0 * histLoopSum3 / (tm2-tm1);
+  std::cout << "frac4: " << 1.0 * histLoopSum4 / (tm2-tm1);
+  std::cout << "frac5: " << 1.0 * histLoopSum5 / (tm2-tm1);
+  std::cout << "frac6: " << 1.0 * histLoopSum6 / (tm2-tm1);
+  std::cout << "frac7: " << 1.0 * histLoopSum7 / (tm2-tm1);
+  std::cout << "frac8: " << 1.0 * histLoopSum8 / (tm2-tm1);
+  std::cout << "frac9: " << 1.0 * histLoopSum9 / (tm2-tm1);
+  */
  // std::cout << tm2-tm1 <<",";
-
 }
 
+
+// like the orientations function, this is left here for profiling and comparison
 void
 Sift::computeKeypointDescriptor2
 (VL::float_t* descr_pt,
@@ -1855,7 +1762,7 @@ Sift::computeKeypointDescriptor2
       // Get the gaussian weight of the sample. The gaussian window
       // has a standard deviation equal to NBP/2. Note that dx and dy
       // are in the normalized frame, so that -NBP/2 <= dx <= NBP/2.
-      VL::float_t const wsigma = NBP/2 ;
+      //VL::float_t const wsigma = NBP/2 ;
 
 
       VL::float_t val = (nx*nx + ny*ny)*.125;

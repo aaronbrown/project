@@ -7,6 +7,10 @@
 
 using namespace std;
 
+
+// open the UART for writing, and write the bytes contained in data
+// CLOSE the UART file pointer when finished, otherwise the data will
+// not be sent
 int sendBytesToUART(const uint8_t* data, int n)
 {
 	FILE* fp = fopen("/dev/uart_0", "w");
@@ -72,7 +76,8 @@ void storeSceneDescriptorInfo(VL::float_t x, VL::float_t y, unsigned int descrNu
 } // storeSceneDescriptorInfo()
 
 
-
+// This is used in the calibration stage to allow the user to toggle a switch
+// in order to advance the evaluation program.
 void waitForUserAdvance()
 {
 	usleep(1*1000*1000); // so we don't get a false switch flip if the user is
@@ -88,10 +93,16 @@ void waitForUserAdvance()
 }
 
 
+// This function retrieves GRAY intensity data from the area the camera writes to in
+// SDRAM and converts to to a floating point representation (normalized between 0 and 1)
+// that is used by the SIFT pr
 void extractImageData(VL::PgmBuffer& buffer)
 {
+	// Before we finalized certain parameters, we mapped the heap to SDRAM.
+	// Now, the heap is mapped to SRAM and we hard code the address of this
+	// and other buffers needed by SIFT.
   //VL::pixel_t* im_pt = new VL::pixel_t[IMAGE_WIDTH*IMAGE_HEIGHT];
-  VL::pixel_t* im_pt = (VL::pixel_t*)SDRAM_0_BASE;
+  VL::pixel_t* im_pt = (VL::pixel_t*)SDRAM_0_BASE; // overwrite the camera image data
   VL::pixel_t* start = im_pt;
 	unsigned int x, y, byteNum, blockNum, offset;
 	unsigned short* imgPtr = 0;
@@ -100,10 +111,12 @@ void extractImageData(VL::PgmBuffer& buffer)
 	float minVal = 1.0;
 	float floatIntensity;
 
-  buffer.width  = IMAGE_WIDTH ;
-  buffer.height = IMAGE_HEIGHT ;
-  buffer.data   = im_pt ;
+  buffer.width  = IMAGE_WIDTH;
+  buffer.height = IMAGE_HEIGHT;
+  buffer.data   = im_pt;
 
+  // retrieve and store floating point data for the 400x400 area
+  // in the center of the screen
 	for (y = FRAME_Y_OFFSET; y < IMAGE_HEIGHT + FRAME_Y_OFFSET; y++)
 	{
 		for (x = FRAME_X_OFFSET; x < IMAGE_WIDTH + FRAME_X_OFFSET; x++)

@@ -62,6 +62,9 @@ int checkForMatch(uint8_t* sceneDescr)
     return -1;
 } // checkForMatch()
 
+
+// Given a count of the scene descriptors, and their representation in SDRAM,
+// compare them against the database, then pack and send matches over the UART.
 void findDatabaseMatches(int numSceneDescrs)
 {
 	for (int sceneDescrNum = 0; sceneDescrNum < numSceneDescrs; sceneDescrNum++)
@@ -76,29 +79,34 @@ void findDatabaseMatches(int numSceneDescrs)
 
 		if (matchIndex != -1)
 		{
-			unsigned int databaseMatchInfoStructNum = matchIndex / 64;
-			unsigned int databaseMatchInfoOffset = matchIndex % 64;
+			unsigned int databaseMatchInfoStructNum = matchIndex / 64; // which 2 block struct is the match's info in?
+			unsigned int databaseMatchInfoOffset = matchIndex % 64; // which info struct within that struct?
 
+			// get struct address for matching descriptor
 			struct descriptorInfoTwoBlocks* theDatabaseInfoPtr =
 					(struct descriptorInfoTwoBlocks*)(DESCRIPTOR_INFO_START) + databaseMatchInfoStructNum;
 
+			// now do the same as above for the scene descriptor, retrieving its information
 			unsigned int sceneMatchInfoStructNum = sceneDescrNum / 64;
 			unsigned int sceneMatchInfoOffset = sceneDescrNum % 64;
 
 			struct descriptorInfoTwoBlocks* theSceneInfoPtr =
 					(struct descriptorInfoTwoBlocks*)(DESCRIPTOR_INFO_START) + sceneMatchInfoStructNum;
 
+			// prepare the database information for sending
 			uint8_t xBig = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].xBig;
 			uint8_t xLittle = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].xLittle;
 			uint8_t yBig = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].yBig;
 			uint8_t yLittle = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].yLittle;
 			uint8_t objID = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].objectID;
 
+			// prepare the scene information for sending
 			uint8_t uBig = theSceneInfoPtr->sceneInfos[sceneMatchInfoOffset].uBig;
 			uint8_t uLittle = theSceneInfoPtr->sceneInfos[sceneMatchInfoOffset].uLittle;
 			uint8_t vBig = theSceneInfoPtr->sceneInfos[sceneMatchInfoOffset].vBig;
 			uint8_t vLittle = theSceneInfoPtr->sceneInfos[sceneMatchInfoOffset].vLittle;
 
+			// get the absolute coordinates just so we can print them to the console
 			unsigned short xCoord = (xBig << 8) + xLittle;
 			unsigned short yCoord = (yBig << 8) + yLittle;
 			unsigned short uCoord = (uBig << 8) + uLittle;
