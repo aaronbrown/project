@@ -7,9 +7,19 @@
 #define DATABASE_HPP_
 
 // database parameters
-#define DATABASE_START 0xf00000
-#define DESCRIPTOR_INFO_START 0xfd6400
-#define NUM_DATABASE_DESCRS 3426
+#define DATABASE_START 0xf00000 // 7MB mark of SDRAM
+// NUM_DATABASE_DESCRS is now the only thing that needs to be changed in
+// the nios code when the database changes
+#define NUM_DATABASE_DESCRS 3368
+// the point information associated with the database descriptors starts
+// right after the descriptors themselves; since we store the database only
+// in bank 2, we have to skip 256 nios-addressable bytes for each descriptor
+// in the database
+// also note that we fill out the last block in the descriptors portion of the
+// database with 0s, so that we need to multiple by the next multiple of 4 greater
+// than or equal to NUM_DATABASE_DESCRS
+static const int FILLER_DESCRS = ((NUM_DATABASE_DESCRS % 4) == 0) ? 0 : (4 - (NUM_DATABASE_DESCRS % 4));
+static const int DESCRIPTOR_INFO_START = (DATABASE_START + (NUM_DATABASE_DESCRS + FILLER_DESCRS)*256);
 
 /*
 GENERAL DATABASE COMMENTS

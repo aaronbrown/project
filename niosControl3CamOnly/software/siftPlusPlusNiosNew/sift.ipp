@@ -40,6 +40,8 @@
 // BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO PROVIDE
 // MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
+// Modified from its original version for the Shape SIFTers' EEC 181 design project.
+
 #define VL_USEFASTMATH
 
 /** 
@@ -213,21 +215,22 @@ Sift::getMagnification() const
  ** @param x argument.
  ** @return @c exp(-x)
  **/
+ // This function is no longer used, as exponentiation is outsourced to hardware.
 inline
 VL::float_t
 fast_expn(VL::float_t x)
 {
-  assert(VL::float_t(0) <= x && x <= Detail::expnTableMax) ;
-#ifdef VL_USEFASTMATH
-  x *= Detail::expnTableSize / Detail::expnTableMax ;
-  VL::int32_t i = fast_floor(x) ;
-  VL::float_t r = x - i ;
-  VL::float_t a = VL::Detail::expnTable[i] ;
-  VL::float_t b = VL::Detail::expnTable[i+1] ;
-  return a + r * (b - a) ;
-#else
+//  assert(VL::float_t(0) <= x && x <= Detail::expnTableMax) ;
+//#ifdef VL_USEFASTMATH
+//  x *= Detail::expnTableSize / Detail::expnTableMax ;
+//  VL::int32_t i = fast_floor(x) ;
+//  VL::float_t r = x - i ;
+//  VL::float_t a = VL::Detail::expnTable[i] ;
+//  VL::float_t b = VL::Detail::expnTable[i+1] ;
+//  return a + r * (b - a) ;
+//#else
   return exp(-x) ;
-#endif
+//#endif
 }
 
 /** @brief Fast @c mod(x,2pi)
@@ -251,9 +254,13 @@ VL::float_t
 fast_mod_2pi(VL::float_t x)
 {
 #ifdef VL_USEFASTMATH
+  // Original Vedaldi implementation.
   //while(x < VL::float_t(0)      ) x += VL::float_t(2*M_PI) ;
   //while(x > VL::float_t(2*M_PI) ) x -= VL::float_t(2*M_PI) ;
   //return x ;
+  
+  // Faster math! Use precomputed constants and the definition of modulo
+  // to produce a fast result in all cases.
   int ax = (int)(x * ONEOVERTWOPI);
   return (x >= 0) ? (x - ax*TWOPI) : (TWOPI + x - ax*TWOPI);
 #else
@@ -271,7 +278,11 @@ int32_t
 fast_floor(VL::float_t x)
 {
 #ifdef VL_USEFASTMATH
+  // Original Vedaldi implementation.
   //return (x>=0)? int32_t(x) : std::floor(x) ;
+  
+  // Faster math! Use the fact that negative numbers in this algorithm are
+  // small in magnitude to avoid an expensive call to std::floor().
   return int32_t(x + 1024) - 1024;
   //  return int32_t( x - ((x>=0)?0:1) ) ; 
 #else
@@ -288,7 +299,10 @@ VL::float_t
 fast_abs(VL::float_t x)
 {
 #ifdef VL_USEFASTMATH
+ // Original Vedaldi implementation.
  // return (x >= 0) ? x : -x ;
+ 
+ // Faster math! Very slightly faster, uses a union to unset the high bit.
  union
  {
  	VL::float_t xf;

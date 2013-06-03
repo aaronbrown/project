@@ -3,6 +3,9 @@
  *
  */
 
+// THE MATCHING CODE HERE IS BASED ON DAVID LOWE'S SIFT DEMO MATCHING CODE, BUT HAS BEEN
+// MODIFIED TO HAVE A STRICTER MATCHING THRESHOLD AND TO USE OUR DATABASE FORMAT.
+
 #include "match.hpp"
 
 // returns the distance squared (Euclidian) of the two 128 byte
@@ -53,7 +56,7 @@ int checkForMatch(uint8_t* sceneDescr)
     } // for
 
     // check ratio of 2 nearest neighbors
-    if (10 * 10 * distsq1 < 7 * 7 * distsq2)
+    if (10 * 10 * distsq1 < 60 * distsq2)
       return minkey;
 
     return -1;
@@ -110,6 +113,7 @@ void findDatabaseMatches(int numSceneDescrs)
 } // findDatabaseMatches()
 
 
+// The functions below are (essentially) David Lowe's implementation of descriptor matching.
 /*
 int DistSquared(unsigned char *descr1, unsigned char *descr2)
 {

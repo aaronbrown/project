@@ -45,18 +45,18 @@
  ** The algorithm is implemented by the class VL::Sift.
  **/
 
+// Modified from its original version for the Shape SIFTers' EEC 181 design project.
+
 #include <sys/alt_timestamp.h>
-#include"sift.hpp"
-#include"sift-conv.tpp"
-#include  "altera_avalon_pio_regs.h"
-#include<algorithm>
-#include<iostream>
-#include<sstream>
-#include<cassert>
+#include "sift.hpp"
+#include "sift-conv.tpp"
+#include "altera_avalon_pio_regs.h"
+#include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <cassert>
 
 #include"system.h"
-
-#define EXP_MACRO(A) __builtin_custom_fnf(0x00, (A));
 
 extern "C" {
 #if defined (VL_MAC)
@@ -73,21 +73,21 @@ namespace VL {
 
 namespace Detail {
 
-int const         expnTableSize = 256 ;
-VL::float_t const expnTableMax  = VL::float_t(25.0) ;
-VL::float_t       expnTable [ expnTableSize + 1 ] ;
+//int const         expnTableSize = 256 ;
+//VL::float_t const expnTableMax  = VL::float_t(25.0) ;
+//VL::float_t       expnTable [ expnTableSize + 1 ] ;
 
 static const VL::float_t ONE_OVER_2PI = 1 / (2 * M_PI);
 static const VL::float_t NBO_TIMES_ONE_OVER_2PI = 8 * ONE_OVER_2PI;
 
-struct buildExpnTable
-{
-  buildExpnTable() {
-    for(int k = 0 ; k < expnTableSize + 1 ; ++k) {
-      expnTable[k] = exp( - VL::float_t(k) / expnTableSize * expnTableMax ) ;
-    }
-  }
-} _buildExpnTable ;
+//struct buildExpnTable
+//{
+//  buildExpnTable() {
+//    for(int k = 0 ; k < expnTableSize + 1 ; ++k) {
+//      expnTable[k] = exp( - VL::float_t(k) / expnTableSize * expnTableMax ) ;
+//    }
+//  }
+//} _buildExpnTable ;
 
 } }
 
