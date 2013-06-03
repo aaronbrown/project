@@ -39560,342 +39560,6 @@ Sdram_Arbiter:sdramArbiter0
 
 # end
 # entity
-Sdram_Control_4Port
-# storage
-db|DE2_D5M.(345).cnf
-db|DE2_D5M.(345).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sdram_control_4port|sdram_control_4port.v
-24f88bd4622a442e847659eaa7986479
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-INIT_PER
-24000
-PARAMETER_SIGNED_DEC
-DEF
-REF_PER
-1024
-PARAMETER_SIGNED_DEC
-DEF
-SC_CL
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RCD
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RRD
-7
-PARAMETER_SIGNED_DEC
-DEF
-SC_PM
-1
-PARAMETER_SIGNED_DEC
-DEF
-SC_BL
-1
-PARAMETER_SIGNED_DEC
-DEF
-SDR_BL
-111
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_BT
-0
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_CL
-011
-PARAMETER_UNSIGNED_BIN
-DEF
-}
-# include_file {
-hwacceleration|hwacceleration.v
-4b8d2fece81775126989bed7f1eb2069
-sdram_control_4port|sdram_params.h
-625599f965a889cf34497649a6d284d8
-}
-# hierarchies {
-Sdram_Control_4Port:u7
-}
-# macro_sequence
-DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      ASIZE23      DSIZE16      
-# end
-# entity
-control_interface
-# storage
-db|DE2_D5M.(346).cnf
-db|DE2_D5M.(346).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sdram_control_4port|control_interface.v
-9c8a4b0d93e3af78862303b80a269
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-INIT_PER
-24000
-PARAMETER_SIGNED_DEC
-DEF
-REF_PER
-1024
-PARAMETER_SIGNED_DEC
-DEF
-SC_CL
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RCD
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RRD
-7
-PARAMETER_SIGNED_DEC
-DEF
-SC_PM
-1
-PARAMETER_SIGNED_DEC
-DEF
-SC_BL
-1
-PARAMETER_SIGNED_DEC
-DEF
-SDR_BL
-111
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_BT
-0
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_CL
-011
-PARAMETER_UNSIGNED_BIN
-DEF
-}
-# include_file {
-hwacceleration|hwacceleration.v
-4b8d2fece81775126989bed7f1eb2069
-sdram_control_4port|sdram_params.h
-625599f965a889cf34497649a6d284d8
-}
-# hierarchies {
-Sdram_Control_4Port:u7|control_interface:control1
-}
-# macro_sequence
-ASIZE23      ASIZE23      ASIZE23      
-# end
-# entity
-command
-# storage
-db|DE2_D5M.(347).cnf
-db|DE2_D5M.(347).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sdram_control_4port|command.v
-bccb6d887eddb7a349a1e2fdcaa8a644
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-INIT_PER
-24000
-PARAMETER_SIGNED_DEC
-DEF
-REF_PER
-1024
-PARAMETER_SIGNED_DEC
-DEF
-SC_CL
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RCD
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RRD
-7
-PARAMETER_SIGNED_DEC
-DEF
-SC_PM
-1
-PARAMETER_SIGNED_DEC
-DEF
-SC_BL
-1
-PARAMETER_SIGNED_DEC
-DEF
-SDR_BL
-111
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_BT
-0
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_CL
-011
-PARAMETER_UNSIGNED_BIN
-DEF
-}
-# include_file {
-hwacceleration|hwacceleration.v
-4b8d2fece81775126989bed7f1eb2069
-sdram_control_4port|sdram_params.h
-625599f965a889cf34497649a6d284d8
-}
-# hierarchies {
-Sdram_Control_4Port:u7|command:command1
-}
-# macro_sequence
-ASIZE23      ROWSIZE12COLSIZE8BANKSIZE2ROWSTART8          ROWSIZE12ROWSTART8          COLSTART0COLSIZE8COLSTART0BANKSTART20BANKSIZE2BANKSTART20ASIZE23      ASIZE23      
-# end
-# entity
-sdr_data_path
-# storage
-db|DE2_D5M.(348).cnf
-db|DE2_D5M.(348).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-sdram_control_4port|sdr_data_path.v
-09ffc6c2394c9b117fa3b22a267efa8
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# user_parameter {
-INIT_PER
-24000
-PARAMETER_SIGNED_DEC
-DEF
-REF_PER
-1024
-PARAMETER_SIGNED_DEC
-DEF
-SC_CL
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RCD
-3
-PARAMETER_SIGNED_DEC
-DEF
-SC_RRD
-7
-PARAMETER_SIGNED_DEC
-DEF
-SC_PM
-1
-PARAMETER_SIGNED_DEC
-DEF
-SC_BL
-1
-PARAMETER_SIGNED_DEC
-DEF
-SDR_BL
-111
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_BT
-0
-PARAMETER_UNSIGNED_BIN
-DEF
-SDR_CL
-011
-PARAMETER_UNSIGNED_BIN
-DEF
-}
-# include_file {
-hwacceleration|hwacceleration.v
-4b8d2fece81775126989bed7f1eb2069
-sdram_control_4port|sdram_params.h
-625599f965a889cf34497649a6d284d8
-}
-# hierarchies {
-Sdram_Control_4Port:u7|sdr_data_path:data_path1
-}
-# macro_sequence
-DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      
-# end
-# entity
 Sdram_FIFO
 # storage
 db|DE2_D5M.(349).cnf
@@ -39930,6 +39594,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2
 }
 # macro_sequence
 
@@ -40102,6 +39770,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component
 }
 # macro_sequence
 
@@ -40294,6 +39966,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated
 }
 # macro_sequence
 
@@ -40387,6 +40063,22 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
 }
 # macro_sequence
 
@@ -40447,6 +40139,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_o96:rdptr_g1p
 }
 # macro_sequence
 
@@ -40477,6 +40173,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_fgc:wrptr_g1p
 }
 # macro_sequence
 
@@ -40537,6 +40237,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|a_graycounter_egc:wrptr_gp
 }
 # macro_sequence
 
@@ -40726,6 +40430,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram
 }
 # macro_sequence
 
@@ -40969,6 +40677,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|altsyncram_1l81:fifo_ram|altsyncram_drg1:altsyncram14
 }
 # macro_sequence
 
@@ -41002,6 +40714,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_ngh:rdaclr
 }
 # macro_sequence
 
@@ -41093,6 +40809,14 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_brp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_kec:rs_bwp
 }
 # macro_sequence
 
@@ -41180,6 +40904,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp
 }
 # macro_sequence
 
@@ -41267,6 +40995,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18
 }
 # macro_sequence
 
@@ -41358,6 +41090,14 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_brp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|dffpipe_oe9:ws_bwp
 }
 # macro_sequence
 
@@ -41445,6 +41185,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp
 }
 # macro_sequence
 
@@ -41532,6 +41276,10 @@ Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o
 Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22
 }
 # macro_sequence
 
@@ -41620,42 +41368,17 @@ Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
 Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:rdempty_eq_comp
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|Sdram_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_m2o1:auto_generated|cmpr_536:wrfull_eq_comp
 }
 # macro_sequence
 
-# end
-# entity
-HWAcceleration
-# storage
-db|DE2_D5M.(366).cnf
-db|DE2_D5M.(366).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-hwacceleration|hwacceleration.v
-4b8d2fece81775126989bed7f1eb2069
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# macro_sequence
-DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      
 # end
 # entity
 I2C_CCD_Config
@@ -65428,42 +65151,6 @@ niosSystemCamControl:niosSystemCamControl_inst|niosSystemCamControl_reset_clk_1_
 
 # end
 # entity
-DE2_D5M
-# storage
-db|DE2_D5M.(0).cnf
-db|DE2_D5M.(0).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-de2_d5m.v
-7ea1c03bbba04719c1bf031d297ef74
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-|
-}
-# macro_sequence
-
-# end
-# entity
 Software_Camera_Control
 # storage
 db|DE2_D5M.(505).cnf
@@ -65495,6 +65182,1373 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 Software_Camera_Control:softwareCameraControl0
+}
+# macro_sequence
+
+# end
+# entity
+DE2_D5M
+# storage
+db|DE2_D5M.(0).cnf
+db|DE2_D5M.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+de2_d5m.v
+ee8477026d57b13c1270cd21a9bd91
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# entity
+Sdram_Control_4Port
+# storage
+db|DE2_D5M.(345).cnf
+db|DE2_D5M.(345).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_control_4port|sdram_control_4port.v
+24f88bd4622a442e847659eaa7986479
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
+1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
+1
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# include_file {
+sdram_control_4port|sdram_params.h
+625599f965a889cf34497649a6d284d8
+hwacceleration|hwacceleration.v
+f9d0472c349f9feae7733b91586d9d9
+}
+# hierarchies {
+Sdram_Control_4Port:u7
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7
+}
+# macro_sequence
+DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      ASIZE23      ASIZE23      DSIZE16      DSIZE16      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      ASIZE23      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      ASIZE23      DSIZE16      
+# end
+# entity
+control_interface
+# storage
+db|DE2_D5M.(346).cnf
+db|DE2_D5M.(346).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_control_4port|control_interface.v
+9c8a4b0d93e3af78862303b80a269
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
+1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
+1
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# include_file {
+sdram_control_4port|sdram_params.h
+625599f965a889cf34497649a6d284d8
+hwacceleration|hwacceleration.v
+f9d0472c349f9feae7733b91586d9d9
+}
+# hierarchies {
+Sdram_Control_4Port:u7|control_interface:control1
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|control_interface:control1
+}
+# macro_sequence
+ASIZE23      ASIZE23      ASIZE23      
+# end
+# entity
+command
+# storage
+db|DE2_D5M.(347).cnf
+db|DE2_D5M.(347).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_control_4port|command.v
+bccb6d887eddb7a349a1e2fdcaa8a644
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
+1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
+1
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# include_file {
+sdram_control_4port|sdram_params.h
+625599f965a889cf34497649a6d284d8
+hwacceleration|hwacceleration.v
+f9d0472c349f9feae7733b91586d9d9
+}
+# hierarchies {
+Sdram_Control_4Port:u7|command:command1
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|command:command1
+}
+# macro_sequence
+ASIZE23      ROWSIZE12COLSIZE8BANKSIZE2ROWSTART8          ROWSIZE12ROWSTART8          COLSTART0COLSIZE8COLSTART0BANKSTART20BANKSIZE2BANKSTART20ASIZE23      ASIZE23      
+# end
+# entity
+sdr_data_path
+# storage
+db|DE2_D5M.(348).cnf
+db|DE2_D5M.(348).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sdram_control_4port|sdr_data_path.v
+09ffc6c2394c9b117fa3b22a267efa8
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+INIT_PER
+24000
+PARAMETER_SIGNED_DEC
+DEF
+REF_PER
+1024
+PARAMETER_SIGNED_DEC
+DEF
+SC_CL
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RCD
+3
+PARAMETER_SIGNED_DEC
+DEF
+SC_RRD
+7
+PARAMETER_SIGNED_DEC
+DEF
+SC_PM
+1
+PARAMETER_SIGNED_DEC
+DEF
+SC_BL
+1
+PARAMETER_SIGNED_DEC
+DEF
+SDR_BL
+111
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_BT
+0
+PARAMETER_UNSIGNED_BIN
+DEF
+SDR_CL
+011
+PARAMETER_UNSIGNED_BIN
+DEF
+}
+# include_file {
+sdram_control_4port|sdram_params.h
+625599f965a889cf34497649a6d284d8
+hwacceleration|hwacceleration.v
+f9d0472c349f9feae7733b91586d9d9
+}
+# hierarchies {
+Sdram_Control_4Port:u7|sdr_data_path:data_path1
+HWAcceleration:HWAccelUnit|Sdram_Control_4Port:u7|sdr_data_path:data_path1
+}
+# macro_sequence
+DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      DSIZE16      
+# end
+# entity
+HWAcceleration
+# storage
+db|DE2_D5M.(366).cnf
+db|DE2_D5M.(366).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+hwacceleration|hwacceleration.v
+f9d0472c349f9feae7733b91586d9d9
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+HWAcceleration:HWAccelUnit
+}
+# macro_sequence
+DSIZE16      DSIZE16      
+# end
+# entity
+MatchAllDescriptors
+# storage
+db|DE2_D5M.(526).cnf
+db|DE2_D5M.(526).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+hwacceleration|matchalldescriptors.v
+dba75f9950c2fbb8de5a13ed52e5bf5b
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+HWAcceleration:HWAccelUnit|MatchAllDescriptors:MatchAllDescriptors_inst
+}
+# macro_sequence
+
+# end
+# entity
+MatchSceneDescriptor
+# storage
+db|DE2_D5M.(527).cnf
+db|DE2_D5M.(527).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+hwacceleration|matchscenedescriptor.v
+4f2b6e237e7551abb0277ad59ee43412
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+HWAcceleration:HWAccelUnit|MatchAllDescriptors:MatchAllDescriptors_inst|MatchSceneDescriptor:MatchSceneDescriptor_inst
+}
+# macro_sequence
+
+# end
+# entity
+TwoDescriptorDistance
+# storage
+db|DE2_D5M.(528).cnf
+db|DE2_D5M.(528).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+hwacceleration|twodescriptordistance.v
+7b6746a92d8370cec6cfd656d2693557
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+HWAcceleration:HWAccelUnit|MatchAllDescriptors:MatchAllDescriptors_inst|MatchSceneDescriptor:MatchSceneDescriptor_inst|TwoDescriptorDistance:TwoDescriptorDistance_inst
+}
+# macro_sequence
+
+# end
+# entity
+altshift_taps
+# storage
+db|DE2_D5M.(529).cnf
+db|DE2_D5M.(529).cnf
+# case_insensitive
+# source_file
+altshift_taps.tdf
+6dcdec57f5c376dcd0fcece04f9f5
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+64
+PARAMETER_UNKNOWN
+USR
+WIDTH
+16
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_h3m
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin15
+-1
+3
+shiftin14
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# include_file {
+lpm_compare.inc
+bbd3e8c93afb7320934629e5fb11566
+lpm_constant.inc
+97ffb7e3fef9ce9fce4eff8455d5da5
+lpm_counter.inc
+c5cfeeabc5f2ab60b3453f6abbc42b41
+altdpram.inc
+2f9e6727b678ffd76e72bc5a95a2630
+}
+# macro_sequence
+
+# end
+# entity
+shift_taps_h3m
+# storage
+db|DE2_D5M.(530).cnf
+db|DE2_D5M.(530).cnf
+# case_insensitive
+# source_file
+db|shift_taps_h3m.tdf
+8e8c4e796a61ec6bcb4523c677d2be8
+7
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps2
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin2
+-1
+3
+shiftin15
+-1
+3
+shiftin14
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_2d81
+# storage
+db|DE2_D5M.(531).cnf
+db|DE2_D5M.(531).cnf
+# case_insensitive
+# source_file
+db|altsyncram_2d81.tdf
+1c82cce36eadfb9d61189e492c63dd9
+7
+# used_port {
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b2
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a2
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clock0
+-1
+3
+address_b5
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a5
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+clocken0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cntr_gmf
+# storage
+db|DE2_D5M.(532).cnf
+db|DE2_D5M.(532).cnf
+# case_insensitive
+# source_file
+db|cntr_gmf.tdf
+cd94f1f1851c659c7a1f783ca48e187
+7
+# used_port {
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_acc
+# storage
+db|DE2_D5M.(533).cnf
+db|DE2_D5M.(533).cnf
+# case_insensitive
+# source_file
+db|cmpr_acc.tdf
+5d4a455357e85af1c6e95afdd76502c
+7
+# used_port {
+datab1
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+datab5
+-1
+2
+datab4
+-1
+2
+datab3
+-1
+2
+datab2
+-1
+2
+datab0
+-1
+2
+}
+# macro_sequence
+
+# end
+# entity
+lpm_mult
+# storage
+db|DE2_D5M.(534).cnf
+db|DE2_D5M.(534).cnf
+# case_insensitive
+# source_file
+lpm_mult.tdf
+22eb094901b73f6a2c1bae1edc91b
+7
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTHA
+8
+PARAMETER_UNKNOWN
+USR
+LPM_WIDTHB
+8
+PARAMETER_UNKNOWN
+USR
+LPM_WIDTHP
+16
+PARAMETER_UNKNOWN
+USR
+LPM_WIDTHR
+16
+PARAMETER_UNKNOWN
+USR
+LPM_WIDTHS
+1
+PARAMETER_UNKNOWN
+USR
+LPM_REPRESENTATION
+UNSIGNED
+PARAMETER_UNKNOWN
+USR
+LPM_PIPELINE
+0
+PARAMETER_UNKNOWN
+DEF
+LATENCY
+0
+PARAMETER_UNKNOWN
+DEF
+INPUT_A_IS_CONSTANT
+NO
+PARAMETER_UNKNOWN
+USR
+INPUT_B_IS_CONSTANT
+NO
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+OFF
+PARAMETER_UNKNOWN
+DEF
+MAXIMIZE_SPEED
+5
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+APEX20K_TECHNOLOGY_MAPPER
+LUT
+TECH_MAPPER_APEX20K
+USR
+DEDICATED_MULTIPLIER_CIRCUITRY
+AUTO
+PARAMETER_UNKNOWN
+DEF
+DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO
+0
+PARAMETER_UNKNOWN
+DEF
+DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO
+0
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+mult_o5t
+PARAMETER_UNKNOWN
+USR
+INPUT_A_FIXED_VALUE
+Bx
+PARAMETER_UNKNOWN
+DEF
+INPUT_B_FIXED_VALUE
+Bx
+PARAMETER_UNKNOWN
+DEF
+USE_AHDL_IMPLEMENTATION
+OFF
+PARAMETER_UNKNOWN
+DEF
+}
+# used_port {
+result9
+-1
+3
+result8
+-1
+3
+result7
+-1
+3
+result6
+-1
+3
+result5
+-1
+3
+result4
+-1
+3
+result3
+-1
+3
+result2
+-1
+3
+result15
+-1
+3
+result14
+-1
+3
+result13
+-1
+3
+result12
+-1
+3
+result11
+-1
+3
+result10
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+}
+# include_file {
+bypassff.inc
+42d08f243d3471f724fd61ea21a0eb9f
+multcore.inc
+ee598ea39a3d6bdc35b167eefc3ee3da
+aglobal110.inc
+f560f9a992734abc3e37886b3957a26a
+altshift.inc
+5c767a29f11db3f131fc886ea42a52bd
+lpm_add_sub.inc
+144a73b61081a2a03554ff5acc5e8842
+}
+# macro_sequence
+
+# end
+# entity
+mult_o5t
+# storage
+db|DE2_D5M.(535).cnf
+db|DE2_D5M.(535).cnf
+# case_insensitive
+# source_file
+db|mult_o5t.tdf
+2e2851d6af526b12151331d4c996e
+7
+# used_port {
+result9
+-1
+3
+result8
+-1
+3
+result7
+-1
+3
+result6
+-1
+3
+result5
+-1
+3
+result4
+-1
+3
+result3
+-1
+3
+result2
+-1
+3
+result15
+-1
+3
+result14
+-1
+3
+result13
+-1
+3
+result12
+-1
+3
+result11
+-1
+3
+result10
+-1
+3
+result1
+-1
+3
+result0
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
 }
 # macro_sequence
 

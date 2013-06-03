@@ -18,6 +18,7 @@ extern "C"
 
 int distSquared(uint8_t const *descr1, uint8_t const *descr2);
 int checkForMatch(uint8_t* sceneDescr);
+void scanAndSendHardwareGeneratedMatches(int numSceneDescrs);
 void findDatabaseMatches(int numSceneDescrs);
 
 #endif /* MATCH_HPP_ */

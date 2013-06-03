@@ -3,6 +3,8 @@ obj/default/sift-driver.o: sift-driver.cpp match.hpp database.hpp \
   ../siftPlusPlusNiosNew_bsp/linker.h sift.ipp \
   ../siftPlusPlusNiosNew_bsp//drivers/inc/altera_avalon_pio_regs.h \
   ../siftPlusPlusNiosNew_bsp//HAL/inc/io.h \
+  ../siftPlusPlusNiosNew_bsp//HAL/inc/alt_types.h \
+  ../siftPlusPlusNiosNew_bsp//HAL/inc/sys/alt_cache.h \
   ../siftPlusPlusNiosNew_bsp//HAL/inc/alt_types.h
 
 match.hpp:
@@ -22,5 +24,9 @@ sift.ipp:
 ../siftPlusPlusNiosNew_bsp//drivers/inc/altera_avalon_pio_regs.h:
 
 ../siftPlusPlusNiosNew_bsp//HAL/inc/io.h:
+
+../siftPlusPlusNiosNew_bsp//HAL/inc/alt_types.h:
+
+../siftPlusPlusNiosNew_bsp//HAL/inc/sys/alt_cache.h:
 
 ../siftPlusPlusNiosNew_bsp//HAL/inc/alt_types.h:

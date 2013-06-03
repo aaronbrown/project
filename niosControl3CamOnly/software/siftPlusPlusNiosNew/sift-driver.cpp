@@ -6,6 +6,7 @@
 
 #include "match.hpp"
 #include <iostream>
+#include "sys/alt_cache.h"
 
 extern "C"
 {
@@ -418,11 +419,43 @@ int main()
 	
 		cout << "Matching against database...";
 
+		/* software matching */
+		//int numDescrs = descrNum;
+		//findDatabaseMatches(numDescrs);
+		/* end software matching */
+
+		/* hardware matching */
+		alt_dcache_flush_all();
+
+		PROC_CONTROL_OFF;
+
 		int numDescrs = descrNum;
-		findDatabaseMatches(numDescrs);
+		unsigned short operandUpper = (short)numDescrs;
+		unsigned short operandLower = (short)NUM_DATABASE_DESCRS;
+		unsigned int matchOperand = (operandUpper << 16) | operandLower;
+
+		IOWR_ALTERA_AVALON_PIO_DATA(FP_OPERAND_BASE, matchOperand);
+		IOWR_ALTERA_AVALON_PIO_DATA(FP_OP_TYPE_BASE, OPCODE_MATCH);
+
+		unsigned int matchingDone = 0;
+
+		usleep(1000);
+
+		while (!matchingDone)
+		{
+			cout << "while\n";
+			matchingDone = (unsigned int)IORD_ALTERA_AVALON_PIO_DATA(FP_RESULT_BASE);
+		} // while the hardware is working
+
+		cout << "numDescrs: " << numDescrs << endl;
+		// now matching is done, scan for matches and send over the UART
+		scanAndSendHardwareGeneratedMatches(numDescrs);
+
+
+		/* end hardware matching */
 
 		cout << "done\n";
-	
+
 		// -------------------------------------------------------------
 		//       We're done with this image!
 		// -------------------------------------------------------------

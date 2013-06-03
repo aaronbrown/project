@@ -93,4 +93,11 @@ struct descriptorInfoTwoBlocks
 	struct sceneDescriptorInfo sceneInfos[64];
 };
 
+
+struct hardwareMatchIndices
+{
+	uint16_t filler[256];
+	uint16_t matchIndices[256];
+};
+
 #endif /* DATABASE_HPP_ */

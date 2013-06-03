@@ -20,6 +20,7 @@ extern "C"
 
 // opcodes for hardware communication
 #define OPCODE_EXP 0x00
+#define OPCODE_MATCH 0xaa
 #define OPCODE_RESET_CAPTURE 0xdd
 #define OPCODE_RESET_RUN 0xbb
 #define OPCODE_RUN 0xcc

@@ -1,14 +1,14 @@
-Analysis & Synthesis Status : Successful - Sat Jun 01 23:15:41 2013
+Analysis & Synthesis Status : Successful - Sun Jun 02 14:05:51 2013
 Quartus II 64-Bit Version : 11.0 Build 208 07/03/2011 SP 1 SJ Full Version
 Revision Name : DE2_D5M
 Top-level Entity Name : DE2_D5M
 Family : Cyclone II
-Total logic elements : 16,366
-    Total combinational functions : 12,848
-    Dedicated logic registers : 9,388
-Total registers : 9388
+Total logic elements : 18,765
+    Total combinational functions : 13,844
+    Dedicated logic registers : 11,375
+Total registers : 11375
 Total pins : 425
 Total virtual pins : 0
-Total memory bits : 350,353
-Embedded Multiplier 9-bit elements : 42
+Total memory bits : 383,152
+Embedded Multiplier 9-bit elements : 44
 Total PLLs : 1

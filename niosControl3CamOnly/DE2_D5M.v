@@ -498,6 +498,7 @@ sdram_pll2			unew (
 	always @(posedge unshifted_nios_clk) begin
 		case (opcode)
 			8'h00 	: result <= fp_exp_result; 	// exponentiation
+			8'haa		: result <= matchingDone;		// matching (duh)
 			8'hee 	: result <= {31'b0, SW[17]};	// switch advance in calibration stage
 			default 	: result <= 32'b0;				// otherwise
 		endcase
@@ -508,6 +509,7 @@ sdram_pll2			unew (
 	wire niosSaysResetCapture = (opcode == 8'hdd);
 	wire niosSaysRun = (opcode == 8'hcc);
 	wire niosSaysResetRun = (opcode == 8'hbb);
+	wire niosSaysMatch = (opcode == 8'haa);
 	wire doCapture;
 	wire doRun;
 	
@@ -569,7 +571,7 @@ assign {DRAM_UDQM,DRAM_LDQM} = niosHasControl ? {DRAM_UDQM_nios,DRAM_LDQM_nios} 
 
 	Sdram_Arbiter sdramArbiter0 (
 	.RequestNiosControl(niosWantsControl),
-	.RequestAccelControl(SW[16]),
+	.RequestAccelControl(niosSaysMatch),
 	.NiosHasControl(niosHasControl),     
    .CamHasControl(camHasControl),     
    .AccelHasControl(),
@@ -668,38 +670,15 @@ Sdram_Control_4Port	u7	(	//	HOST Side
         					.DQM({DRAM_UDQM_cam,DRAM_LDQM_cam})
 						);
 
-						/*
-HWAcceleration	HWAccelUnit	(	//	HOST Side						
+				wire matchingDone;
+				HWAcceleration	HWAccelUnit	(	//	HOST Side						
 						    .REF_CLK(unshifted_nios_clk),
-						    .RESET_N(1'b1),
 							.CLK(sdram_ctrl_clk),
-							.GO(SW[16]),
-							.FIFOCLOCK(rClk[1]),
-							.LEDS(LEDR[17:0]),
-							//	FIFO Write Side 1
-							.WR1_ADDR(0),
-							.WR1_MAX_ADDR(320*240),
-							.WR1_LENGTH(9'h100),
-							.WR1_LOAD(!DLY_RST_0),
-
-							//	FIFO Write Side 2
-							.WR2_ADDR(22'h100000),
-							.WR2_MAX_ADDR(22'h100000+320*240),
-							.WR2_LENGTH(9'h100),
-							.WR2_LOAD(!DLY_RST_0),
-
-
-							//	FIFO Read Side 1
-				        	.RD1_ADDR(0),
-							.RD1_MAX_ADDR(320*240),
-							.RD1_LENGTH(9'h100),
-							.RD1_LOAD(!DLY_RST_0),
-							
-							//	FIFO Read Side 2
-							.RD2_ADDR(22'h100000),
-							.RD2_MAX_ADDR(22'h100000+320*240),
-							.RD2_LENGTH(9'h100),
-							.RD2_LOAD(!DLY_RST_0),
+							.FIFOCLOCK(rClk[1]),		
+							.iStart( niosSaysMatch ),
+							.iSceneDescriptorCount( operand[31:16] ),
+							.iDatabaseDescriptorCount( operand[15:0] ),
+							.oDone( matchingDone ),
 							
 							//	SDRAM Side
 						    .SA(DRAM_ADDR_accel),
@@ -712,7 +691,6 @@ HWAcceleration	HWAccelUnit	(	//	HOST Side
         					.DQ(DRAM_DQ),
         					.DQM({DRAM_UDQM_accel,DRAM_LDQM_accel})
 						);
-						*/
 
 
 //assign	UART_TXD = UART_RXD;

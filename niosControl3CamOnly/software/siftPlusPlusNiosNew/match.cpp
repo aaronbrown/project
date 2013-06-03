@@ -4,6 +4,8 @@
  */
 
 #include "match.hpp"
+#include <iostream>
+using namespace std;
 
 // returns the distance squared (Euclidian) of the two 128 byte
 // arrays descr1 and descr2.
@@ -58,6 +60,57 @@ int checkForMatch(uint8_t* sceneDescr)
 
     return -1;
 } // checkForMatch()
+
+
+void scanAndSendHardwareGeneratedMatches(int numSceneDescrs)
+{
+	cout << "scanAndSend\n";
+	for (int sceneDescrNum = 0; sceneDescrNum < numSceneDescrs; sceneDescrNum++)
+	{
+		unsigned short resultStructNum = sceneDescrNum / 256;
+		unsigned short resultOffset = sceneDescrNum % 256;
+		struct hardwareMatchIndices* theIndicesPtr = (struct hardwareMatchIndices*)(DATABASE_START) + resultStructNum;
+		unsigned short matchIndex = theIndicesPtr->matchIndices[resultOffset];
+
+		cout << "i: " << sceneDescrNum << " : " << matchIndex << endl;
+		if (matchIndex < NUM_DATABASE_DESCRS)
+		{
+			unsigned int databaseMatchInfoStructNum = matchIndex / 64;
+			unsigned int databaseMatchInfoOffset = matchIndex % 64;
+
+			struct descriptorInfoTwoBlocks* theDatabaseInfoPtr =
+					(struct descriptorInfoTwoBlocks*)(DESCRIPTOR_INFO_START) + databaseMatchInfoStructNum;
+
+			unsigned int sceneMatchInfoStructNum = sceneDescrNum / 64;
+			unsigned int sceneMatchInfoOffset = sceneDescrNum % 64;
+
+			struct descriptorInfoTwoBlocks* theSceneInfoPtr =
+					(struct descriptorInfoTwoBlocks*)(DESCRIPTOR_INFO_START) + sceneMatchInfoStructNum;
+
+			uint8_t xBig = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].xBig;
+			uint8_t xLittle = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].xLittle;
+			uint8_t yBig = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].yBig;
+			uint8_t yLittle = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].yLittle;
+			uint8_t objID = theDatabaseInfoPtr->databaseInfos[databaseMatchInfoOffset].objectID;
+
+			uint8_t uBig = theSceneInfoPtr->sceneInfos[sceneMatchInfoOffset].uBig;
+			uint8_t uLittle = theSceneInfoPtr->sceneInfos[sceneMatchInfoOffset].uLittle;
+			uint8_t vBig = theSceneInfoPtr->sceneInfos[sceneMatchInfoOffset].vBig;
+			uint8_t vLittle = theSceneInfoPtr->sceneInfos[sceneMatchInfoOffset].vLittle;
+
+			unsigned short xCoord = (xBig << 8) + xLittle;
+			unsigned short yCoord = (yBig << 8) + yLittle;
+			unsigned short uCoord = (uBig << 8) + uLittle;
+			unsigned short vCoord = (vBig << 8) + vLittle;
+
+			const uint8_t pointData[9] = {objID, xLittle, xBig, yLittle, yBig, uLittle, uBig, vLittle, vBig};
+			sendBytesToUART(pointData, 9);
+
+			printf("match found (ID = %d): (x, y) = (%d, %d)...(u, v) = (%d, %d)\n", objID, xCoord, yCoord, uCoord, vCoord);
+		} // if match
+	} // for
+} // scanAndSendHardwareGeneratedMatches()
+
 
 void findDatabaseMatches(int numSceneDescrs)
 {
